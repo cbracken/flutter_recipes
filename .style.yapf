@@ -1,0 +1,4 @@
+[style]
+# Flutter uses Google style, but Chromium recipes use Chromium's style. For now,
+# we'll keep the same style as before.
+based_on_style = chromium

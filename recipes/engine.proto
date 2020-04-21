@@ -1,0 +1,50 @@
+// Copyright 2019 The Flutter Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+package recipes.flutter.engine;
+
+message InputProperties {
+  string mastername = 1;
+  string goma_jobs = 2;
+
+  // License keys for the Android SDK.
+  string android_sdk_license = 3;
+  string android_sdk_preview_license = 4;
+
+  // Which artifacts to build.
+  // TODO(dnfield): Deprecate these in favor of actually passing in
+  // build artifacts to use.
+  bool build_host = 5;
+  bool build_fuchsia = 6;
+  bool build_android_aot = 7;
+  bool build_android_debug = 8;
+  bool build_android_vulkan = 9;
+
+  // Whether to actually upload results to the bucket.
+  bool upload_packages = 10;
+
+  // Used to override the git ref/url. Only for experimental or non-prod builds.
+  string git_url = 11;
+  string git_ref = 12;
+
+  string jazzy_version = 13;
+  string xcpretty_version = 14;
+
+  bool build_ios = 15;
+  bool ios_debug = 16;
+  bool ios_profile = 17;
+  bool ios_release = 18;
+  bool no_bitcode = 19;
+  bool no_maven = 20;
+  bool clobber=21;
+
+  string fuchsia_ctl_version=22;
+  bool build_font_subset=23;
+  bool test_fuchsia=24;
+}
+
+message EnvProperties {
+  string SWARMING_TASK_ID = 1;
+}

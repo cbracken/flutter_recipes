@@ -1,0 +1,29 @@
+[
+  {
+    "cmd": [
+      "luci-auth",
+      "token",
+      "-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-fake-account.json",
+      "-lifetime",
+      "3m"
+    ],
+    "infra_step": true,
+    "name": "get access token for service-account-fake-account.json"
+  },
+  {
+    "cmd": [
+      "luci-auth",
+      "token",
+      "-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-fake-account.json",
+      "-lifetime",
+      "3m"
+    ],
+    "infra_step": true,
+    "name": "get access token for service-account-fake-account.json (2)"
+  },
+  {
+    "name": "$result"
+  }
+]

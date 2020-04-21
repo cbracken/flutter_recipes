@@ -1,0 +1,3 @@
+tasks:
+  - task: abc
+    script:  myscript.sh

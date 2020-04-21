@@ -1,0 +1,181 @@
+[
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[START_DIR]/homebrew"
+    ],
+    "infra_step": true,
+    "name": "mkdir homebrew"
+  },
+  {
+    "cmd": [
+      "curl",
+      "-L",
+      "https://github.com/Homebrew/brew/tarball/master",
+      "-o",
+      "[START_DIR]/homebrew.tar.gz"
+    ],
+    "name": "get homebrew"
+  },
+  {
+    "cmd": [
+      "tar",
+      "zxf",
+      "[START_DIR]/homebrew.tar.gz",
+      "--strip",
+      "1",
+      "-C",
+      "[START_DIR]/homebrew"
+    ],
+    "name": "open tarball"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[START_DIR]/output"
+    ],
+    "infra_step": true,
+    "name": "mkdir output"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[START_DIR]/zips"
+    ],
+    "infra_step": true,
+    "name": "mkdir zips"
+  },
+  {
+    "cmd": [
+      "[START_DIR]/homebrew/bin/brew",
+      "tap",
+      "flutter/homebrew-flutter",
+      "https://flutter-mirrors.googlesource.com/homebrew-flutter"
+    ],
+    "name": "tap custom formulae"
+  },
+  {
+    "cmd": [
+      "[START_DIR]/homebrew/bin/brew",
+      "install",
+      "flutter/homebrew-flutter/openssl-flutter",
+      "--HEAD"
+    ],
+    "name": "installing openssl-flutter"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[START_DIR]/output/openssl-flutter"
+    ],
+    "infra_step": true,
+    "name": "mkdir package [START_DIR]/output/openssl-flutter"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[START_DIR]/homebrew/opt/openssl-flutter/lib/libssl.1.0.0.dylib",
+      "[START_DIR]/output/openssl-flutter"
+    ],
+    "infra_step": true,
+    "name": "copying lib/libssl.1.0.0.dylib from package openssl-flutter"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[START_DIR]/homebrew/opt/openssl-flutter/lib/libcrypto.1.0.0.dylib",
+      "[START_DIR]/output/openssl-flutter"
+    ],
+    "infra_step": true,
+    "name": "copying lib/libcrypto.1.0.0.dylib from package openssl-flutter"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[START_DIR]/homebrew/opt/openssl-flutter/LICENSE",
+      "[START_DIR]/output/openssl-flutter"
+    ],
+    "infra_step": true,
+    "name": "copying LICENSE from package openssl-flutter"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+    ],
+    "name": "zipping openssl-flutter.zip",
+    "stdin": "{\"entries\": [{\"path\": \"[START_DIR]/output/openssl-flutter\", \"type\": \"dir\"}], \"output\": \"[START_DIR]/zips/openssl-flutter.zip\", \"root\": \"[START_DIR]/output/openssl-flutter\"}"
+  },
+  {
+    "cmd": [
+      "echo",
+      "ios-usb-dependencies/unsigned/openssl/2d72510e447ab60a9728aeea2362d8be2cbd7789/openssl.zip"
+    ],
+    "name": "cloud path"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[START_DIR]/zips/openssl-flutter.zip",
+      "gs://flutter_infra/ios-usb-dependencies/unsigned/openssl/2d72510e447ab60a9728aeea2362d8be2cbd7789/openssl.zip"
+    ],
+    "infra_step": true,
+    "name": "gsutil upload of openssl-flutter.zip",
+    "~followup_annotations": [
+      "@@@STEP_LINK@openssl-flutter.zip@https://storage.cloud.google.com/flutter_infra/ios-usb-dependencies/unsigned/openssl/2d72510e447ab60a9728aeea2362d8be2cbd7789/openssl.zip@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]

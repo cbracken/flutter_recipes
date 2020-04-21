@@ -1,0 +1,33 @@
+[
+  {
+    "cmd": [],
+    "name": "yaml",
+    "~followup_annotations": [
+      "@@@STEP_EXCEPTION@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "RECIPE[flutter::yaml:examples/full].resources/sample.yaml",
+      "/path/to/tmp/"
+    ],
+    "infra_step": true,
+    "name": "yaml.read",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_EXCEPTION@@@"
+    ]
+  },
+  {
+    "failure": {
+      "humanReason": "Infra Failure: Step('yaml.read') (retcode: 1)"
+    },
+    "name": "$result"
+  }
+]

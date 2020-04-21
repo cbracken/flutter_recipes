@@ -1,0 +1,57 @@
+[
+  {
+    "cmd": [],
+    "name": "yaml",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@yaml@@@@",
+      "@@@STEP_LOG_LINE@yaml@tasks:@@@",
+      "@@@STEP_LOG_LINE@yaml@  - task: one@@@",
+      "@@@STEP_LOG_LINE@yaml@    script: myscript@@@",
+      "@@@STEP_LOG_END@yaml@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "RECIPE[flutter::yaml:examples/full].resources/sample.yaml",
+      "/path/to/tmp/"
+    ],
+    "infra_step": true,
+    "name": "yaml.read",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@sample.yaml@@@@",
+      "@@@STEP_LOG_LINE@sample.yaml@tasks:@@@",
+      "@@@STEP_LOG_LINE@sample.yaml@  - task: one@@@",
+      "@@@STEP_LOG_LINE@sample.yaml@    script: myscript@@@",
+      "@@@STEP_LOG_END@sample.yaml@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[flutter::yaml]/resources/parse_yaml.py",
+      "--yaml_file",
+      "RECIPE[flutter::yaml:examples/full].resources/sample.yaml",
+      "--json_file",
+      "/path/to/tmp/json"
+    ],
+    "name": "yaml.parse",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"key\": \"value\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]
