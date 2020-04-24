@@ -6,7 +6,8 @@ from contextlib import contextmanager
 import re
 
 DEPS = [
-    'build',
+    'build/build',
+    'build/zip',
     'depot_tools/git',
     'depot_tools/gsutil',
     'depot_tools/depot_tools',
@@ -27,7 +28,6 @@ DEPS = [
     'recipe_engine/step',
     'recipe_engine/swarming',
     'recipe_engine/url',
-    'zip',
 ]
 
 BUCKET_NAME = 'flutter_infra'

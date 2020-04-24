@@ -12,12 +12,13 @@ from PB.recipes.flutter.engine import InputProperties
 from PB.recipes.flutter.engine import EnvProperties
 
 DEPS = [
+    'build/build',
+    'build/goma',
     'depot_tools/gclient',
     'depot_tools/gsutil',
     'recipe_engine/file',
     'recipe_engine/path',
     'recipe_engine/context',
-    'build',
     'depot_tools/depot_tools',
     'recipe_engine/buildbucket',
     'depot_tools/osx_sdk',
@@ -25,7 +26,6 @@ DEPS = [
     'recipe_engine/platform',
     'recipe_engine/step',
     'depot_tools/bot_update',
-    'goma',
 ]
 
 GIT_REPO = (

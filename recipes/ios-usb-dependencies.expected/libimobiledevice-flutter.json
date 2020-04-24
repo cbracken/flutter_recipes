@@ -243,7 +243,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "name": "zipping libimobiledevice-flutter.zip",
     "stdin": "{\"entries\": [{\"path\": \"[START_DIR]/output/libimobiledevice-flutter\", \"type\": \"dir\"}], \"output\": \"[START_DIR]/zips/libimobiledevice-flutter.zip\", \"root\": \"[START_DIR]/output/libimobiledevice-flutter\"}"

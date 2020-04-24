@@ -145,7 +145,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "name": "zipping ios-deploy-flutter.zip",
     "stdin": "{\"entries\": [{\"path\": \"[START_DIR]/output/ios-deploy-flutter\", \"type\": \"dir\"}], \"output\": \"[START_DIR]/zips/ios-deploy-flutter.zip\", \"root\": \"[START_DIR]/output/ios-deploy-flutter\"}"

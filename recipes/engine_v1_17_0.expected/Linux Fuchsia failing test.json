@@ -417,12 +417,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -600,11 +600,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -662,12 +662,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -895,12 +895,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -1077,11 +1077,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -1139,12 +1139,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -1276,12 +1276,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -1458,11 +1458,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -1520,12 +1520,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -1628,12 +1628,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -1810,11 +1810,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -1872,12 +1872,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -2009,12 +2009,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -2191,11 +2191,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -2253,12 +2253,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -2288,7 +2288,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2373,7 +2373,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2458,7 +2458,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2543,7 +2543,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2628,7 +2628,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2713,7 +2713,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2855,7 +2855,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2940,7 +2940,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3025,7 +3025,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3233,12 +3233,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -3415,11 +3415,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -3477,12 +3477,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -3543,7 +3543,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3727,12 +3727,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -3909,11 +3909,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -3971,12 +3971,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -4037,7 +4037,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -4122,7 +4122,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -4372,12 +4372,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -4554,11 +4554,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -4616,12 +4616,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -4651,7 +4651,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -4736,7 +4736,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -4986,12 +4986,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -5168,11 +5168,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -5230,12 +5230,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -5265,7 +5265,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5350,7 +5350,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5600,12 +5600,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -5782,11 +5782,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -5844,12 +5844,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -5879,7 +5879,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5964,7 +5964,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6287,12 +6287,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -6470,11 +6470,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -6532,12 +6532,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -6567,7 +6567,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6785,7 +6785,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6970,12 +6970,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -7152,11 +7152,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -7214,12 +7214,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -7349,12 +7349,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -7531,11 +7531,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -7593,12 +7593,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -7727,12 +7727,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -7909,11 +7909,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -7971,12 +7971,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -8079,12 +8079,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -8262,11 +8262,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -8324,12 +8324,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -8406,7 +8406,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8557,7 +8557,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8642,7 +8642,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8826,12 +8826,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -9008,11 +9008,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -9070,12 +9070,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -9178,12 +9178,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -9361,11 +9361,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -9423,12 +9423,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -9458,7 +9458,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -9609,7 +9609,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -9694,7 +9694,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -9969,12 +9969,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -10151,11 +10151,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -10213,12 +10213,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -10321,12 +10321,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -10504,11 +10504,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -10566,12 +10566,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -10601,7 +10601,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10752,7 +10752,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10837,7 +10837,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -11021,12 +11021,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -11203,11 +11203,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -11265,12 +11265,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -11373,12 +11373,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -11556,11 +11556,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -11618,12 +11618,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -11653,7 +11653,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -11804,7 +11804,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -11889,7 +11889,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -12164,12 +12164,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -12346,11 +12346,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -12408,12 +12408,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -12516,12 +12516,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -12699,11 +12699,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -12761,12 +12761,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -12796,7 +12796,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -12947,7 +12947,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -13032,7 +13032,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -13216,12 +13216,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -13398,11 +13398,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -13460,12 +13460,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -13568,12 +13568,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "start",
       "--cloudtail-path",
       "cloudtail",
@@ -13751,11 +13751,11 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[flutter]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
@@ -13813,12 +13813,12 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_REPO[flutter]/scripts/tools/runit.py",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
       "--show-path",
       "--with-third-party-lib",
       "--",
       "python",
-      "RECIPE_MODULE[flutter::goma]/resources/cloudtail_utils.py",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
       "stop",
       "--killed-pid-file",
       "[TMP_BASE]/cloudtail.pid"
@@ -13848,7 +13848,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -13999,7 +13999,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -14084,7 +14084,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+      "RECIPE_MODULE[build::zip]/resources/zip.py"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
