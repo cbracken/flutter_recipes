@@ -170,11 +170,6 @@ def RunFuchsiaDriverTests(api):
   # Fuchsia driver tests are currently only run from linux hosts.
   if not api.platform.is_linux:
     return
-  # Note: https://github.com/flutter/flutter/issues/50500
-  # We will only be running Fuchsia tests in experimental runs until the bots
-  # become more stable.
-  if not api.runtime.is_experimental:
-    return
   with api.step.nest('Run Fuchsia Driver Tests'):
     flutter_executable = 'flutter' if not api.platform.is_win else 'flutter.bat'
     api.step('precache fuchsia artifacts', [
