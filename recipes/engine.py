@@ -273,6 +273,17 @@ def UploadFolder(api,
                  folder_name,
                  zip_name,
                  platform=None):
+  UploadFolderAndFiles(api, dir_label, parent_dir, folder_name, None, zip_name,
+                       platform)
+
+
+def UploadFolderAndFiles(api,
+                         dir_label,
+                         parent_dir,
+                         folder_name,
+                         file_paths,
+                         zip_name,
+                         platform=None):
   with MakeTempDir(api, dir_label) as temp_dir:
     local_zip = temp_dir.join(zip_name)
     if platform is None:
@@ -283,6 +294,8 @@ def UploadFolder(api,
     parent_dir = api.path['cache'].join('builder', parent_dir)
     pkg = api.zip.make_package(parent_dir, local_zip)
     pkg.add_directory(parent_dir.join(folder_name))
+    if file_paths is not None:
+      AddFiles(api, pkg, file_paths)
     pkg.zip('Zip %s' % folder_name)
     if ShouldUploadPackages(api):
       api.gsutil.upload(
@@ -586,6 +599,18 @@ def BuildLinuxAndroid(api, swarming_task_id):
       ], swarming_task_id)
 
 
+def PackageLinuxDesktopVariant(api, label, bucket_name):
+  artifacts = [
+      'libflutter_linux_gtk.so',
+  ]
+  if bucket_name.endswith('profile') or bucket_name.endswith('release'):
+    artifacts.append('gen_snapshot')
+  # Headers for the library are in the flutter_linux folder.
+  UploadFolderAndFiles(api, 'Upload linux-x64 Flutter GTK artifacts',
+                       'src/out/%s' % label, 'flutter_linux', artifacts,
+                       'linux-x64-flutter-gtk.zip', bucket_name)
+
+
 def BuildLinux(api):
   RunGN(api, '--runtime-mode', 'debug', '--full-dart-sdk')
   RunGN(api, '--runtime-mode', 'debug', '--unoptimized')
@@ -612,6 +637,12 @@ def BuildLinux(api):
       ],
       archive_name='linux-x64-embedder')
 
+  # GTK desktop embedding.
+  PackageLinuxDesktopVariant(api, 'host_debug', 'linux-x64')
+  PackageLinuxDesktopVariant(api, 'host_profile', 'linux-x64-profile')
+  PackageLinuxDesktopVariant(api, 'host_release', 'linux-x64-release')
+
+  # GLFW desktop embedding. Remove once the switch to GTK is complete.
   UploadArtifacts(
       api,
       'linux-x64', [
@@ -625,6 +656,7 @@ def BuildLinux(api):
   UploadFolder(api, 'Upload linux-x64 Flutter GLFW library C++ wrapper',
                'src/out/host_debug', 'cpp_client_wrapper_glfw',
                'flutter-cpp-client-wrapper-glfw.zip', 'linux-x64')
+
   if BuildFontSubset(api):
     UploadArtifacts(
         api,
