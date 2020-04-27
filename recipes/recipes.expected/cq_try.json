@@ -1,0 +1,424 @@
+[
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::git]/resources/git_setup.py",
+      "--path",
+      "[START_DIR]/recipes",
+      "--url",
+      "https://flutter.googlesource.com/recipes"
+    ],
+    "name": "git setup"
+  },
+  {
+    "cmd": [
+      "git",
+      "fetch",
+      "origin",
+      "master",
+      "--recurse-submodules",
+      "--progress",
+      "--tags"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "env": {
+      "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
+    },
+    "infra_step": true,
+    "name": "git fetch"
+  },
+  {
+    "cmd": [
+      "git",
+      "checkout",
+      "-f",
+      "FETCH_HEAD"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "infra_step": true,
+    "name": "git checkout"
+  },
+  {
+    "cmd": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "infra_step": true,
+    "name": "read revision",
+    "~followup_annotations": [
+      "@@@STEP_TEXT@<br/>checked out 'deadbeef'<br/>@@@",
+      "@@@SET_BUILD_PROPERTY@got_revision@\"deadbeef\"@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "clean",
+      "-f",
+      "-d",
+      "-x"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "infra_step": true,
+    "name": "git clean"
+  },
+  {
+    "cmd": [
+      "git",
+      "submodule",
+      "sync"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "infra_step": true,
+    "name": "submodule sync"
+  },
+  {
+    "cmd": [
+      "git",
+      "submodule",
+      "update",
+      "--init",
+      "--recursive"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "infra_step": true,
+    "name": "submodule update"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[START_DIR]/recipes/recipes.py",
+      "lint"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "name": "lint"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[START_DIR]/recipes/recipes.py",
+      "test",
+      "run"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "name": "test"
+  },
+  {
+    "cmd": [],
+    "name": "get commit-queue"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::url]/resources/pycurl.py",
+      "--url",
+      "https://luci-config.appspot.com/_ah/api/config/v1/config_sets/projects/flutter/config/commit-queue.cfg",
+      "--status-json",
+      "/path/to/tmp/json",
+      "--outfile",
+      "/path/to/tmp/json"
+    ],
+    "name": "get commit-queue.get",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "get commit-queue.response",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@decoded@@@@",
+      "@@@STEP_LOG_LINE@decoded@    submit_options: <@@@",
+      "@@@STEP_LOG_LINE@decoded@      max_burst: 4@@@",
+      "@@@STEP_LOG_LINE@decoded@      burst_delay: <@@@",
+      "@@@STEP_LOG_LINE@decoded@        seconds: 480@@@",
+      "@@@STEP_LOG_LINE@decoded@      >@@@",
+      "@@@STEP_LOG_LINE@decoded@    >@@@",
+      "@@@STEP_LOG_LINE@decoded@    config_groups: <@@@",
+      "@@@STEP_LOG_LINE@decoded@      gerrit: <@@@",
+      "@@@STEP_LOG_LINE@decoded@        url: \"https://flutter-review.googlesource.com\"@@@",
+      "@@@STEP_LOG_LINE@decoded@        projects: <@@@",
+      "@@@STEP_LOG_LINE@decoded@          name: \"project\"@@@",
+      "@@@STEP_LOG_LINE@decoded@          ref_regexp: \"refs/heads/.+\"@@@",
+      "@@@STEP_LOG_LINE@decoded@        >@@@",
+      "@@@STEP_LOG_LINE@decoded@      >@@@",
+      "@@@STEP_LOG_LINE@decoded@      verifiers: <@@@",
+      "@@@STEP_LOG_LINE@decoded@        gerrit_cq_ability: <@@@",
+      "@@@STEP_LOG_LINE@decoded@          committer_list: \"project-flutter-committers\"@@@",
+      "@@@STEP_LOG_LINE@decoded@          dry_run_access_list: \"project-flutter-tryjob-access\"@@@",
+      "@@@STEP_LOG_LINE@decoded@        >@@@",
+      "@@@STEP_LOG_LINE@decoded@        tryjob: <@@@",
+      "@@@STEP_LOG_LINE@decoded@          builders: <@@@",
+      "@@@STEP_LOG_LINE@decoded@            name: \"flutter/try/flutter-baz\"@@@",
+      "@@@STEP_LOG_LINE@decoded@            location_regexp: \".*\"@@@",
+      "@@@STEP_LOG_LINE@decoded@            location_regexp_exclude: \".+/[+]/.*\\.md\"@@@",
+      "@@@STEP_LOG_LINE@decoded@          >@@@",
+      "@@@STEP_LOG_LINE@decoded@        >@@@",
+      "@@@STEP_LOG_LINE@decoded@      >@@@",
+      "@@@STEP_LOG_LINE@decoded@    >@@@",
+      "@@@STEP_LOG_LINE@decoded@    config_groups: <@@@",
+      "@@@STEP_LOG_LINE@decoded@      gerrit: <@@@",
+      "@@@STEP_LOG_LINE@decoded@        url: \"https://flutter-review.googlesource.com\"@@@",
+      "@@@STEP_LOG_LINE@decoded@        projects: <@@@",
+      "@@@STEP_LOG_LINE@decoded@          name: \"flutter/flutter\"@@@",
+      "@@@STEP_LOG_LINE@decoded@          ref_regexp: \"refs/heads/.+\"@@@",
+      "@@@STEP_LOG_LINE@decoded@        >@@@",
+      "@@@STEP_LOG_LINE@decoded@      >@@@",
+      "@@@STEP_LOG_LINE@decoded@      verifiers: <@@@",
+      "@@@STEP_LOG_LINE@decoded@        gerrit_cq_ability: <@@@",
+      "@@@STEP_LOG_LINE@decoded@          committer_list: \"project-flutter-committers\"@@@",
+      "@@@STEP_LOG_LINE@decoded@          dry_run_access_list: \"project-flutter-tryjob-access\"@@@",
+      "@@@STEP_LOG_LINE@decoded@        >@@@",
+      "@@@STEP_LOG_LINE@decoded@        tryjob: <@@@",
+      "@@@STEP_LOG_LINE@decoded@          builders: <@@@",
+      "@@@STEP_LOG_LINE@decoded@            name: \"flutter/try/flutter-bar\"@@@",
+      "@@@STEP_LOG_LINE@decoded@            location_regexp: \".*\"@@@",
+      "@@@STEP_LOG_LINE@decoded@            location_regexp_exclude: \".+/[+]/.*\\.md\"@@@",
+      "@@@STEP_LOG_LINE@decoded@            location_regexp_exclude: \".+/[+].*/docs/.+\"@@@",
+      "@@@STEP_LOG_LINE@decoded@          >@@@",
+      "@@@STEP_LOG_LINE@decoded@          builders: <@@@",
+      "@@@STEP_LOG_LINE@decoded@            name: \"flutter/try/flutter-foo\"@@@",
+      "@@@STEP_LOG_LINE@decoded@            location_regexp: \".*\"@@@",
+      "@@@STEP_LOG_LINE@decoded@            location_regexp_exclude: \".+/[+]/.*\\.md\"@@@",
+      "@@@STEP_LOG_LINE@decoded@            location_regexp_exclude: \".+/[+].*/docs/.+\"@@@",
+      "@@@STEP_LOG_LINE@decoded@          >@@@",
+      "@@@STEP_LOG_LINE@decoded@        >@@@",
+      "@@@STEP_LOG_LINE@decoded@      >@@@",
+      "@@@STEP_LOG_LINE@decoded@    >@@@",
+      "@@@STEP_LOG_END@decoded@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "all_tryjobs",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@tryjobs@flutter/try/flutter-bar@@@",
+      "@@@STEP_LOG_LINE@tryjobs@flutter/try/flutter-baz@@@",
+      "@@@STEP_LOG_LINE@tryjobs@flutter/try/flutter-foo@@@",
+      "@@@STEP_LOG_END@tryjobs@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "normalized_tryjobs",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@tryjobs@flutter/try/flutter-bar@@@",
+      "@@@STEP_LOG_LINE@tryjobs@flutter/try/flutter-baz@@@",
+      "@@@STEP_LOG_LINE@tryjobs@flutter/try/flutter-foo@@@",
+      "@@@STEP_LOG_END@tryjobs@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "get_affected_recipes",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@all recipes@fuchsia@@@",
+      "@@@STEP_LOG_LINE@all recipes@recipes@@@",
+      "@@@STEP_LOG_END@all recipes@@@",
+      "@@@STEP_LOG_LINE@changed files (raw)@recipes/fuchsia.py@@@",
+      "@@@STEP_LOG_LINE@changed files (raw)@recipes/foo@@@",
+      "@@@STEP_LOG_LINE@changed files (raw)@recipes/non_expected_json_file.json@@@",
+      "@@@STEP_LOG_LINE@changed files (raw)@recipe_modules/foo/examples/full.expected/bar.json@@@",
+      "@@@STEP_LOG_LINE@changed files (raw)@recipe_modules/foo/examples/full.py@@@",
+      "@@@STEP_LOG_LINE@changed files (raw)@recipe_modules/foo/test_api.py@@@",
+      "@@@STEP_LOG_END@changed files (raw)@@@",
+      "@@@STEP_LOG_LINE@changed files (filtered)@recipes/fuchsia.py@@@",
+      "@@@STEP_LOG_LINE@changed files (filtered)@recipes/foo@@@",
+      "@@@STEP_LOG_LINE@changed files (filtered)@recipes/non_expected_json_file.json@@@",
+      "@@@STEP_LOG_END@changed files (filtered)@@@",
+      "@@@STEP_LOG_LINE@affected recipes@none@@@",
+      "@@@STEP_LOG_END@affected recipes@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "listdir",
+      "[START_DIR]/recipes/recipes",
+      "--recursive"
+    ],
+    "infra_step": true,
+    "name": "get_affected_recipes.ls-recipes",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@listdir@[START_DIR]/recipes/recipes/foo@@@",
+      "@@@STEP_LOG_LINE@listdir@[START_DIR]/recipes/recipes/fuchsia.py@@@",
+      "@@@STEP_LOG_LINE@listdir@[START_DIR]/recipes/recipes/recipes.py@@@",
+      "@@@STEP_LOG_LINE@listdir@[START_DIR]/recipes/recipes/sdk.expected@@@",
+      "@@@STEP_LOG_END@listdir@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "diff-tree",
+      "--no-commit-id",
+      "--name-only",
+      "-r",
+      "HEAD",
+      "-z"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "env": {
+      "GIT_HTTP_LOW_SPEED_LIMIT": "1024000",
+      "GIT_HTTP_LOW_SPEED_TIME": "60"
+    },
+    "name": "get_affected_recipes.git diff-tree",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@files@recipes/fuchsia.py@@@",
+      "@@@STEP_LOG_LINE@files@recipes/foo@@@",
+      "@@@STEP_LOG_LINE@files@recipes/non_expected_json_file.json@@@",
+      "@@@STEP_LOG_LINE@files@recipe_modules/foo/examples/full.expected/bar.json@@@",
+      "@@@STEP_LOG_LINE@files@recipe_modules/foo/examples/full.py@@@",
+      "@@@STEP_LOG_LINE@files@recipe_modules/foo/test_api.py@@@",
+      "@@@STEP_LOG_END@files@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[START_DIR]/recipes/recipes.py",
+      "analyze",
+      "{\"files\": [\"recipes/fuchsia.py\", \"recipes/foo\", \"recipes/non_expected_json_file.json\"], \"recipes\": [\"fuchsia\", \"recipes\"]}",
+      "/path/to/tmp/json"
+    ],
+    "name": "get_affected_recipes.recipes-analyze",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"error\": \"\", @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"invalidRecipes\": [], @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"recipes\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"none\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "get builders",
+    "~followup_annotations": [
+      "@@@STEP_SUMMARY_TEXT@selected 0 builds@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "get builders.flutter/try/flutter-bar",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_SUMMARY_TEXT@skipped@@@",
+      "@@@STEP_LOG_LINE@recipe_used@flutter@@@",
+      "@@@STEP_LOG_END@recipe_used@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "bb",
+      "ls",
+      "-host",
+      "cr-buildbucket.appspot.com",
+      "-json",
+      "-nopage",
+      "-n",
+      "1",
+      "-fields",
+      "builder,create_time,created_by,critical,end_time,id,infra.recipe,input,number,output,start_time,status,update_time",
+      "-predicate",
+      "{\"builder\": {\"bucket\": \"try\", \"builder\": \"flutter-bar\", \"project\": \"flutter\"}, \"status\": \"SUCCESS\"}"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "infra_step": true,
+    "name": "get builders.flutter/try/flutter-bar.buildbucket.search",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LOG_LINE@raw_io.output_text@{\"status\": \"SUCCESS\", \"builder\": {\"builder\": \"flutter/try/flutter-bar\"}, \"infra\": {\"recipe\": {\"name\": \"flutter\"}}, \"input\": {\"gerritChanges\": [{\"project\": \"fuchsia\", \"host\": \"fuchsia-review.googlesource.com\"}]}, \"endTime\": \"2012-05-13T12:53:20Z\", \"id\": \"37\"}@@@",
+      "@@@STEP_LOG_END@raw_io.output_text@@@",
+      "@@@STEP_LINK@37@https://cr-buildbucket.appspot.com/build/37@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "get builders.flutter/try/flutter-baz",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_SUMMARY_TEXT@skipped@@@",
+      "@@@STEP_LOG_LINE@recipe_used@project@@@",
+      "@@@STEP_LOG_END@recipe_used@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "bb",
+      "ls",
+      "-host",
+      "cr-buildbucket.appspot.com",
+      "-json",
+      "-nopage",
+      "-n",
+      "1",
+      "-fields",
+      "builder,create_time,created_by,critical,end_time,id,infra.recipe,input,number,output,start_time,status,update_time",
+      "-predicate",
+      "{\"builder\": {\"bucket\": \"try\", \"builder\": \"flutter-baz\", \"project\": \"flutter\"}, \"status\": \"SUCCESS\"}"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "infra_step": true,
+    "name": "get builders.flutter/try/flutter-baz.buildbucket.search",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LOG_LINE@raw_io.output_text@{\"status\": \"SUCCESS\", \"builder\": {\"builder\": \"flutter/try/flutter-baz\"}, \"infra\": {\"recipe\": {\"name\": \"project\"}}, \"input\": {\"gerritChanges\": [{\"project\": \"fuchsia\", \"host\": \"fuchsia-review.googlesource.com\"}]}, \"endTime\": \"2012-05-13T12:53:20Z\", \"id\": \"37\"}@@@",
+      "@@@STEP_LOG_END@raw_io.output_text@@@",
+      "@@@STEP_LINK@37@https://cr-buildbucket.appspot.com/build/37@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "get builders.flutter/try/flutter-foo",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_SUMMARY_TEXT@skipped@@@",
+      "@@@STEP_LOG_LINE@recipe_used@flutter@@@",
+      "@@@STEP_LOG_END@recipe_used@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "bb",
+      "ls",
+      "-host",
+      "cr-buildbucket.appspot.com",
+      "-json",
+      "-nopage",
+      "-n",
+      "1",
+      "-fields",
+      "builder,create_time,created_by,critical,end_time,id,infra.recipe,input,number,output,start_time,status,update_time",
+      "-predicate",
+      "{\"builder\": {\"bucket\": \"try\", \"builder\": \"flutter-foo\", \"project\": \"flutter\"}, \"status\": \"SUCCESS\"}"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "infra_step": true,
+    "name": "get builders.flutter/try/flutter-foo.buildbucket.search",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LOG_LINE@raw_io.output_text@{\"status\": \"SUCCESS\", \"builder\": {\"builder\": \"flutter/try/flutter-foo\"}, \"infra\": {\"recipe\": {\"name\": \"flutter\"}}, \"input\": {\"gerritChanges\": [{\"project\": \"fuchsia\", \"host\": \"fuchsia-review.googlesource.com\"}]}, \"endTime\": \"2012-05-13T12:53:20Z\", \"id\": \"37\"}@@@",
+      "@@@STEP_LOG_END@raw_io.output_text@@@",
+      "@@@STEP_LINK@37@https://cr-buildbucket.appspot.com/build/37@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]
