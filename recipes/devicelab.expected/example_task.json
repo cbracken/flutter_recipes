@@ -5,9 +5,9 @@
       "-u",
       "RECIPE_MODULE[depot_tools::git]/resources/git_setup.py",
       "--path",
-      "[START_DIR]/flutter",
+      "[START_DIR]/repo",
       "--url",
-      "https://chromium.googlesource.com/external/github.com/flutter/flutter"
+      "https://abc.com/repo"
     ],
     "name": "git setup"
   },
@@ -21,7 +21,7 @@
       "--progress",
       "--tags"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/repo",
     "env": {
       "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
     },
@@ -35,7 +35,7 @@
       "-f",
       "FETCH_HEAD"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/repo",
     "infra_step": true,
     "name": "git checkout"
   },
@@ -45,7 +45,7 @@
       "rev-parse",
       "HEAD"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/repo",
     "infra_step": true,
     "name": "read revision",
     "~followup_annotations": [
@@ -61,7 +61,7 @@
       "-d",
       "-x"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/repo",
     "infra_step": true,
     "name": "git clean"
   },
@@ -71,7 +71,7 @@
       "submodule",
       "sync"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/repo",
     "infra_step": true,
     "name": "submodule sync"
   },
@@ -83,7 +83,7 @@
       "--init",
       "--recursive"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/repo",
     "infra_step": true,
     "name": "submodule update"
   },

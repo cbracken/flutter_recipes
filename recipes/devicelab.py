@@ -79,7 +79,8 @@ def GenTests(api):
   )
   yield api.test(
       'example_task',
-      api.properties(git_ref='refs/pull/123/head'),
+      api.properties(
+          git_ref='refs/pull/123/head', git_url='https://abc.com/repo'),
       api.properties(task_name='task1'),
       api.step_data('read manifest.parse', api.json.output(example_manifest)),
   ) + api.post_check(lambda check, steps: check('run task1' in steps))
