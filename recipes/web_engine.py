@@ -146,12 +146,6 @@ def RunSteps(api, properties, env_properties):
       felt_licenses = copy.deepcopy(felt_cmd)
       felt_licenses.append('check-licenses')
       api.step('felt licenses', felt_licenses)
-      if api.platform.is_linux:
-        additional_args_firefox = ['--browser', 'firefox']
-        felt_test_firefox = copy.deepcopy(felt_cmd)
-        felt_test_firefox.append('test')
-        felt_test_firefox.extend(additional_args_firefox)
-        api.step('felt test firefox', felt_test_firefox)
       felt_test = copy.deepcopy(felt_cmd)
       felt_test.append('test')
       felt_test.extend(additional_args)
