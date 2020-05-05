@@ -104,8 +104,8 @@ def DownloadFuchsiaSystemImageAndPackages(api, fuchsia_dir, target_dir):
         name="download fuchsia system image")
     api.gsutil.download(
         bucket_name,
-        'development/%s/packages/%s' % (build_id,
-                                        FUCHSIA_PACKAGES_ARCHIVE_NAME),
+        'development/%s/packages/%s' %
+        (build_id, FUCHSIA_PACKAGES_ARCHIVE_NAME),
         target_dir,
         name="download fuchsia companion packages")
 
@@ -123,6 +123,31 @@ def IsolateFuchsiaCtlDeps(api, fuchsia_ctl_wd):
     api.file.copy('Copy dev_finder', fuchsia_tools.join('dev_finder'),
                   fuchsia_ctl_wd)
     api.file.copy('Copy pm', fuchsia_tools.join('pm'), fuchsia_ctl_wd)
+
+
+def CollectFlutterDriverTestResults(api, fuchsia_swarming_metadata):
+  # Collect the result of the task by metadata.
+  links = {m.id: m.task_ui_link for m in fuchsia_swarming_metadata}
+  fuchsia_output = api.path['cleanup'].join('fuchsia_test_output')
+  api.file.ensure_directory('swarming output', fuchsia_output)
+  results = api.swarming.collect(
+      'collect',
+      fuchsia_swarming_metadata,
+      output_dir=fuchsia_output,
+      timeout='30m')
+  ProcessResults(api, results, links)
+
+
+def ProcessResults(api, results, links):
+  with api.step.defer_results():
+    for result in results:
+      with api.step.nest('Result for %s' % result.name) as presentation:
+        if (result.state is None or
+            result.state != api.swarming.TaskState.COMPLETED):
+          presentation.status = api.step.EXCEPTION
+        elif not result.success:
+          presentation.status = api.step.FAILURE
+        presentation.links['task UI'] = links[result.id]
 
 
 def IsolateDriverDeps(api):
@@ -143,27 +168,20 @@ def SwarmFuchsiaTests(api):
   fuchsia_ctl_package.add_package('flutter/fuchsia_ctl/${platform}',
                                   api.properties.get('fuchsia_ctl_version'))
   request = (
-      api.swarming.task_request().with_name('flutter_fuchsia_driver_tests')
-      .with_priority(100))
+      api.swarming.task_request().with_name(
+          'flutter_fuchsia_driver_tests').with_priority(100))
   request = (
       request.with_slice(
-          0, request[0].with_cipd_ensure_file(fuchsia_ctl_package).with_command(
-              ['./%s' % FUCHSIA_TEST_SCRIPT_NAME,
-               FUCHSIA_IMAGE_NAME]).with_dimensions(pool='luci.flutter.tests')
-          .with_isolated(isolated_hash).with_expiration_secs(
-              3600).with_io_timeout_secs(3600).with_execution_timeout_secs(
-                  3600).with_idempotent(True).with_containment_type('AUTO')))
+          0,
+          request[0].with_cipd_ensure_file(fuchsia_ctl_package).with_command([
+              './%s' % FUCHSIA_TEST_SCRIPT_NAME, FUCHSIA_IMAGE_NAME
+          ]).with_dimensions(pool='luci.flutter.tests').with_isolated(
+              isolated_hash).with_expiration_secs(3600).with_io_timeout_secs(
+                  3600).with_execution_timeout_secs(3600).with_idempotent(
+                      True).with_containment_type('AUTO')))
 
-  # Trigger the task request.
-  metadata = api.swarming.trigger(
+  return api.swarming.trigger(
       'Trigger Fuchsia Driver Tests', requests=[request])
-  # Collect the result of the task by metadata.
-  fuchsia_output = api.path['cleanup'].join('fuchsia_test_output')
-  api.file.ensure_directory('swarming output', fuchsia_output)
-  results = api.swarming.collect(
-      'collect', metadata, output_dir=fuchsia_output, timeout='30m')
-  for result in results:
-    result.analyze()
 
 
 def RunFuchsiaDriverTests(api):
@@ -179,8 +197,7 @@ def RunFuchsiaDriverTests(api):
         flutter_executable, 'precache', '--flutter_runner', '--no-android',
         '--no-ios'
     ])
-    SwarmFuchsiaTests(api)
-    return
+    return SwarmFuchsiaTests(api)
 
 
 def InstallOpenJDK(api):
@@ -335,9 +352,6 @@ def RunSteps(api):
         'GOLD_TRYJOB': git_ref,
     })
 
-
-
-
   flutter_executable = 'flutter' if not api.platform.is_win else 'flutter.bat'
   dart_executable = 'dart' if not api.platform.is_win else 'dart.exe'
 
@@ -357,8 +371,9 @@ def RunSteps(api):
     api.step('download dependencies', [flutter_executable, 'update-packages'])
 
   # TODO (kaushikiska): Should we only run the tests on specific shard types?
+  fuchsia_swarming_metadata = None
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout):
-    RunFuchsiaDriverTests(api)
+    fuchsia_swarming_metadata = RunFuchsiaDriverTests(api)
 
   with _PlatformSDK(api):
     with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout):
@@ -369,6 +384,8 @@ def RunSteps(api):
         api.step('run test.dart for %s shard' % shard,
                  [dart_executable,
                   checkout.join('dev', 'bots', 'test.dart')])
+      if fuchsia_swarming_metadata:
+        CollectFlutterDriverTestResults(api, fuchsia_swarming_metadata)
       if shard == 'coverage':
         UploadFlutterCoverage(api)
       # Windows uses exclusive file locking.  On LUCI, if these processes remain
@@ -401,14 +418,15 @@ def GenTests(api):
               coveralls_lcov_version='5.1.0',
               upload_packages=should_upload,
               gold_tryjob=not should_upload),
-      ) + api.post_check(
-          lambda check, steps: check('Download goldctl' in steps)))
+      ) + api.post_check(lambda check, steps: check('Download goldctl' in steps)
+                        ))
       for platform in ('mac', 'linux', 'win'):
         for branch in ('master', 'dev', 'beta', 'stable'):
           git_ref = 'refs/heads/' + branch
           test = api.test(
-              '%s_%s%s%s' % (platform, branch, '_experimental' if experimental
-                             else '', '_upload' if should_upload else ''),
+              '%s_%s%s%s' %
+              (platform, branch, '_experimental' if experimental else '',
+               '_upload' if should_upload else ''),
               api.platform(platform, 64),
               api.buildbucket.ci_build(git_ref=git_ref, revision=None),
               api.properties(
@@ -418,8 +436,8 @@ def GenTests(api):
                   gold_tryjob=not should_upload),
               api.runtime(is_luci=True, is_experimental=experimental),
           )
-          yield test + api.post_check(
-              lambda check, steps: check('Download goldctl' in steps))
+          yield test + api.post_check(lambda check, steps: check(
+              'Download goldctl' in steps))
 
   yield (api.test(
       'pull_request',
@@ -431,3 +449,23 @@ def GenTests(api):
           fuchsia_ctl_version='version:0.0.2',
           should_upload=False),
   ) + api.post_check(lambda check, steps: check('Download goldctl' in steps)))
+
+  yield (
+      api.test(
+          'Linux Fuchsia Infra Failure', api.platform('linux', 64),
+          api.buildbucket.ci_build(git_ref='refs/head/master', revision=None),
+          api.step_data('Run Fuchsia Driver Tests.Trigger Fuchsia Driver Tests',
+                        api.swarming.trigger(['task1', 'task2'])),
+          api.step_data(
+              'collect',
+              api.swarming.collect([
+                  api.swarming.task_result(0, 'task1', state=None),
+                  api.swarming.task_result(1, 'task1', failure=True)
+              ])),
+          api.properties(
+              shard='tests',
+              fuchsia_ctl_version='version:0.0.2',
+              upload_packages=True,
+              gold_tryjob=False),
+          api.runtime(is_luci=True, is_experimental=False)) +
+      api.post_check(lambda check, steps: check('Download goldctl' in steps)))

@@ -16,7 +16,7 @@
       "git",
       "fetch",
       "origin",
-      "master",
+      "refs/head/master",
       "--recurse-submodules",
       "--progress",
       "--tags"
@@ -454,7 +454,7 @@
       "-root",
       "[CACHE]/isolated_client",
       "-ensure-file",
-      "infra/tools/luci/isolated/${platform} latest",
+      "infra/tools/luci/isolated/${platform} git_revision:305e79001db1846906c7136d90a863bee5bd3bfc",
       "-max-threads",
       "0",
       "-json-output",
@@ -480,7 +480,7 @@
       "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
       "@@@STEP_LOG_LINE@json.output@      {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-git_revision:305\", @@@",
       "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/isolated/resolved-platform\"@@@",
       "@@@STEP_LOG_LINE@json.output@      }@@@",
       "@@@STEP_LOG_LINE@json.output@    ]@@@",
@@ -564,7 +564,7 @@
       "-root",
       "[CACHE]/swarming_client",
       "-ensure-file",
-      "infra/tools/luci/swarming/${platform} latest",
+      "infra/tools/luci/swarming/${platform} git_revision:62a9c18c7fd447316832d0d768f99cfc9bac7f87",
       "-max-threads",
       "0",
       "-json-output",
@@ -590,7 +590,7 @@
       "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
       "@@@STEP_LOG_LINE@json.output@      {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-git_revision:62a\", @@@",
       "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/swarming/resolved-platform\"@@@",
       "@@@STEP_LOG_LINE@json.output@      }@@@",
       "@@@STEP_LOG_LINE@json.output@    ]@@@",
@@ -606,7 +606,7 @@
       "-server",
       "https://example.swarmingserver.appspot.com",
       "-json-input",
-      "{\"requests\": [{\"name\": \"flutter_fuchsia_driver_tests\", \"priority\": \"100\", \"service_account\": \"\", \"task_slices\": [{\"expiration_secs\": \"3600\", \"properties\": {\"cipd_input\": {\"packages\": [{\"package_name\": \"flutter/fuchsia_ctl/${platform}\", \"path\": \".\", \"version\": null}]}, \"command\": [\"./run_fuchsia_tests.sh\", \"generic-x64.tgz\"], \"containment\": {\"containment_type\": \"AUTO\", \"limit_processes\": \"0\", \"limit_total_committed_memory\": \"0\", \"lower_priority\": false}, \"dimensions\": [{\"key\": \"pool\", \"value\": \"luci.flutter.tests\"}], \"env\": [], \"env_prefixes\": [], \"execution_timeout_secs\": \"3600\", \"grace_period_secs\": \"30\", \"idempotent\": true, \"inputs_ref\": {\"isolated\": \"[dummy hash]\", \"isolatedserver\": \"https://example.isolateserver.appspot.com\", \"namespace\": \"default-gzip\"}, \"io_timeout_secs\": \"3600\", \"outputs\": []}}]}]}",
+      "{\"requests\": [{\"name\": \"flutter_fuchsia_driver_tests\", \"priority\": \"100\", \"service_account\": \"\", \"task_slices\": [{\"expiration_secs\": \"3600\", \"properties\": {\"cipd_input\": {\"packages\": [{\"package_name\": \"flutter/fuchsia_ctl/${platform}\", \"path\": \".\", \"version\": \"version:0.0.2\"}]}, \"command\": [\"./run_fuchsia_tests.sh\", \"generic-x64.tgz\"], \"containment\": {\"containment_type\": \"AUTO\", \"limit_processes\": \"0\", \"limit_total_committed_memory\": \"0\", \"lower_priority\": false}, \"dimensions\": [{\"key\": \"pool\", \"value\": \"luci.flutter.tests\"}], \"env\": [], \"env_prefixes\": [], \"execution_timeout_secs\": \"3600\", \"grace_period_secs\": \"30\", \"idempotent\": true, \"inputs_ref\": {\"isolated\": \"[dummy hash]\", \"isolatedserver\": \"https://example.isolateserver.appspot.com\", \"namespace\": \"default-gzip\"}, \"io_timeout_secs\": \"3600\", \"outputs\": []}}]}]}",
       "-json-output",
       "/path/to/tmp/json"
     ],
@@ -630,14 +630,21 @@
       "@@@STEP_LOG_LINE@json.output@  \"tasks\": [@@@",
       "@@@STEP_LOG_LINE@json.output@    {@@@",
       "@@@STEP_LOG_LINE@json.output@      \"request\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"name\": \"flutter_fuchsia_driver_tests\"@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"name\": \"task1\"@@@",
       "@@@STEP_LOG_LINE@json.output@      }, @@@",
       "@@@STEP_LOG_LINE@json.output@      \"task_id\": \"0\"@@@",
+      "@@@STEP_LOG_LINE@json.output@    }, @@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"request\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"name\": \"task2\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }, @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"task_id\": \"1\"@@@",
       "@@@STEP_LOG_LINE@json.output@    }@@@",
       "@@@STEP_LOG_LINE@json.output@  ]@@@",
       "@@@STEP_LOG_LINE@json.output@}@@@",
       "@@@STEP_LOG_END@json.output@@@",
-      "@@@STEP_LINK@task UI: flutter_fuchsia_driver_tests@https://example.swarmingserver.appspot.com/task?id=0@@@"
+      "@@@STEP_LINK@task UI: task1@https://example.swarmingserver.appspot.com/task?id=0@@@",
+      "@@@STEP_LINK@task UI: task2@https://example.swarmingserver.appspot.com/task?id=1@@@"
     ]
   },
   {
@@ -679,7 +686,7 @@
       "GOLDCTL": "[CACHE]/gold/goldctl",
       "JAVA_HOME": "[CACHE]/java",
       "PUB_CACHE": "[START_DIR]/flutter/.pub-cache",
-      "SHARD": "coverage"
+      "SHARD": "tests"
     },
     "env_prefixes": {
       "PATH": [
@@ -688,7 +695,7 @@
         "[CACHE]/java/bin"
       ]
     },
-    "name": "run test.dart for coverage shard"
+    "name": "run test.dart for tests shard"
   },
   {
     "cmd": [
@@ -734,7 +741,8 @@
       "[CLEANUP]/fuchsia_test_output",
       "-timeout",
       "30m",
-      "0"
+      "0",
+      "1"
     ],
     "cwd": "[START_DIR]/flutter",
     "env": {
@@ -755,190 +763,52 @@
     "~followup_annotations": [
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"0\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"error\": \"Bot could not be contacted\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"results\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"task_id\": 0@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"1\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"output\": \"hello world!\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"outputs\": [], @@@",
       "@@@STEP_LOG_LINE@json.output@    \"results\": {@@@",
       "@@@STEP_LOG_LINE@json.output@      \"bot_id\": \"vm-123\", @@@",
       "@@@STEP_LOG_LINE@json.output@      \"duration\": 62.35, @@@",
-      "@@@STEP_LOG_LINE@json.output@      \"exit_code\": 0, @@@",
-      "@@@STEP_LOG_LINE@json.output@      \"name\": \"flutter_fuchsia_driver_tests\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"exit_code\": 1, @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"name\": \"task1\", @@@",
       "@@@STEP_LOG_LINE@json.output@      \"outputs_ref\": {@@@",
       "@@@STEP_LOG_LINE@json.output@        \"isolated\": \"abc123\", @@@",
       "@@@STEP_LOG_LINE@json.output@        \"isolatedserver\": \"https://isolateserver.appspot.com\", @@@",
       "@@@STEP_LOG_LINE@json.output@        \"namespace\": \"default-gzip\"@@@",
       "@@@STEP_LOG_LINE@json.output@      }, @@@",
       "@@@STEP_LOG_LINE@json.output@      \"state\": \"COMPLETED\", @@@",
-      "@@@STEP_LOG_LINE@json.output@      \"task_id\": \"0\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"task_id\": 1@@@",
       "@@@STEP_LOG_LINE@json.output@    }@@@",
       "@@@STEP_LOG_LINE@json.output@  }@@@",
       "@@@STEP_LOG_LINE@json.output@}@@@",
       "@@@STEP_LOG_END@json.output@@@",
-      "@@@STEP_LOG_LINE@task stdout+stderr: flutter_fuchsia_driver_tests@hello world!@@@",
-      "@@@STEP_LOG_END@task stdout+stderr: flutter_fuchsia_driver_tests@@@",
-      "@@@STEP_LINK@task isolated outputs: flutter_fuchsia_driver_tests@https://isolateserver.appspot.com/browse?namespace=default-gzip&hash=abc123@@@"
+      "@@@STEP_LOG_LINE@task stdout+stderr: None@Bot could not be contacted@@@",
+      "@@@STEP_LOG_END@task stdout+stderr: None@@@",
+      "@@@STEP_LOG_LINE@task stdout+stderr: task1@hello world!@@@",
+      "@@@STEP_LOG_END@task stdout+stderr: task1@@@",
+      "@@@STEP_LINK@task isolated outputs: task1@https://isolateserver.appspot.com/browse?namespace=default-gzip&hash=abc123@@@"
     ]
   },
   {
     "cmd": [],
-    "name": "Result for flutter_fuchsia_driver_tests",
+    "name": "Result for None",
     "~followup_annotations": [
-      "@@@STEP_LINK@task UI@https://example.swarmingserver.appspot.com/task?id=0@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
-      "--",
-      "RECIPE_REPO[depot_tools]/gsutil.py",
-      "----",
-      "cp",
-      "[START_DIR]/flutter/packages/flutter/coverage/lcov.info",
-      "gs://flutter_infra/flutter/experimental/coverage/lcov.info"
-    ],
-    "cwd": "[START_DIR]/flutter",
-    "env": {
-      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "GOLDCTL": "[CACHE]/gold/goldctl",
-      "JAVA_HOME": "[CACHE]/java",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
-        "[CACHE]/java/bin"
-      ]
-    },
-    "infra_step": true,
-    "name": "gsutil upload coverage data",
-    "~followup_annotations": [
-      "@@@STEP_LINK@lcov.info@https://storage.cloud.google.com/flutter_infra/flutter/experimental/coverage/lcov.info@@@"
+      "@@@STEP_LINK@task UI@https://example.swarmingserver.appspot.com/task?id=0@@@",
+      "@@@STEP_EXCEPTION@@@"
     ]
   },
   {
     "cmd": [],
-    "name": "ensure_cloudkms"
-  },
-  {
-    "cmd": [
-      "cipd",
-      "ensure",
-      "-root",
-      "[START_DIR]/cipd/cloudkms",
-      "-ensure-file",
-      "infra/tools/luci/cloudkms/${platform} latest",
-      "-max-threads",
-      "0",
-      "-json-output",
-      "/path/to/tmp/json"
-    ],
-    "cwd": "[START_DIR]/flutter",
-    "env": {
-      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "GOLDCTL": "[CACHE]/gold/goldctl",
-      "JAVA_HOME": "[CACHE]/java",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
-        "[CACHE]/java/bin"
-      ]
-    },
-    "infra_step": true,
-    "name": "ensure_cloudkms.ensure_installed",
+    "name": "Result for task1",
     "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@json.output@{@@@",
-      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
-      "@@@STEP_LOG_LINE@json.output@      {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/cloudkms/resolved-platform\"@@@",
-      "@@@STEP_LOG_LINE@json.output@      }@@@",
-      "@@@STEP_LOG_LINE@json.output@    ]@@@",
-      "@@@STEP_LOG_LINE@json.output@  }@@@",
-      "@@@STEP_LOG_LINE@json.output@}@@@",
-      "@@@STEP_LOG_END@json.output@@@"
+      "@@@STEP_LINK@task UI@https://example.swarmingserver.appspot.com/task?id=1@@@",
+      "@@@STEP_FAILURE@@@"
     ]
-  },
-  {
-    "cmd": [
-      "[START_DIR]/cipd/cloudkms/cloudkms",
-      "decrypt",
-      "-input",
-      "RECIPE[flutter::flutter].resources/coveralls-token.enc",
-      "-output",
-      "[START_DIR]/flutter/packages/flutter/.coveralls.yml",
-      "projects/flutter-infra/locations/global/keyRings/luci/cryptoKeys/coveralls"
-    ],
-    "cwd": "[START_DIR]/flutter",
-    "env": {
-      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "GOLDCTL": "[CACHE]/gold/goldctl",
-      "JAVA_HOME": "[CACHE]/java",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
-        "[CACHE]/java/bin"
-      ]
-    },
-    "name": "decrypt coveralls token"
-  },
-  {
-    "cmd": [
-      "pub",
-      "global",
-      "activate",
-      "coveralls",
-      "5.1.0",
-      "--no-executables"
-    ],
-    "cwd": "[START_DIR]/flutter",
-    "env": {
-      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "GOLDCTL": "[CACHE]/gold/goldctl",
-      "JAVA_HOME": "[CACHE]/java",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
-        "[CACHE]/java/bin"
-      ]
-    },
-    "name": "pub global activate coveralls"
-  },
-  {
-    "cmd": [
-      "pub",
-      "global",
-      "run",
-      "coveralls:main",
-      "[START_DIR]/flutter/packages/flutter/coverage/lcov.info"
-    ],
-    "cwd": "[START_DIR]/flutter/packages/flutter",
-    "env": {
-      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "GOLDCTL": "[CACHE]/gold/goldctl",
-      "JAVA_HOME": "[CACHE]/java",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
-        "[CACHE]/java/bin"
-      ]
-    },
-    "name": "upload to coveralls"
   },
   {
     "name": "$result"

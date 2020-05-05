@@ -642,94 +642,6 @@
   },
   {
     "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "ensure-directory",
-      "--mode",
-      "0777",
-      "[CLEANUP]/fuchsia_test_output"
-    ],
-    "cwd": "[START_DIR]/flutter",
-    "env": {
-      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "GOLDCTL": "[CACHE]/gold/goldctl",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
-      ]
-    },
-    "infra_step": true,
-    "name": "Run Fuchsia Driver Tests.swarming output",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "[CACHE]/swarming_client/swarming",
-      "collect",
-      "-verbose",
-      "-server",
-      "https://example.swarmingserver.appspot.com",
-      "-task-summary-json",
-      "/path/to/tmp/json",
-      "-task-output-stdout",
-      "json",
-      "-output-dir",
-      "[CLEANUP]/fuchsia_test_output",
-      "-timeout",
-      "30m",
-      "0"
-    ],
-    "cwd": "[START_DIR]/flutter",
-    "env": {
-      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "GOLDCTL": "[CACHE]/gold/goldctl",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
-      ]
-    },
-    "infra_step": true,
-    "name": "Run Fuchsia Driver Tests.collect",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@json.output@{@@@",
-      "@@@STEP_LOG_LINE@json.output@  \"0\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@    \"output\": \"hello world!\", @@@",
-      "@@@STEP_LOG_LINE@json.output@    \"outputs\": [], @@@",
-      "@@@STEP_LOG_LINE@json.output@    \"results\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@      \"bot_id\": \"vm-123\", @@@",
-      "@@@STEP_LOG_LINE@json.output@      \"duration\": 62.35, @@@",
-      "@@@STEP_LOG_LINE@json.output@      \"exit_code\": 0, @@@",
-      "@@@STEP_LOG_LINE@json.output@      \"name\": \"flutter_fuchsia_driver_tests\", @@@",
-      "@@@STEP_LOG_LINE@json.output@      \"outputs_ref\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"isolated\": \"abc123\", @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"isolatedserver\": \"https://isolateserver.appspot.com\", @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"namespace\": \"default-gzip\"@@@",
-      "@@@STEP_LOG_LINE@json.output@      }, @@@",
-      "@@@STEP_LOG_LINE@json.output@      \"state\": \"COMPLETED\", @@@",
-      "@@@STEP_LOG_LINE@json.output@      \"task_id\": \"0\"@@@",
-      "@@@STEP_LOG_LINE@json.output@    }@@@",
-      "@@@STEP_LOG_LINE@json.output@  }@@@",
-      "@@@STEP_LOG_LINE@json.output@}@@@",
-      "@@@STEP_LOG_END@json.output@@@",
-      "@@@STEP_LOG_LINE@task stdout+stderr: flutter_fuchsia_driver_tests@hello world!@@@",
-      "@@@STEP_LOG_END@task stdout+stderr: flutter_fuchsia_driver_tests@@@",
-      "@@@STEP_LINK@task isolated outputs: flutter_fuchsia_driver_tests@https://isolateserver.appspot.com/browse?namespace=default-gzip&hash=abc123@@@"
-    ]
-  },
-  {
-    "cmd": [
       "cipd",
       "ensure",
       "-root",
@@ -777,6 +689,101 @@
       ]
     },
     "name": "run test.dart for coverage shard"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CLEANUP]/fuchsia_test_output"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "GOLDCTL": "[CACHE]/gold/goldctl",
+      "JAVA_HOME": "[CACHE]/java",
+      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[CACHE]/java/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "swarming output"
+  },
+  {
+    "cmd": [
+      "[CACHE]/swarming_client/swarming",
+      "collect",
+      "-verbose",
+      "-server",
+      "https://example.swarmingserver.appspot.com",
+      "-task-summary-json",
+      "/path/to/tmp/json",
+      "-task-output-stdout",
+      "json",
+      "-output-dir",
+      "[CLEANUP]/fuchsia_test_output",
+      "-timeout",
+      "30m",
+      "0"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "GOLDCTL": "[CACHE]/gold/goldctl",
+      "JAVA_HOME": "[CACHE]/java",
+      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[CACHE]/java/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "collect",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"0\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"output\": \"hello world!\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"outputs\": [], @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"results\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"bot_id\": \"vm-123\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"duration\": 62.35, @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"exit_code\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"name\": \"flutter_fuchsia_driver_tests\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"outputs_ref\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"isolated\": \"abc123\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"isolatedserver\": \"https://isolateserver.appspot.com\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"namespace\": \"default-gzip\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }, @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"state\": \"COMPLETED\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"task_id\": \"0\"@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LOG_LINE@task stdout+stderr: flutter_fuchsia_driver_tests@hello world!@@@",
+      "@@@STEP_LOG_END@task stdout+stderr: flutter_fuchsia_driver_tests@@@",
+      "@@@STEP_LINK@task isolated outputs: flutter_fuchsia_driver_tests@https://isolateserver.appspot.com/browse?namespace=default-gzip&hash=abc123@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "Result for flutter_fuchsia_driver_tests",
+    "~followup_annotations": [
+      "@@@STEP_LINK@task UI@https://example.swarmingserver.appspot.com/task?id=0@@@"
+    ]
   },
   {
     "name": "$result"
