@@ -12966,7 +12966,6 @@
     "cmd": [
       "[CACHE]/swarming_client/swarming",
       "collect",
-      "-verbose",
       "-server",
       "https://example.swarmingserver.appspot.com",
       "-task-summary-json",
