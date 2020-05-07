@@ -271,7 +271,7 @@
     ],
     "cwd": "[START_DIR]/recipes",
     "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "1024000",
+      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
     },
     "name": "get_affected_recipes.git diff-tree",
