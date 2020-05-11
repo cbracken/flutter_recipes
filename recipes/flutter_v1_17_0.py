@@ -14,13 +14,12 @@ from contextlib import contextmanager
 import re
 
 DEPS = [
-    'build/build',
-    'build/zip',
+    'depot_tools/depot_tools',
     'depot_tools/git',
     'depot_tools/gsutil',
-    'depot_tools/depot_tools',
     'depot_tools/osx_sdk',
     'depot_tools/windows_sdk',
+    'flutter/zip',
     'recipe_engine/buildbucket',
     'recipe_engine/cipd',
     'recipe_engine/context',

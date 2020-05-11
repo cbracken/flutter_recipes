@@ -20,28 +20,27 @@ from PB.go.chromium.org.luci.buildbucket.proto import build as build_pb2
 from google.protobuf import struct_pb2
 
 DEPS = [
-    'build/build',
     'build/goma',
-    'build/zip',
     'depot_tools/bot_update',
     'depot_tools/depot_tools',
     'depot_tools/gclient',
     'depot_tools/git',
     'depot_tools/gsutil',
     'depot_tools/osx_sdk',
+    'flutter/zip',
     'recipe_engine/buildbucket',
     'recipe_engine/cipd',
     'recipe_engine/context',
-    'recipe_engine/isolated',
     'recipe_engine/file',
+    'recipe_engine/isolated',
     'recipe_engine/json',
     'recipe_engine/path',
     'recipe_engine/platform',
     'recipe_engine/properties',
+    'recipe_engine/python',
     'recipe_engine/runtime',
     'recipe_engine/step',
     'recipe_engine/swarming',
-    'recipe_engine/python',
 ]
 
 # Account for ~1 hour queue time when there is a high number of commits.

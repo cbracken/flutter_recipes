@@ -12,7 +12,6 @@ from PB.recipes.flutter.engine import InputProperties
 from PB.recipes.flutter.engine import EnvProperties
 
 DEPS = [
-    'build/build',
     'build/goma',
     'depot_tools/gclient',
     'depot_tools/gsutil',

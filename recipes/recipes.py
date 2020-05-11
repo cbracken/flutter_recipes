@@ -4,7 +4,6 @@
 
 """Recipe for testing recipes."""
 
-from PB.go.chromium.org.luci.buildbucket.proto import common as common_pb2
 from recipe_engine.recipe_api import Property
 DEPS = [
     'depot_tools/git',

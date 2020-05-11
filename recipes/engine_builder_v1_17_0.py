@@ -17,7 +17,6 @@ from PB.recipes.flutter.engine_builder_v1_17_0 \
     import InputProperties, EngineBuild
 
 DEPS = [
-    'build/build',
     'build/goma',
     'depot_tools/bot_update',
     'depot_tools/depot_tools',

@@ -5,12 +5,11 @@
 from contextlib import contextmanager
 
 DEPS = [
-    'build/build',
-    'build/zip',
+    'depot_tools/depot_tools',
     'depot_tools/git',
     'depot_tools/gsutil',
-    'depot_tools/depot_tools',
     'depot_tools/osx_sdk',
+    'flutter/zip',
     'recipe_engine/buildbucket',
     'recipe_engine/context',
     'recipe_engine/file',

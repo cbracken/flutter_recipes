@@ -131,7 +131,7 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[build::zip]/resources/zip.py"
+      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
     ],
     "name": "zipping ideviceinstaller-flutter.zip",
     "stdin": "{\"entries\": [{\"path\": \"[START_DIR]/output/ideviceinstaller-flutter\", \"type\": \"dir\"}], \"output\": \"[START_DIR]/zips/ideviceinstaller-flutter.zip\", \"root\": \"[START_DIR]/output/ideviceinstaller-flutter\"}"
