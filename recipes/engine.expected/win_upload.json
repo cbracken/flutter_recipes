@@ -636,7 +636,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Win Engine"
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -1043,7 +1045,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Win Engine"
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -1452,7 +1456,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Win Engine"
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -1832,7 +1838,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Win Engine"
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -2185,7 +2193,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Win Engine"
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -3463,7 +3473,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Win Engine"
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -3816,7 +3828,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Win Engine"
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -4169,7 +4183,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Win Engine"
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -4522,7 +4538,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Win Engine"
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -4875,7 +4893,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Win Engine"
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -5228,7 +5248,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Win Engine"
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {

@@ -810,7 +810,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -1191,7 +1193,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -1543,7 +1547,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -1924,7 +1930,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2919,7 +2927,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3432,7 +3442,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3785,7 +3797,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -4138,7 +4152,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -4491,7 +4507,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -4844,7 +4862,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5197,7 +5217,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6030,7 +6052,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6426,7 +6450,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6901,7 +6927,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7271,7 +7299,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7920,7 +7950,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8290,7 +8322,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8859,7 +8893,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -9229,7 +9265,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10226,7 +10264,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10609,7 +10649,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Mac Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Mac Engine"
+      "Mac Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10826,7 +10868,7 @@
       "-root",
       "[CACHE]/isolated_client",
       "-ensure-file",
-      "infra/tools/luci/isolated/${platform} git_revision:305e79001db1846906c7136d90a863bee5bd3bfc",
+      "infra/tools/luci/isolated/${platform} isolated_module_pin",
       "-max-threads",
       "0",
       "-json-output",
@@ -10855,7 +10897,7 @@
       "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
       "@@@STEP_LOG_LINE@json.output@      {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-git_revision:305\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-isolated_module_\", @@@",
       "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/isolated/resolved-platform\"@@@",
       "@@@STEP_LOG_LINE@json.output@      }@@@",
       "@@@STEP_LOG_LINE@json.output@    ]@@@",

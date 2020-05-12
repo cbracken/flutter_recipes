@@ -631,7 +631,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -1108,7 +1110,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -1489,7 +1493,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -1841,7 +1847,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2222,7 +2230,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3359,7 +3369,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3819,7 +3831,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -4228,7 +4242,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -4741,7 +4757,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5223,7 +5241,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5705,7 +5725,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6162,7 +6184,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6739,7 +6763,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7118,7 +7144,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7496,7 +7524,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7849,7 +7879,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8430,7 +8462,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8783,7 +8817,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -9374,7 +9410,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -9727,7 +9765,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10261,7 +10301,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10614,7 +10656,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -11205,7 +11249,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -11558,7 +11604,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -12092,7 +12140,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -12445,7 +12495,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -13424,7 +13476,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -13784,7 +13838,7 @@
       "-root",
       "[CACHE]/isolated_client",
       "-ensure-file",
-      "infra/tools/luci/isolated/${platform} git_revision:305e79001db1846906c7136d90a863bee5bd3bfc",
+      "infra/tools/luci/isolated/${platform} isolated_module_pin",
       "-max-threads",
       "0",
       "-json-output",
@@ -13813,7 +13867,7 @@
       "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
       "@@@STEP_LOG_LINE@json.output@      {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-git_revision:305\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-isolated_module_\", @@@",
       "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/isolated/resolved-platform\"@@@",
       "@@@STEP_LOG_LINE@json.output@      }@@@",
       "@@@STEP_LOG_LINE@json.output@    ]@@@",
@@ -13896,7 +13950,7 @@
       "-root",
       "[CACHE]/swarming_client",
       "-ensure-file",
-      "infra/tools/luci/swarming/${platform} git_revision:04f55b620457d37b0fb764c195eb2b6d18c3501f",
+      "infra/tools/luci/swarming/${platform} swarming_module_pin",
       "-max-threads",
       "0",
       "-json-output",
@@ -13925,7 +13979,7 @@
       "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
       "@@@STEP_LOG_LINE@json.output@      {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-git_revision:04f\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-swarming_module_\", @@@",
       "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/swarming/resolved-platform\"@@@",
       "@@@STEP_LOG_LINE@json.output@      }@@@",
       "@@@STEP_LOG_LINE@json.output@    ]@@@",
@@ -14403,7 +14457,9 @@
       "{\"bucket\": \"ci\", \"builder\": \"Linux Engine\", \"project\": \"flutter\"}",
       "--is-luci",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {

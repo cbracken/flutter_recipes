@@ -483,7 +483,9 @@
       "[TMP_BASE]\\crash_report_id",
       "--builder-id-json",
       "{\"bucket\": \"\", \"builder\": \"\", \"project\": \"\"}",
-      "--is-luci"
+      "--is-luci",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {

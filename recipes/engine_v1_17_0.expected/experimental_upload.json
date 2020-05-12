@@ -632,7 +632,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -1110,7 +1112,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -1492,7 +1496,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -1845,7 +1851,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2227,7 +2235,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3452,7 +3462,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3947,7 +3959,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -4593,7 +4607,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5208,7 +5224,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5823,7 +5841,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6512,7 +6532,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7195,7 +7217,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7575,7 +7599,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7954,7 +7980,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8308,7 +8336,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -9055,7 +9085,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -9409,7 +9441,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10200,7 +10234,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10554,7 +10590,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -11254,7 +11292,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -11608,7 +11648,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -12399,7 +12441,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -12753,7 +12797,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -13453,7 +13499,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -13807,7 +13855,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -15150,7 +15200,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -16084,7 +16136,9 @@
       "--is-luci",
       "--is-experimental",
       "--buildbot-buildername",
-      "Linux Engine"
+      "Linux Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
