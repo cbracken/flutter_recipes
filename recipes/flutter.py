@@ -135,7 +135,10 @@ def CollectFlutterDriverTestResults(api, fuchsia_swarming_metadata):
       output_dir=fuchsia_output,
       timeout='30m')
   api.display_util.display_tasks(
-      'Display builds', results=results, metadata=fuchsia_swarming_metadata)
+      'Display builds',
+      results=results,
+      metadata=fuchsia_swarming_metadata,
+      raise_on_failure=True)
 
 
 def IsolateDriverDeps(api):

@@ -776,7 +776,10 @@ def TestFuchsia(api):
   results = api.swarming.collect(
       'collect', metadata, output_dir=fuchsia_output, timeout='30m')
   api.display_util.display_tasks(
-      'Display builds', results=results, metadata=metadata)
+      'Display builds',
+      results=results,
+      metadata=metadata,
+      raise_on_failure=True)
 
 
 def GetRemoteFileName(exec_path):
