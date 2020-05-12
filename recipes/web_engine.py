@@ -15,6 +15,7 @@ DEPS = [
     'build/goma',
     'depot_tools/gclient',
     'depot_tools/gsutil',
+    'recipe_engine/cipd',
     'recipe_engine/file',
     'recipe_engine/path',
     'recipe_engine/context',
@@ -86,6 +87,30 @@ def GetCheckoutPath(api):
   return api.path['cache'].join('builder', 'src')
 
 
+def DownloadChromeAndDriver(api):
+  checkout = GetCheckoutPath(api)
+  # Download a specific version of chrome-linux before running Flutter Web
+  # tests.
+  # Chrome uses binary numbers for archiving different versions of the browser.
+  # The binary 741412 has major version 82. It is tested in both headless and
+  # no-headless mode of Chrome Driver for integration tests.
+  # Please make sure to also change the following lock file when updating the
+  # recipe:
+  # flutter/engine/blob/master/lib/web_ui/dev/browser_lock.yaml#L4
+  chrome_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
+                              'chrome','741412')
+  pkgs = api.cipd.EnsureFile()
+  pkgs.add_package('flutter_internal/browsers/chrome-linux', 'latest')
+  api.cipd.ensure(chrome_path, pkgs)
+  # Download the driver fort the same version of chrome-linux.
+  chrome_driver_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
+                                     'drivers','chrome')
+  pkgdriver = api.cipd.EnsureFile()
+  pkgdriver.add_package('flutter_internal/browser-drivers/chromedriver-linux',
+                        'latest')
+  api.cipd.ensure(chrome_driver_path, pkgdriver)
+
+
 def RunSteps(api, properties, env_properties):
   """Steps to checkout flutter engine and execute web tests."""
   cache_root = api.path['cache'].join('builder')
@@ -105,7 +130,8 @@ def RunSteps(api, properties, env_properties):
   env = {
       'GOMA_DIR': api.goma.goma_dir,
       'ANDROID_HOME': str(android_home),
-      'CHROME_NO_SANDBOX': 'true'
+      'CHROME_NO_SANDBOX': 'true',
+      'ENGINE_PATH': cache_root
   }
   env_prefixes = {'PATH': [dart_bin]}
 
@@ -145,6 +171,8 @@ def RunSteps(api, properties, env_properties):
       felt_licenses = copy.deepcopy(felt_cmd)
       felt_licenses.append('check-licenses')
       api.step('felt licenses', felt_licenses)
+      if api.platform.is_linux:
+        DownloadChromeAndDriver(api)
       felt_test = copy.deepcopy(felt_cmd)
       felt_test.append('test')
       felt_test.extend(additional_args)
