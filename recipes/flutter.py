@@ -12,6 +12,7 @@ DEPS = [
     'depot_tools/osx_sdk',
     'depot_tools/windows_sdk',
     'flutter/zip',
+    'fuchsia/display_util',
     'recipe_engine/buildbucket',
     'recipe_engine/cipd',
     'recipe_engine/context',
@@ -126,7 +127,6 @@ def IsolateFuchsiaCtlDeps(api, fuchsia_ctl_wd):
 
 def CollectFlutterDriverTestResults(api, fuchsia_swarming_metadata):
   # Collect the result of the task by metadata.
-  links = {m.id: m.task_ui_link for m in fuchsia_swarming_metadata}
   fuchsia_output = api.path['cleanup'].join('fuchsia_test_output')
   api.file.ensure_directory('swarming output', fuchsia_output)
   results = api.swarming.collect(
@@ -134,19 +134,8 @@ def CollectFlutterDriverTestResults(api, fuchsia_swarming_metadata):
       fuchsia_swarming_metadata,
       output_dir=fuchsia_output,
       timeout='30m')
-  ProcessResults(api, results, links)
-
-
-def ProcessResults(api, results, links):
-  with api.step.defer_results():
-    for result in results:
-      with api.step.nest('Result for %s' % result.name) as presentation:
-        if (result.state is None or
-            result.state != api.swarming.TaskState.COMPLETED):
-          presentation.status = api.step.EXCEPTION
-        elif not result.success:
-          presentation.status = api.step.FAILURE
-        presentation.links['task UI'] = links[result.id]
+  api.display_util.display_tasks(
+      'Display builds', results=results, metadata=fuchsia_swarming_metadata)
 
 
 def IsolateDriverDeps(api):
@@ -448,23 +437,3 @@ def GenTests(api):
           fuchsia_ctl_version='version:0.0.2',
           should_upload=False),
   ) + api.post_check(lambda check, steps: check('Download goldctl' in steps)))
-
-  yield (
-      api.test(
-          'Linux Fuchsia Infra Failure', api.platform('linux', 64),
-          api.buildbucket.ci_build(git_ref='refs/head/master', revision=None),
-          api.step_data('Run Fuchsia Driver Tests.Trigger Fuchsia Driver Tests',
-                        api.swarming.trigger(['task1', 'task2'])),
-          api.step_data(
-              'collect',
-              api.swarming.collect([
-                  api.swarming.task_result(0, 'task1', state=None),
-                  api.swarming.task_result(1, 'task1', failure=True)
-              ])),
-          api.properties(
-              shard='tests',
-              fuchsia_ctl_version='version:0.0.2',
-              upload_packages=True,
-              gold_tryjob=False),
-          api.runtime(is_luci=True, is_experimental=False)) +
-      api.post_check(lambda check, steps: check('Download goldctl' in steps)))

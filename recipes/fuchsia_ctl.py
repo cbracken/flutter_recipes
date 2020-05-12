@@ -6,17 +6,17 @@ from recipe_engine.recipe_api import Property
 
 DEPS = [
     'depot_tools/git',
+    'fuchsia/display_util',
+    'fuchsia/upload',
     'recipe_engine/buildbucket',
+    'recipe_engine/cipd',
     'recipe_engine/context',
+    'recipe_engine/file',
     'recipe_engine/json',
     'recipe_engine/path',
     'recipe_engine/properties',
     'recipe_engine/step',
-    'recipe_engine/file',
     'recipe_engine/swarming',
-    'fuchsia/buildbucket_util',
-    'fuchsia/upload',
-    'recipe_engine/cipd',
     'yaml',
 ]
 
@@ -55,7 +55,7 @@ def RunSteps(api):
   props = {'fuchsia_ctl_version': pin.instance_id}
   builds = ScheduleBuilds(api, 'Linux Fuchsia', props)
   builds = CollectBuilds(api, builds)
-  api.buildbucket_util.display_builds(
+  api.display_util.display_builds(
       step_name='display builds',
       builds=builds.values(),
       raise_on_failure=True,

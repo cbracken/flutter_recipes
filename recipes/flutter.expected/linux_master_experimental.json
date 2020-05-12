@@ -798,9 +798,18 @@
   },
   {
     "cmd": [],
-    "name": "Result for flutter_fuchsia_driver_tests",
+    "name": "Display builds",
     "~followup_annotations": [
-      "@@@STEP_LINK@task UI@https://example.swarmingserver.appspot.com/task?id=0@@@"
+      "@@@STEP_WARNINGS@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "Display builds.flutter_fuchsia_driver_tests",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LINK@0@https://example.swarmingserver.appspot.com/task?id=0@@@",
+      "@@@STEP_WARNINGS@@@"
     ]
   },
   {

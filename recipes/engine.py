@@ -20,7 +20,7 @@ DEPS = [
     'depot_tools/gsutil',
     'depot_tools/osx_sdk',
     'flutter/zip',
-    'fuchsia/buildbucket_util',
+    'fuchsia/display_util',
     'recipe_engine/buildbucket',
     'recipe_engine/cipd',
     'recipe_engine/context',
@@ -414,9 +414,10 @@ def UploadTreeMap(api, upload_dir, lib_flutter_path, android_triple):
         'third_party/binary_size/src/run_binary_size_analysis.py')
     library_path = checkout.join(lib_flutter_path)
     destionation_dir = temp_dir.join('sizes')
-    addr2line = checkout.join(
-        'third_party/android_tools/ndk/toolchains/' + android_triple +
-        '-4.9/prebuilt/linux-x86_64/bin/' + android_triple + '-addr2line')
+    addr2line = checkout.join('third_party/android_tools/ndk/toolchains/' +
+                              android_triple +
+                              '-4.9/prebuilt/linux-x86_64/bin/' +
+                              android_triple + '-addr2line')
     args = [
         '--library', library_path, '--destdir', destionation_dir,
         "--addr2line-binary", addr2line
@@ -439,8 +440,8 @@ def UploadTreeMap(api, upload_dir, lib_flutter_path, android_triple):
 
 
 def LintAndroidHost(api):
-  android_lint_path = GetCheckoutPath(api).join(
-      'flutter', 'tools', 'android_lint')
+  android_lint_path = GetCheckoutPath(api).join('flutter', 'tools',
+                                                'android_lint')
   with api.step.nest('android lint'):
     with api.context(cwd=android_lint_path):
       api.step('pub get', ['pub', 'get'])
@@ -473,8 +474,11 @@ def BuildLinuxAndroid(api, swarming_task_id):
     # Build Android Unopt and run tests
     RunGN(api, '--android', '--unoptimized')
     Build(api, 'android_debug_unopt')
-    RunTests(api, 'android_debug_unopt',
-             android_out_dir='android_debug_unopt', types='java')
+    RunTests(
+        api,
+        'android_debug_unopt',
+        android_out_dir='android_debug_unopt',
+        types='java')
     for android_cpu, out_dir, artifact_dir, run_tests, abi in debug_variants:
       RunGN(api, '--android', '--android-cpu=%s' % android_cpu, '--no-lto')
       Build(api, out_dir)
@@ -680,7 +684,7 @@ def GetFuchsiaBuildId(api):
 
 
 def DownloadFuchsiaSystemDeps(api, target_dir, bucket_name, build_id,
-                               image_name, packages_name):
+                              image_name, packages_name):
   api.gsutil.download(bucket_name,
                       'development/%s/images/%s' % (build_id, image_name),
                       target_dir)
@@ -743,49 +747,37 @@ def TestFuchsia(api):
   fuchsia_test_script = checkout.join('flutter', 'testing', 'fuchsia',
                                       'run_tests.sh')
 
-  isolated_hash = IsolateFuchsiaTestArtifacts(
-      api, checkout, fuchsia_tools, image_name, packages_name,
-      fuchsia_test_script)
+  isolated_hash = IsolateFuchsiaTestArtifacts(api, checkout, fuchsia_tools,
+                                              image_name, packages_name,
+                                              fuchsia_test_script)
 
   ensure_file = api.cipd.EnsureFile()
   ensure_file.add_package('flutter/fuchsia_ctl/${platform}',
                           api.properties.get('fuchsia_ctl_version'))
 
   request = (
-      api.swarming.task_request().with_name('flutter_fuchsia_unittests')
-      .with_priority(100))
+      api.swarming.task_request().with_name(
+          'flutter_fuchsia_unittests').with_priority(100))
 
   request = (
       request.with_slice(
-          0, request[0].with_cipd_ensure_file(ensure_file).with_command(
-              ['./run_tests.sh',
-               image_name, packages_name]
-          ).with_dimensions(pool='luci.flutter.tests')
-          .with_isolated(isolated_hash).with_expiration_secs(
-              3600).with_io_timeout_secs(3600).with_execution_timeout_secs(
-                  3600).with_idempotent(True).with_containment_type('AUTO')))
+          0, request[0].with_cipd_ensure_file(ensure_file).with_command([
+              './run_tests.sh', image_name, packages_name
+          ]).with_dimensions(pool='luci.flutter.tests').with_isolated(
+              isolated_hash).with_expiration_secs(3600).with_io_timeout_secs(
+                  3600).with_execution_timeout_secs(3600).with_idempotent(
+                      True).with_containment_type('AUTO')))
 
   # Trigger the task request.
   metadata = api.swarming.trigger('Trigger Fuchsia Tests', requests=[request])
-  links = {m.id: m.task_ui_link for m in metadata}
   # Collect the result of the task by metadata.
   fuchsia_output = api.path['cleanup'].join('fuchsia_test_output')
   api.file.ensure_directory('swarming output', fuchsia_output)
   results = api.swarming.collect(
       'collect', metadata, output_dir=fuchsia_output, timeout='30m')
-  ProcessResults(api, results, links)
+  api.display_util.display_tasks(
+      'Display builds', results=results, metadata=metadata)
 
-
-def ProcessResults(api, results, links):
-  with api.step.defer_results():
-    for result in results:
-      with api.step.nest('Result for %s' % result.name) as presentation:
-        if (result.state is None or
-            result.state != api.swarming.TaskState.COMPLETED):
-          presentation.status = api.step.EXCEPTION
-        elif not result.success:
-          presentation.status = api.step.FAILURE
-        presentation.links['task UI'] = links[result.id]
 
 def GetRemoteFileName(exec_path):
   # An example of exec_path is:
@@ -902,7 +894,7 @@ def BuildFuchsia(api):
     raise e
 
   builds = CollectBuilds(api, builds)
-  api.buildbucket_util.display_builds(
+  api.display_util.display_builds(
       step_name='display builds',
       builds=builds.values(),
       raise_on_failure=True,
@@ -1405,9 +1397,8 @@ def InstallGems(api):
           '--install-dir', '.'
       ])
       api.step('install xcpretty', [
-          'gem', 'install',
-          'xcpretty:' + api.properties.get('xcpretty_version', '0.3.0'),
-          '--install-dir', '.'
+          'gem', 'install', 'xcpretty:' +
+          api.properties.get('xcpretty_version', '0.3.0'), '--install-dir', '.'
       ])
   with api.context(
       env={"GEM_HOME": gem_dir}, env_prefixes={'PATH': [gem_dir.join('bin')]}):
@@ -1652,40 +1643,6 @@ def GenTests(api):
       api.step_data(
           'gn --fuchsia --fuchsia-cpu x64 --runtime-mode debug --no-lto',
           retcode=1),
-      api.properties(
-          InputProperties(
-              clobber=False,
-              goma_jobs='1024',
-              fuchsia_ctl_version='version:0.0.2',
-              build_host=False,
-              build_fuchsia=True,
-              test_fuchsia=True,
-              build_android_aot=False,
-              build_android_debug=False,
-              build_android_vulkan=False,
-              no_maven=False,
-              upload_packages=True,
-              android_sdk_license='android_sdk_hash',
-              android_sdk_preview_license='android_sdk_preview_hash')),
-      api.properties.environ(EnvProperties(SWARMING_TASK_ID='deadbeef')),
-  )
-  yield api.test(
-      'Linux Fuchsia Infra Failure',
-      api.platform('linux', 64),
-      api.buildbucket.ci_build(
-          builder='Linux Engine', git_repo=GIT_REPO, project='flutter'),
-      api.step_data('Trigger Fuchsia Tests',
-                    api.swarming.trigger(['task1', 'task2'])),
-      api.step_data('collect',
-                    api.swarming.collect(
-                        [api.swarming.task_result(0, 'task1', state=None),
-                         api.swarming.task_result(1, 'task1', failure=True)
-                        ])
-                    ),
-      api.buildbucket.simulated_collect_output([
-        api.buildbucket.try_build_message(
-            build_id=9016911228971028737, status='FAILURE'),
-      ]),
       api.properties(
           InputProperties(
               clobber=False,
