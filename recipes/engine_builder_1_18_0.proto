@@ -1,0 +1,43 @@
+// Copyright 2019 The Flutter Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+package recipes.flutter.engine_builder_1_18_0;
+
+message EngineBuild {
+  // Whether to disable GOMA for a build.
+  bool disable_goma = 1;
+
+  // Arguments to pass to the Flutter `gn` script.
+  repeated string gn_args = 2;
+
+  // The directory in `out` to pass to ninja.
+  string dir = 3;
+
+  // Specific targets, if any, to build.
+  repeated string targets = 4;
+
+  // File paths, relative to `src`, to send to isolated.
+  // For example, if you want to isolate libflutter.so and flutter.jar, it would
+  // be `['libflutter.so', 'flutter.jar']`.
+  repeated string output_files = 5;
+  // Directory paths, relative to `src`, to send to isolated.
+  // For example, if you want to isolate the "flutter_runner_far" directory,
+  // it would be `['flutter_runner_far']`.
+  repeated string output_dirs = 6;
+}
+
+message InputProperties {
+  string mastername = 1;
+
+  // License keys for the Android SDK.
+  string android_sdk_license = 2;
+  string android_sdk_preview_license = 3;
+
+  // Used to override the git ref/url. Only for experimental or non-prod builds.
+  string git_url = 4;
+  string git_ref = 5;
+
+  repeated EngineBuild builds = 6;
+}
