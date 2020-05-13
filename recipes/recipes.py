@@ -14,6 +14,7 @@ DEPS = [
     'recipe_engine/path',
     'recipe_engine/properties',
     'recipe_engine/python',
+    'recipe_engine/step',
 ]
 PROPERTIES = {
     'remote':
@@ -102,8 +103,9 @@ def RunSteps(api, remote, unittest_only):
   else:
     api.git.checkout(remote)
   api.recipe_testing.project = 'flutter'
-  api.recipe_testing.run_lint(checkout_path)
-  api.recipe_testing.run_unit_tests(checkout_path)
+  with api.step.defer_results():
+    api.recipe_testing.run_lint(checkout_path)
+    api.recipe_testing.run_unit_tests(checkout_path)
   if not unittest_only:
     api.recipe_testing.run_led_tests(checkout_path, SELFTEST_CL)
 
