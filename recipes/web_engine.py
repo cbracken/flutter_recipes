@@ -98,13 +98,13 @@ def DownloadChromeAndDriver(api):
   # recipe:
   # flutter/engine/blob/master/lib/web_ui/dev/browser_lock.yaml#L4
   chrome_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                              'chrome','741412')
+                              'chrome', '741412')
   pkgs = api.cipd.EnsureFile()
   pkgs.add_package('flutter_internal/browsers/chrome-linux', 'latest')
   api.cipd.ensure(chrome_path, pkgs)
   # Download the driver fort the same version of chrome-linux.
   chrome_driver_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                                     'drivers','chrome')
+                                     'drivers', 'chrome')
   pkgdriver = api.cipd.EnsureFile()
   pkgdriver.add_package('flutter_internal/browser-drivers/chromedriver-linux',
                         'latest')

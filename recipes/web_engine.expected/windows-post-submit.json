@@ -83,6 +83,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GIT_HTTP_LOW_SPEED_LIMIT": "102400",
       "GIT_HTTP_LOW_SPEED_TIME": "300",
       "GOMA_DIR": "[CACHE]\\goma\\client"
@@ -149,6 +150,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GOMA_DIR": "[CACHE]\\goma\\client"
     },
     "env_prefixes": {
@@ -176,6 +178,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GOMA_DIR": "[CACHE]\\goma\\client"
     },
     "env_prefixes": {
@@ -210,6 +213,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GOMA_DIR": "[CACHE]\\goma\\client"
     },
     "env_prefixes": {
@@ -239,6 +243,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
       "GOMA_CACHE_DIR": "[CACHE]\\goma\\data",
       "GOMA_DIR": "[CACHE]\\goma\\client",
@@ -287,6 +292,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GOMA_DIR": "[CACHE]\\goma\\client"
     },
     "env_prefixes": {
@@ -317,6 +323,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GOMA_DIR": "[CACHE]\\goma\\client"
     },
     "env_prefixes": {
@@ -347,6 +354,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
       "GOMA_CACHE_DIR": "[CACHE]\\goma\\data",
       "GOMA_DIR": "[CACHE]\\goma\\client",
@@ -393,6 +401,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
       "GOMA_CACHE_DIR": "[CACHE]\\goma\\data",
       "GOMA_DIR": "[CACHE]\\goma\\client",
@@ -428,6 +437,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
       "GOMA_CACHE_DIR": "[CACHE]\\goma\\data",
       "GOMA_DIR": "[CACHE]\\goma\\client",
@@ -491,6 +501,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GOMA_DIR": "[CACHE]\\goma\\client"
     },
     "env_prefixes": {
@@ -531,6 +542,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GOMA_DIR": "[CACHE]\\goma\\client"
     },
     "env_prefixes": {
@@ -558,6 +570,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GOMA_DIR": "[CACHE]\\goma\\client"
     },
     "env_prefixes": {
@@ -581,6 +594,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GOMA_DIR": "[CACHE]\\goma\\client"
     },
     "env_prefixes": {
@@ -604,6 +618,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GOMA_DIR": "[CACHE]\\goma\\client"
     },
     "env_prefixes": {
@@ -627,6 +642,7 @@
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
       "GOMA_DIR": "[CACHE]\\goma\\client"
     },
     "env_prefixes": {
