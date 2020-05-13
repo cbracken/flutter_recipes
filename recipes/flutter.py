@@ -81,116 +81,6 @@ def ShouldRunGoldTryjob(api):
   return api.properties.get('gold_tryjob', True)
 
 
-@contextmanager
-def MakeTempDir(api, label):
-  temp_dir = api.path.mkdtemp('tmp')
-  try:
-    yield temp_dir
-  finally:
-    api.file.rmtree('temp dir for %s' % label, temp_dir)
-
-
-def DownloadFuchsiaSystemImageAndPackages(api, fuchsia_dir, target_dir):
-  with api.step.nest('Download Fuchsia Archives'):
-    manifest_path = fuchsia_dir.join('meta', 'manifest.json')
-    manifest_data = api.file.read_json(
-        'Read fuchsia build manifest', manifest_path, test_data={'id': 123})
-    build_id = manifest_data['id']
-    bucket_name = 'fuchsia'
-    api.gsutil.download(
-        bucket_name,
-        'development/%s/images/%s' % (build_id, FUCHSIA_IMAGE_NAME),
-        target_dir,
-        name="download fuchsia system image")
-    api.gsutil.download(
-        bucket_name,
-        'development/%s/packages/%s' %
-        (build_id, FUCHSIA_PACKAGES_ARCHIVE_NAME),
-        target_dir,
-        name="download fuchsia companion packages")
-
-
-def IsolateFuchsiaCtlDeps(api, fuchsia_ctl_wd):
-  checkout = api.path['checkout']
-  flutter_bin = checkout.join('bin')
-  fuchsia_dir = flutter_bin.join('cache', 'artifacts', 'fuchsia')
-  fuchsia_tools = fuchsia_dir.join('tools')
-  DownloadFuchsiaSystemImageAndPackages(api, fuchsia_dir, fuchsia_ctl_wd)
-  with api.step.nest('Copy Fuchsia CTL Deps'):
-    api.file.copy('Copy test script',
-                  checkout.join('dev', 'bots', FUCHSIA_TEST_SCRIPT_NAME),
-                  fuchsia_ctl_wd)
-    api.file.copy('Copy dev_finder', fuchsia_tools.join('dev_finder'),
-                  fuchsia_ctl_wd)
-    api.file.copy('Copy pm', fuchsia_tools.join('pm'), fuchsia_ctl_wd)
-
-
-def CollectFlutterDriverTestResults(api, fuchsia_swarming_metadata):
-  # Collect the result of the task by metadata.
-  fuchsia_output = api.path['cleanup'].join('fuchsia_test_output')
-  api.file.ensure_directory('swarming output', fuchsia_output)
-  results = api.swarming.collect(
-      'collect',
-      fuchsia_swarming_metadata,
-      output_dir=fuchsia_output,
-      timeout='30m')
-  api.display_util.display_tasks(
-      'Display builds',
-      results=results,
-      metadata=fuchsia_swarming_metadata,
-      raise_on_failure=True)
-
-
-def IsolateDriverDeps(api):
-  checkout = api.path['checkout']
-  with api.step.nest('Create Isolate Archive'):
-    with MakeTempDir(api, 'isolate_dir') as isolate_dir:
-      IsolateFuchsiaCtlDeps(api, isolate_dir)
-      isolated_flutter = isolate_dir.join('flutter')
-      api.file.copytree('Copy flutter framework', checkout, isolated_flutter)
-      isolated = api.isolated.isolated(isolate_dir)
-      isolated.add_dir(isolate_dir)
-      return isolated.archive('Archive Fuchsia Test Isolate')
-
-
-def SwarmFuchsiaTests(api):
-  isolated_hash = IsolateDriverDeps(api)
-  fuchsia_ctl_package = api.cipd.EnsureFile()
-  fuchsia_ctl_package.add_package('flutter/fuchsia_ctl/${platform}',
-                                  api.properties.get('fuchsia_ctl_version'))
-  request = (
-      api.swarming.task_request().with_name(
-          'flutter_fuchsia_driver_tests').with_priority(100))
-  request = (
-      request.with_slice(
-          0,
-          request[0].with_cipd_ensure_file(fuchsia_ctl_package).with_command([
-              './%s' % FUCHSIA_TEST_SCRIPT_NAME, FUCHSIA_IMAGE_NAME
-          ]).with_dimensions(pool='luci.flutter.tests').with_isolated(
-              isolated_hash).with_expiration_secs(3600).with_io_timeout_secs(
-                  3600).with_execution_timeout_secs(3600).with_idempotent(
-                      True).with_containment_type('AUTO')))
-
-  return api.swarming.trigger(
-      'Trigger Fuchsia Driver Tests', requests=[request])
-
-
-def RunFuchsiaDriverTests(api):
-  # Fuchsia driver tests are currently only run from linux hosts.
-  if not api.platform.is_linux:
-    return
-  with api.step.nest('Run Fuchsia Driver Tests'):
-    flutter_executable = 'flutter' if not api.platform.is_win else 'flutter.bat'
-    api.step('precache fuchsia artifacts', [
-        flutter_executable, 'precache', '--fuchsia', '--no-android', '--no-ios'
-    ])
-    api.step('precache flutter runners', [
-        flutter_executable, 'precache', '--flutter_runner', '--no-android',
-        '--no-ios'
-    ])
-    return SwarmFuchsiaTests(api)
-
-
 def InstallOpenJDK(api):
   java_cache_dir = api.path['cache'].join('java')
   api.cipd.ensure(
@@ -361,11 +251,6 @@ def RunSteps(api):
     api.step('flutter doctor', [flutter_executable, 'doctor'])
     api.step('download dependencies', [flutter_executable, 'update-packages'])
 
-  # TODO (kaushikiska): Should we only run the tests on specific shard types?
-  fuchsia_swarming_metadata = None
-  with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout):
-    fuchsia_swarming_metadata = RunFuchsiaDriverTests(api)
-
   with _PlatformSDK(api):
     with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout):
       shard = api.properties['shard']
@@ -375,8 +260,6 @@ def RunSteps(api):
         api.step('run test.dart for %s shard' % shard,
                  [dart_executable,
                   checkout.join('dev', 'bots', 'test.dart')])
-      if fuchsia_swarming_metadata:
-        CollectFlutterDriverTestResults(api, fuchsia_swarming_metadata)
       if shard == 'coverage':
         UploadFlutterCoverage(api)
       # Windows uses exclusive file locking.  On LUCI, if these processes remain
