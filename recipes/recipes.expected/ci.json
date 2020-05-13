@@ -1,9 +1,5 @@
 [
   {
-    "cmd": [],
-    "name": "fetch master"
-  },
-  {
     "cmd": [
       "vpython",
       "-u",
@@ -16,301 +12,6 @@
       "[START_DIR]/recipes"
     ],
     "infra_step": true,
-    "name": "fetch master.makedirs",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "init"
-    ],
-    "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
-    "name": "fetch master.git init",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "remote",
-      "add",
-      "origin",
-      "https://flutter.googlesource.com/recipes"
-    ],
-    "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
-    "name": "fetch master.git remote",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [],
-    "name": "fetch master.cache",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "ensure-directory",
-      "--mode",
-      "0777",
-      "[CACHE]/git/flutter.googlesource.com-recipes"
-    ],
-    "cwd": "[START_DIR]/recipes",
-    "infra_step": true,
-    "name": "fetch master.cache.makedirs",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "init",
-      "--bare"
-    ],
-    "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
-    "name": "fetch master.cache.git init",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "config",
-      "remote.origin.url",
-      "https://flutter.googlesource.com/recipes"
-    ],
-    "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
-    "name": "fetch master.cache.remote set-url",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "config",
-      "--replace-all",
-      "remote.origin.fetch",
-      "+refs/heads/*:refs/heads/*",
-      "\\+refs/heads/\\*:.*"
-    ],
-    "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
-    "name": "fetch master.cache.git config",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "fetch",
-      "--prune",
-      "--tags",
-      "origin"
-    ],
-    "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
-    "name": "fetch master.cache.git fetch",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "ensure-directory",
-      "--mode",
-      "0777",
-      "[START_DIR]/recipes/.git/objects/info"
-    ],
-    "cwd": "[START_DIR]/recipes",
-    "infra_step": true,
-    "name": "fetch master.cache.makedirs object/info",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "[CACHE]/git/flutter.googlesource.com-recipes/objects\n",
-      "[START_DIR]/recipes/.git/objects/info/alternates"
-    ],
-    "cwd": "[START_DIR]/recipes",
-    "infra_step": true,
-    "name": "fetch master.cache.alternates",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LOG_LINE@alternates@[CACHE]/git/flutter.googlesource.com-recipes/objects@@@",
-      "@@@STEP_LOG_END@alternates@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "fetch",
-      "--tags",
-      "origin",
-      "master"
-    ],
-    "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
-    "name": "fetch master.git fetch",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "checkout",
-      "-f",
-      "FETCH_HEAD"
-    ],
-    "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
-    "name": "fetch master.git checkout",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "rev-parse",
-      "HEAD"
-    ],
-    "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
-    "name": "fetch master.git rev-parse",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "clean",
-      "-f",
-      "-d",
-      "-x"
-    ],
-    "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
-    "name": "fetch master.git clean",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [],
-    "name": "fetch master.submodule",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "submodule",
-      "sync"
-    ],
-    "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
-    "name": "fetch master.submodule.git submodule sync",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "submodule",
-      "update",
-      "--init"
-    ],
-    "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
-    "name": "fetch master.submodule.git submodule update",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "ensure-directory",
-      "--mode",
-      "0777",
-      "[START_DIR]"
-    ],
-    "infra_step": true,
     "name": "makedirs"
   },
   {
@@ -318,6 +19,7 @@
       "git",
       "init"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
@@ -332,6 +34,7 @@
       "origin",
       "https://flutter.googlesource.com/recipes"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
@@ -354,6 +57,7 @@
       "0777",
       "[CACHE]/git/flutter.googlesource.com-recipes"
     ],
+    "cwd": "[START_DIR]/recipes",
     "infra_step": true,
     "name": "cache.makedirs",
     "~followup_annotations": [
@@ -440,8 +144,9 @@
       "ensure-directory",
       "--mode",
       "0777",
-      "[START_DIR]/.git/objects/info"
+      "[START_DIR]/recipes/.git/objects/info"
     ],
+    "cwd": "[START_DIR]/recipes",
     "infra_step": true,
     "name": "cache.makedirs object/info",
     "~followup_annotations": [
@@ -457,8 +162,9 @@
       "/path/to/tmp/json",
       "copy",
       "[CACHE]/git/flutter.googlesource.com-recipes/objects\n",
-      "[START_DIR]/.git/objects/info/alternates"
+      "[START_DIR]/recipes/.git/objects/info/alternates"
     ],
+    "cwd": "[START_DIR]/recipes",
     "infra_step": true,
     "name": "cache.alternates",
     "~followup_annotations": [
@@ -473,8 +179,9 @@
       "fetch",
       "--tags",
       "origin",
-      "refs/changes/56/123456/7"
+      "master"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
@@ -488,6 +195,7 @@
       "-f",
       "FETCH_HEAD"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
@@ -500,6 +208,7 @@
       "rev-parse",
       "HEAD"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
@@ -514,6 +223,7 @@
       "-d",
       "-x"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
@@ -530,6 +240,7 @@
       "submodule",
       "sync"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
@@ -546,6 +257,7 @@
       "update",
       "--init"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
@@ -554,18 +266,6 @@
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
-  },
-  {
-    "cmd": [
-      "git",
-      "rebase",
-      "deadbeef"
-    ],
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
-    "name": "git rebase"
   },
   {
     "cmd": [
