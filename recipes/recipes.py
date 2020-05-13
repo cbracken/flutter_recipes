@@ -95,12 +95,12 @@ COMMIT_QUEUE_CFG = """
 
 
 def RunSteps(api, remote, unittest_only):
+  checkout_path = api.path['start_dir'].join('recipes')
   bb_input = api.buildbucket.build.input
   if bb_input.gerrit_changes:
-    api.git.checkout_cl(bb_input.gerrit_changes[0], api.path['start_dir'])
+    api.git.checkout_cl(bb_input.gerrit_changes[0], checkout_path)
   else:
     api.git.checkout(remote)
-  checkout_path = api.path['start_dir'].join('recipes')
   api.recipe_testing.project = 'flutter'
   api.recipe_testing.run_lint(checkout_path)
   api.recipe_testing.run_unit_tests(checkout_path)

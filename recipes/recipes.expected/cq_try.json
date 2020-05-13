@@ -308,7 +308,7 @@
       "ensure-directory",
       "--mode",
       "0777",
-      "[START_DIR]"
+      "[START_DIR]/recipes"
     ],
     "infra_step": true,
     "name": "makedirs"
@@ -316,13 +316,16 @@
   {
     "cmd": [
       "git",
-      "init"
+      "config",
+      "--remove-section",
+      "remote.origin"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
     },
-    "name": "git init"
+    "name": "git config"
   },
   {
     "cmd": [
@@ -332,6 +335,7 @@
       "origin",
       "https://flutter.googlesource.com/recipes"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
@@ -354,6 +358,7 @@
       "0777",
       "[CACHE]/git/flutter.googlesource.com-recipes"
     ],
+    "cwd": "[START_DIR]/recipes",
     "infra_step": true,
     "name": "cache.makedirs",
     "~followup_annotations": [
@@ -440,8 +445,9 @@
       "ensure-directory",
       "--mode",
       "0777",
-      "[START_DIR]/.git/objects/info"
+      "[START_DIR]/recipes/.git/objects/info"
     ],
+    "cwd": "[START_DIR]/recipes",
     "infra_step": true,
     "name": "cache.makedirs object/info",
     "~followup_annotations": [
@@ -457,8 +463,9 @@
       "/path/to/tmp/json",
       "copy",
       "[CACHE]/git/flutter.googlesource.com-recipes/objects\n",
-      "[START_DIR]/.git/objects/info/alternates"
+      "[START_DIR]/recipes/.git/objects/info/alternates"
     ],
+    "cwd": "[START_DIR]/recipes",
     "infra_step": true,
     "name": "cache.alternates",
     "~followup_annotations": [
@@ -475,6 +482,7 @@
       "origin",
       "refs/changes/56/123456/7"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
@@ -488,6 +496,7 @@
       "-f",
       "FETCH_HEAD"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
@@ -500,6 +509,7 @@
       "rev-parse",
       "HEAD"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
@@ -514,6 +524,7 @@
       "-d",
       "-x"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
@@ -530,6 +541,7 @@
       "submodule",
       "sync"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
@@ -546,6 +558,7 @@
       "update",
       "--init"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
@@ -561,6 +574,7 @@
       "rebase",
       "deadbeef"
     ],
+    "cwd": "[START_DIR]/recipes",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
       "GIT_HTTP_LOW_SPEED_TIME": "60"
