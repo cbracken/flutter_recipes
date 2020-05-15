@@ -656,6 +656,28 @@ def BuildLinux(api):
           'out/host_debug/libflutter_linux_glfw.so',
       ],
       archive_name='linux-x64-flutter-glfw.zip')
+  UploadArtifacts(
+      api,
+      'linux-x64-profile', [
+          'out/host_profile/flutter_export.h',
+          'out/host_profile/flutter_glfw.h',
+          'out/host_profile/flutter_messenger.h',
+          'out/host_profile/flutter_plugin_registrar.h',
+          'out/host_profile/libflutter_linux_glfw.so',
+          'out/host_profile/gen_snapshot',
+      ],
+      archive_name='linux-x64-flutter-glfw.zip')
+  UploadArtifacts(
+      api,
+      'linux-x64-release', [
+          'out/host_release/flutter_export.h',
+          'out/host_release/flutter_glfw.h',
+          'out/host_release/flutter_messenger.h',
+          'out/host_release/flutter_plugin_registrar.h',
+          'out/host_release/libflutter_linux_glfw.so',
+          'out/host_release/gen_snapshot',
+      ],
+      archive_name='linux-x64-flutter-glfw.zip')
   UploadFolder(api, 'Upload linux-x64 Flutter GLFW library C++ wrapper',
                'src/out/host_debug', 'cpp_client_wrapper_glfw',
                'flutter-cpp-client-wrapper-glfw.zip', 'linux-x64')
