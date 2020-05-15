@@ -131,8 +131,7 @@ def RunSteps(api, properties, env_properties):
       'GOMA_DIR': api.goma.goma_dir,
       'ANDROID_HOME': str(android_home),
       'CHROME_NO_SANDBOX': 'true',
-      'ENGINE_PATH': cache_root,
-      'BOT': 'true'
+      'ENGINE_PATH': cache_root
   }
   env_prefixes = {'PATH': [dart_bin]}
 
