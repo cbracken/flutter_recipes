@@ -6,12 +6,15 @@ from recipe_engine.recipe_api import Property
 
 DEPS = [
     'depot_tools/git',
-    'recipe_engine/buildbucket',
+    'recipe_engine/cipd',
     'recipe_engine/context',
+    'recipe_engine/file',
     'recipe_engine/json',
     'recipe_engine/path',
+    'recipe_engine/platform',
     'recipe_engine/properties',
     'recipe_engine/step',
+    'android_sdk',
     'yaml',
 ]
 
@@ -62,7 +65,10 @@ def RunSteps(api, task_name):
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     api.step('flutter doctor', cmd=['flutter', 'doctor'])
     api.step('pub get', cmd=['pub', 'get'])
-    api.step('run ' + task_name, cmd=['dart', 'bin/run.dart', '-t', task_name])
+    api.android_sdk.install()
+    with api.android_sdk.context():
+      api.step(
+          'run %s' % task_name, cmd=['dart', 'bin/run.dart', '-t', task_name])
 
 
 def GenTests(api):
@@ -81,6 +87,10 @@ def GenTests(api):
       'example_task',
       api.properties(
           git_ref='refs/pull/123/head', git_url='https://abc.com/repo'),
-      api.properties(task_name='task1'),
+      api.properties(
+          task_name='task1',
+          android_sdk_license='android_sdk_hash',
+          android_sdk_preview_license='android_sdk_preview_hash',
+      ),
       api.step_data('read manifest.parse', api.json.output(example_manifest)),
   ) + api.post_check(lambda check, steps: check('run task1' in steps))

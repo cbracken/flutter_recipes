@@ -1,0 +1,172 @@
+[
+  {
+    "cmd": [],
+    "name": "Download Android SDK Components"
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/android_root/platform-tools",
+      "-ensure-file",
+      "flutter/android/sdk/platform-tools/${platform} version:29.0.2",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "name": "Download Android SDK Components.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-version:29.0.2--\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"flutter/android/sdk/platform-tools/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/android_root/platforms",
+      "-ensure-file",
+      "flutter/android/sdk/platforms/${platform} version:29r1.experiment2",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "name": "Download Android SDK Components.ensure_installed (2)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-version:29r1.exp\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"flutter/android/sdk/platforms/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/android_root/build-tools",
+      "-ensure-file",
+      "flutter/android/sdk/build-tools/${platform} version:29.0.1",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "name": "Download Android SDK Components.ensure_installed (3)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-version:29.0.1--\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"flutter/android/sdk/build-tools/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "Android SDK Licenses"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/android_root/licenses"
+    ],
+    "infra_step": true,
+    "name": "Android SDK Licenses.mkdir licenses",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "android_sdk_hash",
+      "[CACHE]/android_root/licenses/android-sdk-license"
+    ],
+    "infra_step": true,
+    "name": "Android SDK Licenses.android sdk license",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@android-sdk-license@android_sdk_hash@@@",
+      "@@@STEP_LOG_END@android-sdk-license@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "android_sdk_preview_hash",
+      "[CACHE]/android_root/licenses/android-sdk-preview-license"
+    ],
+    "infra_step": true,
+    "name": "Android SDK Licenses.android sdk preview license",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@android-sdk-preview-license@android_sdk_preview_hash@@@",
+      "@@@STEP_LOG_END@android-sdk-preview-license@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "adb",
+      "devices",
+      "-l"
+    ],
+    "env": {
+      "ANDROID_SDK_ROOT": "[CACHE]/android_root"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/android_root/platform-tools"
+      ]
+    },
+    "name": "adb devices -l"
+  },
+  {
+    "name": "$result"
+  }
+]

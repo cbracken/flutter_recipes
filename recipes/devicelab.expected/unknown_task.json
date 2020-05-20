@@ -151,7 +151,7 @@
       "    arg_names, **additional_args)",
       "  File \"RECIPE_REPO[recipe_engine]/recipe_engine/internal/property_invoker.py\", in _invoke_with_properties",
       "    return callable_obj(*props, **additional_args)",
-      "  File \"RECIPE_REPO[flutter]/recipes/devicelab.py\", line 54, in RunSteps",
+      "  File \"RECIPE_REPO[flutter]/recipes/devicelab.py\", line 57, in RunSteps",
       "    raise ValueError('Unknown task: %s' % task_name)",
       "ValueError: Unknown task: unknown_task"
     ]
