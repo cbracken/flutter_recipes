@@ -5,7 +5,7 @@
       "-u",
       "RECIPE_MODULE[depot_tools::git]/resources/git_setup.py",
       "--path",
-      "[START_DIR]/repo",
+      "[START_DIR]/packages",
       "--url",
       "https://abc.com/repo"
     ],
@@ -21,7 +21,7 @@
       "--progress",
       "--tags"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[START_DIR]/packages",
     "env": {
       "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
     },
@@ -35,7 +35,7 @@
       "-f",
       "FETCH_HEAD"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[START_DIR]/packages",
     "infra_step": true,
     "name": "git checkout"
   },
@@ -45,7 +45,7 @@
       "rev-parse",
       "HEAD"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[START_DIR]/packages",
     "infra_step": true,
     "name": "read revision",
     "~followup_annotations": [
@@ -61,7 +61,7 @@
       "-d",
       "-x"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[START_DIR]/packages",
     "infra_step": true,
     "name": "git clean"
   },
@@ -71,7 +71,7 @@
       "submodule",
       "sync"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[START_DIR]/packages",
     "infra_step": true,
     "name": "submodule sync"
   },
@@ -83,7 +83,7 @@
       "--init",
       "--recursive"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[START_DIR]/packages",
     "infra_step": true,
     "name": "submodule update"
   },
@@ -91,7 +91,7 @@
     "cmd": [
       "tool/build.sh"
     ],
-    "cwd": "[START_DIR]/packages/fuchsia_ctl",
+    "cwd": "[START_DIR]/packages/packages/fuchsia_ctl",
     "name": "run tool/build.sh"
   },
   {
@@ -99,7 +99,7 @@
       "cipd",
       "pkg-build",
       "-in",
-      "[START_DIR]/packages/fuchsia_ctl/build",
+      "[START_DIR]/packages/packages/fuchsia_ctl/build",
       "-name",
       "flutter/fuchsia_ctl/${platform}",
       "-out",

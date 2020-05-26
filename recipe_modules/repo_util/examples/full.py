@@ -11,11 +11,12 @@ DEPS = [
 
 
 def RunSteps(api):
-  checkout_path = api.path['checkout']
-  api.repo_util.checkout_flutter(checkout_path)
-  api.repo_util.checkout_engine(checkout_path)
-  api.repo_util.checkout_cocoon(checkout_path)
-  env, env_paths = api.repo_util.flutter_environment(checkout_path)
+  flutter_checkout_path = api.path['start_dir'].join('flutter')
+  api.repo_util.checkout('flutter', flutter_checkout_path)
+  api.repo_util.checkout('engine', api.path['start_dir'].join('engine'))
+  api.repo_util.checkout('cocoon', api.path['start_dir'].join('cocoon'))
+  api.repo_util.checkout('packages', api.path['start_dir'].join('packages'))
+  env, env_paths = api.repo_util.flutter_environment(flutter_checkout_path)
 
 
 def GenTests(api):

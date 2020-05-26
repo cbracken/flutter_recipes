@@ -16,9 +16,13 @@ DEPS = [
 
 
 def RunSteps(api):
-  checkout_path = api.path['checkout']
-  api.repo_util.checkout_flutter(checkout_path, api.properties.get('git_url'),
-                                 api.properties.get('git_ref'))
+  checkout_path = api.path['start_dir'].join('flutter')
+  api.repo_util.checkout(
+      'flutter',
+      checkout_path,
+      api.properties.get('git_url'),
+      api.properties.get('git_ref'),
+  )
   env, env_prefixes = api.repo_util.flutter_environment(checkout_path)
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
     metadata = api.fuchsia_util.run_test(checkout_path)

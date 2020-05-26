@@ -17,6 +17,7 @@ DEPS = [
     'recipe_engine/properties',
     'recipe_engine/step',
     'recipe_engine/swarming',
+    'repo_util',
     'yaml',
 ]
 
@@ -24,24 +25,16 @@ DEPS = [
 # This recipe builds the fuchsia_ctl CIPD package and tests it against the Linux
 # Fuchsia builder.
 def RunSteps(api):
-  # Checkout the flutter/packages repository.
-  packages_git_url = 'https://github.com/flutter/packages/'
-  if 'git_url' in api.properties:
-    packages_git_url = api.properties['git_url']
-
-  packages_git_ref = 'master'
-  if 'git_ref' in api.properties:
-    packages_git_ref = api.properties['git_ref']
-
-  packages_git_hash = api.git.checkout(
-      packages_git_url,
-      ref=packages_git_ref,
-      recursive=True,
-      set_got_revision=True,
-      tags=True)
+  packages_dir = api.path['start_dir'].join('packages')
+  packages_git_rev = api.repo_util.checkout(
+      'packages',
+      packages_dir,
+      api.properties['git_url'],
+      api.properties['git_ref'],
+  )
 
   # Build and uploads a new version of the fuchsia_ctl CIPD package.
-  fuchsia_ctl_path = api.path['start_dir'].join('packages', 'fuchsia_ctl')
+  fuchsia_ctl_path = packages_dir.join('packages', 'fuchsia_ctl')
   with api.context(cwd=fuchsia_ctl_path):
     api.step('run tool/build.sh', cmd=['tool/build.sh'])
 
