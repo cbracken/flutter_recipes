@@ -15,6 +15,7 @@ DEPS = [
     'recipe_engine/properties',
     'recipe_engine/step',
     'android_sdk',
+    'repo_util',
     'yaml',
 ]
 
@@ -24,46 +25,28 @@ PROPERTIES = {
 
 
 def RunSteps(api, task_name):
-  # Checkout the flutter/flutter repository.
-  flutter_git_url = 'https://chromium.googlesource.com/external/github.com/flutter/flutter'
-  if 'git_url' in api.properties:
-    flutter_git_url = api.properties['git_url']
+  flutter_path = api.path['start_dir'].join('flutter')
+  api.repo_util.checkout(
+      'flutter',
+      flutter_path,
+      api.properties.get('git_url'),
+      api.properties.get('git_ref'),
+  )
+  api.step(
+      'flutter doctor', cmd=[flutter_path.join('bin', 'flutter'), 'doctor'])
 
-  flutter_git_ref = 'master'
-  if 'git_ref' in api.properties:
-    flutter_git_ref = api.properties['git_ref']
-
-  api.git.checkout(
-      flutter_git_url,
-      ref=flutter_git_ref,
-      recursive=True,
-      set_got_revision=True,
-      tags=True)
-
-  # Figure out paths.
-  start_path = api.path['start_dir']
-  flutter_path = start_path.join('flutter')
+  # Reads the manifest.
   devicelab_path = flutter_path.join('dev', 'devicelab')
-  dart_bin = flutter_path.join('bin', 'cache', 'dart-sdk', 'bin')
-  flutter_bin = flutter_path.join('bin')
-
-  # Read the manifest.
   manifest_yaml_path = devicelab_path.join('manifest.yaml')
   result = api.yaml.read('read manifest', manifest_yaml_path, api.json.output())
   manifest = result.json.output
 
-  # Verify the manifest contains the task to run.
+  # Verifies the manifest containing the task to run.
   if task_name not in manifest['tasks']:
     raise ValueError('Unknown task: %s' % task_name)
 
-  env = {
-      # Setup our own pub_cache to not affect other bots on this machine,
-      # and so that the pre-populated pub cache is contained in the package.
-      'PUB_CACHE': api.path['cache'].join('.pub-cache'),
-  }
-  env_prefixes = {'PATH': [flutter_bin, dart_bin]}
+  env, env_prefixes = api.repo_util.flutter_environment(flutter_path)
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
-    api.step('flutter doctor', cmd=['flutter', 'doctor'])
     api.step('pub get', cmd=['pub', 'get'])
     api.android_sdk.install()
     with api.android_sdk.context():
@@ -72,11 +55,11 @@ def RunSteps(api, task_name):
 
 
 def GenTests(api):
-  example_manifest = {"tasks": {"task1": {}, "task2": {}}}
   yield api.test(
       'missing_task_name',
       api.expect_exception('ValueError'),
   )
+  example_manifest = {"tasks": {"task1": {}, "task2": {}}}
   yield api.test(
       'unknown_task',
       api.properties(task_name='unknown_task'),
@@ -92,5 +75,7 @@ def GenTests(api):
           android_sdk_license='android_sdk_hash',
           android_sdk_preview_license='android_sdk_preview_hash',
       ),
+      api.repo_util.flutter_environment_data(),
       api.step_data('read manifest.parse', api.json.output(example_manifest)),
-  ) + api.post_check(lambda check, steps: check('run task1' in steps))
+      api.post_check(lambda check, steps: check('run task1' in steps)),
+  )

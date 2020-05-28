@@ -88,6 +88,13 @@
     "name": "submodule update"
   },
   {
+    "cmd": [
+      "[START_DIR]/flutter/bin/flutter",
+      "doctor"
+    ],
+    "name": "flutter doctor"
+  },
+  {
     "cmd": [],
     "name": "read manifest",
     "~followup_annotations": [
@@ -151,7 +158,7 @@
       "    arg_names, **additional_args)",
       "  File \"RECIPE_REPO[recipe_engine]/recipe_engine/internal/property_invoker.py\", in _invoke_with_properties",
       "    return callable_obj(*props, **additional_args)",
-      "  File \"RECIPE_REPO[flutter]/recipes/devicelab.py\", line 57, in RunSteps",
+      "  File \"RECIPE_REPO[flutter]/recipes/devicelab.py\", line 46, in RunSteps",
       "    raise ValueError('Unknown task: %s' % task_name)",
       "ValueError: Unknown task: unknown_task"
     ]

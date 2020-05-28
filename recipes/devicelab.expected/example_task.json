@@ -5,7 +5,7 @@
       "-u",
       "RECIPE_MODULE[depot_tools::git]/resources/git_setup.py",
       "--path",
-      "[START_DIR]/repo",
+      "[START_DIR]/flutter",
       "--url",
       "https://abc.com/repo"
     ],
@@ -21,7 +21,7 @@
       "--progress",
       "--tags"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[START_DIR]/flutter",
     "env": {
       "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
     },
@@ -35,7 +35,7 @@
       "-f",
       "FETCH_HEAD"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[START_DIR]/flutter",
     "infra_step": true,
     "name": "git checkout"
   },
@@ -45,7 +45,7 @@
       "rev-parse",
       "HEAD"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[START_DIR]/flutter",
     "infra_step": true,
     "name": "read revision",
     "~followup_annotations": [
@@ -61,7 +61,7 @@
       "-d",
       "-x"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[START_DIR]/flutter",
     "infra_step": true,
     "name": "git clean"
   },
@@ -71,7 +71,7 @@
       "submodule",
       "sync"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[START_DIR]/flutter",
     "infra_step": true,
     "name": "submodule sync"
   },
@@ -83,9 +83,16 @@
       "--init",
       "--recursive"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[START_DIR]/flutter",
     "infra_step": true,
     "name": "submodule update"
+  },
+  {
+    "cmd": [
+      "[START_DIR]/flutter/bin/flutter",
+      "doctor"
+    ],
+    "name": "flutter doctor"
   },
   {
     "cmd": [],
@@ -137,29 +144,13 @@
   },
   {
     "cmd": [
-      "flutter",
-      "doctor"
-    ],
-    "cwd": "[START_DIR]/flutter/dev/devicelab",
-    "env": {
-      "PUB_CACHE": "[CACHE]/.pub-cache"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
-      ]
-    },
-    "name": "flutter doctor"
-  },
-  {
-    "cmd": [
       "pub",
       "get"
     ],
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
-      "PUB_CACHE": "[CACHE]/.pub-cache"
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -188,7 +179,8 @@
     ],
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
-      "PUB_CACHE": "[CACHE]/.pub-cache"
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -227,7 +219,8 @@
     ],
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
-      "PUB_CACHE": "[CACHE]/.pub-cache"
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -266,7 +259,8 @@
     ],
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
-      "PUB_CACHE": "[CACHE]/.pub-cache"
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -308,7 +302,8 @@
     ],
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
-      "PUB_CACHE": "[CACHE]/.pub-cache"
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -335,7 +330,8 @@
     ],
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
-      "PUB_CACHE": "[CACHE]/.pub-cache"
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -364,7 +360,8 @@
     ],
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
-      "PUB_CACHE": "[CACHE]/.pub-cache"
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -390,7 +387,8 @@
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
       "ANDROID_SDK_ROOT": "[CACHE]/android_root",
-      "PUB_CACHE": "[CACHE]/.pub-cache"
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
