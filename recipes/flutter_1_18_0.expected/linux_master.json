@@ -453,9 +453,40 @@
   },
   {
     "cmd": [],
-    "name": "Run Fuchsia Driver Tests.Create Isolate Archive.ensure isolated",
+    "name": "Run Fuchsia Driver Tests.Create Isolate Archive.install isolated",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "GOLDCTL": "[CACHE]/gold/goldctl",
+      "GOLD_TRYJOB": "refs/heads/master",
+      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "Run Fuchsia Driver Tests.Create Isolate Archive.install isolated.ensure package directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@3@@@"
     ]
   },
   {
@@ -463,7 +494,7 @@
       "cipd",
       "ensure",
       "-root",
-      "[CACHE]/isolated_client",
+      "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin",
       "-ensure-file",
       "infra/tools/luci/isolated/${platform} isolated_module_pin",
       "-max-threads",
@@ -485,7 +516,7 @@
       ]
     },
     "infra_step": true,
-    "name": "Run Fuchsia Driver Tests.Create Isolate Archive.ensure isolated.ensure_installed",
+    "name": "Run Fuchsia Driver Tests.Create Isolate Archive.install isolated.ensure_installed",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@3@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -503,7 +534,7 @@
   },
   {
     "cmd": [
-      "[CACHE]/isolated_client/isolated",
+      "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin/isolated",
       "archive",
       "-verbose",
       "-isolate-server",

@@ -175,9 +175,27 @@
   },
   {
     "cmd": [],
-    "name": "Fuchsia Tests.Create Isolate Archive.ensure isolated",
+    "name": "Fuchsia Tests.Create Isolate Archive.install isolated",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin"
+    ],
+    "infra_step": true,
+    "name": "Fuchsia Tests.Create Isolate Archive.install isolated.ensure package directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@3@@@"
     ]
   },
   {
@@ -185,7 +203,7 @@
       "cipd",
       "ensure",
       "-root",
-      "[CACHE]/isolated_client",
+      "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin",
       "-ensure-file",
       "infra/tools/luci/isolated/${platform} isolated_module_pin",
       "-max-threads",
@@ -194,7 +212,7 @@
       "/path/to/tmp/json"
     ],
     "infra_step": true,
-    "name": "Fuchsia Tests.Create Isolate Archive.ensure isolated.ensure_installed",
+    "name": "Fuchsia Tests.Create Isolate Archive.install isolated.ensure_installed",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@3@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -212,7 +230,7 @@
   },
   {
     "cmd": [
-      "[CACHE]/isolated_client/isolated",
+      "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin/isolated",
       "archive",
       "-verbose",
       "-isolate-server",
