@@ -23,8 +23,8 @@ class AndroidSdkApi(recipe_api.RecipeApi):
       self.m.cipd.ensure(
           android_root.join('platforms'),
           self.m.cipd.EnsureFile().add_package(
-              'flutter/android/sdk/platforms/${platform}',
-              'version:29r1.experiment2',
+              'flutter/android/sdk/platforms',
+              'version:29r1',
           ),
       )
       self.m.cipd.ensure(
