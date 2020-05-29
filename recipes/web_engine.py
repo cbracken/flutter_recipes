@@ -177,31 +177,32 @@ def RunSteps(api, properties, env_properties):
       felt_test.append('test')
       felt_test.extend(additional_args)
       with recipe_api.defer_results():
-        api.step('felt test', felt_test)
-        logs_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                                  'test_results')
-        if api.properties.get('gcs_goldens_bucket'):
-          api.gsutil.upload(
-              bucket=api.properties['gcs_goldens_bucket'],
-              source=logs_path,
-              dest='%s/%s' % ('web_engine', api.buildbucket.build.id),
-              link_name='archive goldens',
-              args=['-r'],
-              multithreaded=True,
-              name='upload goldens %s' % api.buildbucket.build.id,
-              unauthenticated_url=True)
-          html_files = api.file.glob_paths(
-              'html goldens',
-              source=logs_path,
-              pattern='*.html',
-              test_data=('a.html',)).get_result()
-          with api.step.nest('Failed golden links') as presentation:
-            for html_file in html_files:
-              base_name = api.path.basename(html_file)
-              url = 'https://storage.googleapis.com/%s/web_engine/%s/%s' % (
-                  api.properties['gcs_goldens_bucket'],
-                  api.buildbucket.build.id, base_name)
-              presentation.links[base_name] = url
+        if not api.platform.is_mac:
+          api.step('felt test', felt_test)
+          logs_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
+                                    'test_results')
+          if api.properties.get('gcs_goldens_bucket'):
+            api.gsutil.upload(
+                bucket=api.properties['gcs_goldens_bucket'],
+                source=logs_path,
+                dest='%s/%s' % ('web_engine', api.buildbucket.build.id),
+                link_name='archive goldens',
+                args=['-r'],
+                multithreaded=True,
+                name='upload goldens %s' % api.buildbucket.build.id,
+                unauthenticated_url=True)
+            html_files = api.file.glob_paths(
+                'html goldens',
+                source=logs_path,
+                pattern='*.html',
+                test_data=('a.html',)).get_result()
+            with api.step.nest('Failed golden links') as presentation:
+              for html_file in html_files:
+                base_name = api.path.basename(html_file)
+                url = 'https://storage.googleapis.com/%s/web_engine/%s/%s' % (
+                    api.properties['gcs_goldens_bucket'],
+                    api.buildbucket.build.id, base_name)
+                presentation.links[base_name] = url
 
 
 def GenTests(api):

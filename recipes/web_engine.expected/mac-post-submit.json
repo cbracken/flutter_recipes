@@ -765,33 +765,6 @@
     "name": "felt licenses"
   },
   {
-    "cmd": [
-      "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin/dart",
-      "dev/felt.dart",
-      "test",
-      "--browser",
-      "safari"
-    ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "felt test"
-  },
-  {
     "name": "$result"
   }
 ]
