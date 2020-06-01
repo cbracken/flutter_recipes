@@ -94,13 +94,15 @@ def BuildNoGoma(api, config, *targets):
   api.step('build %s' % ' '.join([config] + list(targets)), ninja_args)
 
 
-def RunTests(api, out_dir, android_out_dir=None, types='all'):
+def RunTests(api, out_dir, android_out_dir=None, ios_out_dir=None, types='all'):
   script_path = GetCheckoutPath(api).join('flutter', 'testing', 'run_tests.py')
   # TODO(godofredoc): use .vpython from engine when file are available.
   venv_path = api.depot_tools.root.join('.vpython')
   args = ['--variant', out_dir, '--type', types]
   if android_out_dir:
     args.extend(['--android-variant', android_out_dir])
+  if ios_out_dir:
+    args.extend(['--ios-variant', ios_out_dir])
   api.python('Host Tests for %s' % out_dir, script_path, args, venv=venv_path)
 
 
@@ -1188,16 +1190,12 @@ def PackageIOSVariant(api,
           dsym_zip, BUCKET_NAME, remote_zip, name='upload "%s"' % remote_name)
 
 
-def RunIOSTests(api):
+def RunIosIntegrationTests(api):
   test_dir = GetCheckoutPath(api).join('flutter', 'testing')
-  ios_unit_tests = test_dir.join('ios', 'IosUnitTests')
   scenario_app_tests = test_dir.join('scenario_app')
 
-  with api.context(cwd=ios_unit_tests):
-    api.step('iOS Unit Tests', ['./run_tests.sh', 'ios_debug_sim'])
-
   with api.context(cwd=scenario_app_tests):
-    api.step('Scenario App Unit Tests', ['./run_ios_tests.sh', 'ios_debug_sim'])
+    api.step('Scenario App Integration Tests', ['./build_and_run_ios_tests.sh', 'ios_debug_sim'])
 
 
 def BuildIOS(api):
@@ -1212,12 +1210,15 @@ def BuildIOS(api):
     Build(api, 'host_debug_unopt')
     Build(api, 'ios_debug_sim', 'ios_test_flutter')
 
+    RunTests(api, 'ios_debug_sim', ios_out_dir='ios_debug_sim', types='objc')
+    RunIosIntegrationTests(api)
+
     RunGNBitcode(api, '--ios', '--runtime-mode', 'debug')
     RunGNBitcode(api, '--ios', '--runtime-mode', 'debug', '--ios-cpu=arm')
 
-    RunIOSTests(api)
     BuildNoGoma(api, 'ios_debug')
     BuildNoGoma(api, 'ios_debug_arm')
+
     BuildObjcDoc(api)
 
     PackageIOSVariant(api, 'debug', 'ios_debug', 'ios_debug_arm',

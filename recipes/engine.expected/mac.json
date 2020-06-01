@@ -6893,6 +6893,63 @@
   },
   {
     "cmd": [
+      "vpython",
+      "-vpython-spec",
+      "RECIPE_REPO[depot_tools]/.vpython",
+      "-u",
+      "[CACHE]/builder/src/flutter/testing/run_tests.py",
+      "--variant",
+      "ios_debug_sim",
+      "--type",
+      "objc",
+      "--ios-variant",
+      "ios_debug_sim"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GEM_HOME": "[START_DIR]/gems",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/gems/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Host Tests for ios_debug_sim"
+  },
+  {
+    "cmd": [
+      "./build_and_run_ios_tests.sh",
+      "ios_debug_sim"
+    ],
+    "cwd": "[CACHE]/builder/src/flutter/testing/scenario_app",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GEM_HOME": "[START_DIR]/gems",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/gems/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Scenario App Integration Tests"
+  },
+  {
+    "cmd": [
       "python",
       "[CACHE]/builder/src/flutter/tools/gn",
       "--bitcode",
@@ -6951,54 +7008,6 @@
       ]
     },
     "name": "gn --ios --runtime-mode debug --ios-cpu=arm"
-  },
-  {
-    "cmd": [
-      "./run_tests.sh",
-      "ios_debug_sim"
-    ],
-    "cwd": "[CACHE]/builder/src/flutter/testing/ios/IosUnitTests",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GEM_HOME": "[START_DIR]/gems",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/gems/bin",
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "iOS Unit Tests"
-  },
-  {
-    "cmd": [
-      "./run_ios_tests.sh",
-      "ios_debug_sim"
-    ],
-    "cwd": "[CACHE]/builder/src/flutter/testing/scenario_app",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GEM_HOME": "[START_DIR]/gems",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/gems/bin",
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "Scenario App Unit Tests"
   },
   {
     "cmd": [
