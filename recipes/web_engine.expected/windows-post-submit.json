@@ -655,7 +655,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "felt test"
+    "name": "felt test chrome"
   },
   {
     "name": "$result"

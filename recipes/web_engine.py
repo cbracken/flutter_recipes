@@ -172,13 +172,18 @@ def RunSteps(api, properties, env_properties):
       felt_licenses.append('check-licenses')
       api.step('felt licenses', felt_licenses)
       if api.platform.is_linux:
+        additional_args_firefox = ['--browser', 'firefox']
+        felt_test_firefox = copy.deepcopy(felt_cmd)
+        felt_test_firefox.append('test')
+        felt_test_firefox.extend(additional_args_firefox)
+        api.step('felt test firefox', felt_test_firefox)
         DownloadChromeAndDriver(api)
       felt_test = copy.deepcopy(felt_cmd)
       felt_test.append('test')
       felt_test.extend(additional_args)
       with recipe_api.defer_results():
         if not api.platform.is_mac:
-          api.step('felt test', felt_test)
+          api.step('felt test chrome', felt_test)
           logs_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
                                     'test_results')
           if api.properties.get('gcs_goldens_bucket'):
@@ -203,7 +208,6 @@ def RunSteps(api, properties, env_properties):
                     api.properties['gcs_goldens_bucket'],
                     api.buildbucket.build.id, base_name)
                 presentation.links[base_name] = url
-
 
 def GenTests(api):
   yield api.test('linux-post-submit') + api.properties(
