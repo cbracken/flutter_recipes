@@ -2382,7 +2382,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "Zip windows-x64 windows-x64-flutter.zip",
+    "name": "Zip windows-x64-debug windows-x64-flutter.zip",
     "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.pdb\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_3\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
@@ -2411,7 +2411,7 @@
       ]
     },
     "infra_step": true,
-    "name": "temp dir for windows-x64 UploadArtifacts windows-x64-flutter.zip"
+    "name": "temp dir for windows-x64-debug UploadArtifacts windows-x64-flutter.zip"
   },
   {
     "cmd": [
@@ -2590,8 +2590,8 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "Zip windows-x64 font-subset.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"font-subset.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/font-subset.exe\", \"type\": \"file\"}, {\"archive_name\": \"const_finder.dart.snapshot\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/gen/const_finder.dart.snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_7\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "name": "Zip windows-x64 windows-x64-flutter.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.pdb\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_7\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -2602,6 +2602,58 @@
       "/path/to/tmp/json",
       "rmtree",
       "[CLEANUP]\\tmp_tmp_7"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for windows-x64 UploadArtifacts windows-x64-flutter.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip windows-x64 font-subset.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"font-subset.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/font-subset.exe\", \"type\": \"file\"}, {\"archive_name\": \"const_finder.dart.snapshot\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/gen/const_finder.dart.snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_8\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_8"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -2643,7 +2695,7 @@
       ]
     },
     "name": "Zip dart-sdk",
-    "stdin": "{\"entries\": [{\"path\": \"[CACHE]\\\\builder\\\\src/out/host_debug\\\\dart-sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_8\\\\dart-sdk-windows-x64.zip\", \"root\": \"[CACHE]\\\\builder\\\\src/out/host_debug\"}"
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]\\\\builder\\\\src/out/host_debug\\\\dart-sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_9\\\\dart-sdk-windows-x64.zip\", \"root\": \"[CACHE]\\\\builder\\\\src/out/host_debug\"}"
   },
   {
     "cmd": [
@@ -2653,7 +2705,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_8"
+      "[CLEANUP]\\tmp_tmp_9"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -2695,7 +2747,7 @@
       ]
     },
     "name": "Zip flutter_web_sdk",
-    "stdin": "{\"entries\": [{\"path\": \"[CACHE]\\\\builder\\\\src/out/host_debug\\\\flutter_web_sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_9\\\\flutter-web-sdk-windows-x64.zip\", \"root\": \"[CACHE]\\\\builder\\\\src/out/host_debug\"}"
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]\\\\builder\\\\src/out/host_debug\\\\flutter_web_sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_10\\\\flutter-web-sdk-windows-x64.zip\", \"root\": \"[CACHE]\\\\builder\\\\src/out/host_debug\"}"
   },
   {
     "cmd": [
@@ -2705,7 +2757,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_9"
+      "[CLEANUP]\\tmp_tmp_10"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -5037,7 +5089,7 @@
       ]
     },
     "name": "Zip android-arm-profile windows-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_profile/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_10\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_profile/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_11\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -5047,7 +5099,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_10"
+      "[CLEANUP]\\tmp_tmp_11"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -5089,7 +5141,7 @@
       ]
     },
     "name": "Zip android-arm64-profile windows-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_profile_arm64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_11\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_profile_arm64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_12\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -5099,7 +5151,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_11"
+      "[CLEANUP]\\tmp_tmp_12"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -5141,7 +5193,7 @@
       ]
     },
     "name": "Zip android-x64-profile windows-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_profile_x64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_12\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_profile_x64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_13\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -5151,7 +5203,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_12"
+      "[CLEANUP]\\tmp_tmp_13"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -5193,7 +5245,7 @@
       ]
     },
     "name": "Zip android-arm-release windows-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_release/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_13\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_release/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_14\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -5203,7 +5255,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_13"
+      "[CLEANUP]\\tmp_tmp_14"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -5245,7 +5297,7 @@
       ]
     },
     "name": "Zip android-arm64-release windows-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_release_arm64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_14\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_release_arm64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_15\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -5255,7 +5307,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_14"
+      "[CLEANUP]\\tmp_tmp_15"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -5297,7 +5349,7 @@
       ]
     },
     "name": "Zip android-x64-release windows-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_release_x64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_15\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_release_x64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_16\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -5307,7 +5359,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_15"
+      "[CLEANUP]\\tmp_tmp_16"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {

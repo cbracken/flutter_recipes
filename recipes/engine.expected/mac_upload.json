@@ -2451,7 +2451,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "Zip darwin-x64 FlutterMacOS.framework.zip",
+    "name": "Zip darwin-x64-debug FlutterMacOS.framework.zip",
     "stdin": "{\"entries\": [{\"archive_name\": \"FlutterMacOS.framework.zip\", \"path\": \"[CACHE]/builder/src/out/host_debug/FlutterMacOS.framework.zip\", \"type\": \"file\"}, {\"archive_name\": \"FlutterMacOS.podspec\", \"path\": \"[CACHE]/builder/src/flutter/shell/platform/darwin/macos/framework/FlutterMacOS.podspec\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_5/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
   },
   {
@@ -2464,7 +2464,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_5/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/darwin-x64/FlutterMacOS.framework.zip"
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/darwin-x64-debug/FlutterMacOS.framework.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2482,9 +2482,9 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"darwin-x64/FlutterMacOS.framework.zip\"",
+    "name": "gsutil upload \"darwin-x64-debug/FlutterMacOS.framework.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/darwin-x64/FlutterMacOS.framework.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/darwin-x64-debug/FlutterMacOS.framework.zip@@@"
     ]
   },
   {
@@ -2513,7 +2513,7 @@
       ]
     },
     "infra_step": true,
-    "name": "temp dir for darwin-x64 UploadArtifacts FlutterMacOS.framework.zip"
+    "name": "temp dir for darwin-x64-debug UploadArtifacts FlutterMacOS.framework.zip"
   },
   {
     "cmd": [
@@ -2791,8 +2791,8 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "Zip dart-sdk",
-    "stdin": "{\"entries\": [{\"path\": \"[CACHE]/builder/src/out/host_debug/dart-sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]/tmp_tmp_9/dart-sdk-darwin-x64.zip\", \"root\": \"[CACHE]/builder/src/out/host_debug\"}"
+    "name": "Zip darwin-x64 FlutterMacOS.framework.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"FlutterMacOS.framework.zip\", \"path\": \"[CACHE]/builder/src/out/host_debug/FlutterMacOS.framework.zip\", \"type\": \"file\"}, {\"archive_name\": \"FlutterMacOS.podspec\", \"path\": \"[CACHE]/builder/src/flutter/shell/platform/darwin/macos/framework/FlutterMacOS.podspec\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_9/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
   },
   {
     "cmd": [
@@ -2803,7 +2803,92 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "[CLEANUP]/tmp_tmp_9/dart-sdk-darwin-x64.zip",
+      "[CLEANUP]/tmp_tmp_9/artifacts.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/darwin-x64/FlutterMacOS.framework.zip"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"darwin-x64/FlutterMacOS.framework.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/darwin-x64/FlutterMacOS.framework.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/tmp_tmp_9"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for darwin-x64 UploadArtifacts FlutterMacOS.framework.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip dart-sdk",
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]/builder/src/out/host_debug/dart-sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]/tmp_tmp_10/dart-sdk-darwin-x64.zip\", \"root\": \"[CACHE]/builder/src/out/host_debug\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]/tmp_tmp_10/dart-sdk-darwin-x64.zip",
       "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/dart-sdk-darwin-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
@@ -2835,7 +2920,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_9"
+      "[CLEANUP]/tmp_tmp_10"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2877,7 +2962,7 @@
       ]
     },
     "name": "Zip flutter_web_sdk",
-    "stdin": "{\"entries\": [{\"path\": \"[CACHE]/builder/src/out/host_debug/flutter_web_sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]/tmp_tmp_10/flutter-web-sdk-darwin-x64.zip\", \"root\": \"[CACHE]/builder/src/out/host_debug\"}"
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]/builder/src/out/host_debug/flutter_web_sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]/tmp_tmp_11/flutter-web-sdk-darwin-x64.zip\", \"root\": \"[CACHE]/builder/src/out/host_debug\"}"
   },
   {
     "cmd": [
@@ -2888,7 +2973,7 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "[CLEANUP]/tmp_tmp_10/flutter-web-sdk-darwin-x64.zip",
+      "[CLEANUP]/tmp_tmp_11/flutter-web-sdk-darwin-x64.zip",
       "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/flutter-web-sdk-darwin-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
@@ -2920,7 +3005,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_10"
+      "[CLEANUP]/tmp_tmp_11"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5633,7 +5718,7 @@
       ]
     },
     "name": "Zip android-arm-profile darwin-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot\", \"path\": \"[CACHE]/builder/src/out/android_profile/clang_x64/gen_snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_11/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot\", \"path\": \"[CACHE]/builder/src/out/android_profile/clang_x64/gen_snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_12/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
   },
   {
     "cmd": [
@@ -5644,7 +5729,7 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "[CLEANUP]/tmp_tmp_11/artifacts.zip",
+      "[CLEANUP]/tmp_tmp_12/artifacts.zip",
       "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-profile/darwin-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
@@ -5676,7 +5761,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_11"
+      "[CLEANUP]/tmp_tmp_12"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5718,7 +5803,7 @@
       ]
     },
     "name": "Zip android-arm64-profile darwin-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot\", \"path\": \"[CACHE]/builder/src/out/android_profile_arm64/clang_x64/gen_snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_12/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot\", \"path\": \"[CACHE]/builder/src/out/android_profile_arm64/clang_x64/gen_snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_13/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
   },
   {
     "cmd": [
@@ -5729,7 +5814,7 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "[CLEANUP]/tmp_tmp_12/artifacts.zip",
+      "[CLEANUP]/tmp_tmp_13/artifacts.zip",
       "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-profile/darwin-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
@@ -5761,7 +5846,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_12"
+      "[CLEANUP]/tmp_tmp_13"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5803,7 +5888,7 @@
       ]
     },
     "name": "Zip android-x64-profile darwin-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot\", \"path\": \"[CACHE]/builder/src/out/android_profile_x64/clang_x64/gen_snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_13/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot\", \"path\": \"[CACHE]/builder/src/out/android_profile_x64/clang_x64/gen_snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_14/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
   },
   {
     "cmd": [
@@ -5814,7 +5899,7 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "[CLEANUP]/tmp_tmp_13/artifacts.zip",
+      "[CLEANUP]/tmp_tmp_14/artifacts.zip",
       "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-profile/darwin-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
@@ -5846,7 +5931,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_13"
+      "[CLEANUP]/tmp_tmp_14"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5888,7 +5973,7 @@
       ]
     },
     "name": "Zip android-arm-release darwin-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot\", \"path\": \"[CACHE]/builder/src/out/android_release/clang_x64/gen_snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_14/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot\", \"path\": \"[CACHE]/builder/src/out/android_release/clang_x64/gen_snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_15/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
   },
   {
     "cmd": [
@@ -5899,7 +5984,7 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "[CLEANUP]/tmp_tmp_14/artifacts.zip",
+      "[CLEANUP]/tmp_tmp_15/artifacts.zip",
       "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-release/darwin-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
@@ -5931,7 +6016,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_14"
+      "[CLEANUP]/tmp_tmp_15"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5973,7 +6058,7 @@
       ]
     },
     "name": "Zip android-arm64-release darwin-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot\", \"path\": \"[CACHE]/builder/src/out/android_release_arm64/clang_x64/gen_snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_15/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot\", \"path\": \"[CACHE]/builder/src/out/android_release_arm64/clang_x64/gen_snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_16/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
   },
   {
     "cmd": [
@@ -5984,7 +6069,7 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "[CLEANUP]/tmp_tmp_15/artifacts.zip",
+      "[CLEANUP]/tmp_tmp_16/artifacts.zip",
       "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-release/darwin-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
@@ -6016,7 +6101,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_15"
+      "[CLEANUP]/tmp_tmp_16"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6058,7 +6143,7 @@
       ]
     },
     "name": "Zip android-x64-release darwin-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot\", \"path\": \"[CACHE]/builder/src/out/android_release_x64/clang_x64/gen_snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_16/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot\", \"path\": \"[CACHE]/builder/src/out/android_release_x64/clang_x64/gen_snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_17/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
   },
   {
     "cmd": [
@@ -6069,7 +6154,7 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "[CLEANUP]/tmp_tmp_16/artifacts.zip",
+      "[CLEANUP]/tmp_tmp_17/artifacts.zip",
       "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-release/darwin-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
@@ -6101,7 +6186,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_16"
+      "[CLEANUP]/tmp_tmp_17"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7590,7 +7675,7 @@
   {
     "cmd": [
       "[CACHE]/builder/src/flutter/tools/gen_objcdoc.sh",
-      "[CLEANUP]/tmp_tmp_17"
+      "[CLEANUP]/tmp_tmp_18"
     ],
     "cwd": "[CACHE]/builder/src/flutter",
     "env": {
@@ -7635,7 +7720,7 @@
       ]
     },
     "name": "archive obj-c doc",
-    "stdin": "{\"entries\": [{\"path\": \"[CLEANUP]/tmp_tmp_17\", \"type\": \"dir\"}], \"output\": \"[CACHE]/builder/src/out/ios-objcdoc.zip\", \"root\": \"[CLEANUP]/tmp_tmp_17\"}"
+    "stdin": "{\"entries\": [{\"path\": \"[CLEANUP]/tmp_tmp_18\", \"type\": \"dir\"}], \"output\": \"[CACHE]/builder/src/out/ios-objcdoc.zip\", \"root\": \"[CLEANUP]/tmp_tmp_18\"}"
   },
   {
     "cmd": [
@@ -7680,7 +7765,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_17"
+      "[CLEANUP]/tmp_tmp_18"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7812,7 +7897,7 @@
       ]
     },
     "name": "Zip ios artifacts.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"Flutter.podspec\", \"path\": \"[CACHE]/builder/src/flutter/shell/platform/darwin/ios/framework/Flutter.podspec\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_armv7\", \"path\": \"[CACHE]/builder/src/out/debug/gen_snapshot_armv7\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_arm64\", \"path\": \"[CACHE]/builder/src/out/debug/gen_snapshot_arm64\", \"type\": \"file\"}, {\"archive_name\": \"Flutter.framework.zip\", \"path\": \"[CACHE]/builder/src/out/debug/Flutter.framework.zip\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_18/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"Flutter.podspec\", \"path\": \"[CACHE]/builder/src/flutter/shell/platform/darwin/ios/framework/Flutter.podspec\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_armv7\", \"path\": \"[CACHE]/builder/src/out/debug/gen_snapshot_armv7\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_arm64\", \"path\": \"[CACHE]/builder/src/out/debug/gen_snapshot_arm64\", \"type\": \"file\"}, {\"archive_name\": \"Flutter.framework.zip\", \"path\": \"[CACHE]/builder/src/out/debug/Flutter.framework.zip\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_19/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
   },
   {
     "cmd": [
@@ -7823,7 +7908,7 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "[CLEANUP]/tmp_tmp_18/artifacts.zip",
+      "[CLEANUP]/tmp_tmp_19/artifacts.zip",
       "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/ios/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
@@ -7857,7 +7942,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_18"
+      "[CLEANUP]/tmp_tmp_19"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8100,7 +8185,7 @@
       ]
     },
     "name": "Zip ios-profile artifacts.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"Flutter.podspec\", \"path\": \"[CACHE]/builder/src/flutter/shell/platform/darwin/ios/framework/Flutter.podspec\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_armv7\", \"path\": \"[CACHE]/builder/src/out/profile/gen_snapshot_armv7\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_arm64\", \"path\": \"[CACHE]/builder/src/out/profile/gen_snapshot_arm64\", \"type\": \"file\"}, {\"archive_name\": \"Flutter.framework.zip\", \"path\": \"[CACHE]/builder/src/out/profile/Flutter.framework.zip\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_19/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"Flutter.podspec\", \"path\": \"[CACHE]/builder/src/flutter/shell/platform/darwin/ios/framework/Flutter.podspec\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_armv7\", \"path\": \"[CACHE]/builder/src/out/profile/gen_snapshot_armv7\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_arm64\", \"path\": \"[CACHE]/builder/src/out/profile/gen_snapshot_arm64\", \"type\": \"file\"}, {\"archive_name\": \"Flutter.framework.zip\", \"path\": \"[CACHE]/builder/src/out/profile/Flutter.framework.zip\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_20/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
   },
   {
     "cmd": [
@@ -8111,7 +8196,7 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "[CLEANUP]/tmp_tmp_19/artifacts.zip",
+      "[CLEANUP]/tmp_tmp_20/artifacts.zip",
       "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/ios-profile/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
@@ -8145,7 +8230,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_19"
+      "[CLEANUP]/tmp_tmp_20"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8390,7 +8475,7 @@
       ]
     },
     "name": "Zip ios-release artifacts.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"Flutter.podspec\", \"path\": \"[CACHE]/builder/src/flutter/shell/platform/darwin/ios/framework/Flutter.podspec\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_armv7\", \"path\": \"[CACHE]/builder/src/out/release/gen_snapshot_armv7\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_arm64\", \"path\": \"[CACHE]/builder/src/out/release/gen_snapshot_arm64\", \"type\": \"file\"}, {\"archive_name\": \"Flutter.framework.zip\", \"path\": \"[CACHE]/builder/src/out/release/Flutter.framework.zip\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_20/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"Flutter.podspec\", \"path\": \"[CACHE]/builder/src/flutter/shell/platform/darwin/ios/framework/Flutter.podspec\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_armv7\", \"path\": \"[CACHE]/builder/src/out/release/gen_snapshot_armv7\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_arm64\", \"path\": \"[CACHE]/builder/src/out/release/gen_snapshot_arm64\", \"type\": \"file\"}, {\"archive_name\": \"Flutter.framework.zip\", \"path\": \"[CACHE]/builder/src/out/release/Flutter.framework.zip\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_21/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
   },
   {
     "cmd": [
@@ -8401,7 +8486,7 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "[CLEANUP]/tmp_tmp_20/artifacts.zip",
+      "[CLEANUP]/tmp_tmp_21/artifacts.zip",
       "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/ios-release/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
@@ -8435,7 +8520,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_20"
+      "[CLEANUP]/tmp_tmp_21"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8631,7 +8716,7 @@
       ]
     },
     "name": "Zip ios-release-nobitcode artifacts.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"Flutter.podspec\", \"path\": \"[CACHE]/builder/src/flutter/shell/platform/darwin/ios/framework/Flutter.podspec\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_armv7\", \"path\": \"[CACHE]/builder/src/out/release/gen_snapshot_armv7\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_arm64\", \"path\": \"[CACHE]/builder/src/out/release/gen_snapshot_arm64\", \"type\": \"file\"}, {\"archive_name\": \"Flutter.framework.zip\", \"path\": \"[CACHE]/builder/src/out/release/Flutter.framework.zip\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_21/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"Flutter.podspec\", \"path\": \"[CACHE]/builder/src/flutter/shell/platform/darwin/ios/framework/Flutter.podspec\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_armv7\", \"path\": \"[CACHE]/builder/src/out/release/gen_snapshot_armv7\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot_arm64\", \"path\": \"[CACHE]/builder/src/out/release/gen_snapshot_arm64\", \"type\": \"file\"}, {\"archive_name\": \"Flutter.framework.zip\", \"path\": \"[CACHE]/builder/src/out/release/Flutter.framework.zip\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_22/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
   },
   {
     "cmd": [
@@ -8642,7 +8727,7 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "[CLEANUP]/tmp_tmp_21/artifacts.zip",
+      "[CLEANUP]/tmp_tmp_22/artifacts.zip",
       "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/ios-release-nobitcode/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
@@ -8676,7 +8761,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_21"
+      "[CLEANUP]/tmp_tmp_22"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10495,7 +10580,7 @@
       "--target-arch",
       "arm64",
       "--out-dir",
-      "[CLEANUP]/tmp_tmp_22",
+      "[CLEANUP]/tmp_tmp_23",
       "--symbol-dirs",
       "[CACHE]/builder/src/out/fuchsia_debug_arm64/flutter-debug-symbols-debug-fuchsia-arm64",
       "[CACHE]/builder/src/out/fuchsia_profile_arm64/flutter-debug-symbols-profile-fuchsia-arm64",
@@ -10529,7 +10614,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_22"
+      "[CLEANUP]/tmp_tmp_23"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10776,7 +10861,7 @@
       "--target-arch",
       "x64",
       "--out-dir",
-      "[CLEANUP]/tmp_tmp_23",
+      "[CLEANUP]/tmp_tmp_24",
       "--symbol-dirs",
       "[CACHE]/builder/src/out/fuchsia_debug_x64/flutter-debug-symbols-debug-fuchsia-x64",
       "[CACHE]/builder/src/out/fuchsia_profile_x64/flutter-debug-symbols-profile-fuchsia-x64",
@@ -10810,7 +10895,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_23"
+      "[CLEANUP]/tmp_tmp_24"
     ],
     "cwd": "[CACHE]/builder",
     "env": {

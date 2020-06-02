@@ -643,14 +643,16 @@ def BuildLinux(api):
       archive_name='linux-x64-embedder')
 
   # GTK desktop embedding.
-  PackageLinuxDesktopVariant(api, 'host_debug', 'linux-x64')
+  PackageLinuxDesktopVariant(api, 'host_debug', 'linux-x64-debug')
   PackageLinuxDesktopVariant(api, 'host_profile', 'linux-x64-profile')
   PackageLinuxDesktopVariant(api, 'host_release', 'linux-x64-release')
+  # Legacy; remove once Flutter tooling is updated to use the -debug location.
+  PackageLinuxDesktopVariant(api, 'host_debug', 'linux-x64')
 
   # GLFW desktop embedding. Remove once the switch to GTK is complete.
   UploadArtifacts(
       api,
-      'linux-x64', [
+      'linux-x64-debug', [
           'out/host_debug/flutter_export.h',
           'out/host_debug/flutter_glfw.h',
           'out/host_debug/flutter_messenger.h',
@@ -678,6 +680,17 @@ def BuildLinux(api):
           'out/host_release/flutter_plugin_registrar.h',
           'out/host_release/libflutter_linux_glfw.so',
           'out/host_release/gen_snapshot',
+      ],
+      archive_name='linux-x64-flutter-glfw.zip')
+  # Legacy; remove once Flutter tooling is updated to use the -debug location.
+  UploadArtifacts(
+      api,
+      'linux-x64', [
+          'out/host_debug/flutter_export.h',
+          'out/host_debug/flutter_glfw.h',
+          'out/host_debug/flutter_messenger.h',
+          'out/host_debug/flutter_plugin_registrar.h',
+          'out/host_debug/libflutter_linux_glfw.so',
       ],
       archive_name='linux-x64-flutter-glfw.zip')
   UploadFolder(api, 'Upload linux-x64 Flutter GLFW library C++ wrapper',
@@ -1025,7 +1038,7 @@ def BuildMac(api):
         'flutter/shell/platform/darwin/macos/framework/FlutterMacOS.podspec'
     UploadArtifacts(
         api,
-        'darwin-x64', [
+        'darwin-x64-debug', [
             'out/host_debug/FlutterMacOS.framework.zip',
             flutter_podspec,
         ],
@@ -1052,6 +1065,14 @@ def BuildMac(api):
               'out/host_debug/gen/const_finder.dart.snapshot',
           ],
           archive_name='font-subset.zip')
+    # Legacy; remove once Flutter tooling is updated to use the -debug location.
+    UploadArtifacts(
+        api,
+        'darwin-x64', [
+            'out/host_debug/FlutterMacOS.framework.zip',
+            flutter_podspec,
+        ],
+        archive_name='FlutterMacOS.framework.zip')
 
     UploadDartSdk(api, archive_name='dart-sdk-darwin-x64.zip')
     UploadWebSdk(api, archive_name='flutter-web-sdk-darwin-x64.zip')
@@ -1299,12 +1320,14 @@ def BuildWindows(api):
         ],
         archive_name='windows-x64-embedder.zip')
 
-    PackageWindowsDesktopVariant(api, 'host_debug', 'windows-x64')
+    PackageWindowsDesktopVariant(api, 'host_debug', 'windows-x64-debug')
     PackageWindowsDesktopVariant(api, 'host_profile', 'windows-x64-profile')
     PackageWindowsDesktopVariant(api, 'host_release', 'windows-x64-release')
     UploadFolder(api, 'Upload windows-x64 Flutter library C++ wrapper',
                  'src/out/host_debug', 'cpp_client_wrapper',
                  'flutter-cpp-client-wrapper.zip', 'windows-x64')
+    # Legacy; remove once Flutter tooling is updated to use the -debug location.
+    PackageWindowsDesktopVariant(api, 'host_debug', 'windows-x64')
 
     if BuildFontSubset(api):
       UploadArtifacts(
