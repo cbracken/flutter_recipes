@@ -1216,7 +1216,8 @@ def RunIosIntegrationTests(api):
   scenario_app_tests = test_dir.join('scenario_app')
 
   with api.context(cwd=scenario_app_tests):
-    api.step('Scenario App Integration Tests', ['./build_and_run_ios_tests.sh', 'ios_debug_sim'])
+    api.step('Scenario App Integration Tests',
+             ['./build_and_run_ios_tests.sh', 'ios_debug_sim'])
 
 
 def BuildIOS(api):
@@ -1490,7 +1491,10 @@ def GetCheckout(api):
   src_cfg.repo_path_map[git_url] = ('src/flutter', git_ref)
   api.gclient.c = src_cfg
   api.gclient.c.got_revision_mapping['src/flutter'] = 'got_engine_revision'
-  api.bot_update.ensure_checkout()
+  try:
+    api.bot_update.ensure_checkout()
+  except api.step.StepFailure:
+    api.bot_update.ensure_checkout(clobber=True)
   api.gclient.runhooks()
 
 
@@ -1708,4 +1712,31 @@ def GenTests(api):
               android_sdk_license='android_sdk_hash',
               android_sdk_preview_license='android_sdk_preview_hash')),
       api.properties.environ(EnvProperties(SWARMING_TASK_ID='deadbeef')),
+  )
+  yield api.test(
+      'first_bot_update_failed',
+      api.buildbucket.ci_build(
+          builder='Linux Host Engine',
+          git_repo='https://github.com/flutter/engine',
+          project='flutter'),
+      # Next line force a fail condition for the bot update
+      # first execution.
+      api.step_data("bot_update", retcode=1),
+      collect_build_output,
+      api.runtime(is_luci=True, is_experimental=True),
+      api.properties(
+          InputProperties(
+              clobber=False,
+              git_url='https://github.com/flutter/engine',
+              goma_jobs='200',
+              git_ref='refs/pull/1/head',
+              fuchsia_ctl_version='version:0.0.2',
+              build_host=True,
+              build_fuchsia=True,
+              test_fuchsia=True,
+              build_android_aot=True,
+              build_android_debug=True,
+              build_android_vulkan=True,
+              android_sdk_license='android_sdk_hash',
+              android_sdk_preview_license='android_sdk_preview_hash')),
   )
