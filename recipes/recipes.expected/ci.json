@@ -453,7 +453,7 @@
       "-n",
       "1",
       "-fields",
-      "builder,create_time,created_by,critical,end_time,id,infra.recipe,input,number,output,start_time,status,update_time",
+      "builder,create_time,created_by,critical,end_time,id,input,number,output,start_time,status,update_time",
       "-predicate",
       "{\"builder\": {\"bucket\": \"try\", \"builder\": \"flutter-bar\", \"project\": \"flutter\"}, \"status\": \"SUCCESS\"}"
     ],
@@ -462,7 +462,7 @@
     "name": "get builders.flutter/try/flutter-bar.buildbucket.search",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LOG_LINE@raw_io.output_text@{\"status\": \"SUCCESS\", \"builder\": {\"builder\": \"flutter/try/flutter-bar\"}, \"infra\": {\"recipe\": {\"name\": \"flutter\"}}, \"input\": {\"gerritChanges\": [{\"project\": \"fuchsia\", \"host\": \"fuchsia-review.googlesource.com\"}]}, \"endTime\": \"2012-05-13T12:53:20Z\", \"id\": \"37\"}@@@",
+      "@@@STEP_LOG_LINE@raw_io.output_text@{\"status\": \"SUCCESS\", \"input\": {\"properties\": {\"recipe\": \"flutter\"}, \"gerritChanges\": [{\"project\": \"fuchsia\", \"host\": \"fuchsia-review.googlesource.com\"}]}, \"builder\": {\"builder\": \"flutter/try/flutter-bar\"}, \"endTime\": \"2012-05-13T12:53:20Z\", \"id\": \"37\"}@@@",
       "@@@STEP_LOG_END@raw_io.output_text@@@",
       "@@@STEP_LINK@37@https://cr-buildbucket.appspot.com/build/37@@@"
     ]
@@ -488,7 +488,7 @@
       "-n",
       "1",
       "-fields",
-      "builder,create_time,created_by,critical,end_time,id,infra.recipe,input,number,output,start_time,status,update_time",
+      "builder,create_time,created_by,critical,end_time,id,input,number,output,start_time,status,update_time",
       "-predicate",
       "{\"builder\": {\"bucket\": \"try\", \"builder\": \"flutter-baz\", \"project\": \"flutter\"}, \"status\": \"SUCCESS\"}"
     ],
@@ -497,7 +497,7 @@
     "name": "get builders.flutter/try/flutter-baz.buildbucket.search",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LOG_LINE@raw_io.output_text@{\"status\": \"SUCCESS\", \"builder\": {\"builder\": \"flutter/try/flutter-baz\"}, \"infra\": {\"recipe\": {\"name\": \"project\"}}, \"input\": {\"gerritChanges\": [{\"project\": \"fuchsia\", \"host\": \"fuchsia-review.googlesource.com\"}]}, \"endTime\": \"2012-05-13T12:53:20Z\", \"id\": \"37\"}@@@",
+      "@@@STEP_LOG_LINE@raw_io.output_text@{\"status\": \"SUCCESS\", \"input\": {\"properties\": {\"recipe\": \"project\"}, \"gerritChanges\": [{\"project\": \"fuchsia\", \"host\": \"fuchsia-review.googlesource.com\"}]}, \"builder\": {\"builder\": \"flutter/try/flutter-baz\"}, \"endTime\": \"2012-05-13T12:53:20Z\", \"id\": \"37\"}@@@",
       "@@@STEP_LOG_END@raw_io.output_text@@@",
       "@@@STEP_LINK@37@https://cr-buildbucket.appspot.com/build/37@@@"
     ]
@@ -523,7 +523,7 @@
       "-n",
       "1",
       "-fields",
-      "builder,create_time,created_by,critical,end_time,id,infra.recipe,input,number,output,start_time,status,update_time",
+      "builder,create_time,created_by,critical,end_time,id,input,number,output,start_time,status,update_time",
       "-predicate",
       "{\"builder\": {\"bucket\": \"try\", \"builder\": \"flutter-foo\", \"project\": \"flutter\"}, \"status\": \"SUCCESS\"}"
     ],
@@ -532,7 +532,7 @@
     "name": "get builders.flutter/try/flutter-foo.buildbucket.search",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LOG_LINE@raw_io.output_text@{\"status\": \"SUCCESS\", \"builder\": {\"builder\": \"flutter/try/flutter-foo\"}, \"infra\": {\"recipe\": {\"name\": \"flutter\"}}, \"input\": {\"gerritChanges\": [{\"project\": \"fuchsia\", \"host\": \"fuchsia-review.googlesource.com\"}]}, \"endTime\": \"2012-05-13T12:53:20Z\", \"id\": \"37\"}@@@",
+      "@@@STEP_LOG_LINE@raw_io.output_text@{\"status\": \"SUCCESS\", \"input\": {\"properties\": {\"recipe\": \"flutter\"}, \"gerritChanges\": [{\"project\": \"fuchsia\", \"host\": \"fuchsia-review.googlesource.com\"}]}, \"builder\": {\"builder\": \"flutter/try/flutter-foo\"}, \"endTime\": \"2012-05-13T12:53:20Z\", \"id\": \"37\"}@@@",
       "@@@STEP_LOG_END@raw_io.output_text@@@",
       "@@@STEP_LINK@37@https://cr-buildbucket.appspot.com/build/37@@@"
     ]

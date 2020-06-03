@@ -10216,7 +10216,7 @@
   },
   {
     "cmd": [],
-    "name": "install isolated"
+    "name": "install infra/tools/luci/isolated"
   },
   {
     "cmd": [
@@ -10246,7 +10246,7 @@
       ]
     },
     "infra_step": true,
-    "name": "install isolated.ensure package directory",
+    "name": "install infra/tools/luci/isolated.ensure package directory",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -10280,7 +10280,7 @@
       ]
     },
     "infra_step": true,
-    "name": "install isolated.ensure_installed",
+    "name": "install infra/tools/luci/isolated.ensure_installed",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",

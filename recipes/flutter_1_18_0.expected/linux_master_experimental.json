@@ -453,7 +453,7 @@
   },
   {
     "cmd": [],
-    "name": "Run Fuchsia Driver Tests.Create Isolate Archive.install isolated",
+    "name": "Run Fuchsia Driver Tests.Create Isolate Archive.install infra/tools/luci/isolated",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -484,7 +484,7 @@
       ]
     },
     "infra_step": true,
-    "name": "Run Fuchsia Driver Tests.Create Isolate Archive.install isolated.ensure package directory",
+    "name": "Run Fuchsia Driver Tests.Create Isolate Archive.install infra/tools/luci/isolated.ensure package directory",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@3@@@"
     ]
@@ -516,7 +516,7 @@
       ]
     },
     "infra_step": true,
-    "name": "Run Fuchsia Driver Tests.Create Isolate Archive.install isolated.ensure_installed",
+    "name": "Run Fuchsia Driver Tests.Create Isolate Archive.install infra/tools/luci/isolated.ensure_installed",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@3@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -597,9 +597,40 @@
   },
   {
     "cmd": [],
-    "name": "Run Fuchsia Driver Tests.ensure swarming",
+    "name": "Run Fuchsia Driver Tests.install infra/tools/luci/swarming",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/cipd/infra/tools/luci/swarming/latest"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "GOLDCTL": "[CACHE]/gold/goldctl",
+      "GOLD_TRYJOB": "refs/heads/master",
+      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "Run Fuchsia Driver Tests.install infra/tools/luci/swarming.ensure package directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
     ]
   },
   {
@@ -607,7 +638,7 @@
       "cipd",
       "ensure",
       "-root",
-      "[CACHE]/swarming_client",
+      "[CACHE]/cipd/infra/tools/luci/swarming/latest",
       "-ensure-file",
       "infra/tools/luci/swarming/${platform} latest",
       "-max-threads",
@@ -629,7 +660,7 @@
       ]
     },
     "infra_step": true,
-    "name": "Run Fuchsia Driver Tests.ensure swarming.ensure_installed",
+    "name": "Run Fuchsia Driver Tests.install infra/tools/luci/swarming.ensure_installed",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -647,7 +678,7 @@
   },
   {
     "cmd": [
-      "[CACHE]/swarming_client/swarming",
+      "[CACHE]/cipd/infra/tools/luci/swarming/latest/swarming",
       "spawn-tasks",
       "-server",
       "https://example.swarmingserver.appspot.com",
@@ -770,7 +801,7 @@
   },
   {
     "cmd": [
-      "[CACHE]/swarming_client/swarming",
+      "[CACHE]/cipd/infra/tools/luci/swarming/latest/swarming",
       "collect",
       "-server",
       "https://example.swarmingserver.appspot.com",
