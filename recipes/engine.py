@@ -1493,8 +1493,11 @@ def GetCheckout(api):
   api.gclient.c.got_revision_mapping['src/flutter'] = 'got_engine_revision'
   try:
     api.bot_update.ensure_checkout()
-  except api.step.StepFailure:
-    api.bot_update.ensure_checkout(clobber=True)
+  except (api.step.StepFailure, api.step.InfraFailure):
+    cache_root = api.path['cache'].join('builder')
+    api.file.rmtree('Clobber cache', cache_root)
+    api.file.ensure_directory('Ensure checkout cache', cache_root)
+    api.bot_update.ensure_checkout()
   api.gclient.runhooks()
 
 
