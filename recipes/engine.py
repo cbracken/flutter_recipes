@@ -110,7 +110,16 @@ def ScheduleBuilds(api, builder_name, drone_props):
   req = api.buildbucket.schedule_request(
       swarming_parent_run_id=api.swarming.task_id,
       builder=builder_name,
-      properties=drone_props)
+      properties=drone_props,
+      # Having main build and subbuilds with the same priority can lead
+      # to a deadlock situation when there are limited resources. For example
+      # if we have only 7 mac bots and we get more than 7 new build requests the
+      # within minutes of each other then the 7 bots will be used by main tasks
+      # and they will all timeout waiting for resources to run subbuilds.
+      # Increasing priority won't fix the problem but will make the deadlock
+      # situation less unlikely.
+      # https://github.com/flutter/flutter/issues/59169.
+      priority=25)
   return api.buildbucket.schedule([req])
 
 
