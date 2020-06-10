@@ -209,11 +209,6 @@ def RunSteps(api, properties, env_properties):
                     api.buildbucket.build.id, base_name)
                 presentation.links[base_name] = url
 
-        else:
-          api.step('kill safari', ['pkill', '-lf', 'Safari'])
-          api.step('felt test safari', felt_test)
-          api.step('kill safari', ['pkill', '-lf', 'Safari'])
-
 def GenTests(api):
   yield api.test('linux-post-submit') + api.properties(
       goma_jobs='200') + api.platform('linux', 64)
