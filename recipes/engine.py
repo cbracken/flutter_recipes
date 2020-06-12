@@ -1482,7 +1482,7 @@ def BuildObjcDoc(api):
           name='upload obj-c doc')
 
 
-def GetCheckout(api):
+def GetCheckout(api, cache_root, env, env_prefixes):
   git_url = GIT_REPO
   git_id = api.buildbucket.gitiles_commit.id
   git_ref = api.buildbucket.gitiles_commit.ref
@@ -1491,23 +1491,32 @@ def GetCheckout(api):
     git_id = api.properties['git_ref']
     git_ref = api.properties['git_ref']
 
-  src_cfg = api.gclient.make_config()
-  soln = src_cfg.solutions.add()
-  soln.name = 'src/flutter'
-  soln.url = git_url
-  soln.revision = git_id
-  src_cfg.parent_got_revision_mapping['parent_got_revision'] = 'got_revision'
-  src_cfg.repo_path_map[git_url] = ('src/flutter', git_ref)
-  api.gclient.c = src_cfg
-  api.gclient.c.got_revision_mapping['src/flutter'] = 'got_engine_revision'
+  # Inner function to execute code a second time in case of failure.
+  def _InnerCheckout():
+    with api.context(
+        cwd=cache_root, env=env,
+        env_prefixes=env_prefixes), api.depot_tools.on_path():
+      src_cfg = api.gclient.make_config()
+      soln = src_cfg.solutions.add()
+      soln.name = 'src/flutter'
+      soln.url = git_url
+      soln.revision = git_id
+      src_cfg.parent_got_revision_mapping[
+          'parent_got_revision'] = 'got_revision'
+      src_cfg.repo_path_map[git_url] = ('src/flutter', git_ref)
+      api.gclient.c = src_cfg
+      api.gclient.c.got_revision_mapping['src/flutter'] = 'got_engine_revision'
+      api.bot_update.ensure_checkout()
+      api.gclient.runhooks()
+
   try:
-    api.bot_update.ensure_checkout()
+    _InnerCheckout()
   except (api.step.StepFailure, api.step.InfraFailure):
-    cache_root = api.path['cache'].join('builder')
+    # Run this out of context
     api.file.rmtree('Clobber cache', cache_root)
     api.file.ensure_directory('Ensure checkout cache', cache_root)
-    api.bot_update.ensure_checkout()
-  api.gclient.runhooks()
+    # Now try a second time
+    _InnerCheckout()
 
 
 def RunSteps(api, properties, env_properties):
@@ -1530,10 +1539,10 @@ def RunSteps(api, properties, env_properties):
   env_prefixes = {'PATH': [dart_bin]}
 
   # Various scripts we run assume access to depot_tools on path for `ninja`.
+  GetCheckout(api, cache_root, env, env_prefixes)
   with api.context(
       cwd=cache_root, env=env,
       env_prefixes=env_prefixes), api.depot_tools.on_path():
-    GetCheckout(api)
 
     # Presence of tags in git repo is critical for determining dart version.
     dart_sdk_dir = GetCheckoutPath(api).join('third_party', 'dart')
