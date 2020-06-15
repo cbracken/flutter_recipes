@@ -19,6 +19,46 @@ from recipe_engine import recipe_api
 class RepoUtilApi(recipe_api.RecipeApi):
   """Provides utilities to work with flutter repos."""
 
+  def engine_checkout(self, checkout_path, env, env_prefixes):
+    """Checkout code using gclient.
+
+    Args:
+      checkout_path(Path): The path to checkout source code and dependencies.
+    """
+    git_url = REPOS['engine']
+    git_id = self.m.buildbucket.gitiles_commit.id
+    git_ref = self.m.buildbucket.gitiles_commit.ref
+    if 'git_url' in self.m.properties and 'git_ref' in self.m.properties:
+      git_url = self.m.properties['git_url']
+      git_id = self.m.properties['git_ref']
+      git_ref = self.m.properties['git_ref']
+
+    # Inner function to execute code a second time in case of failure.
+    def _InnerCheckout():
+      with self.m.context(cwd=checkout_path), self.m.depot_tools.on_path():
+        src_cfg = self.m.gclient.make_config()
+        soln = src_cfg.solutions.add()
+        soln.name = 'src/flutter'
+        soln.url = git_url
+        soln.revision = git_id
+        src_cfg.parent_got_revision_mapping[
+            'parent_got_revision'] = 'got_revision'
+        src_cfg.repo_path_map[git_url] = ('src/flutter', git_ref)
+        self.m.gclient.c = src_cfg
+        self.m.gclient.c.got_revision_mapping[
+            'src/flutter'] = 'got_engine_revision'
+        self.m.bot_update.ensure_checkout()
+        self.m.gclient.runhooks()
+
+    try:
+      _InnerCheckout()
+    except (self.m.step.StepFailure, self.m.step.InfraFailure):
+      # Run this out of context
+      self.m.file.rmtree('Clobber cache', checkout_path)
+      self.m.file.ensure_directory('Ensure checkout cache', checkout_path)
+      # Now try a second time
+      _InnerCheckout()
+
   def checkout(self, name, checkout_path, url=None, ref=None):
     """Checks out a repo and returns sha1 of checked out revision.
 

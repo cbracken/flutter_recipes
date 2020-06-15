@@ -13,6 +13,7 @@ from PB.recipes.flutter.engine import EnvProperties
 
 DEPS = [
     'build/goma',
+    'flutter/repo_util',
     'depot_tools/gclient',
     'depot_tools/gsutil',
     'recipe_engine/cipd',
@@ -41,28 +42,6 @@ def SetupXcode(api):
   # https://github.com/flutter/infra/blob/master/config/cr-buildbucket.cfg#L148
   with api.osx_sdk('ios'):
     yield
-
-
-def GetCheckout(api):
-  git_url = GIT_REPO
-  git_id = api.buildbucket.gitiles_commit.id
-  git_ref = api.buildbucket.gitiles_commit.ref
-  if 'git_url' in api.properties and 'git_ref' in api.properties:
-    git_url = api.properties['git_url']
-    git_id = api.properties['git_ref']
-    git_ref = api.properties['git_ref']
-
-  src_cfg = api.gclient.make_config()
-  soln = src_cfg.solutions.add()
-  soln.name = 'src/flutter'
-  soln.url = git_url
-  soln.revision = git_id
-  src_cfg.parent_got_revision_mapping['parent_got_revision'] = 'got_revision'
-  src_cfg.repo_path_map[git_url] = ('src/flutter', git_ref)
-  api.gclient.c = src_cfg
-  api.gclient.c.got_revision_mapping['src/flutter'] = 'got_engine_revision'
-  api.bot_update.ensure_checkout()
-  api.gclient.runhooks()
 
 
 def Build(api, config, *targets):
@@ -135,11 +114,11 @@ def RunSteps(api, properties, env_properties):
   }
   env_prefixes = {'PATH': [dart_bin]}
 
+  # Checkout source code and build
+  api.repo_util.engine_checkout(cache_root, env, env_prefixes)
   with api.context(
       cwd=cache_root, env=env,
       env_prefixes=env_prefixes), api.depot_tools.on_path():
-    # Checkout source code and build
-    GetCheckout(api)
     target_name = 'host_debug_unopt'
     gn_flags = ['--unoptimized', '--full-dart-sdk']
     # Mac needs to install xcode as part of the building process.
@@ -208,6 +187,7 @@ def RunSteps(api, properties, env_properties):
                     api.properties['gcs_goldens_bucket'],
                     api.buildbucket.build.id, base_name)
                 presentation.links[base_name] = url
+
 
 def GenTests(api):
   yield api.test('linux-post-submit') + api.properties(

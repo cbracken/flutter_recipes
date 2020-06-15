@@ -19,6 +19,7 @@ DEPS = [
     'depot_tools/git',
     'depot_tools/gsutil',
     'depot_tools/osx_sdk',
+    'flutter/repo_util',
     'flutter/zip',
     'fuchsia/display_util',
     'recipe_engine/buildbucket',
@@ -1482,49 +1483,9 @@ def BuildObjcDoc(api):
           name='upload obj-c doc')
 
 
-def GetCheckout(api, cache_root, env, env_prefixes):
-  git_url = GIT_REPO
-  git_id = api.buildbucket.gitiles_commit.id
-  git_ref = api.buildbucket.gitiles_commit.ref
-  if 'git_url' in api.properties and 'git_ref' in api.properties:
-    git_url = api.properties['git_url']
-    git_id = api.properties['git_ref']
-    git_ref = api.properties['git_ref']
-
-  # Inner function to execute code a second time in case of failure.
-  def _InnerCheckout():
-    with api.context(
-        cwd=cache_root, env=env,
-        env_prefixes=env_prefixes), api.depot_tools.on_path():
-      src_cfg = api.gclient.make_config()
-      soln = src_cfg.solutions.add()
-      soln.name = 'src/flutter'
-      soln.url = git_url
-      soln.revision = git_id
-      src_cfg.parent_got_revision_mapping[
-          'parent_got_revision'] = 'got_revision'
-      src_cfg.repo_path_map[git_url] = ('src/flutter', git_ref)
-      api.gclient.c = src_cfg
-      api.gclient.c.got_revision_mapping['src/flutter'] = 'got_engine_revision'
-      api.bot_update.ensure_checkout()
-      api.gclient.runhooks()
-
-  try:
-    _InnerCheckout()
-  except (api.step.StepFailure, api.step.InfraFailure):
-    # Run this out of context
-    api.file.rmtree('Clobber cache', cache_root)
-    api.file.ensure_directory('Ensure checkout cache', cache_root)
-    # Now try a second time
-    _InnerCheckout()
-
-
 def RunSteps(api, properties, env_properties):
   cache_root = api.path['cache'].join('builder')
   checkout = GetCheckoutPath(api)
-
-  if properties.clobber:
-    api.file.rmtree('Clobber cache', cache_root)
 
   api.file.rmtree('Clobber build output', checkout.join('out'))
 
@@ -1538,8 +1499,9 @@ def RunSteps(api, properties, env_properties):
   env = {'GOMA_DIR': api.goma.goma_dir, 'ANDROID_HOME': str(android_home)}
   env_prefixes = {'PATH': [dart_bin]}
 
+  api.repo_util.engine_checkout(cache_root, env, env_prefixes)
+
   # Various scripts we run assume access to depot_tools on path for `ninja`.
-  GetCheckout(api, cache_root, env, env_prefixes)
   with api.context(
       cwd=cache_root, env=env,
       env_prefixes=env_prefixes), api.depot_tools.on_path():
