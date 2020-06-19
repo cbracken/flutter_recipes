@@ -33,7 +33,7 @@ PROPERTIES = {
 # off. In that case alter the recipes build to run on a specific CL that
 # modifies the envtest recipe alone, because that recipe is used by
 # relatively few CQ builders.
-SELFTEST_CL = ('https://flutter-review.git.corp.google.com/c/recipes/+/2280/1')
+SELFTEST_CL = ('https://flutter-review.googlesource.com/c/recipes/+/3606')
 COMMIT_QUEUE_CFG = """
     submit_options: <
       max_burst: 4
