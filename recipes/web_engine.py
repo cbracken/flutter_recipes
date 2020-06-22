@@ -66,6 +66,17 @@ def GetCheckoutPath(api):
   return api.path['cache'].join('builder', 'src')
 
 
+def DownloadFirefoxDriver(api):
+  checkout = GetCheckoutPath(api)
+  # Download the driver for Firefox.
+  firefox_driver_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
+                                     'drivers', 'firefox')
+  pkgdriver = api.cipd.EnsureFile()
+  pkgdriver.add_package('flutter_internal/browser-drivers/firefoxdriver-linux',
+                        'latest')
+  api.cipd.ensure(firefox_driver_path, pkgdriver)
+
+
 def DownloadChromeAndDriver(api):
   checkout = GetCheckoutPath(api)
   # Download a specific version of chrome-linux before running Flutter Web
@@ -81,7 +92,7 @@ def DownloadChromeAndDriver(api):
   pkgs = api.cipd.EnsureFile()
   pkgs.add_package('flutter_internal/browsers/chrome-linux', 'latest')
   api.cipd.ensure(chrome_path, pkgs)
-  # Download the driver fort the same version of chrome-linux.
+  # Download the driver for the same version of chrome-linux.
   chrome_driver_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
                                      'drivers', 'chrome')
   pkgdriver = api.cipd.EnsureFile()
@@ -151,6 +162,7 @@ def RunSteps(api, properties, env_properties):
       felt_licenses.append('check-licenses')
       api.step('felt licenses', felt_licenses)
       if api.platform.is_linux:
+        DownloadFirefoxDriver(api)
         additional_args_firefox = ['--browser', 'firefox']
         felt_test_firefox = copy.deepcopy(felt_cmd)
         felt_test_firefox.append('test')
