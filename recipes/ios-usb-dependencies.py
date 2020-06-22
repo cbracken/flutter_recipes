@@ -25,24 +25,17 @@ HOMEBREW_FLUTTER_PREFIX = ['flutter', 'homebrew-flutter']
 MIRROR_URL_PREFIX = 'https://flutter-mirrors.googlesource.com'
 
 INSTALL_PKGS = {
-    'ideviceinstaller-flutter': {
-      'install_flags': ['--HEAD'],
-      'deliverables': [
-        'bin/ideviceinstaller',
-        'COPYING',
-        ],
-      },
     'libplist-flutter': {
       'install_flags': ['--HEAD'],
       'deliverables': [
-        'lib/libplist.3.dylib',
+        'lib/libplist-2.0.3.dylib',
         'COPYING',
         ],
       },
     'usbmuxd-flutter': {
       'install_flags': ['--HEAD'],
       'deliverables': [
-        'lib/libusbmuxd.4.dylib',
+        'lib/libusbmuxd-2.0.6.dylib',
         'bin/iproxy',
         'COPYING',
         ],
@@ -50,8 +43,8 @@ INSTALL_PKGS = {
     'openssl-flutter': {
       'install_flags': ['--HEAD'],
       'deliverables': [
-        'lib/libssl.1.0.0.dylib',
-        'lib/libcrypto.1.0.0.dylib',
+        'lib/libssl.1.1.dylib',
+        'lib/libcrypto.1.1.dylib',
         'LICENSE',
         ],
       },
@@ -62,12 +55,9 @@ INSTALL_PKGS = {
         'COPYING.LESSER',
         'libtasn1-LICENSE',
         'libtasn1-AUTHORS',
-        'bin/idevice_id',
-        'bin/ideviceinfo',
-        'bin/idevicename',
         'bin/idevicescreenshot',
         'bin/idevicesyslog',
-        'lib/libimobiledevice.6.dylib',
+        'lib/libimobiledevice-1.0.6.dylib',
         ],
       },
     'ios-deploy-flutter': {
@@ -78,7 +68,7 @@ INSTALL_PKGS = {
         'LICENSE2',
         ],
       },
- }
+    }
 
 def InstallHomebrew(api, homebrew_dir):
   homebrew_tar = api.path['start_dir'].join('homebrew.tar.gz')

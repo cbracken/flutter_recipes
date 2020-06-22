@@ -107,11 +107,11 @@
       "--json-output",
       "/path/to/tmp/json",
       "copy",
-      "[START_DIR]/homebrew/opt/usbmuxd-flutter/lib/libusbmuxd.4.dylib",
+      "[START_DIR]/homebrew/opt/usbmuxd-flutter/lib/libusbmuxd-2.0.6.dylib",
       "[START_DIR]/output/usbmuxd-flutter"
     ],
     "infra_step": true,
-    "name": "copying lib/libusbmuxd.4.dylib from package usbmuxd-flutter"
+    "name": "copying lib/libusbmuxd-2.0.6.dylib from package usbmuxd-flutter"
   },
   {
     "cmd": [

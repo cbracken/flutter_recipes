@@ -107,11 +107,11 @@
       "--json-output",
       "/path/to/tmp/json",
       "copy",
-      "[START_DIR]/homebrew/opt/libplist-flutter/lib/libplist.3.dylib",
+      "[START_DIR]/homebrew/opt/libplist-flutter/lib/libplist-2.0.3.dylib",
       "[START_DIR]/output/libplist-flutter"
     ],
     "infra_step": true,
-    "name": "copying lib/libplist.3.dylib from package libplist-flutter"
+    "name": "copying lib/libplist-2.0.3.dylib from package libplist-flutter"
   },
   {
     "cmd": [

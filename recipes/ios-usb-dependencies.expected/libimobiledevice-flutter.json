@@ -163,48 +163,6 @@
       "--json-output",
       "/path/to/tmp/json",
       "copy",
-      "[START_DIR]/homebrew/opt/libimobiledevice-flutter/bin/idevice_id",
-      "[START_DIR]/output/libimobiledevice-flutter"
-    ],
-    "infra_step": true,
-    "name": "copying bin/idevice_id from package libimobiledevice-flutter"
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "[START_DIR]/homebrew/opt/libimobiledevice-flutter/bin/ideviceinfo",
-      "[START_DIR]/output/libimobiledevice-flutter"
-    ],
-    "infra_step": true,
-    "name": "copying bin/ideviceinfo from package libimobiledevice-flutter"
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "[START_DIR]/homebrew/opt/libimobiledevice-flutter/bin/idevicename",
-      "[START_DIR]/output/libimobiledevice-flutter"
-    ],
-    "infra_step": true,
-    "name": "copying bin/idevicename from package libimobiledevice-flutter"
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
       "[START_DIR]/homebrew/opt/libimobiledevice-flutter/bin/idevicescreenshot",
       "[START_DIR]/output/libimobiledevice-flutter"
     ],
@@ -233,11 +191,11 @@
       "--json-output",
       "/path/to/tmp/json",
       "copy",
-      "[START_DIR]/homebrew/opt/libimobiledevice-flutter/lib/libimobiledevice.6.dylib",
+      "[START_DIR]/homebrew/opt/libimobiledevice-flutter/lib/libimobiledevice-1.0.6.dylib",
       "[START_DIR]/output/libimobiledevice-flutter"
     ],
     "infra_step": true,
-    "name": "copying lib/libimobiledevice.6.dylib from package libimobiledevice-flutter"
+    "name": "copying lib/libimobiledevice-1.0.6.dylib from package libimobiledevice-flutter"
   },
   {
     "cmd": [

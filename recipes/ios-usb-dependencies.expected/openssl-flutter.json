@@ -107,11 +107,11 @@
       "--json-output",
       "/path/to/tmp/json",
       "copy",
-      "[START_DIR]/homebrew/opt/openssl-flutter/lib/libssl.1.0.0.dylib",
+      "[START_DIR]/homebrew/opt/openssl-flutter/lib/libssl.1.1.dylib",
       "[START_DIR]/output/openssl-flutter"
     ],
     "infra_step": true,
-    "name": "copying lib/libssl.1.0.0.dylib from package openssl-flutter"
+    "name": "copying lib/libssl.1.1.dylib from package openssl-flutter"
   },
   {
     "cmd": [
@@ -121,11 +121,11 @@
       "--json-output",
       "/path/to/tmp/json",
       "copy",
-      "[START_DIR]/homebrew/opt/openssl-flutter/lib/libcrypto.1.0.0.dylib",
+      "[START_DIR]/homebrew/opt/openssl-flutter/lib/libcrypto.1.1.dylib",
       "[START_DIR]/output/openssl-flutter"
     ],
     "infra_step": true,
-    "name": "copying lib/libcrypto.1.0.0.dylib from package openssl-flutter"
+    "name": "copying lib/libcrypto.1.1.dylib from package openssl-flutter"
   },
   {
     "cmd": [
