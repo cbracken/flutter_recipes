@@ -197,7 +197,7 @@
       "GOLDCTL": "[CACHE]/gold/goldctl",
       "JAVA_HOME": "[CACHE]/java",
       "PUB_CACHE": "[START_DIR]/flutter/.pub-cache",
-      "SHARD": "coverage"
+      "SHARD": "framework_coverage"
     },
     "env_prefixes": {
       "PATH": [
@@ -206,7 +206,7 @@
         "[CACHE]/java/bin"
       ]
     },
-    "name": "run test.dart for coverage shard"
+    "name": "run test.dart for framework_coverage shard"
   },
   {
     "cmd": [
@@ -241,15 +241,11 @@
     ]
   },
   {
-    "cmd": [],
-    "name": "ensure_cloudkms"
-  },
-  {
     "cmd": [
       "cipd",
       "ensure",
       "-root",
-      "[START_DIR]/cipd/cloudkms",
+      "[START_DIR]/cloudkms",
       "-ensure-file",
       "infra/tools/luci/cloudkms/${platform} latest",
       "-max-threads",
@@ -271,10 +267,8 @@
         "[CACHE]/java/bin"
       ]
     },
-    "infra_step": true,
-    "name": "ensure_cloudkms.ensure_installed",
+    "name": "ensure_installed (2)",
     "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
@@ -290,13 +284,15 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/cloudkms/cloudkms",
-      "decrypt",
-      "-input",
-      "RECIPE[flutter::flutter].resources/coveralls-token.enc",
-      "-output",
-      "[START_DIR]/flutter/packages/flutter/.coveralls.yml",
-      "projects/flutter-infra/locations/global/keyRings/luci/cryptoKeys/coveralls"
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "gs://flutter_configs/codecov.encrypted",
+      "[CLEANUP]/codecov.encrypted"
     ],
     "cwd": "[START_DIR]/flutter",
     "env": {
@@ -312,7 +308,34 @@
         "[CACHE]/java/bin"
       ]
     },
-    "name": "decrypt coveralls token"
+    "infra_step": true,
+    "name": "gsutil download"
+  },
+  {
+    "cmd": [
+      "[START_DIR]/cloudkms/cloudkms",
+      "decrypt",
+      "-input",
+      "[CLEANUP]/codecov.encrypted",
+      "-output",
+      "[START_DIR]/flutter/packages/flutter/.coveralls.yml",
+      "projects/flutter-infra/locations/global/keyRings/luci/cryptoKeys/flutter-infra"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "GOLDCTL": "[CACHE]/gold/goldctl",
+      "JAVA_HOME": "[CACHE]/java",
+      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[CACHE]/java/bin"
+      ]
+    },
+    "name": "cloudkms get key"
   },
   {
     "cmd": [

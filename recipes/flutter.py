@@ -11,6 +11,7 @@ DEPS = [
     'depot_tools/gsutil',
     'depot_tools/osx_sdk',
     'depot_tools/windows_sdk',
+    'flutter/kms',
     'flutter/zip',
     'fuchsia/display_util',
     'recipe_engine/buildbucket',
@@ -91,32 +92,6 @@ def InstallOpenJDK(api):
       env={'JAVA_HOME': java_cache_dir},
       env_prefixes={'PATH': [java_cache_dir.join('bin')]})
 
-
-def EnsureCloudKMS(api, version=None):
-  with api.step.nest('ensure_cloudkms'):
-    with api.context(infra_steps=True):
-      pkgs = api.cipd.EnsureFile()
-      pkgs.add_package('infra/tools/luci/cloudkms/${platform}', version or
-                       'latest')
-      cipd_dir = api.path['start_dir'].join('cipd', 'cloudkms')
-      api.cipd.ensure(cipd_dir, pkgs)
-      return cipd_dir.join('cloudkms')
-
-
-def DecryptKMS(api, step_name, crypto_key_path, ciphertext_file,
-               plaintext_file):
-  kms_path = EnsureCloudKMS(api)
-  return api.step(step_name, [
-      kms_path,
-      'decrypt',
-      '-input',
-      ciphertext_file,
-      '-output',
-      plaintext_file,
-      crypto_key_path,
-  ])
-
-
 def GetCloudPath(api, git_hash, path):
   if api.runtime.is_experimental:
     return 'flutter/experimental/%s/%s' % (git_hash, path)
@@ -140,12 +115,10 @@ def UploadFlutterCoverage(api):
       link_name='lcov.info',
       name='upload coverage data')
 
+  # Download encrpted file to local and then decrypt.
   token_path = flutter_package_dir.join('.coveralls.yml')
-  DecryptKMS(api, 'decrypt coveralls token',
-          'projects/flutter-infra/locations/global' \
-          '/keyRings/luci/cryptoKeys/coveralls',
-          api.resource('coveralls-token.enc'),
-          token_path)
+  api.kms.get_secret('codecov.encrypted', token_path)
+
   pub_executable = 'pub' if not api.platform.is_win else 'pub.exe'
   api.step('pub global activate coveralls', [
       pub_executable, 'global', 'activate', 'coveralls', '5.1.0',
@@ -260,7 +233,7 @@ def RunSteps(api):
         api.step('run test.dart for %s shard' % shard,
                  [dart_executable,
                   checkout.join('dev', 'bots', 'test.dart')])
-      if shard == 'coverage':
+      if shard == 'framework_coverage':
         UploadFlutterCoverage(api)
       # Windows uses exclusive file locking.  On LUCI, if these processes remain
       # they will cause the build to fail because the builder won't be able to
@@ -288,7 +261,7 @@ def GenTests(api):
            '_upload' if should_upload else ''),
           api.runtime(is_luci=True, is_experimental=experimental),
           api.properties(
-              shard='coverage',
+              shard='framework_coverage',
               coveralls_lcov_version='5.1.0',
               upload_packages=should_upload,
               gold_tryjob=not should_upload),

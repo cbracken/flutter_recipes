@@ -197,7 +197,7 @@
       "GOLDCTL": "[CACHE]/gold/goldctl",
       "JAVA_HOME": "[CACHE]/java",
       "PUB_CACHE": "[START_DIR]/flutter/.pub-cache",
-      "SHARD": "coverage"
+      "SHARD": "framework_coverage"
     },
     "env_prefixes": {
       "PATH": [
@@ -206,7 +206,7 @@
         "[CACHE]/java/bin"
       ]
     },
-    "name": "run test.dart for coverage shard"
+    "name": "run test.dart for framework_coverage shard"
   },
   {
     "name": "$result"
