@@ -359,7 +359,7 @@
     ],
     "name": "Flutter Environment",
     "~followup_annotations": [
-      "@@@STEP_TEXT@dart or flutter bin folders do not exist,did you forget to checkout flutter repo?@@@",
+      "@@@STEP_TEXT@flutter bin folders do not exist,did you forget to checkout flutter repo?@@@",
       "@@@STEP_FAILURE@@@"
     ]
   },

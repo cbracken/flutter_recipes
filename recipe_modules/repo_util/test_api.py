@@ -8,9 +8,9 @@ import api
 
 class RepoUtilTestApi(recipe_test_api.RecipeTestApi):
 
-  def flutter_environment_data(self):
+  def flutter_environment_data(self, checkout_dir=''):
     """Provides flutter environment data for tests."""
-    checkout_path = self.m.path['checkout']
+    checkout_path = checkout_dir or self.m.path['checkout']
     dart_bin = checkout_path.join('bin', 'cache', 'dart-sdk', 'bin')
     flutter_bin = checkout_path.join('bin')
     return self.m.path.exists(dart_bin, flutter_bin)

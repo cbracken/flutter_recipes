@@ -231,6 +231,7 @@
       "doctor"
     ],
     "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -247,6 +248,7 @@
       "[START_DIR]/cocoon/test_utilities/bin/prepare_environment.sh"
     ],
     "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -264,6 +266,7 @@
       "[START_DIR]/cocoon/one"
     ],
     "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {

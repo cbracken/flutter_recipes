@@ -102,7 +102,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -126,7 +126,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -167,7 +167,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -198,7 +198,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -227,7 +227,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -262,7 +262,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -290,7 +290,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -318,7 +318,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -346,7 +346,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -382,7 +382,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -412,7 +412,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -454,7 +454,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -482,7 +482,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -518,7 +518,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -548,7 +548,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -587,7 +587,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -635,7 +635,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [
@@ -666,7 +666,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
       "PATH": [

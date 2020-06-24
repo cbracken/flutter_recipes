@@ -88,16 +88,18 @@ class RepoUtilApi(recipe_api.RecipeApi):
     """Returns env and env_prefixes of an flutter/dart command environment."""
     dart_bin = checkout_path.join('bin', 'cache', 'dart-sdk', 'bin')
     flutter_bin = checkout_path.join('bin')
-    # Fail if dart and flutter bin folders do not exist.
-    if not (self.m.path.exists(dart_bin) and self.m.path.exists(flutter_bin)):
-      msg = ('dart or flutter bin folders do not exist,'
+    # Fail if flutter bin folder does not exist. dart-sdk/bin folder will be
+    # available only after running "flutter doctor" and it needs to be run as
+    # the first command on the context using the environment.
+    if not self.m.path.exists(flutter_bin):
+      msg = ('flutter bin folders do not exist,'
              'did you forget to checkout flutter repo?')
       self.m.python.failing_step('Flutter Environment', msg)
 
     env = {
         # Setup our own pub_cache to not affect other slaves on this machine,
         # and so that the pre-populated pub cache is contained in the package.
-        'PUB_CACHE': checkout_path.join('.pub-cache'),
+        'PUB_CACHE': self.m.path['cache'].join('.pub-cache'),
         # Windows Packaging script assumes this is set.
         'DEPOT_TOOLS': str(self.m.depot_tools.root),
     }
