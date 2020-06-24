@@ -143,7 +143,7 @@ def RunSteps(api, properties, env_properties):
       with SetupXcode(api):
         RunGN(api, *gn_flags)
         Build(api, target_name)
-        additional_args = ['--browser', 'safari']
+        additional_args = ['--browser', 'ios-safari']
     else:
       RunGN(api, *gn_flags)
       Build(api, target_name)
@@ -172,8 +172,11 @@ def RunSteps(api, properties, env_properties):
       felt_test = copy.deepcopy(felt_cmd)
       felt_test.append('test')
       felt_test.extend(additional_args)
-      with recipe_api.defer_results():
-        if not api.platform.is_mac:
+      if api.platform.is_mac:
+          with SetupXcode(api):
+            api.step('felt ios-safari test',felt_test)
+      else:
+        with recipe_api.defer_results():
           api.step('felt test chrome', felt_test)
           logs_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
                                     'test_results')
