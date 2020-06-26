@@ -1,14 +1,14 @@
 [
   {
     "cmd": [],
-    "name": "Download Android SDK Components"
+    "name": "download Android SDK components"
   },
   {
     "cmd": [
       "cipd",
       "ensure",
       "-root",
-      "[CACHE]/android_root/platform-tools",
+      "[CACHE]/android29/platform-tools",
       "-ensure-file",
       "flutter/android/sdk/platform-tools/${platform} version:29.0.2",
       "-max-threads",
@@ -16,7 +16,7 @@
       "-json-output",
       "/path/to/tmp/json"
     ],
-    "name": "Download Android SDK Components.ensure_installed",
+    "name": "download Android SDK components.ensure_installed",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -37,7 +37,7 @@
       "cipd",
       "ensure",
       "-root",
-      "[CACHE]/android_root/platforms",
+      "[CACHE]/android29/platforms",
       "-ensure-file",
       "flutter/android/sdk/platforms version:29r1",
       "-max-threads",
@@ -45,7 +45,7 @@
       "-json-output",
       "/path/to/tmp/json"
     ],
-    "name": "Download Android SDK Components.ensure_installed (2)",
+    "name": "download Android SDK components.ensure_installed (2)",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -66,7 +66,7 @@
       "cipd",
       "ensure",
       "-root",
-      "[CACHE]/android_root/build-tools",
+      "[CACHE]/android29/build-tools",
       "-ensure-file",
       "flutter/android/sdk/build-tools/${platform} version:29.0.1",
       "-max-threads",
@@ -74,7 +74,7 @@
       "-json-output",
       "/path/to/tmp/json"
     ],
-    "name": "Download Android SDK Components.ensure_installed (3)",
+    "name": "download Android SDK components.ensure_installed (3)",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -92,7 +92,7 @@
   },
   {
     "cmd": [],
-    "name": "Android SDK Licenses"
+    "name": "add Android SDK licenses"
   },
   {
     "cmd": [
@@ -104,10 +104,10 @@
       "ensure-directory",
       "--mode",
       "0777",
-      "[CACHE]/android_root/licenses"
+      "[CACHE]/android29/licenses"
     ],
     "infra_step": true,
-    "name": "Android SDK Licenses.mkdir licenses",
+    "name": "add Android SDK licenses.mkdir licenses",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -121,10 +121,10 @@
       "/path/to/tmp/json",
       "copy",
       "android_sdk_hash",
-      "[CACHE]/android_root/licenses/android-sdk-license"
+      "[CACHE]/android29/licenses/android-sdk-license"
     ],
     "infra_step": true,
-    "name": "Android SDK Licenses.android sdk license",
+    "name": "add Android SDK licenses.android sdk license",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@android-sdk-license@android_sdk_hash@@@",
@@ -140,10 +140,10 @@
       "/path/to/tmp/json",
       "copy",
       "android_sdk_preview_hash",
-      "[CACHE]/android_root/licenses/android-sdk-preview-license"
+      "[CACHE]/android29/licenses/android-sdk-preview-license"
     ],
     "infra_step": true,
-    "name": "Android SDK Licenses.android sdk preview license",
+    "name": "add Android SDK licenses.android sdk preview license",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@android-sdk-preview-license@android_sdk_preview_hash@@@",
@@ -157,11 +157,11 @@
       "-l"
     ],
     "env": {
-      "ANDROID_SDK_ROOT": "[CACHE]/android_root"
+      "ANDROID_SDK_ROOT": "[CACHE]/android29"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/android_root/platform-tools"
+        "[CACHE]/android29/platform-tools"
       ]
     },
     "name": "adb devices -l"
