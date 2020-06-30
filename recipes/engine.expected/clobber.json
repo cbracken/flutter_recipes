@@ -2503,6 +2503,38 @@
   },
   {
     "cmd": [
+      "vpython",
+      "-vpython-spec",
+      "RECIPE_REPO[depot_tools]/.vpython",
+      "-u",
+      "[CACHE]/builder/src/flutter/testing/run_tests.py",
+      "--variant",
+      "host_release",
+      "--type",
+      "dart,engine,benchmarks"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Host Tests for host_release"
+  },
+  {
+    "cmd": [
       "python",
       "-u",
       "RECIPE_MODULE[flutter::zip]/resources/zip.py"

@@ -637,6 +637,7 @@ def BuildLinux(api):
   Build(api, 'host_profile')
   RunTests(api, 'host_profile', types='engine')
   Build(api, 'host_release')
+  RunTests(api, 'host_release', types='dart,engine,benchmarks')
   UploadArtifacts(api, 'linux-x64', [
       ICU_DATA_PATH,
       'out/host_debug/flutter_tester',
