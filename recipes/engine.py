@@ -707,6 +707,11 @@ def IsolateFuchsiaTestArtifacts(api, checkout, fuchsia_tools, image_name,
       api.file.copy('Copy test script', fuchsia_test_script, isolated_dir)
       api.file.copy('Copy dev_finder', fuchsia_tools.join('dev_finder'),
                     isolated_dir)
+      # Temporarily copy both dev_finder and dev-finder. This is required for a
+      # clean transition. dev_finder will be deleted after updating fuchsia_ctl.
+      # fxb/55369.
+      api.file.copy('Copy device-finder', fuchsia_tools.join('device-finder'),
+                    isolated_dir)
       api.file.copy('Copy pm', fuchsia_tools.join('pm'), isolated_dir)
       api.file.copy(
           'Copy flutter_runner far',
