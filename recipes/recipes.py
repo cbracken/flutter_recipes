@@ -102,7 +102,7 @@ def RunSteps(api, remote, unittest_only):
     api.git.checkout_cl(bb_input.gerrit_changes[0], checkout_path)
   else:
     api.git.checkout(remote)
-  api.recipe_testing.project = 'flutter'
+  api.recipe_testing.projects = ('flutter',)
   with api.step.defer_results():
     api.recipe_testing.run_lint(checkout_path)
     api.recipe_testing.run_unit_tests(checkout_path)
