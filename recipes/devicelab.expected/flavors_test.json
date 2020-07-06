@@ -1,5 +1,9 @@
 [
   {
+    "cmd": [],
+    "name": "checkout flutter/flutter"
+  },
+  {
     "cmd": [
       "python",
       "-u",
@@ -9,7 +13,10 @@
       "--url",
       "https://abc.com/repo"
     ],
-    "name": "git setup"
+    "name": "checkout flutter/flutter.git setup",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
@@ -26,7 +33,10 @@
       "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
     },
     "infra_step": true,
-    "name": "git fetch"
+    "name": "checkout flutter/flutter.git fetch",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
@@ -37,7 +47,10 @@
     ],
     "cwd": "[START_DIR]/flutter",
     "infra_step": true,
-    "name": "git checkout"
+    "name": "checkout flutter/flutter.git checkout",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
@@ -47,8 +60,9 @@
     ],
     "cwd": "[START_DIR]/flutter",
     "infra_step": true,
-    "name": "read revision",
+    "name": "checkout flutter/flutter.read revision",
     "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_TEXT@<br/>checked out 'deadbeef'<br/>@@@",
       "@@@SET_BUILD_PROPERTY@got_revision@\"deadbeef\"@@@"
     ]
@@ -63,7 +77,10 @@
     ],
     "cwd": "[START_DIR]/flutter",
     "infra_step": true,
-    "name": "git clean"
+    "name": "checkout flutter/flutter.git clean",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
@@ -73,7 +90,10 @@
     ],
     "cwd": "[START_DIR]/flutter",
     "infra_step": true,
-    "name": "submodule sync"
+    "name": "checkout flutter/flutter.submodule sync",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
@@ -85,13 +105,27 @@
     ],
     "cwd": "[START_DIR]/flutter",
     "infra_step": true,
-    "name": "submodule update"
+    "name": "checkout flutter/flutter.submodule update",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
-      "[START_DIR]/flutter/bin/flutter",
+      "flutter",
       "doctor"
     ],
+    "cwd": "[START_DIR]/flutter/dev/devicelab",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "PUB_CACHE": "[CACHE]/.pub-cache"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
     "name": "flutter doctor"
   },
   {
@@ -113,6 +147,17 @@
       "[START_DIR]/flutter/dev/devicelab/manifest.yaml",
       "/path/to/tmp/"
     ],
+    "cwd": "[START_DIR]/flutter/dev/devicelab",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "PUB_CACHE": "[CACHE]/.pub-cache"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
     "infra_step": true,
     "name": "read manifest.read",
     "~followup_annotations": [
@@ -130,13 +175,43 @@
       "--json_file",
       "/path/to/tmp/json"
     ],
+    "cwd": "[START_DIR]/flutter/dev/devicelab",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "PUB_CACHE": "[CACHE]/.pub-cache"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
     "name": "read manifest.parse",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"tasks\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@    \"task1\": {}, @@@",
-      "@@@STEP_LOG_LINE@json.output@    \"task2\": {}@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"android_defines_test\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"description\": \"Builds an APK with a --dart-define ...\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"required_agent_capabilities\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"linux/android\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      ], @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"stage\": \"devicelab\"@@@",
+      "@@@STEP_LOG_LINE@json.output@    }, @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"flavors_test\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"description\": \"Checks that flavored builds work on Android.\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"required_agent_capabilities\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"mac/android\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      ], @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"stage\": \"devicelab\"@@@",
+      "@@@STEP_LOG_LINE@json.output@    }, @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"flutter_gallery_ios__compile\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"description\": \"Collects various performance metrics of ...\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"required_agent_capabilities\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"mac/ios\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      ], @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"stage\": \"devicelab_ios\"@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
       "@@@STEP_LOG_LINE@json.output@  }@@@",
       "@@@STEP_LOG_LINE@json.output@}@@@",
       "@@@STEP_LOG_END@json.output@@@"
@@ -382,7 +457,7 @@
       "dart",
       "bin/run.dart",
       "-t",
-      "task1"
+      "flavors_test"
     ],
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
@@ -397,7 +472,7 @@
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
     },
-    "name": "run task1"
+    "name": "run flavors_test"
   },
   {
     "name": "$result"
