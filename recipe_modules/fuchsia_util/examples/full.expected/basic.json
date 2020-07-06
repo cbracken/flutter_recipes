@@ -130,11 +130,11 @@
       "--json-output",
       "/path/to/tmp/json",
       "copy",
-      "None/bin/cache/artifacts/fuchsia/tools/dev_finder",
+      "None/bin/cache/artifacts/fuchsia/tools/device-finder",
       "[CLEANUP]/tmp_tmp_1"
     ],
     "infra_step": true,
-    "name": "Fuchsia Tests.Create Isolate Archive.Collect tool deps.Copy dev_finder",
+    "name": "Fuchsia Tests.Create Isolate Archive.Collect tool deps.Copy device-finder",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@3@@@"
     ]

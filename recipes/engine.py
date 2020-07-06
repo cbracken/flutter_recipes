@@ -697,7 +697,7 @@ def IsolateFuchsiaTestArtifacts(api, checkout, fuchsia_tools, image_name,
                                 packages_name, fuchsia_test_script):
   """
   Gets the system image for the current Fuchsia SDK from cloud storage, adds it
-  to an isolated along with the `pm` and `dev_finder` utilities, as well as the
+  to an isolated along with the `pm` and `device-finder` utilities, as well as the
   flutter_runner_tests and the required flutter unittest FARs (listed in
   engine/testing/fuchsia/test_fars), and a bash script (in
   engine/testing/fuchsia/run_tests.sh) to drive the flutter_ctl.
@@ -705,11 +705,6 @@ def IsolateFuchsiaTestArtifacts(api, checkout, fuchsia_tools, image_name,
   with MakeTempDir(api, 'isolated') as isolated_dir:
     with api.step.nest('Copy files'):
       api.file.copy('Copy test script', fuchsia_test_script, isolated_dir)
-      api.file.copy('Copy dev_finder', fuchsia_tools.join('dev_finder'),
-                    isolated_dir)
-      # Temporarily copy both dev_finder and dev-finder. This is required for a
-      # clean transition. dev_finder will be deleted after updating fuchsia_ctl.
-      # fxb/55369.
       api.file.copy('Copy device-finder', fuchsia_tools.join('device-finder'),
                     isolated_dir)
       api.file.copy('Copy pm', fuchsia_tools.join('pm'), isolated_dir)

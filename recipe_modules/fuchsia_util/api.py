@@ -71,8 +71,8 @@ class FuchsiaUtilsApi(recipe_api.RecipeApi):
           'Copy test script',
           checkout_path.join('dev', 'bots', FUCHSIA_TEST_SCRIPT_NAME),
           destination_path)
-      self.m.file.copy('Copy dev_finder', fuchsia_tools.join('dev_finder'),
-                       destination_path)
+      self.m.file.copy('Copy device-finder',
+                       fuchsia_tools.join('device-finder'), destination_path)
       self.m.file.copy('Copy pm', fuchsia_tools.join('pm'), destination_path)
 
   def collect_results(self, fuchsia_swarming_metadata, timeout='30m'):

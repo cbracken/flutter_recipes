@@ -284,7 +284,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "copy",
-      "[START_DIR]/flutter/bin/cache/artifacts/fuchsia/tools/dev_finder",
+      "[START_DIR]/flutter/bin/cache/artifacts/fuchsia/tools/device-finder",
       "[CLEANUP]/tmp_tmp_1"
     ],
     "cwd": "[START_DIR]/flutter",
@@ -299,7 +299,7 @@
       ]
     },
     "infra_step": true,
-    "name": "Fuchsia Tests.Create Isolate Archive.Collect tool deps.Copy dev_finder",
+    "name": "Fuchsia Tests.Create Isolate Archive.Collect tool deps.Copy device-finder",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@3@@@"
     ]
