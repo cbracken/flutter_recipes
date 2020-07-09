@@ -761,12 +761,13 @@ def TestFuchsia(api):
 
   request = (
       request.with_slice(
-          0, request[0].with_cipd_ensure_file(ensure_file).with_command([
-              './run_tests.sh', image_name, packages_name
-          ]).with_dimensions(pool='luci.flutter.tests').with_isolated(
-              isolated_hash).with_expiration_secs(3600).with_io_timeout_secs(
-                  3600).with_execution_timeout_secs(3600).with_idempotent(
-                      True).with_containment_type('AUTO')))
+          0, request[0].with_cipd_ensure_file(ensure_file).with_command(
+              ['./run_tests.sh', image_name, packages_name]).with_dimensions(
+                  pool='luci.flutter.tests',
+                  device_type='Intel NUC Kit NUC7i5DNHE').with_isolated(
+                      isolated_hash).with_expiration_secs(3600)
+          .with_io_timeout_secs(3600).with_execution_timeout_secs(
+              3600).with_idempotent(True).with_containment_type('AUTO')))
 
   # Trigger the task request.
   metadata = api.swarming.trigger('Trigger Fuchsia Tests', requests=[request])
