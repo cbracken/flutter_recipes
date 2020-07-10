@@ -1,0 +1,6437 @@
+[
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CACHE]\\builder\\src\\out"
+    ],
+    "infra_step": true,
+    "name": "Clobber build output"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]\\builder"
+    ],
+    "infra_step": true,
+    "name": "Ensure checkout cache"
+  },
+  {
+    "cmd": [],
+    "name": "ensure_goma"
+  },
+  {
+    "cmd": [
+      "cipd.bat",
+      "ensure",
+      "-root",
+      "[CACHE]\\goma\\client",
+      "-ensure-file",
+      "infra_internal/goma/client/${platform} release",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "infra_step": true,
+    "name": "ensure_goma.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-release---------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra_internal/goma/client/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd.bat",
+      "ensure",
+      "-root",
+      "[CACHE]\\goma\\bqupload",
+      "-ensure-file",
+      "infra/tools/bqupload/${platform} git_revision:643892f957c8e106dff793468101f2ecfc31abb7",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "infra_step": true,
+    "name": "ensure_goma.ensure_installed (2)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-git_revision:643\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/bqupload/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::bot_update]\\resources\\bot_update.py",
+      "--spec-path",
+      "cache_dir = '[CACHE]\\\\git'\nsolutions = [{'deps_file': '.DEPS.git', 'managed': True, 'name': 'src/flutter', 'url': 'https://chromium.googlesource.com/external/github.com/flutter/engine'}]",
+      "--revision_mapping_file",
+      "{\"got_engine_revision\": \"src/flutter\"}",
+      "--git-cache-dir",
+      "[CACHE]\\git",
+      "--cleanup-dir",
+      "[CLEANUP]\\bot_update",
+      "--output_json",
+      "/path/to/tmp/json",
+      "--revision",
+      "src/flutter@2d72510e447ab60a9728aeea2362d8be2cbd7789",
+      "--revision",
+      "src\\flutter@2d72510e447ab60a9728aeea2362d8be2cbd7789",
+      "--refs",
+      "refs/heads/master"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "GIT_HTTP_LOW_SPEED_LIMIT": "102400",
+      "GIT_HTTP_LOW_SPEED_TIME": "300"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "bot_update",
+    "~followup_annotations": [
+      "@@@STEP_TEXT@Some step text@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"did_run\": true, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"fixed_revisions\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"src/flutter\": \"2d72510e447ab60a9728aeea2362d8be2cbd7789\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"src\\\\flutter\": \"2d72510e447ab60a9728aeea2362d8be2cbd7789\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"manifest\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"src/flutter\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"repository\": \"https://fake.org/src/flutter.git\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"revision\": \"9221bca00ddbd888260084def81f09543281b952\"@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"patch_failure\": false, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"patch_root\": \"src/flutter\", @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"properties\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"got_engine_revision\": \"9221bca00ddbd888260084def81f09543281b952\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"got_engine_revision_cp\": \"refs/heads/master@{#84512}\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"root\": \"src/flutter\", @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"source_manifest\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"directories\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"src/flutter\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"git_checkout\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@          \"repo_url\": \"https://fake.org/src/flutter.git\", @@@",
+      "@@@STEP_LOG_LINE@json.output@          \"revision\": \"9221bca00ddbd888260084def81f09543281b952\"@@@",
+      "@@@STEP_LOG_LINE@json.output@        }@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }, @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"version\": 0@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"step_text\": \"Some step text\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@SET_BUILD_PROPERTY@got_engine_revision@\"9221bca00ddbd888260084def81f09543281b952\"@@@",
+      "@@@SET_BUILD_PROPERTY@got_engine_revision_cp@\"refs/heads/master@{#84512}\"@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[depot_tools]\\gclient.py",
+      "runhooks"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gclient runhooks"
+  },
+  {
+    "cmd": [
+      "git",
+      "fetch"
+    ],
+    "cwd": "[CACHE]\\builder\\src\\third_party\\dart",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Fetch dart tags"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[depot_tools]\\gclient.py",
+      "runhooks"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gclient runhooks (2)"
+  },
+  {
+    "cmd": [],
+    "name": "Android SDK Licenses"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk\\licenses"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Android SDK Licenses.mkdir licenses",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "android_sdk_hash",
+      "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk\\licenses\\android-sdk-license"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Android SDK Licenses.android sdk license",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@android-sdk-license@android_sdk_hash@@@",
+      "@@@STEP_LOG_END@android-sdk-license@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "android_sdk_preview_hash",
+      "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk\\licenses\\android-sdk-preview-license"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Android SDK Licenses.android sdk preview license",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@android-sdk-preview-license@android_sdk_preview_hash@@@",
+      "@@@STEP_LOG_END@android-sdk-preview-license@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]\\builder\\src\\flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "debug",
+      "--full-dart-sdk",
+      "--no-lto"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode debug --full-dart-sdk --no-lto"
+  },
+  {
+    "cmd": [],
+    "name": "preprocess_for_goma"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]\\goma\\data\\Win_Engine"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma.goma cache directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma.start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LINK@cloudtail@https://console.cloud.google.com/logs/viewer?project=goma-logs&resource=gce_instance%2Finstance_id%2Ffakevm999-m9@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "start",
+      "--cloudtail-path",
+      "cloudtail.exe",
+      "--pid-file",
+      "[TMP_BASE]\\cloudtail.pid",
+      "--cloudtail-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-cloudtail.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma.start cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]\\ninja.exe",
+      "-j",
+      "1024",
+      "-C",
+      "[CACHE]\\builder\\src\\out/host_debug"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build host_debug"
+  },
+  {
+    "cmd": [],
+    "name": "postprocess_for_goma"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "jsonstatus",
+      "[TMP_BASE]\\goma_jsonstatus.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma.goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma.goma_stat",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma.stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--",
+      "python",
+      "RECIPE_REPO[build]\\scripts\\slave\\upload_goma_logs.py",
+      "--upload-compiler-proxy-info",
+      "--log-url-json-file",
+      "/path/to/tmp/json",
+      "--gsutil-py-path",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "--bqupload-path",
+      "[CACHE]\\goma\\bqupload\\bqupload",
+      "--bigquery-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-bigquery.json",
+      "--json-status",
+      "[TMP_BASE]\\goma_jsonstatus.json",
+      "--build-exit-status",
+      "0",
+      "--build-step-name",
+      "build host_debug",
+      "--goma-stats-file",
+      "[TMP_BASE]\\goma_stats",
+      "--goma-counterz-file",
+      "[TMP_BASE]\\goma_counterz",
+      "--goma-crash-report-id-file",
+      "[TMP_BASE]\\crash_report_id",
+      "--build-id",
+      "8945511751514863184",
+      "--builder-id-json",
+      "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
+      "--is-luci",
+      "--buildbot-buildername",
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma.upload_log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"compiler_proxy_log\": \"https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LINK@compiler_proxy_log@https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "stop",
+      "--killed-pid-file",
+      "[TMP_BASE]\\cloudtail.pid"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "postprocess_for_goma.stop cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-vpython-spec",
+      "RECIPE_REPO[depot_tools]\\.vpython",
+      "-u",
+      "[CACHE]\\builder\\src\\flutter\\testing\\run_tests.py",
+      "--variant",
+      "host_debug",
+      "--type",
+      "engine"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Host Tests for host_debug"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]\\builder\\src\\flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "debug",
+      "--unoptimized"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode debug --unoptimized"
+  },
+  {
+    "cmd": [],
+    "name": "preprocess_for_goma (2)"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]\\goma\\data\\Win_Engine"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (2).goma cache directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (2).start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LINK@cloudtail@https://console.cloud.google.com/logs/viewer?project=goma-logs&resource=gce_instance%2Finstance_id%2Ffakevm999-m9@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "start",
+      "--cloudtail-path",
+      "cloudtail.exe",
+      "--pid-file",
+      "[TMP_BASE]\\cloudtail.pid",
+      "--cloudtail-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-cloudtail.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (2).start cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]\\ninja.exe",
+      "-j",
+      "1024",
+      "-C",
+      "[CACHE]\\builder\\src\\out/host_debug_unopt"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build host_debug_unopt"
+  },
+  {
+    "cmd": [],
+    "name": "postprocess_for_goma (2)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "jsonstatus",
+      "[TMP_BASE]\\goma_jsonstatus.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (2).goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (2).goma_stat",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (2).stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--",
+      "python",
+      "RECIPE_REPO[build]\\scripts\\slave\\upload_goma_logs.py",
+      "--upload-compiler-proxy-info",
+      "--log-url-json-file",
+      "/path/to/tmp/json",
+      "--gsutil-py-path",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "--bqupload-path",
+      "[CACHE]\\goma\\bqupload\\bqupload",
+      "--bigquery-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-bigquery.json",
+      "--json-status",
+      "[TMP_BASE]\\goma_jsonstatus.json",
+      "--build-exit-status",
+      "0",
+      "--build-step-name",
+      "build host_debug_unopt",
+      "--goma-stats-file",
+      "[TMP_BASE]\\goma_stats",
+      "--goma-counterz-file",
+      "[TMP_BASE]\\goma_counterz",
+      "--goma-crash-report-id-file",
+      "[TMP_BASE]\\crash_report_id",
+      "--build-id",
+      "8945511751514863184",
+      "--builder-id-json",
+      "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
+      "--is-luci",
+      "--buildbot-buildername",
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (2).upload_log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"compiler_proxy_log\": \"https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LINK@compiler_proxy_log@https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "stop",
+      "--killed-pid-file",
+      "[TMP_BASE]\\cloudtail.pid"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "postprocess_for_goma (2).stop cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-vpython-spec",
+      "RECIPE_REPO[depot_tools]\\.vpython",
+      "-u",
+      "[CACHE]\\builder\\src\\flutter\\testing\\run_tests.py",
+      "--variant",
+      "host_debug_unopt",
+      "--type",
+      "engine"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Host Tests for host_debug_unopt"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]\\builder\\src\\flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "profile",
+      "--no-lto"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode profile --no-lto"
+  },
+  {
+    "cmd": [],
+    "name": "preprocess_for_goma (3)"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]\\goma\\data\\Win_Engine"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (3).goma cache directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (3).start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LINK@cloudtail@https://console.cloud.google.com/logs/viewer?project=goma-logs&resource=gce_instance%2Finstance_id%2Ffakevm999-m9@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "start",
+      "--cloudtail-path",
+      "cloudtail.exe",
+      "--pid-file",
+      "[TMP_BASE]\\cloudtail.pid",
+      "--cloudtail-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-cloudtail.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (3).start cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]\\ninja.exe",
+      "-j",
+      "1024",
+      "-C",
+      "[CACHE]\\builder\\src\\out/host_profile",
+      "windows",
+      "gen_snapshot"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build host_profile windows gen_snapshot"
+  },
+  {
+    "cmd": [],
+    "name": "postprocess_for_goma (3)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "jsonstatus",
+      "[TMP_BASE]\\goma_jsonstatus.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (3).goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (3).goma_stat",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (3).stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--",
+      "python",
+      "RECIPE_REPO[build]\\scripts\\slave\\upload_goma_logs.py",
+      "--upload-compiler-proxy-info",
+      "--log-url-json-file",
+      "/path/to/tmp/json",
+      "--gsutil-py-path",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "--bqupload-path",
+      "[CACHE]\\goma\\bqupload\\bqupload",
+      "--bigquery-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-bigquery.json",
+      "--json-status",
+      "[TMP_BASE]\\goma_jsonstatus.json",
+      "--build-exit-status",
+      "0",
+      "--build-step-name",
+      "build host_profile windows gen_snapshot",
+      "--goma-stats-file",
+      "[TMP_BASE]\\goma_stats",
+      "--goma-counterz-file",
+      "[TMP_BASE]\\goma_counterz",
+      "--goma-crash-report-id-file",
+      "[TMP_BASE]\\crash_report_id",
+      "--build-id",
+      "8945511751514863184",
+      "--builder-id-json",
+      "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
+      "--is-luci",
+      "--buildbot-buildername",
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (3).upload_log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"compiler_proxy_log\": \"https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LINK@compiler_proxy_log@https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "stop",
+      "--killed-pid-file",
+      "[TMP_BASE]\\cloudtail.pid"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "postprocess_for_goma (3).stop cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]\\builder\\src\\flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "release",
+      "--no-lto"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode release --no-lto"
+  },
+  {
+    "cmd": [],
+    "name": "preprocess_for_goma (4)"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]\\goma\\data\\Win_Engine"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (4).goma cache directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (4).start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LINK@cloudtail@https://console.cloud.google.com/logs/viewer?project=goma-logs&resource=gce_instance%2Finstance_id%2Ffakevm999-m9@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "start",
+      "--cloudtail-path",
+      "cloudtail.exe",
+      "--pid-file",
+      "[TMP_BASE]\\cloudtail.pid",
+      "--cloudtail-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-cloudtail.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (4).start cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]\\ninja.exe",
+      "-j",
+      "1024",
+      "-C",
+      "[CACHE]\\builder\\src\\out/host_release",
+      "windows",
+      "gen_snapshot"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build host_release windows gen_snapshot"
+  },
+  {
+    "cmd": [],
+    "name": "postprocess_for_goma (4)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "jsonstatus",
+      "[TMP_BASE]\\goma_jsonstatus.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (4).goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (4).goma_stat",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (4).stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--",
+      "python",
+      "RECIPE_REPO[build]\\scripts\\slave\\upload_goma_logs.py",
+      "--upload-compiler-proxy-info",
+      "--log-url-json-file",
+      "/path/to/tmp/json",
+      "--gsutil-py-path",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "--bqupload-path",
+      "[CACHE]\\goma\\bqupload\\bqupload",
+      "--bigquery-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-bigquery.json",
+      "--json-status",
+      "[TMP_BASE]\\goma_jsonstatus.json",
+      "--build-exit-status",
+      "0",
+      "--build-step-name",
+      "build host_release windows gen_snapshot",
+      "--goma-stats-file",
+      "[TMP_BASE]\\goma_stats",
+      "--goma-counterz-file",
+      "[TMP_BASE]\\goma_counterz",
+      "--goma-crash-report-id-file",
+      "[TMP_BASE]\\crash_report_id",
+      "--build-id",
+      "8945511751514863184",
+      "--builder-id-json",
+      "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
+      "--is-luci",
+      "--buildbot-buildername",
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (4).upload_log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"compiler_proxy_log\": \"https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LINK@compiler_proxy_log@https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "stop",
+      "--killed-pid-file",
+      "[TMP_BASE]\\cloudtail.pid"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "postprocess_for_goma (4).stop cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "preprocess_for_goma (5)"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]\\goma\\data\\Win_Engine"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (5).goma cache directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (5).start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LINK@cloudtail@https://console.cloud.google.com/logs/viewer?project=goma-logs&resource=gce_instance%2Finstance_id%2Ffakevm999-m9@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "start",
+      "--cloudtail-path",
+      "cloudtail.exe",
+      "--pid-file",
+      "[TMP_BASE]\\cloudtail.pid",
+      "--cloudtail-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-cloudtail.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (5).start cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]\\ninja.exe",
+      "-j",
+      "1024",
+      "-C",
+      "[CACHE]\\builder\\src\\out/host_release",
+      "font-subset"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build host_release font-subset"
+  },
+  {
+    "cmd": [],
+    "name": "postprocess_for_goma (5)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "jsonstatus",
+      "[TMP_BASE]\\goma_jsonstatus.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (5).goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (5).goma_stat",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (5).stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--",
+      "python",
+      "RECIPE_REPO[build]\\scripts\\slave\\upload_goma_logs.py",
+      "--upload-compiler-proxy-info",
+      "--log-url-json-file",
+      "/path/to/tmp/json",
+      "--gsutil-py-path",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "--bqupload-path",
+      "[CACHE]\\goma\\bqupload\\bqupload",
+      "--bigquery-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-bigquery.json",
+      "--json-status",
+      "[TMP_BASE]\\goma_jsonstatus.json",
+      "--build-exit-status",
+      "0",
+      "--build-step-name",
+      "build host_release font-subset",
+      "--goma-stats-file",
+      "[TMP_BASE]\\goma_stats",
+      "--goma-counterz-file",
+      "[TMP_BASE]\\goma_counterz",
+      "--goma-crash-report-id-file",
+      "[TMP_BASE]\\crash_report_id",
+      "--build-id",
+      "8945511751514863184",
+      "--builder-id-json",
+      "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
+      "--is-luci",
+      "--buildbot-buildername",
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (5).upload_log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"compiler_proxy_log\": \"https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LINK@compiler_proxy_log@https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "stop",
+      "--killed-pid-file",
+      "[TMP_BASE]\\cloudtail.pid"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "postprocess_for_goma (5).stop cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip windows-x64 artifacts.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"icudtl.dat\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\third_party/icu/flutter/icudtl.dat\", \"type\": \"file\"}, {\"archive_name\": \"flutter_tester.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_tester.exe\", \"type\": \"file\"}, {\"archive_name\": \"isolate_snapshot.bin\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/gen/flutter/lib/snapshot/isolate_snapshot.bin\", \"type\": \"file\"}, {\"archive_name\": \"vm_isolate_snapshot.bin\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/gen/flutter/lib/snapshot/vm_isolate_snapshot.bin\", \"type\": \"file\"}, {\"archive_name\": \"frontend_server.dart.snapshot\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/gen/frontend_server.dart.snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_1\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_1\\artifacts.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64/artifacts.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"windows-x64/artifacts.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64/artifacts.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_1"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for windows-x64 UploadArtifacts artifacts.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip windows-x64 windows-x64-embedder.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_embedder.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_embedder.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_engine.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_engine.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_engine.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_engine.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_engine.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_engine.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_engine.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_engine.dll.pdb\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_2\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_2\\artifacts.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64/windows-x64-embedder.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"windows-x64/windows-x64-embedder.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64/windows-x64-embedder.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_2"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for windows-x64 UploadArtifacts windows-x64-embedder.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip windows-x64-debug windows-x64-flutter.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.pdb\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_3\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_3\\artifacts.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64-debug/windows-x64-flutter.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"windows-x64-debug/windows-x64-flutter.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64-debug/windows-x64-flutter.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_3"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for windows-x64-debug UploadArtifacts windows-x64-flutter.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip windows-x64-profile windows-x64-flutter.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_windows.dll.pdb\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_4\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_4\\artifacts.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64-profile/windows-x64-flutter.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"windows-x64-profile/windows-x64-flutter.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64-profile/windows-x64-flutter.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_4"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for windows-x64-profile UploadArtifacts windows-x64-flutter.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip windows-x64-release windows-x64-flutter.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_windows.dll.pdb\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_5\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_5\\artifacts.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64-release/windows-x64-flutter.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"windows-x64-release/windows-x64-flutter.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64-release/windows-x64-flutter.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_5"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for windows-x64-release UploadArtifacts windows-x64-flutter.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip cpp_client_wrapper",
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]\\\\builder\\\\src/out/host_debug\\\\cpp_client_wrapper\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_6\\\\flutter-cpp-client-wrapper.zip\", \"root\": \"[CACHE]\\\\builder\\\\src/out/host_debug\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_6\\flutter-cpp-client-wrapper.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64/flutter-cpp-client-wrapper.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload windows-x64/flutter-cpp-client-wrapper.zip",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64/flutter-cpp-client-wrapper.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_6"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for Upload windows-x64 Flutter library C++ wrapper"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip windows-x64 windows-x64-flutter.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.pdb\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_7\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_7\\artifacts.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64/windows-x64-flutter.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"windows-x64/windows-x64-flutter.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64/windows-x64-flutter.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_7"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for windows-x64 UploadArtifacts windows-x64-flutter.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip windows-x64 font-subset.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"font-subset.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/font-subset.exe\", \"type\": \"file\"}, {\"archive_name\": \"const_finder.dart.snapshot\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/gen/const_finder.dart.snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_8\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_8\\artifacts.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64/font-subset.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"windows-x64/font-subset.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/windows-x64/font-subset.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_8"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for windows-x64 UploadArtifacts font-subset.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip dart-sdk",
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]\\\\builder\\\\src/out/host_debug\\\\dart-sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_9\\\\dart-sdk-windows-x64.zip\", \"root\": \"[CACHE]\\\\builder\\\\src/out/host_debug\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_9\\dart-sdk-windows-x64.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/dart-sdk-windows-x64.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload dart-sdk-windows-x64.zip",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/dart-sdk-windows-x64.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_9"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for Upload Dart SDK"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip flutter_web_sdk",
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]\\\\builder\\\\src/out/host_debug\\\\flutter_web_sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_10\\\\flutter-web-sdk-windows-x64.zip\", \"root\": \"[CACHE]\\\\builder\\\\src/out/host_debug\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_10\\flutter-web-sdk-windows-x64.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/flutter-web-sdk-windows-x64.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload flutter-web-sdk-windows-x64.zip",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/flutter-web-sdk-windows-x64.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_10"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for Upload Web SDK"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]\\builder\\src\\flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "profile",
+      "--android"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode profile --android"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]\\builder\\src\\flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "profile",
+      "--android",
+      "--android-cpu=arm64"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode profile --android --android-cpu=arm64"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]\\builder\\src\\flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "profile",
+      "--android",
+      "--android-cpu=x64"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode profile --android --android-cpu=x64"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]\\builder\\src\\flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "release",
+      "--android"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode release --android"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]\\builder\\src\\flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "release",
+      "--android",
+      "--android-cpu=arm64"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode release --android --android-cpu=arm64"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]\\builder\\src\\flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "release",
+      "--android",
+      "--android-cpu=x64"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode release --android --android-cpu=x64"
+  },
+  {
+    "cmd": [],
+    "name": "preprocess_for_goma (6)"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]\\goma\\data\\Win_Engine"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (6).goma cache directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (6).start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LINK@cloudtail@https://console.cloud.google.com/logs/viewer?project=goma-logs&resource=gce_instance%2Finstance_id%2Ffakevm999-m9@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "start",
+      "--cloudtail-path",
+      "cloudtail.exe",
+      "--pid-file",
+      "[TMP_BASE]\\cloudtail.pid",
+      "--cloudtail-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-cloudtail.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (6).start cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]\\ninja.exe",
+      "-j",
+      "1024",
+      "-C",
+      "[CACHE]\\builder\\src\\out/android_profile",
+      "gen_snapshot"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build android_profile gen_snapshot"
+  },
+  {
+    "cmd": [],
+    "name": "postprocess_for_goma (6)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "jsonstatus",
+      "[TMP_BASE]\\goma_jsonstatus.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (6).goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (6).goma_stat",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (6).stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--",
+      "python",
+      "RECIPE_REPO[build]\\scripts\\slave\\upload_goma_logs.py",
+      "--upload-compiler-proxy-info",
+      "--log-url-json-file",
+      "/path/to/tmp/json",
+      "--gsutil-py-path",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "--bqupload-path",
+      "[CACHE]\\goma\\bqupload\\bqupload",
+      "--bigquery-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-bigquery.json",
+      "--json-status",
+      "[TMP_BASE]\\goma_jsonstatus.json",
+      "--build-exit-status",
+      "0",
+      "--build-step-name",
+      "build android_profile gen_snapshot",
+      "--goma-stats-file",
+      "[TMP_BASE]\\goma_stats",
+      "--goma-counterz-file",
+      "[TMP_BASE]\\goma_counterz",
+      "--goma-crash-report-id-file",
+      "[TMP_BASE]\\crash_report_id",
+      "--build-id",
+      "8945511751514863184",
+      "--builder-id-json",
+      "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
+      "--is-luci",
+      "--buildbot-buildername",
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (6).upload_log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"compiler_proxy_log\": \"https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LINK@compiler_proxy_log@https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "stop",
+      "--killed-pid-file",
+      "[TMP_BASE]\\cloudtail.pid"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "postprocess_for_goma (6).stop cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "preprocess_for_goma (7)"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]\\goma\\data\\Win_Engine"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (7).goma cache directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (7).start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LINK@cloudtail@https://console.cloud.google.com/logs/viewer?project=goma-logs&resource=gce_instance%2Finstance_id%2Ffakevm999-m9@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "start",
+      "--cloudtail-path",
+      "cloudtail.exe",
+      "--pid-file",
+      "[TMP_BASE]\\cloudtail.pid",
+      "--cloudtail-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-cloudtail.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (7).start cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]\\ninja.exe",
+      "-j",
+      "1024",
+      "-C",
+      "[CACHE]\\builder\\src\\out/android_profile_arm64",
+      "gen_snapshot"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build android_profile_arm64 gen_snapshot"
+  },
+  {
+    "cmd": [],
+    "name": "postprocess_for_goma (7)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "jsonstatus",
+      "[TMP_BASE]\\goma_jsonstatus.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (7).goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (7).goma_stat",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (7).stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--",
+      "python",
+      "RECIPE_REPO[build]\\scripts\\slave\\upload_goma_logs.py",
+      "--upload-compiler-proxy-info",
+      "--log-url-json-file",
+      "/path/to/tmp/json",
+      "--gsutil-py-path",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "--bqupload-path",
+      "[CACHE]\\goma\\bqupload\\bqupload",
+      "--bigquery-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-bigquery.json",
+      "--json-status",
+      "[TMP_BASE]\\goma_jsonstatus.json",
+      "--build-exit-status",
+      "0",
+      "--build-step-name",
+      "build android_profile_arm64 gen_snapshot",
+      "--goma-stats-file",
+      "[TMP_BASE]\\goma_stats",
+      "--goma-counterz-file",
+      "[TMP_BASE]\\goma_counterz",
+      "--goma-crash-report-id-file",
+      "[TMP_BASE]\\crash_report_id",
+      "--build-id",
+      "8945511751514863184",
+      "--builder-id-json",
+      "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
+      "--is-luci",
+      "--buildbot-buildername",
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (7).upload_log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"compiler_proxy_log\": \"https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LINK@compiler_proxy_log@https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "stop",
+      "--killed-pid-file",
+      "[TMP_BASE]\\cloudtail.pid"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "postprocess_for_goma (7).stop cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "preprocess_for_goma (8)"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]\\goma\\data\\Win_Engine"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (8).goma cache directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (8).start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LINK@cloudtail@https://console.cloud.google.com/logs/viewer?project=goma-logs&resource=gce_instance%2Finstance_id%2Ffakevm999-m9@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "start",
+      "--cloudtail-path",
+      "cloudtail.exe",
+      "--pid-file",
+      "[TMP_BASE]\\cloudtail.pid",
+      "--cloudtail-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-cloudtail.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (8).start cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]\\ninja.exe",
+      "-j",
+      "1024",
+      "-C",
+      "[CACHE]\\builder\\src\\out/android_profile_x64",
+      "gen_snapshot"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build android_profile_x64 gen_snapshot"
+  },
+  {
+    "cmd": [],
+    "name": "postprocess_for_goma (8)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "jsonstatus",
+      "[TMP_BASE]\\goma_jsonstatus.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (8).goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (8).goma_stat",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (8).stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--",
+      "python",
+      "RECIPE_REPO[build]\\scripts\\slave\\upload_goma_logs.py",
+      "--upload-compiler-proxy-info",
+      "--log-url-json-file",
+      "/path/to/tmp/json",
+      "--gsutil-py-path",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "--bqupload-path",
+      "[CACHE]\\goma\\bqupload\\bqupload",
+      "--bigquery-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-bigquery.json",
+      "--json-status",
+      "[TMP_BASE]\\goma_jsonstatus.json",
+      "--build-exit-status",
+      "0",
+      "--build-step-name",
+      "build android_profile_x64 gen_snapshot",
+      "--goma-stats-file",
+      "[TMP_BASE]\\goma_stats",
+      "--goma-counterz-file",
+      "[TMP_BASE]\\goma_counterz",
+      "--goma-crash-report-id-file",
+      "[TMP_BASE]\\crash_report_id",
+      "--build-id",
+      "8945511751514863184",
+      "--builder-id-json",
+      "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
+      "--is-luci",
+      "--buildbot-buildername",
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (8).upload_log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"compiler_proxy_log\": \"https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LINK@compiler_proxy_log@https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "stop",
+      "--killed-pid-file",
+      "[TMP_BASE]\\cloudtail.pid"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "postprocess_for_goma (8).stop cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "preprocess_for_goma (9)"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]\\goma\\data\\Win_Engine"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (9).goma cache directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (9).start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LINK@cloudtail@https://console.cloud.google.com/logs/viewer?project=goma-logs&resource=gce_instance%2Finstance_id%2Ffakevm999-m9@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "start",
+      "--cloudtail-path",
+      "cloudtail.exe",
+      "--pid-file",
+      "[TMP_BASE]\\cloudtail.pid",
+      "--cloudtail-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-cloudtail.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (9).start cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]\\ninja.exe",
+      "-j",
+      "1024",
+      "-C",
+      "[CACHE]\\builder\\src\\out/android_release",
+      "gen_snapshot"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build android_release gen_snapshot"
+  },
+  {
+    "cmd": [],
+    "name": "postprocess_for_goma (9)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "jsonstatus",
+      "[TMP_BASE]\\goma_jsonstatus.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (9).goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (9).goma_stat",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (9).stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--",
+      "python",
+      "RECIPE_REPO[build]\\scripts\\slave\\upload_goma_logs.py",
+      "--upload-compiler-proxy-info",
+      "--log-url-json-file",
+      "/path/to/tmp/json",
+      "--gsutil-py-path",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "--bqupload-path",
+      "[CACHE]\\goma\\bqupload\\bqupload",
+      "--bigquery-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-bigquery.json",
+      "--json-status",
+      "[TMP_BASE]\\goma_jsonstatus.json",
+      "--build-exit-status",
+      "0",
+      "--build-step-name",
+      "build android_release gen_snapshot",
+      "--goma-stats-file",
+      "[TMP_BASE]\\goma_stats",
+      "--goma-counterz-file",
+      "[TMP_BASE]\\goma_counterz",
+      "--goma-crash-report-id-file",
+      "[TMP_BASE]\\crash_report_id",
+      "--build-id",
+      "8945511751514863184",
+      "--builder-id-json",
+      "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
+      "--is-luci",
+      "--buildbot-buildername",
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (9).upload_log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"compiler_proxy_log\": \"https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LINK@compiler_proxy_log@https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "stop",
+      "--killed-pid-file",
+      "[TMP_BASE]\\cloudtail.pid"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "postprocess_for_goma (9).stop cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "preprocess_for_goma (10)"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]\\goma\\data\\Win_Engine"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (10).goma cache directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (10).start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LINK@cloudtail@https://console.cloud.google.com/logs/viewer?project=goma-logs&resource=gce_instance%2Finstance_id%2Ffakevm999-m9@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "start",
+      "--cloudtail-path",
+      "cloudtail.exe",
+      "--pid-file",
+      "[TMP_BASE]\\cloudtail.pid",
+      "--cloudtail-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-cloudtail.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (10).start cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]\\ninja.exe",
+      "-j",
+      "1024",
+      "-C",
+      "[CACHE]\\builder\\src\\out/android_release_arm64",
+      "gen_snapshot"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build android_release_arm64 gen_snapshot"
+  },
+  {
+    "cmd": [],
+    "name": "postprocess_for_goma (10)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "jsonstatus",
+      "[TMP_BASE]\\goma_jsonstatus.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (10).goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (10).goma_stat",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (10).stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--",
+      "python",
+      "RECIPE_REPO[build]\\scripts\\slave\\upload_goma_logs.py",
+      "--upload-compiler-proxy-info",
+      "--log-url-json-file",
+      "/path/to/tmp/json",
+      "--gsutil-py-path",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "--bqupload-path",
+      "[CACHE]\\goma\\bqupload\\bqupload",
+      "--bigquery-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-bigquery.json",
+      "--json-status",
+      "[TMP_BASE]\\goma_jsonstatus.json",
+      "--build-exit-status",
+      "0",
+      "--build-step-name",
+      "build android_release_arm64 gen_snapshot",
+      "--goma-stats-file",
+      "[TMP_BASE]\\goma_stats",
+      "--goma-counterz-file",
+      "[TMP_BASE]\\goma_counterz",
+      "--goma-crash-report-id-file",
+      "[TMP_BASE]\\crash_report_id",
+      "--build-id",
+      "8945511751514863184",
+      "--builder-id-json",
+      "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
+      "--is-luci",
+      "--buildbot-buildername",
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (10).upload_log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"compiler_proxy_log\": \"https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LINK@compiler_proxy_log@https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "stop",
+      "--killed-pid-file",
+      "[TMP_BASE]\\cloudtail.pid"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "postprocess_for_goma (10).stop cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "preprocess_for_goma (11)"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]\\goma\\data\\Win_Engine"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (11).goma cache directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (11).start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LINK@cloudtail@https://console.cloud.google.com/logs/viewer?project=goma-logs&resource=gce_instance%2Finstance_id%2Ffakevm999-m9@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "start",
+      "--cloudtail-path",
+      "cloudtail.exe",
+      "--pid-file",
+      "[TMP_BASE]\\cloudtail.pid",
+      "--cloudtail-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-cloudtail.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "preprocess_for_goma (11).start cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]\\ninja.exe",
+      "-j",
+      "1024",
+      "-C",
+      "[CACHE]\\builder\\src\\out/android_release_x64",
+      "gen_snapshot"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build android_release_x64 gen_snapshot"
+  },
+  {
+    "cmd": [],
+    "name": "postprocess_for_goma (11)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "jsonstatus",
+      "[TMP_BASE]\\goma_jsonstatus.json"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (11).goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (11).goma_stat",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]\\goma\\client\\goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]\\crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]\\goma\\data\\Win_Engine",
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]\\goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]\\goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "C:\\creds\\service_accounts\\service-account-goma-client.json"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (11).stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--",
+      "python",
+      "RECIPE_REPO[build]\\scripts\\slave\\upload_goma_logs.py",
+      "--upload-compiler-proxy-info",
+      "--log-url-json-file",
+      "/path/to/tmp/json",
+      "--gsutil-py-path",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "--bqupload-path",
+      "[CACHE]\\goma\\bqupload\\bqupload",
+      "--bigquery-service-account-json",
+      "C:\\creds\\service_accounts\\service-account-goma-bigquery.json",
+      "--json-status",
+      "[TMP_BASE]\\goma_jsonstatus.json",
+      "--build-exit-status",
+      "0",
+      "--build-step-name",
+      "build android_release_x64 gen_snapshot",
+      "--goma-stats-file",
+      "[TMP_BASE]\\goma_stats",
+      "--goma-counterz-file",
+      "[TMP_BASE]\\goma_counterz",
+      "--goma-crash-report-id-file",
+      "[TMP_BASE]\\crash_report_id",
+      "--build-id",
+      "8945511751514863184",
+      "--builder-id-json",
+      "{\"bucket\": \"ci\", \"builder\": \"Win Engine\", \"project\": \"flutter\"}",
+      "--is-luci",
+      "--buildbot-buildername",
+      "Win Engine",
+      "--buildbot-slavename",
+      "fake-bot-id"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "postprocess_for_goma (11).upload_log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"compiler_proxy_log\": \"https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LINK@compiler_proxy_log@https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]\\scripts\\tools\\runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]\\resources\\cloudtail_utils.py",
+      "stop",
+      "--killed-pid-file",
+      "[TMP_BASE]\\cloudtail.pid"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "postprocess_for_goma (11).stop cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip android-arm-profile windows-x64.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_profile/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_11\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_11\\artifacts.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-profile/windows-x64.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"android-arm-profile/windows-x64.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-profile/windows-x64.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_11"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for android-arm-profile UploadArtifacts windows-x64.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip android-arm64-profile windows-x64.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_profile_arm64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_12\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_12\\artifacts.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-profile/windows-x64.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"android-arm64-profile/windows-x64.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-profile/windows-x64.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_12"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for android-arm64-profile UploadArtifacts windows-x64.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip android-x64-profile windows-x64.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_profile_x64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_13\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_13\\artifacts.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-profile/windows-x64.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"android-x64-profile/windows-x64.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-profile/windows-x64.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_13"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for android-x64-profile UploadArtifacts windows-x64.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip android-arm-release windows-x64.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_release/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_14\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_14\\artifacts.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-release/windows-x64.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"android-arm-release/windows-x64.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-release/windows-x64.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_14"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for android-arm-release UploadArtifacts windows-x64.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip android-arm64-release windows-x64.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_release_arm64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_15\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_15\\artifacts.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-release/windows-x64.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"android-arm64-release/windows-x64.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-release/windows-x64.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_15"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for android-arm64-release UploadArtifacts windows-x64.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]\\resources\\zip.py"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip android-x64-release windows-x64.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_release_x64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_16\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]\\resources\\gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]\\gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]\\tmp_tmp_16\\artifacts.zip",
+      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-release/windows-x64.zip"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"android-x64-release/windows-x64.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-release/windows-x64.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]\\tmp_tmp_16"
+    ],
+    "cwd": "[CACHE]\\builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for android-x64-release UploadArtifacts windows-x64.zip"
+  },
+  {
+    "name": "$result"
+  }
+]

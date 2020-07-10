@@ -1,0 +1,741 @@
+[
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::bot_update]/resources/bot_update.py",
+      "--spec-path",
+      "cache_dir = '[CACHE]/git'\nsolutions = [{'deps_file': '.DEPS.git', 'managed': True, 'name': 'src/flutter', 'url': 'https://chromium.googlesource.com/external/github.com/flutter/engine'}]",
+      "--revision_mapping_file",
+      "{\"got_engine_revision\": \"src/flutter\"}",
+      "--git-cache-dir",
+      "[CACHE]/git",
+      "--cleanup-dir",
+      "[CLEANUP]/bot_update",
+      "--output_json",
+      "/path/to/tmp/json",
+      "--revision",
+      "src/flutter@2d72510e447ab60a9728aeea2362d8be2cbd7789",
+      "--refs",
+      "refs/heads/master"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "GIT_HTTP_LOW_SPEED_LIMIT": "102400",
+      "GIT_HTTP_LOW_SPEED_TIME": "300"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "bot_update",
+    "~followup_annotations": [
+      "@@@STEP_TEXT@Some step text@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"did_run\": true, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"fixed_revisions\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"src/flutter\": \"2d72510e447ab60a9728aeea2362d8be2cbd7789\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"manifest\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"src/flutter\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"repository\": \"https://fake.org/src/flutter.git\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"revision\": \"9221bca00ddbd888260084def81f09543281b952\"@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"patch_failure\": false, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"patch_root\": \"src/flutter\", @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"properties\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"got_engine_revision\": \"9221bca00ddbd888260084def81f09543281b952\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"got_engine_revision_cp\": \"refs/heads/master@{#84512}\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"root\": \"src/flutter\", @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"source_manifest\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"directories\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"src/flutter\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"git_checkout\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@          \"repo_url\": \"https://fake.org/src/flutter.git\", @@@",
+      "@@@STEP_LOG_LINE@json.output@          \"revision\": \"9221bca00ddbd888260084def81f09543281b952\"@@@",
+      "@@@STEP_LOG_LINE@json.output@        }@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }, @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"version\": 0@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"step_text\": \"Some step text\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@SET_BUILD_PROPERTY@got_engine_revision@\"9221bca00ddbd888260084def81f09543281b952\"@@@",
+      "@@@SET_BUILD_PROPERTY@got_engine_revision_cp@\"refs/heads/master@{#84512}\"@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[depot_tools]/gclient.py",
+      "runhooks"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gclient runhooks"
+  },
+  {
+    "cmd": [],
+    "name": "ensure_goma"
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/goma/client",
+      "-ensure-file",
+      "infra_internal/goma/client/${platform} release",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "cwd": "[CACHE]/builder",
+    "infra_step": true,
+    "name": "ensure_goma.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-release---------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra_internal/goma/client/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/goma/bqupload",
+      "-ensure-file",
+      "infra/tools/bqupload/${platform} git_revision:643892f957c8e106dff793468101f2ecfc31abb7",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "cwd": "[CACHE]/builder",
+    "infra_step": true,
+    "name": "ensure_goma.ensure_installed (2)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-git_revision:643\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/bqupload/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "Android SDK"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/builder/src/third_party/android_tools/sdk/licenses"
+    ],
+    "cwd": "[CACHE]/builder",
+    "infra_step": true,
+    "name": "Android SDK.mkdir licenses",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "sdk_hash",
+      "[CACHE]/builder/src/third_party/android_tools/sdk/licenses/android-sdk-license"
+    ],
+    "cwd": "[CACHE]/builder",
+    "infra_step": true,
+    "name": "Android SDK.android sdk license",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@android-sdk-license@sdk_hash@@@",
+      "@@@STEP_LOG_END@android-sdk-license@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "sdk preview hash",
+      "[CACHE]/builder/src/third_party/android_tools/sdk/licenses/android-sdk-preview-license"
+    ],
+    "cwd": "[CACHE]/builder",
+    "infra_step": true,
+    "name": "Android SDK.android sdk preview license",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@android-sdk-preview-license@sdk preview hash@@@",
+      "@@@STEP_LOG_END@android-sdk-preview-license@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "build android_debug_unopt ()"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/gn",
+      "--unoptimized",
+      "--android"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build android_debug_unopt ().gn --unoptimized --android",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]/autoninja",
+      "-C",
+      "[CACHE]/builder/src/out/android_debug_unopt"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build android_debug_unopt ().build android_debug_unopt",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "build host_debug_unopt ()"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/gn",
+      "--unoptimized"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build host_debug_unopt ().gn --unoptimized",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "build host_debug_unopt ().preprocess_for_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/goma/data/Linux_Drone"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "build host_debug_unopt ().preprocess_for_goma.goma cache directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]/crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]/goma/data/Linux_Drone",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]/goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]/goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "/creds/service_accounts/service-account-goma-client.json"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "build host_debug_unopt ().preprocess_for_goma.start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LINK@cloudtail@https://console.cloud.google.com/logs/viewer?project=goma-logs&resource=gce_instance%2Finstance_id%2Ffakevm999-m9@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
+      "start",
+      "--cloudtail-path",
+      "cloudtail",
+      "--pid-file",
+      "[TMP_BASE]/cloudtail.pid",
+      "--cloudtail-service-account-json",
+      "/creds/service_accounts/service-account-goma-cloudtail.json"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "build host_debug_unopt ().preprocess_for_goma.start cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]/autoninja",
+      "-C",
+      "[CACHE]/builder/src/out/host_debug_unopt"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build host_debug_unopt ().build host_debug_unopt",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "build host_debug_unopt ().postprocess_for_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "jsonstatus",
+      "[TMP_BASE]/goma_jsonstatus.json"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]/crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]/goma/data/Linux_Drone",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]/goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]/goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "/creds/service_accounts/service-account-goma-client.json"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build host_debug_unopt ().postprocess_for_goma.goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]/crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]/goma/data/Linux_Drone",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]/goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]/goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "/creds/service_accounts/service-account-goma-client.json"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build host_debug_unopt ().postprocess_for_goma.goma_stat",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMACTL_CRASH_REPORT_ID_FILE": "[TMP_BASE]/crash_report_id",
+      "GOMA_CACHE_DIR": "[CACHE]/goma/data/Linux_Drone",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_COUNTERZ_FILE": "[TMP_BASE]/goma_counterz",
+      "GOMA_DUMP_STATS_FILE": "[TMP_BASE]/goma_stats",
+      "GOMA_ENABLE_COUNTERZ": "true",
+      "GOMA_HERMETIC": "error",
+      "GOMA_SERVICE_ACCOUNT_JSON_FILE": "/creds/service_accounts/service-account-goma-client.json"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build host_debug_unopt ().postprocess_for_goma.stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
+      "--show-path",
+      "--",
+      "python",
+      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
+      "--upload-compiler-proxy-info",
+      "--log-url-json-file",
+      "/path/to/tmp/json",
+      "--gsutil-py-path",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "--bqupload-path",
+      "[CACHE]/goma/bqupload/bqupload",
+      "--bigquery-service-account-json",
+      "/creds/service_accounts/service-account-goma-bigquery.json",
+      "--json-status",
+      "[TMP_BASE]/goma_jsonstatus.json",
+      "--build-exit-status",
+      "0",
+      "--build-step-name",
+      "build host_debug_unopt",
+      "--goma-stats-file",
+      "[TMP_BASE]/goma_stats",
+      "--goma-counterz-file",
+      "[TMP_BASE]/goma_counterz",
+      "--goma-crash-report-id-file",
+      "[TMP_BASE]/crash_report_id",
+      "--build-id",
+      "8945511751514863184",
+      "--builder-id-json",
+      "{\"bucket\": \"ci\", \"builder\": \"Linux Drone\", \"project\": \"flutter\"}",
+      "--is-luci",
+      "--buildbot-buildername",
+      "Linux Drone",
+      "--buildbot-mastername",
+      "client.flutter",
+      "--buildbot-slavename",
+      "fake-bot-id"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build host_debug_unopt ().postprocess_for_goma.upload_log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"compiler_proxy_log\": \"https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LINK@compiler_proxy_log@https://chromium-build-stats.appspot.com/compiler_proxy_log/2017/03/30/build11-m1/compiler_proxy.exe.BUILD11-M1.chrome-bot.log.INFO.20170329-222936.4420.gz@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[build]/scripts/tools/runit.py",
+      "--show-path",
+      "--with-third-party-lib",
+      "--",
+      "python",
+      "RECIPE_MODULE[build::goma]/resources/cloudtail_utils.py",
+      "stop",
+      "--killed-pid-file",
+      "[TMP_BASE]/cloudtail.pid"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "build host_debug_unopt ().postprocess_for_goma.stop cloudtail",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "install infra/tools/luci/isolated"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin"
+    ],
+    "cwd": "[CACHE]/builder",
+    "infra_step": true,
+    "name": "install infra/tools/luci/isolated.ensure package directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin",
+      "-ensure-file",
+      "infra/tools/luci/isolated/${platform} isolated_module_pin",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "cwd": "[CACHE]/builder",
+    "infra_step": true,
+    "name": "install infra/tools/luci/isolated.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-isolated_module_\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/isolated/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin/isolated",
+      "archive",
+      "-verbose",
+      "-isolate-server",
+      "https://example.isolateserver.appspot.com",
+      "-namespace",
+      "default-gzip",
+      "-dump-hash",
+      "/path/to/tmp/",
+      "-files",
+      "[CACHE]/builder/src:out/android_debug_unopt/libflutter.so",
+      "-files",
+      "[CACHE]/builder/src:out/host_debug_unopt/shell_unittests",
+      "-dirs",
+      "[CACHE]/builder/src:out/android_debug_unopt/some_dir"
+    ],
+    "cwd": "[CACHE]/builder",
+    "infra_step": true,
+    "name": "Archive build outputs",
+    "~followup_annotations": [
+      "@@@STEP_LINK@isolated UI@https://example.isolateserver.appspot.com/browse?namespace=default-gzip&hash=%5Bdummy+hash%5D@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "Set output properties",
+    "~followup_annotations": [
+      "@@@SET_BUILD_PROPERTY@isolated_output_hash@\"[dummy hash]\"@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]
