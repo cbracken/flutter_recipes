@@ -410,7 +410,7 @@
     "name": "get builders.flutter/try/flutter-bar.buildbucket.search",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LOG_LINE@raw_io.output_text@{\"status\": \"SUCCESS\", \"input\": {\"properties\": {\"recipe\": \"flutter\"}, \"gerritChanges\": [{\"project\": \"fuchsia\", \"host\": \"fuchsia-review.googlesource.com\"}]}, \"builder\": {\"builder\": \"flutter/try/flutter-bar\"}, \"endTime\": \"2012-05-13T12:53:20Z\", \"id\": \"100\"}@@@",
+      "@@@STEP_LOG_LINE@raw_io.output_text@{\"status\": \"SUCCESS\", \"input\": {\"properties\": {\"recipe\": \"flutter\"}, \"gerritChanges\": [{\"project\": \"fuchsia\", \"host\": \"fuchsia-review.googlesource.com\"}]}, \"builder\": {\"project\": \"fuchsia\", \"builder\": \"flutter/try/flutter-bar\", \"bucket\": \"try\"}, \"endTime\": \"2012-05-13T12:53:20Z\", \"id\": \"100\"}@@@",
       "@@@STEP_LOG_END@raw_io.output_text@@@",
       "@@@STEP_LINK@100@https://cr-buildbucket.appspot.com/build/100@@@"
     ]
@@ -445,7 +445,7 @@
     "name": "get builders.flutter/try/flutter-baz.buildbucket.search",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LOG_LINE@raw_io.output_text@{\"status\": \"SUCCESS\", \"input\": {\"properties\": {\"recipe\": \"project\"}, \"gerritChanges\": [{\"project\": \"fuchsia\", \"host\": \"fuchsia-review.googlesource.com\"}]}, \"builder\": {\"builder\": \"flutter/try/flutter-baz\"}, \"endTime\": \"2012-05-13T12:53:20Z\", \"id\": \"100\"}@@@",
+      "@@@STEP_LOG_LINE@raw_io.output_text@{\"status\": \"SUCCESS\", \"input\": {\"properties\": {\"recipe\": \"project\"}, \"gerritChanges\": [{\"project\": \"fuchsia\", \"host\": \"fuchsia-review.googlesource.com\"}]}, \"builder\": {\"project\": \"fuchsia\", \"builder\": \"flutter/try/flutter-baz\", \"bucket\": \"try\"}, \"endTime\": \"2012-05-13T12:53:20Z\", \"id\": \"100\"}@@@",
       "@@@STEP_LOG_END@raw_io.output_text@@@",
       "@@@STEP_LINK@100@https://cr-buildbucket.appspot.com/build/100@@@"
     ]
@@ -480,7 +480,7 @@
     "name": "get builders.flutter/try/flutter-foo.buildbucket.search",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LOG_LINE@raw_io.output_text@{\"status\": \"SUCCESS\", \"input\": {\"properties\": {\"recipe\": \"flutter\"}, \"gerritChanges\": [{\"project\": \"fuchsia\", \"host\": \"fuchsia-review.googlesource.com\"}]}, \"builder\": {\"builder\": \"flutter/try/flutter-foo\"}, \"endTime\": \"2012-05-13T12:53:20Z\", \"id\": \"100\"}@@@",
+      "@@@STEP_LOG_LINE@raw_io.output_text@{\"status\": \"SUCCESS\", \"input\": {\"properties\": {\"recipe\": \"flutter\"}, \"gerritChanges\": [{\"project\": \"fuchsia\", \"host\": \"fuchsia-review.googlesource.com\"}]}, \"builder\": {\"project\": \"fuchsia\", \"builder\": \"flutter/try/flutter-foo\", \"bucket\": \"try\"}, \"endTime\": \"2012-05-13T12:53:20Z\", \"id\": \"100\"}@@@",
       "@@@STEP_LOG_END@raw_io.output_text@@@",
       "@@@STEP_LINK@100@https://cr-buildbucket.appspot.com/build/100@@@"
     ]
