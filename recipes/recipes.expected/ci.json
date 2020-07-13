@@ -20,10 +20,6 @@
       "init"
     ],
     "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
     "name": "git init"
   },
   {
@@ -35,10 +31,6 @@
       "https://flutter.googlesource.com/recipes"
     ],
     "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
     "name": "git remote"
   },
   {
@@ -71,10 +63,6 @@
       "--bare"
     ],
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
     "name": "cache.git init",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -88,10 +76,6 @@
       "https://flutter.googlesource.com/recipes"
     ],
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
     "name": "cache.remote set-url",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -107,10 +91,6 @@
       "\\+refs/heads/\\*:.*"
     ],
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
     "name": "cache.git config",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -125,10 +105,6 @@
       "origin"
     ],
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
     "name": "cache.git fetch",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -182,10 +158,6 @@
       "master"
     ],
     "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
     "name": "git fetch"
   },
   {
@@ -196,10 +168,6 @@
       "FETCH_HEAD"
     ],
     "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
     "name": "git checkout"
   },
   {
@@ -209,10 +177,6 @@
       "HEAD"
     ],
     "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
     "name": "git rev-parse"
   },
   {
@@ -224,10 +188,6 @@
       "-x"
     ],
     "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
     "name": "git clean"
   },
   {
@@ -241,10 +201,6 @@
       "sync"
     ],
     "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
     "name": "submodule.git submodule sync",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -258,10 +214,6 @@
       "--init"
     ],
     "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
     "name": "submodule.git submodule update",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -389,10 +341,6 @@
       "-z"
     ],
     "cwd": "[START_DIR]/recipes",
-    "env": {
-      "GIT_HTTP_LOW_SPEED_LIMIT": "2048000",
-      "GIT_HTTP_LOW_SPEED_TIME": "60"
-    },
     "name": "get_affected_recipes.git diff-tree",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
