@@ -162,6 +162,10 @@ def RunSteps(api, properties, env_properties):
       felt_licenses.append('check-licenses')
       api.step('felt licenses', felt_licenses)
       if api.platform.is_linux:
+        web_engine_analysis_cmd = [
+            checkout.join('flutter', 'lib', 'web_ui', 'dev', 'web_engine_analysis.sh'),
+        ]
+        api.step('web engine analysis', web_engine_analysis_cmd)
         DownloadFirefoxDriver(api)
         additional_args_firefox = ['--browser', 'firefox']
         felt_test_firefox = copy.deepcopy(felt_cmd)
