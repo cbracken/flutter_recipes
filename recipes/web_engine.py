@@ -54,6 +54,19 @@ def Build(api, config, *targets):
       name='build %s' % ' '.join([config] + list(targets)),
       ninja_command=ninja_args)
 
+def FormatAndDartTest(api):
+  checkout = GetCheckoutPath(api)
+  with api.context(cwd=checkout.join('flutter')):
+    format_cmd = checkout.join('flutter', 'ci', 'format.sh')
+    api.step('format and dart test', [format_cmd])
+
+
+def Lint(api):
+  checkout = GetCheckoutPath(api)
+  with api.context(cwd=checkout):
+    lint_cmd = checkout.join('flutter', 'ci', 'lint.sh')
+    api.step('lint test', [lint_cmd])
+
 
 def RunGN(api, *args):
   checkout = GetCheckoutPath(api)
@@ -130,6 +143,13 @@ def RunSteps(api, properties, env_properties):
   with api.context(
       cwd=cache_root, env=env,
       env_prefixes=env_prefixes), api.depot_tools.on_path():
+
+
+    # Checks before building the engine. Only run on Linux.
+    if api.platform.is_linux:
+      FormatAndDartTest(api)
+      Lint(api)
+
     target_name = 'host_debug_unopt'
     gn_flags = ['--unoptimized', '--full-dart-sdk']
     # Mac needs to install xcode as part of the building process.

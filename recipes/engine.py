@@ -407,6 +407,20 @@ def AnalyzeDartUI(api):
     api.step('analyze dart_ui', ['/bin/bash', 'flutter/ci/analyze.sh'])
 
 
+def FormatAndDartTest(api):
+  checkout = GetCheckoutPath(api)
+  with api.context(cwd=checkout.join('flutter')):
+    format_cmd = checkout.join('flutter', 'ci', 'format.sh')
+    api.step('format and dart test', [format_cmd])
+
+
+def Lint(api):
+  checkout = GetCheckoutPath(api)
+  with api.context(cwd=checkout):
+    lint_cmd = checkout.join('flutter', 'ci', 'lint.sh')
+    api.step('lint test', [lint_cmd])
+
+
 def VerifyExportedSymbols(api):
   checkout = GetCheckoutPath(api)
   out_dir = checkout.join('out')
@@ -1459,6 +1473,11 @@ def RunSteps(api, properties, env_properties):
   with api.context(
       cwd=cache_root, env=env,
       env_prefixes=env_prefixes), api.depot_tools.on_path():
+
+    # Checks before building the engine. Only run on Linux.
+    if api.platform.is_linux:
+      FormatAndDartTest(api)
+      Lint(api)
 
     # Presence of tags in git repo is critical for determining dart version.
     dart_sdk_dir = GetCheckoutPath(api).join('third_party', 'dart')

@@ -1,3 +1,6 @@
 *.pyc
 /.recipe_deps
+.idea/workspace.xml
+.idea/misc.xml
+/.idea/
 README.recipes.md
