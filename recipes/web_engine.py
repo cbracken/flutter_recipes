@@ -66,20 +66,6 @@ def GetCheckoutPath(api):
   return api.path['cache'].join('builder', 'src')
 
 
-def FormatAndDartTest(api):
-  checkout = GetCheckoutPath(api)
-  with api.context(cwd=checkout.join('flutter')):
-    format_cmd = checkout.join('flutter', 'ci', 'format.sh')
-    api.step('format and dart test', [format_cmd])
-
-
-def Lint(api):
-  checkout = GetCheckoutPath(api)
-  with api.context(cwd=checkout):
-    lint_cmd = checkout.join('flutter', 'ci', 'lint.sh')
-    api.step('lint test', [lint_cmd])
-
-
 def DownloadFirefoxDriver(api):
   checkout = GetCheckoutPath(api)
   # Download the driver for Firefox.
@@ -141,14 +127,9 @@ def RunSteps(api, properties, env_properties):
 
   # Checkout source code and build
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
-
   with api.context(
       cwd=cache_root, env=env,
       env_prefixes=env_prefixes), api.depot_tools.on_path():
-
-    # Checks before building the engine.
-    FormatAndDartTest(api)
-    Lint(api)
     target_name = 'host_debug_unopt'
     gn_flags = ['--unoptimized', '--full-dart-sdk']
     # Mac needs to install xcode as part of the building process.
@@ -170,7 +151,6 @@ def RunSteps(api, properties, env_properties):
         felt_cmd = [
             checkout.join('flutter', 'lib', 'web_ui', 'dev', 'felt_windows.bat')
         ]
-
     # Update dart packages and run tests.
     local_pub = checkout.join('out', target_name, 'dart-sdk', 'bin', 'pub')
     with api.context(
