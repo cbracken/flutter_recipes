@@ -107,7 +107,7 @@
       "--output_json",
       "/path/to/tmp/json",
       "--revision",
-      "src/flutter@2d72510e447ab60a9728aeea2362d8be2cbd7789",
+      "src/flutter@abcd1234",
       "--refs",
       "refs/heads/master"
     ],
@@ -140,7 +140,7 @@
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"did_run\": true, @@@",
       "@@@STEP_LOG_LINE@json.output@  \"fixed_revisions\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@    \"src/flutter\": \"2d72510e447ab60a9728aeea2362d8be2cbd7789\"@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"src/flutter\": \"abcd1234\"@@@",
       "@@@STEP_LOG_LINE@json.output@  }, @@@",
       "@@@STEP_LOG_LINE@json.output@  \"manifest\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"src/flutter\": {@@@",
@@ -2547,7 +2547,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_1/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/artifacts.zip"
+      "gs://flutter_infra/flutter/abcd1234/linux-x64/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2570,7 +2570,7 @@
     "infra_step": true,
     "name": "gsutil upload \"linux-x64/artifacts.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/artifacts.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/linux-x64/artifacts.zip@@@"
     ]
   },
   {
@@ -2641,7 +2641,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_2/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/linux-x64-embedder"
+      "gs://flutter_infra/flutter/abcd1234/linux-x64/linux-x64-embedder"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2664,7 +2664,7 @@
     "infra_step": true,
     "name": "gsutil upload \"linux-x64/linux-x64-embedder\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/linux-x64-embedder@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/linux-x64/linux-x64-embedder@@@"
     ]
   },
   {
@@ -2735,7 +2735,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_3/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/linux-x64-flutter-glfw.zip"
+      "gs://flutter_infra/flutter/abcd1234/linux-x64/linux-x64-flutter-glfw.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2758,7 +2758,7 @@
     "infra_step": true,
     "name": "gsutil upload \"linux-x64/linux-x64-flutter-glfw.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/linux-x64-flutter-glfw.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/linux-x64/linux-x64-flutter-glfw.zip@@@"
     ]
   },
   {
@@ -2829,7 +2829,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_4/flutter-cpp-client-wrapper-glfw.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/flutter-cpp-client-wrapper-glfw.zip"
+      "gs://flutter_infra/flutter/abcd1234/linux-x64/flutter-cpp-client-wrapper-glfw.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2852,7 +2852,7 @@
     "infra_step": true,
     "name": "gsutil upload linux-x64/flutter-cpp-client-wrapper-glfw.zip",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/flutter-cpp-client-wrapper-glfw.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/linux-x64/flutter-cpp-client-wrapper-glfw.zip@@@"
     ]
   },
   {
@@ -2923,7 +2923,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_5/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/font-subset.zip"
+      "gs://flutter_infra/flutter/abcd1234/linux-x64/font-subset.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2946,7 +2946,7 @@
     "infra_step": true,
     "name": "gsutil upload \"linux-x64/font-subset.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/font-subset.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/linux-x64/font-subset.zip@@@"
     ]
   },
   {
@@ -3017,7 +3017,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_6/flutter_patched_sdk.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/flutter_patched_sdk.zip"
+      "gs://flutter_infra/flutter/abcd1234/flutter_patched_sdk.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3040,7 +3040,7 @@
     "infra_step": true,
     "name": "gsutil upload flutter_patched_sdk.zip",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/flutter_patched_sdk.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/flutter_patched_sdk.zip@@@"
     ]
   },
   {
@@ -3174,7 +3174,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_7/flutter_patched_sdk_product.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/flutter_patched_sdk_product.zip"
+      "gs://flutter_infra/flutter/abcd1234/flutter_patched_sdk_product.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3197,7 +3197,7 @@
     "infra_step": true,
     "name": "gsutil upload flutter_patched_sdk_product.zip",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/flutter_patched_sdk_product.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/flutter_patched_sdk_product.zip@@@"
     ]
   },
   {
@@ -3268,7 +3268,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_8/dart-sdk-linux-x64.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/dart-sdk-linux-x64.zip"
+      "gs://flutter_infra/flutter/abcd1234/dart-sdk-linux-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3291,7 +3291,7 @@
     "infra_step": true,
     "name": "gsutil upload dart-sdk-linux-x64.zip",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/dart-sdk-linux-x64.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/dart-sdk-linux-x64.zip@@@"
     ]
   },
   {
@@ -3362,7 +3362,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_9/flutter-web-sdk-linux-x64.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/flutter-web-sdk-linux-x64.zip"
+      "gs://flutter_infra/flutter/abcd1234/flutter-web-sdk-linux-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3385,7 +3385,7 @@
     "infra_step": true,
     "name": "gsutil upload flutter-web-sdk-linux-x64.zip",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/flutter-web-sdk-linux-x64.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/flutter-web-sdk-linux-x64.zip@@@"
     ]
   },
   {
@@ -3928,7 +3928,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_10/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x86-jit-release/artifacts.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-x86-jit-release/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3951,7 +3951,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-x86-jit-release/artifacts.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x86-jit-release/artifacts.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x86-jit-release/artifacts.zip@@@"
     ]
   },
   {
@@ -4467,7 +4467,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_11/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm/artifacts.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -4490,7 +4490,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm/artifacts.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm/artifacts.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm/artifacts.zip@@@"
     ]
   },
   {
@@ -4561,7 +4561,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_12/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm/symbols.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm/symbols.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -4584,7 +4584,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm/symbols.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm/symbols.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm/symbols.zip@@@"
     ]
   },
   {
@@ -5066,7 +5066,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_13/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64/artifacts.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm64/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5089,7 +5089,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm64/artifacts.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64/artifacts.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64/artifacts.zip@@@"
     ]
   },
   {
@@ -5160,7 +5160,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_14/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64/symbols.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm64/symbols.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5183,7 +5183,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm64/symbols.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64/symbols.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64/symbols.zip@@@"
     ]
   },
   {
@@ -5665,7 +5665,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_15/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x86/artifacts.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-x86/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5688,7 +5688,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-x86/artifacts.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x86/artifacts.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x86/artifacts.zip@@@"
     ]
   },
   {
@@ -5759,7 +5759,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_16/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x86/symbols.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-x86/symbols.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5782,7 +5782,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-x86/symbols.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x86/symbols.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x86/symbols.zip@@@"
     ]
   },
   {
@@ -6264,7 +6264,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_17/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64/artifacts.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-x64/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6287,7 +6287,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-x64/artifacts.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64/artifacts.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64/artifacts.zip@@@"
     ]
   },
   {
@@ -6358,7 +6358,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_18/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64/symbols.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-x64/symbols.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6381,7 +6381,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-x64/symbols.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64/symbols.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64/symbols.zip@@@"
     ]
   },
   {
@@ -6835,7 +6835,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_19/sky_engine.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/sky_engine.zip"
+      "gs://flutter_infra/flutter/abcd1234/sky_engine.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6858,7 +6858,7 @@
     "infra_step": true,
     "name": "gsutil upload sky_engine.zip",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/sky_engine.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/sky_engine.zip@@@"
     ]
   },
   {
@@ -6946,7 +6946,7 @@
       "-ref",
       "latest",
       "-tag",
-      "git_revision:2d72510e447ab60a9728aeea2362d8be2cbd7789",
+      "git_revision:abcd1234",
       "-json-output",
       "/path/to/tmp/json"
     ],
@@ -7105,7 +7105,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_javadoc.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-javadoc.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-javadoc.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7128,7 +7128,7 @@
     "infra_step": true,
     "name": "gsutil upload javadoc",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-javadoc.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-javadoc.zip@@@"
     ]
   },
   {
@@ -8779,7 +8779,7 @@
     "cmd": [
       "./flutter/ci/firebase_testlab.sh",
       "[CACHE]/builder/src/flutter/testing/scenario_app/android/app/build/outputs/apk/debug/app-debug.apk",
-      "2d72510e447ab60a9728aeea2362d8be2cbd7789",
+      "abcd1234",
       "deadbeef"
     ],
     "cwd": "[CACHE]/builder/src",
@@ -8839,7 +8839,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_22/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-profile/artifacts.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm64-profile/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8862,7 +8862,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm64-profile/artifacts.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-profile/artifacts.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-profile/artifacts.zip@@@"
     ]
   },
   {
@@ -8933,7 +8933,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_23/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-profile/linux-x64.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm64-profile/linux-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8956,7 +8956,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm64-profile/linux-x64.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-profile/linux-x64.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-profile/linux-x64.zip@@@"
     ]
   },
   {
@@ -9027,7 +9027,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_24/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-profile/symbols.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm64-profile/symbols.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -9050,7 +9050,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm64-profile/symbols.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-profile/symbols.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-profile/symbols.zip@@@"
     ]
   },
   {
@@ -9915,7 +9915,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_25/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-release/artifacts.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm64-release/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -9938,7 +9938,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm64-release/artifacts.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-release/artifacts.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-release/artifacts.zip@@@"
     ]
   },
   {
@@ -10009,7 +10009,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_26/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-release/linux-x64.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm64-release/linux-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10032,7 +10032,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm64-release/linux-x64.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-release/linux-x64.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-release/linux-x64.zip@@@"
     ]
   },
   {
@@ -10103,7 +10103,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_27/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-release/symbols.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm64-release/symbols.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10126,7 +10126,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm64-release/symbols.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-release/symbols.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-release/symbols.zip@@@"
     ]
   },
   {
@@ -10203,7 +10203,7 @@
       "cp",
       "-r",
       "[CLEANUP]/tmp_tmp_28/sizes",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-release"
+      "gs://flutter_infra/flutter/abcd1234/android-arm64-release"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10226,7 +10226,7 @@
     "infra_step": true,
     "name": "gsutil upload treemap for out/android_release_arm64/libflutter.so",
     "~followup_annotations": [
-      "@@@STEP_LINK@Open Treemap@https://storage.googleapis.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm64-release/sizes/index.html@@@"
+      "@@@STEP_LINK@Open Treemap@https://storage.googleapis.com/flutter_infra/flutter/abcd1234/android-arm64-release/sizes/index.html@@@"
     ]
   },
   {
@@ -11091,7 +11091,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_29/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-profile/artifacts.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm-profile/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -11114,7 +11114,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm-profile/artifacts.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-profile/artifacts.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-profile/artifacts.zip@@@"
     ]
   },
   {
@@ -11185,7 +11185,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_30/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-profile/linux-x64.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm-profile/linux-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -11208,7 +11208,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm-profile/linux-x64.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-profile/linux-x64.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-profile/linux-x64.zip@@@"
     ]
   },
   {
@@ -11279,7 +11279,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_31/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-profile/symbols.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm-profile/symbols.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -11302,7 +11302,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm-profile/symbols.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-profile/symbols.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-profile/symbols.zip@@@"
     ]
   },
   {
@@ -12167,7 +12167,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_32/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-release/artifacts.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm-release/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -12190,7 +12190,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm-release/artifacts.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-release/artifacts.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-release/artifacts.zip@@@"
     ]
   },
   {
@@ -12261,7 +12261,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_33/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-release/linux-x64.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm-release/linux-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -12284,7 +12284,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm-release/linux-x64.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-release/linux-x64.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-release/linux-x64.zip@@@"
     ]
   },
   {
@@ -12355,7 +12355,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_34/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-release/symbols.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-arm-release/symbols.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -12378,7 +12378,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-arm-release/symbols.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-release/symbols.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-release/symbols.zip@@@"
     ]
   },
   {
@@ -12455,7 +12455,7 @@
       "cp",
       "-r",
       "[CLEANUP]/tmp_tmp_35/sizes",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-release"
+      "gs://flutter_infra/flutter/abcd1234/android-arm-release"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -12478,7 +12478,7 @@
     "infra_step": true,
     "name": "gsutil upload treemap for out/android_release/libflutter.so",
     "~followup_annotations": [
-      "@@@STEP_LINK@Open Treemap@https://storage.googleapis.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-arm-release/sizes/index.html@@@"
+      "@@@STEP_LINK@Open Treemap@https://storage.googleapis.com/flutter_infra/flutter/abcd1234/android-arm-release/sizes/index.html@@@"
     ]
   },
   {
@@ -13343,7 +13343,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_36/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-profile/artifacts.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-x64-profile/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -13366,7 +13366,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-x64-profile/artifacts.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-profile/artifacts.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-profile/artifacts.zip@@@"
     ]
   },
   {
@@ -13437,7 +13437,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_37/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-profile/linux-x64.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-x64-profile/linux-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -13460,7 +13460,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-x64-profile/linux-x64.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-profile/linux-x64.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-profile/linux-x64.zip@@@"
     ]
   },
   {
@@ -13531,7 +13531,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_38/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-profile/symbols.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-x64-profile/symbols.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -13554,7 +13554,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-x64-profile/symbols.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-profile/symbols.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-profile/symbols.zip@@@"
     ]
   },
   {
@@ -14419,7 +14419,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_39/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-release/artifacts.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-x64-release/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -14442,7 +14442,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-x64-release/artifacts.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-release/artifacts.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-release/artifacts.zip@@@"
     ]
   },
   {
@@ -14513,7 +14513,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_40/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-release/linux-x64.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-x64-release/linux-x64.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -14536,7 +14536,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-x64-release/linux-x64.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-release/linux-x64.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-release/linux-x64.zip@@@"
     ]
   },
   {
@@ -14607,7 +14607,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_41/artifacts.zip",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-release/symbols.zip"
+      "gs://flutter_infra/flutter/abcd1234/android-x64-release/symbols.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -14630,7 +14630,7 @@
     "infra_step": true,
     "name": "gsutil upload \"android-x64-release/symbols.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/android-x64-release/symbols.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-release/symbols.zip@@@"
     ]
   },
   {
@@ -14691,7 +14691,7 @@
     },
     "infra_step": true,
     "name": "buildbucket.schedule",
-    "stdin": "{\"requests\": [{\"scheduleBuild\": {\"builder\": {\"bucket\": \"ci\", \"builder\": \"Linux Engine Drone\", \"project\": \"flutter\"}, \"experimental\": \"NO\", \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", \"gitilesCommit\": {\"host\": \"chromium.googlesource.com\", \"id\": \"2d72510e447ab60a9728aeea2362d8be2cbd7789\", \"project\": \"external/github.com/flutter/engine\", \"ref\": \"refs/heads/master\"}, \"priority\": 30, \"properties\": {\"builds\": [{\"dir\": \"fuchsia_profile_arm64\", \"gn_args\": [\"--fuchsia\", \"--fuchsia-cpu\", \"arm64\", \"--runtime-mode\", \"profile\"], \"output_dirs\": [\"dart_jit_runner_far\", \"dart_aot_runner_far\", \"flutter_jit_runner_far\", \"flutter_aot_runner_far\", \"dart_runner_patched_sdk\", \"flutter_runner_patched_sdk\", \"clang_x64\", \"flutter-debug-symbols-profile-fuchsia-arm64\"], \"output_files\": [\"dart_jit_runner\", \"dart_aot_runner\", \"flutter_jit_runner\", \"flutter_aot_runner\"], \"targets\": [\"flutter/shell/platform/fuchsia:fuchsia\"]}]}, \"requestId\": \"8945511751514863184-00000000-0000-0000-0000-000000001337\", \"swarming\": {\"parentRunId\": \"deadbeef\"}, \"tags\": [{\"key\": \"user_agent\", \"value\": \"recipe\"}]}}]}",
+    "stdin": "{\"requests\": [{\"scheduleBuild\": {\"builder\": {\"bucket\": \"ci\", \"builder\": \"Linux Engine Drone\", \"project\": \"flutter\"}, \"experimental\": \"NO\", \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", \"gitilesCommit\": {\"host\": \"chromium.googlesource.com\", \"id\": \"abcd1234\", \"project\": \"external/github.com/flutter/engine\", \"ref\": \"refs/heads/master\"}, \"priority\": 30, \"properties\": {\"builds\": [{\"dir\": \"fuchsia_profile_arm64\", \"gn_args\": [\"--fuchsia\", \"--fuchsia-cpu\", \"arm64\", \"--runtime-mode\", \"profile\"], \"output_dirs\": [\"dart_jit_runner_far\", \"dart_aot_runner_far\", \"flutter_jit_runner_far\", \"flutter_aot_runner_far\", \"dart_runner_patched_sdk\", \"flutter_runner_patched_sdk\", \"clang_x64\", \"flutter-debug-symbols-profile-fuchsia-arm64\"], \"output_files\": [\"dart_jit_runner\", \"dart_aot_runner\", \"flutter_jit_runner\", \"flutter_aot_runner\"], \"targets\": [\"flutter/shell/platform/fuchsia:fuchsia\"]}]}, \"requestId\": \"8945511751514863184-00000000-0000-0000-0000-000000001337\", \"swarming\": {\"parentRunId\": \"deadbeef\"}, \"tags\": [{\"key\": \"user_agent\", \"value\": \"recipe\"}]}}]}",
     "~followup_annotations": [
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"responses\": [@@@",
@@ -14721,7 +14721,7 @@
       "@@@STEP_LOG_LINE@request@        \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", @@@",
       "@@@STEP_LOG_LINE@request@        \"gitilesCommit\": {@@@",
       "@@@STEP_LOG_LINE@request@          \"host\": \"chromium.googlesource.com\", @@@",
-      "@@@STEP_LOG_LINE@request@          \"id\": \"2d72510e447ab60a9728aeea2362d8be2cbd7789\", @@@",
+      "@@@STEP_LOG_LINE@request@          \"id\": \"abcd1234\", @@@",
       "@@@STEP_LOG_LINE@request@          \"project\": \"external/github.com/flutter/engine\", @@@",
       "@@@STEP_LOG_LINE@request@          \"ref\": \"refs/heads/master\"@@@",
       "@@@STEP_LOG_LINE@request@        }, @@@",
@@ -14804,7 +14804,7 @@
     },
     "infra_step": true,
     "name": "buildbucket.schedule (2)",
-    "stdin": "{\"requests\": [{\"scheduleBuild\": {\"builder\": {\"bucket\": \"ci\", \"builder\": \"Linux Engine Drone\", \"project\": \"flutter\"}, \"experimental\": \"NO\", \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", \"gitilesCommit\": {\"host\": \"chromium.googlesource.com\", \"id\": \"2d72510e447ab60a9728aeea2362d8be2cbd7789\", \"project\": \"external/github.com/flutter/engine\", \"ref\": \"refs/heads/master\"}, \"priority\": 30, \"properties\": {\"builds\": [{\"dir\": \"fuchsia_release_arm64\", \"gn_args\": [\"--fuchsia\", \"--fuchsia-cpu\", \"arm64\", \"--runtime-mode\", \"release\"], \"output_dirs\": [\"dart_jit_product_runner_far\", \"dart_aot_product_runner_far\", \"flutter_jit_product_runner_far\", \"flutter_aot_product_runner_far\", \"dart_runner_patched_sdk\", \"flutter_runner_patched_sdk\", \"clang_x64\", \"flutter-debug-symbols-release-fuchsia-arm64\"], \"output_files\": [\"dart_jit_product_runner\", \"dart_aot_product_runner\", \"flutter_jit_product_runner\", \"flutter_aot_product_runner\"], \"targets\": [\"flutter/shell/platform/fuchsia:fuchsia\"]}]}, \"requestId\": \"8945511751514863184-00000000-0000-0000-0000-00000000133a\", \"swarming\": {\"parentRunId\": \"deadbeef\"}, \"tags\": [{\"key\": \"user_agent\", \"value\": \"recipe\"}]}}]}",
+    "stdin": "{\"requests\": [{\"scheduleBuild\": {\"builder\": {\"bucket\": \"ci\", \"builder\": \"Linux Engine Drone\", \"project\": \"flutter\"}, \"experimental\": \"NO\", \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", \"gitilesCommit\": {\"host\": \"chromium.googlesource.com\", \"id\": \"abcd1234\", \"project\": \"external/github.com/flutter/engine\", \"ref\": \"refs/heads/master\"}, \"priority\": 30, \"properties\": {\"builds\": [{\"dir\": \"fuchsia_release_arm64\", \"gn_args\": [\"--fuchsia\", \"--fuchsia-cpu\", \"arm64\", \"--runtime-mode\", \"release\"], \"output_dirs\": [\"dart_jit_product_runner_far\", \"dart_aot_product_runner_far\", \"flutter_jit_product_runner_far\", \"flutter_aot_product_runner_far\", \"dart_runner_patched_sdk\", \"flutter_runner_patched_sdk\", \"clang_x64\", \"flutter-debug-symbols-release-fuchsia-arm64\"], \"output_files\": [\"dart_jit_product_runner\", \"dart_aot_product_runner\", \"flutter_jit_product_runner\", \"flutter_aot_product_runner\"], \"targets\": [\"flutter/shell/platform/fuchsia:fuchsia\"]}]}, \"requestId\": \"8945511751514863184-00000000-0000-0000-0000-00000000133a\", \"swarming\": {\"parentRunId\": \"deadbeef\"}, \"tags\": [{\"key\": \"user_agent\", \"value\": \"recipe\"}]}}]}",
     "~followup_annotations": [
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"responses\": [@@@",
@@ -14834,7 +14834,7 @@
       "@@@STEP_LOG_LINE@request@        \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", @@@",
       "@@@STEP_LOG_LINE@request@        \"gitilesCommit\": {@@@",
       "@@@STEP_LOG_LINE@request@          \"host\": \"chromium.googlesource.com\", @@@",
-      "@@@STEP_LOG_LINE@request@          \"id\": \"2d72510e447ab60a9728aeea2362d8be2cbd7789\", @@@",
+      "@@@STEP_LOG_LINE@request@          \"id\": \"abcd1234\", @@@",
       "@@@STEP_LOG_LINE@request@          \"project\": \"external/github.com/flutter/engine\", @@@",
       "@@@STEP_LOG_LINE@request@          \"ref\": \"refs/heads/master\"@@@",
       "@@@STEP_LOG_LINE@request@        }, @@@",
@@ -14917,7 +14917,7 @@
     },
     "infra_step": true,
     "name": "buildbucket.schedule (3)",
-    "stdin": "{\"requests\": [{\"scheduleBuild\": {\"builder\": {\"bucket\": \"ci\", \"builder\": \"Linux Engine Drone\", \"project\": \"flutter\"}, \"experimental\": \"NO\", \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", \"gitilesCommit\": {\"host\": \"chromium.googlesource.com\", \"id\": \"2d72510e447ab60a9728aeea2362d8be2cbd7789\", \"project\": \"external/github.com/flutter/engine\", \"ref\": \"refs/heads/master\"}, \"priority\": 30, \"properties\": {\"builds\": [{\"dir\": \"fuchsia_profile_x64\", \"gn_args\": [\"--fuchsia\", \"--fuchsia-cpu\", \"x64\", \"--runtime-mode\", \"profile\"], \"output_dirs\": [\"dart_jit_runner_far\", \"dart_aot_runner_far\", \"flutter_jit_runner_far\", \"flutter_aot_runner_far\", \"dart_runner_patched_sdk\", \"flutter_runner_patched_sdk\", \"clang_x64\", \"flutter-debug-symbols-profile-fuchsia-x64\"], \"output_files\": [\"dart_jit_runner\", \"dart_aot_runner\", \"flutter_jit_runner\", \"flutter_aot_runner\"], \"targets\": [\"flutter/shell/platform/fuchsia:fuchsia\"]}]}, \"requestId\": \"8945511751514863184-00000000-0000-0000-0000-00000000133d\", \"swarming\": {\"parentRunId\": \"deadbeef\"}, \"tags\": [{\"key\": \"user_agent\", \"value\": \"recipe\"}]}}]}",
+    "stdin": "{\"requests\": [{\"scheduleBuild\": {\"builder\": {\"bucket\": \"ci\", \"builder\": \"Linux Engine Drone\", \"project\": \"flutter\"}, \"experimental\": \"NO\", \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", \"gitilesCommit\": {\"host\": \"chromium.googlesource.com\", \"id\": \"abcd1234\", \"project\": \"external/github.com/flutter/engine\", \"ref\": \"refs/heads/master\"}, \"priority\": 30, \"properties\": {\"builds\": [{\"dir\": \"fuchsia_profile_x64\", \"gn_args\": [\"--fuchsia\", \"--fuchsia-cpu\", \"x64\", \"--runtime-mode\", \"profile\"], \"output_dirs\": [\"dart_jit_runner_far\", \"dart_aot_runner_far\", \"flutter_jit_runner_far\", \"flutter_aot_runner_far\", \"dart_runner_patched_sdk\", \"flutter_runner_patched_sdk\", \"clang_x64\", \"flutter-debug-symbols-profile-fuchsia-x64\"], \"output_files\": [\"dart_jit_runner\", \"dart_aot_runner\", \"flutter_jit_runner\", \"flutter_aot_runner\"], \"targets\": [\"flutter/shell/platform/fuchsia:fuchsia\"]}]}, \"requestId\": \"8945511751514863184-00000000-0000-0000-0000-00000000133d\", \"swarming\": {\"parentRunId\": \"deadbeef\"}, \"tags\": [{\"key\": \"user_agent\", \"value\": \"recipe\"}]}}]}",
     "~followup_annotations": [
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"responses\": [@@@",
@@ -14947,7 +14947,7 @@
       "@@@STEP_LOG_LINE@request@        \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", @@@",
       "@@@STEP_LOG_LINE@request@        \"gitilesCommit\": {@@@",
       "@@@STEP_LOG_LINE@request@          \"host\": \"chromium.googlesource.com\", @@@",
-      "@@@STEP_LOG_LINE@request@          \"id\": \"2d72510e447ab60a9728aeea2362d8be2cbd7789\", @@@",
+      "@@@STEP_LOG_LINE@request@          \"id\": \"abcd1234\", @@@",
       "@@@STEP_LOG_LINE@request@          \"project\": \"external/github.com/flutter/engine\", @@@",
       "@@@STEP_LOG_LINE@request@          \"ref\": \"refs/heads/master\"@@@",
       "@@@STEP_LOG_LINE@request@        }, @@@",
@@ -15030,7 +15030,7 @@
     },
     "infra_step": true,
     "name": "buildbucket.schedule (4)",
-    "stdin": "{\"requests\": [{\"scheduleBuild\": {\"builder\": {\"bucket\": \"ci\", \"builder\": \"Linux Engine Drone\", \"project\": \"flutter\"}, \"experimental\": \"NO\", \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", \"gitilesCommit\": {\"host\": \"chromium.googlesource.com\", \"id\": \"2d72510e447ab60a9728aeea2362d8be2cbd7789\", \"project\": \"external/github.com/flutter/engine\", \"ref\": \"refs/heads/master\"}, \"priority\": 30, \"properties\": {\"builds\": [{\"dir\": \"fuchsia_release_x64\", \"gn_args\": [\"--fuchsia\", \"--fuchsia-cpu\", \"x64\", \"--runtime-mode\", \"release\"], \"output_dirs\": [\"dart_jit_product_runner_far\", \"dart_aot_product_runner_far\", \"flutter_jit_product_runner_far\", \"flutter_aot_product_runner_far\", \"dart_runner_patched_sdk\", \"flutter_runner_patched_sdk\", \"clang_x64\", \"flutter-debug-symbols-release-fuchsia-x64\"], \"output_files\": [\"dart_jit_product_runner\", \"dart_aot_product_runner\", \"flutter_jit_product_runner\", \"flutter_aot_product_runner\"], \"targets\": [\"flutter/shell/platform/fuchsia:fuchsia\"]}]}, \"requestId\": \"8945511751514863184-00000000-0000-0000-0000-000000001340\", \"swarming\": {\"parentRunId\": \"deadbeef\"}, \"tags\": [{\"key\": \"user_agent\", \"value\": \"recipe\"}]}}]}",
+    "stdin": "{\"requests\": [{\"scheduleBuild\": {\"builder\": {\"bucket\": \"ci\", \"builder\": \"Linux Engine Drone\", \"project\": \"flutter\"}, \"experimental\": \"NO\", \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", \"gitilesCommit\": {\"host\": \"chromium.googlesource.com\", \"id\": \"abcd1234\", \"project\": \"external/github.com/flutter/engine\", \"ref\": \"refs/heads/master\"}, \"priority\": 30, \"properties\": {\"builds\": [{\"dir\": \"fuchsia_release_x64\", \"gn_args\": [\"--fuchsia\", \"--fuchsia-cpu\", \"x64\", \"--runtime-mode\", \"release\"], \"output_dirs\": [\"dart_jit_product_runner_far\", \"dart_aot_product_runner_far\", \"flutter_jit_product_runner_far\", \"flutter_aot_product_runner_far\", \"dart_runner_patched_sdk\", \"flutter_runner_patched_sdk\", \"clang_x64\", \"flutter-debug-symbols-release-fuchsia-x64\"], \"output_files\": [\"dart_jit_product_runner\", \"dart_aot_product_runner\", \"flutter_jit_product_runner\", \"flutter_aot_product_runner\"], \"targets\": [\"flutter/shell/platform/fuchsia:fuchsia\"]}]}, \"requestId\": \"8945511751514863184-00000000-0000-0000-0000-000000001340\", \"swarming\": {\"parentRunId\": \"deadbeef\"}, \"tags\": [{\"key\": \"user_agent\", \"value\": \"recipe\"}]}}]}",
     "~followup_annotations": [
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"responses\": [@@@",
@@ -15060,7 +15060,7 @@
       "@@@STEP_LOG_LINE@request@        \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", @@@",
       "@@@STEP_LOG_LINE@request@        \"gitilesCommit\": {@@@",
       "@@@STEP_LOG_LINE@request@          \"host\": \"chromium.googlesource.com\", @@@",
-      "@@@STEP_LOG_LINE@request@          \"id\": \"2d72510e447ab60a9728aeea2362d8be2cbd7789\", @@@",
+      "@@@STEP_LOG_LINE@request@          \"id\": \"abcd1234\", @@@",
       "@@@STEP_LOG_LINE@request@          \"project\": \"external/github.com/flutter/engine\", @@@",
       "@@@STEP_LOG_LINE@request@          \"ref\": \"refs/heads/master\"@@@",
       "@@@STEP_LOG_LINE@request@        }, @@@",
@@ -15537,7 +15537,7 @@
       "python",
       "[CACHE]/builder/src/flutter/tools/fuchsia/build_fuchsia_artifacts.py",
       "--engine-version",
-      "2d72510e447ab60a9728aeea2362d8be2cbd7789",
+      "abcd1234",
       "--skip-build",
       "--archs",
       "x64",
@@ -16800,12 +16800,13 @@
   },
   {
     "cmd": [
-      "python",
-      "[CACHE]/builder/src/flutter/tools/fuchsia/build_fuchsia_artifacts.py",
-      "--engine-version",
-      "2d72510e447ab60a9728aeea2362d8be2cbd7789",
-      "--skip-build",
-      "--upload"
+      "cipd",
+      "search",
+      "flutter/fuchsia",
+      "-tag",
+      "git_revision:abcd1234",
+      "-json-output",
+      "/path/to/tmp/json"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -16825,620 +16826,17 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "Upload Fuchsia Artifacts"
-  },
-  {
-    "cmd": [],
-    "name": "Upload Fuchsia Debug Symbols"
-  },
-  {
-    "cmd": [],
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64",
+    "name": "cipd search flutter/fuchsia git_revision:abcd1234",
     "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "listdir",
-      "[CACHE]/builder/src/out/fuchsia_debug_arm64/flutter-debug-symbols-debug-fuchsia-arm64",
-      "--recursive"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.list [CACHE]/builder/src/out/fuchsia_debug_arm64/flutter-debug-symbols-debug-fuchsia-arm64",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LOG_LINE@listdir@[CACHE]/builder/src/out/fuchsia_debug_arm64/flutter-debug-symbols-debug-fuchsia-arm64/test_dir/sub_dir/test_file.debug@@@",
-      "@@@STEP_LOG_END@listdir@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
-      "--",
-      "RECIPE_REPO[depot_tools]/gsutil.py",
-      "----",
-      "cp",
-      "-n",
-      "[CACHE]/builder/src/out/fuchsia_debug_arm64/flutter-debug-symbols-debug-fuchsia-arm64/test_dir/sub_dir/test_file.debug",
-      "gs://fuchsia-artifacts-release/debug/sub_dirtest_file.debug"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.gsutil upload \"sub_dirtest_file.debug\"",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "listdir",
-      "[CACHE]/builder/src/out/fuchsia_profile_arm64/flutter-debug-symbols-profile-fuchsia-arm64",
-      "--recursive"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.list [CACHE]/builder/src/out/fuchsia_profile_arm64/flutter-debug-symbols-profile-fuchsia-arm64",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LOG_LINE@listdir@[CACHE]/builder/src/out/fuchsia_profile_arm64/flutter-debug-symbols-profile-fuchsia-arm64/test_dir/sub_dir/test_file.debug@@@",
-      "@@@STEP_LOG_END@listdir@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
-      "--",
-      "RECIPE_REPO[depot_tools]/gsutil.py",
-      "----",
-      "cp",
-      "-n",
-      "[CACHE]/builder/src/out/fuchsia_profile_arm64/flutter-debug-symbols-profile-fuchsia-arm64/test_dir/sub_dir/test_file.debug",
-      "gs://fuchsia-artifacts-release/debug/sub_dirtest_file.debug"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.gsutil upload \"sub_dirtest_file.debug\" (2)",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "listdir",
-      "[CACHE]/builder/src/out/fuchsia_release_arm64/flutter-debug-symbols-release-fuchsia-arm64",
-      "--recursive"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.list [CACHE]/builder/src/out/fuchsia_release_arm64/flutter-debug-symbols-release-fuchsia-arm64",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LOG_LINE@listdir@[CACHE]/builder/src/out/fuchsia_release_arm64/flutter-debug-symbols-release-fuchsia-arm64/test_dir/sub_dir/test_file.debug@@@",
-      "@@@STEP_LOG_END@listdir@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
-      "--",
-      "RECIPE_REPO[depot_tools]/gsutil.py",
-      "----",
-      "cp",
-      "-n",
-      "[CACHE]/builder/src/out/fuchsia_release_arm64/flutter-debug-symbols-release-fuchsia-arm64/test_dir/sub_dir/test_file.debug",
-      "gs://fuchsia-artifacts-release/debug/sub_dirtest_file.debug"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.gsutil upload \"sub_dirtest_file.debug\" (3)",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "[CACHE]/builder/src/flutter/tools/fuchsia/merge_and_upload_debug_symbols.py",
-      "--engine-version",
-      "2d72510e447ab60a9728aeea2362d8be2cbd7789",
-      "--upload",
-      "--target-arch",
-      "arm64",
-      "--out-dir",
-      "[CLEANUP]/tmp_tmp_43",
-      "--symbol-dirs",
-      "[CACHE]/builder/src/out/fuchsia_debug_arm64/flutter-debug-symbols-debug-fuchsia-arm64",
-      "[CACHE]/builder/src/out/fuchsia_profile_arm64/flutter-debug-symbols-profile-fuchsia-arm64",
-      "[CACHE]/builder/src/out/fuchsia_release_arm64/flutter-debug-symbols-release-fuchsia-arm64"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "Upload Fuchsia Debug Symbols.Upload to CIPD for arch: arm64",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "rmtree",
-      "[CLEANUP]/tmp_tmp_43"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.temp dir for FuchsiaDebugSymbols",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [],
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "listdir",
-      "[CACHE]/builder/src/out/fuchsia_debug_x64/flutter-debug-symbols-debug-fuchsia-x64",
-      "--recursive"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.list [CACHE]/builder/src/out/fuchsia_debug_x64/flutter-debug-symbols-debug-fuchsia-x64",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LOG_LINE@listdir@[CACHE]/builder/src/out/fuchsia_debug_x64/flutter-debug-symbols-debug-fuchsia-x64/test_dir/sub_dir/test_file.debug@@@",
-      "@@@STEP_LOG_END@listdir@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
-      "--",
-      "RECIPE_REPO[depot_tools]/gsutil.py",
-      "----",
-      "cp",
-      "-n",
-      "[CACHE]/builder/src/out/fuchsia_debug_x64/flutter-debug-symbols-debug-fuchsia-x64/test_dir/sub_dir/test_file.debug",
-      "gs://fuchsia-artifacts-release/debug/sub_dirtest_file.debug"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.gsutil upload \"sub_dirtest_file.debug\"",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "listdir",
-      "[CACHE]/builder/src/out/fuchsia_profile_x64/flutter-debug-symbols-profile-fuchsia-x64",
-      "--recursive"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.list [CACHE]/builder/src/out/fuchsia_profile_x64/flutter-debug-symbols-profile-fuchsia-x64",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LOG_LINE@listdir@[CACHE]/builder/src/out/fuchsia_profile_x64/flutter-debug-symbols-profile-fuchsia-x64/test_dir/sub_dir/test_file.debug@@@",
-      "@@@STEP_LOG_END@listdir@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
-      "--",
-      "RECIPE_REPO[depot_tools]/gsutil.py",
-      "----",
-      "cp",
-      "-n",
-      "[CACHE]/builder/src/out/fuchsia_profile_x64/flutter-debug-symbols-profile-fuchsia-x64/test_dir/sub_dir/test_file.debug",
-      "gs://fuchsia-artifacts-release/debug/sub_dirtest_file.debug"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.gsutil upload \"sub_dirtest_file.debug\" (2)",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "listdir",
-      "[CACHE]/builder/src/out/fuchsia_release_x64/flutter-debug-symbols-release-fuchsia-x64",
-      "--recursive"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.list [CACHE]/builder/src/out/fuchsia_release_x64/flutter-debug-symbols-release-fuchsia-x64",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LOG_LINE@listdir@[CACHE]/builder/src/out/fuchsia_release_x64/flutter-debug-symbols-release-fuchsia-x64/test_dir/sub_dir/test_file.debug@@@",
-      "@@@STEP_LOG_END@listdir@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
-      "--",
-      "RECIPE_REPO[depot_tools]/gsutil.py",
-      "----",
-      "cp",
-      "-n",
-      "[CACHE]/builder/src/out/fuchsia_release_x64/flutter-debug-symbols-release-fuchsia-x64/test_dir/sub_dir/test_file.debug",
-      "gs://fuchsia-artifacts-release/debug/sub_dirtest_file.debug"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.gsutil upload \"sub_dirtest_file.debug\" (3)",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "[CACHE]/builder/src/flutter/tools/fuchsia/merge_and_upload_debug_symbols.py",
-      "--engine-version",
-      "2d72510e447ab60a9728aeea2362d8be2cbd7789",
-      "--upload",
-      "--target-arch",
-      "x64",
-      "--out-dir",
-      "[CLEANUP]/tmp_tmp_44",
-      "--symbol-dirs",
-      "[CACHE]/builder/src/out/fuchsia_debug_x64/flutter-debug-symbols-debug-fuchsia-x64",
-      "[CACHE]/builder/src/out/fuchsia_profile_x64/flutter-debug-symbols-profile-fuchsia-x64",
-      "[CACHE]/builder/src/out/fuchsia_release_x64/flutter-debug-symbols-release-fuchsia-x64"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "Upload Fuchsia Debug Symbols.Upload to CIPD for arch: x64",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "rmtree",
-      "[CLEANUP]/tmp_tmp_44"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.temp dir for FuchsiaDebugSymbols (2)",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"instance_id\": \"resolved-instance_id-of-instance_id_1---\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"package\": \"flutter/fuchsia\"@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
     ]
   },
   {
@@ -17486,7 +16884,7 @@
       "----",
       "cp",
       "[CLEANUP]/fuchsia_stamp",
-      "gs://flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/fuchsia/fuchsia.stamp"
+      "gs://flutter_infra/flutter/abcd1234/fuchsia/fuchsia.stamp"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -17509,7 +16907,7 @@
     "infra_step": true,
     "name": "gsutil upload \"fuchsia.stamp\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/fuchsia/fuchsia.stamp@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/fuchsia/fuchsia.stamp@@@"
     ]
   },
   {

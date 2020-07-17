@@ -18694,14 +18694,652 @@
     "name": "cipd search flutter/fuchsia git_revision:abcd1234",
     "~followup_annotations": [
       "@@@STEP_LOG_LINE@json.output@{@@@",
-      "@@@STEP_LOG_LINE@json.output@  \"result\": [@@@",
-      "@@@STEP_LOG_LINE@json.output@    {@@@",
-      "@@@STEP_LOG_LINE@json.output@      \"instance_id\": \"resolved-instance_id-of-instance_id_1---\", @@@",
-      "@@@STEP_LOG_LINE@json.output@      \"package\": \"flutter/fuchsia\"@@@",
-      "@@@STEP_LOG_LINE@json.output@    }@@@",
-      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": []@@@",
       "@@@STEP_LOG_LINE@json.output@}@@@",
       "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/fuchsia/build_fuchsia_artifacts.py",
+      "--engine-version",
+      "abcd1234",
+      "--skip-build",
+      "--upload"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Upload Fuchsia Artifacts"
+  },
+  {
+    "cmd": [],
+    "name": "Upload Fuchsia Debug Symbols"
+  },
+  {
+    "cmd": [],
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "listdir",
+      "[CACHE]/builder/src/out/fuchsia_debug_arm64/flutter-debug-symbols-debug-fuchsia-arm64",
+      "--recursive"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.list [CACHE]/builder/src/out/fuchsia_debug_arm64/flutter-debug-symbols-debug-fuchsia-arm64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LOG_LINE@listdir@[CACHE]/builder/src/out/fuchsia_debug_arm64/flutter-debug-symbols-debug-fuchsia-arm64/test_dir/sub_dir/test_file.debug@@@",
+      "@@@STEP_LOG_END@listdir@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "-n",
+      "[CACHE]/builder/src/out/fuchsia_debug_arm64/flutter-debug-symbols-debug-fuchsia-arm64/test_dir/sub_dir/test_file.debug",
+      "gs://fuchsia-artifacts-release/debug/sub_dirtest_file.debug"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.gsutil upload \"sub_dirtest_file.debug\"",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "listdir",
+      "[CACHE]/builder/src/out/fuchsia_profile_arm64/flutter-debug-symbols-profile-fuchsia-arm64",
+      "--recursive"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.list [CACHE]/builder/src/out/fuchsia_profile_arm64/flutter-debug-symbols-profile-fuchsia-arm64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LOG_LINE@listdir@[CACHE]/builder/src/out/fuchsia_profile_arm64/flutter-debug-symbols-profile-fuchsia-arm64/test_dir/sub_dir/test_file.debug@@@",
+      "@@@STEP_LOG_END@listdir@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "-n",
+      "[CACHE]/builder/src/out/fuchsia_profile_arm64/flutter-debug-symbols-profile-fuchsia-arm64/test_dir/sub_dir/test_file.debug",
+      "gs://fuchsia-artifacts-release/debug/sub_dirtest_file.debug"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.gsutil upload \"sub_dirtest_file.debug\" (2)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "listdir",
+      "[CACHE]/builder/src/out/fuchsia_release_arm64/flutter-debug-symbols-release-fuchsia-arm64",
+      "--recursive"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.list [CACHE]/builder/src/out/fuchsia_release_arm64/flutter-debug-symbols-release-fuchsia-arm64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LOG_LINE@listdir@[CACHE]/builder/src/out/fuchsia_release_arm64/flutter-debug-symbols-release-fuchsia-arm64/test_dir/sub_dir/test_file.debug@@@",
+      "@@@STEP_LOG_END@listdir@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "-n",
+      "[CACHE]/builder/src/out/fuchsia_release_arm64/flutter-debug-symbols-release-fuchsia-arm64/test_dir/sub_dir/test_file.debug",
+      "gs://fuchsia-artifacts-release/debug/sub_dirtest_file.debug"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.gsutil upload \"sub_dirtest_file.debug\" (3)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/fuchsia/merge_and_upload_debug_symbols.py",
+      "--engine-version",
+      "abcd1234",
+      "--upload",
+      "--target-arch",
+      "arm64",
+      "--out-dir",
+      "[CLEANUP]/tmp_tmp_45",
+      "--symbol-dirs",
+      "[CACHE]/builder/src/out/fuchsia_debug_arm64/flutter-debug-symbols-debug-fuchsia-arm64",
+      "[CACHE]/builder/src/out/fuchsia_profile_arm64/flutter-debug-symbols-profile-fuchsia-arm64",
+      "[CACHE]/builder/src/out/fuchsia_release_arm64/flutter-debug-symbols-release-fuchsia-arm64"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Upload Fuchsia Debug Symbols.Upload to CIPD for arch: arm64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/tmp_tmp_45"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload Fuchsia Debug Symbols.temp dir for FuchsiaDebugSymbols",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "listdir",
+      "[CACHE]/builder/src/out/fuchsia_debug_x64/flutter-debug-symbols-debug-fuchsia-x64",
+      "--recursive"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.list [CACHE]/builder/src/out/fuchsia_debug_x64/flutter-debug-symbols-debug-fuchsia-x64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LOG_LINE@listdir@[CACHE]/builder/src/out/fuchsia_debug_x64/flutter-debug-symbols-debug-fuchsia-x64/test_dir/sub_dir/test_file.debug@@@",
+      "@@@STEP_LOG_END@listdir@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "-n",
+      "[CACHE]/builder/src/out/fuchsia_debug_x64/flutter-debug-symbols-debug-fuchsia-x64/test_dir/sub_dir/test_file.debug",
+      "gs://fuchsia-artifacts-release/debug/sub_dirtest_file.debug"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.gsutil upload \"sub_dirtest_file.debug\"",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "listdir",
+      "[CACHE]/builder/src/out/fuchsia_profile_x64/flutter-debug-symbols-profile-fuchsia-x64",
+      "--recursive"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.list [CACHE]/builder/src/out/fuchsia_profile_x64/flutter-debug-symbols-profile-fuchsia-x64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LOG_LINE@listdir@[CACHE]/builder/src/out/fuchsia_profile_x64/flutter-debug-symbols-profile-fuchsia-x64/test_dir/sub_dir/test_file.debug@@@",
+      "@@@STEP_LOG_END@listdir@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "-n",
+      "[CACHE]/builder/src/out/fuchsia_profile_x64/flutter-debug-symbols-profile-fuchsia-x64/test_dir/sub_dir/test_file.debug",
+      "gs://fuchsia-artifacts-release/debug/sub_dirtest_file.debug"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.gsutil upload \"sub_dirtest_file.debug\" (2)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "listdir",
+      "[CACHE]/builder/src/out/fuchsia_release_x64/flutter-debug-symbols-release-fuchsia-x64",
+      "--recursive"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.list [CACHE]/builder/src/out/fuchsia_release_x64/flutter-debug-symbols-release-fuchsia-x64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LOG_LINE@listdir@[CACHE]/builder/src/out/fuchsia_release_x64/flutter-debug-symbols-release-fuchsia-x64/test_dir/sub_dir/test_file.debug@@@",
+      "@@@STEP_LOG_END@listdir@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "-n",
+      "[CACHE]/builder/src/out/fuchsia_release_x64/flutter-debug-symbols-release-fuchsia-x64/test_dir/sub_dir/test_file.debug",
+      "gs://fuchsia-artifacts-release/debug/sub_dirtest_file.debug"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.gsutil upload \"sub_dirtest_file.debug\" (3)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/fuchsia/merge_and_upload_debug_symbols.py",
+      "--engine-version",
+      "abcd1234",
+      "--upload",
+      "--target-arch",
+      "x64",
+      "--out-dir",
+      "[CLEANUP]/tmp_tmp_46",
+      "--symbol-dirs",
+      "[CACHE]/builder/src/out/fuchsia_debug_x64/flutter-debug-symbols-debug-fuchsia-x64",
+      "[CACHE]/builder/src/out/fuchsia_profile_x64/flutter-debug-symbols-profile-fuchsia-x64",
+      "[CACHE]/builder/src/out/fuchsia_release_x64/flutter-debug-symbols-release-fuchsia-x64"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Upload Fuchsia Debug Symbols.Upload to CIPD for arch: x64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/tmp_tmp_46"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload Fuchsia Debug Symbols.temp dir for FuchsiaDebugSymbols (2)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {

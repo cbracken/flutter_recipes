@@ -800,6 +800,16 @@ def UploadFuchsiaDebugSymbols(api):
   return
 
 
+def ShouldPublishToCIPD(api, package_name, git_rev):
+  """
+  CIPD will, upon request, tag multiple instances with the same tag. However, if
+  you try to retrieve that tag, it will throw an error complaining that the tag
+  amgiguously refers to multiple instances. We should check before tagging.
+  """
+  instances = api.cipd.search(package_name, "git_revision:%s" % git_rev)
+  return len(instances) == 0
+
+
 def BuildFuchsia(api):
   """
   This schedules release and profile builds for x64 and arm64 on other bots,
@@ -860,9 +870,10 @@ def BuildFuchsia(api):
         '--skip-build',
         '--upload',
     ]
-    api.step('Upload Fuchsia Artifacts', fuchsia_package_cmd)
-    with api.step.nest('Upload Fuchsia Debug Symbols'):
-      UploadFuchsiaDebugSymbols(api)
+    if ShouldPublishToCIPD(api, 'flutter/fuchsia', git_rev):
+      api.step('Upload Fuchsia Artifacts', fuchsia_package_cmd)
+      with api.step.nest('Upload Fuchsia Debug Symbols'):
+        UploadFuchsiaDebugSymbols(api)
     stamp_file = api.path['cleanup'].join('fuchsia_stamp')
     api.file.write_text('fuchsia.stamp', stamp_file, '')
     remote_file = GetCloudPath(api, 'fuchsia/fuchsia.stamp')
@@ -1458,6 +1469,7 @@ def RunSteps(api, properties, env_properties):
 # The tests in here make sure that every line of code is used and does not fail.
 # pylint: enable=line-too-long
 def GenTests(api):
+  git_revision = 'abcd1234',
   output_props = struct_pb2.Struct()
   output_props['isolated_output_hash'] = 'deadbeef'
   build = api.buildbucket.try_build_message(
@@ -1468,43 +1480,53 @@ def GenTests(api):
   for platform in ('mac', 'linux', 'win'):
     for should_upload in (True, False):
       for maven_or_bitcode in (True, False):
-        test = api.test(
-            '%s%s%s' % (platform, '_upload' if should_upload else '',
-                        '_maven_or_bitcode' if maven_or_bitcode else ''),
-            api.platform(platform, 64),
-            api.buildbucket.ci_build(
-                builder='%s Engine' % platform.capitalize(),
-                git_repo=GIT_REPO,
-                project='flutter',
-            ),
-            api.properties(
-                InputProperties(
-                    clobber=False,
-                    goma_jobs='1024',
-                    fuchsia_ctl_version='version:0.0.2',
-                    build_host=True,
-                    build_fuchsia=True,
-                    test_fuchsia=True,
-                    build_android_aot=True,
-                    build_android_debug=True,
-                    build_android_vulkan=True,
-                    no_maven=maven_or_bitcode,
-                    upload_packages=should_upload,
-                    android_sdk_license='android_sdk_hash',
-                    android_sdk_preview_license='android_sdk_preview_hash',
-                ),),
-            api.properties.environ(EnvProperties(SWARMING_TASK_ID='deadbeef')),
-        )
-        if platform != 'win':
-          test += collect_build_output
-        if platform == 'mac':
-          test += (
+        for should_publish_cipd in (True, False):
+          test = api.test(
+              '%s%s%s%s' % (platform, '_upload' if should_upload else '',
+                          '_maven_or_bitcode' if maven_or_bitcode else '',
+                          '_publish_cipd' if should_publish_cipd else ''),
+              api.platform(platform, 64),
+              api.buildbucket.ci_build(
+                  builder='%s Engine' % platform.capitalize(),
+                  git_repo=GIT_REPO,
+                  project='flutter',
+                  revision='%s' % git_revision,
+              ),
               api.properties(
                   InputProperties(
-                      jazzy_version='0.8.4',
-                      build_ios=True,
-                      no_bitcode=maven_or_bitcode)))
-        yield test
+                      clobber=False,
+                      goma_jobs='1024',
+                      fuchsia_ctl_version='version:0.0.2',
+                      build_host=True,
+                      build_fuchsia=True,
+                      test_fuchsia=True,
+                      build_android_aot=True,
+                      build_android_debug=True,
+                      build_android_vulkan=True,
+                      no_maven=maven_or_bitcode,
+                      upload_packages=should_upload,
+                      android_sdk_license='android_sdk_hash',
+                      android_sdk_preview_license='android_sdk_preview_hash',
+                  ),),
+              api.properties.environ(EnvProperties(SWARMING_TASK_ID='deadbeef')),
+          )
+          if platform == 'linux' and should_upload:
+              instances = 0 if should_publish_cipd else 1
+              test += (api.override_step_data(
+                  'cipd search flutter/fuchsia git_revision:%s' % git_revision,
+                  api.cipd.example_search(
+                      'flutter/fuchsia',
+                      instances=instances)))
+          if platform != 'win':
+            test += collect_build_output
+          if platform == 'mac':
+            test += (
+                api.properties(
+                    InputProperties(
+                        jazzy_version='0.8.4',
+                        build_ios=True,
+                        no_bitcode=maven_or_bitcode)))
+          yield test
 
   for should_upload in (True, False):
     yield api.test(
