@@ -29,8 +29,8 @@ def RunSteps(api):
   packages_git_rev = api.repo_util.checkout(
       'packages',
       packages_dir,
-      api.properties['git_url'],
-      api.properties['git_ref'],
+      api.properties.get('git_url'),
+      api.properties.get('git_ref'),
   )
 
   # Build and uploads a new version of the fuchsia_ctl CIPD package.
