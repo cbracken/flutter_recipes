@@ -92,6 +92,7 @@ def InstallOpenJDK(api):
       env={'JAVA_HOME': java_cache_dir},
       env_prefixes={'PATH': [java_cache_dir.join('bin')]})
 
+
 def GetCloudPath(api, git_hash, path):
   if api.runtime.is_experimental:
     return 'flutter/experimental/%s/%s' % (git_hash, path)
@@ -167,10 +168,8 @@ def CreateAndUploadFlutterPackage(api, git_hash, branch):
 def RunSteps(api):
   git_url = \
     'https://chromium.googlesource.com/external/github.com/flutter/flutter'
-  git_ref = api.buildbucket.gitiles_commit.ref
-  if ('git_url' in api.properties and 'git_ref' in api.properties):
-    git_url = api.properties['git_url']
-    git_ref = api.properties['git_ref']
+  git_url = api.properties.get('git_url') or git_url
+  git_ref = api.properties.get('git_ref') or api.buildbucket.gitiles_commit.ref
 
   git_hash = api.git.checkout(
       git_url, ref=git_ref, recursive=True, set_got_revision=True, tags=True)
