@@ -1,0 +1,141 @@
+[
+  {
+    "cmd": [],
+    "name": "launch job",
+    "~followup_annotations": [
+      "@@@STEP_LINK@fake_job0@chromium-swarm.appspot.com/task?id=job_task_id@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/led",
+      "-ensure-file",
+      "infra/tools/luci/led/${platform} latest",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "name": "launch job.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/led/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[CACHE]/led/led",
+      "get-builder",
+      "luci.flutter.try:Linux"
+    ],
+    "name": "launch job.led get-builder",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@proto.output@{@@@",
+      "@@@STEP_LOG_LINE@proto.output@  \"buildbucket\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@    \"bbagent_args\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@      \"build\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@        \"builder\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@          \"bucket\": \"try\", @@@",
+      "@@@STEP_LOG_LINE@proto.output@          \"builder\": \"Linux\", @@@",
+      "@@@STEP_LOG_LINE@proto.output@          \"project\": \"flutter\"@@@",
+      "@@@STEP_LOG_LINE@proto.output@        }, @@@",
+      "@@@STEP_LOG_LINE@proto.output@        \"infra\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@          \"swarming\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@            \"task_id\": \"job_task_id\"@@@",
+      "@@@STEP_LOG_LINE@proto.output@          }@@@",
+      "@@@STEP_LOG_LINE@proto.output@        }@@@",
+      "@@@STEP_LOG_LINE@proto.output@      }@@@",
+      "@@@STEP_LOG_LINE@proto.output@    }@@@",
+      "@@@STEP_LOG_LINE@proto.output@  }@@@",
+      "@@@STEP_LOG_LINE@proto.output@}@@@",
+      "@@@STEP_LOG_END@proto.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[CACHE]/led/led",
+      "edit",
+      "-p",
+      "foo=[\"a\", \"b\"]",
+      "-p",
+      "recipe=\"fake_recipe\"",
+      "-p",
+      "name=\"fake_job0\"",
+      "-d",
+      "id=fake_bot_id",
+      "-d",
+      "pool=luci.flutter.staging"
+    ],
+    "name": "launch job.led edit",
+    "stdin": "{\n\"buildbucket\": {\n\"bbagent_args\": {\n\"build\": {\n\"builder\": {\n\"bucket\": \"try\", \n\"builder\": \"Linux\", \n\"project\": \"flutter\"\n}, \n\"infra\": {\n\"swarming\": {\n\"task_id\": \"job_task_id\"\n}\n}\n}\n}\n}\n}",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@proto.output@{@@@",
+      "@@@STEP_LOG_LINE@proto.output@  \"buildbucket\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@    \"bbagent_args\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@      \"build\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@        \"builder\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@          \"bucket\": \"try\", @@@",
+      "@@@STEP_LOG_LINE@proto.output@          \"builder\": \"Linux\", @@@",
+      "@@@STEP_LOG_LINE@proto.output@          \"project\": \"flutter\"@@@",
+      "@@@STEP_LOG_LINE@proto.output@        }, @@@",
+      "@@@STEP_LOG_LINE@proto.output@        \"infra\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@          \"swarming\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@            \"task_id\": \"job_task_id\"@@@",
+      "@@@STEP_LOG_LINE@proto.output@          }@@@",
+      "@@@STEP_LOG_LINE@proto.output@        }, @@@",
+      "@@@STEP_LOG_LINE@proto.output@        \"input\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@          \"properties\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@            \"foo\": [@@@",
+      "@@@STEP_LOG_LINE@proto.output@              \"a\", @@@",
+      "@@@STEP_LOG_LINE@proto.output@              \"b\"@@@",
+      "@@@STEP_LOG_LINE@proto.output@            ], @@@",
+      "@@@STEP_LOG_LINE@proto.output@            \"name\": \"fake_job0\", @@@",
+      "@@@STEP_LOG_LINE@proto.output@            \"recipe\": \"fake_recipe\"@@@",
+      "@@@STEP_LOG_LINE@proto.output@          }@@@",
+      "@@@STEP_LOG_LINE@proto.output@        }@@@",
+      "@@@STEP_LOG_LINE@proto.output@      }@@@",
+      "@@@STEP_LOG_LINE@proto.output@    }@@@",
+      "@@@STEP_LOG_LINE@proto.output@  }@@@",
+      "@@@STEP_LOG_LINE@proto.output@}@@@",
+      "@@@STEP_LOG_END@proto.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[CACHE]/led/led",
+      "launch",
+      "-modernize"
+    ],
+    "name": "launch job.led launch",
+    "stdin": "{\n\"buildbucket\": {\n\"bbagent_args\": {\n\"build\": {\n\"builder\": {\n\"bucket\": \"try\", \n\"builder\": \"Linux\", \n\"project\": \"flutter\"\n}, \n\"infra\": {\n\"swarming\": {\n\"task_id\": \"job_task_id\"\n}\n}, \n\"input\": {\n\"properties\": {\n\"foo\": [\n\"a\", \n\"b\"\n], \n\"name\": \"fake_job0\", \n\"recipe\": \"fake_recipe\"\n}\n}\n}\n}\n}\n}",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"swarming\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"host_name\": \"chromium-swarm.appspot.com\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"task_id\": \"job_task_id\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LINK@Swarming task@https://chromium-swarm.appspot.com/task?id=job_task_id@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]

@@ -1,0 +1,220 @@
+[
+  {
+    "cmd": [],
+    "name": "collect builds",
+    "~followup_annotations": [
+      "@@@STEP_LINK@fake_job0 (success)@https://ci.chromium.org/swarming/task/task_id0?server=None@@@",
+      "@@@STEP_LINK@fake_job1 (success)@https://ci.chromium.org/swarming/task/task_id1?server=None@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "collect builds.install infra/tools/luci/swarming",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/cipd/infra/tools/luci/swarming/swarming_module_pin"
+    ],
+    "infra_step": true,
+    "name": "collect builds.install infra/tools/luci/swarming.ensure package directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/cipd/infra/tools/luci/swarming/swarming_module_pin",
+      "-ensure-file",
+      "infra/tools/luci/swarming/${platform} swarming_module_pin",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "infra_step": true,
+    "name": "collect builds.install infra/tools/luci/swarming.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-swarming_module_\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/swarming/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[CACHE]/cipd/infra/tools/luci/swarming/swarming_module_pin/swarming",
+      "collect",
+      "-server",
+      "https://example.swarmingserver.appspot.com",
+      "-task-summary-json",
+      "/path/to/tmp/json",
+      "-task-output-stdout",
+      "json",
+      "-output-dir",
+      "[CLEANUP]",
+      "task_id1",
+      "task_id0"
+    ],
+    "infra_step": true,
+    "name": "collect builds.collect",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"task_id0\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"output\": \"hello world!\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"outputs\": [], @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"results\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"bot_id\": \"vm-123\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"duration\": 62.35, @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"exit_code\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"name\": \"my_task_0\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"outputs_ref\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"isolated\": \"abc123\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"isolatedserver\": \"https://isolateserver.appspot.com\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"namespace\": \"default-gzip\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }, @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"state\": \"COMPLETED\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"task_id\": \"task_id0\"@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"task_id1\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"output\": \"hello world!\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"outputs\": [], @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"results\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"bot_id\": \"vm-123\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"duration\": 62.35, @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"exit_code\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"name\": \"my_task_1\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"outputs_ref\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"isolated\": \"abc123\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"isolatedserver\": \"https://isolateserver.appspot.com\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"namespace\": \"default-gzip\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }, @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"state\": \"COMPLETED\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"task_id\": \"task_id1\"@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LOG_LINE@task stdout+stderr: my_task_0@hello world!@@@",
+      "@@@STEP_LOG_END@task stdout+stderr: my_task_0@@@",
+      "@@@STEP_LOG_LINE@task stdout+stderr: my_task_1@hello world!@@@",
+      "@@@STEP_LOG_END@task stdout+stderr: my_task_1@@@",
+      "@@@STEP_LINK@task isolated outputs: my_task_0@https://isolateserver.appspot.com/browse?namespace=default-gzip&hash=abc123@@@",
+      "@@@STEP_LINK@task isolated outputs: my_task_1@https://isolateserver.appspot.com/browse?namespace=default-gzip&hash=abc123@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CLEANUP]/task_id0/build.proto.json",
+      "/path/to/tmp/"
+    ],
+    "infra_step": true,
+    "name": "collect builds.read build.proto.json",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@{@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"builder\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"project\": \"project\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"builder\": \"builder\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"bucket\": \"ci\"@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  }, @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"createTime\": \"2018-05-25T23:50:17Z\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"infra\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"swarming\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"priority\": 30@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    }, @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"resultdb\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"invocation\": \"invocations/build:1000\"@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    }@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  }, @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"createdBy\": \"user:luci-scheduler@appspot.gserviceaccount.com\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"input\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"gitilesCommit\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"project\": \"project\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"host\": \"chromium.googlesource.com\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"ref\": \"refs/heads/master\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"id\": \"2d72510e447ab60a9728aeea2362d8be2cbd7789\"@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    }@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  }, @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"id\": \"1000\"@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@}@@@",
+      "@@@STEP_LOG_END@build.proto.json@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CLEANUP]/task_id1/build.proto.json",
+      "/path/to/tmp/"
+    ],
+    "infra_step": true,
+    "name": "collect builds.read build.proto.json (2)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@{@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"builder\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"project\": \"project\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"builder\": \"builder\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"bucket\": \"ci\"@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  }, @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"createTime\": \"2018-05-25T23:50:17Z\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"infra\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"swarming\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"priority\": 30@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    }, @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"resultdb\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"invocation\": \"invocations/build:1001\"@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    }@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  }, @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"createdBy\": \"user:luci-scheduler@appspot.gserviceaccount.com\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"input\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"gitilesCommit\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"project\": \"project\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"host\": \"chromium.googlesource.com\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"ref\": \"refs/heads/master\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"id\": \"2d72510e447ab60a9728aeea2362d8be2cbd7789\"@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    }@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  }, @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"id\": \"1001\"@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@}@@@",
+      "@@@STEP_LOG_END@build.proto.json@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]

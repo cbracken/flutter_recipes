@@ -1,0 +1,467 @@
+[
+  {
+    "cmd": [],
+    "name": "checkout flutter/flutter"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::git]/resources/git_setup.py",
+      "--path",
+      "[START_DIR]/flutter",
+      "--url",
+      "https://chromium.googlesource.com/external/github.com/flutter/flutter"
+    ],
+    "name": "checkout flutter/flutter.git setup",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "fetch",
+      "origin",
+      "master",
+      "--recurse-submodules",
+      "--progress",
+      "--tags"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
+    },
+    "infra_step": true,
+    "name": "checkout flutter/flutter.git fetch",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "checkout",
+      "-f",
+      "FETCH_HEAD"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "infra_step": true,
+    "name": "checkout flutter/flutter.git checkout",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "infra_step": true,
+    "name": "checkout flutter/flutter.read revision",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_TEXT@<br/>checked out 'deadbeef'<br/>@@@",
+      "@@@SET_BUILD_PROPERTY@got_revision@\"deadbeef\"@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "clean",
+      "-f",
+      "-d",
+      "-x"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "infra_step": true,
+    "name": "checkout flutter/flutter.git clean",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "submodule",
+      "sync"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "infra_step": true,
+    "name": "checkout flutter/flutter.submodule sync",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "submodule",
+      "update",
+      "--init",
+      "--recursive"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "infra_step": true,
+    "name": "checkout flutter/flutter.submodule update",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "read manifest",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@yaml@@@@",
+      "@@@STEP_LOG_END@yaml@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[START_DIR]/flutter/dev/devicelab/manifest.yaml",
+      "/path/to/tmp/"
+    ],
+    "cwd": "[START_DIR]/flutter/dev/devicelab",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "PUB_CACHE": "[CACHE]/.pub-cache"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "read manifest.read",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_END@manifest.yaml@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[flutter::yaml]/resources/parse_yaml.py",
+      "--yaml_file",
+      "[START_DIR]/flutter/dev/devicelab/manifest.yaml",
+      "--json_file",
+      "/path/to/tmp/json"
+    ],
+    "cwd": "[START_DIR]/flutter/dev/devicelab",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "PUB_CACHE": "[CACHE]/.pub-cache"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "name": "read manifest.parse",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"tasks\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"android_defines_test\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"description\": \"Builds an APK with a --dart-define ...\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"on_luci\": true, @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"required_agent_capabilities\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"linux/android\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      ], @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"stage\": \"devicelab\"@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "launch jobs",
+    "~followup_annotations": [
+      "@@@STEP_LINK@android_defines_test@chromium-swarm.appspot.com/task?id=fake-task-id@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/led",
+      "-ensure-file",
+      "infra/tools/luci/led/${platform} latest",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "name": "launch jobs.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/led/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[CACHE]/led/led",
+      "get-builder",
+      "luci..:"
+    ],
+    "name": "launch jobs.led get-builder",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@proto.output@{@@@",
+      "@@@STEP_LOG_LINE@proto.output@  \"buildbucket\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@    \"bbagent_args\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@      \"build\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@        \"builder\": {}@@@",
+      "@@@STEP_LOG_LINE@proto.output@      }@@@",
+      "@@@STEP_LOG_LINE@proto.output@    }@@@",
+      "@@@STEP_LOG_LINE@proto.output@  }@@@",
+      "@@@STEP_LOG_LINE@proto.output@}@@@",
+      "@@@STEP_LOG_END@proto.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[CACHE]/led/led",
+      "edit",
+      "-p",
+      "recipe=\"devicelab\"",
+      "-p",
+      "role=\"worker\"",
+      "-p",
+      "name=\"android_defines_test\"",
+      "-p",
+      "first_capability=\"linux/android\"",
+      "-d",
+      "cores=",
+      "-d",
+      "caches=",
+      "-d",
+      "os=",
+      "-d",
+      "cpu=",
+      "-d",
+      "pool=luci.flutter.staging",
+      "-d",
+      "id=flutter-devicelab-linux-8"
+    ],
+    "name": "launch jobs.led edit",
+    "stdin": "{\n\"buildbucket\": {\n\"bbagent_args\": {\n\"build\": {\n\"builder\": {}\n}\n}\n}\n}",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@proto.output@{@@@",
+      "@@@STEP_LOG_LINE@proto.output@  \"buildbucket\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@    \"bbagent_args\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@      \"build\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@        \"builder\": {}, @@@",
+      "@@@STEP_LOG_LINE@proto.output@        \"input\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@          \"properties\": {@@@",
+      "@@@STEP_LOG_LINE@proto.output@            \"first_capability\": \"linux/android\", @@@",
+      "@@@STEP_LOG_LINE@proto.output@            \"name\": \"android_defines_test\", @@@",
+      "@@@STEP_LOG_LINE@proto.output@            \"recipe\": \"devicelab\", @@@",
+      "@@@STEP_LOG_LINE@proto.output@            \"role\": \"worker\"@@@",
+      "@@@STEP_LOG_LINE@proto.output@          }@@@",
+      "@@@STEP_LOG_LINE@proto.output@        }@@@",
+      "@@@STEP_LOG_LINE@proto.output@      }@@@",
+      "@@@STEP_LOG_LINE@proto.output@    }@@@",
+      "@@@STEP_LOG_LINE@proto.output@  }@@@",
+      "@@@STEP_LOG_LINE@proto.output@}@@@",
+      "@@@STEP_LOG_END@proto.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[CACHE]/led/led",
+      "launch",
+      "-modernize"
+    ],
+    "name": "launch jobs.led launch",
+    "stdin": "{\n\"buildbucket\": {\n\"bbagent_args\": {\n\"build\": {\n\"builder\": {}, \n\"input\": {\n\"properties\": {\n\"first_capability\": \"linux/android\", \n\"name\": \"android_defines_test\", \n\"recipe\": \"devicelab\", \n\"role\": \"worker\"\n}\n}\n}\n}\n}\n}",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"swarming\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"host_name\": \"chromium-swarm.appspot.com\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"task_id\": \"fake-task-id\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LINK@Swarming task@https://chromium-swarm.appspot.com/task?id=fake-task-id@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "collect jobs",
+    "~followup_annotations": [
+      "@@@STEP_LINK@android_defines_test (success)@https://ci.chromium.org/swarming/task/fake-task-id?server=chromium-swarm.appspot.com@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "collect jobs.install infra/tools/luci/swarming",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/cipd/infra/tools/luci/swarming/swarming_module_pin"
+    ],
+    "infra_step": true,
+    "name": "collect jobs.install infra/tools/luci/swarming.ensure package directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/cipd/infra/tools/luci/swarming/swarming_module_pin",
+      "-ensure-file",
+      "infra/tools/luci/swarming/${platform} swarming_module_pin",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "infra_step": true,
+    "name": "collect jobs.install infra/tools/luci/swarming.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-swarming_module_\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/swarming/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[CACHE]/cipd/infra/tools/luci/swarming/swarming_module_pin/swarming",
+      "collect",
+      "-server",
+      "https://example.swarmingserver.appspot.com",
+      "-task-summary-json",
+      "/path/to/tmp/json",
+      "-task-output-stdout",
+      "json",
+      "-output-dir",
+      "[CLEANUP]",
+      "fake-task-id"
+    ],
+    "infra_step": true,
+    "name": "collect jobs.collect",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"fake-task-id\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"output\": \"hello world!\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"outputs\": [], @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"results\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"bot_id\": \"vm-123\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"duration\": 62.35, @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"exit_code\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"name\": \"my_task_0\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"outputs_ref\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"isolated\": \"abc123\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"isolatedserver\": \"https://isolateserver.appspot.com\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"namespace\": \"default-gzip\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }, @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"state\": \"COMPLETED\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"task_id\": \"fake-task-id\"@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@STEP_LOG_LINE@task stdout+stderr: my_task_0@hello world!@@@",
+      "@@@STEP_LOG_END@task stdout+stderr: my_task_0@@@",
+      "@@@STEP_LINK@task isolated outputs: my_task_0@https://isolateserver.appspot.com/browse?namespace=default-gzip&hash=abc123@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CLEANUP]/fake-task-id/build.proto.json",
+      "/path/to/tmp/"
+    ],
+    "infra_step": true,
+    "name": "collect jobs.read build.proto.json",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@{@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"builder\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"project\": \"project\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"builder\": \"builder\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"bucket\": \"ci\"@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  }, @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"createTime\": \"2018-05-25T23:50:17Z\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"infra\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"swarming\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"priority\": 30@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    }, @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"resultdb\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"invocation\": \"invocations/build:1000\"@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    }@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  }, @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"createdBy\": \"user:luci-scheduler@appspot.gserviceaccount.com\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"input\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    \"gitilesCommit\": {@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"project\": \"project\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"host\": \"chromium.googlesource.com\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"ref\": \"refs/heads/master\", @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@      \"id\": \"2d72510e447ab60a9728aeea2362d8be2cbd7789\"@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@    }@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  }, @@@",
+      "@@@STEP_LOG_LINE@build.proto.json@  \"id\": \"1000\"@@@",
+      "@@@STEP_LOG_LINE@build.proto.json@}@@@",
+      "@@@STEP_LOG_END@build.proto.json@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]

@@ -14,15 +14,15 @@
       "  File \"RECIPE_REPO[recipe_engine]/recipe_engine/internal/property_invoker.py\", in invoke_with_properties",
       "    arg_names, **additional_args)",
       "  File \"RECIPE_REPO[recipe_engine]/recipe_engine/internal/property_invoker.py\", in _invoke_with_properties",
-      "    prop.interpret(all_props.get(prop_name, PROPERTY_SENTINEL), environ))",
-      "  File \"RECIPE_REPO[recipe_engine]/recipe_engine/recipe_api.py\", in interpret",
-      "    self.name, self.__property_type, self.full_decl_name))",
-      "ValueError: No default specified and no value provided for 'task_name' from recipe 'flutter::devicelab'"
+      "    return callable_obj(*props, **additional_args)",
+      "  File \"RECIPE_REPO[flutter]/recipes/devicelab.py\", line 32, in RunSteps",
+      "    raise ValueError('Unknown role: %s' % role)",
+      "ValueError: Unknown role: unknown"
     ]
   },
   {
     "failure": {
-      "humanReason": "Uncaught Exception: ValueError(\"No default specified and no value provided for 'task_name' from recipe 'flutter::devicelab'\",)"
+      "humanReason": "Uncaught Exception: ValueError('Unknown role: unknown',)"
     },
     "name": "$result"
   }
