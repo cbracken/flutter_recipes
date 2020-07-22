@@ -8,24 +8,24 @@ import contextlib
 from PB.recipes.flutter.engine_builder import InputProperties, EngineBuild
 
 DEPS = [
-    'build/goma',
-    'flutter/repo_util',
-    'depot_tools/bot_update',
-    'depot_tools/depot_tools',
-    'depot_tools/gclient',
-    'depot_tools/git',
-    'depot_tools/osx_sdk',
-    'recipe_engine/buildbucket',
-    'recipe_engine/context',
-    'recipe_engine/file',
-    'recipe_engine/isolated',
-    'recipe_engine/path',
-    'recipe_engine/platform',
-    'recipe_engine/properties',
-    'recipe_engine/runtime',
-    'recipe_engine/step',
-    'recipe_engine/swarming',
-    'recipe_engine/python',
+  'depot_tools/bot_update',
+  'depot_tools/depot_tools',
+  'depot_tools/gclient',
+  'depot_tools/git',
+  'depot_tools/osx_sdk',
+  'flutter/repo_util',
+  'fuchsia/goma',
+  'recipe_engine/buildbucket',
+  'recipe_engine/context',
+  'recipe_engine/file',
+  'recipe_engine/isolated',
+  'recipe_engine/path',
+  'recipe_engine/platform',
+  'recipe_engine/properties',
+  'recipe_engine/python',
+  'recipe_engine/runtime',
+  'recipe_engine/step',
+  'recipe_engine/swarming',
 ]
 
 GIT_REPO = \
@@ -41,9 +41,9 @@ def Build(api, config, disable_goma, *targets):
   if not disable_goma:
     ninja_args = [api.depot_tools.autoninja_path, '-C', build_dir]
     ninja_args.extend(targets)
-    api.goma.build_with_goma(
-        name='build %s' % ' '.join([config] + list(targets)),
-        ninja_command=ninja_args)
+    with api.goma.build_with_goma():
+      name='build %s' % ' '.join([config] + list(targets))
+      api.step(name, ninja_args)
   else:
     ninja_args = [api.depot_tools.autoninja_path, '-C', build_dir]
     ninja_args.extend(targets)
@@ -70,7 +70,7 @@ def RunSteps(api, properties):
   cache_root = api.path['cache'].join('builder')
   api.repo_util.engine_checkout(cache_root, {}, {})
   with api.context(cwd=cache_root):
-    api.goma.ensure_goma()
+    api.goma.ensure()
 
     android_home = cache_root.join('src', 'third_party', 'android_tools', 'sdk')
     with api.step.nest('Android SDK'):

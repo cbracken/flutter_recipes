@@ -17,12 +17,12 @@ from PB.recipes.flutter.engine_builder_v1_17_0 \
     import InputProperties, EngineBuild
 
 DEPS = [
-    'build/goma',
     'depot_tools/bot_update',
     'depot_tools/depot_tools',
     'depot_tools/gclient',
     'depot_tools/git',
     'depot_tools/osx_sdk',
+    'fuchsia/goma',
     'recipe_engine/buildbucket',
     'recipe_engine/context',
     'recipe_engine/file',
@@ -30,10 +30,10 @@ DEPS = [
     'recipe_engine/path',
     'recipe_engine/platform',
     'recipe_engine/properties',
+    'recipe_engine/python',
     'recipe_engine/runtime',
     'recipe_engine/step',
     'recipe_engine/swarming',
-    'recipe_engine/python',
 ]
 
 GIT_REPO = \
@@ -49,9 +49,9 @@ def Build(api, config, disable_goma, *targets):
   if not disable_goma:
     ninja_args = [api.depot_tools.autoninja_path, '-C', build_dir]
     ninja_args.extend(targets)
-    api.goma.build_with_goma(
-        name='build %s' % ' '.join([config] + list(targets)),
-        ninja_command=ninja_args)
+    with api.goma.build_with_goma():
+      name='build %s' % ' '.join([config] + list(targets))
+      api.step(name, ninja_args)
   else:
     ninja_args = [api.depot_tools.autoninja_path, '-C', build_dir]
     ninja_args.extend(targets)
@@ -96,7 +96,7 @@ def RunSteps(api, properties):
   cache_root = api.path['cache'].join('builder')
   with api.context(cwd=cache_root):
     GetCheckout(api, properties.git_url, properties.git_ref)
-    api.goma.ensure_goma()
+    api.goma.ensure()
 
     android_home = cache_root.join('src', 'third_party', 'android_tools', 'sdk')
     with api.step.nest('Android SDK'):

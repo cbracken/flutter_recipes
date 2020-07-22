@@ -20,7 +20,6 @@ from PB.go.chromium.org.luci.buildbucket.proto import build as build_pb2
 from google.protobuf import struct_pb2
 
 DEPS = [
-    'build/goma',
     'depot_tools/bot_update',
     'depot_tools/depot_tools',
     'depot_tools/gclient',
@@ -30,6 +29,7 @@ DEPS = [
     'flutter/repo_util',
     'flutter/zip',
     'fuchsia/display_util',
+    'fuchsia/goma',
     'recipe_engine/buildbucket',
     'recipe_engine/cipd',
     'recipe_engine/context',
@@ -85,9 +85,9 @@ def Build(api, config, *targets):
   goma_jobs = api.properties['goma_jobs']
   ninja_args = [api.depot_tools.ninja_path, '-j', goma_jobs, '-C', build_dir]
   ninja_args.extend(targets)
-  api.goma.build_with_goma(
-      name='build %s' % ' '.join([config] + list(targets)),
-      ninja_command=ninja_args)
+  with api.goma.build_with_goma():
+    name = 'build %s' % ' '.join([config] + list(targets))
+    api.step(name, ninja_args)
 
 
 # Bitcode builds cannot use goma.
@@ -1462,7 +1462,7 @@ def RunSteps(api, properties, env_properties):
   api.file.rmtree('Clobber build output', checkout.join('out'))
 
   api.file.ensure_directory('Ensure checkout cache', cache_root)
-  api.goma.ensure_goma()
+  api.goma.ensure()
   dart_bin = checkout.join('third_party', 'dart', 'tools', 'sdks', 'dart-sdk',
                            'bin')
 
