@@ -61,6 +61,13 @@ def FormatAndDartTest(api):
     api.step('format and dart test', [format_cmd])
 
 
+def Lint(api):
+  checkout = GetCheckoutPath(api)
+  with api.context(cwd=checkout):
+    lint_cmd = checkout.join('flutter', 'ci', 'lint.sh')
+    api.step('lint test', [lint_cmd])
+
+
 def RunGN(api, *args):
   checkout = GetCheckoutPath(api)
   gn_cmd = ['python', checkout.join('flutter/tools/gn'), '--goma']
@@ -141,6 +148,7 @@ def RunSteps(api, properties, env_properties):
     # Checks before building the engine. Only run on Linux.
     if api.platform.is_linux:
       FormatAndDartTest(api)
+      Lint(api)
 
     target_name = 'host_debug_unopt'
     gn_flags = ['--unoptimized', '--full-dart-sdk']
