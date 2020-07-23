@@ -568,6 +568,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -640,6 +641,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -688,6 +690,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -725,6 +728,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -1007,6 +1011,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -1079,6 +1084,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -1127,6 +1133,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -1164,6 +1171,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -1358,6 +1366,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -1430,6 +1439,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -1478,6 +1488,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -1515,6 +1526,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -1741,6 +1753,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -1813,6 +1826,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -1861,6 +1875,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -1898,6 +1913,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -2868,6 +2884,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -2940,6 +2957,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -2988,6 +3006,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -3025,6 +3044,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -3397,6 +3417,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -3470,6 +3491,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -3518,6 +3540,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -3555,6 +3578,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -3749,6 +3773,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -3822,6 +3847,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -3870,6 +3896,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -3907,6 +3934,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -4101,6 +4129,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -4174,6 +4203,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -4222,6 +4252,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -4259,6 +4290,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -4453,6 +4485,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -4526,6 +4559,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -4574,6 +4608,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -4611,6 +4646,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -4805,6 +4841,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -4878,6 +4915,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -4926,6 +4964,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -4963,6 +5002,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -5157,6 +5197,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -5230,6 +5271,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -5278,6 +5320,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -5315,6 +5358,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -6028,6 +6072,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -6104,6 +6149,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -6154,6 +6200,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -6193,6 +6240,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -6426,6 +6474,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -6502,6 +6551,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -6552,6 +6602,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -6591,6 +6642,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -6795,6 +6847,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -6872,6 +6925,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -6922,6 +6976,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -6961,6 +7016,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -8866,6 +8922,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -8940,6 +8997,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -8988,6 +9046,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -9025,6 +9084,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -9251,6 +9311,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -9325,6 +9386,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -9373,6 +9435,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
@@ -9410,6 +9473,7 @@
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma"
     },
     "env_prefixes": {
