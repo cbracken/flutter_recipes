@@ -483,6 +483,17 @@
   },
   {
     "cmd": [
+      "git",
+      "log",
+      "--oneline",
+      "-n",
+      "10"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "name": "git log"
+  },
+  {
+    "cmd": [
       "python",
       "-u",
       "[START_DIR]/recipes/recipes.py",

@@ -31,9 +31,14 @@ PROPERTIES = {
 # to explicitly pass a CL. The most recent passing run of
 # flutter.try/recipes could have any number of different subbuilds kicked
 # off. In that case alter the recipes build to run on a specific CL that
-# modifies the envtest recipe alone, because that recipe is used by
+# modifies the fuchsia_ctl recipe alone, because that recipe is used by
 # relatively few CQ builders.
-SELFTEST_CL = ('https://flutter-review.googlesource.com/c/recipes/+/3606')
+#
+# If the self test CL triggers multiple builds then it may be possible that
+# led recipes will call itself reaching the max recursion limit. In the
+# flutter recipes the fuchsia_ctl recipe is the only one without too many
+# dependencies.
+SELFTEST_CL = ('https://flutter-review.googlesource.com/c/recipes/+/4600')
 COMMIT_QUEUE_CFG = """
     submit_options: <
       max_burst: 4
@@ -100,8 +105,12 @@ def RunSteps(api, remote, unittest_only):
   bb_input = api.buildbucket.build.input
   if bb_input.gerrit_changes:
     api.git.checkout_cl(bb_input.gerrit_changes[0], checkout_path)
+    with api.context(cwd=checkout_path):
+      api.git('log', '--oneline', '-n', '10')
   else:
     api.git.checkout(remote)
+    with api.context(cwd=checkout_path):
+      api.git('log', '--oneline', '-n', '10')
   api.recipe_testing.projects = ('flutter',)
   with api.step.defer_results():
     api.recipe_testing.run_lint(checkout_path)
