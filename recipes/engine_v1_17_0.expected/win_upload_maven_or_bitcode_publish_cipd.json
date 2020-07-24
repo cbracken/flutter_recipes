@@ -177,7 +177,8 @@
   {
     "cmd": [
       "git",
-      "fetch"
+      "fetch",
+      "--tags"
     ],
     "cwd": "[CACHE]\\builder\\src\\third_party\\dart",
     "env": {
