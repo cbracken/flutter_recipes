@@ -159,6 +159,12 @@ def RunSteps(api, properties, env_properties):
         felt_cmd = [
             checkout.join('flutter', 'lib', 'web_ui', 'dev', 'felt_windows.bat')
         ]
+
+    # Presence of tags in git repo is critical for determining dart version.
+    dart_sdk_dir = GetCheckoutPath(api).join('third_party', 'dart')
+    with api.context(cwd=dart_sdk_dir):
+      api.step('Fetch dart tags', ['git', 'fetch', '--tags'])
+
     # Update dart packages and run tests.
     local_pub = checkout.join('out', target_name, 'dart-sdk', 'bin', 'pub')
     with api.context(

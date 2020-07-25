@@ -159,6 +159,11 @@ def RunSteps(api, properties, env_properties):
         'dev/felt.dart'
     ]
 
+    # Presence of tags in git repo is critical for determining dart version.
+    dart_sdk_dir = GetCheckoutPath(api).join('third_party', 'dart')
+    with api.context(cwd=dart_sdk_dir):
+      api.step('Fetch dart tags', ['git', 'fetch', '--tags'])
+
     if api.platform.is_mac:
       with SetupXcode(api):
         RunGN(api, *gn_flags)
