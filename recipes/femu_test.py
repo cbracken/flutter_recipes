@@ -276,7 +276,7 @@ def RunSteps(api, properties, env_properties):
   env = {'GOMA_DIR': api.goma.goma_dir}
   env_prefixes = {'PATH': [dart_bin]}
 
-  api.repo_util.engine_checkout(cache_root, env, env_prefixes)
+  api.repo_util.engine_checkout(cache_root, env, env_prefixes, clobber=properties.clobber)
 
   # Various scripts we run assume access to depot_tools on path for `ninja`.
   with api.context(

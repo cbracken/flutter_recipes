@@ -19,7 +19,7 @@
       "    api.path['start_dir'].join('unsupported_repo'))",
       "  File \"RECIPE_REPO[recipe_engine]/recipe_engine/recipe_api.py\", in _inner",
       "    return func(*a, **kw)",
-      "  File \"RECIPE_REPO[flutter]/recipe_modules/repo_util/api.py\", line 75, in checkout",
+      "  File \"RECIPE_REPO[flutter]/recipe_modules/repo_util/api.py\", line 82, in checkout",
       "    raise ValueError('Unsupported repo: %s' % name)",
       "ValueError: Unsupported repo: unsupported_repo"
     ]

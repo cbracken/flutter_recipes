@@ -63,6 +63,34 @@
   },
   {
     "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CACHE]/builder"
+    ],
+    "infra_step": true,
+    "name": "Clobber cache"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/builder"
+    ],
+    "infra_step": true,
+    "name": "Ensure checkout cache (2)"
+  },
+  {
+    "cmd": [
       "python",
       "-u",
       "RECIPE_MODULE[depot_tools::bot_update]/resources/bot_update.py",
@@ -150,7 +178,7 @@
       "[CACHE]/builder"
     ],
     "infra_step": true,
-    "name": "Clobber cache"
+    "name": "Clobber cache (2)"
   },
   {
     "cmd": [
@@ -165,7 +193,7 @@
       "[CACHE]/builder"
     ],
     "infra_step": true,
-    "name": "Ensure checkout cache (2)"
+    "name": "Ensure checkout cache (3)"
   },
   {
     "cmd": [

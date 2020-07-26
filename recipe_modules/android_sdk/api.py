@@ -4,6 +4,7 @@
 from contextlib import contextmanager
 from recipe_engine import recipe_api
 
+
 class AndroidSdkApi(recipe_api.RecipeApi):
   """Provides Android SDK environment.
 

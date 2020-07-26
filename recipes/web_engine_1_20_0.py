@@ -34,6 +34,7 @@ DEPS = [
     'recipe_engine/path',
     'recipe_engine/platform',
     'recipe_engine/properties',
+    'recipe_engine/runtime',
     'recipe_engine/step',
 ]
 
@@ -194,7 +195,7 @@ def RunSteps(api, properties, env_properties):
           api.step('felt test chrome', felt_test)
           logs_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
                                     'test_results')
-          if api.properties.get('gcs_goldens_bucket'):
+          if api.properties.get('gcs_goldens_bucket') and not api.runtime.is_experimental:
             api.gsutil.upload(
                 bucket=api.properties['gcs_goldens_bucket'],
                 source=logs_path,

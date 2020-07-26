@@ -19,11 +19,14 @@ from recipe_engine import recipe_api
 class RepoUtilApi(recipe_api.RecipeApi):
   """Provides utilities to work with flutter repos."""
 
-  def engine_checkout(self, checkout_path, env, env_prefixes):
+  def engine_checkout(self, checkout_path, env, env_prefixes, clobber=True):
     """Checkout code using gclient.
 
     Args:
       checkout_path(Path): The path to checkout source code and dependencies.
+      env(dict): A dictionary with the environment variables to set.
+      env(dict): A dictionary with the paths to be added to environment variables.
+      clobber(bool): A boolean indicating whether the checkout folder should be cleaned.
     """
     git_url = REPOS['engine']
     git_id = self.m.buildbucket.gitiles_commit.id
@@ -51,6 +54,10 @@ class RepoUtilApi(recipe_api.RecipeApi):
         self.m.gclient.runhooks()
 
     try:
+      # Run this out of context
+      if clobber:
+        self.m.file.rmtree('Clobber cache', checkout_path)
+        self.m.file.ensure_directory('Ensure checkout cache', checkout_path)
       _InnerCheckout()
     except (self.m.step.StepFailure, self.m.step.InfraFailure):
       # Run this out of context
