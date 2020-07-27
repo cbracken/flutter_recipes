@@ -151,6 +151,17 @@ def RunSteps(api, properties, env_properties):
       FormatAndDartTest(api)
       Lint(api)
 
+    # Presence of tags in git repo is critical for determining dart version.
+    dart_sdk_dir = GetCheckoutPath(api).join('third_party', 'dart')
+    with api.context(cwd=dart_sdk_dir):
+      # The default fetch remote is a local dir, so explicitly fetch from
+      # upstream remote
+      api.step('Fetch dart tags',
+              ['git', 'fetch', 'https://dart.googlesource.com/sdk.git', '--tags'])
+      api.step('List all tags', ['git', 'tag', '--list'])
+
+    api.gclient.runhooks()
+
     target_name = 'host_debug_unopt'
     gn_flags = ['--unoptimized', '--full-dart-sdk']
     # Mac needs to install xcode as part of the building process.
@@ -159,11 +170,6 @@ def RunSteps(api, properties, env_properties):
         checkout.join('out', target_name, 'dart-sdk', 'bin', 'dart'),
         'dev/felt.dart'
     ]
-
-    # Presence of tags in git repo is critical for determining dart version.
-    dart_sdk_dir = GetCheckoutPath(api).join('third_party', 'dart')
-    with api.context(cwd=dart_sdk_dir):
-      api.step('Fetch dart tags', ['git', 'fetch', '--tags'])
 
     if api.platform.is_mac:
       with SetupXcode(api):

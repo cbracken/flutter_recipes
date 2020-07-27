@@ -133,7 +133,13 @@ def RunSteps(api, properties, env_properties):
     # Presence of tags in git repo is critical for determining dart version.
     dart_sdk_dir = GetCheckoutPath(api).join('third_party', 'dart')
     with api.context(cwd=dart_sdk_dir):
-      api.step('Fetch dart tags', ['git', 'fetch', '--tags'])
+      # The default fetch remote is a local dir, so explicitly fetch from
+      # upstream remote
+      api.step('Fetch dart tags',
+              ['git', 'fetch', 'https://dart.googlesource.com/sdk.git', '--tags'])
+      api.step('List all tags', ['git', 'tag', '--list'])
+
+    api.gclient.runhooks()
 
     if api.platform.is_mac:
       with SetupXcode(api):
