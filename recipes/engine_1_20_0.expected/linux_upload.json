@@ -427,7 +427,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -461,7 +462,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -501,7 +503,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -550,7 +553,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -588,7 +592,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -623,7 +628,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -661,7 +667,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -699,7 +706,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -755,7 +763,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -797,7 +806,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -979,7 +989,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1012,7 +1023,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1052,7 +1064,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1101,7 +1114,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1139,7 +1153,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1174,7 +1189,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1212,7 +1228,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1250,7 +1267,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1292,7 +1310,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1366,7 +1385,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1399,7 +1419,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1439,7 +1460,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1488,7 +1510,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1526,7 +1549,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1561,7 +1585,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1599,7 +1624,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1637,7 +1663,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1679,7 +1706,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1721,7 +1749,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1754,7 +1783,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1794,7 +1824,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1843,7 +1874,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1881,7 +1913,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1916,7 +1949,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1954,7 +1988,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -1992,7 +2027,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -2034,7 +2070,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -2108,7 +2145,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -2141,7 +2179,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -2181,7 +2220,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -2230,7 +2270,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -2268,7 +2309,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -2303,7 +2345,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -2341,7 +2384,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -2379,7 +2423,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -2421,7 +2466,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -3708,7 +3754,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -3741,7 +3788,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -3781,7 +3829,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -3830,7 +3879,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -3868,7 +3918,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -3903,7 +3954,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -3941,7 +3993,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -3979,7 +4032,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4021,7 +4075,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4219,7 +4274,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4252,7 +4308,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4292,7 +4349,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4341,7 +4399,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4379,7 +4438,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4414,7 +4474,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4452,7 +4513,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4490,7 +4552,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4532,7 +4595,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4637,7 +4701,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4670,7 +4735,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4710,7 +4776,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4759,7 +4826,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4797,7 +4865,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4832,7 +4901,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4870,7 +4940,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4908,7 +4979,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -4950,7 +5022,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -5315,7 +5388,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -5348,7 +5422,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -5388,7 +5463,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -5437,7 +5513,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -5475,7 +5552,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -5510,7 +5588,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -5548,7 +5627,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -5586,7 +5666,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -5628,7 +5709,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -5959,7 +6041,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -5992,7 +6075,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6032,7 +6116,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6081,7 +6166,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6119,7 +6205,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6154,7 +6241,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6192,7 +6280,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6230,7 +6319,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6272,7 +6362,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6603,7 +6694,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6636,7 +6728,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6676,7 +6769,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6725,7 +6819,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6763,7 +6858,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6798,7 +6894,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6836,7 +6933,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6874,7 +6972,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -6916,7 +7015,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -7326,7 +7426,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -7360,7 +7461,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -7400,7 +7502,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -7449,7 +7552,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -7487,7 +7591,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -7522,7 +7627,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -7560,7 +7666,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -7598,7 +7705,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -7640,7 +7748,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8045,7 +8154,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8078,7 +8188,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8118,7 +8229,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8167,7 +8279,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8205,7 +8318,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8240,7 +8354,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8278,7 +8393,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8316,7 +8432,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8358,7 +8475,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8430,7 +8548,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8463,7 +8582,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8503,7 +8623,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8552,7 +8673,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8590,7 +8712,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8625,7 +8748,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8663,7 +8787,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8701,7 +8826,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8743,7 +8869,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8814,7 +8941,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8847,7 +8975,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8887,7 +9016,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8936,7 +9066,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -8974,7 +9105,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -9009,7 +9141,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -9047,7 +9180,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -9085,7 +9219,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -9127,7 +9262,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -9169,7 +9305,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -9203,7 +9340,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -9243,7 +9381,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -9292,7 +9431,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -9330,7 +9470,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -9365,7 +9506,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -9403,7 +9545,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -9441,7 +9584,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -9483,7 +9627,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -9961,7 +10106,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -9994,7 +10140,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10034,7 +10181,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10083,7 +10231,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10121,7 +10270,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10156,7 +10306,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10194,7 +10345,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10232,7 +10384,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10274,7 +10427,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10316,7 +10470,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10350,7 +10505,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10390,7 +10546,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10439,7 +10596,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10477,7 +10635,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10512,7 +10671,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10550,7 +10710,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10588,7 +10749,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -10630,7 +10792,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11155,7 +11318,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11188,7 +11352,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11228,7 +11393,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11277,7 +11443,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11315,7 +11482,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11350,7 +11518,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11388,7 +11557,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11426,7 +11596,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11468,7 +11639,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11510,7 +11682,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11544,7 +11717,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11584,7 +11758,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11633,7 +11808,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11671,7 +11847,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11706,7 +11883,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11744,7 +11922,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11782,7 +11961,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -11824,7 +12004,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12249,7 +12430,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12282,7 +12464,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12322,7 +12505,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12371,7 +12555,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12409,7 +12594,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12444,7 +12630,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12482,7 +12669,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12520,7 +12708,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12562,7 +12751,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12604,7 +12794,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12638,7 +12829,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12678,7 +12870,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12727,7 +12920,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12765,7 +12959,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12800,7 +12995,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12838,7 +13034,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12876,7 +13073,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -12918,7 +13116,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -13443,7 +13642,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -13476,7 +13676,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -13516,7 +13717,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -13565,7 +13767,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -13603,7 +13806,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -13638,7 +13842,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -13676,7 +13881,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -13714,7 +13920,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -13756,7 +13963,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -13798,7 +14006,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -13832,7 +14041,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -13872,7 +14082,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -13921,7 +14132,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -13959,7 +14171,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -13994,7 +14207,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -14032,7 +14246,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -14070,7 +14285,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -14112,7 +14328,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -14537,7 +14754,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -14570,7 +14788,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -14610,7 +14829,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -14659,7 +14879,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -14697,7 +14918,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -14732,7 +14954,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -14770,7 +14993,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -14808,7 +15032,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -14850,7 +15075,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -14892,7 +15118,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -14926,7 +15153,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -14966,7 +15194,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -15015,7 +15244,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -15053,7 +15283,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -15088,7 +15319,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -15126,7 +15358,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -15164,7 +15397,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -15206,7 +15440,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -16302,7 +16537,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -16337,7 +16573,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -16377,7 +16614,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -16426,7 +16664,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -16464,7 +16703,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -16499,7 +16739,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -16537,7 +16778,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -16575,7 +16817,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -16617,7 +16860,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -17407,7 +17651,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -17442,7 +17687,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -17482,7 +17728,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -17531,7 +17778,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -17569,7 +17817,8 @@
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -17604,7 +17853,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -17642,7 +17892,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -17680,7 +17931,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
@@ -17722,7 +17974,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma"
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
     },
     "env_prefixes": {
       "PATH": [
