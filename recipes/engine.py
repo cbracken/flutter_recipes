@@ -60,28 +60,6 @@ def GetCheckoutPath(api):
   return api.path['cache'].join('builder', 'src')
 
 
-def CheckForDuplicateProdBuild(api, engine_dir):
-  """Ensure we don't make duplicate uploads."""
-  # A return value of True means that a production build of the current hash
-  # already exists on cloud storage.
-  git_hash = (
-          api.buildbucket.gitiles_commit.id or
-          api.properties.get('git_ref', ''))
-  # TODO(fujino) create a specific stamp file to check for
-  stamp_file = 'gs://%s/flutter/%s/sky_engine.zip' % (BUCKET_NAME, git_hash)
-  result = api.step(
-    'Check if cloud upload already exists',
-    [
-      'gsutil',
-      'stat',
-      stamp_file,
-    ],
-    ok_ret="all")
-  # previous command should return 0 exit code if the file exists, non-zero
-  # otherwise. If the file exists, that means we've found a previous build.
-  return result.exc_result.retcode == 0
-
-
 def ShouldUploadPackages(api):
   return api.properties.get('upload_packages', False)
 
@@ -1507,15 +1485,6 @@ def RunSteps(api, properties, env_properties):
       cwd=cache_root, env=env,
       env_prefixes=env_prefixes), api.depot_tools.on_path():
 
-    if not api.properties.get('force-upload', False):
-      # Only check if we're going to upload and we're not experimental
-      # (duplicate uploads are OK for experimental builds)
-      if ShouldUploadPackages(api) and not api.runtime.is_experimental:
-        is_duplicate = CheckForDuplicateProdBuild(api, checkout.join('flutter'))
-        # An assert is the most consistent to fail a job in swarming, milo, and
-        # the tests
-        assert(is_duplicate == False)
-
     # Checks before building the engine. Only run on Linux.
     if api.platform.is_linux:
       FormatAndDartTest(api)
@@ -1586,8 +1555,8 @@ def GenTests(api):
         for should_publish_cipd in (True, False):
           test = api.test(
               '%s%s%s%s' % (platform, '_upload' if should_upload else '',
-                  '_maven_or_bitcode' if maven_or_bitcode else '',
-                  '_publish_cipd' if should_publish_cipd else ''),
+                          '_maven_or_bitcode' if maven_or_bitcode else '',
+                          '_publish_cipd' if should_publish_cipd else ''),
               api.platform(platform, 64),
               api.buildbucket.ci_build(
                   builder='%s Engine' % platform.capitalize(),
@@ -1613,10 +1582,6 @@ def GenTests(api):
                   ),),
               api.properties.environ(EnvProperties(SWARMING_TASK_ID='deadbeef')),
           )
-          if should_upload:
-              test += (api.step_data(
-                      'Check if cloud upload already exists',
-                      retcode=1))
           if platform == 'linux' and should_upload:
               instances = 0 if should_publish_cipd else 1
               test += (api.override_step_data(
@@ -1634,17 +1599,6 @@ def GenTests(api):
                         build_ios=True,
                         no_bitcode=maven_or_bitcode)))
           yield test
-
-  yield api.test(
-      'previous_upload_exists',
-      api.step_data('Check if cloud upload already exists', retcode=0),
-      api.properties(
-          InputProperties(
-              upload_packages=True,
-          )),
-      api.expect_exception('AssertionError'),
-      )
-
 
   for should_upload in (True, False):
     yield api.test(
@@ -1724,9 +1678,6 @@ def GenTests(api):
           builder='Linux Engine', git_repo=GIT_REPO, project='flutter'),
       api.step_data(
           'gn --fuchsia --fuchsia-cpu x64 --runtime-mode debug --no-lto',
-          retcode=1),
-      api.step_data(
-          'Check if cloud upload already exists',
           retcode=1),
       api.properties(
           InputProperties(
