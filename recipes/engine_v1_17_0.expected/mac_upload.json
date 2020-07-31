@@ -2334,7 +2334,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/darwin-x64/artifacts.zip\"",
+    "name": "gsutil upload \"darwin-x64/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/darwin-x64/artifacts.zip@@@"
     ]
@@ -2428,7 +2428,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/darwin-x64-profile/artifacts.zip\"",
+    "name": "gsutil upload \"darwin-x64-profile/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/darwin-x64-profile/artifacts.zip@@@"
     ]
@@ -2522,7 +2522,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/darwin-x64-release/artifacts.zip\"",
+    "name": "gsutil upload \"darwin-x64-release/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/darwin-x64-release/artifacts.zip@@@"
     ]
@@ -2616,7 +2616,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/darwin-x64/FlutterEmbedder.framework.zip\"",
+    "name": "gsutil upload \"darwin-x64/FlutterEmbedder.framework.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/darwin-x64/FlutterEmbedder.framework.zip@@@"
     ]
@@ -2710,7 +2710,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/darwin-x64/FlutterMacOS.framework.zip\"",
+    "name": "gsutil upload \"darwin-x64/FlutterMacOS.framework.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/darwin-x64/FlutterMacOS.framework.zip@@@"
     ]
@@ -2804,7 +2804,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/darwin-x64-profile/FlutterMacOS.framework.zip\"",
+    "name": "gsutil upload \"darwin-x64-profile/FlutterMacOS.framework.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/darwin-x64-profile/FlutterMacOS.framework.zip@@@"
     ]
@@ -2898,7 +2898,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/darwin-x64-release/FlutterMacOS.framework.zip\"",
+    "name": "gsutil upload \"darwin-x64-release/FlutterMacOS.framework.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/darwin-x64-release/FlutterMacOS.framework.zip@@@"
     ]
@@ -2992,7 +2992,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/darwin-x64/font-subset.zip\"",
+    "name": "gsutil upload \"darwin-x64/font-subset.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/darwin-x64/font-subset.zip@@@"
     ]
@@ -3086,7 +3086,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/dart-sdk-darwin-x64.zip\"",
+    "name": "gsutil upload dart-sdk-darwin-x64.zip",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/dart-sdk-darwin-x64.zip@@@"
     ]
@@ -3180,7 +3180,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/flutter-web-sdk-darwin-x64.zip\"",
+    "name": "gsutil upload flutter-web-sdk-darwin-x64.zip",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/flutter-web-sdk-darwin-x64.zip@@@"
     ]
@@ -6036,7 +6036,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/android-arm-profile/darwin-x64.zip\"",
+    "name": "gsutil upload \"android-arm-profile/darwin-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-profile/darwin-x64.zip@@@"
     ]
@@ -6130,7 +6130,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/android-arm64-profile/darwin-x64.zip\"",
+    "name": "gsutil upload \"android-arm64-profile/darwin-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-profile/darwin-x64.zip@@@"
     ]
@@ -6224,7 +6224,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/android-x64-profile/darwin-x64.zip\"",
+    "name": "gsutil upload \"android-x64-profile/darwin-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-profile/darwin-x64.zip@@@"
     ]
@@ -6318,7 +6318,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/android-arm-release/darwin-x64.zip\"",
+    "name": "gsutil upload \"android-arm-release/darwin-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-release/darwin-x64.zip@@@"
     ]
@@ -6412,7 +6412,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/android-arm64-release/darwin-x64.zip\"",
+    "name": "gsutil upload \"android-arm64-release/darwin-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-release/darwin-x64.zip@@@"
     ]
@@ -6506,7 +6506,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/android-x64-release/darwin-x64.zip\"",
+    "name": "gsutil upload \"android-x64-release/darwin-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-release/darwin-x64.zip@@@"
     ]
@@ -7773,7 +7773,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/ios-objcdoc.zip\"",
+    "name": "gsutil upload obj-c doc",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/ios-objcdoc.zip@@@"
     ]
@@ -7968,7 +7968,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/ios/artifacts.zip\"",
+    "name": "gsutil upload \"ios/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/ios/artifacts.zip@@@"
     ]
@@ -8288,7 +8288,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/ios-profile/artifacts.zip\"",
+    "name": "gsutil upload \"ios-profile/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/ios-profile/artifacts.zip@@@"
     ]
@@ -8610,7 +8610,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/ios-release/artifacts.zip\"",
+    "name": "gsutil upload \"ios-release/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/ios-release/artifacts.zip@@@"
     ]
@@ -8710,7 +8710,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/ios-release/Flutter.dSYM.zip\"",
+    "name": "gsutil upload \"ios-release/Flutter.dSYM.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/ios-release/Flutter.dSYM.zip@@@"
     ]
@@ -8875,7 +8875,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/ios-release-nobitcode/artifacts.zip\"",
+    "name": "gsutil upload \"ios-release-nobitcode/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/ios-release-nobitcode/artifacts.zip@@@"
     ]
@@ -8975,7 +8975,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/ios-release-nobitcode/Flutter.dSYM.zip\"",
+    "name": "gsutil upload \"ios-release-nobitcode/Flutter.dSYM.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/ios-release-nobitcode/Flutter.dSYM.zip@@@"
     ]
@@ -10606,7 +10606,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/fuchsia/fuchsia.stamp\"",
+    "name": "gsutil upload \"fuchsia.stamp\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/fuchsia/fuchsia.stamp@@@"
     ]
