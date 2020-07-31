@@ -2577,7 +2577,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"linux-x64/artifacts.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/linux-x64/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/linux-x64/artifacts.zip@@@"
     ]
@@ -2671,7 +2671,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"linux-x64/linux-x64-embedder\"",
+    "name": "gsutil upload \"flutter/abcd1234/linux-x64/linux-x64-embedder\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/linux-x64/linux-x64-embedder@@@"
     ]
@@ -2765,7 +2765,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload linux-x64-debug/linux-x64-flutter-gtk.zip",
+    "name": "gsutil upload \"flutter/abcd1234/linux-x64-debug/linux-x64-flutter-gtk.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/linux-x64-debug/linux-x64-flutter-gtk.zip@@@"
     ]
@@ -2859,7 +2859,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload linux-x64-profile/linux-x64-flutter-gtk.zip",
+    "name": "gsutil upload \"flutter/abcd1234/linux-x64-profile/linux-x64-flutter-gtk.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/linux-x64-profile/linux-x64-flutter-gtk.zip@@@"
     ]
@@ -2953,7 +2953,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload linux-x64-release/linux-x64-flutter-gtk.zip",
+    "name": "gsutil upload \"flutter/abcd1234/linux-x64-release/linux-x64-flutter-gtk.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/linux-x64-release/linux-x64-flutter-gtk.zip@@@"
     ]
@@ -3047,7 +3047,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload linux-x64/linux-x64-flutter-gtk.zip",
+    "name": "gsutil upload \"flutter/abcd1234/linux-x64/linux-x64-flutter-gtk.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/linux-x64/linux-x64-flutter-gtk.zip@@@"
     ]
@@ -3141,7 +3141,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"linux-x64/font-subset.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/linux-x64/font-subset.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/linux-x64/font-subset.zip@@@"
     ]
@@ -3235,7 +3235,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload flutter_patched_sdk.zip",
+    "name": "gsutil upload \"flutter/abcd1234/flutter_patched_sdk.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/flutter_patched_sdk.zip@@@"
     ]
@@ -3392,7 +3392,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload flutter_patched_sdk_product.zip",
+    "name": "gsutil upload \"flutter/abcd1234/flutter_patched_sdk_product.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/flutter_patched_sdk_product.zip@@@"
     ]
@@ -3486,7 +3486,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload dart-sdk-linux-x64.zip",
+    "name": "gsutil upload \"flutter/abcd1234/dart-sdk-linux-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/dart-sdk-linux-x64.zip@@@"
     ]
@@ -3580,7 +3580,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload flutter-web-sdk-linux-x64.zip",
+    "name": "gsutil upload \"flutter/abcd1234/flutter-web-sdk-linux-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/flutter-web-sdk-linux-x64.zip@@@"
     ]
@@ -4188,7 +4188,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-x86-jit-release/artifacts.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-x86-jit-release/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x86-jit-release/artifacts.zip@@@"
     ]
@@ -5135,7 +5135,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm/artifacts.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm/artifacts.zip@@@"
     ]
@@ -5229,7 +5229,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm/symbols.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm/symbols.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm/symbols.zip@@@"
     ]
@@ -5275,7 +5275,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_debug/armeabi_v7a_debug.jar",
-      "gs://download.flutter.io/io/flutter/armeabi_v7a_debug/1.0.0-abcd1234/armeabi_v7a_debug-1.0.0-abcd1234.jar"
+      "gs://flutter_infra/io/flutter/armeabi_v7a_debug/1.0.0-abcd1234/armeabi_v7a_debug-1.0.0-abcd1234.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5298,7 +5298,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/armeabi_v7a_debug/1.0.0-abcd1234/armeabi_v7a_debug-1.0.0-abcd1234.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/armeabi_v7a_debug/1.0.0-abcd1234/armeabi_v7a_debug-1.0.0-abcd1234.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/armeabi_v7a_debug/1.0.0-abcd1234/armeabi_v7a_debug-1.0.0-abcd1234.jar@@@"
     ]
   },
   {
@@ -5311,7 +5311,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_debug/armeabi_v7a_debug.pom",
-      "gs://download.flutter.io/io/flutter/armeabi_v7a_debug/1.0.0-abcd1234/armeabi_v7a_debug-1.0.0-abcd1234.pom"
+      "gs://flutter_infra/io/flutter/armeabi_v7a_debug/1.0.0-abcd1234/armeabi_v7a_debug-1.0.0-abcd1234.pom"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5334,7 +5334,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/armeabi_v7a_debug/1.0.0-abcd1234/armeabi_v7a_debug-1.0.0-abcd1234.pom\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/armeabi_v7a_debug/1.0.0-abcd1234/armeabi_v7a_debug-1.0.0-abcd1234.pom@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/armeabi_v7a_debug/1.0.0-abcd1234/armeabi_v7a_debug-1.0.0-abcd1234.pom@@@"
     ]
   },
   {
@@ -5788,7 +5788,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm64/artifacts.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm64/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64/artifacts.zip@@@"
     ]
@@ -5882,7 +5882,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm64/symbols.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm64/symbols.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64/symbols.zip@@@"
     ]
@@ -5928,7 +5928,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_debug_arm64/arm64_v8a_debug.jar",
-      "gs://download.flutter.io/io/flutter/arm64_v8a_debug/1.0.0-abcd1234/arm64_v8a_debug-1.0.0-abcd1234.jar"
+      "gs://flutter_infra/io/flutter/arm64_v8a_debug/1.0.0-abcd1234/arm64_v8a_debug-1.0.0-abcd1234.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5951,7 +5951,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/arm64_v8a_debug/1.0.0-abcd1234/arm64_v8a_debug-1.0.0-abcd1234.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/arm64_v8a_debug/1.0.0-abcd1234/arm64_v8a_debug-1.0.0-abcd1234.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/arm64_v8a_debug/1.0.0-abcd1234/arm64_v8a_debug-1.0.0-abcd1234.jar@@@"
     ]
   },
   {
@@ -5964,7 +5964,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_debug_arm64/arm64_v8a_debug.pom",
-      "gs://download.flutter.io/io/flutter/arm64_v8a_debug/1.0.0-abcd1234/arm64_v8a_debug-1.0.0-abcd1234.pom"
+      "gs://flutter_infra/io/flutter/arm64_v8a_debug/1.0.0-abcd1234/arm64_v8a_debug-1.0.0-abcd1234.pom"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -5987,7 +5987,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/arm64_v8a_debug/1.0.0-abcd1234/arm64_v8a_debug-1.0.0-abcd1234.pom\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/arm64_v8a_debug/1.0.0-abcd1234/arm64_v8a_debug-1.0.0-abcd1234.pom@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/arm64_v8a_debug/1.0.0-abcd1234/arm64_v8a_debug-1.0.0-abcd1234.pom@@@"
     ]
   },
   {
@@ -6441,7 +6441,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-x86/artifacts.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-x86/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x86/artifacts.zip@@@"
     ]
@@ -6535,7 +6535,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-x86/symbols.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-x86/symbols.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x86/symbols.zip@@@"
     ]
@@ -6581,7 +6581,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_debug_x86/x86_debug.jar",
-      "gs://download.flutter.io/io/flutter/x86_debug/1.0.0-abcd1234/x86_debug-1.0.0-abcd1234.jar"
+      "gs://flutter_infra/io/flutter/x86_debug/1.0.0-abcd1234/x86_debug-1.0.0-abcd1234.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6604,7 +6604,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/x86_debug/1.0.0-abcd1234/x86_debug-1.0.0-abcd1234.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/x86_debug/1.0.0-abcd1234/x86_debug-1.0.0-abcd1234.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/x86_debug/1.0.0-abcd1234/x86_debug-1.0.0-abcd1234.jar@@@"
     ]
   },
   {
@@ -6617,7 +6617,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_debug_x86/x86_debug.pom",
-      "gs://download.flutter.io/io/flutter/x86_debug/1.0.0-abcd1234/x86_debug-1.0.0-abcd1234.pom"
+      "gs://flutter_infra/io/flutter/x86_debug/1.0.0-abcd1234/x86_debug-1.0.0-abcd1234.pom"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6640,7 +6640,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/x86_debug/1.0.0-abcd1234/x86_debug-1.0.0-abcd1234.pom\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/x86_debug/1.0.0-abcd1234/x86_debug-1.0.0-abcd1234.pom@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/x86_debug/1.0.0-abcd1234/x86_debug-1.0.0-abcd1234.pom@@@"
     ]
   },
   {
@@ -7094,7 +7094,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-x64/artifacts.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-x64/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64/artifacts.zip@@@"
     ]
@@ -7188,7 +7188,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-x64/symbols.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-x64/symbols.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64/symbols.zip@@@"
     ]
@@ -7234,7 +7234,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_debug_x64/x86_64_debug.jar",
-      "gs://download.flutter.io/io/flutter/x86_64_debug/1.0.0-abcd1234/x86_64_debug-1.0.0-abcd1234.jar"
+      "gs://flutter_infra/io/flutter/x86_64_debug/1.0.0-abcd1234/x86_64_debug-1.0.0-abcd1234.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7257,7 +7257,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/x86_64_debug/1.0.0-abcd1234/x86_64_debug-1.0.0-abcd1234.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/x86_64_debug/1.0.0-abcd1234/x86_64_debug-1.0.0-abcd1234.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/x86_64_debug/1.0.0-abcd1234/x86_64_debug-1.0.0-abcd1234.jar@@@"
     ]
   },
   {
@@ -7270,7 +7270,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_debug_x64/x86_64_debug.pom",
-      "gs://download.flutter.io/io/flutter/x86_64_debug/1.0.0-abcd1234/x86_64_debug-1.0.0-abcd1234.pom"
+      "gs://flutter_infra/io/flutter/x86_64_debug/1.0.0-abcd1234/x86_64_debug-1.0.0-abcd1234.pom"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7293,7 +7293,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/x86_64_debug/1.0.0-abcd1234/x86_64_debug-1.0.0-abcd1234.pom\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/x86_64_debug/1.0.0-abcd1234/x86_64_debug-1.0.0-abcd1234.pom@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/x86_64_debug/1.0.0-abcd1234/x86_64_debug-1.0.0-abcd1234.pom@@@"
     ]
   },
   {
@@ -7306,7 +7306,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_debug/flutter_embedding_debug.jar",
-      "gs://download.flutter.io/io/flutter/flutter_embedding_debug/1.0.0-abcd1234/flutter_embedding_debug-1.0.0-abcd1234.jar"
+      "gs://flutter_infra/io/flutter/flutter_embedding_debug/1.0.0-abcd1234/flutter_embedding_debug-1.0.0-abcd1234.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7329,7 +7329,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/flutter_embedding_debug/1.0.0-abcd1234/flutter_embedding_debug-1.0.0-abcd1234.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/flutter_embedding_debug/1.0.0-abcd1234/flutter_embedding_debug-1.0.0-abcd1234.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/flutter_embedding_debug/1.0.0-abcd1234/flutter_embedding_debug-1.0.0-abcd1234.jar@@@"
     ]
   },
   {
@@ -7342,7 +7342,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_debug/flutter_embedding_debug.pom",
-      "gs://download.flutter.io/io/flutter/flutter_embedding_debug/1.0.0-abcd1234/flutter_embedding_debug-1.0.0-abcd1234.pom"
+      "gs://flutter_infra/io/flutter/flutter_embedding_debug/1.0.0-abcd1234/flutter_embedding_debug-1.0.0-abcd1234.pom"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7365,7 +7365,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/flutter_embedding_debug/1.0.0-abcd1234/flutter_embedding_debug-1.0.0-abcd1234.pom\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/flutter_embedding_debug/1.0.0-abcd1234/flutter_embedding_debug-1.0.0-abcd1234.pom@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/flutter_embedding_debug/1.0.0-abcd1234/flutter_embedding_debug-1.0.0-abcd1234.pom@@@"
     ]
   },
   {
@@ -7378,7 +7378,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_debug/flutter_embedding_debug-sources.jar",
-      "gs://download.flutter.io/io/flutter/flutter_embedding_debug/1.0.0-abcd1234/flutter_embedding_debug-1.0.0-abcd1234-sources.jar"
+      "gs://flutter_infra/io/flutter/flutter_embedding_debug/1.0.0-abcd1234/flutter_embedding_debug-1.0.0-abcd1234-sources.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7401,7 +7401,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/flutter_embedding_debug/1.0.0-abcd1234/flutter_embedding_debug-1.0.0-abcd1234-sources.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/flutter_embedding_debug/1.0.0-abcd1234/flutter_embedding_debug-1.0.0-abcd1234-sources.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/flutter_embedding_debug/1.0.0-abcd1234/flutter_embedding_debug-1.0.0-abcd1234-sources.jar@@@"
     ]
   },
   {
@@ -7827,7 +7827,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload sky_engine.zip",
+    "name": "gsutil upload \"flutter/abcd1234/sky_engine.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/sky_engine.zip@@@"
     ]
@@ -8076,7 +8076,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_javadoc.zip",
-      "gs://flutter_infra/flutter/abcd1234/android-javadoc.zip"
+      "gs://flutter_infra/flutter/abcd1234/android_javadoc.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8097,9 +8097,9 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload javadoc",
+    "name": "gsutil upload \"flutter/abcd1234/android_javadoc.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-javadoc.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android_javadoc.zip@@@"
     ]
   },
   {
@@ -9759,7 +9759,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm64-profile/artifacts.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm64-profile/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-profile/artifacts.zip@@@"
     ]
@@ -9805,7 +9805,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_profile_arm64/arm64_v8a_profile.jar",
-      "gs://download.flutter.io/io/flutter/arm64_v8a_profile/1.0.0-abcd1234/arm64_v8a_profile-1.0.0-abcd1234.jar"
+      "gs://flutter_infra/io/flutter/arm64_v8a_profile/1.0.0-abcd1234/arm64_v8a_profile-1.0.0-abcd1234.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -9828,7 +9828,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/arm64_v8a_profile/1.0.0-abcd1234/arm64_v8a_profile-1.0.0-abcd1234.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/arm64_v8a_profile/1.0.0-abcd1234/arm64_v8a_profile-1.0.0-abcd1234.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/arm64_v8a_profile/1.0.0-abcd1234/arm64_v8a_profile-1.0.0-abcd1234.jar@@@"
     ]
   },
   {
@@ -9841,7 +9841,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_profile_arm64/arm64_v8a_profile.pom",
-      "gs://download.flutter.io/io/flutter/arm64_v8a_profile/1.0.0-abcd1234/arm64_v8a_profile-1.0.0-abcd1234.pom"
+      "gs://flutter_infra/io/flutter/arm64_v8a_profile/1.0.0-abcd1234/arm64_v8a_profile-1.0.0-abcd1234.pom"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -9864,7 +9864,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/arm64_v8a_profile/1.0.0-abcd1234/arm64_v8a_profile-1.0.0-abcd1234.pom\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/arm64_v8a_profile/1.0.0-abcd1234/arm64_v8a_profile-1.0.0-abcd1234.pom@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/arm64_v8a_profile/1.0.0-abcd1234/arm64_v8a_profile-1.0.0-abcd1234.pom@@@"
     ]
   },
   {
@@ -9925,7 +9925,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm64-profile/linux-x64.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm64-profile/linux-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-profile/linux-x64.zip@@@"
     ]
@@ -10019,7 +10019,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm64-profile/symbols.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm64-profile/symbols.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-profile/symbols.zip@@@"
     ]
@@ -10871,7 +10871,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm64-release/artifacts.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm64-release/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-release/artifacts.zip@@@"
     ]
@@ -10917,7 +10917,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_release_arm64/arm64_v8a_release.jar",
-      "gs://download.flutter.io/io/flutter/arm64_v8a_release/1.0.0-abcd1234/arm64_v8a_release-1.0.0-abcd1234.jar"
+      "gs://flutter_infra/io/flutter/arm64_v8a_release/1.0.0-abcd1234/arm64_v8a_release-1.0.0-abcd1234.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10940,7 +10940,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/arm64_v8a_release/1.0.0-abcd1234/arm64_v8a_release-1.0.0-abcd1234.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/arm64_v8a_release/1.0.0-abcd1234/arm64_v8a_release-1.0.0-abcd1234.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/arm64_v8a_release/1.0.0-abcd1234/arm64_v8a_release-1.0.0-abcd1234.jar@@@"
     ]
   },
   {
@@ -10953,7 +10953,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_release_arm64/arm64_v8a_release.pom",
-      "gs://download.flutter.io/io/flutter/arm64_v8a_release/1.0.0-abcd1234/arm64_v8a_release-1.0.0-abcd1234.pom"
+      "gs://flutter_infra/io/flutter/arm64_v8a_release/1.0.0-abcd1234/arm64_v8a_release-1.0.0-abcd1234.pom"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -10976,7 +10976,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/arm64_v8a_release/1.0.0-abcd1234/arm64_v8a_release-1.0.0-abcd1234.pom\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/arm64_v8a_release/1.0.0-abcd1234/arm64_v8a_release-1.0.0-abcd1234.pom@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/arm64_v8a_release/1.0.0-abcd1234/arm64_v8a_release-1.0.0-abcd1234.pom@@@"
     ]
   },
   {
@@ -11037,7 +11037,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm64-release/linux-x64.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm64-release/linux-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-release/linux-x64.zip@@@"
     ]
@@ -11131,7 +11131,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm64-release/symbols.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm64-release/symbols.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-release/symbols.zip@@@"
     ]
@@ -12083,7 +12083,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm-profile/artifacts.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm-profile/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-profile/artifacts.zip@@@"
     ]
@@ -12129,7 +12129,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_profile/armeabi_v7a_profile.jar",
-      "gs://download.flutter.io/io/flutter/armeabi_v7a_profile/1.0.0-abcd1234/armeabi_v7a_profile-1.0.0-abcd1234.jar"
+      "gs://flutter_infra/io/flutter/armeabi_v7a_profile/1.0.0-abcd1234/armeabi_v7a_profile-1.0.0-abcd1234.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -12152,7 +12152,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/armeabi_v7a_profile/1.0.0-abcd1234/armeabi_v7a_profile-1.0.0-abcd1234.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/armeabi_v7a_profile/1.0.0-abcd1234/armeabi_v7a_profile-1.0.0-abcd1234.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/armeabi_v7a_profile/1.0.0-abcd1234/armeabi_v7a_profile-1.0.0-abcd1234.jar@@@"
     ]
   },
   {
@@ -12165,7 +12165,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_profile/armeabi_v7a_profile.pom",
-      "gs://download.flutter.io/io/flutter/armeabi_v7a_profile/1.0.0-abcd1234/armeabi_v7a_profile-1.0.0-abcd1234.pom"
+      "gs://flutter_infra/io/flutter/armeabi_v7a_profile/1.0.0-abcd1234/armeabi_v7a_profile-1.0.0-abcd1234.pom"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -12188,7 +12188,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/armeabi_v7a_profile/1.0.0-abcd1234/armeabi_v7a_profile-1.0.0-abcd1234.pom\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/armeabi_v7a_profile/1.0.0-abcd1234/armeabi_v7a_profile-1.0.0-abcd1234.pom@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/armeabi_v7a_profile/1.0.0-abcd1234/armeabi_v7a_profile-1.0.0-abcd1234.pom@@@"
     ]
   },
   {
@@ -12249,7 +12249,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm-profile/linux-x64.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm-profile/linux-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-profile/linux-x64.zip@@@"
     ]
@@ -12343,7 +12343,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm-profile/symbols.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm-profile/symbols.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-profile/symbols.zip@@@"
     ]
@@ -13195,7 +13195,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm-release/artifacts.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm-release/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-release/artifacts.zip@@@"
     ]
@@ -13241,7 +13241,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_release/armeabi_v7a_release.jar",
-      "gs://download.flutter.io/io/flutter/armeabi_v7a_release/1.0.0-abcd1234/armeabi_v7a_release-1.0.0-abcd1234.jar"
+      "gs://flutter_infra/io/flutter/armeabi_v7a_release/1.0.0-abcd1234/armeabi_v7a_release-1.0.0-abcd1234.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -13264,7 +13264,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/armeabi_v7a_release/1.0.0-abcd1234/armeabi_v7a_release-1.0.0-abcd1234.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/armeabi_v7a_release/1.0.0-abcd1234/armeabi_v7a_release-1.0.0-abcd1234.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/armeabi_v7a_release/1.0.0-abcd1234/armeabi_v7a_release-1.0.0-abcd1234.jar@@@"
     ]
   },
   {
@@ -13277,7 +13277,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_release/armeabi_v7a_release.pom",
-      "gs://download.flutter.io/io/flutter/armeabi_v7a_release/1.0.0-abcd1234/armeabi_v7a_release-1.0.0-abcd1234.pom"
+      "gs://flutter_infra/io/flutter/armeabi_v7a_release/1.0.0-abcd1234/armeabi_v7a_release-1.0.0-abcd1234.pom"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -13300,7 +13300,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/armeabi_v7a_release/1.0.0-abcd1234/armeabi_v7a_release-1.0.0-abcd1234.pom\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/armeabi_v7a_release/1.0.0-abcd1234/armeabi_v7a_release-1.0.0-abcd1234.pom@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/armeabi_v7a_release/1.0.0-abcd1234/armeabi_v7a_release-1.0.0-abcd1234.pom@@@"
     ]
   },
   {
@@ -13361,7 +13361,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm-release/linux-x64.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm-release/linux-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-release/linux-x64.zip@@@"
     ]
@@ -13455,7 +13455,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm-release/symbols.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm-release/symbols.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-release/symbols.zip@@@"
     ]
@@ -14407,7 +14407,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-x64-profile/artifacts.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-x64-profile/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-profile/artifacts.zip@@@"
     ]
@@ -14453,7 +14453,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_profile_x64/x86_64_profile.jar",
-      "gs://download.flutter.io/io/flutter/x86_64_profile/1.0.0-abcd1234/x86_64_profile-1.0.0-abcd1234.jar"
+      "gs://flutter_infra/io/flutter/x86_64_profile/1.0.0-abcd1234/x86_64_profile-1.0.0-abcd1234.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -14476,7 +14476,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/x86_64_profile/1.0.0-abcd1234/x86_64_profile-1.0.0-abcd1234.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/x86_64_profile/1.0.0-abcd1234/x86_64_profile-1.0.0-abcd1234.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/x86_64_profile/1.0.0-abcd1234/x86_64_profile-1.0.0-abcd1234.jar@@@"
     ]
   },
   {
@@ -14489,7 +14489,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_profile_x64/x86_64_profile.pom",
-      "gs://download.flutter.io/io/flutter/x86_64_profile/1.0.0-abcd1234/x86_64_profile-1.0.0-abcd1234.pom"
+      "gs://flutter_infra/io/flutter/x86_64_profile/1.0.0-abcd1234/x86_64_profile-1.0.0-abcd1234.pom"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -14512,7 +14512,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/x86_64_profile/1.0.0-abcd1234/x86_64_profile-1.0.0-abcd1234.pom\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/x86_64_profile/1.0.0-abcd1234/x86_64_profile-1.0.0-abcd1234.pom@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/x86_64_profile/1.0.0-abcd1234/x86_64_profile-1.0.0-abcd1234.pom@@@"
     ]
   },
   {
@@ -14573,7 +14573,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-x64-profile/linux-x64.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-x64-profile/linux-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-profile/linux-x64.zip@@@"
     ]
@@ -14667,7 +14667,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-x64-profile/symbols.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-x64-profile/symbols.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-profile/symbols.zip@@@"
     ]
@@ -15519,7 +15519,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-x64-release/artifacts.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-x64-release/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-release/artifacts.zip@@@"
     ]
@@ -15565,7 +15565,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_release_x64/x86_64_release.jar",
-      "gs://download.flutter.io/io/flutter/x86_64_release/1.0.0-abcd1234/x86_64_release-1.0.0-abcd1234.jar"
+      "gs://flutter_infra/io/flutter/x86_64_release/1.0.0-abcd1234/x86_64_release-1.0.0-abcd1234.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -15588,7 +15588,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/x86_64_release/1.0.0-abcd1234/x86_64_release-1.0.0-abcd1234.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/x86_64_release/1.0.0-abcd1234/x86_64_release-1.0.0-abcd1234.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/x86_64_release/1.0.0-abcd1234/x86_64_release-1.0.0-abcd1234.jar@@@"
     ]
   },
   {
@@ -15601,7 +15601,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_release_x64/x86_64_release.pom",
-      "gs://download.flutter.io/io/flutter/x86_64_release/1.0.0-abcd1234/x86_64_release-1.0.0-abcd1234.pom"
+      "gs://flutter_infra/io/flutter/x86_64_release/1.0.0-abcd1234/x86_64_release-1.0.0-abcd1234.pom"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -15624,7 +15624,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/x86_64_release/1.0.0-abcd1234/x86_64_release-1.0.0-abcd1234.pom\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/x86_64_release/1.0.0-abcd1234/x86_64_release-1.0.0-abcd1234.pom@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/x86_64_release/1.0.0-abcd1234/x86_64_release-1.0.0-abcd1234.pom@@@"
     ]
   },
   {
@@ -15685,7 +15685,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-x64-release/linux-x64.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-x64-release/linux-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-release/linux-x64.zip@@@"
     ]
@@ -15779,7 +15779,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-x64-release/symbols.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-x64-release/symbols.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-release/symbols.zip@@@"
     ]
@@ -15825,7 +15825,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_profile_x64/flutter_embedding_profile.jar",
-      "gs://download.flutter.io/io/flutter/flutter_embedding_profile/1.0.0-abcd1234/flutter_embedding_profile-1.0.0-abcd1234.jar"
+      "gs://flutter_infra/io/flutter/flutter_embedding_profile/1.0.0-abcd1234/flutter_embedding_profile-1.0.0-abcd1234.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -15848,7 +15848,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/flutter_embedding_profile/1.0.0-abcd1234/flutter_embedding_profile-1.0.0-abcd1234.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/flutter_embedding_profile/1.0.0-abcd1234/flutter_embedding_profile-1.0.0-abcd1234.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/flutter_embedding_profile/1.0.0-abcd1234/flutter_embedding_profile-1.0.0-abcd1234.jar@@@"
     ]
   },
   {
@@ -15861,7 +15861,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_profile_x64/flutter_embedding_profile.pom",
-      "gs://download.flutter.io/io/flutter/flutter_embedding_profile/1.0.0-abcd1234/flutter_embedding_profile-1.0.0-abcd1234.pom"
+      "gs://flutter_infra/io/flutter/flutter_embedding_profile/1.0.0-abcd1234/flutter_embedding_profile-1.0.0-abcd1234.pom"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -15884,7 +15884,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/flutter_embedding_profile/1.0.0-abcd1234/flutter_embedding_profile-1.0.0-abcd1234.pom\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/flutter_embedding_profile/1.0.0-abcd1234/flutter_embedding_profile-1.0.0-abcd1234.pom@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/flutter_embedding_profile/1.0.0-abcd1234/flutter_embedding_profile-1.0.0-abcd1234.pom@@@"
     ]
   },
   {
@@ -15897,7 +15897,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_profile_x64/flutter_embedding_profile-sources.jar",
-      "gs://download.flutter.io/io/flutter/flutter_embedding_profile/1.0.0-abcd1234/flutter_embedding_profile-1.0.0-abcd1234-sources.jar"
+      "gs://flutter_infra/io/flutter/flutter_embedding_profile/1.0.0-abcd1234/flutter_embedding_profile-1.0.0-abcd1234-sources.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -15920,7 +15920,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/flutter_embedding_profile/1.0.0-abcd1234/flutter_embedding_profile-1.0.0-abcd1234-sources.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/flutter_embedding_profile/1.0.0-abcd1234/flutter_embedding_profile-1.0.0-abcd1234-sources.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/flutter_embedding_profile/1.0.0-abcd1234/flutter_embedding_profile-1.0.0-abcd1234-sources.jar@@@"
     ]
   },
   {
@@ -15933,7 +15933,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_release_x64/flutter_embedding_release.jar",
-      "gs://download.flutter.io/io/flutter/flutter_embedding_release/1.0.0-abcd1234/flutter_embedding_release-1.0.0-abcd1234.jar"
+      "gs://flutter_infra/io/flutter/flutter_embedding_release/1.0.0-abcd1234/flutter_embedding_release-1.0.0-abcd1234.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -15956,7 +15956,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/flutter_embedding_release/1.0.0-abcd1234/flutter_embedding_release-1.0.0-abcd1234.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/flutter_embedding_release/1.0.0-abcd1234/flutter_embedding_release-1.0.0-abcd1234.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/flutter_embedding_release/1.0.0-abcd1234/flutter_embedding_release-1.0.0-abcd1234.jar@@@"
     ]
   },
   {
@@ -15969,7 +15969,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_release_x64/flutter_embedding_release.pom",
-      "gs://download.flutter.io/io/flutter/flutter_embedding_release/1.0.0-abcd1234/flutter_embedding_release-1.0.0-abcd1234.pom"
+      "gs://flutter_infra/io/flutter/flutter_embedding_release/1.0.0-abcd1234/flutter_embedding_release-1.0.0-abcd1234.pom"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -15992,7 +15992,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/flutter_embedding_release/1.0.0-abcd1234/flutter_embedding_release-1.0.0-abcd1234.pom\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/flutter_embedding_release/1.0.0-abcd1234/flutter_embedding_release-1.0.0-abcd1234.pom@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/flutter_embedding_release/1.0.0-abcd1234/flutter_embedding_release-1.0.0-abcd1234.pom@@@"
     ]
   },
   {
@@ -16005,7 +16005,7 @@
       "----",
       "cp",
       "[CACHE]/builder/src/out/android_release_x64/flutter_embedding_release-sources.jar",
-      "gs://download.flutter.io/io/flutter/flutter_embedding_release/1.0.0-abcd1234/flutter_embedding_release-1.0.0-abcd1234-sources.jar"
+      "gs://flutter_infra/io/flutter/flutter_embedding_release/1.0.0-abcd1234/flutter_embedding_release-1.0.0-abcd1234-sources.jar"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -16028,7 +16028,7 @@
     "infra_step": true,
     "name": "gsutil upload \"io/flutter/flutter_embedding_release/1.0.0-abcd1234/flutter_embedding_release-1.0.0-abcd1234-sources.jar\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/download.flutter.io/io/flutter/flutter_embedding_release/1.0.0-abcd1234/flutter_embedding_release-1.0.0-abcd1234-sources.jar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/io/flutter/flutter_embedding_release/1.0.0-abcd1234/flutter_embedding_release-1.0.0-abcd1234-sources.jar@@@"
     ]
   },
   {
@@ -18339,7 +18339,7 @@
       ]
     },
     "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.gsutil upload \"sub_dirtest_file.debug\"",
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.gsutil upload \"debug/sub_dirtest_file.debug\"",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
@@ -18414,7 +18414,7 @@
       ]
     },
     "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.gsutil upload \"sub_dirtest_file.debug\" (2)",
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.gsutil upload \"debug/sub_dirtest_file.debug\" (2)",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
@@ -18489,7 +18489,7 @@
       ]
     },
     "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.gsutil upload \"sub_dirtest_file.debug\" (3)",
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: arm64.gsutil upload \"debug/sub_dirtest_file.debug\" (3)",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
@@ -18644,7 +18644,7 @@
       ]
     },
     "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.gsutil upload \"sub_dirtest_file.debug\"",
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.gsutil upload \"debug/sub_dirtest_file.debug\"",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
@@ -18719,7 +18719,7 @@
       ]
     },
     "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.gsutil upload \"sub_dirtest_file.debug\" (2)",
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.gsutil upload \"debug/sub_dirtest_file.debug\" (2)",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
@@ -18794,7 +18794,7 @@
       ]
     },
     "infra_step": true,
-    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.gsutil upload \"sub_dirtest_file.debug\" (3)",
+    "name": "Upload Fuchsia Debug Symbols.Upload to Symbol Server for arch: x64.gsutil upload \"debug/sub_dirtest_file.debug\" (3)",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/fuchsia-artifacts-release/debug/sub_dirtest_file.debug@@@"
@@ -18939,7 +18939,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"fuchsia.stamp\"",
+    "name": "gsutil upload \"flutter/abcd1234/fuchsia/fuchsia.stamp\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/fuchsia/fuchsia.stamp@@@"
     ]

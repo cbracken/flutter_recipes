@@ -66,6 +66,36 @@ def GetCheckoutPath(api):
   return api.path['cache'].join('builder', 'src')
 
 
+def SafeUpload(api, local_path, remote_path, bucket_name=BUCKET_NAME, args=[]):
+  """Upload a file if it doesn't already exist, fail job otherwise.
+
+    The check can be overridden with the `force_upload` property."""
+  assert (ShouldUploadPackages(api))
+
+  experimental = api.runtime.is_experimental
+  force_upload = api.properties.get('force_upload', False)
+  # Experimental builds go to a different bucket, duplicates allowed
+  if not experimental and not force_upload:
+    result = api.step(
+        'Check if archive already exists on cloud storage', [
+            api.depot_tools.gsutil_py_path,
+            'stat',
+            'gs://%s/%s' % (bucket_name, remote_path),
+        ],
+        ok_ret="all")
+    # `gsutil stat` command will return 0 if the file exists, non-zero
+    # otherwise. If the file exists, that means this is a duplicate build
+    # and should fail.
+    assert (result.exc_result.retcode != 0)
+
+  return api.gsutil.upload(
+      local_path,
+      bucket_name,
+      remote_path,
+      args=args,
+      name='upload "%s"' % remote_path)
+
+
 def ShouldUploadPackages(api):
   return api.properties.get('upload_packages', False)
 
@@ -84,7 +114,7 @@ def Build(api, config, *targets):
   ninja_args = [api.depot_tools.ninja_path, '-j', goma_jobs, '-C', build_dir]
   ninja_args.extend(targets)
   with api.goma.build_with_goma():
-    name='build %s' % ' '.join([config] + list(targets))
+    name = 'build %s' % ' '.join([config] + list(targets))
     api.step(name, ninja_args)
 
 
@@ -223,8 +253,7 @@ def UploadArtifacts(api, platform, file_paths, archive_name='artifacts.zip'):
 
     pkg.zip('Zip %s %s' % (platform, archive_name))
     if ShouldUploadPackages(api):
-      api.gsutil.upload(
-          local_zip, BUCKET_NAME, remote_zip, name='upload "%s"' % remote_name)
+      SafeUpload(api, local_zip, remote_zip)
 
 
 # Takes an artifact filename such as `flutter_embedding_release.jar`
@@ -265,11 +294,7 @@ def UploadMavenArtifacts(api, artifacts, swarming_task_id):
     filename = api.path.basename(local_artifact)
     remote_artifact = GetCloudMavenPath(api, filename, swarming_task_id)
 
-    api.gsutil.upload(
-        checkout.join(local_artifact),
-        MAVEN_BUCKET_NAME,
-        remote_artifact,
-        name='upload "%s"' % remote_artifact)
+    SafeUpload(api, checkout.join(local_artifact), remote_artifact)
 
 
 def UploadFolder(api,
@@ -290,8 +315,7 @@ def UploadFolder(api,
     pkg.add_directory(parent_dir.join(folder_name))
     pkg.zip('Zip %s' % folder_name)
     if ShouldUploadPackages(api):
-      api.gsutil.upload(
-          local_zip, BUCKET_NAME, remote_zip, name='upload %s' % remote_name)
+      SafeUpload(api, local_zip, remote_zip)
 
 
 def UploadDartPackage(api, package_name):
@@ -407,9 +431,10 @@ def UploadTreeMap(api, upload_dir, lib_flutter_path, android_triple):
         'third_party/binary_size/src/run_binary_size_analysis.py')
     library_path = checkout.join(lib_flutter_path)
     destionation_dir = temp_dir.join('sizes')
-    addr2line = checkout.join(
-        'third_party/android_tools/ndk/toolchains/' + android_triple +
-        '-4.9/prebuilt/linux-x86_64/bin/' + android_triple + '-addr2line')
+    addr2line = checkout.join('third_party/android_tools/ndk/toolchains/' +
+                              android_triple +
+                              '-4.9/prebuilt/linux-x86_64/bin/' +
+                              android_triple + '-addr2line')
     args = [
         '--library', library_path, '--destdir', destionation_dir,
         "--addr2line-binary", addr2line
@@ -707,17 +732,17 @@ def TestFuchsia(api):
                           api.properties.get('fuchsia_ctl_version'))
 
   request = (
-      api.swarming.task_request().with_name('flutter_fuchsia_unittests')
-      .with_priority(100))
+      api.swarming.task_request().with_name(
+          'flutter_fuchsia_unittests').with_priority(100))
 
   request = (
       request.with_slice(
-          0, request[0].with_cipd_ensure_file(ensure_file).with_command(
-              ['./run_tests.sh',
-               image_name]).with_dimensions(pool='luci.flutter.tests')
-          .with_isolated(isolated_hash).with_expiration_secs(
-              3600).with_io_timeout_secs(3600).with_execution_timeout_secs(
-                  3600).with_idempotent(True).with_containment_type('AUTO')))
+          0, request[0].with_cipd_ensure_file(ensure_file).with_command([
+              './run_tests.sh', image_name
+          ]).with_dimensions(pool='luci.flutter.tests').with_isolated(
+              isolated_hash).with_expiration_secs(3600).with_io_timeout_secs(
+                  3600).with_execution_timeout_secs(3600).with_idempotent(
+                      True).with_containment_type('AUTO')))
 
   # Trigger the task request.
   metadata = api.swarming.trigger('Trigger Fuchsia Tests', requests=[request])
@@ -766,13 +791,14 @@ def UploadFuchsiaDebugSymbolsToSymbolServer(api, arch, symbol_dirs):
         # are generated by GN and have to be ignored.
         exec_path = str(executable)
         if 'dbg_success' not in exec_path:
-          remote_file_name = GetRemoteFileName(exec_path)
-          api.gsutil.upload(
+          remote_path = '%s/%s' % (FUCHSIA_ARTIFACTS_DEBUG_NAMESPACE,
+                                   GetRemoteFileName(exec_path))
+          SafeUpload(
+              api,
               executable,
-              FUCHSIA_ARTIFACTS_BUCKET_NAME,
-              '%s/%s' % (FUCHSIA_ARTIFACTS_DEBUG_NAMESPACE, remote_file_name),
-              args=['-n'],
-              name='upload "%s"' % remote_file_name)
+              remote_path,
+              bucket_name=FUCHSIA_ARTIFACTS_BUCKET_NAME,
+              args=['-n'])
 
 
 def UploadFuchsiaDebugSymbols(api):
@@ -877,8 +903,7 @@ def BuildFuchsia(api):
     stamp_file = api.path['cleanup'].join('fuchsia_stamp')
     api.file.write_text('fuchsia.stamp', stamp_file, '')
     remote_file = GetCloudPath(api, 'fuchsia/fuchsia.stamp')
-    api.gsutil.upload(
-        stamp_file, BUCKET_NAME, remote_file, name='upload "fuchsia.stamp"')
+    SafeUpload(api, stamp_file, remote_file)
 
 
 def TestObservatory(api):
@@ -1116,8 +1141,7 @@ def PackageIOSVariant(api,
     remote_name = '%s/Flutter.dSYM.zip' % bucket_name
     remote_zip = GetCloudPath(api, remote_name)
     if ShouldUploadPackages(api):
-      api.gsutil.upload(
-          dsym_zip, BUCKET_NAME, remote_zip, name='upload "%s"' % remote_name)
+      SafeUpload(api, dsym_zip, remote_zip)
 
 
 def RunIOSTests(api):
@@ -1305,11 +1329,8 @@ def BuildJavadoc(api):
     api.zip.directory('archive javadoc', temp_dir,
                       checkout.join('out/android_javadoc.zip'))
   if ShouldUploadPackages(api):
-    api.gsutil.upload(
-        checkout.join('out/android_javadoc.zip'),
-        BUCKET_NAME,
-        GetCloudPath(api, 'android-javadoc.zip'),
-        name='upload javadoc')
+    SafeUpload(api, checkout.join('out/android_javadoc.zip'),
+               GetCloudPath(api, 'android_javadoc.zip'))
 
 
 # The MacOSX10.15 SDK included in Xcode 11 does not ship Ruby 2.3 headers,
@@ -1350,9 +1371,8 @@ def InstallGems(api):
           '--install-dir', '.'
       ])
       api.step('install xcpretty', [
-          'gem', 'install',
-          'xcpretty:' + api.properties.get('xcpretty_version', '0.3.0'),
-          '--install-dir', '.'
+          'gem', 'install', 'xcpretty:' +
+          api.properties.get('xcpretty_version', '0.3.0'), '--install-dir', '.'
       ])
   with api.context(
       env={"GEM_HOME": gem_dir}, env_prefixes={'PATH': [gem_dir.join('bin')]}):
@@ -1370,11 +1390,8 @@ def BuildObjcDoc(api):
                       checkout.join('out/ios-objcdoc.zip'))
 
     if ShouldUploadPackages(api):
-      api.gsutil.upload(
-          checkout.join('out/ios-objcdoc.zip'),
-          BUCKET_NAME,
-          GetCloudPath(api, 'ios-objcdoc.zip'),
-          name='upload obj-c doc')
+      SafeUpload(api, checkout.join('out/ios-objcdoc.zip'),
+                 GetCloudPath(api, 'ios-objcdoc.zip'))
 
 
 def GetCheckout(api):
@@ -1429,8 +1446,9 @@ def RunSteps(api, properties, env_properties):
     with api.context(cwd=dart_sdk_dir):
       # The default fetch remote is a local dir, so explicitly fetch from
       # upstream remote
-      api.step('Fetch dart tags',
-              ['git', 'fetch', 'https://dart.googlesource.com/sdk.git', '--tags'])
+      api.step(
+          'Fetch dart tags',
+          ['git', 'fetch', 'https://dart.googlesource.com/sdk.git', '--tags'])
       api.step('List all tags', ['git', 'tag', '--list'])
 
     api.gclient.runhooks()
@@ -1488,8 +1506,8 @@ def GenTests(api):
         for should_publish_cipd in (True, False):
           test = api.test(
               '%s%s%s%s' % (platform, '_upload' if should_upload else '',
-                          '_maven_or_bitcode' if maven_or_bitcode else '',
-                          '_publish_cipd' if should_publish_cipd else ''),
+                            '_maven_or_bitcode' if maven_or_bitcode else '',
+                            '_publish_cipd' if should_publish_cipd else ''),
               api.platform(platform, 64),
               api.buildbucket.ci_build(
                   builder='%s Engine' % platform.capitalize(),
@@ -1497,6 +1515,7 @@ def GenTests(api):
                   project='flutter',
                   revision='%s' % git_revision,
               ),
+              api.runtime(is_luci=True, is_experimental=False),
               api.properties(
                   InputProperties(
                       clobber=False,
@@ -1512,16 +1531,19 @@ def GenTests(api):
                       upload_packages=should_upload,
                       android_sdk_license='android_sdk_hash',
                       android_sdk_preview_license='android_sdk_preview_hash',
+                      force_upload=True,
                   ),),
-              api.properties.environ(EnvProperties(SWARMING_TASK_ID='deadbeef')),
+              api.properties.environ(
+                  EnvProperties(SWARMING_TASK_ID='deadbeef')),
           )
           if platform == 'linux' and should_upload:
-              instances = 0 if should_publish_cipd else 1
-              test += (api.override_step_data(
-                  'cipd search flutter/fuchsia git_revision:%s' % git_revision,
-                  api.cipd.example_search(
-                      'flutter/fuchsia',
-                      instances=instances)))
+            instances = 0 if should_publish_cipd else 1
+            test += (
+                api.override_step_data(
+                    'cipd search flutter/fuchsia git_revision:%s' %
+                    git_revision,
+                    api.cipd.example_search(
+                        'flutter/fuchsia', instances=instances)))
           if platform != 'win':
             test += collect_build_output
           if platform == 'mac':
@@ -1532,6 +1554,18 @@ def GenTests(api):
                         build_ios=True,
                         no_bitcode=maven_or_bitcode)))
           yield test
+
+  yield api.test(
+      'safeupload_catches_duplicates',
+      api.runtime(is_luci=True, is_experimental=False),
+      api.step_data(
+          'Check if archive already exists on cloud storage',
+          retcode=0,
+      ), api.expect_exception('AssertionError'),
+      api.properties(InputProperties(
+          goma_jobs='1024',
+          upload_packages=True,
+      )))
 
   for should_upload in (True, False):
     yield api.test(
@@ -1626,6 +1660,7 @@ def GenTests(api):
               no_maven=False,
               upload_packages=True,
               android_sdk_license='android_sdk_hash',
-              android_sdk_preview_license='android_sdk_preview_hash')),
+              android_sdk_preview_license='android_sdk_preview_hash',
+              force_upload=True)),
       api.properties.environ(EnvProperties(SWARMING_TASK_ID='deadbeef')),
   )

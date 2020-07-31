@@ -2091,7 +2091,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"windows-x64/artifacts.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/windows-x64/artifacts.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/windows-x64/artifacts.zip@@@"
     ]
@@ -2185,7 +2185,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"windows-x64/windows-x64-embedder.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/windows-x64/windows-x64-embedder.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/windows-x64/windows-x64-embedder.zip@@@"
     ]
@@ -2279,7 +2279,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"windows-x64/windows-x64-flutter.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/windows-x64/windows-x64-flutter.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/windows-x64/windows-x64-flutter.zip@@@"
     ]
@@ -2373,7 +2373,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"windows-x64-profile/windows-x64-flutter.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/windows-x64-profile/windows-x64-flutter.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/windows-x64-profile/windows-x64-flutter.zip@@@"
     ]
@@ -2467,7 +2467,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"windows-x64-release/windows-x64-flutter.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/windows-x64-release/windows-x64-flutter.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/windows-x64-release/windows-x64-flutter.zip@@@"
     ]
@@ -2561,7 +2561,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload windows-x64/flutter-cpp-client-wrapper.zip",
+    "name": "gsutil upload \"flutter/abcd1234/windows-x64/flutter-cpp-client-wrapper.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/windows-x64/flutter-cpp-client-wrapper.zip@@@"
     ]
@@ -2655,7 +2655,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"windows-x64/font-subset.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/windows-x64/font-subset.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/windows-x64/font-subset.zip@@@"
     ]
@@ -2749,7 +2749,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload dart-sdk-windows-x64.zip",
+    "name": "gsutil upload \"flutter/abcd1234/dart-sdk-windows-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/dart-sdk-windows-x64.zip@@@"
     ]
@@ -2843,7 +2843,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload flutter-web-sdk-windows-x64.zip",
+    "name": "gsutil upload \"flutter/abcd1234/flutter-web-sdk-windows-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/flutter-web-sdk-windows-x64.zip@@@"
     ]
@@ -5329,7 +5329,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm-profile/windows-x64.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm-profile/windows-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-profile/windows-x64.zip@@@"
     ]
@@ -5423,7 +5423,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm64-profile/windows-x64.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm64-profile/windows-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-profile/windows-x64.zip@@@"
     ]
@@ -5517,7 +5517,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-x64-profile/windows-x64.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-x64-profile/windows-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-profile/windows-x64.zip@@@"
     ]
@@ -5611,7 +5611,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm-release/windows-x64.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm-release/windows-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm-release/windows-x64.zip@@@"
     ]
@@ -5705,7 +5705,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-arm64-release/windows-x64.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-arm64-release/windows-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-arm64-release/windows-x64.zip@@@"
     ]
@@ -5799,7 +5799,7 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"android-x64-release/windows-x64.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/android-x64-release/windows-x64.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/android-x64-release/windows-x64.zip@@@"
     ]
