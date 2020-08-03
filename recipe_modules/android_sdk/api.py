@@ -15,6 +15,13 @@ class AndroidSdkApi(recipe_api.RecipeApi):
     """Installs Android SDK in cache."""
     with self.m.step.nest('download Android SDK components'):
       self.m.cipd.ensure(
+          self._root().join('tools'),
+          self.m.cipd.EnsureFile().add_package(
+              'flutter/android/sdk/tools/${platform}',
+              'version:26.1.1',
+          ),
+      )
+      self.m.cipd.ensure(
           self._root().join('platform-tools'),
           self.m.cipd.EnsureFile().add_package(
               'flutter/android/sdk/platform-tools/${platform}',
@@ -58,7 +65,12 @@ class AndroidSdkApi(recipe_api.RecipeApi):
     """
     with self.m.context(
         env={'ANDROID_SDK_ROOT': self._root()},
-        env_prefixes={'PATH': [self._root().join('platform-tools')]}):
+        env_prefixes={
+            'PATH': [
+                self._root().join('platform-tools'),
+                self._root().join('tools')
+            ]
+        }):
       yield
 
   def _root(self):

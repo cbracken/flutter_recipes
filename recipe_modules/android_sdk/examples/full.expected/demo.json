@@ -8,6 +8,35 @@
       "cipd",
       "ensure",
       "-root",
+      "[CACHE]/android29/tools",
+      "-ensure-file",
+      "flutter/android/sdk/tools/${platform} version:26.1.1",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "name": "download Android SDK components.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-version:26.1.1--\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"flutter/android/sdk/tools/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
       "[CACHE]/android29/platform-tools",
       "-ensure-file",
       "flutter/android/sdk/platform-tools/${platform} version:29.0.2",
@@ -16,7 +45,7 @@
       "-json-output",
       "/path/to/tmp/json"
     ],
-    "name": "download Android SDK components.ensure_installed",
+    "name": "download Android SDK components.ensure_installed (2)",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -45,7 +74,7 @@
       "-json-output",
       "/path/to/tmp/json"
     ],
-    "name": "download Android SDK components.ensure_installed (2)",
+    "name": "download Android SDK components.ensure_installed (3)",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -74,7 +103,7 @@
       "-json-output",
       "/path/to/tmp/json"
     ],
-    "name": "download Android SDK components.ensure_installed (3)",
+    "name": "download Android SDK components.ensure_installed (4)",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -161,7 +190,8 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/android29/platform-tools"
+        "[CACHE]/android29/platform-tools",
+        "[CACHE]/android29/tools"
       ]
     },
     "name": "adb devices -l"
