@@ -404,6 +404,13 @@
     ]
   },
   {
+    "cmd": [],
+    "name": "build host_debug_unopt ().preprocess_for_goma.goma_with_global_service_account",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
     "cmd": [
       "python",
       "-u",
