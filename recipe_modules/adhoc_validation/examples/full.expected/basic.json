@@ -1,0 +1,29 @@
+[
+  {
+    "cmd": [],
+    "name": "dart analyze"
+  },
+  {
+    "cmd": [
+      "chmod",
+      "755",
+      "RECIPE_MODULE[flutter::adhoc_validation]/resources/analyze.sh"
+    ],
+    "name": "dart analyze.Set execute permission",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_MODULE[flutter::adhoc_validation]/resources/analyze.sh"
+    ],
+    "name": "dart analyze.analyze",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]
