@@ -61,7 +61,12 @@ def GetCheckoutPath(api):
 
 
 # TODO(fujino): make this a shared function in a utility module.
-def SafeUpload(api, local_path, remote_path, bucket_name=BUCKET_NAME, args=[]):
+def SafeUpload(api,
+               local_path,
+               remote_path,
+               bucket_name=BUCKET_NAME,
+               args=[],
+               skip_on_duplicate=False):
   """Upload a file if it doesn't already exist, fail job otherwise.
 
     The check can be overridden with the `force_upload` property.
@@ -74,16 +79,19 @@ def SafeUpload(api, local_path, remote_path, bucket_name=BUCKET_NAME, args=[]):
   if not experimental and not force_upload:
     cloud_path = 'gs://%s/%s' % (bucket_name, remote_path)
     result = api.step(
-        'Ensure archive does not already exist on cloud storage', [
+        'Ensure %s does not already exist on cloud storage' % remote_path, [
             'python',
             api.depot_tools.gsutil_py_path,
             'stat',
             cloud_path,
         ],
         ok_ret='all')
-    # Only acceptable return value is 1, which means this file does NOT already
-    # exist on cloud storage
-    assert (result.exc_result.retcode == 1)
+    # A return value of 0 means the file ALREADY exists on cloud storage
+    if result.exc_result.retcode == 0:
+      if skip_on_duplicate:
+        # This file already exists, but we shouldn't fail the build
+        return
+      raise AssertionError('%s already exists on cloud storage' % cloud_path)
 
   return api.gsutil.upload(
       local_path,
@@ -871,7 +879,9 @@ def UploadFuchsiaDebugSymbolsToSymbolServer(api, arch, symbol_dirs):
               executable,
               '%s/%s' % (FUCHSIA_ARTIFACTS_DEBUG_NAMESPACE, remote_file_name),
               bucket_name=FUCHSIA_ARTIFACTS_BUCKET_NAME,
-              args=['-n'])
+              args=['-n'],
+              skip_on_duplicate=True,  # because this isn't namespaced by commit
+          )
 
 
 def UploadFuchsiaDebugSymbols(api):
@@ -1566,7 +1576,7 @@ def RunSteps(api, properties, env_properties):
 # The tests in here make sure that every line of code is used and does not fail.
 # pylint: enable=line-too-long
 def GenTests(api):
-  git_revision = 'abcd1234',
+  git_revision = 'abcd1234'
   output_props = struct_pb2.Struct()
   output_props['isolated_output_hash'] = 'deadbeef'
   build = api.buildbucket.try_build_message(
@@ -1630,10 +1640,11 @@ def GenTests(api):
           yield test
 
   yield api.test(
-      'safeupload_raises_on_duplicates',
+      'safeupload_raise_on_duplicate',
       api.runtime(is_luci=True, is_experimental=False),
       api.step_data(
-          'Ensure archive does not already exist on cloud storage',
+          'Ensure %s does not already exist on cloud storage' %
+          ('flutter//linux-x64/artifacts.zip'),
           retcode=0,
       ), api.expect_exception('AssertionError'),
       api.properties(InputProperties(
@@ -1712,6 +1723,88 @@ def GenTests(api):
               android_sdk_license='android_sdk_hash',
               android_sdk_preview_license='android_sdk_preview_hash')),
   )
+
+  test = api.test(
+      'Linux Fuchsia skips on duplicate',
+      api.platform('linux', 64),
+      api.buildbucket.ci_build(
+          builder='Linux Engine',
+          git_repo=GIT_REPO,
+          project='flutter',
+          revision='%s' % git_revision,
+      ),
+      api.step_data(
+          'cipd search flutter/fuchsia git_revision:%s' % git_revision,
+          api.cipd.example_search('flutter/fuchsia', instances=0)),
+      collect_build_output,
+      api.properties(
+          InputProperties(
+              clobber=False,
+              goma_jobs='1024',
+              fuchsia_ctl_version='version:0.0.2',
+              build_host=False,
+              build_fuchsia=True,
+              test_fuchsia=False,
+              build_android_aot=False,
+              build_android_jit_release=False,
+              build_android_debug=False,
+              build_android_vulkan=False,
+              no_maven=True,
+              upload_packages=True,
+              android_sdk_license='android_sdk_hash',
+              android_sdk_preview_license='android_sdk_preview_hash',
+              force_upload=False)),
+      api.properties.environ(EnvProperties(SWARMING_TASK_ID='deadbeef')),
+  )
+  # TODO(fujino): find out why these are not getting skipped based on properties
+  for artifact in (
+      'flutter/%s/linux-x64/artifacts.zip' % (git_revision),
+      'flutter/%s/linux-x64/linux-x64-embedder' % (git_revision),
+      'flutter/%s/linux-x64-debug/linux-x64-flutter-gtk.zip' % (git_revision),
+      'flutter/%s/linux-x64-profile/linux-x64-flutter-gtk.zip' % (git_revision),
+      'flutter/%s/linux-x64-release/linux-x64-flutter-gtk.zip' % (git_revision),
+      'flutter/%s/linux-x64/linux-x64-flutter-gtk.zip' % (git_revision),
+      'flutter/%s/linux-x64/font-subset.zip' % (git_revision),
+      'flutter/%s/flutter_patched_sdk.zip' % (git_revision),
+      'flutter/%s/flutter_patched_sdk_product.zip' % (git_revision),
+      'flutter/%s/dart-sdk-linux-x64.zip' % (git_revision),
+      'flutter/%s/flutter-web-sdk-linux-x64.zip' % (git_revision),
+      'flutter/%s/android-x86-jit-release/artifacts.zip' % (git_revision),
+      'flutter/%s/android-arm/artifacts.zip' % (git_revision),
+      'flutter/%s/android-arm/symbols.zip' % (git_revision),
+      'flutter/%s/android-arm-profile/artifacts.zip' % (git_revision),
+      'flutter/%s/android-arm-profile/symbols.zip' % (git_revision),
+      'flutter/%s/android-arm-release/artifacts.zip' % (git_revision),
+      'flutter/%s/android-arm-release/symbols.zip' % (git_revision),
+      'flutter/%s/android-arm64/artifacts.zip' % git_revision,
+      'flutter/%s/android-arm64/symbols.zip' % git_revision,
+      'flutter/%s/android-arm64-release/artifacts.zip' % git_revision,
+      'flutter/%s/android-arm64-release/symbols.zip' % git_revision,
+      'flutter/%s/android-arm64-profile/artifacts.zip' % git_revision,
+      'flutter/%s/android-arm64-profile/symbols.zip' % git_revision,
+      'flutter/%s/android-x64-profile/artifacts.zip' % git_revision,
+      'flutter/%s/android-x64-profile/symbols.zip' % git_revision,
+      'flutter/%s/android-x64-release/artifacts.zip' % git_revision,
+      'flutter/%s/android-x64-release/symbols.zip' % git_revision,
+      'flutter/%s/android-x86/artifacts.zip' % git_revision,
+      'flutter/%s/android-x86/symbols.zip' % git_revision,
+      'flutter/%s/android-x64/artifacts.zip' % git_revision,
+      'flutter/%s/android-x64/symbols.zip' % git_revision,
+      'flutter/%s/sky_engine.zip' % (git_revision),
+      'flutter/%s/android-javadoc.zip' % (git_revision),
+      'flutter/%s/android-arm64-profile/linux-x64.zip' % (git_revision),
+      'flutter/%s/android-arm64-release/linux-x64.zip' % (git_revision),
+      'flutter/%s/android-arm-profile/linux-x64.zip' % (git_revision),
+      'flutter/%s/android-arm-release/linux-x64.zip' % (git_revision),
+      'flutter/%s/android-x64-profile/linux-x64.zip' % (git_revision),
+      'flutter/%s/android-x64-release/linux-x64.zip' % (git_revision),
+      'flutter/%s/fuchsia/fuchsia.stamp' % git_revision,
+  ):
+    test += api.step_data(
+        'Ensure %s does not already exist on cloud storage' % artifact,
+        retcode=1)
+  yield test
+
   yield api.test(
       'Linux Fuchsia failing test',
       api.platform('linux', 64),

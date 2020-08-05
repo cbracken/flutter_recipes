@@ -45,6 +45,7 @@ message InputProperties {
   bool test_fuchsia=24;
   // Override previous upload check, defaults to False
   bool force_upload=25;
+  bool build_android_jit_release = 26;
 }
 
 message EnvProperties {

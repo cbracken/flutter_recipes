@@ -2163,7 +2163,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "Ensure archive does not already exist on cloud storage"
+    "name": "Ensure flutter//linux-x64/artifacts.zip does not already exist on cloud storage"
   },
   {
     "cmd": [
@@ -2208,20 +2208,20 @@
       "    raw_result = recipe_obj.run_steps(api, engine)",
       "  File \"RECIPE_REPO[recipe_engine]/recipe_engine/internal/recipe_deps.py\", in run_steps",
       "    recipe_result = self.global_symbols['RunSteps'](*args)",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 1542, in RunSteps",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 1552, in RunSteps",
       "    BuildLinux(api)",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 692, in BuildLinux",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 700, in BuildLinux",
       "    'out/host_debug_unopt/gen/frontend_server.dart.snapshot',",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 265, in UploadArtifacts",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 273, in UploadArtifacts",
       "    SafeUpload(api, local_zip, remote_zip)",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 86, in SafeUpload",
-      "    assert (result.exc_result.retcode == 1)",
-      "AssertionError"
+      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 94, in SafeUpload",
+      "    raise AssertionError('%s already exists on cloud storage' % cloud_path)",
+      "AssertionError: gs://flutter_infra/flutter//linux-x64/artifacts.zip already exists on cloud storage"
     ]
   },
   {
     "failure": {
-      "humanReason": "Uncaught Exception: AssertionError()"
+      "humanReason": "Uncaught Exception: AssertionError(u'gs://flutter_infra/flutter//linux-x64/artifacts.zip already exists on cloud storage',)"
     },
     "name": "$result"
   }
