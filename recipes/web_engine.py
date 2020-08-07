@@ -17,6 +17,7 @@ DEPS = [
     'depot_tools/gclient',
     'depot_tools/gsutil',
     'depot_tools/osx_sdk',
+    'flutter/json_util',
     'flutter/repo_util',
     'fuchsia/goma',
     'recipe_engine/buildbucket',
@@ -150,6 +151,8 @@ def RunSteps(api, properties, env_properties):
     if api.platform.is_linux:
       FormatAndDartTest(api)
       Lint(api)
+      # Validates engine builders json format.
+      api.json_util.validate_json(checkout.join('flutter', 'ci'), 'engine')
 
     # Presence of tags in git repo is critical for determining dart version.
     dart_sdk_dir = GetCheckoutPath(api).join('third_party', 'dart')
