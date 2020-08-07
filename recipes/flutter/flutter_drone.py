@@ -12,10 +12,12 @@ DEPS = [
     'flutter/android_sdk',
     'flutter/repo_util',
     'flutter/flutter_deps',
+    'flutter/json_util',
     'flutter/os_utils',
     'recipe_engine/context',
     'recipe_engine/isolated',
     'recipe_engine/path',
+    'recipe_engine/platform',
     'recipe_engine/properties',
     'recipe_engine/step',
 ]
@@ -39,6 +41,9 @@ def RunSteps(api):
   checkout_path = api.path['start_dir'].join('flutter')
   api.repo_util.checkout('flutter', api.properties.get('git_url'),
                          api.properties.get('git_ref'))
+  if api.platform.is_linux:
+    # Validates flutter builders json format.
+    api.json_util.validate_json(checkout_path, 'flutter')
   env, env_prefixes = api.repo_util.flutter_environment(checkout_path)
   api.flutter_deps.chrome_and_driver(env, env_prefixes)
   api.flutter_deps.open_jdk(env, env_prefixes)
@@ -52,9 +57,6 @@ def RunSteps(api):
       RunWithAndroid(api, env, env_prefixes, checkout_path)
     else:
       RunShard(api, env, env_prefixes, checkout_path)
-
-  # This is a noop for non windows tasks.
-  api.os_utils.kill_win_processes()
 
 
 def GenTests(api):
