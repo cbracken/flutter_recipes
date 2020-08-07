@@ -17,6 +17,7 @@ DEPS = [
     'recipe_engine/properties',
     'recipe_engine/step',
     'recipe_engine/swarming',
+    'flutter/json_util',
     'repo_util',
     'yaml',
 ]
@@ -32,6 +33,8 @@ def RunSteps(api):
       api.properties.get('git_url'),
       api.properties.get('git_ref'),
   )
+  # Validates packages builders json format.
+  api.json_util.validate_json(packages_dir, 'packages')
 
   # Build and uploads a new version of the fuchsia_ctl CIPD package.
   fuchsia_ctl_path = packages_dir.join('packages', 'fuchsia_ctl')
