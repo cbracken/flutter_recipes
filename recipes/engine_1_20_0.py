@@ -68,6 +68,47 @@ def GetCheckoutPath(api):
   return api.path['cache'].join('builder', 'src')
 
 
+# TODO(fujino): make this a shared function in a utility module.
+def SafeUpload(api,
+               local_path,
+               remote_path,
+               bucket_name=BUCKET_NAME,
+               args=[],
+               skip_on_duplicate=False):
+  """Upload a file if it doesn't already exist, fail job otherwise.
+
+    The check can be overridden with the `force_upload` property.
+    """
+  assert (ShouldUploadPackages(api))
+
+  experimental = api.runtime.is_experimental
+  force_upload = api.properties.get('force_upload', False)
+  # Experimental builds go to a different bucket, duplicates allowed
+  if not experimental and not force_upload:
+    cloud_path = 'gs://%s/%s' % (bucket_name, remote_path)
+    result = api.step(
+        'Ensure %s does not already exist on cloud storage' % remote_path, [
+            'python',
+            api.depot_tools.gsutil_py_path,
+            'stat',
+            cloud_path,
+        ],
+        ok_ret='all')
+    # A return value of 0 means the file ALREADY exists on cloud storage
+    if result.exc_result.retcode == 0:
+      if skip_on_duplicate:
+        # This file already exists, but we shouldn't fail the build
+        return
+      raise AssertionError('%s already exists on cloud storage' % cloud_path)
+
+  return api.gsutil.upload(
+      local_path,
+      bucket_name,
+      remote_path,
+      args=args,
+      name='upload "%s"' % remote_path)
+
+
 def ShouldUploadPackages(api):
   return api.properties.get('upload_packages', False)
 
@@ -237,8 +278,7 @@ def UploadArtifacts(api, platform, file_paths, archive_name='artifacts.zip'):
 
     pkg.zip('Zip %s %s' % (platform, archive_name))
     if ShouldUploadPackages(api):
-      api.gsutil.upload(
-          local_zip, BUCKET_NAME, remote_zip, name='upload "%s"' % remote_name)
+      SafeUpload(api, local_zip, remote_zip)
 
 
 # Takes an artifact filename such as `flutter_embedding_release.jar`
@@ -279,11 +319,11 @@ def UploadMavenArtifacts(api, artifacts, swarming_task_id):
     filename = api.path.basename(local_artifact)
     remote_artifact = GetCloudMavenPath(api, filename, swarming_task_id)
 
-    api.gsutil.upload(
+    SafeUpload(
+        api,
         checkout.join(local_artifact),
-        MAVEN_BUCKET_NAME,
         remote_artifact,
-        name='upload "%s"' % remote_artifact)
+        bucket_name=MAVEN_BUCKET_NAME)
 
 
 def UploadFolder(api,
@@ -317,8 +357,7 @@ def UploadFolderAndFiles(api,
       AddFiles(api, pkg, file_paths)
     pkg.zip('Zip %s' % folder_name)
     if ShouldUploadPackages(api):
-      api.gsutil.upload(
-          local_zip, BUCKET_NAME, remote_zip, name='upload %s' % remote_name)
+      SafeUpload(api, local_zip, remote_zip)
 
 
 def UploadDartPackage(api, package_name):
@@ -827,12 +866,14 @@ def UploadFuchsiaDebugSymbolsToSymbolServer(api, arch, symbol_dirs):
         exec_path = str(executable)
         if 'dbg_success' not in exec_path:
           remote_file_name = GetRemoteFileName(exec_path)
-          api.gsutil.upload(
+          SafeUpload(
+              api,
               executable,
-              FUCHSIA_ARTIFACTS_BUCKET_NAME,
               '%s/%s' % (FUCHSIA_ARTIFACTS_DEBUG_NAMESPACE, remote_file_name),
+              bucket_name=FUCHSIA_ARTIFACTS_BUCKET_NAME,
               args=['-n'],
-              name='upload "%s"' % remote_file_name)
+              skip_on_duplicate=True,  # because this isn't namespaced by commit
+          )
 
 
 def UploadFuchsiaDebugSymbols(api):
@@ -942,8 +983,7 @@ def BuildFuchsia(api):
     stamp_file = api.path['cleanup'].join('fuchsia_stamp')
     api.file.write_text('fuchsia.stamp', stamp_file, '')
     remote_file = GetCloudPath(api, 'fuchsia/fuchsia.stamp')
-    api.gsutil.upload(
-        stamp_file, BUCKET_NAME, remote_file, name='upload "fuchsia.stamp"')
+    SafeUpload(api, stamp_file, remote_file)
 
 
 def TestObservatory(api):
@@ -1189,8 +1229,7 @@ def PackageIOSVariant(api,
     remote_name = '%s/Flutter.dSYM.zip' % bucket_name
     remote_zip = GetCloudPath(api, remote_name)
     if ShouldUploadPackages(api):
-      api.gsutil.upload(
-          dsym_zip, BUCKET_NAME, remote_zip, name='upload "%s"' % remote_name)
+      SafeUpload(api, dsym_zip, remote_zip)
 
 
 def RunIosIntegrationTests(api):
@@ -1384,11 +1423,8 @@ def BuildJavadoc(api):
     api.zip.directory('archive javadoc', temp_dir,
                       checkout.join('out/android_javadoc.zip'))
   if ShouldUploadPackages(api):
-    api.gsutil.upload(
-        checkout.join('out/android_javadoc.zip'),
-        BUCKET_NAME,
-        GetCloudPath(api, 'android-javadoc.zip'),
-        name='upload javadoc')
+    SafeUpload(api, checkout.join('out/android_javadoc.zip'),
+               GetCloudPath(api, 'android-javadoc.zip'))
 
 
 # The MacOSX10.15 SDK included in Xcode 11 does not ship Ruby 2.3 headers,
@@ -1448,11 +1484,8 @@ def BuildObjcDoc(api):
                       checkout.join('out/ios-objcdoc.zip'))
 
     if ShouldUploadPackages(api):
-      api.gsutil.upload(
-          checkout.join('out/ios-objcdoc.zip'),
-          BUCKET_NAME,
-          GetCloudPath(api, 'ios-objcdoc.zip'),
-          name='upload obj-c doc')
+      SafeUpload(api, checkout.join('out/ios-objcdoc.zip'),
+                 GetCloudPath(api, 'ios-objcdoc.zip'))
 
 
 def RunSteps(api, properties, env_properties):
@@ -1552,6 +1585,7 @@ def GenTests(api):
                   project='flutter',
                   revision='%s' % git_revision,
               ),
+              api.runtime(is_luci=True, is_experimental=False),
               api.properties(
                   InputProperties(
                       clobber=False,
@@ -1567,6 +1601,7 @@ def GenTests(api):
                       upload_packages=should_upload,
                       android_sdk_license='android_sdk_hash',
                       android_sdk_preview_license='android_sdk_preview_hash',
+                      force_upload=True,
                   ),),
               api.properties.environ(EnvProperties(SWARMING_TASK_ID='deadbeef')),
           )
@@ -1587,6 +1622,19 @@ def GenTests(api):
                         build_ios=True,
                         no_bitcode=maven_or_bitcode)))
           yield test
+
+  yield api.test(
+      'safeupload_raise_on_duplicate',
+      api.runtime(is_luci=True, is_experimental=False),
+      api.step_data(
+          'Ensure %s does not already exist on cloud storage' %
+          ('flutter//linux-x64/artifacts.zip'),
+          retcode=0,
+      ), api.expect_exception('AssertionError'),
+      api.properties(InputProperties(
+          goma_jobs='1024',
+          upload_packages=True,
+      )))
 
   for should_upload in (True, False):
     yield api.test(
@@ -1659,6 +1707,88 @@ def GenTests(api):
               android_sdk_license='android_sdk_hash',
               android_sdk_preview_license='android_sdk_preview_hash')),
   )
+
+  test = api.test(
+      'Linux Fuchsia skips on duplicate',
+      api.platform('linux', 64),
+      api.buildbucket.ci_build(
+          builder='Linux Engine',
+          git_repo=GIT_REPO,
+          project='flutter',
+          revision='%s' % git_revision,
+      ),
+      api.step_data(
+          'cipd search flutter/fuchsia git_revision:%s' % git_revision,
+          api.cipd.example_search('flutter/fuchsia', instances=0)),
+      collect_build_output,
+      api.properties(
+          InputProperties(
+              clobber=False,
+              goma_jobs='1024',
+              fuchsia_ctl_version='version:0.0.2',
+              build_host=False,
+              build_fuchsia=True,
+              test_fuchsia=False,
+              build_android_aot=False,
+              build_android_jit_release=False,
+              build_android_debug=False,
+              build_android_vulkan=False,
+              no_maven=True,
+              upload_packages=True,
+              android_sdk_license='android_sdk_hash',
+              android_sdk_preview_license='android_sdk_preview_hash',
+              force_upload=False)),
+      api.properties.environ(EnvProperties(SWARMING_TASK_ID='deadbeef')),
+  )
+  # TODO(fujino): find out why these are not getting skipped based on properties
+  for artifact in (
+      'flutter/%s/linux-x64/artifacts.zip' % (git_revision),
+      'flutter/%s/linux-x64/linux-x64-embedder' % (git_revision),
+      'flutter/%s/linux-x64-debug/linux-x64-flutter-gtk.zip' % (git_revision),
+      'flutter/%s/linux-x64-profile/linux-x64-flutter-gtk.zip' % (git_revision),
+      'flutter/%s/linux-x64-release/linux-x64-flutter-gtk.zip' % (git_revision),
+      'flutter/%s/linux-x64/linux-x64-flutter-gtk.zip' % (git_revision),
+      'flutter/%s/linux-x64/font-subset.zip' % (git_revision),
+      'flutter/%s/flutter_patched_sdk.zip' % (git_revision),
+      'flutter/%s/flutter_patched_sdk_product.zip' % (git_revision),
+      'flutter/%s/dart-sdk-linux-x64.zip' % (git_revision),
+      'flutter/%s/flutter-web-sdk-linux-x64.zip' % (git_revision),
+      'flutter/%s/android-x86-jit-release/artifacts.zip' % (git_revision),
+      'flutter/%s/android-arm/artifacts.zip' % (git_revision),
+      'flutter/%s/android-arm/symbols.zip' % (git_revision),
+      'flutter/%s/android-arm-profile/artifacts.zip' % (git_revision),
+      'flutter/%s/android-arm-profile/symbols.zip' % (git_revision),
+      'flutter/%s/android-arm-release/artifacts.zip' % (git_revision),
+      'flutter/%s/android-arm-release/symbols.zip' % (git_revision),
+      'flutter/%s/android-arm64/artifacts.zip' % git_revision,
+      'flutter/%s/android-arm64/symbols.zip' % git_revision,
+      'flutter/%s/android-arm64-release/artifacts.zip' % git_revision,
+      'flutter/%s/android-arm64-release/symbols.zip' % git_revision,
+      'flutter/%s/android-arm64-profile/artifacts.zip' % git_revision,
+      'flutter/%s/android-arm64-profile/symbols.zip' % git_revision,
+      'flutter/%s/android-x64-profile/artifacts.zip' % git_revision,
+      'flutter/%s/android-x64-profile/symbols.zip' % git_revision,
+      'flutter/%s/android-x64-release/artifacts.zip' % git_revision,
+      'flutter/%s/android-x64-release/symbols.zip' % git_revision,
+      'flutter/%s/android-x86/artifacts.zip' % git_revision,
+      'flutter/%s/android-x86/symbols.zip' % git_revision,
+      'flutter/%s/android-x64/artifacts.zip' % git_revision,
+      'flutter/%s/android-x64/symbols.zip' % git_revision,
+      'flutter/%s/sky_engine.zip' % (git_revision),
+      'flutter/%s/android-javadoc.zip' % (git_revision),
+      'flutter/%s/android-arm64-profile/linux-x64.zip' % (git_revision),
+      'flutter/%s/android-arm64-release/linux-x64.zip' % (git_revision),
+      'flutter/%s/android-arm-profile/linux-x64.zip' % (git_revision),
+      'flutter/%s/android-arm-release/linux-x64.zip' % (git_revision),
+      'flutter/%s/android-x64-profile/linux-x64.zip' % (git_revision),
+      'flutter/%s/android-x64-release/linux-x64.zip' % (git_revision),
+      'flutter/%s/fuchsia/fuchsia.stamp' % git_revision,
+  ):
+    test += api.step_data(
+        'Ensure %s does not already exist on cloud storage' % artifact,
+        retcode=1)
+  yield test
+
   yield api.test(
       'Linux Fuchsia failing test',
       api.platform('linux', 64),
@@ -1681,7 +1811,8 @@ def GenTests(api):
               no_maven=False,
               upload_packages=True,
               android_sdk_license='android_sdk_hash',
-              android_sdk_preview_license='android_sdk_preview_hash')),
+              android_sdk_preview_license='android_sdk_preview_hash',
+              force_upload=True)),
       api.properties.environ(EnvProperties(SWARMING_TASK_ID='deadbeef')),
   )
   yield api.test(
