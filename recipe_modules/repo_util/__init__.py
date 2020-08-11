@@ -4,6 +4,7 @@ DEPS = [
     'depot_tools/gclient',
     'depot_tools/git',
     'recipe_engine/buildbucket',
+    'recipe_engine/cipd',
     'recipe_engine/context',
     'recipe_engine/file',
     'recipe_engine/path',

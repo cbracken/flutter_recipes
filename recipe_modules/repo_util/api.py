@@ -53,18 +53,27 @@ class RepoUtilApi(recipe_api.RecipeApi):
         self.m.bot_update.ensure_checkout()
         self.m.gclient.runhooks()
 
-    try:
-      # Run this out of context
-      if clobber:
+    with self.m.step.nest('Checkout source code'):
+      try:
+        # Run this out of context
+        if clobber:
+          self.m.file.rmtree('Clobber cache', checkout_path)
+          self.m.file.ensure_directory('Ensure checkout cache', checkout_path)
+        _InnerCheckout()
+      except (self.m.step.StepFailure, self.m.step.InfraFailure):
+        # Run this out of context
+
+        # Ensure vpython exists
+        ensure_file = self.m.cipd.EnsureFile()
+        ensure_file.add_package('infra/tools/luci/vpython/${platform}',
+                                'latest')
+        self.m.cipd.ensure(self.m.path['cache'].join('vpython'), ensure_file)
         self.m.file.rmtree('Clobber cache', checkout_path)
+        self.m.file.rmtree('Clobber git cache',
+                           self.m.path['cache'].join('git'))
         self.m.file.ensure_directory('Ensure checkout cache', checkout_path)
-      _InnerCheckout()
-    except (self.m.step.StepFailure, self.m.step.InfraFailure):
-      # Run this out of context
-      self.m.file.rmtree('Clobber cache', checkout_path)
-      self.m.file.ensure_directory('Ensure checkout cache', checkout_path)
-      # Now try a second time
-      _InnerCheckout()
+        # Now try a second time
+        _InnerCheckout()
 
   def checkout(self, name, checkout_path, url=None, ref=None):
     """Checks out a repo and returns sha1 of checked out revision.

@@ -34,5 +34,5 @@ def GenTests(api):
               git_ref='refs/pull/1/head')) +
       # Next line force a fail condition for the bot update
       # first execution.
-      api.step_data("bot_update", retcode=1) +
+      api.step_data("Checkout source code.bot_update", retcode=1) +
       api.repo_util.flutter_environment_data())

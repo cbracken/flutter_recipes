@@ -352,6 +352,13 @@
     "name": "submodule update (4)"
   },
   {
+    "cmd": [],
+    "name": "Checkout source code",
+    "~followup_annotations": [
+      "@@@STEP_EXCEPTION@@@"
+    ]
+  },
+  {
     "cmd": [
       "vpython",
       "-u",
@@ -362,7 +369,10 @@
       "[START_DIR]/engine"
     ],
     "infra_step": true,
-    "name": "Clobber cache"
+    "name": "Checkout source code.Clobber cache",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
@@ -377,7 +387,10 @@
       "[START_DIR]/engine"
     ],
     "infra_step": true,
-    "name": "Ensure checkout cache"
+    "name": "Checkout source code.Ensure checkout cache",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
@@ -415,8 +428,9 @@
       ]
     },
     "infra_step": true,
-    "name": "bot_update",
+    "name": "Checkout source code.bot_update",
     "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_TEXT@Some step text@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"did_run\": true, @@@",
@@ -457,6 +471,35 @@
   },
   {
     "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/vpython",
+      "-ensure-file",
+      "infra/tools/luci/vpython/${platform} latest",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "name": "Checkout source code.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/vpython/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
       "vpython",
       "-u",
       "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
@@ -466,7 +509,26 @@
       "[START_DIR]/engine"
     ],
     "infra_step": true,
-    "name": "Clobber cache (2)"
+    "name": "Checkout source code.Clobber cache (2)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CACHE]/git"
+    ],
+    "infra_step": true,
+    "name": "Checkout source code.Clobber git cache",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
@@ -481,7 +543,10 @@
       "[START_DIR]/engine"
     ],
     "infra_step": true,
-    "name": "Ensure checkout cache (2)"
+    "name": "Checkout source code.Ensure checkout cache (2)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
@@ -519,8 +584,9 @@
       ]
     },
     "infra_step": true,
-    "name": "bot_update (2)",
+    "name": "Checkout source code.bot_update (2)",
     "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_TEXT@Some step text@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"did_run\": true, @@@",
@@ -575,7 +641,10 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "gclient runhooks"
+    "name": "Checkout source code.gclient runhooks",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "name": "$result"

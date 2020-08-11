@@ -276,7 +276,8 @@ def RunSteps(api, properties, env_properties):
   env = {'GOMA_DIR': api.goma.goma_dir}
   env_prefixes = {'PATH': [dart_bin]}
 
-  api.repo_util.engine_checkout(cache_root, env, env_prefixes, clobber=properties.clobber)
+  api.repo_util.engine_checkout(
+      cache_root, env, env_prefixes, clobber=properties.clobber)
 
   # Various scripts we run assume access to depot_tools on path for `ninja`.
   with api.context(
@@ -305,6 +306,7 @@ def GenTests(api):
               test_fuchsia=True,
               git_url='https://github.com/flutter/engine',
               git_ref='refs/pull/1/head',
+              clobber=False,
           ),),
       api.step_data(
           'Retrieve list of test FARs',

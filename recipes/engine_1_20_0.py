@@ -1516,8 +1516,9 @@ def RunSteps(api, properties, env_properties):
     with api.context(cwd=dart_sdk_dir):
       # The default fetch remote is a local dir, so explicitly fetch from
       # upstream remote
-      api.step('Fetch dart tags',
-              ['git', 'fetch', 'https://dart.googlesource.com/sdk.git', '--tags'])
+      api.step(
+          'Fetch dart tags',
+          ['git', 'fetch', 'https://dart.googlesource.com/sdk.git', '--tags'])
       api.step('List all tags', ['git', 'tag', '--list'])
 
     api.gclient.runhooks()
@@ -1576,8 +1577,8 @@ def GenTests(api):
         for should_publish_cipd in (True, False):
           test = api.test(
               '%s%s%s%s' % (platform, '_upload' if should_upload else '',
-                          '_maven_or_bitcode' if maven_or_bitcode else '',
-                          '_publish_cipd' if should_publish_cipd else ''),
+                            '_maven_or_bitcode' if maven_or_bitcode else '',
+                            '_publish_cipd' if should_publish_cipd else ''),
               api.platform(platform, 64),
               api.buildbucket.ci_build(
                   builder='%s Engine' % platform.capitalize(),
@@ -1603,15 +1604,17 @@ def GenTests(api):
                       android_sdk_preview_license='android_sdk_preview_hash',
                       force_upload=True,
                   ),),
-              api.properties.environ(EnvProperties(SWARMING_TASK_ID='deadbeef')),
+              api.properties.environ(
+                  EnvProperties(SWARMING_TASK_ID='deadbeef')),
           )
           if platform == 'linux' and should_upload:
-              instances = 0 if should_publish_cipd else 1
-              test += (api.override_step_data(
-                  'cipd search flutter/fuchsia git_revision:%s' % git_revision,
-                  api.cipd.example_search(
-                      'flutter/fuchsia',
-                      instances=instances)))
+            instances = 0 if should_publish_cipd else 1
+            test += (
+                api.override_step_data(
+                    'cipd search flutter/fuchsia git_revision:%s' %
+                    git_revision,
+                    api.cipd.example_search(
+                        'flutter/fuchsia', instances=instances)))
           if platform != 'win':
             test += collect_build_output
           if platform == 'mac':
@@ -1823,7 +1826,7 @@ def GenTests(api):
           project='flutter'),
       # Next line force a fail condition for the bot update
       # first execution.
-      api.step_data("bot_update", retcode=1),
+      api.step_data("Checkout source code.bot_update", retcode=1),
       collect_build_output,
       api.runtime(is_luci=True, is_experimental=True),
       api.properties(

@@ -49,6 +49,10 @@
     ]
   },
   {
+    "cmd": [],
+    "name": "Checkout source code"
+  },
+  {
     "cmd": [
       "python",
       "-u",
@@ -84,8 +88,9 @@
       ]
     },
     "infra_step": true,
-    "name": "bot_update",
+    "name": "Checkout source code.bot_update",
     "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_TEXT@Some step text@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"did_run\": true, @@@",
@@ -140,7 +145,10 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "gclient runhooks"
+    "name": "Checkout source code.gclient runhooks",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
