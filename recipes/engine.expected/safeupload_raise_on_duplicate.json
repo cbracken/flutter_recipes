@@ -245,78 +245,6 @@
   },
   {
     "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "[CACHE]/builder/src/flutter/ci/dev/try_builders.json",
-      "/path/to/tmp/"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "validate try json format",
-    "~followup_annotations": [
-      "@@@STEP_LOG_LINE@try_builders.json@\"\"@@@",
-      "@@@STEP_LOG_END@try_builders.json@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "[CACHE]/builder/src/flutter/ci/dev/prod_builders.json",
-      "/path/to/tmp/"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "validate prod json format",
-    "~followup_annotations": [
-      "@@@STEP_LOG_LINE@prod_builders.json@\"\"@@@",
-      "@@@STEP_LOG_END@prod_builders.json@@@"
-    ]
-  },
-  {
-    "cmd": [
       "git",
       "fetch",
       "https://dart.googlesource.com/sdk.git",
@@ -2299,13 +2227,13 @@
       "    raw_result = recipe_obj.run_steps(api, engine)",
       "  File \"RECIPE_REPO[recipe_engine]/recipe_engine/internal/recipe_deps.py\", in run_steps",
       "    recipe_result = self.global_symbols['RunSteps'](*args)",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 1555, in RunSteps",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 1552, in RunSteps",
       "    BuildLinux(api)",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 701, in BuildLinux",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 700, in BuildLinux",
       "    'out/host_debug_unopt/gen/frontend_server.dart.snapshot',",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 274, in UploadArtifacts",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 273, in UploadArtifacts",
       "    SafeUpload(api, local_zip, remote_zip)",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 95, in SafeUpload",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine.py\", line 94, in SafeUpload",
       "    raise AssertionError('%s already exists on cloud storage' % cloud_path)",
       "AssertionError: gs://flutter_infra/flutter//linux-x64/artifacts.zip already exists on cloud storage"
     ]
