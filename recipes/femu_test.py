@@ -102,6 +102,7 @@ def IsolateSymlink(api):
     )
 
   def addVDLFiles():
+    api.vdl.set_vdl_cipd_tag(tag="g3-revision:vdl_fuchsia_20200811_RC00")
     add(api.vdl.vdl_path, 'device_launcher')
     add(api.vdl.aemu_dir, 'aemu')
     add(api.vdl.create_device_proto(), 'virtual_device.textproto')
