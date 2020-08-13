@@ -73,7 +73,7 @@ def EnsureGoldctl(api):
     api.cipd.ensure(
         goldctl_cache_dir,
         api.cipd.EnsureFile().add_package('skia/tools/goldctl/${platform}',
-                                          'latest'))
+                                          'git_revision:b57f561ad4ad624bd399b8b7b500aa1955276d41'))
     return goldctl_cache_dir.join('goldctl')
 
 
