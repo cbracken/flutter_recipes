@@ -6,6 +6,11 @@ DRONE_TIMEOUT_SECS = 3600 * 3  # 3 hours.
 
 from recipe_engine import recipe_api
 
+# Builder names use full platform name instead of short names. We need to
+# map short names to full platform names to be able to identify the drone
+# used to run the subshards.
+PLATFORM_TO_NAME = {'win': 'Windows', 'linux': 'Linux'}
+
 
 class ShardUtilApi(recipe_api.RecipeApi):
   """Utilities to shard tasks."""
@@ -29,9 +34,10 @@ class ShardUtilApi(recipe_api.RecipeApi):
           'task_name':
               task_name
       }
+      platform_name = PLATFORM_TO_NAME.get(self.m.platform.name)
       req = self.m.buildbucket.schedule_request(
           swarming_parent_run_id=self.m.swarming.task_id,
-          builder='%s SDK Drone' % self.m.platform.name.capitalize(),
+          builder='%s SDK Drone' % platform_name,
           properties=drone_props,
           priority=30)
       reqs.append(req)

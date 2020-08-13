@@ -7,6 +7,7 @@ from recipe_engine.post_process import DoesNotRun, Filter, StatusFailure
 DEPS = [
     'flutter/shard_util',
     'recipe_engine/properties',
+    'recipe_engine/platform',
 ]
 
 
@@ -16,4 +17,4 @@ def RunSteps(api):
 
 
 def GenTests(api):
-  yield api.test('basic', api.properties(subshards=['0', '1_last']))
+  yield api.test('basic', api.properties(subshards=['0', '1_last']), api.platform.name('win'))
