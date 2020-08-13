@@ -39,7 +39,15 @@ class ShardUtilApi(recipe_api.RecipeApi):
           swarming_parent_run_id=self.m.swarming.task_id,
           builder='%s SDK Drone' % platform_name,
           properties=drone_props,
-          priority=30)
+          # Having main build and subbuilds with the same priority can lead
+          # to a deadlock situation when there are limited resources. For example
+          # if we have only 7 mac bots and we get more than 7 new build requests the
+          # within minutes of each other then the 7 bots will be used by main tasks
+          # and they will all timeout waiting for resources to run subbuilds.
+          # Increasing priority won't fix the problem but will make the deadlock
+          # situation less unlikely.
+          # https://github.com/flutter/flutter/issues/59169.
+          priority=25)
       reqs.append(req)
     return self.m.buildbucket.schedule(reqs)
 
