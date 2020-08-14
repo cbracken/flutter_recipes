@@ -40,12 +40,13 @@ message InputProperties {
   bool no_maven = 20;
   bool clobber=21;
 
-  string fuchsia_ctl_version=22;
-  bool build_font_subset=23;
-  bool test_fuchsia=24;
+  string fuchsia_ctl_version = 22;
+  bool build_font_subset = 23;
+  bool test_fuchsia = 24;
   // Override previous upload check, defaults to False
-  bool force_upload=25;
+  bool force_upload = 25;
   bool build_android_jit_release = 26;
+  bool no_lto = 27;
 }
 
 message EnvProperties {

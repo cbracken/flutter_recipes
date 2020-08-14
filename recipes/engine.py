@@ -124,7 +124,7 @@ def Build(api, config, *targets):
 
 
 # Bitcode builds cannot use goma.
-def BuildNoGoma(api, config, *targets):
+def BuildBitcode(api, config, *targets):
   if api.properties.get('no_bitcode', False):
     Build(api, config, *targets)
     return
@@ -227,6 +227,8 @@ def BuildAndTestFuchsia(api, build_script, git_rev):
 def RunGN(api, *args):
   checkout = GetCheckoutPath(api)
   gn_cmd = ['python', checkout.join('flutter/tools/gn'), '--goma']
+  if api.properties.get('no_lto', False) and '--no-lto' not in args:
+    args += ('--no-lto',)
   gn_cmd.extend(args)
   api.step('gn %s' % ' '.join(args), gn_cmd)
 
@@ -244,6 +246,8 @@ def RunGNBitcode(api, *args):
         'python',
         checkout.join('flutter/tools/gn'), '--bitcode', '--no-goma'
     ]
+    if api.properties.get('no_lto', False) and '--no-lto' not in args:
+      args += ('--no-lto',)
     gn_cmd.extend(args)
     api.step('gn %s' % ' '.join(args), gn_cmd)
 
@@ -1267,8 +1271,8 @@ def BuildIOS(api):
     RunGNBitcode(api, '--ios', '--runtime-mode', 'debug')
     RunGNBitcode(api, '--ios', '--runtime-mode', 'debug', '--ios-cpu=arm')
 
-    BuildNoGoma(api, 'ios_debug')
-    BuildNoGoma(api, 'ios_debug_arm')
+    BuildBitcode(api, 'ios_debug')
+    BuildBitcode(api, 'ios_debug_arm')
 
     BuildObjcDoc(api)
 
@@ -1278,16 +1282,16 @@ def BuildIOS(api):
   if api.properties.get('ios_profile', True):
     RunGNBitcode(api, '--ios', '--runtime-mode', 'profile')
     RunGNBitcode(api, '--ios', '--runtime-mode', 'profile', '--ios-cpu=arm')
-    BuildNoGoma(api, 'ios_profile')
-    BuildNoGoma(api, 'ios_profile_arm')
+    BuildBitcode(api, 'ios_profile')
+    BuildBitcode(api, 'ios_profile_arm')
     PackageIOSVariant(api, 'profile', 'ios_profile', 'ios_profile_arm',
                       'ios_debug_sim', 'ios-profile')
 
   if api.properties.get('ios_release', True):
     RunGNBitcode(api, '--ios', '--runtime-mode', 'release')
     RunGNBitcode(api, '--ios', '--runtime-mode', 'release', '--ios-cpu=arm')
-    BuildNoGoma(api, 'ios_release')
-    BuildNoGoma(api, 'ios_release_arm')
+    BuildBitcode(api, 'ios_release')
+    BuildBitcode(api, 'ios_release_arm')
     PackageIOSVariant(api, 'release', 'ios_release', 'ios_release_arm',
                       'ios_debug_sim', 'ios-release')
 
@@ -1515,7 +1519,7 @@ def RunSteps(api, properties, env_properties):
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
 
   # Various scripts we run assume access to depot_tools on path for `ninja`.
-  with api.context(
+  with SetupXcode(api), api.context(
       cwd=cache_root, env=env,
       env_prefixes=env_prefixes), api.depot_tools.on_path():
 
@@ -1588,56 +1592,59 @@ def GenTests(api):
     for should_upload in (True, False):
       for maven_or_bitcode in (True, False):
         for should_publish_cipd in (True, False):
-          test = api.test(
-              '%s%s%s%s' % (platform, '_upload' if should_upload else '',
-                            '_maven_or_bitcode' if maven_or_bitcode else '',
-                            '_publish_cipd' if should_publish_cipd else ''),
-              api.platform(platform, 64),
-              api.buildbucket.ci_build(
-                  builder='%s Engine' % platform.capitalize(),
-                  git_repo=GIT_REPO,
-                  project='flutter',
-                  revision='%s' % git_revision,
-              ),
-              api.runtime(is_luci=True, is_experimental=False),
-              api.properties(
-                  InputProperties(
-                      clobber=False,
-                      goma_jobs='1024',
-                      fuchsia_ctl_version='version:0.0.2',
-                      build_host=True,
-                      build_fuchsia=True,
-                      test_fuchsia=True,
-                      build_android_aot=True,
-                      build_android_debug=True,
-                      build_android_vulkan=True,
-                      no_maven=maven_or_bitcode,
-                      upload_packages=should_upload,
-                      android_sdk_license='android_sdk_hash',
-                      android_sdk_preview_license='android_sdk_preview_hash',
-                      force_upload=True,
-                  ),),
-              api.properties.environ(
-                  EnvProperties(SWARMING_TASK_ID='deadbeef')),
-          )
-          if platform == 'linux' and should_upload:
-            instances = 0 if should_publish_cipd else 1
-            test += (
-                api.override_step_data(
-                    'cipd search flutter/fuchsia git_revision:%s' %
-                    git_revision,
-                    api.cipd.example_search(
-                        'flutter/fuchsia', instances=instances)))
-          if platform != 'win':
-            test += collect_build_output
-          if platform == 'mac':
-            test += (
+          for no_lto in (True, False):
+            test = api.test(
+                '%s%s%s%s%s' % (platform, '_upload' if should_upload else '',
+                              '_maven_or_bitcode' if maven_or_bitcode else '',
+                              '_publish_cipd' if should_publish_cipd else '',
+                              '_no_lto' if no_lto else ''),
+                api.platform(platform, 64),
+                api.buildbucket.ci_build(
+                    builder='%s Engine' % platform.capitalize(),
+                    git_repo=GIT_REPO,
+                    project='flutter',
+                    revision='%s' % git_revision,
+                ),
+                api.runtime(is_luci=True, is_experimental=False),
                 api.properties(
                     InputProperties(
-                        jazzy_version='0.8.4',
-                        build_ios=True,
-                        no_bitcode=maven_or_bitcode)))
-          yield test
+                        clobber=False,
+                        goma_jobs='1024',
+                        fuchsia_ctl_version='version:0.0.2',
+                        build_host=True,
+                        build_fuchsia=True,
+                        test_fuchsia=True,
+                        build_android_aot=True,
+                        build_android_debug=True,
+                        build_android_vulkan=True,
+                        no_maven=maven_or_bitcode,
+                        upload_packages=should_upload,
+                        android_sdk_license='android_sdk_hash',
+                        android_sdk_preview_license='android_sdk_preview_hash',
+                        force_upload=True,
+                        no_lto=no_lto,
+                    ),),
+                api.properties.environ(
+                    EnvProperties(SWARMING_TASK_ID='deadbeef')),
+            )
+            if platform == 'linux' and should_upload:
+              instances = 0 if should_publish_cipd else 1
+              test += (
+                  api.override_step_data(
+                      'cipd search flutter/fuchsia git_revision:%s' %
+                      git_revision,
+                      api.cipd.example_search(
+                          'flutter/fuchsia', instances=instances)))
+            if platform != 'win':
+              test += collect_build_output
+            if platform == 'mac':
+              test += (
+                  api.properties(
+                      InputProperties(
+                          jazzy_version='0.8.4',
+                          build_ios=True,
+                          no_bitcode=maven_or_bitcode)))
+            yield test
 
   yield api.test(
       'safeupload_raise_on_duplicate',

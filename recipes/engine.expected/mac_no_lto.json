@@ -3005,7 +3005,8 @@
       "--runtime-mode",
       "release",
       "--android",
-      "--enable-vulkan"
+      "--enable-vulkan",
+      "--no-lto"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3025,7 +3026,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "gn --runtime-mode release --android --enable-vulkan"
+    "name": "gn --runtime-mode release --android --enable-vulkan --no-lto"
   },
   {
     "cmd": [],
@@ -3399,7 +3400,8 @@
       "--goma",
       "--runtime-mode",
       "profile",
-      "--android"
+      "--android",
+      "--no-lto"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3419,7 +3421,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "gn --runtime-mode profile --android"
+    "name": "gn --runtime-mode profile --android --no-lto"
   },
   {
     "cmd": [
@@ -3429,7 +3431,8 @@
       "--runtime-mode",
       "profile",
       "--android",
-      "--android-cpu=arm64"
+      "--android-cpu=arm64",
+      "--no-lto"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3449,7 +3452,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "gn --runtime-mode profile --android --android-cpu=arm64"
+    "name": "gn --runtime-mode profile --android --android-cpu=arm64 --no-lto"
   },
   {
     "cmd": [
@@ -3459,7 +3462,8 @@
       "--runtime-mode",
       "profile",
       "--android",
-      "--android-cpu=x64"
+      "--android-cpu=x64",
+      "--no-lto"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3479,36 +3483,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "gn --runtime-mode profile --android --android-cpu=x64"
-  },
-  {
-    "cmd": [
-      "python",
-      "[CACHE]/builder/src/flutter/tools/gn",
-      "--goma",
-      "--runtime-mode",
-      "release",
-      "--android"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "gn --runtime-mode release --android"
+    "name": "gn --runtime-mode profile --android --android-cpu=x64 --no-lto"
   },
   {
     "cmd": [
@@ -3518,7 +3493,7 @@
       "--runtime-mode",
       "release",
       "--android",
-      "--android-cpu=arm64"
+      "--no-lto"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3538,7 +3513,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "gn --runtime-mode release --android --android-cpu=arm64"
+    "name": "gn --runtime-mode release --android --no-lto"
   },
   {
     "cmd": [
@@ -3548,7 +3523,8 @@
       "--runtime-mode",
       "release",
       "--android",
-      "--android-cpu=x64"
+      "--android-cpu=arm64",
+      "--no-lto"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3568,7 +3544,38 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "gn --runtime-mode release --android --android-cpu=x64"
+    "name": "gn --runtime-mode release --android --android-cpu=arm64 --no-lto"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "release",
+      "--android",
+      "--android-cpu=x64",
+      "--no-lto"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode release --android --android-cpu=x64 --no-lto"
   },
   {
     "cmd": [],
@@ -6672,7 +6679,8 @@
       "python",
       "[CACHE]/builder/src/flutter/tools/gn",
       "--goma",
-      "--unoptimized"
+      "--unoptimized",
+      "--no-lto"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6694,7 +6702,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "gn --unoptimized"
+    "name": "gn --unoptimized --no-lto"
   },
   {
     "cmd": [],
@@ -7534,7 +7542,8 @@
       "--no-goma",
       "--ios",
       "--runtime-mode",
-      "debug"
+      "debug",
+      "--no-lto"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7558,7 +7567,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "gn --ios --runtime-mode debug"
+    "name": "gn --ios --runtime-mode debug --no-lto"
   },
   {
     "cmd": [
@@ -7569,7 +7578,8 @@
       "--ios",
       "--runtime-mode",
       "debug",
-      "--ios-cpu=arm"
+      "--ios-cpu=arm",
+      "--no-lto"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7593,7 +7603,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "gn --ios --runtime-mode debug --ios-cpu=arm"
+    "name": "gn --ios --runtime-mode debug --ios-cpu=arm --no-lto"
   },
   {
     "cmd": [
@@ -7905,7 +7915,8 @@
       "--no-goma",
       "--ios",
       "--runtime-mode",
-      "profile"
+      "profile",
+      "--no-lto"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7929,7 +7940,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "gn --ios --runtime-mode profile"
+    "name": "gn --ios --runtime-mode profile --no-lto"
   },
   {
     "cmd": [
@@ -7940,7 +7951,8 @@
       "--ios",
       "--runtime-mode",
       "profile",
-      "--ios-cpu=arm"
+      "--ios-cpu=arm",
+      "--no-lto"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -7964,7 +7976,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "gn --ios --runtime-mode profile --ios-cpu=arm"
+    "name": "gn --ios --runtime-mode profile --ios-cpu=arm --no-lto"
   },
   {
     "cmd": [
@@ -8187,7 +8199,8 @@
       "--no-goma",
       "--ios",
       "--runtime-mode",
-      "release"
+      "release",
+      "--no-lto"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8211,7 +8224,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "gn --ios --runtime-mode release"
+    "name": "gn --ios --runtime-mode release --no-lto"
   },
   {
     "cmd": [
@@ -8222,7 +8235,8 @@
       "--ios",
       "--runtime-mode",
       "release",
-      "--ios-cpu=arm"
+      "--ios-cpu=arm",
+      "--no-lto"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -8246,7 +8260,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "gn --ios --runtime-mode release --ios-cpu=arm"
+    "name": "gn --ios --runtime-mode release --ios-cpu=arm --no-lto"
   },
   {
     "cmd": [
