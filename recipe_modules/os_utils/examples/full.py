@@ -7,6 +7,7 @@ from recipe_engine.post_process import DoesNotRun, Filter, StatusFailure
 DEPS = [
     'flutter/os_utils',
     'recipe_engine/platform',
+    'recipe_engine/python',
 ]
 
 
@@ -19,3 +20,6 @@ def GenTests(api):
       'basic',
       api.platform('win', 64),
   )
+  yield api.test(
+      'with_failures', api.platform('win', 64),
+      api.step_data("Killing Windows Processes.stop dart", retcode=1))

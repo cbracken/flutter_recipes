@@ -4,6 +4,8 @@
 
 from recipe_engine import recipe_api
 
+from PB.go.chromium.org.luci.buildbucket.proto import common as common_pb2
+
 
 class FlutterDepsApi(recipe_api.RecipeApi):
   """Operating system utilities."""
@@ -15,7 +17,10 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       name(str): The name of the step.
       exe_name(str): The name of the windows executable.
     """
-    self.m.step(name, ['taskkill', '/f', '/im', exe_name, '/t'], ok_ret='any')
+    try:
+      step_result = self.m.step(name, ['taskkill', '/f', '/im', exe_name, '/t'])
+    except (self.m.step.StepFailure, self.m.step.InfraFailure):
+      pass
 
   def kill_win_processes(self):
     """Kills windows processes.

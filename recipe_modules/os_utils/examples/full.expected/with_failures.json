@@ -1,0 +1,52 @@
+[
+  {
+    "cmd": [],
+    "name": "Killing Windows Processes",
+    "~followup_annotations": [
+      "@@@STEP_FAILURE@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "taskkill",
+      "/f",
+      "/im",
+      "java.exe",
+      "/t"
+    ],
+    "name": "Killing Windows Processes.stop gradle daemon",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "taskkill",
+      "/f",
+      "/im",
+      "dart.exe",
+      "/t"
+    ],
+    "name": "Killing Windows Processes.stop dart",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_FAILURE@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "taskkill",
+      "/f",
+      "/im",
+      "adb.exe",
+      "/t"
+    ],
+    "name": "Killing Windows Processes.stop adb",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]
