@@ -1476,10 +1476,6 @@ def InstallGems(api):
           'gem', 'install', 'jazzy:' + api.properties['jazzy_version'],
           '--install-dir', '.'
       ])
-      api.step('install xcpretty', [
-          'gem', 'install', 'xcpretty:' +
-          api.properties.get('xcpretty_version', '0.3.0'), '--install-dir', '.'
-      ])
   with api.context(
       env={"GEM_HOME": gem_dir}, env_prefixes={'PATH': [gem_dir.join('bin')]}):
     yield

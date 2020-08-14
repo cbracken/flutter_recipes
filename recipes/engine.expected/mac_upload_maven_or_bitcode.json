@@ -6836,35 +6836,6 @@
   },
   {
     "cmd": [
-      "gem",
-      "install",
-      "xcpretty:0.3.0",
-      "--install-dir",
-      "."
-    ],
-    "cwd": "[START_DIR]/gems",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "SDKROOT": "[CACHE]/xcode_binary/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "install xcpretty"
-  },
-  {
-    "cmd": [
       "python",
       "[CACHE]/builder/src/flutter/tools/gn",
       "--goma",
