@@ -1,0 +1,18 @@
+[
+  {
+    "cmd": [],
+    "name": "dart analyze"
+  },
+  {
+    "cmd": [
+      "RECIPE_MODULE[flutter::adhoc_validation]\\resources\\analyze.bat"
+    ],
+    "name": "dart analyze.analyze",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]

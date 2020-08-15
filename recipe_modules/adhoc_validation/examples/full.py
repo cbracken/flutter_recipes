@@ -6,6 +6,7 @@ from recipe_engine.post_process import DoesNotRun, Filter, StatusFailure
 
 DEPS = [
     'flutter/adhoc_validation',
+    'recipe_engine/platform',
 ]
 
 
@@ -14,4 +15,5 @@ def RunSteps(api):
 
 
 def GenTests(api):
-  yield api.test('basic')
+  yield api.test('win', api.platform.name('win'))
+  yield api.test('linux', api.platform.name('linux'))

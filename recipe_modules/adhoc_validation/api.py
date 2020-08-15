@@ -15,7 +15,7 @@ class AddhocValidationApi(recipe_api.RecipeApi):
 
   def available_validations(self):
     """Returns the list of accepted validations."""
-    return ['analyze', 'fuchsia_precache']
+    return ['analyze', 'customer_testing', 'docs', 'fuchsia_precache']
 
   def run(self, name, validation):
     """Runs a validation as a recipe step.
@@ -27,7 +27,10 @@ class AddhocValidationApi(recipe_api.RecipeApi):
     """
     assert (validation in self.available_validations())
     with self.m.step.nest(name):
-      self.m.step(
-          'Set execute permission',
-          ['chmod', '755', self.resource('%s.sh' % validation)])
-      self.m.step(validation, [self.resource('%s.sh' % validation)])
+      resource_name = ''
+      if self.m.platform.is_linux:
+        resource_name = self.resource('%s.sh' % validation)
+        self.m.step('Set execute permission', ['chmod', '755', resource_name])
+      if self.m.platform.is_win:
+        resource_name = self.resource('%s.bat' % validation)
+      self.m.step(validation, [resource_name])
