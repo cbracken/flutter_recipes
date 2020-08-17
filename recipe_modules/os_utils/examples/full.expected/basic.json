@@ -43,6 +43,19 @@
     ]
   },
   {
+    "cmd": [
+      "taskkill",
+      "/f",
+      "/im",
+      "flutter_tester.exe",
+      "/t"
+    ],
+    "name": "Killing Windows Processes.stop flutter_tester",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
     "name": "$result"
   }
 ]

@@ -1,10 +1,7 @@
 [
   {
     "cmd": [],
-    "name": "Killing Windows Processes",
-    "~followup_annotations": [
-      "@@@STEP_FAILURE@@@"
-    ]
+    "name": "Killing Windows Processes"
   },
   {
     "cmd": [
@@ -29,8 +26,7 @@
     ],
     "name": "Killing Windows Processes.stop dart",
     "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_FAILURE@@@"
+      "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
@@ -42,6 +38,19 @@
       "/t"
     ],
     "name": "Killing Windows Processes.stop adb",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "taskkill",
+      "/f",
+      "/im",
+      "flutter_tester.exe",
+      "/t"
+    ],
+    "name": "Killing Windows Processes.stop flutter_tester",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
