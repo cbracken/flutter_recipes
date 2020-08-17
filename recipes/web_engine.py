@@ -91,28 +91,41 @@ def DownloadFirefoxDriver(api):
   api.cipd.ensure(firefox_driver_path, pkgdriver)
 
 
-def DownloadChromeAndDriver(api):
+def DownloadChromeAndDriver(api, chrome_path_84):
   checkout = GetCheckoutPath(api)
   # Download a specific version of chrome-linux before running Flutter Web
   # tests.
-  # Chrome uses binary numbers for archiving different versions of the browser.
-  # The binary 741412 has major version 82. It is tested in both headless and
-  # no-headless mode of Chrome Driver for integration tests.
-  # Please make sure to also change the following lock file when updating the
-  # recipe:
+  # Please make sure at least one of the versions in this method is this file:
   # flutter/engine/blob/master/lib/web_ui/dev/browser_lock.yaml#L4
-  chrome_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
+  # Chrome uses binary numbers for archiving different versions of the browser.
+  chrome_pkg_84 = api.cipd.EnsureFile()
+  chrome_pkg_84.add_package('flutter_internal/browsers/chrome/${platform}',
+                            'latest-84')
+  api.cipd.ensure(chrome_path_84, chrome_pkg_84)
+  # Download the driver for Chrome 84.
+  chrome_driver_84_path = checkout.join('flutter', 'lib', 'web_ui',
+                                        '.dart_tool', 'drivers', 'chrome', '84')
+  chrome_pkgdriver_84= api.cipd.EnsureFile()
+  chrome_pkgdriver_84.add_package(
+      'flutter_internal/browser-drivers/chrome/${platform}', 'latest-84')
+  api.cipd.ensure(chrome_driver_84_path, chrome_pkgdriver_84)
+
+  # Chrome uses binary numbers for archiving different versions of the browser.
+  # The binary 741412 has major version 82.
+  # TODO: remove this version once 84 start working with no issues.
+  chrome_path_82 = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
                               'chrome', '741412')
-  pkgs = api.cipd.EnsureFile()
-  pkgs.add_package('flutter_internal/browsers/chrome-linux', 'latest')
-  api.cipd.ensure(chrome_path, pkgs)
-  # Download the driver for the same version of chrome-linux.
-  chrome_driver_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
+  chrome_pkg_82 = api.cipd.EnsureFile()
+  chrome_pkg_82.add_package('flutter_internal/browsers/chrome-linux', 'latest')
+  api.cipd.ensure(chrome_path_82, chrome_pkg_82)
+  # Download the driver for Chrome 82.
+  # TODO: remove this version once 84 start working with no issues.
+  chrome_driver_82_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
                                      'drivers', 'chrome')
-  pkgdriver = api.cipd.EnsureFile()
-  pkgdriver.add_package('flutter_internal/browser-drivers/chromedriver-linux',
-                        'latest')
-  api.cipd.ensure(chrome_driver_path, pkgdriver)
+  chrome_pkgdriver_82 = api.cipd.EnsureFile()
+  chrome_pkgdriver_82.add_package(
+      'flutter_internal/browser-drivers/chromedriver-linux', 'latest')
+  api.cipd.ensure(chrome_driver_82_path, chrome_pkgdriver_82)
 
 
 def RunSteps(api, properties, env_properties):
@@ -193,6 +206,12 @@ def RunSteps(api, properties, env_properties):
       felt_licenses = copy.deepcopy(felt_cmd)
       felt_licenses.append('check-licenses')
       api.step('felt licenses', felt_licenses)
+      if api.platform.is_win:
+        chrome_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
+                                       'chrome', '768975')
+      if api.platform.is_mac:
+        chrome_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
+                                       'chrome', '768985')
       if api.platform.is_linux:
         web_engine_analysis_cmd = [
             checkout.join('flutter', 'lib', 'web_ui', 'dev', 'web_engine_analysis.sh'),
@@ -204,7 +223,9 @@ def RunSteps(api, properties, env_properties):
         felt_test_firefox.append('test')
         felt_test_firefox.extend(additional_args_firefox)
         api.step('felt test firefox', felt_test_firefox)
-        DownloadChromeAndDriver(api)
+        chrome_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
+                                       'chrome', '768968')
+      DownloadChromeAndDriver(api, chrome_path)
       felt_test = copy.deepcopy(felt_cmd)
       felt_test.append('test')
       felt_test.extend(additional_args)
