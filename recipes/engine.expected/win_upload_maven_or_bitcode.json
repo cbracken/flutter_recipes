@@ -3000,7 +3000,7 @@
       "----",
       "cp",
       "[CLEANUP]\\tmp_tmp_6\\flutter-cpp-client-wrapper.zip",
-      "gs://flutter_infra/flutter/abcd1234/flutter-cpp-client-wrapper.zip"
+      "gs://flutter_infra/flutter/abcd1234/windows-x64/flutter-cpp-client-wrapper.zip"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -3021,9 +3021,9 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/flutter-cpp-client-wrapper.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/windows-x64/flutter-cpp-client-wrapper.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/flutter-cpp-client-wrapper.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/windows-x64/flutter-cpp-client-wrapper.zip@@@"
     ]
   },
   {

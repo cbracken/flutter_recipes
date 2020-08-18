@@ -2,7 +2,6 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-from contextlib import contextmanager
 from recipe_engine import recipe_api
 
 from PB.go.chromium.org.luci.buildbucket.proto import common as common_pb2
@@ -41,16 +40,3 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         # Ensure we always pass this step as killing non existing processes
         # may create errors.
         presentation.status = 'SUCCESS'
-
-  @contextmanager
-  def make_temp_directory(self, label):
-    """Makes a temporary directory that is automatically deleted.
-
-    Args:
-      label: String to append to the step that creates the temporary directory.
-    """
-    temp_dir = self.m.path.mkdtemp('tmp')
-    try:
-      yield temp_dir
-    finally:
-      self.m.file.rmtree('temp dir for %s' % label, temp_dir)
