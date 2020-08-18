@@ -3,7 +3,6 @@
 # found in the LICENSE file.
 
 from contextlib import contextmanager
-import contextlib
 
 from PB.recipes.flutter.engine import InputProperties
 from PB.recipes.flutter.engine import EnvProperties
@@ -19,6 +18,8 @@ DEPS = [
     'depot_tools/git',
     'depot_tools/gsutil',
     'depot_tools/osx_sdk',
+    'flutter/bucket_util',
+    'flutter/os_utils',
     'flutter/repo_util',
     'flutter/zip',
     'fuchsia/display_util',
@@ -58,51 +59,6 @@ def BuildFontSubset(api):
 
 def GetCheckoutPath(api):
   return api.path['cache'].join('builder', 'src')
-
-
-# TODO(fujino): make this a shared function in a utility module.
-def SafeUpload(api,
-               local_path,
-               remote_path,
-               bucket_name=BUCKET_NAME,
-               args=[],
-               skip_on_duplicate=False):
-  """Upload a file if it doesn't already exist, fail job otherwise.
-
-    The check can be overridden with the `force_upload` property.
-    """
-  assert (ShouldUploadPackages(api))
-
-  experimental = api.runtime.is_experimental
-  force_upload = api.properties.get('force_upload', False)
-  # Experimental builds go to a different bucket, duplicates allowed
-  if not experimental and not force_upload:
-    cloud_path = 'gs://%s/%s' % (bucket_name, remote_path)
-    result = api.step(
-        'Ensure %s does not already exist on cloud storage' % remote_path, [
-            'python',
-            api.depot_tools.gsutil_py_path,
-            'stat',
-            cloud_path,
-        ],
-        ok_ret='all')
-    # A return value of 0 means the file ALREADY exists on cloud storage
-    if result.exc_result.retcode == 0:
-      if skip_on_duplicate:
-        # This file already exists, but we shouldn't fail the build
-        return
-      raise AssertionError('%s already exists on cloud storage' % cloud_path)
-
-  return api.gsutil.upload(
-      local_path,
-      bucket_name,
-      remote_path,
-      args=args,
-      name='upload "%s"' % remote_path)
-
-
-def ShouldUploadPackages(api):
-  return api.properties.get('upload_packages', False)
 
 
 def GetCloudPath(api, path):
@@ -252,29 +208,18 @@ def RunGNBitcode(api, *args):
     api.step('gn %s' % ' '.join(args), gn_cmd)
 
 
-# The relative_paths parameter is a list of strings and pairs of strings.
-# If the path is a string, then it will be used as the source filename,
-# and its basename will be used as the destination filename in the archive.
-# If the path is a pair, then the first element will be used as the source
-# filename, and the second element will be used as the destination filename
-# in the archive.
-def AddFiles(api, pkg, relative_paths):
-  for path in relative_paths:
-    pkg.add_file(pkg.root.join(path), archive_name=api.path.basename(path))
-
-
 def UploadArtifacts(api, platform, file_paths, archive_name='artifacts.zip'):
   dir_label = '%s UploadArtifacts %s' % (platform, archive_name)
-  with MakeTempDir(api, dir_label) as temp_dir:
+  with api.os_utils.make_temp_directory(dir_label) as temp_dir:
     local_zip = temp_dir.join('artifacts.zip')
     remote_name = '%s/%s' % (platform, archive_name)
     remote_zip = GetCloudPath(api, remote_name)
     pkg = api.zip.make_package(GetCheckoutPath(api), local_zip)
-    AddFiles(api, pkg, file_paths)
+    api.bucket_util.add_files( pkg, file_paths)
 
     pkg.zip('Zip %s %s' % (platform, archive_name))
-    if ShouldUploadPackages(api):
-      SafeUpload(api, local_zip, remote_zip)
+    if api.bucket_util.should_upload_packages():
+      api.bucket_util.safe_upload(local_zip, remote_zip)
 
 
 # Takes an artifact filename such as `flutter_embedding_release.jar`
@@ -307,7 +252,7 @@ def GetCloudMavenPath(api, artifact_filename, swarming_task_id):
 def UploadMavenArtifacts(api, artifacts, swarming_task_id):
   if api.properties.get('no_maven', False):
     return
-  if not ShouldUploadPackages(api):
+  if not api.bucket_util.should_upload_packages():
     return
   checkout = GetCheckoutPath(api)
 
@@ -315,54 +260,17 @@ def UploadMavenArtifacts(api, artifacts, swarming_task_id):
     filename = api.path.basename(local_artifact)
     remote_artifact = GetCloudMavenPath(api, filename, swarming_task_id)
 
-    SafeUpload(
-        api,
-        checkout.join(local_artifact),
-        remote_artifact,
-        bucket_name=MAVEN_BUCKET_NAME)
-
-
-def UploadFolder(api,
-                 dir_label,
-                 parent_dir,
-                 folder_name,
-                 zip_name,
-                 platform=None):
-  UploadFolderAndFiles(api, dir_label, parent_dir, folder_name, None, zip_name,
-                       platform)
-
-
-def UploadFolderAndFiles(api,
-                         dir_label,
-                         parent_dir,
-                         folder_name,
-                         file_paths,
-                         zip_name,
-                         platform=None):
-  with MakeTempDir(api, dir_label) as temp_dir:
-    local_zip = temp_dir.join(zip_name)
-    if platform is None:
-      remote_name = zip_name
-    else:
-      remote_name = '%s/%s' % (platform, zip_name)
-    remote_zip = GetCloudPath(api, remote_name)
-    parent_dir = api.path['cache'].join('builder', parent_dir)
-    pkg = api.zip.make_package(parent_dir, local_zip)
-    pkg.add_directory(parent_dir.join(folder_name))
-    if file_paths is not None:
-      AddFiles(api, pkg, file_paths)
-    pkg.zip('Zip %s' % folder_name)
-    if ShouldUploadPackages(api):
-      SafeUpload(api, local_zip, remote_zip)
+    api.bucket_util.safe_upload(checkout.join(local_artifact),
+                                remote_artifact,
+                                bucket_name=MAVEN_BUCKET_NAME)
 
 
 def UploadDartPackage(api, package_name):
-  UploadFolder(
-      api,
-      'UploadDartPackage %s' % package_name,  # dir_label
-      'src/out/android_debug/dist/packages',  # parent_dir
-      package_name,  # folder_name
-      "%s.zip" % package_name)  # zip_name
+  api.bucket_util.upload_folder(
+      'UploadDartPackage %s' % package_name,
+      'src/out/android_debug/dist/packages',
+      package_name,
+      "%s.zip" % package_name)
 
 
 def UploadSkyEngineToCIPD(api, package_name):
@@ -370,12 +278,12 @@ def UploadSkyEngineToCIPD(api, package_name):
   package_dir = 'src/out/android_debug/dist/packages'
   parent_dir = api.path['cache'].join('builder', package_dir)
   folder_path = parent_dir.join(package_name)
-  with MakeTempDir(api, package_name) as temp_dir:
+  with api.os_utils.make_temp_directory(package_name) as temp_dir:
     zip_path = temp_dir.join('%s.zip' % package_name)
     cipd_package_name = 'flutter/%s' % package_name
     api.cipd.build(
         folder_path, zip_path, cipd_package_name, install_mode='copy')
-    if ShouldUploadPackages(api):
+    if api.bucket_util.should_upload_packages():
       api.cipd.register(
           cipd_package_name,
           zip_path,
@@ -389,12 +297,11 @@ def UploadSkyEngineDartPackage(api):
 
 
 def UploadFlutterPatchedSdk(api):
-  UploadFolder(
-      api,
-      'Upload Flutter patched sdk',  # dir_label
-      'src/out/host_debug',  # parent_dir
-      'flutter_patched_sdk',  # folder_name
-      'flutter_patched_sdk.zip')  # zip_name
+  api.bucket_util.upload_folder(
+      'Upload Flutter patched sdk',
+      'src/out/host_debug',
+      'flutter_patched_sdk',
+      'flutter_patched_sdk.zip')
 
   host_release_path = GetCheckoutPath(api).join('out/host_release')
   flutter_patched_sdk_product = host_release_path.join(
@@ -405,40 +312,27 @@ def UploadFlutterPatchedSdk(api):
       'Move release flutter_patched_sdk to flutter_patched_sdk_product',
       host_release_path.join('flutter_patched_sdk'),
       flutter_patched_sdk_product)
-  UploadFolder(
-      api,
-      'Upload Product Flutter patched sdk',  # dir_label
-      'src/out/host_release',  # parent_dir
-      'flutter_patched_sdk_product',  # folder_name
-      'flutter_patched_sdk_product.zip')  # zip_name
+  api.bucket_util.upload_folder(
+      'Upload Product Flutter patched sdk',
+      'src/out/host_release',
+      'flutter_patched_sdk_product',
+      'flutter_patched_sdk_product.zip')
 
 
 def UploadDartSdk(api, archive_name):
-  UploadFolder(
-      api,
-      'Upload Dart SDK',  # dir_label
-      'src/out/host_debug',  # parent_dir
-      'dart-sdk',  # folder_name
+  api.bucket_util.upload_folder(
+      'Upload Dart SDK',
+      'src/out/host_debug',
+      'dart-sdk',
       archive_name)
 
 
 def UploadWebSdk(api, archive_name):
-  UploadFolder(
-      api,
-      'Upload Web SDK',  # dir_label
-      'src/out/host_debug',  # parent_dir
-      'flutter_web_sdk',  # folder_name
+  api.bucket_util.upload_folder(
+      'Upload Web SDK',
+      'src/out/host_debug',
+      'flutter_web_sdk',
       archive_name)
-
-
-# TODO(eseidel): Would be nice to have this on api.path or api.file.
-@contextlib.contextmanager
-def MakeTempDir(api, label):
-  temp_dir = api.path.mkdtemp('tmp')
-  try:
-    yield temp_dir
-  finally:
-    api.file.rmtree('temp dir for %s' % label, temp_dir)
 
 
 def AnalyzeDartUI(api):
@@ -476,7 +370,7 @@ def VerifyExportedSymbols(api):
 
 
 def UploadTreeMap(api, upload_dir, lib_flutter_path, android_triple):
-  with MakeTempDir(api, 'treemap') as temp_dir:
+  with api.os_utils.make_temp_directory('treemap') as temp_dir:
     checkout = GetCheckoutPath(api)
     script_path = checkout.join(
         'third_party/dart/runtime/'
@@ -495,7 +389,7 @@ def UploadTreeMap(api, upload_dir, lib_flutter_path, android_triple):
     api.python('generate treemap for %s' % upload_dir, script_path, args)
 
     remote_name = GetCloudPath(api, upload_dir)
-    if ShouldUploadPackages(api):
+    if api.bucket_util.should_upload_packages():
       # TODO(fujino): create SafeUploadDirectory() wrapper
       result = api.gsutil.upload(
           destination_dir,
@@ -679,9 +573,13 @@ def PackageLinuxDesktopVariant(api, label, bucket_name):
   if bucket_name.endswith('profile') or bucket_name.endswith('release'):
     artifacts.append('gen_snapshot')
   # Headers for the library are in the flutter_linux folder.
-  UploadFolderAndFiles(api, 'Upload linux-x64 Flutter GTK artifacts',
-                       'src/out/%s' % label, 'flutter_linux', artifacts,
-                       'linux-x64-flutter-gtk.zip', bucket_name)
+  api.bucket_util.upload_folder_and_files(
+      'Upload linux-x64 Flutter GTK artifacts',
+      'src/out/%s' % label,
+      'flutter_linux',
+      artifacts,
+      'linux-x64-flutter-gtk.zip',
+      bucket_name)
 
 
 def BuildLinux(api):
@@ -760,7 +658,7 @@ def IsolateFuchsiaTestArtifacts(api, checkout, fuchsia_tools, image_name,
   engine/testing/fuchsia/test_fars), and a bash script (in
   engine/testing/fuchsia/run_tests.sh) to drive the flutter_ctl.
   """
-  with MakeTempDir(api, 'isolated') as isolated_dir:
+  with api.os_utils.make_temp_directory('isolated') as isolated_dir:
     with api.step.nest('Copy files'):
       api.file.copy('Copy test script', fuchsia_test_script, isolated_dir)
       api.file.copy('Copy device-finder', fuchsia_tools.join('device-finder'),
@@ -878,8 +776,7 @@ def UploadFuchsiaDebugSymbolsToSymbolServer(api, arch, symbol_dirs):
         exec_path = str(executable)
         if 'dbg_success' not in exec_path:
           remote_file_name = GetRemoteFileName(exec_path)
-          SafeUpload(
-              api,
+          api.bucket_util.safe_upload(
               executable,
               '%s/%s' % (FUCHSIA_ARTIFACTS_DEBUG_NAMESPACE, remote_file_name),
               bucket_name=FUCHSIA_ARTIFACTS_BUCKET_NAME,
@@ -904,7 +801,7 @@ def UploadFuchsiaDebugSymbols(api):
       symbol_dir = checkout.join('out', base_dir, symbols_basename)
       symbol_dirs.append(symbol_dir)
     UploadFuchsiaDebugSymbolsToSymbolServer(api, arch, symbol_dirs)
-    with MakeTempDir(api, 'FuchsiaDebugSymbols') as temp_dir:
+    with api.os_utils.make_temp_directory('FuchsiaDebugSymbols') as temp_dir:
       debug_symbols_cmd = [
           'python', dbg_symbols_script, '--engine-version', git_rev, '--upload',
           '--target-arch', arch, '--out-dir', temp_dir, '--symbol-dirs'
@@ -979,7 +876,8 @@ def BuildFuchsia(api):
         builds[build_id].output.properties['isolated_output_hash'],
         GetCheckoutPath(api))
 
-  if ShouldUploadPackages(api) and not api.runtime.is_experimental:
+  if (api.bucket_util.should_upload_packages()
+         and not api.runtime.is_experimental):
     fuchsia_package_cmd = [
         'python',
         build_script,
@@ -995,7 +893,7 @@ def BuildFuchsia(api):
     stamp_file = api.path['cleanup'].join('fuchsia_stamp')
     api.file.write_text('fuchsia.stamp', stamp_file, '')
     remote_file = GetCloudPath(api, 'fuchsia/fuchsia.stamp')
-    SafeUpload(api, stamp_file, remote_file)
+    api.bucket_util.safe_upload(stamp_file, remote_file)
 
 
 def TestObservatory(api):
@@ -1240,8 +1138,8 @@ def PackageIOSVariant(api,
     pkg.zip('Zip Flutter.dSYM')
     remote_name = '%s/Flutter.dSYM.zip' % bucket_name
     remote_zip = GetCloudPath(api, remote_name)
-    if ShouldUploadPackages(api):
-      SafeUpload(api, dsym_zip, remote_zip)
+    if api.bucket_util.should_upload_packages():
+      api.bucket_util.safe_upload(dsym_zip, remote_zip)
 
 
 def RunIosIntegrationTests(api):
@@ -1357,7 +1255,8 @@ def BuildWindows(api):
     PackageWindowsDesktopVariant(api, 'host_debug', 'windows-x64-debug')
     PackageWindowsDesktopVariant(api, 'host_profile', 'windows-x64-profile')
     PackageWindowsDesktopVariant(api, 'host_release', 'windows-x64-release')
-    UploadFolder(api, 'Upload windows-x64 Flutter library C++ wrapper',
+    api.bucket_util.upload_folder(
+                 'Upload windows-x64 Flutter library C++ wrapper',
                  'src/out/host_debug', 'cpp_client_wrapper',
                  'flutter-cpp-client-wrapper.zip', 'windows-x64')
     # Legacy; remove once Flutter tooling is updated to use the -debug location.
@@ -1426,7 +1325,7 @@ def BuildWindows(api):
 
 def BuildJavadoc(api):
   checkout = GetCheckoutPath(api)
-  with MakeTempDir(api, 'BuildJavadoc') as temp_dir:
+  with api.os_utils.make_temp_directory('BuildJavadoc') as temp_dir:
     javadoc_cmd = [
         checkout.join('flutter/tools/gen_javadoc.py'), '--out-dir', temp_dir
     ]
@@ -1434,9 +1333,10 @@ def BuildJavadoc(api):
       api.step('build javadoc', javadoc_cmd)
     api.zip.directory('archive javadoc', temp_dir,
                       checkout.join('out/android_javadoc.zip'))
-  if ShouldUploadPackages(api):
-    SafeUpload(api, checkout.join('out/android_javadoc.zip'),
-               GetCloudPath(api, 'android-javadoc.zip'))
+  if api.bucket_util.should_upload_packages():
+    api.bucket_util.safe_upload(
+        checkout.join('out/android_javadoc.zip'),
+        GetCloudPath(api, 'android-javadoc.zip'))
 
 
 # The MacOSX10.15 SDK included in Xcode 11 does not ship Ruby 2.3 headers,
@@ -1484,16 +1384,16 @@ def InstallGems(api):
 def BuildObjcDoc(api):
   """Builds documentation for the Objective-C variant of engine."""
   checkout = GetCheckoutPath(api)
-  with MakeTempDir(api, 'BuildObjcDoc') as temp_dir:
+  with api.os_utils.make_temp_directory('BuildObjcDoc') as temp_dir:
     objcdoc_cmd = [checkout.join('flutter/tools/gen_objcdoc.sh'), temp_dir]
     with api.context(cwd=checkout.join('flutter')):
       api.step('build obj-c doc', objcdoc_cmd)
     api.zip.directory('archive obj-c doc', temp_dir,
                       checkout.join('out/ios-objcdoc.zip'))
 
-    if ShouldUploadPackages(api):
-      SafeUpload(api, checkout.join('out/ios-objcdoc.zip'),
-                 GetCloudPath(api, 'ios-objcdoc.zip'))
+    if api.bucket_util.should_upload_packages():
+      api.bucket_util.safe_upload(checkout.join('out/ios-objcdoc.zip'),
+                                  GetCloudPath(api, 'ios-objcdoc.zip'))
 
 
 def RunSteps(api, properties, env_properties):

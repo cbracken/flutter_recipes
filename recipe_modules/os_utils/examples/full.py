@@ -14,6 +14,9 @@ DEPS = [
 def RunSteps(api):
   api.os_utils.kill_win_processes()
 
+  with api.os_utils.make_temp_directory('Create temp directory') as temp_dir:
+    file = temp_dir.join('artifacts.zip')
+
 
 def GenTests(api):
   yield api.test(
