@@ -1,0 +1,143 @@
+[
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+    ],
+    "name": "Zip build",
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]/builder/src/build\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]/tmp_tmp_1/test1.zip\", \"root\": \"[CACHE]/builder/src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]/tmp_tmp_1/test1.zip",
+      "gs://flutter_infra/flutter/experimental//test1.zip"
+    ],
+    "infra_step": true,
+    "name": "gsutil upload \"flutter/experimental//test1.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental//test1.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/tmp_tmp_1"
+    ],
+    "infra_step": true,
+    "name": "temp dir for Upload test.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+    ],
+    "name": "Zip build (2)",
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]/builder/src/build\", \"type\": \"dir\"}, {\"archive_name\": \"a.txt\", \"path\": \"[CACHE]/builder/src/a.txt\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_2/test2.zip\", \"root\": \"[CACHE]/builder/src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]/tmp_tmp_2/test2.zip",
+      "gs://flutter_infra/flutter/experimental//test2.zip"
+    ],
+    "infra_step": true,
+    "name": "gsutil upload \"flutter/experimental//test2.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental//test2.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/tmp_tmp_2"
+    ],
+    "infra_step": true,
+    "name": "temp dir for Upload test.zip (2)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+    ],
+    "name": "Zip build (3)",
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]/builder/src/build\", \"type\": \"dir\"}, {\"archive_name\": \"a.txt\", \"path\": \"[CACHE]/builder/src/a.txt\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_3/test3.zip\", \"root\": \"[CACHE]/builder/src\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]/tmp_tmp_3/test3.zip",
+      "gs://flutter_infra/flutter/experimental//parent_directory/test3.zip"
+    ],
+    "infra_step": true,
+    "name": "gsutil upload \"flutter/experimental//parent_directory/test3.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental//parent_directory/test3.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/tmp_tmp_3"
+    ],
+    "infra_step": true,
+    "name": "temp dir for Upload test.zip (3)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "foo",
+      "gs://flutter_infra/bar"
+    ],
+    "infra_step": true,
+    "name": "gsutil upload \"bar\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/bar@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]
