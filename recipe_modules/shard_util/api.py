@@ -22,18 +22,19 @@ class ShardUtilApi(recipe_api.RecipeApi):
       task_name = '%s-%s' % (self.m.properties.get('shard', ''), subshard)
       drone_props = {
           'subshard':
-              subshard,
-          'shard':
-              self.m.properties.get('shard', ''),
-          'android_sdk_license':
-              self.m.properties.get('android_sdk_license', ''),
+              subshard, 'shard':
+                  self.m.properties.get('shard', ''), 'android_sdk_license':
+                      self.m.properties.get('android_sdk_license', ''),
           'android_sdk_preview_license':
               self.m.properties.get('android_sdk_preview_license', ''),
           'dependencies':
-              list(self.m.properties.get('dependencies', [])),
-          'task_name':
-              task_name
+              list(self.m.properties.get('dependencies', [])), 'task_name':
+                  task_name
       }
+      if self.m.properties.get('git_url'):
+        drone_props['git_url'] = self.m.properties.get('git_url')
+      if self.m.properties.get('git_ref'):
+        drone_props['git_ref'] = self.m.properties.get('git_ref')
       platform_name = PLATFORM_TO_NAME.get(self.m.platform.name)
       req = self.m.buildbucket.schedule_request(
           swarming_parent_run_id=self.m.swarming.task_id,
@@ -47,7 +48,8 @@ class ShardUtilApi(recipe_api.RecipeApi):
           # Increasing priority won't fix the problem but will make the deadlock
           # situation less unlikely.
           # https://github.com/flutter/flutter/issues/59169.
-          priority=25)
+          priority=25
+      )
       reqs.append(req)
     return self.m.buildbucket.schedule(reqs)
 
@@ -61,7 +63,8 @@ class ShardUtilApi(recipe_api.RecipeApi):
     for build in builds:
       task_name = build.input.properties.fields['task_name'].string_value
       step.presentation.links[task_name] = self.m.buildbucket.build_url(
-          build_id=build.id)
+          build_id=build.id
+      )
     return self.m.buildbucket.collect_builds([build.id for build in builds],
                                              timeout=DRONE_TIMEOUT_SECS,
                                              mirror_status=True)

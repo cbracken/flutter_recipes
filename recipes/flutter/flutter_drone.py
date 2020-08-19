@@ -26,7 +26,8 @@ def RunShard(api, env, env_prefixes, checkout_path):
     api.step(
         'run test.dart for %s shard and subshard %s' %
         (api.properties.get('shard'), api.properties.get('subshard')),
-        ['dart', checkout_path.join('dev', 'bots', 'test.dart')])
+        ['dart', checkout_path.join('dev', 'bots', 'test.dart')]
+    )
 
 
 def RunWithAndroid(api, env, env_prefixes, checkout_path):
@@ -37,8 +38,12 @@ def RunWithAndroid(api, env, env_prefixes, checkout_path):
 
 def RunSteps(api):
   checkout_path = api.path['start_dir'].join('flutter')
-  api.repo_util.checkout('flutter', api.properties.get('git_url'),
-                         api.properties.get('git_ref'))
+  api.repo_util.checkout(
+      'flutter',
+      checkout_path=checkout_path,
+      url=api.properties.get('git_url'),
+      ref=api.properties.get('git_ref')
+  )
   env, env_prefixes = api.repo_util.flutter_environment(checkout_path)
   api.flutter_deps.chrome_and_driver(env, env_prefixes)
   api.flutter_deps.open_jdk(env, env_prefixes)
@@ -65,4 +70,6 @@ def GenTests(api):
           dependencies=['android_sdk'],
           android_sdk=True,
           android_sdk_preview_license='abc',
-          android_sdk_license='cde'))
+          android_sdk_license='cde'
+      )
+  )

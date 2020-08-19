@@ -17,4 +17,13 @@ def RunSteps(api):
 
 
 def GenTests(api):
-  yield api.test('basic', api.properties(subshards=['0', '1_last']), api.platform.name('win'))
+  yield api.test(
+      'postsubmit', api.properties(subshards=['0', '1_last']),
+      api.platform.name('win')
+  )
+  yield api.test(
+      'presubmit',
+      api.properties(
+          subshards=['0', '1_last'], git_url='https://abc', git_ref='abc'
+      ), api.platform.name('linux')
+  )

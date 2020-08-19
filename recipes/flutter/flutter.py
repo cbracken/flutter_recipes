@@ -41,8 +41,12 @@ def RunSteps(api):
   # when don't need to run in shards.
   checkout_path = api.path['start_dir'].join('flutter')
   with api.step.nest('checkout source code'):
-    api.repo_util.checkout('flutter', api.properties.get('git_url'),
-                           api.properties.get('git_ref'))
+    api.repo_util.checkout(
+        'flutter',
+        checkout_path=checkout_path,
+        url=api.properties.get('git_url'),
+        ref=api.properties.get('git_ref')
+    )
   env, env_prefixes = api.repo_util.flutter_environment(checkout_path)
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
     with api.step.nest('prepare environment'):
@@ -50,27 +54,34 @@ def RunSteps(api):
       api.step('download dependencies', ['flutter', 'update-packages'])
       api.adhoc_validation.run(
           api.properties.get('validation_name'),
-          api.properties.get('validation'))
+          api.properties.get('validation')
+      )
 
 
 def GenTests(api):
   yield api.test(
       'validators',
       api.properties(validation='analyze', validation_name='dart analyze'),
-      api.repo_util.flutter_environment_data())
+      api.repo_util.flutter_environment_data()
+  )
   props = struct_pb2.Struct()
   props['task_name'] = 'abc'
   build = build_pb2.Build(input=build_pb2.Build.Input(properties=props))
-  passed_batch_res = builds_service_pb2.BatchResponse(responses=[
-      dict(
-          schedule_build=dict(
-              id=build.id, builder=build.builder, input=build.input))
-  ])
+  passed_batch_res = builds_service_pb2.BatchResponse(
+      responses=[
+          dict(
+              schedule_build=dict(
+                  id=build.id, builder=build.builder, input=build.input
+              )
+          )
+      ]
+  )
   yield api.test(
       'shards',
       api.properties(shard='framework_tests', subshards=['0', '1_last']),
       api.repo_util.flutter_environment_data(),
-      api.buildbucket.simulated_schedule_output(passed_batch_res))
+      api.buildbucket.simulated_schedule_output(passed_batch_res)
+  )
 
   err_batch_res = builds_service_pb2.BatchResponse(
       responses=[
@@ -78,9 +89,11 @@ def GenTests(api):
               code=1,
               message='bad',
           ),),
-      ],)
+      ],
+  )
   yield api.test(
       'shards_fail',
       api.properties(shard='framework_tests', subshards=['0', '1_last']),
       api.repo_util.flutter_environment_data(),
-      api.buildbucket.simulated_schedule_output(err_batch_res))
+      api.buildbucket.simulated_schedule_output(err_batch_res)
+  )
