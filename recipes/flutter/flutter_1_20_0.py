@@ -15,6 +15,7 @@ DEPS = [
     'flutter/adhoc_validation',
     'flutter/repo_util',
     'flutter/shard_util',
+    'flutter/flutter_deps',
     'flutter/display_util',
     'recipe_engine/buildbucket',
     'recipe_engine/context',
@@ -48,6 +49,7 @@ def RunSteps(api):
         ref=api.properties.get('git_ref')
     )
   env, env_prefixes = api.repo_util.flutter_environment(checkout_path)
+  api.flutter_deps.chrome_and_driver(env, env_prefixes)
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
     with api.step.nest('prepare environment'):
       api.step('flutter doctor', ['flutter', 'doctor'])

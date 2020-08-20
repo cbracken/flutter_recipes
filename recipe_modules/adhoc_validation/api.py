@@ -15,7 +15,10 @@ class AddhocValidationApi(recipe_api.RecipeApi):
 
   def available_validations(self):
     """Returns the list of accepted validations."""
-    return ['analyze', 'customer_testing', 'docs', 'fuchsia_precache']
+    return [
+        'analyze', 'customer_testing', 'docs', 'docker_build', 'fuchsia_precache',
+        'web_smoke_test'
+    ]
 
   def run(self, name, validation):
     """Runs a validation as a recipe step.

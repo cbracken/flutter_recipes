@@ -21,7 +21,9 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       self.m.cipd.ensure(
           java_cache_dir,
           self.m.cipd.EnsureFile().add_package(
-              'flutter_internal/java/openjdk/${platform}', version))
+              'flutter_internal/java/openjdk/${platform}', version
+          )
+      )
       env['JAVA_HOME'] = java_cache_dir
       path = env_prefixes.get('PATH', [])
       path.append(java_cache_dir.join('bin'))
@@ -39,15 +41,17 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       env['CHROME_NO_SANDBOX'] = 'true'
       chrome_path = self.m.path['cache'].join('chrome', 'chrome')
       pkgs = self.m.cipd.EnsureFile()
-      pkgs.add_package('flutter_internal/browsers/chrome-linux', version)
+      pkgs.add_package('flutter_internal/browsers/chrome/${platform}', version)
       self.m.cipd.ensure(chrome_path, pkgs)
       chrome_driver_path = self.m.path['cache'].join('chrome', 'drivers')
       pkgdriver = self.m.cipd.EnsureFile()
       pkgdriver.add_package(
-          'flutter_internal/browser-drivers/chromedriver-linux', version)
+          'flutter_internal/browser-drivers/chrome/${platform}', version
+      )
       self.m.cipd.ensure(chrome_driver_path, pkgdriver)
       paths = env_prefixes.get('PATH', [])
       paths.append(chrome_path)
       paths.append(chrome_driver_path)
       env_prefixes['PATH'] = paths
-      env['CHROME_EXECUTABLE'] = chrome_path.join('chrome-linux', 'chrome')
+      binary_name = 'chrome.exe' if self.m.platform.is_win else 'chrome'
+      env['CHROME_EXECUTABLE'] = chrome_path.join(binary_name)
