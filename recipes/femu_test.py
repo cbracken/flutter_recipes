@@ -182,9 +182,7 @@ def TestFuchsiaFEMU(api):
       'fml_tests':
           '--gtest_filter=-MessageLoop.TimeSensistiveTest_*:FileTest.CanTruncateAndWrite:FileTest.CreateDirectoryStructure',
       'shell_tests':
-          '--gtest_filter=-ShellTest.CacheSkSLWorks:ShellTest.SetResourceCacheSize*:ShellTest.OnServiceProtocolGetSkSLsWorks:ShellTest.CanLoadSkSLsFromAsset:ShellTest.CanRemoveOldPersistentCache',
-      'shell_tests_next':
-          '--gtest_filter=-ShellTest.CacheSkSLWorks:ShellTest.SetResourceCacheSize*:ShellTest.OnServiceProtocolGetSkSLsWorks:ShellTest.CanLoadSkSLsFromAsset:ShellTest.CanRemoveOldPersistentCache',
+      '--gtest_filter=-ShellTest.ReportTimingsIsCalledLaterInReleaseMode:ShellTest.ReportTimingsIsCalledSoonerInNonReleaseMode',
       'flutter_runner_scenic_tests':
           '--gtest_filter=-SessionConnectionTest.*:CalculateNextLatchPointTest.*',
   }
