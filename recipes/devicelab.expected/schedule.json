@@ -190,7 +190,7 @@
     "cmd": [],
     "name": "launch jobs",
     "~followup_annotations": [
-      "@@@STEP_LINK@android_defines_test@chromium-swarm.appspot.com/task?id=fake-task-id@@@"
+      "@@@STEP_LINK@android_defines_test@https://ci.chromium.org/swarming/task/fake-task-id?server=chromium-swarm.appspot.com@@@"
     ]
   },
   {
@@ -248,13 +248,17 @@
       "[CACHE]/led/led",
       "edit",
       "-p",
-      "recipe=\"devicelab\"",
-      "-p",
       "role=\"worker\"",
       "-p",
       "name=\"android_defines_test\"",
       "-p",
+      "git_ref=null",
+      "-p",
       "first_capability=\"linux/android\"",
+      "-p",
+      "recipe=\"devicelab\"",
+      "-p",
+      "git_url=null",
       "-d",
       "cores=",
       "-d",
@@ -280,6 +284,8 @@
       "@@@STEP_LOG_LINE@proto.output@        \"input\": {@@@",
       "@@@STEP_LOG_LINE@proto.output@          \"properties\": {@@@",
       "@@@STEP_LOG_LINE@proto.output@            \"first_capability\": \"linux/android\", @@@",
+      "@@@STEP_LOG_LINE@proto.output@            \"git_ref\": null, @@@",
+      "@@@STEP_LOG_LINE@proto.output@            \"git_url\": null, @@@",
       "@@@STEP_LOG_LINE@proto.output@            \"name\": \"android_defines_test\", @@@",
       "@@@STEP_LOG_LINE@proto.output@            \"recipe\": \"devicelab\", @@@",
       "@@@STEP_LOG_LINE@proto.output@            \"role\": \"worker\"@@@",
@@ -299,7 +305,7 @@
       "-modernize"
     ],
     "name": "launch jobs.led launch",
-    "stdin": "{\n\"buildbucket\": {\n\"bbagent_args\": {\n\"build\": {\n\"builder\": {}, \n\"input\": {\n\"properties\": {\n\"first_capability\": \"linux/android\", \n\"name\": \"android_defines_test\", \n\"recipe\": \"devicelab\", \n\"role\": \"worker\"\n}\n}\n}\n}\n}\n}",
+    "stdin": "{\n\"buildbucket\": {\n\"bbagent_args\": {\n\"build\": {\n\"builder\": {}, \n\"input\": {\n\"properties\": {\n\"first_capability\": \"linux/android\", \n\"git_ref\": null, \n\"git_url\": null, \n\"name\": \"android_defines_test\", \n\"recipe\": \"devicelab\", \n\"role\": \"worker\"\n}\n}\n}\n}\n}\n}",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",

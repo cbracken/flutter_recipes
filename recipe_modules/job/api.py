@@ -90,7 +90,7 @@ class JobApi(recipe_api.RecipeApi):
     job.task_id = final.launch_result.task_id
     job.task_server = final.launch_result.swarming_hostname
 
-    presentation.links[job.name] = job.task_url
+    presentation.links[job.name] = job.milo_url
     return job
 
   def collect(self, jobs, presentation):

@@ -3,7 +3,7 @@
     "cmd": [],
     "name": "launch job",
     "~followup_annotations": [
-      "@@@STEP_LINK@fake_job0@chromium-swarm.appspot.com/task?id=job_task_id@@@"
+      "@@@STEP_LINK@fake_job0@https://ci.chromium.org/swarming/task/job_task_id?server=chromium-swarm.appspot.com@@@"
     ]
   },
   {

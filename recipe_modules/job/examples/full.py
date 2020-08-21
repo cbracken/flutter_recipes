@@ -40,6 +40,7 @@ def RunSteps(api, test_name):
   elif test_name == "current_recipe":
     api.job.current_recipe()
 
+  job1.task_url # For test coverage.
 
 def GenTests(api):
   yield api.test(

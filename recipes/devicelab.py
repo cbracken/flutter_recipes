@@ -61,6 +61,8 @@ def schedule_all(api):
             "recipe": api.job.current_recipe(),
             "role": "worker",
             "first_capability": first_capability,
+            "git_url": api.properties.get('git_url'),
+            "git_ref": api.properties.get('git_ref'),
         })
         # TODO(wutong): add a devicelab dedicated builder that would save us
         # from removing extra dimensions like "cores", "os" etc.
