@@ -10,7 +10,8 @@ REPOS = {
     'cocoon':
         'https://chromium.googlesource.com/external/github.com/flutter/cocoon',
     'packages':
-        'https://github.com/flutter/packages',
+        'https://github.com/flutter/packages', 'plugins':
+            'https://github.com/flutter/plugins'
 }
 
 from recipe_engine import recipe_api
@@ -44,12 +45,12 @@ class RepoUtilApi(recipe_api.RecipeApi):
         soln.name = 'src/flutter'
         soln.url = git_url
         soln.revision = git_id
-        src_cfg.parent_got_revision_mapping[
-            'parent_got_revision'] = 'got_revision'
+        src_cfg.parent_got_revision_mapping['parent_got_revision'
+                                           ] = 'got_revision'
         src_cfg.repo_path_map[git_url] = ('src/flutter', git_ref)
         self.m.gclient.c = src_cfg
-        self.m.gclient.c.got_revision_mapping[
-            'src/flutter'] = 'got_engine_revision'
+        self.m.gclient.c.got_revision_mapping['src/flutter'
+                                             ] = 'got_engine_revision'
         self.m.bot_update.ensure_checkout()
         self.m.gclient.runhooks()
 
@@ -65,12 +66,14 @@ class RepoUtilApi(recipe_api.RecipeApi):
 
         # Ensure vpython exists
         ensure_file = self.m.cipd.EnsureFile()
-        ensure_file.add_package('infra/tools/luci/vpython/${platform}',
-                                'latest')
+        ensure_file.add_package(
+            'infra/tools/luci/vpython/${platform}', 'latest'
+        )
         self.m.cipd.ensure(self.m.path['cache'].join('vpython'), ensure_file)
         self.m.file.rmtree('Clobber cache', checkout_path)
-        self.m.file.rmtree('Clobber git cache',
-                           self.m.path['cache'].join('git'))
+        self.m.file.rmtree(
+            'Clobber git cache', self.m.path['cache'].join('git')
+        )
         self.m.file.ensure_directory('Ensure checkout cache', checkout_path)
         # Now try a second time
         _InnerCheckout()
@@ -98,7 +101,8 @@ class RepoUtilApi(recipe_api.RecipeApi):
         ref=git_ref,
         recursive=True,
         set_got_revision=True,
-        tags=True)
+        tags=True
+    )
 
   def flutter_environment(self, checkout_path):
     """Returns env and env_prefixes of an flutter/dart command environment."""
@@ -108,8 +112,10 @@ class RepoUtilApi(recipe_api.RecipeApi):
     # available only after running "flutter doctor" and it needs to be run as
     # the first command on the context using the environment.
     if not self.m.path.exists(flutter_bin):
-      msg = ('flutter bin folders do not exist,'
-             'did you forget to checkout flutter repo?')
+      msg = (
+          'flutter bin folders do not exist,'
+          'did you forget to checkout flutter repo?'
+      )
       self.m.python.failing_step('Flutter Environment', msg)
 
     env = {
