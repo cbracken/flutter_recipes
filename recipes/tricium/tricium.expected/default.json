@@ -548,7 +548,8 @@
       "[START_DIR]/recipes/out/default",
       "--check=system",
       "--args=import(\"//boards/x64.gni\")  import(\"//products/core.gni\")  base_package_labels+=[\"//bundles:kitchen_sink\"] goma_dir=\"[START_DIR]/recipes/prebuilt/third_party/goma/linux-x64\" is_debug=false target_cpu=\"x64\" test_durations_file=\"integration/infra/test_durations/builder.json\" use_goma=true",
-      "--export-compile-commands"
+      "--export-compile-commands",
+      "--fail-on-unused-args"
     ],
     "cwd": "[START_DIR]/recipes",
     "name": "analyze flutter.py.yapf.gn gen",
