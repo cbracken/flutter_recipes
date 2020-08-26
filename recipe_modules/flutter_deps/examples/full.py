@@ -17,7 +17,8 @@ def RunSteps(api):
   api.flutter_deps.open_jdk(env, env_prefixes)
   api.assertions.assertTrue(env.get('JAVA_HOME'))
   api.assertions.assertEqual(
-      env_prefixes.get('PATH'), [api.path['cache'].join('java', 'bin')])
+      env_prefixes.get('PATH'), [api.path['cache'].join('java', 'bin')]
+  )
   env_prefixes = {}
   env = {}
   api.flutter_deps.chrome_and_driver(env, env_prefixes)
@@ -25,9 +26,13 @@ def RunSteps(api):
   api.assertions.assertTrue(env.get('CHROME_EXECUTABLE'))
   api.assertions.assertEqual(
       env_prefixes.get('PATH'), [
-          api.path['cache'].join('chrome', 'chrome'), api.path['cache'].join(
-              'chrome', 'drivers')
-      ])
+          api.path['cache'].join('chrome', 'chrome'),
+          api.path['cache'].join('chrome', 'drivers')
+      ]
+  )
+  api.flutter_deps.go_sdk(env, env_prefixes)
+  api.flutter_deps.dashing(env, env_prefixes)
+  api.flutter_deps.vpython(env, env_prefixes)
 
 
 def GenTests(api):

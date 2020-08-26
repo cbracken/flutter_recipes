@@ -55,3 +55,42 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       env_prefixes['PATH'] = paths
       binary_name = 'chrome.exe' if self.m.platform.is_win else 'chrome'
       env['CHROME_EXECUTABLE'] = chrome_path.join(binary_name)
+
+  def go_sdk(self, env, env_prefixes, version='version:1.12.5'):
+    """Installs go sdk."""
+    go_path = self.m.path['cache'].join('go')
+    go = self.m.cipd.EnsureFile()
+    go.add_package('infra/go/${platform}', version)
+    self.m.cipd.ensure(go_path, go)
+    paths = env_prefixes.get('PATH', [])
+    paths.append(go_path.join('bin'))
+    # Setup GOPATH and add to the env.
+    bin_path = self.m.path['cleanup'].join('go_path')
+    self.m.file.ensure_directory('Ensure go path', bin_path)
+    env['GOPATH'] = bin_path
+    paths.append(bin_path)
+    env_prefixes['PATH'] = paths
+
+  def dashing(
+      self,
+      env,
+      env_prefixes,
+      version='git_revision:ed8da90e524f59c69781c8af65638f108d0bbba6'
+  ):
+    """Installs dashing."""
+    self.go_sdk(env, env_prefixes)
+    with self.m.context(env=env, env_prefixes=env_prefixes):
+      self.m.step(
+          'Install dashing',
+          ['go', 'get', '-u', 'github.com/technosophos/dashing']
+      )
+
+  def vpython(self, env, env_prefixes, version='latest'):
+    """Installs vpython."""
+    vpython_path = self.m.path['cache'].join('vpython')
+    vpython = self.m.cipd.EnsureFile()
+    vpython.add_package('infra/tools/luci/vpython/${platform}', version)
+    self.m.cipd.ensure(vpython_path, vpython)
+    paths = env_prefixes.get('PATH', [])
+    paths.append(vpython_path)
+    env_prefixes['PATH'] = paths
