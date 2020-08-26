@@ -161,7 +161,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "copy",
-      "[START_DIR]/flutter/bin/cache/artifacts/fuchsia/meta/manifest.json",
+      "[START_DIR]/flutter/bin/internal/fuchsia-linux.version",
       "/path/to/tmp/"
     ],
     "cwd": "[START_DIR]/flutter",
@@ -176,11 +176,73 @@
       ]
     },
     "infra_step": true,
-    "name": "Fuchsia Tests.Create Isolate Archive.Download Fuchsia Dependencies.Read fuchsia manifest",
+    "name": "Fuchsia Tests.Create Isolate Archive.Download Fuchsia Dependencies.Read fuchsia cipd version",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@3@@@",
-      "@@@STEP_LOG_LINE@manifest.json@{\"id\": \"123\"}@@@",
-      "@@@STEP_LOG_END@manifest.json@@@"
+      "@@@STEP_LOG_LINE@fuchsia-linux.version@FuchsiaSdkCipdVersion@@@",
+      "@@@STEP_LOG_END@fuchsia-linux.version@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "describe",
+      "fuchsia/sdk/core/linux-amd64",
+      "-version",
+      "FuchsiaSdkCipdVersion",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "PUB_CACHE": "[CACHE]/.pub-cache"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "name": "Fuchsia Tests.Create Isolate Archive.Download Fuchsia Dependencies.cipd describe fuchsia/sdk/core/linux-amd64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@3@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"pin\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"instance_id\": \"resolved-instance_id-of-FuchsiaSdkCipdVe\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"package\": \"fuchsia/sdk/core/linux-amd64\"@@@",
+      "@@@STEP_LOG_LINE@json.output@    }, @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"refs\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"modified_by\": \"user:44-blablbla@developer.gserviceaccount.com\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"modified_ts\": 1446574210, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ref\": \"latest\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ], @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"registered_by\": \"user:44-blablbla@developer.gserviceaccount.com\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"registered_ts\": 1446574210, @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"tags\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"registered_by\": \"user:44-blablbla@developer.gserviceaccount.com\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"registered_ts\": 1446574210, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"tag\": \"git_revision:GIT_REVISION\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }, @@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"registered_by\": \"user:44-blablbla@developer.gserviceaccount.com\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"registered_ts\": 1446574210, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"tag\": \"jiri:JIRI_VERSION\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }, @@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"registered_by\": \"user:44-blablbla@developer.gserviceaccount.com\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"registered_ts\": 1446574210, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"tag\": \"version:FUCHSIA_VERSION\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
     ]
   },
   {
@@ -192,7 +254,7 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "gs://fuchsia/development/123/images/generic-x64.tgz",
+      "gs://fuchsia/development/FUCHSIA_VERSION/images/generic-x64.tgz",
       "[CLEANUP]/tmp_tmp_1"
     ],
     "cwd": "[START_DIR]/flutter",
@@ -221,7 +283,7 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "gs://fuchsia/development/123/packages/generic-x64.tar.gz",
+      "gs://fuchsia/development/FUCHSIA_VERSION/packages/generic-x64.tar.gz",
       "[CLEANUP]/tmp_tmp_1"
     ],
     "cwd": "[START_DIR]/flutter",

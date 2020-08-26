@@ -8,6 +8,7 @@ DEPS = [
     'flutter/fuchsia_util',
     'flutter/repo_util',
     'recipe_engine/assertions',
+    'recipe_engine/cipd',
     'recipe_engine/file',
     'recipe_engine/json',
     'recipe_engine/path',
@@ -34,4 +35,27 @@ def GenTests(api):
          api.repo_util.flutter_environment_data() + api.step_data(
              'Fuchsia Tests.Create Isolate Archive.'
              'Download Fuchsia Dependencies.'
-             'Read fuchsia manifest', api.file.read_json({"id": "123"})))
+             'Read fuchsia cipd version',
+             api.file.read_text('FuchsiaSdkCipdVersion')) + api.step_data(
+                 'Fuchsia Tests.Create Isolate Archive.'
+                 'Download Fuchsia Dependencies.'
+                 'cipd describe fuchsia/sdk/core/linux-amd64',
+                 api.cipd.example_describe(
+                     package_name="fuchsia/sdk/core/linux-amd64",
+                     version="FuchsiaSdkCipdVersion",
+                     test_data_tags=[
+                         "git_revision:GIT_REVISION", "jiri:JIRI_VERSION",
+                         "version:FUCHSIA_VERSION"
+                     ])))
+  yield api.test('fuchsia_sdk_version_error') + api.step_data(
+      'Fuchsia Tests.Create Isolate Archive.'
+      'Download Fuchsia Dependencies.'
+      'Read fuchsia cipd version',
+      api.file.read_text('FuchsiaSdkCipdVersion')) + api.step_data(
+          'Fuchsia Tests.Create Isolate Archive.'
+          'Download Fuchsia Dependencies.'
+          'cipd describe fuchsia/sdk/core/linux-amd64',
+          api.cipd.example_describe(
+              package_name="fuchsia/sdk/core/linux-amd64",
+              version="FuchsiaSdkCipdVersion",
+              test_data_tags=[]))

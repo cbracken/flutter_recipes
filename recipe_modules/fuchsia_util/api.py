@@ -6,6 +6,8 @@ from contextlib import contextmanager
 from recipe_engine import recipe_api
 
 BUCKET_NAME = 'flutter_infra'
+FUCHSIA_BUCKET_NAME = 'fuchsia'
+FUCHSIA_SDK_CIPD = 'fuchsia/sdk/core/linux-amd64'
 FUCHSIA_IMAGE_NAME = 'generic-x64.tgz'
 FUCHSIA_PACKAGES_ARCHIVE_NAME = 'generic-x64.tar.gz'
 FUCHSIA_TEST_SCRIPT_NAME = 'run_fuchsia_tests.sh'
@@ -42,30 +44,58 @@ class FuchsiaUtilsApi(recipe_api.RecipeApi):
     finally:
       self.m.file.rmtree('temp dir for %s' % label, temp_dir)
 
-  def download_fuchsia_deps(self, fuchsia_dir, destination_path):
+  def get_fuchsia_version(self, flutter_bin):
+    """Get the Fuchsia SDK version from the given Flutter SDK.
+
+    Args:
+      flutter_bin: Path to Flutter bin with internal/fuchsia-linux.version.
+
+    Returns:
+      String of the Fuchsia SDK version to pull artifacts from GCP.
+    """
+    # Flutter SDK only stores the CIPD version, so CIPD must be queried to
+    # find the SDK version tag for this ref.
+    version_path = flutter_bin.join('internal', 'fuchsia-linux.version')
+    version = self.m.file.read_text('Read fuchsia cipd version', version_path)
+    fuchsia_cipd = self.m.cipd.describe(FUCHSIA_SDK_CIPD, version=version)
+    # There are multiple tags in a Fuchsia SDK CIPD description requiring
+    # a search through the tags tuple for the version tag.
+    for tag in fuchsia_cipd.tags:
+      if 'version:' in tag.tag:
+        return tag.tag.replace('version:', '')
+    raise recipe_api.InfraFailure('No version tag on Fuchsia SDK CIPD ref')
+
+  def download_fuchsia_deps(self, flutter_bin, destination_path):
+    """Download dependencies to initialize Fuchsia bot.
+
+    Args:
+      flutter_bin: Path to Flutter bin with internal/fuchsia-linux.version.
+      destination_path: Path to store the downloaded Fuchsia dependencies.
+    """
     with self.m.step.nest('Download Fuchsia Dependencies'):
-      manifest_path = fuchsia_dir.join('meta', 'manifest.json')
-      manifest_data = self.m.file.read_json('Read fuchsia manifest',
-                                            manifest_path)
-      build_id = manifest_data['id']
-      bucket_name = 'fuchsia'
+      fuchsia_version = self.get_fuchsia_version(flutter_bin)
       self.m.gsutil.download(
-          bucket_name,
-          'development/%s/images/%s' % (build_id, FUCHSIA_IMAGE_NAME),
+          FUCHSIA_BUCKET_NAME,
+          'development/%s/images/%s' % (fuchsia_version, FUCHSIA_IMAGE_NAME),
           destination_path,
           name="download fuchsia system image")
       self.m.gsutil.download(
-          bucket_name,
+          FUCHSIA_BUCKET_NAME,
           'development/%s/packages/%s' %
-          (build_id, FUCHSIA_PACKAGES_ARCHIVE_NAME),
+          (fuchsia_version, FUCHSIA_PACKAGES_ARCHIVE_NAME),
           destination_path,
           name="download fuchsia companion packages")
 
   def copy_tool_deps(self, checkout_path, destination_path):
+    """Copy necessary tools from Flutter SDK to initialize Fuchsia bot.
+
+    Args:
+      flutter_bin: Path to Flutter bin with internal/fuchsia-linux.version.
+      destination_path: Path to store the downloaded Fuchsia dependencies.
+    """
     flutter_bin = checkout_path.join('bin')
-    fuchsia_dir = flutter_bin.join('cache', 'artifacts', 'fuchsia')
-    fuchsia_tools = fuchsia_dir.join('tools')
-    self.download_fuchsia_deps(fuchsia_dir, destination_path)
+    fuchsia_tools = flutter_bin.join('cache', 'artifacts', 'fuchsia', 'tools')
+    self.download_fuchsia_deps(flutter_bin, destination_path)
     with self.m.step.nest('Collect tool deps'):
       self.m.file.copy(
           'Copy test script',
