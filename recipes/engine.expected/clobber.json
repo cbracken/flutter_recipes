@@ -123,8 +123,15 @@
     ],
     "cwd": "[CACHE]/builder",
     "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
       "GIT_HTTP_LOW_SPEED_LIMIT": "102400",
-      "GIT_HTTP_LOW_SPEED_TIME": "300"
+      "GIT_HTTP_LOW_SPEED_TIME": "300",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
@@ -185,6 +192,15 @@
       "runhooks"
     ],
     "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
         "0"
@@ -537,9 +553,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -1099,9 +1117,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -1496,9 +1516,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -1861,9 +1883,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -2258,9 +2282,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -3472,9 +3498,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -3957,9 +3985,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -4385,9 +4415,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -4929,9 +4961,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -5439,9 +5473,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -5949,9 +5985,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -6431,9 +6469,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -7045,9 +7085,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -7440,9 +7482,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -7834,9 +7878,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -8200,9 +8246,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -8821,9 +8869,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -9187,9 +9237,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -9818,9 +9870,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -10184,9 +10238,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -10752,9 +10808,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -11118,9 +11176,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -11749,9 +11809,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -12115,9 +12177,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -12683,9 +12747,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -13049,9 +13115,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -14082,9 +14150,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -15234,9 +15304,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
