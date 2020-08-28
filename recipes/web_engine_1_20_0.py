@@ -25,6 +25,7 @@ DEPS = [
     'depot_tools/gclient',
     'depot_tools/gsutil',
     'depot_tools/osx_sdk',
+    'flutter/json_util',
     'flutter/repo_util',
     'fuchsia/goma',
     'recipe_engine/buildbucket',
@@ -136,6 +137,11 @@ def RunSteps(api, properties, env_properties):
 
   # Checkout source code and build
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
+
+  # Checks before building the engine. Only run on Linux.
+  if api.platform.is_linux:
+    api.json_util.validate_json(checkout.join('flutter', 'ci'))
+
   with api.context(
       cwd=cache_root, env=env,
       env_prefixes=env_prefixes), api.depot_tools.on_path():

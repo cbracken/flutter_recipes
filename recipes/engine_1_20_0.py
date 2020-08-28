@@ -26,6 +26,7 @@ DEPS = [
     'depot_tools/git',
     'depot_tools/gsutil',
     'depot_tools/osx_sdk',
+    'flutter/json_util',
     'flutter/repo_util',
     'flutter/zip',
     'fuchsia/display_util',
@@ -1505,6 +1506,10 @@ def RunSteps(api, properties, env_properties):
   env_prefixes = {'PATH': [dart_bin]}
 
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
+
+  # Validates engine builders json format.
+  if api.platform.is_linux:
+    api.json_util.validate_json(checkout.join('flutter', 'ci'))
 
   # Various scripts we run assume access to depot_tools on path for `ninja`.
   with api.context(

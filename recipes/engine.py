@@ -19,6 +19,7 @@ DEPS = [
     'depot_tools/gsutil',
     'depot_tools/osx_sdk',
     'flutter/bucket_util',
+    'flutter/json_util',
     'flutter/os_utils',
     'flutter/repo_util',
     'flutter/zip',
@@ -1563,6 +1564,7 @@ def RunSteps(api, properties, env_properties):
 
     # Checks before building the engine. Only run on Linux.
     if api.platform.is_linux:
+      api.json_util.validate_json(checkout.join('flutter', 'ci'))
       FormatAndDartTest(api)
       Lint(api)
 

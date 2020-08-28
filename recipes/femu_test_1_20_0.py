@@ -15,6 +15,7 @@ import re
 DEPS = [
     'fuchsia/goma',
     'depot_tools/depot_tools',
+    'flutter/json_util',
     'flutter/repo_util',
     'fuchsia/display_util',
     'fuchsia/sdk',
@@ -273,6 +274,10 @@ def RunSteps(api, properties, env_properties):
   api.goma.ensure()
   dart_bin = checkout.join('third_party', 'dart', 'tools', 'sdks', 'dart-sdk',
                            'bin')
+
+  # Checks before building the engine. Only run on Linux.
+  if api.platform.is_linux:
+      api.json_util.validate_json(checkout.join('flutter', 'ci'))
 
   env = {'GOMA_DIR': api.goma.goma_dir}
   env_prefixes = {'PATH': [dart_bin]}

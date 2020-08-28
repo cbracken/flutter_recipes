@@ -1530,6 +1530,7 @@ def RunSteps(api, properties, env_properties):
 
     # Checks before building the engine. Only run on Linux.
     if api.platform.is_linux:
+      api.json_util.validate_json(checkout.join('flutter', 'ci'))
       FormatAndDartTest(api)
       Lint(api)
 
