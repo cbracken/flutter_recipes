@@ -11,6 +11,7 @@ DEPS = [
     'depot_tools/gsutil',
     'depot_tools/osx_sdk',
     'depot_tools/windows_sdk',
+    'flutter/json_util',
     'flutter/kms',
     'flutter/zip',
     'fuchsia/display_util',
@@ -174,6 +175,10 @@ def RunSteps(api):
   git_hash = api.git.checkout(
       git_url, ref=git_ref, recursive=True, set_got_revision=True, tags=True)
   checkout = api.path['checkout']
+
+  if api.platform.is_linux:
+    # Validates flutter builders json format.
+    api.json_util.validate_json(checkout)
 
   dart_bin = checkout.join('bin', 'cache', 'dart-sdk', 'bin')
   flutter_bin = checkout.join('bin')

@@ -13,6 +13,7 @@ from google.protobuf import struct_pb2
 
 DEPS = [
     'flutter/adhoc_validation',
+    'flutter/json_util',
     'flutter/repo_util',
     'flutter/shard_util',
     'flutter/flutter_deps',
@@ -20,6 +21,7 @@ DEPS = [
     'recipe_engine/buildbucket',
     'recipe_engine/context',
     'recipe_engine/path',
+    'recipe_engine/platform',
     'recipe_engine/properties',
     'recipe_engine/step',
 ]
@@ -48,6 +50,11 @@ def RunSteps(api):
         url=api.properties.get('git_url'),
         ref=api.properties.get('git_ref')
     )
+
+  if api.platform.is_linux:
+    # Validates flutter builders json format.
+    api.json_util.validate_json(checkout_path)
+
   env, env_prefixes = api.repo_util.flutter_environment(checkout_path)
   api.flutter_deps.chrome_and_driver(env, env_prefixes)
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
