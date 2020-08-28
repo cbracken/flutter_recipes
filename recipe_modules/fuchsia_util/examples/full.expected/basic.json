@@ -6,10 +6,22 @@
   {
     "cmd": [
       "flutter",
+      "config",
+      "--enable-fuchsia"
+    ],
+    "name": "Fuchsia Tests.Flutter Config Enable Fuchsia",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "flutter",
       "precache",
       "--fuchsia",
       "--no-android",
-      "--no-ios"
+      "--no-ios",
+      "--force"
     ],
     "name": "Fuchsia Tests.Precache Flutter Artifacts",
     "~followup_annotations": [

@@ -154,10 +154,18 @@ class FuchsiaUtilsApi(recipe_api.RecipeApi):
         'Trigger Fuchsia Driver Tests', requests=[request])
 
   def run_test(self, checkout_path):
+    """Create isolate to run tests against Fuchsia device.
+
+    Args:
+      checkout_path: Location of Flutter SDK
+    """
     with self.m.step.nest('Fuchsia Tests'):
       self.m.step(
+          'Flutter Config Enable Fuchsia',
+          ['flutter', 'config', '--enable-fuchsia'])
+      self.m.step(
           'Precache Flutter Artifacts',
-          ['flutter', 'precache', '--fuchsia', '--no-android', '--no-ios'])
+          ['flutter', 'precache', '--fuchsia', '--no-android', '--no-ios', '--force'])
       self.m.step('Precache Flutter Runners', [
           'flutter', 'precache', '--flutter_runner', '--no-android', '--no-ios'
       ])
