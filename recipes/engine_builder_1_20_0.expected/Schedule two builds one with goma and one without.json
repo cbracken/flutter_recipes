@@ -608,7 +608,7 @@
       "--show-path",
       "--",
       "python",
-      "RECIPE_REPO[build]/scripts/slave/upload_goma_logs.py",
+      "RECIPE_REPO[build]/recipes/upload_goma_logs.py",
       "--upload-compiler-proxy-info",
       "--log-url-json-file",
       "/path/to/tmp/json",
