@@ -10,7 +10,12 @@ DEPS = [
 ]
 
 def RunSteps(api):
-  api.json_util.validate_json(api.path['cleanup'], 'engine')
+  api.json_util.validate_json(api.path['cache'])
 
 def GenTests(api):
-  yield api.test('basic')
+  yield api.test('try', 
+    api.path.exists(api.path['cache'].join('dev', 'try_builders.json'))
+  )
+  yield api.test('prod', 
+    api.path.exists(api.path['cache'].join('dev', 'prod_builders.json'))
+  )

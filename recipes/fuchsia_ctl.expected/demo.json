@@ -89,24 +89,6 @@
   },
   {
     "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "[START_DIR]/packages/dev/try_builders.json",
-      "/path/to/tmp/"
-    ],
-    "infra_step": true,
-    "name": "validate try json format",
-    "~followup_annotations": [
-      "@@@STEP_LOG_LINE@try_builders.json@\"\"@@@",
-      "@@@STEP_LOG_END@try_builders.json@@@"
-    ]
-  },
-  {
-    "cmd": [
       "tool/build.sh"
     ],
     "cwd": "[START_DIR]/packages/packages/fuchsia_ctl",

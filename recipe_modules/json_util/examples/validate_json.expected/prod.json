@@ -1,0 +1,23 @@
+[
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CACHE]/dev/prod_builders.json",
+      "/path/to/tmp/"
+    ],
+    "infra_step": true,
+    "name": "validate prod json format",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@prod_builders.json@\"\"@@@",
+      "@@@STEP_LOG_END@prod_builders.json@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]

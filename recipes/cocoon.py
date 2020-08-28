@@ -31,7 +31,7 @@ def RunSteps(api):
       ref=api.properties.get('git_ref'))
 
   # Validates engine builders json format.
-  api.json_util.validate_json(cocoon_path, 'cocoon')
+  api.json_util.validate_json(cocoon_path)
 
   # Checkout flutter/flutter at head.
   flutter_git_ref = 'refs/heads/stable'
