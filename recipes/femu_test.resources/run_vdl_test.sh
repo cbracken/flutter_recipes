@@ -117,10 +117,10 @@ log "Launching virtual device using VDL."
   --output_launched_device_proto="${VDL_PROTO}" > "${EMULATOR_LOG}" \
   --grpc_port="${GRPC_PORT}"
 
-_EXIT_CODE=$?
+_LAUNCH_EXIT_CODE=$?
 _TEST_EXIT_CODE=0
 
-if [[ ${_EXIT_CODE} == 0 ]]; then
+if [[ ${_LAUNCH_EXIT_CODE} == 0 ]]; then
   log "Successfully launched virtual device proto ${VDL_PROTO}"
   ssh_to_guest "log_listener" >"${SYSLOG}" 2>&1 &
 
@@ -138,7 +138,7 @@ if [[ ${_EXIT_CODE} == 0 ]]; then
     fi
   done
 else
-  log "Failed to launch virtual device. Exit code ${_EXIT_CODE}"
+  log "Failed to launch virtual device. Exit code ${_LAUNCH_EXIT_CODE}"
 fi
 
 # Stop the emulator
@@ -156,4 +156,4 @@ else
   log "Failed to stop virtual device. Exit code ${VDL_STOP_EXIT_CODE}"
 fi
 
-exit ${_TEST_EXIT_CODE}
+exit ${_LAUNCH_EXIT_CODE} && ${_TEST_EXIT_CODE} && ${VDL_STOP_EXIT_CODE}

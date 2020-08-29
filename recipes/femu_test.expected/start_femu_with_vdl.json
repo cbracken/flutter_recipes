@@ -553,7 +553,7 @@
       "-root",
       "[CACHE]/builder/vdl",
       "-ensure-file",
-      "fuchsia/vdl/${platform} g3-revision:vdl_fuchsia_20200811_RC00",
+      "fuchsia/vdl/${platform} g3-revision:vdl_fuchsia_20200824_RC00",
       "-max-threads",
       "0",
       "-json-output",
@@ -604,7 +604,7 @@
       "-root",
       "[CACHE]/builder/aemu",
       "-ensure-file",
-      "fuchsia/third_party/aemu/${platform} git_revision:b14d86bbed0c1c64e9d177daa981e9c3a7df8cba",
+      "fuchsia/third_party/aemu/${platform} integration",
       "-max-threads",
       "0",
       "-json-output",
@@ -635,7 +635,7 @@
       "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
       "@@@STEP_LOG_LINE@json.output@      {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-git_revision:b14\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-integration-----\", @@@",
       "@@@STEP_LOG_LINE@json.output@        \"package\": \"fuchsia/third_party/aemu/resolved-platform\"@@@",
       "@@@STEP_LOG_LINE@json.output@      }@@@",
       "@@@STEP_LOG_LINE@json.output@    ]@@@",
@@ -2073,7 +2073,10 @@
   },
   {
     "cmd": [],
-    "name": "FEMU Test"
+    "name": "FEMU Test",
+    "~followup_annotations": [
+      "@@@STEP_EXCEPTION@@@"
+    ]
   },
   {
     "cmd": [
@@ -2120,7 +2123,8 @@
       "@@@STEP_LOG_LINE@syslog@failure@@@",
       "@@@STEP_LOG_END@syslog@@@",
       "@@@STEP_LOG_LINE@emulator_log@@@@",
-      "@@@STEP_LOG_END@emulator_log@@@"
+      "@@@STEP_LOG_END@emulator_log@@@",
+      "@@@STEP_FAILURE@@@"
     ]
   },
   {
@@ -2169,10 +2173,15 @@
       "@@@STEP_LOG_LINE@syslog@failure@@@",
       "@@@STEP_LOG_END@syslog@@@",
       "@@@STEP_LOG_LINE@emulator_log@@@@",
-      "@@@STEP_LOG_END@emulator_log@@@"
+      "@@@STEP_LOG_END@emulator_log@@@",
+      "@@@STEP_FAILURE@@@"
     ]
   },
   {
+    "failure": {
+      "failure": {},
+      "humanReason": "2 out of 2 aggregated steps failed: Step('FEMU Test.Run FEMU Test ui_tests') (retcode: 1), Step('FEMU Test.Run FEMU Test fml_tests') (retcode: 1)"
+    },
     "name": "$result"
   }
 ]

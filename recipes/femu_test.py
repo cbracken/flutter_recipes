@@ -49,7 +49,7 @@ def Build(api, config, *targets):
   ninja_args = [api.depot_tools.ninja_path, '-j', goma_jobs, '-C', build_dir]
   ninja_args.extend(targets)
   with api.goma.build_with_goma():
-    name='build %s' % ' '.join([config] + list(targets))
+    name = 'build %s' % ' '.join([config] + list(targets))
     api.step(name, ninja_args)
 
 
@@ -103,9 +103,8 @@ def IsolateSymlink(api):
     )
 
   def addVDLFiles():
-    api.vdl.set_vdl_cipd_tag(tag="g3-revision:vdl_fuchsia_20200811_RC00")
+    api.vdl.set_vdl_cipd_tag(tag="g3-revision:vdl_fuchsia_20200824_RC00")
     add(api.vdl.vdl_path, 'device_launcher')
-    api.vdl.set_aemu_cipd_tag(tag="git_revision:b14d86bbed0c1c64e9d177daa981e9c3a7df8cba")
     add(api.vdl.aemu_dir, 'aemu')
     add(api.vdl.create_device_proto(), 'virtual_device.textproto')
 
@@ -183,7 +182,7 @@ def TestFuchsiaFEMU(api):
       'fml_tests':
           '--gtest_filter=-MessageLoop.TimeSensistiveTest_*:FileTest.CanTruncateAndWrite:FileTest.CreateDirectoryStructure',
       'shell_tests':
-      '--gtest_filter=-ShellTest.ReportTimingsIsCalledLaterInReleaseMode:ShellTest.ReportTimingsIsCalledSoonerInNonReleaseMode',
+          '--gtest_filter=-ShellTest.ReportTimingsIsCalledLaterInReleaseMode:ShellTest.ReportTimingsIsCalledSoonerInNonReleaseMode',
       'flutter_runner_scenic_tests':
           '--gtest_filter=-SessionConnectionTest.*:CalculateNextLatchPointTest.*',
   }
@@ -217,7 +216,7 @@ def TestFuchsiaFEMU(api):
       ))
 
   with api.context(cwd=root_dir):
-    with api.step.nest('FEMU Test') as presentation:
+    with api.step.nest('FEMU Test'), api.step.defer_results():
       for test in flutter_tests:
         package_name = re.search('(?P<package_name>.*)-\d+.far', test)
         if package_name and package_name.group('package_name'):
@@ -229,25 +228,24 @@ def TestFuchsiaFEMU(api):
           test_cmd.append('--run_test={pkg}'.format(pkg=pkg))
           if test_args.has_key(pkg):
             test_cmd.append('--test_args={args}'.format(args=test_args[pkg]))
-          try:
-            api.step(
-                'Run FEMU Test %s' % pkg,
-                test_cmd + [
-                    '--emulator_log',
-                    api.raw_io.output_text(name='emulator_log'),
-                    '--syslog',
-                    api.raw_io.output_text(name='syslog'),
-                ],
-                step_test_data=(lambda: api.raw_io.test_api.output_text(
-                    'failure', name='syslog')))
-
-          finally:
-            step_result = api.step.active_result
-            step_result.presentation.logs[
-                'syslog'] = step_result.raw_io.output_texts['syslog']
-            step_result.presentation.logs[
-                'emulator_log'] = step_result.raw_io.output_texts[
-                    'emulator_log']
+          api.step(
+              'Run FEMU Test %s' % pkg,
+              test_cmd + [
+                  '--emulator_log',
+                  api.raw_io.output_text(name='emulator_log'),
+                  '--syslog',
+                  api.raw_io.output_text(name='syslog'),
+              ],
+              step_test_data=(
+                  lambda: api.raw_io.test_api.
+                  output_text('failure', name='syslog')
+              )
+          )
+          step_result = api.step.active_result
+          step_result.presentation.logs[
+              'syslog'] = step_result.raw_io.output_texts['syslog']
+          step_result.presentation.logs[
+              'emulator_log'] = step_result.raw_io.output_texts['emulator_log']
 
 
 def BuildFuchsia(api):
@@ -323,6 +321,8 @@ def GenTests(api):
           'Read manifest',
           api.file.read_json({'id': '0.20200101.0.1'}),
       ),
+      api.step_data('FEMU Test.Run FEMU Test ui_tests', retcode=1),
+      api.step_data('FEMU Test.Run FEMU Test fml_tests', retcode=1),
       api.properties.environ(EnvProperties(SWARMING_TASK_ID='deadbeef')),
       api.platform('linux', 64),
       api.path.exists(
