@@ -68,7 +68,6 @@ def schedule_all(api):
         # from removing extra dimensions like "cores", "os" etc.
         sub_job.dimensions.update({
             "id": select_bot(first_capability),
-            "pool": "luci.flutter.staging",
             "cores": "",
             "os": "",
             "cpu": "",

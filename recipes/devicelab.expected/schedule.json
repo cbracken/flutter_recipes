@@ -262,15 +262,13 @@
       "-d",
       "cores=",
       "-d",
-      "caches=",
+      "cpu=",
       "-d",
       "os=",
       "-d",
-      "cpu=",
+      "id=flutter-devicelab-linux-8",
       "-d",
-      "pool=luci.flutter.staging",
-      "-d",
-      "id=flutter-devicelab-linux-8"
+      "caches="
     ],
     "name": "launch jobs.led edit",
     "stdin": "{\n\"buildbucket\": {\n\"bbagent_args\": {\n\"build\": {\n\"builder\": {}\n}\n}\n}\n}",
