@@ -54,6 +54,7 @@ def RunSteps(api):
   env, env_prefixes = api.repo_util.flutter_environment(checkout_path)
   api.flutter_deps.chrome_and_driver(env, env_prefixes)
   api.flutter_deps.open_jdk(env, env_prefixes)
+  api.flutter_deps.goldctl(env, env_prefixes)
   # Add shard and subshard.
   env['SHARD'] = api.properties.get('shard')
   env['SUBSHARD'] = api.properties.get('subshard')

@@ -29,6 +29,32 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       path.append(java_cache_dir.join('bin'))
       env_prefixes['PATH'] = path
 
+  def goldctl(
+      self,
+      env,
+      env_prefixes,
+      version='git_revision:b57f561ad4ad624bd399b8b7b500aa1955276d41'
+    ):
+    """Downloads goldctl from CIPD and updates the environment variables.
+
+    Args:
+      env(dict): Current environment variables.
+      env_prefixes(dict):  Current environment prefixes variables.
+      version(str): The goldctl version to install.
+    """
+    with self.m.step.nest('Download goldctl'):
+      goldctl_cache_dir = self.m.path['cache'].join('gold')
+      self.m.cipd.ensure(
+        goldctl_cache_dir,
+        self.m.cipd.EnsureFile().add_package(
+            'skia/tools/goldctl/${platform}', version
+        )
+      )
+      env['GOLDCTL'] = goldctl_cache_dir.join('goldctl')
+
+    if self.m.properties.get('git_ref') and self.m.properties.get('gold_tryjob') == True:
+      env['GOLD_TRYJOB'] = self.m.properties.get('git_ref')
+
   def chrome_and_driver(self, env, env_prefixes, version='latest'):
     """Downloads chrome from CIPD and updates the environment variables.
 

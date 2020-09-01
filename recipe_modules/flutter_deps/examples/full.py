@@ -6,8 +6,9 @@ from recipe_engine.post_process import DoesNotRun, Filter, StatusFailure
 
 DEPS = [
     'flutter/flutter_deps',
-    'recipe_engine/path',
     'recipe_engine/assertions',
+    'recipe_engine/path',
+    'recipe_engine/properties',
 ]
 
 
@@ -16,6 +17,8 @@ def RunSteps(api):
   env_prefixes = {}
   api.flutter_deps.open_jdk(env, env_prefixes)
   api.assertions.assertTrue(env.get('JAVA_HOME'))
+  api.flutter_deps.goldctl(env, env_prefixes)
+  api.assertions.assertTrue(env.get('GOLDCTL'))
   api.assertions.assertEqual(
       env_prefixes.get('PATH'), [api.path['cache'].join('java', 'bin')]
   )
@@ -37,3 +40,8 @@ def RunSteps(api):
 
 def GenTests(api):
   yield api.test('basic')
+  yield api.test(
+      'goldTryjob',
+      api.properties(
+          gold_tryjob=True,
+          git_ref='refs/pull/1/head'))
