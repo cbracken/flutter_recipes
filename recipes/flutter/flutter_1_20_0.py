@@ -56,7 +56,7 @@ def RunSteps(api):
     api.json_util.validate_json(checkout_path)
 
   env, env_prefixes = api.repo_util.flutter_environment(checkout_path)
-  api.flutter_deps.chrome_and_driver(env, env_prefixes)
+  api.flutter_deps.chrome_and_driver(env, env_prefixes, '')
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
     with api.step.nest('prepare environment'):
       api.step('flutter doctor', ['flutter', 'doctor'])

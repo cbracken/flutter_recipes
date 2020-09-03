@@ -15,16 +15,16 @@ DEPS = [
 def RunSteps(api):
   env = {}
   env_prefixes = {}
-  api.flutter_deps.open_jdk(env, env_prefixes)
+  api.flutter_deps.open_jdk(env, env_prefixes, 'v1')
   api.assertions.assertTrue(env.get('JAVA_HOME'))
-  api.flutter_deps.goldctl(env, env_prefixes)
+  api.flutter_deps.goldctl(env, env_prefixes, 'v2')
   api.assertions.assertTrue(env.get('GOLDCTL'))
   api.assertions.assertEqual(
       env_prefixes.get('PATH'), [api.path['cache'].join('java', 'bin')]
   )
   env_prefixes = {}
   env = {}
-  api.flutter_deps.chrome_and_driver(env, env_prefixes)
+  api.flutter_deps.chrome_and_driver(env, env_prefixes, 'v3')
   api.assertions.assertTrue(env.get('CHROME_NO_SANDBOX'))
   api.assertions.assertTrue(env.get('CHROME_EXECUTABLE'))
   api.assertions.assertEqual(
@@ -33,15 +33,21 @@ def RunSteps(api):
           api.path['cache'].join('chrome', 'drivers')
       ]
   )
-  api.flutter_deps.go_sdk(env, env_prefixes)
-  api.flutter_deps.dashing(env, env_prefixes)
-  api.flutter_deps.vpython(env, env_prefixes)
+  api.flutter_deps.go_sdk(env, env_prefixes, 'v4')
+  api.flutter_deps.dashing(env, env_prefixes, 'v5')
+  api.flutter_deps.vpython(env, env_prefixes, 'v6')
+  api.flutter_deps.required_deps(
+      env, env_prefixes, [{'dependency': 'chrome_and_driver'}]
+  )
+  with api.assertions.assertRaises(ValueError):
+    api.flutter_deps.required_deps(
+        env, env_prefixes, [{'dependency': 'does_not_exist'}]
+    )
 
 
 def GenTests(api):
   yield api.test('basic')
   yield api.test(
       'goldTryjob',
-      api.properties(
-          gold_tryjob=True,
-          git_ref='refs/pull/1/head'))
+      api.properties(gold_tryjob=True, git_ref='refs/pull/1/head')
+  )

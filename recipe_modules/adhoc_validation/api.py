@@ -16,24 +16,29 @@ class AddhocValidationApi(recipe_api.RecipeApi):
   def available_validations(self):
     """Returns the list of accepted validations."""
     return [
-        'analyze', 'customer_testing', 'docs', 'docker_build', 'fuchsia_precache',
-        'web_smoke_test'
+        'analyze', 'customer_testing', 'docs', 'fuchsia_precache',
+        'tool_coverage', 'web_smoke_test'
     ]
 
-  def run(self, name, validation):
+  def run(self, name, validation, secrets=None):
     """Runs a validation as a recipe step.
 
     Args:
       name(str): The step group name.
       validation(str): The name of a validation to run. This has to correlate
         to a <validation>.sh for linux/mac or <validation>.bat for windows.
+      secrets(dict): The key is the name of the secret and value is the path to kms.
     """
     assert (validation in self.available_validations())
+    secrets = secrets or {}
     with self.m.step.nest(name):
       resource_name = ''
+      env = {}
+      self.m.kms.decrypt_secrets(env, secrets)
       if self.m.platform.is_linux:
         resource_name = self.resource('%s.sh' % validation)
         self.m.step('Set execute permission', ['chmod', '755', resource_name])
       if self.m.platform.is_win:
         resource_name = self.resource('%s.bat' % validation)
-      self.m.step(validation, [resource_name])
+      with self.m.context(env=env):
+        self.m.step(validation, [resource_name])

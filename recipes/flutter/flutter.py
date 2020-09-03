@@ -12,6 +12,7 @@ from PB.go.chromium.org.luci.buildbucket.proto \
 from google.protobuf import struct_pb2
 
 DEPS = [
+    'flutter/android_sdk',
     'flutter/adhoc_validation',
     'flutter/json_util',
     'flutter/repo_util',
@@ -56,22 +57,28 @@ def RunSteps(api):
     api.json_util.validate_json(checkout_path)
 
   env, env_prefixes = api.repo_util.flutter_environment(checkout_path)
-  api.flutter_deps.chrome_and_driver(env, env_prefixes)
+  api.flutter_deps.required_deps(
+      env, env_prefixes, api.properties.get('dependencies', [])
+  )
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
     with api.step.nest('prepare environment'):
       api.step('flutter doctor', ['flutter', 'doctor'])
       api.step('download dependencies', ['flutter', 'update-packages'])
       api.adhoc_validation.run(
           api.properties.get('validation_name'),
-          api.properties.get('validation')
+          api.properties.get('validation'), api.properties.get('secrets', {})
       )
 
 
 def GenTests(api):
   yield api.test(
       'validators',
-      api.properties(validation='analyze', validation_name='dart analyze'),
-      api.repo_util.flutter_environment_data()
+      api.properties(
+          validation='analyze',
+          validation_name='dart analyze',
+          android_sdk_license='android_license',
+          android_sdk_preview_license='android_preview_license'
+      ), api.repo_util.flutter_environment_data()
   )
   props = struct_pb2.Struct()
   props['task_name'] = 'abc'

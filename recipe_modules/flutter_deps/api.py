@@ -8,7 +8,28 @@ from recipe_engine import recipe_api
 class FlutterDepsApi(recipe_api.RecipeApi):
   """Utilities to install flutter build/test dependencies at runtime."""
 
-  def open_jdk(self, env, env_prefixes, version='version:1.8.0u202-b08'):
+  def required_deps(self, env, env_prefixes, deps):
+    """Install all the required dependencies for a given builder.
+
+    Args:
+      env(dict): Current environment variables.
+      env_prefixes(dict):  Current environment prefixes variables.
+      deps(list(dict)): A list of dictionaries with dependencies as
+        {'dependency': 'android_sdk', version: ''} where an empty version
+        means the default.
+    """
+    available_deps = {
+        'open_jdk': self.open_jdk, 'goldctl': self.goldctl,
+        'chrome_and_driver': self.chrome_and_driver, 'go_sdk': self.go_sdk,
+        'dashing': self.dashing, 'vpython': self.vpython
+    }
+    for dep in deps:
+      dep_funct = available_deps.get(dep.get('dependency'))
+      if not dep_funct:
+        raise ValueError('Dependency %s not available.' % dep)
+      dep_funct(env, env_prefixes, dep.get('version'))
+
+  def open_jdk(self, env, env_prefixes, version):
     """Downloads OpenJdk CIPD package and updates environment variables.
 
     Args:
@@ -16,6 +37,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       env_prefixes(dict):  Current environment prefixes variables.
       version(str): The OpenJdk version to install.
     """
+    version = version or 'version:1.8.0u202-b08'
     with self.m.step.nest('OpenJDK dependency'):
       java_cache_dir = self.m.path['cache'].join('java')
       self.m.cipd.ensure(
@@ -29,12 +51,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       path.append(java_cache_dir.join('bin'))
       env_prefixes['PATH'] = path
 
-  def goldctl(
-      self,
-      env,
-      env_prefixes,
-      version='git_revision:b57f561ad4ad624bd399b8b7b500aa1955276d41'
-    ):
+  def goldctl(self, env, env_prefixes, version):
     """Downloads goldctl from CIPD and updates the environment variables.
 
     Args:
@@ -42,20 +59,22 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       env_prefixes(dict):  Current environment prefixes variables.
       version(str): The goldctl version to install.
     """
+    version = version or 'git_revision:b57f561ad4ad624bd399b8b7b500aa1955276d41'
     with self.m.step.nest('Download goldctl'):
       goldctl_cache_dir = self.m.path['cache'].join('gold')
       self.m.cipd.ensure(
-        goldctl_cache_dir,
-        self.m.cipd.EnsureFile().add_package(
-            'skia/tools/goldctl/${platform}', version
-        )
+          goldctl_cache_dir,
+          self.m.cipd.EnsureFile().add_package(
+              'skia/tools/goldctl/${platform}', version
+          )
       )
       env['GOLDCTL'] = goldctl_cache_dir.join('goldctl')
 
-    if self.m.properties.get('git_ref') and self.m.properties.get('gold_tryjob') == True:
+    if self.m.properties.get('git_ref') and self.m.properties.get('gold_tryjob'
+                                                                 ) == True:
       env['GOLD_TRYJOB'] = self.m.properties.get('git_ref')
 
-  def chrome_and_driver(self, env, env_prefixes, version='latest'):
+  def chrome_and_driver(self, env, env_prefixes, version):
     """Downloads chrome from CIPD and updates the environment variables.
 
     Args:
@@ -63,6 +82,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       env_prefixes(dict):  Current environment prefixes variables.
       version(str): The OpenJdk version to install.
     """
+    version = version or 'latest'
     with self.m.step.nest('Chrome and driver dependency'):
       env['CHROME_NO_SANDBOX'] = 'true'
       chrome_path = self.m.path['cache'].join('chrome', 'chrome')
@@ -82,8 +102,9 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       binary_name = 'chrome.exe' if self.m.platform.is_win else 'chrome'
       env['CHROME_EXECUTABLE'] = chrome_path.join(binary_name)
 
-  def go_sdk(self, env, env_prefixes, version='version:1.12.5'):
+  def go_sdk(self, env, env_prefixes, version):
     """Installs go sdk."""
+    version = version or 'version:1.12.5'
     go_path = self.m.path['cache'].join('go')
     go = self.m.cipd.EnsureFile()
     go.add_package('infra/go/${platform}', version)
@@ -97,22 +118,19 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     paths.append(bin_path)
     env_prefixes['PATH'] = paths
 
-  def dashing(
-      self,
-      env,
-      env_prefixes,
-      version='git_revision:ed8da90e524f59c69781c8af65638f108d0bbba6'
-  ):
+  def dashing(self, env, env_prefixes, version):
     """Installs dashing."""
-    self.go_sdk(env, env_prefixes)
+    version = version or 'git_revision:ed8da90e524f59c69781c8af65638f108d0bbba6'
+    self.go_sdk(env, env_prefixes, 'latest')
     with self.m.context(env=env, env_prefixes=env_prefixes):
       self.m.step(
           'Install dashing',
           ['go', 'get', '-u', 'github.com/technosophos/dashing']
       )
 
-  def vpython(self, env, env_prefixes, version='latest'):
+  def vpython(self, env, env_prefixes, version):
     """Installs vpython."""
+    version = version or 'latest'
     vpython_path = self.m.path['cache'].join('vpython')
     vpython = self.m.cipd.EnsureFile()
     vpython.add_package('infra/tools/luci/vpython/${platform}', version)
