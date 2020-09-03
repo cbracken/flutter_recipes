@@ -9,6 +9,7 @@ from contextlib import contextmanager
 import re
 
 DEPS = [
+    'depot_tools/osx_sdk',
     'flutter/android_sdk',
     'flutter/json_util',
     'flutter/repo_util',
@@ -32,12 +33,6 @@ def RunShard(api, env, env_prefixes, checkout_path):
     )
 
 
-def RunWithAndroid(api, env, env_prefixes, checkout_path):
-  api.android_sdk.install()
-  with api.android_sdk.context():
-    RunShard(api, env, env_prefixes, checkout_path)
-
-
 def RunSteps(api):
   checkout_path = api.path['start_dir'].join('flutter')
   api.repo_util.checkout(
@@ -52,17 +47,18 @@ def RunSteps(api):
     api.json_util.validate_json(checkout_path)
 
   env, env_prefixes = api.repo_util.flutter_environment(checkout_path)
-  api.flutter_deps.chrome_and_driver(env, env_prefixes, '')
-  api.flutter_deps.open_jdk(env, env_prefixes, '')
-  api.flutter_deps.goldctl(env, env_prefixes, '')
+  deps = [{'dependency': 'chrome_and_driver'}, {'dependency': 'open_jdk'},
+          {'dependency': 'goldctl'}, {'dependency': 'android_sdk'}]
+  api.flutter_deps.required_deps(env, env_prefixes, deps)
   # Add shard and subshard.
   env['SHARD'] = api.properties.get('shard')
   env['SUBSHARD'] = api.properties.get('subshard')
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
     api.step('flutter doctor', ['flutter', 'doctor'])
     api.step('download dependencies', ['flutter', 'update-packages'])
-    if 'android_sdk' in api.properties.get('dependencies', []):
-      RunWithAndroid(api, env, env_prefixes, checkout_path)
+    if 'xcode' in api.properties.get('dependencies', []):
+      with api.osx_sdk('ios'):
+        RunShard(api, env, env_prefixes, checkout_path)
     else:
       RunShard(api, env, env_prefixes, checkout_path)
 
@@ -80,4 +76,8 @@ def GenTests(api):
           android_sdk_preview_license='abc',
           android_sdk_license='cde'
       )
+  )
+  yield api.test(
+      'xcode', api.repo_util.flutter_environment_data(),
+      api.properties(dependencies=['xcode'],)
   )

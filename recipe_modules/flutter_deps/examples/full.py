@@ -43,6 +43,7 @@ def RunSteps(api):
     api.flutter_deps.required_deps(
         env, env_prefixes, [{'dependency': 'does_not_exist'}]
     )
+  api.flutter_deps.android_sdk(env, env_prefixes, '')
 
 
 def GenTests(api):

@@ -21,7 +21,8 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     available_deps = {
         'open_jdk': self.open_jdk, 'goldctl': self.goldctl,
         'chrome_and_driver': self.chrome_and_driver, 'go_sdk': self.go_sdk,
-        'dashing': self.dashing, 'vpython': self.vpython
+        'dashing': self.dashing, 'vpython': self.vpython,
+        'android_sdk': self.android_sdk
     }
     for dep in deps:
       dep_funct = available_deps.get(dep.get('dependency'))
@@ -138,3 +139,9 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     paths = env_prefixes.get('PATH', [])
     paths.append(vpython_path)
     env_prefixes['PATH'] = paths
+
+  def android_sdk(self, env, env_prefixes, version):
+    """Installs android sdk."""
+    version = version or '29.0.2'
+    root_path = self.m.path['cache'].join('android')
+    self.m.android_sdk.install(root_path, env, env_prefixes)

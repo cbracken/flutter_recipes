@@ -4,22 +4,25 @@
 
 DEPS = [
     'android_sdk',
+    'recipe_engine/context',
+    'recipe_engine/path',
     'recipe_engine/properties',
     'recipe_engine/step',
 ]
 
 
 def RunSteps(api):
-  api.android_sdk.install()
-  with api.android_sdk.context():
+  env = {}
+  env_prefixes = {}
+  root = api.path['cache'].join('android29')
+  api.android_sdk.install(
+      sdk_root=root,
+      env=env,
+      env_prefixes=env_prefixes
+  )
+  with api.context(env=env, env_prefixes=env_prefixes):
     api.step('adb devices -l', cmd=['adb', 'devices', '-l'])
 
 
 def GenTests(api):
-  yield (api.test(
-      'demo',
-      api.properties(
-          android_sdk_license='android_sdk_hash',
-          android_sdk_preview_license='android_sdk_preview_hash',
-      ),
-  ))
+  yield (api.test('demo',))

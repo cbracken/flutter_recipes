@@ -6,7 +6,7 @@ from recipe_engine.recipe_api import Property
 
 DEPS = [
     'depot_tools/git',
-    'flutter/android_sdk',
+    'flutter/flutter_deps',
     'flutter/repo_util',
     'flutter/yaml',
     'recipe_engine/context',
@@ -48,9 +48,9 @@ def schedule_all(api):
   sub_jobs = []
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     # Reads the manifest.
-    result = api.yaml.read('read manifest',
-                           devicelab_path.join('manifest.yaml'),
-                           api.json.output())
+    result = api.yaml.read(
+        'read manifest', devicelab_path.join('manifest.yaml'), api.json.output()
+    )
     manifest = result.json.output
     for task_name, task_body in manifest['tasks'].iteritems():
       # Example first capability values: linux/android, mac/ios.
@@ -115,15 +115,13 @@ def run_task(api):
     # Runs a task.
     sdk = first_capability.split('/')[1]
     if sdk == 'android':
-      run_android_task(api, task_name)
+      api.flutter_deps.android_sdk(env, env_prefixes, '')
+      with api.context(env=env, env_prefixes=env_prefixes):
+        api.step(
+            'run %s' % task_name, ['dart', 'bin/run.dart', '-t', task_name]
+        )
     elif sdk == 'ios':
       run_ios_task(api, task_name)
-
-
-def run_android_task(api, task_name):
-  api.android_sdk.install()
-  with api.android_sdk.context():
-    api.step('run %s' % task_name, ['dart', 'bin/run.dart', '-t', task_name])
 
 
 def run_ios_task(api, task_name):
@@ -167,7 +165,8 @@ def gen_scheduler_tests(api):
       "schedule", api.properties(role="scheduler"),
       api.repo_util.flutter_environment_data(),
       api.step_data('read manifest.parse', api.json.output(sample_manifest)),
-      api.job.mock_collect(["fake-task-id"], "collect jobs"))
+      api.job.mock_collect(["fake-task-id"], "collect jobs")
+  )
 
 
 def gen_worker_tests(api):
@@ -199,8 +198,10 @@ def gen_worker_tests(api):
         api.properties(
             role="worker",
             name=task_name,
-            first_capability=(sample_manifest["tasks"][task_name]
-                              ["required_agent_capabilities"][0]),
+            first_capability=(
+                sample_manifest["tasks"][task_name]
+                ["required_agent_capabilities"][0]
+            ),
             android_sdk_license='android_sdk_hash',
             android_sdk_preview_license='android_sdk_preview_hash',
         ),
