@@ -3,6 +3,7 @@
 # found in the LICENSE file.
 
 DEPS = [
+    'flutter/json_util',
     'flutter/repo_util',
     'recipe_engine/context',
     'recipe_engine/path',
@@ -24,6 +25,9 @@ def RunSteps(api):
         url=api.properties.get('git_url'),
         ref=api.properties.get('git_ref')
     )
+  # Validates plugins builders json format.
+  api.json_util.validate_json(plugins_checkout_path.join('.ci'))
+
   env, env_prefixes = api.repo_util.flutter_environment(flutter_checkout_path)
   with api.context(env=env, env_prefixes=env_prefixes,
                    cwd=flutter_checkout_path):
