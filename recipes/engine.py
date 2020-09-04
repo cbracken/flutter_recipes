@@ -1474,47 +1474,18 @@ def BuildJavadoc(api):
     )
 
 
-# The MacOSX10.15 SDK included in Xcode 11 does not ship Ruby 2.3 headers,
-# so jazzy installation will fail on MacOS 10.14 + Xcode 11. Workaround
-# that by specifying an external MacOSX10.14 SDK to use during gem installation.
-#
-# TODO(https://crbug.com/998883): remove this method and all references to it
-# once the bots are upgraded to MacOS 10.15.
-@contextmanager
-def SetupMacOSSDK(api):
-  xcode_binary_cache_dir = api.path['cache'].join('xcode_binary')
-  # Pull a trimmed version of Xcode 10.2.1(10E1001) that contains the MacOS
-  # 10.14 SDK needed for installing gems. This does not affect what
-  # `xcode-select -p` points to.
-  api.cipd.ensure(
-      xcode_binary_cache_dir,
-      api.cipd.EnsureFile().add_package(
-          'infra_internal/ios/xcode/xcode_binaries/${platform}',
-          'yjQtk3auAegQO4t18uBtBlKbj76xBjVtLE-3UM2faRUC'
-      )
-  )
-
-  # Override SDKROOT during gem installation.
-  sdk_relative_path = 'Contents/Developer/Platforms/' \
-                      'MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk'
-  with api.context(
-      env={"SDKROOT": xcode_binary_cache_dir.join(sdk_relative_path)}):
-    yield
-
-
 @contextmanager
 def InstallGems(api):
   gem_dir = api.path['start_dir'].join('gems')
   api.file.ensure_directory('mkdir gems', gem_dir)
 
-  with SetupMacOSSDK(api):
-    with api.context(cwd=gem_dir):
-      api.step(
-          'install jazzy', [
-              'gem', 'install', 'jazzy:' + api.properties['jazzy_version'],
-              '--install-dir', '.'
-          ]
-      )
+  with api.context(cwd=gem_dir):
+    api.step(
+        'install jazzy', [
+            'gem', 'install', 'jazzy:' + api.properties['jazzy_version'],
+            '--install-dir', '.'
+        ]
+    )
   with api.context(env={"GEM_HOME": gem_dir},
                    env_prefixes={'PATH': [gem_dir.join('bin')]}):
     yield
