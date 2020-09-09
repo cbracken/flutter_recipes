@@ -28,8 +28,10 @@ def RunShard(api, env, env_prefixes, checkout_path):
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
     api.step(
         'run test.dart for %s shard and subshard %s' %
-        (api.properties.get('shard'), api.properties.get('subshard')),
-        ['dart', checkout_path.join('dev', 'bots', 'test.dart')]
+        (api.properties.get('shard'), api.properties.get('subshard')), [
+            'dart', '--enable-asserts',
+            checkout_path.join('dev', 'bots', 'test.dart')
+        ]
     )
 
 
@@ -47,16 +49,16 @@ def RunSteps(api):
     api.json_util.validate_json(checkout_path)
 
   env, env_prefixes = api.repo_util.flutter_environment(checkout_path)
-  deps = [{'dependency': 'chrome_and_driver'}, {'dependency': 'open_jdk'},
-          {'dependency': 'goldctl'}, {'dependency': 'android_sdk'}]
+  deps = api.properties.get('dependencies', [])
   api.flutter_deps.required_deps(env, env_prefixes, deps)
   # Add shard and subshard.
   env['SHARD'] = api.properties.get('shard')
   env['SUBSHARD'] = api.properties.get('subshard')
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
-    api.step('flutter doctor', ['flutter', 'doctor'])
+    api.step('flutter doctor', ['flutter', 'doctor', '-v'])
     api.step('download dependencies', ['flutter', 'update-packages'])
-    if 'xcode' in api.properties.get('dependencies', []):
+    dep_list = [d['dependency'] for d in deps]
+    if 'xcode' in dep_list:
       with api.osx_sdk('ios'):
         RunShard(api, env, env_prefixes, checkout_path)
     else:
@@ -71,7 +73,7 @@ def GenTests(api):
   yield api.test(
       'android_sdk', api.repo_util.flutter_environment_data(),
       api.properties(
-          dependencies=['android_sdk'],
+          dependencies=[{'dependency': 'android_sdk'}],
           android_sdk=True,
           android_sdk_preview_license='abc',
           android_sdk_license='cde'
@@ -79,5 +81,5 @@ def GenTests(api):
   )
   yield api.test(
       'xcode', api.repo_util.flutter_environment_data(),
-      api.properties(dependencies=['xcode'],)
+      api.properties(dependencies=[{'dependency': 'xcode'}],)
   )

@@ -25,6 +25,8 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         'android_sdk': self.android_sdk
     }
     for dep in deps:
+      if dep.get('dependency') == 'xcode':
+        continue
       dep_funct = available_deps.get(dep.get('dependency'))
       if not dep_funct:
         raise ValueError('Dependency %s not available.' % dep)
@@ -47,9 +49,13 @@ class FlutterDepsApi(recipe_api.RecipeApi):
               'flutter_internal/java/openjdk/${platform}', version
           )
       )
-      env['JAVA_HOME'] = java_cache_dir
+      java_home = java_cache_dir
+      if self.m.platform.is_mac:
+        java_home = java_cache_dir.join('contents', 'Home')
+
+      env['JAVA_HOME'] = java_home
       path = env_prefixes.get('PATH', [])
-      path.append(java_cache_dir.join('bin'))
+      path.append(java_home.join('bin'))
       env_prefixes['PATH'] = path
 
   def goldctl(self, env, env_prefixes, version):

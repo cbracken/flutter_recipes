@@ -47,9 +47,7 @@ def _PlatformSDK(api):
     with api.windows_sdk():
       with InstallOpenJDK(api):
         yield
-  elif api.platform.is_mac:
-    yield
-  elif api.platform.is_linux:
+  else:
     with InstallOpenJDK(api):
       yield
 
@@ -61,7 +59,9 @@ def Install7za(api):
     api.cipd.ensure(
         sevenzip_cache_dir,
         api.cipd.EnsureFile().add_package(
-            'flutter_internal/tools/7za/${platform}', 'version:19.00'))
+            'flutter_internal/tools/7za/${platform}', 'version:19.00'
+        )
+    )
     with api.context(env_prefixes={'PATH': [sevenzip_cache_dir]}):
       yield
   else:
@@ -73,8 +73,11 @@ def EnsureGoldctl(api):
     goldctl_cache_dir = api.path['cache'].join('gold')
     api.cipd.ensure(
         goldctl_cache_dir,
-        api.cipd.EnsureFile().add_package('skia/tools/goldctl/${platform}',
-                                          'git_revision:b57f561ad4ad624bd399b8b7b500aa1955276d41'))
+        api.cipd.EnsureFile().add_package(
+            'skia/tools/goldctl/${platform}',
+            'git_revision:b57f561ad4ad624bd399b8b7b500aa1955276d41'
+        )
+    )
     return goldctl_cache_dir.join('goldctl')
 
 
@@ -88,10 +91,13 @@ def InstallOpenJDK(api):
   api.cipd.ensure(
       java_cache_dir,
       api.cipd.EnsureFile().add_package(
-          'flutter_internal/java/openjdk/${platform}', 'version:1.8.0u202-b08'))
+          'flutter_internal/java/openjdk/${platform}', 'version:1.8.0u202-b08'
+      )
+  )
   return api.context(
       env={'JAVA_HOME': java_cache_dir},
-      env_prefixes={'PATH': [java_cache_dir.join('bin')]})
+      env_prefixes={'PATH': [java_cache_dir.join('bin')]}
+  )
 
 
 def GetCloudPath(api, git_hash, path):
@@ -115,20 +121,25 @@ def UploadFlutterCoverage(api):
       BUCKET_NAME,
       GetCloudPath(api, 'coverage', 'lcov.info'),
       link_name='lcov.info',
-      name='upload coverage data')
+      name='upload coverage data'
+  )
 
   # Download encrpted file to local and then decrypt.
   token_path = flutter_package_dir.join('.coveralls.yml')
   api.kms.get_secret('codecov.encrypted', token_path)
 
   pub_executable = 'pub' if not api.platform.is_win else 'pub.exe'
-  api.step('pub global activate coveralls', [
-      pub_executable, 'global', 'activate', 'coveralls', '5.1.0',
-      '--no-executables'
-  ])
+  api.step(
+      'pub global activate coveralls', [
+          pub_executable, 'global', 'activate', 'coveralls', '5.1.0',
+          '--no-executables'
+      ]
+  )
   with api.context(cwd=flutter_package_dir):
-    api.step('upload to coveralls',
-             [pub_executable, 'global', 'run', 'coveralls:main', coverage_path])
+    api.step(
+        'upload to coveralls',
+        [pub_executable, 'global', 'run', 'coveralls:main', coverage_path]
+    )
 
 
 def CreateAndUploadFlutterPackage(api, git_hash, branch):
@@ -142,13 +153,15 @@ def CreateAndUploadFlutterPackage(api, git_hash, branch):
       'https://chromium.googlesource.com/external/github.com/flutter/flutter',
       ref='master',
       recursive=True,
-      set_got_revision=True)
+      set_got_revision=True
+  )
 
   flutter_executable = 'flutter' if not api.platform.is_win else 'flutter.bat'
   dart_executable = 'dart' if not api.platform.is_win else 'dart.exe'
   work_dir = api.path['start_dir'].join('archive')
-  prepare_script = api.path['checkout'].join('dev', 'bots',
-                                             'prepare_package.dart')
+  prepare_script = api.path['checkout'].join(
+      'dev', 'bots', 'prepare_package.dart'
+  )
   api.step('flutter doctor', [flutter_executable, 'doctor'])
   api.step('download dependencies', [flutter_executable, 'update-packages'])
   api.file.rmtree('clean archive work directory', work_dir)
@@ -173,7 +186,8 @@ def RunSteps(api):
   git_ref = api.properties.get('git_ref') or api.buildbucket.gitiles_commit.ref
 
   git_hash = api.git.checkout(
-      git_url, ref=git_ref, recursive=True, set_got_revision=True, tags=True)
+      git_url, ref=git_ref, recursive=True, set_got_revision=True, tags=True
+  )
   checkout = api.path['checkout']
 
   if api.platform.is_linux:
@@ -234,9 +248,11 @@ def RunSteps(api):
       shard_env = env
       shard_env['SHARD'] = shard
       with api.context(env=shard_env):
-        api.step('run test.dart for %s shard' % shard,
-                 [dart_executable,
-                  checkout.join('dev', 'bots', 'test.dart')])
+        api.step(
+            'run test.dart for %s shard' % shard,
+            [dart_executable,
+             checkout.join('dev', 'bots', 'test.dart')]
+        )
       if shard == 'framework_coverage':
         UploadFlutterCoverage(api)
       # Windows uses exclusive file locking.  On LUCI, if these processes remain
@@ -249,7 +265,8 @@ def RunSteps(api):
 
         def KillAll(name, exe_name):
           api.step(
-              name, ['taskkill', '/f', '/im', exe_name, '/t'], ok_ret='any')
+              name, ['taskkill', '/f', '/im', exe_name, '/t'], ok_ret='any'
+          )
 
         KillAll('stop gradle daemon', 'java.exe')
         KillAll('stop dart', 'dart.exe')
@@ -259,44 +276,55 @@ def RunSteps(api):
 def GenTests(api):
   for experimental in (True, False):
     for should_upload in (True, False):
-      yield (api.test(
-          'linux_master_coverage_%s%s' %
-          ('_experimental' if experimental else '',
-           '_upload' if should_upload else ''),
-          api.runtime(is_luci=True, is_experimental=experimental),
-          api.properties(
-              shard='framework_coverage',
-              coveralls_lcov_version='5.1.0',
-              upload_packages=should_upload,
-              gold_tryjob=not should_upload),
-      ) + api.post_check(lambda check, steps: check('Download goldctl' in steps)
-                        ))
+      yield (
+          api.test(
+              'linux_master_coverage_%s%s' % (
+                  '_experimental' if experimental else '',
+                  '_upload' if should_upload else ''
+              ),
+              api.runtime(is_luci=True, is_experimental=experimental),
+              api.properties(
+                  shard='framework_coverage',
+                  coveralls_lcov_version='5.1.0',
+                  upload_packages=should_upload,
+                  gold_tryjob=not should_upload
+              ),
+          ) + api
+          .post_check(lambda check, steps: check('Download goldctl' in steps))
+      )
       for platform in ('mac', 'linux', 'win'):
         for branch in ('master', 'dev', 'beta', 'stable'):
           git_ref = 'refs/heads/' + branch
           test = api.test(
-              '%s_%s%s%s' %
-              (platform, branch, '_experimental' if experimental else '',
-               '_upload' if should_upload else ''),
+              '%s_%s%s%s' % (
+                  platform, branch, '_experimental' if experimental else '',
+                  '_upload' if should_upload else ''
+              ),
               api.platform(platform, 64),
               api.buildbucket.ci_build(git_ref=git_ref, revision=None),
               api.properties(
                   shard='tests',
                   fuchsia_ctl_version='version:0.0.2',
                   upload_packages=should_upload,
-                  gold_tryjob=not should_upload),
+                  gold_tryjob=not should_upload
+              ),
               api.runtime(is_luci=True, is_experimental=experimental),
           )
-          yield test + api.post_check(lambda check, steps: check(
-              'Download goldctl' in steps))
+          yield test + api.post_check(
+              lambda check, steps: check('Download goldctl' in steps)
+          )
 
-  yield (api.test(
-      'pull_request',
-      api.runtime(is_luci=True, is_experimental=True),
-      api.properties(
-          git_url='https://github.com/flutter/flutter',
-          git_ref='refs/pull/1/head',
-          shard='tests',
-          fuchsia_ctl_version='version:0.0.2',
-          should_upload=False),
-  ) + api.post_check(lambda check, steps: check('Download goldctl' in steps)))
+  yield (
+      api.test(
+          'pull_request',
+          api.runtime(is_luci=True, is_experimental=True),
+          api.properties(
+              git_url='https://github.com/flutter/flutter',
+              git_ref='refs/pull/1/head',
+              shard='tests',
+              fuchsia_ctl_version='version:0.0.2',
+              should_upload=False
+          ),
+      ) +
+      api.post_check(lambda check, steps: check('Download goldctl' in steps))
+  )

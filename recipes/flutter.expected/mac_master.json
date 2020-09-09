@@ -162,6 +162,34 @@
   },
   {
     "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/java",
+      "-ensure-file",
+      "flutter_internal/java/openjdk/${platform} version:1.8.0u202-b08",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "name": "ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-version:1.8.0u20\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"flutter_internal/java/openjdk/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
       "dart",
       "[START_DIR]/flutter/dev/bots/test.dart"
     ],
@@ -170,13 +198,15 @@
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "GOLDCTL": "[CACHE]/gold/goldctl",
       "GOLD_TRYJOB": "refs/heads/master",
+      "JAVA_HOME": "[CACHE]/java",
       "PUB_CACHE": "[START_DIR]/flutter/.pub-cache",
       "SHARD": "tests"
     },
     "env_prefixes": {
       "PATH": [
         "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[CACHE]/java/bin"
       ]
     },
     "name": "run test.dart for tests shard"
