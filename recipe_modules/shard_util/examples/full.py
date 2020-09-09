@@ -24,6 +24,10 @@ def GenTests(api):
   yield api.test(
       'presubmit',
       api.properties(
-          subshards=['0', '1_last'], git_url='https://abc', git_ref='abc'
+          subshards=['0', '1_last'],
+          git_url='https://abc',
+          git_ref='abc',
+          dependencies=[{"dependency": "android_sdk"},
+                        {"dependency": "chrome_and_driver"}]
       ), api.platform.name('linux')
   )

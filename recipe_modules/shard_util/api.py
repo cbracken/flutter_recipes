@@ -18,6 +18,10 @@ class ShardUtilApi(recipe_api.RecipeApi):
   def schedule_builds(self):
     """Schedules one subbuild per subshard."""
     reqs = []
+    # Dependencies get here as a frozen dict we need force them back to list of
+    # dicts.
+    deps = self.m.properties.get('dependencies', [])
+    deps_list = [{'dependency': d['dependency']} for d in deps]
     for subshard in self.m.properties.get('subshards'):
       task_name = '%s-%s' % (self.m.properties.get('shard', ''), subshard)
       drone_props = {
@@ -26,10 +30,10 @@ class ShardUtilApi(recipe_api.RecipeApi):
                   self.m.properties.get('shard', ''), 'android_sdk_license':
                       self.m.properties.get('android_sdk_license', ''),
           'android_sdk_preview_license':
-              self.m.properties.get('android_sdk_preview_license', ''),
-          'dependencies':
-              list(self.m.properties.get('dependencies', [])), 'task_name':
-                  task_name
+              self.m.properties.get('android_sdk_preview_license',
+                                    ''), 'dependencies':
+                                        deps_list, 'task_name':
+                                            task_name
       }
       if self.m.properties.get('git_url'):
         drone_props['git_url'] = self.m.properties.get('git_url')
