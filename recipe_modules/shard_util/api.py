@@ -9,7 +9,7 @@ from recipe_engine import recipe_api
 # Builder names use full platform name instead of short names. We need to
 # map short names to full platform names to be able to identify the drone
 # used to run the subshards.
-PLATFORM_TO_NAME = {'win': 'Windows', 'linux': 'Linux', 'mac': 'mac'}
+PLATFORM_TO_NAME = {'win': 'Windows', 'linux': 'Linux', 'mac': 'Mac'}
 
 
 class ShardUtilApi(recipe_api.RecipeApi):
