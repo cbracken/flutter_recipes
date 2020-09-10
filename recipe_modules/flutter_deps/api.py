@@ -8,6 +8,34 @@ from recipe_engine import recipe_api
 class FlutterDepsApi(recipe_api.RecipeApi):
   """Utilities to install flutter build/test dependencies at runtime."""
 
+  def flutter_engine(self, env, env_prefixes):
+    """ Sets the local engine related information to environment variables.
+
+    If the drone is started to run the tests with a local engine, it will
+    contain an `isolated_hash` property where we can download engine files.
+
+    These files will be located under `host_debug_unopt` folder.
+    Args:
+
+      env(dict): Current environment variables.
+      env_prefixes(dict):  Current environment prefixes variables.
+    """
+    # No-op if `isolate_hash` property is empty.
+    if self.m.properties.get('isolated_hash'):
+      isolated_hash = self.m.properties.get('isolated_hash')
+      checkout_engine = self.m.path['cache'].join('builder', 'src', 'out')
+      # Download host_debug_unopt from the isolate.
+      self.m.isolated.download(
+        'Download for engine',
+        isolated_hash,
+        checkout_engine)
+      local_engine = checkout_engine.join('host_debug_unopt')
+      dart_bin = local_engine.join('dart-sdk','bin')
+      paths = env_prefixes.get('PATH', [])
+      paths.insert(0, dart_bin)
+      env_prefixes['PATH'] = paths
+      env['LOCAL_ENGINE'] = local_engine
+
   def required_deps(self, env, env_prefixes, deps):
     """Install all the required dependencies for a given builder.
 

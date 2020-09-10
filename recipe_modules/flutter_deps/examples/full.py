@@ -44,6 +44,7 @@ def RunSteps(api):
         env, env_prefixes, [{'dependency': 'does_not_exist'}]
     )
   api.flutter_deps.android_sdk(env, env_prefixes, '')
+  api.flutter_deps.flutter_engine(env, env_prefixes)
 
 
 def GenTests(api):
@@ -53,6 +54,11 @@ def GenTests(api):
       api.properties(
           dependencies=[{"dependency": "xcode"},
                         {'dependency': 'chrome_and_driver'}]
+      )
+  )
+  yield api.test('flutter_engine',
+      api.properties(
+          isolated_hash='abceqwe',
       )
   )
   yield api.test(

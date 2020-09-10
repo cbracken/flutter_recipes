@@ -11,14 +11,11 @@ import re
 DEPS = [
     'depot_tools/osx_sdk',
     'flutter/android_sdk',
-    'flutter/json_util',
     'flutter/repo_util',
     'flutter/flutter_deps',
     'flutter/os_utils',
     'recipe_engine/context',
-    'recipe_engine/isolated',
     'recipe_engine/path',
-    'recipe_engine/platform',
     'recipe_engine/properties',
     'recipe_engine/step',
 ]
@@ -26,14 +23,16 @@ DEPS = [
 
 def RunShard(api, env, env_prefixes, checkout_path):
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
+    cmd_list = ['dart', '--enable-asserts',
+                checkout_path.join('dev', 'bots', 'test.dart')]
+    if env.get('LOCAL_ENGINE'):
+      cmd_list.extend(['--local-engine', env.get('LOCAL_ENGINE')])
+
     api.step(
         'run test.dart for %s shard and subshard %s' %
-        (api.properties.get('shard'), api.properties.get('subshard')), [
-            'dart', '--enable-asserts',
-            checkout_path.join('dev', 'bots', 'test.dart')
-        ]
+        (api.properties.get('shard'), api.properties.get('subshard')),
+        cmd_list
     )
-
 
 def RunSteps(api):
   checkout_path = api.path['start_dir'].join('flutter')
@@ -44,16 +43,15 @@ def RunSteps(api):
       ref=api.properties.get('git_ref')
   )
 
-  if api.platform.is_linux:
-    # Validates flutter builders json format.
-    api.json_util.validate_json(checkout_path)
-
   env, env_prefixes = api.repo_util.flutter_environment(checkout_path)
   deps = api.properties.get('dependencies', [])
   api.flutter_deps.required_deps(env, env_prefixes, deps)
   # Add shard and subshard.
   env['SHARD'] = api.properties.get('shard')
   env['SUBSHARD'] = api.properties.get('subshard')
+  # Load local engine information if available.
+  api.flutter_deps.flutter_engine(env, env_prefixes)
+
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
     api.step('flutter doctor', ['flutter', 'doctor', '-v'])
     api.step('download dependencies', ['flutter', 'update-packages'])
@@ -77,6 +75,11 @@ def GenTests(api):
           android_sdk=True,
           android_sdk_preview_license='abc',
           android_sdk_license='cde'
+      )
+  )
+  yield api.test('web_engine', api.repo_util.flutter_environment_data(),
+      api.properties(
+          isolated_hash='abceqwe',
       )
   )
   yield api.test(
