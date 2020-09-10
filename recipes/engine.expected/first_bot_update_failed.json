@@ -379,6 +379,10 @@
     ]
   },
   {
+    "cmd": [],
+    "name": "validate luci builder json schemas"
+  },
+  {
     "cmd": [
       "[CACHE]/builder/src/flutter/ci/format.sh"
     ],

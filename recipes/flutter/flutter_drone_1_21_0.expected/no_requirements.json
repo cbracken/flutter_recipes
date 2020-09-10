@@ -89,6 +89,10 @@
   },
   {
     "cmd": [],
+    "name": "validate luci builder json schemas"
+  },
+  {
+    "cmd": [],
     "name": "Chrome and driver dependency"
   },
   {

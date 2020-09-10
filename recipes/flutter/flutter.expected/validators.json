@@ -112,6 +112,10 @@
   },
   {
     "cmd": [],
+    "name": "validate luci builder json schemas"
+  },
+  {
+    "cmd": [],
     "name": "prepare environment"
   },
   {

@@ -88,6 +88,10 @@
     "name": "submodule update"
   },
   {
+    "cmd": [],
+    "name": "validate luci builder json schemas"
+  },
+  {
     "cmd": [
       "python",
       "-u",

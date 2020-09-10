@@ -50,6 +50,10 @@
   },
   {
     "cmd": [],
+    "name": "validate luci builder json schemas"
+  },
+  {
+    "cmd": [],
     "name": "Checkout source code"
   },
   {

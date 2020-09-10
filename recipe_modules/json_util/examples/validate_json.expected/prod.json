@@ -1,5 +1,9 @@
 [
   {
+    "cmd": [],
+    "name": "validate luci builder json schemas"
+  },
+  {
     "cmd": [
       "vpython",
       "-u",
@@ -11,10 +15,31 @@
       "/path/to/tmp/"
     ],
     "infra_step": true,
-    "name": "validate prod json format",
+    "name": "validate luci builder json schemas.validate prod json format",
     "~followup_annotations": [
-      "@@@STEP_LOG_LINE@prod_builders.json@\"\"@@@",
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@prod_builders.json@{\"builders\": [{\"repo\": \"abc\", \"name\": \"def\"}]}@@@",
       "@@@STEP_LOG_END@prod_builders.json@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "echo",
+      "[{\"name\": \"def\", \"repo\": \"abc\"}]"
+    ],
+    "name": "validate luci builder json schemas.validate prod builders",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "echo",
+      "keys are valid"
+    ],
+    "name": "validate luci builder json schemas.validate prod builder keys",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {

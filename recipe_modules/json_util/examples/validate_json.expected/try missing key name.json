@@ -1,0 +1,73 @@
+[
+  {
+    "cmd": [],
+    "name": "validate luci builder json schemas",
+    "~followup_annotations": [
+      "@@@STEP_EXCEPTION@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CACHE]/dev/try_builders.json",
+      "/path/to/tmp/"
+    ],
+    "infra_step": true,
+    "name": "validate luci builder json schemas.validate try json format",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@try_builders.json@{\"builders\": [{\"repo\": \"abc\"}]}@@@",
+      "@@@STEP_LOG_END@try_builders.json@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "echo",
+      "[{\"repo\": \"abc\"}]"
+    ],
+    "name": "validate luci builder json schemas.validate try builders",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "RECIPE CRASH (Uncaught exception)",
+    "~followup_annotations": [
+      "@@@STEP_EXCEPTION@@@",
+      "The recipe has crashed at point 'Uncaught exception'!",
+      "",
+      "Traceback (most recent call last):",
+      "  File \"RECIPE_REPO[recipe_engine]/recipe_engine/internal/engine.py\", in run_steps",
+      "    raw_result = recipe_obj.run_steps(api, engine)",
+      "  File \"RECIPE_REPO[recipe_engine]/recipe_engine/internal/recipe_deps.py\", in run_steps",
+      "    properties_def, api=api)",
+      "  File \"RECIPE_REPO[recipe_engine]/recipe_engine/internal/property_invoker.py\", in invoke_with_properties",
+      "    arg_names, **additional_args)",
+      "  File \"RECIPE_REPO[recipe_engine]/recipe_engine/internal/property_invoker.py\", in _invoke_with_properties",
+      "    return callable_obj(*props, **additional_args)",
+      "  File \"RECIPE_REPO[flutter]/recipe_modules/json_util/examples/validate_json.py\", line 14, in RunSteps",
+      "    api.json_util.validate_json(api.path['cache'])",
+      "  File \"RECIPE_REPO[recipe_engine]/recipe_engine/recipe_api.py\", in _inner",
+      "    return func(*a, **kw)",
+      "  File \"RECIPE_REPO[flutter]/recipe_modules/json_util/api.py\", line 22, in validate_json",
+      "    self.validate_builder_schema('try', try_json_data)",
+      "  File \"RECIPE_REPO[recipe_engine]/recipe_engine/recipe_api.py\", in _inner",
+      "    return func(*a, **kw)",
+      "  File \"RECIPE_REPO[flutter]/recipe_modules/json_util/api.py\", line 79, in validate_builder_schema",
+      "    self.m.json.dumps(builder))",
+      "ValueError: Missing key: name in builder: {\"repo\": \"abc\"}"
+    ]
+  },
+  {
+    "failure": {
+      "humanReason": "Uncaught Exception: ValueError('Missing key: name in builder: {\"repo\": \"abc\"}',)"
+    },
+    "name": "$result"
+  }
+]
