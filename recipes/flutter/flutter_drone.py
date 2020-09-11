@@ -23,16 +23,18 @@ DEPS = [
 
 def RunShard(api, env, env_prefixes, checkout_path):
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
-    cmd_list = ['dart', '--enable-asserts',
-                checkout_path.join('dev', 'bots', 'test.dart')]
+    cmd_list = [
+        'dart', '--enable-asserts',
+        checkout_path.join('dev', 'bots', 'test.dart')
+    ]
     if env.get('LOCAL_ENGINE'):
       cmd_list.extend(['--local-engine', env.get('LOCAL_ENGINE')])
 
     api.step(
         'run test.dart for %s shard and subshard %s' %
-        (api.properties.get('shard'), api.properties.get('subshard')),
-        cmd_list
+        (api.properties.get('shard'), api.properties.get('subshard')), cmd_list
     )
+
 
 def RunSteps(api):
   checkout_path = api.path['start_dir'].join('flutter')
@@ -58,6 +60,7 @@ def RunSteps(api):
     dep_list = [d['dependency'] for d in deps]
     if 'xcode' in dep_list:
       with api.osx_sdk('ios'):
+        api.flutter_deps.swift()
         RunShard(api, env, env_prefixes, checkout_path)
     else:
       RunShard(api, env, env_prefixes, checkout_path)
@@ -77,10 +80,9 @@ def GenTests(api):
           android_sdk_license='cde'
       )
   )
-  yield api.test('web_engine', api.repo_util.flutter_environment_data(),
-      api.properties(
-          isolated_hash='abceqwe',
-      )
+  yield api.test(
+      'web_engine', api.repo_util.flutter_environment_data(),
+      api.properties(isolated_hash='abceqwe',)
   )
   yield api.test(
       'xcode', api.repo_util.flutter_environment_data(),

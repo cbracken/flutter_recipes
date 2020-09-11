@@ -45,6 +45,7 @@ def RunSteps(api):
     )
   api.flutter_deps.android_sdk(env, env_prefixes, '')
   api.flutter_deps.flutter_engine(env, env_prefixes)
+  api.flutter_deps.swift()
 
 
 def GenTests(api):
@@ -54,13 +55,17 @@ def GenTests(api):
       api.properties(
           dependencies=[{"dependency": "xcode"},
                         {'dependency': 'chrome_and_driver'}]
+      ),
+      api.path.exists(
+          api.path['cache'].join(
+              'osx_sdk/XCode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift'
+          ),
+          api.path['cache'].join(
+              'osx_sdk/XCode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0'
+          ),
       )
   )
-  yield api.test('flutter_engine',
-      api.properties(
-          isolated_hash='abceqwe',
-      )
-  )
+  yield api.test('flutter_engine', api.properties(isolated_hash='abceqwe',))
   yield api.test(
       'goldTryjob',
       api.properties(gold_tryjob=True, git_ref='refs/pull/1/head')

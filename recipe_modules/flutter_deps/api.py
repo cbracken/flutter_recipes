@@ -26,11 +26,10 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       checkout_engine = self.m.path['cache'].join('builder', 'src', 'out')
       # Download host_debug_unopt from the isolate.
       self.m.isolated.download(
-        'Download for engine',
-        isolated_hash,
-        checkout_engine)
+          'Download for engine', isolated_hash, checkout_engine
+      )
       local_engine = checkout_engine.join('host_debug_unopt')
-      dart_bin = local_engine.join('dart-sdk','bin')
+      dart_bin = local_engine.join('dart-sdk', 'bin')
       paths = env_prefixes.get('PATH', [])
       paths.insert(0, dart_bin)
       env_prefixes['PATH'] = paths
@@ -179,3 +178,29 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     version = version or '29.0.2'
     root_path = self.m.path['cache'].join('android')
     self.m.android_sdk.install(root_path, env, env_prefixes)
+
+  def swift(self):
+    """Installs apple swift.
+
+    Xcode cipd packages do not include swift which is required for some sdk tests.
+    """
+    swift_path = self.m.path['cleanup'].join('swift')
+    swift = self.m.cipd.EnsureFile()
+    swift.add_package('flutter_internal/mac/swift/${platform}', 'latest')
+    dst = self.m.path['cache'].join(
+        'osx_sdk', 'XCode.app', 'Contents', 'Developer', 'Toolchains',
+        'XcodeDefault.xctoolchain', 'usr', 'lib'
+    )
+    with self.m.step.nest('Swift deps'):
+      self.m.cipd.ensure(swift_path, swift)
+      if self.m.path.exists(dst.join('swift')):
+        self.m.file.rmtree('Delete swift', dst.join('swift'))
+      self.m.file.copytree(
+          'Copy swift', swift_path.join('swift'), dst.join('swift')
+      )
+      if self.m.path.exists(dst.join('swift-5.0')):
+        self.m.file.rmtree('Delete swift-5.0', dst.join('swift-5.0'))
+      self.m.file.copytree(
+          'Copy swift-5.0', swift_path.join('swift-5.0'), dst.join('swift-5.0')
+      )
+      self.m.file.listdir('List directory', dst)
