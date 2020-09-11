@@ -23,21 +23,8 @@
     ]
   },
   {
-    "cmd": [
-      "echo",
-      "[{\"name\": \"def\", \"repo\": \"abc\"}]"
-    ],
+    "cmd": [],
     "name": "validate luci builder json schemas.validate prod builders",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "echo",
-      "keys are valid"
-    ],
-    "name": "validate luci builder json schemas.validate prod builder keys",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]

@@ -18,12 +18,14 @@ class JsonUtilApi(recipe_api.RecipeApi):
       try_json_file = dev_path.join('dev', 'try_builders.json')
       if self.m.path.exists(try_json_file):
         try_json_data = self.m.file.read_json(
-          'validate try json format', try_json_file)
+            'validate try json format', try_json_file
+        )
         self.validate_builder_schema('try', try_json_data)
       prod_json_file = dev_path.join('dev', 'prod_builders.json')
       if self.m.path.exists(prod_json_file):
         prod_json_data = self.m.file.read_json(
-          'validate prod json format', prod_json_file)
+            'validate prod json format', prod_json_file
+        )
         self.validate_builder_schema('prod', prod_json_data)
 
   def validate_builder_schema(self, bucket, json_data):
@@ -57,25 +59,28 @@ class JsonUtilApi(recipe_api.RecipeApi):
         }
     """
     supported_builder_keys = {
-      'try': ['repo', 'name', 'enabled', 'run_if', 'task_name'],
-      'prod': ['repo', 'name', 'task_name', 'flaky']
+        'try': ['repo', 'name', 'enabled', 'run_if', 'task_name'],
+        'prod': ['repo', 'name', 'task_name', 'flaky']
     }
 
     builders = json_data['builders']
-    self.m.step('validate %s builders' %
-      bucket, ['echo', self.m.json.dumps(builders)])
-    for builder in builders:
-      builder_keys_flag = {key: False for key in supported_builder_keys[bucket]}
-      for key in builder.keys():
-        if key not in supported_builder_keys[bucket]:
-          raise ValueError('Unsupported key: %s in builder: %s' % (
-            key, self.m.json.dumps(builder)))
-        builder_keys_flag[key] = True
-      if not builder_keys_flag['repo']:
-        raise ValueError('Missing key: repo in builder: %s' %
-          self.m.json.dumps(builder))
-      if not builder_keys_flag['name']:
-        raise ValueError('Missing key: name in builder: %s' %
-          self.m.json.dumps(builder))
-    self.m.step('validate %s builder keys' %
-      bucket, ['echo', 'keys are valid'])
+    with self.m.step.nest('validate %s builders' % bucket):
+      for builder in builders:
+        builder_keys_flag = {
+            key: False for key in supported_builder_keys[bucket]
+        }
+        for key in builder.keys():
+          if key not in supported_builder_keys[bucket]:
+            raise ValueError(
+                'Unsupported key: %s in builder: %s' %
+                (key, self.m.json.dumps(builder))
+            )
+          builder_keys_flag[key] = True
+        if not builder_keys_flag['repo']:
+          raise ValueError(
+              'Missing key: repo in builder: %s' % self.m.json.dumps(builder)
+          )
+        if not builder_keys_flag['name']:
+          raise ValueError(
+              'Missing key: name in builder: %s' % self.m.json.dumps(builder)
+          )
