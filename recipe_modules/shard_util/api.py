@@ -39,6 +39,12 @@ class ShardUtilApi(recipe_api.RecipeApi):
         drone_props['git_url'] = self.m.properties.get('git_url')
       if self.m.properties.get('git_ref'):
         drone_props['git_ref'] = self.m.properties.get('git_ref')
+      if self.m.properties.get('$depot_tools/osx_sdk'):
+        drone_props['$depot_tools/osx_sdk'] = {
+            "sdk_version":
+                self.m.properties.get('$depot_tools/osx_sdk'
+                                     ).get('sdk_version')
+        }
       platform_name = PLATFORM_TO_NAME.get(self.m.platform.name)
       req = self.m.buildbucket.schedule_request(
           swarming_parent_run_id=self.m.swarming.task_id,

@@ -21,13 +21,12 @@ def GenTests(api):
       'postsubmit', api.properties(subshards=['0', '1_last']),
       api.platform.name('win')
   )
+  props = {
+      'subshards': ['0', '1_last'], 'git_url': 'https://abc', 'git_ref': 'abc',
+      'dependencies': [{"dependency": "android_sdk"},
+                       {"dependency": "chrome_and_driver"}],
+      '$depot_tools/osx_sdk': {"sdk_version": "11a420a"}
+  }
   yield api.test(
-      'presubmit',
-      api.properties(
-          subshards=['0', '1_last'],
-          git_url='https://abc',
-          git_ref='abc',
-          dependencies=[{"dependency": "android_sdk"},
-                        {"dependency": "chrome_and_driver"}]
-      ), api.platform.name('linux')
+      'presubmit', api.properties(**props), api.platform.name('linux')
   )
