@@ -535,6 +535,23 @@
     "name": "analyze flutter.py"
   },
   {
+    "cmd": [
+      "git",
+      "diff-tree",
+      "--no-commit-id",
+      "--diff-filter=d",
+      "-U0",
+      "HEAD"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "name": "analyze flutter.py.get changed files",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@ranges_of_changed_files@{'flutter.py': [Range(start=1, end=5)]}@@@",
+      "@@@STEP_LOG_END@ranges_of_changed_files@@@"
+    ]
+  },
+  {
     "cmd": [],
     "name": "analyze flutter.py.yapf",
     "~followup_annotations": [
@@ -811,6 +828,13 @@
       "@@@STEP_LOG_LINE@json.output@  }, @@@",
       "@@@STEP_LOG_LINE@json.output@  {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"x64\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"label\": \"//tools/buildstats\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"name\": \"buildstats\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"os\": \"linux\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"path\": \"linux_x64/buildstats\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"x64\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"label\": \"//tools/cmc\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"name\": \"cmc\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"os\": \"linux\", @@@",
@@ -892,6 +916,13 @@
       "@@@STEP_LOG_LINE@json.output@    \"name\": \"testsharder\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"os\": \"linux\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"path\": \"linux_x64/testsharder\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"x64\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"label\": \"//tools/triage\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"name\": \"triage\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"os\": \"linux\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"path\": \"linux_x64/triage\"@@@",
       "@@@STEP_LOG_LINE@json.output@  }, @@@",
       "@@@STEP_LOG_LINE@json.output@  {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"x64\", @@@",
@@ -1119,6 +1150,13 @@
       "@@@STEP_LOG_LINE@json.output@  }, @@@",
       "@@@STEP_LOG_LINE@json.output@  {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"arm64\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"label\": \"//tools/buildstats\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"name\": \"buildstats\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"os\": \"linux\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"path\": \"linux_arm64/buildstats\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"arm64\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"label\": \"//tools/cmc\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"name\": \"cmc\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"os\": \"linux\", @@@",
@@ -1200,6 +1238,13 @@
       "@@@STEP_LOG_LINE@json.output@    \"name\": \"testsharder\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"os\": \"linux\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"path\": \"linux_arm64/testsharder\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"arm64\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"label\": \"//tools/triage\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"name\": \"triage\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"os\": \"linux\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"path\": \"linux_arm64/triage\"@@@",
       "@@@STEP_LOG_LINE@json.output@  }, @@@",
       "@@@STEP_LOG_LINE@json.output@  {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"arm64\", @@@",
@@ -1427,6 +1472,13 @@
       "@@@STEP_LOG_LINE@json.output@  }, @@@",
       "@@@STEP_LOG_LINE@json.output@  {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"x64\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"label\": \"//tools/buildstats\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"name\": \"buildstats\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"os\": \"mac\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"path\": \"mac_x64/buildstats\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"x64\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"label\": \"//tools/cmc\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"name\": \"cmc\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"os\": \"mac\", @@@",
@@ -1508,6 +1560,13 @@
       "@@@STEP_LOG_LINE@json.output@    \"name\": \"testsharder\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"os\": \"mac\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"path\": \"mac_x64/testsharder\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"x64\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"label\": \"//tools/triage\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"name\": \"triage\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"os\": \"mac\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"path\": \"mac_x64/triage\"@@@",
       "@@@STEP_LOG_LINE@json.output@  }, @@@",
       "@@@STEP_LOG_LINE@json.output@  {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"x64\", @@@",
@@ -1735,6 +1794,13 @@
       "@@@STEP_LOG_LINE@json.output@  }, @@@",
       "@@@STEP_LOG_LINE@json.output@  {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"arm64\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"label\": \"//tools/buildstats\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"name\": \"buildstats\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"os\": \"mac\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"path\": \"mac_arm64/buildstats\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"arm64\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"label\": \"//tools/cmc\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"name\": \"cmc\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"os\": \"mac\", @@@",
@@ -1819,6 +1885,13 @@
       "@@@STEP_LOG_LINE@json.output@  }, @@@",
       "@@@STEP_LOG_LINE@json.output@  {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"arm64\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"label\": \"//tools/triage\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"name\": \"triage\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"os\": \"mac\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"path\": \"mac_arm64/triage\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"cpu\": \"arm64\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"label\": \"//tools/perfcompare\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"name\": \"perfcompare\", @@@",
       "@@@STEP_LOG_LINE@json.output@    \"os\": \"mac\", @@@",
@@ -1843,13 +1916,18 @@
   {
     "cmd": [
       "git",
-      "diff",
-      "--name-only"
+      "diff-index",
+      "--no-commit-id",
+      "--diff-filter=d",
+      "-U0",
+      "HEAD"
     ],
     "cwd": "[START_DIR]/recipes",
-    "name": "analyze flutter.py.check file formatting",
+    "name": "analyze flutter.py.get formatted files",
     "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@ranges_of_formatted_files@{'flutter.py': [Range(start=1, end=3)]}@@@",
+      "@@@STEP_LOG_END@ranges_of_formatted_files@@@"
     ]
   },
   {
@@ -1869,7 +1947,7 @@
     "cmd": [],
     "name": "write results",
     "~followup_annotations": [
-      "@@@SET_BUILD_PROPERTY@tricium@\"{\\n  \\\"comments\\\": [\\n    {\\n      \\\"category\\\": \\\"Format/YAPF\\\", \\n      \\\"path\\\": \\\"BUILD.gn\\\", \\n      \\\"message\\\": \\\"File not formatted properly.\\\\nRun the following to format:\\\\n\\\\nfx format-code --files=BUILD.gn\\\"\\n    }\\n  ]\\n}\"@@@"
+      "@@@SET_BUILD_PROPERTY@tricium@\"{\\n  \\\"comments\\\": [\\n    {\\n      \\\"category\\\": \\\"Format/YAPF\\\", \\n      \\\"path\\\": \\\"flutter.py\\\", \\n      \\\"message\\\": \\\"File not formatted properly.\\\\nRun the following to format:\\\\n\\\\nfx format-code --files=flutter.py\\\"\\n    }\\n  ]\\n}\"@@@"
     ]
   },
   {

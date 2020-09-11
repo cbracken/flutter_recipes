@@ -569,6 +569,23 @@
     "name": "analyze flutter.py"
   },
   {
+    "cmd": [
+      "git",
+      "diff-tree",
+      "--no-commit-id",
+      "--diff-filter=d",
+      "-U0",
+      "HEAD"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "name": "analyze flutter.py.get changed files",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@ranges_of_changed_files@{'flutter.py': [Range(start=1, end=5)]}@@@",
+      "@@@STEP_LOG_END@ranges_of_changed_files@@@"
+    ]
+  },
+  {
     "cmd": [],
     "name": "analyze flutter.py.yapf",
     "~followup_annotations": [
@@ -590,13 +607,18 @@
   {
     "cmd": [
       "git",
-      "diff",
-      "--name-only"
+      "diff-index",
+      "--no-commit-id",
+      "--diff-filter=d",
+      "-U0",
+      "HEAD"
     ],
     "cwd": "[START_DIR]/recipes",
-    "name": "analyze flutter.py.check file formatting",
+    "name": "analyze flutter.py.get formatted files",
     "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@ranges_of_formatted_files@{'flutter.py': [Range(start=1, end=3)]}@@@",
+      "@@@STEP_LOG_END@ranges_of_formatted_files@@@"
     ]
   },
   {

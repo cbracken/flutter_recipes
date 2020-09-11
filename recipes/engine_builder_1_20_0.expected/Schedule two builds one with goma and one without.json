@@ -656,6 +656,7 @@
       ]
     },
     "name": "build host_debug_unopt ().postprocess_for_goma.upload_log",
+    "timeout": 300,
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
