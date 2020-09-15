@@ -242,6 +242,6 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         self.m.step('install gems', ['bundler', 'install'])
       # Update envs to the final destination.
       self.m.file.listdir('list bundle', gem_dir, recursive=True)
-      env['GEM_HOME'] = gem_dir.join('ruby', '2.3.0')
-      paths.append(gem_dir.join('ruby', '2.3.0', 'bin'))
+      env['GEM_HOME'] = gem_dir.join('ruby', '2.6.0')
+      paths.append(gem_dir.join('ruby', '2.6.0', 'bin'))
       env_prefixes['PATH'] = paths
