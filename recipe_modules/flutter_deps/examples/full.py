@@ -20,9 +20,6 @@ def RunSteps(api):
   api.assertions.assertTrue(env.get('JAVA_HOME'))
   api.flutter_deps.goldctl(env, env_prefixes, 'v2')
   api.assertions.assertTrue(env.get('GOLDCTL'))
-  #api.assertions.assertEqual(
-  #    env_prefixes.get('PATH'), [api.path['cache'].join('java', 'bin')]
-  #)
   env_prefixes = {}
   env = {}
   api.flutter_deps.chrome_and_driver(env, env_prefixes, 'v3')
@@ -46,10 +43,15 @@ def RunSteps(api):
   api.flutter_deps.android_sdk(env, env_prefixes, '')
   api.flutter_deps.flutter_engine(env, env_prefixes)
   api.flutter_deps.swift()
+  gems_dir = api.path['start_dir'].join('dev', 'ci', 'mac')
+  api.flutter_deps.gems(env, env_prefixes, gems_dir)
 
 
 def GenTests(api):
   yield api.test('basic')
+  yield api.test(
+      'with-gems', api.properties(dependencies=[{"dependency": "gems"}])
+  )
   yield api.test(
       'mac', api.platform('mac', 64),
       api.properties(

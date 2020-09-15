@@ -90,17 +90,17 @@ class RepoUtilApi(recipe_api.RecipeApi):
     """
     if name not in REPOS:
       raise ValueError('Unsupported repo: %s' % name)
-
-    git_url = url or REPOS[name]
-    git_ref = ref or self.m.buildbucket.gitiles_commit.ref
-    return self.m.git.checkout(
-        git_url,
-        dir_path=checkout_path,
-        ref=git_ref,
-        recursive=True,
-        set_got_revision=True,
-        tags=True
-    )
+    with self.m.step.nest('Checkout flutter/%s' % name):
+      git_url = url or REPOS[name]
+      git_ref = ref or self.m.buildbucket.gitiles_commit.ref
+      return self.m.git.checkout(
+          git_url,
+          dir_path=checkout_path,
+          ref=git_ref,
+          recursive=True,
+          set_got_revision=True,
+          tags=True
+      )
 
   def flutter_environment(self, checkout_path):
     """Returns env and env_prefixes of an flutter/dart command environment."""

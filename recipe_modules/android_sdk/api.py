@@ -58,6 +58,7 @@ class AndroidSdkApi(recipe_api.RecipeApi):
 
     # Setup environment variables
     env['ANDROID_SDK_ROOT'] = sdk_root
+    env['ANDROID_HOME'] = sdk_root
     paths = env_prefixes.get('PATH', [])
     paths.append(sdk_root.join('platform-tools'))
     paths.append(sdk_root.join('tools'))

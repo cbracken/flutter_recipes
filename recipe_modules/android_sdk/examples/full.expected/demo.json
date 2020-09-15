@@ -155,6 +155,7 @@
       "-l"
     ],
     "env": {
+      "ANDROID_HOME": "[CACHE]/android29",
       "ANDROID_SDK_ROOT": "[CACHE]/android29"
     },
     "env_prefixes": {

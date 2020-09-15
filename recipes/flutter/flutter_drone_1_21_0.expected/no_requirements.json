@@ -1,5 +1,9 @@
 [
   {
+    "cmd": [],
+    "name": "Checkout flutter/flutter"
+  },
+  {
     "cmd": [
       "python",
       "-u",
@@ -9,7 +13,10 @@
       "--url",
       "https://chromium.googlesource.com/external/github.com/flutter/flutter"
     ],
-    "name": "git setup"
+    "name": "Checkout flutter/flutter.git setup",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
@@ -26,7 +33,10 @@
       "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
     },
     "infra_step": true,
-    "name": "git fetch"
+    "name": "Checkout flutter/flutter.git fetch",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
@@ -37,7 +47,10 @@
     ],
     "cwd": "[START_DIR]/flutter",
     "infra_step": true,
-    "name": "git checkout"
+    "name": "Checkout flutter/flutter.git checkout",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
@@ -47,8 +60,9 @@
     ],
     "cwd": "[START_DIR]/flutter",
     "infra_step": true,
-    "name": "read revision",
+    "name": "Checkout flutter/flutter.read revision",
     "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_TEXT@<br/>checked out 'deadbeef'<br/>@@@",
       "@@@SET_BUILD_PROPERTY@got_revision@\"deadbeef\"@@@"
     ]
@@ -63,7 +77,10 @@
     ],
     "cwd": "[START_DIR]/flutter",
     "infra_step": true,
-    "name": "git clean"
+    "name": "Checkout flutter/flutter.git clean",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
@@ -73,7 +90,10 @@
     ],
     "cwd": "[START_DIR]/flutter",
     "infra_step": true,
-    "name": "submodule sync"
+    "name": "Checkout flutter/flutter.submodule sync",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [
@@ -85,7 +105,10 @@
     ],
     "cwd": "[START_DIR]/flutter",
     "infra_step": true,
-    "name": "submodule update"
+    "name": "Checkout flutter/flutter.submodule update",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "cmd": [],
@@ -375,6 +398,7 @@
     ],
     "cwd": "[START_DIR]/flutter",
     "env": {
+      "ANDROID_HOME": "[CACHE]/android",
       "ANDROID_SDK_ROOT": "[CACHE]/android",
       "CHROME_EXECUTABLE": "[CACHE]/chrome/chrome/chrome",
       "CHROME_NO_SANDBOX": "true",
@@ -405,6 +429,7 @@
     ],
     "cwd": "[START_DIR]/flutter",
     "env": {
+      "ANDROID_HOME": "[CACHE]/android",
       "ANDROID_SDK_ROOT": "[CACHE]/android",
       "CHROME_EXECUTABLE": "[CACHE]/chrome/chrome/chrome",
       "CHROME_NO_SANDBOX": "true",
@@ -435,6 +460,7 @@
     ],
     "cwd": "[START_DIR]/flutter",
     "env": {
+      "ANDROID_HOME": "[CACHE]/android",
       "ANDROID_SDK_ROOT": "[CACHE]/android",
       "CHROME_EXECUTABLE": "[CACHE]/chrome/chrome/chrome",
       "CHROME_NO_SANDBOX": "true",

@@ -25,7 +25,8 @@ def GenTests(api):
       'subshards': ['0', '1_last'], 'git_url': 'https://abc', 'git_ref': 'abc',
       'dependencies': [{"dependency": "android_sdk"},
                        {"dependency": "chrome_and_driver"}],
-      '$depot_tools/osx_sdk': {"sdk_version": "11a420a"}
+      '$depot_tools/osx_sdk': {"sdk_version": "11a420a"},
+      'gems': [["cocoapods", "1.6.0"]]
   }
   yield api.test(
       'presubmit', api.properties(**props), api.platform.name('linux')

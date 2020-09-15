@@ -2,6 +2,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+import copy
 from recipe_engine import recipe_api
 
 
@@ -52,7 +53,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         'android_sdk': self.android_sdk
     }
     for dep in deps:
-      if dep.get('dependency') == 'xcode':
+      if dep.get('dependency') in ['xcode', 'gems']:
         continue
       dep_funct = available_deps.get(dep.get('dependency'))
       if not dep_funct:
@@ -204,3 +205,43 @@ class FlutterDepsApi(recipe_api.RecipeApi):
           'Copy swift-5.0', swift_path.join('swift-5.0'), dst.join('swift-5.0')
       )
       self.m.file.listdir('List directory', dst)
+
+  def gems(self, env, env_prefixes, gemfile_dir):
+    """Installs android sdk.
+
+    Args:
+      env(dict): Current environment variables.
+      env_prefixes(dict):  Current environment prefixes variables.
+      gemfile_dir(Path): The path to the location of the repository gemfile.
+    """
+    deps_list = self.m.properties.get('dependencies', [])
+    deps = [d['dependency'] for d in deps_list]
+    if 'gems' not in deps:
+      # Noop if gems property is not set.
+      return
+
+    gem_file = self.m.path['start_dir'].join('flutter', 'flutter')
+    gem_dir = self.m.path['start_dir'].join('gems')
+    with self.m.step.nest('Install gems'):
+      self.m.file.ensure_directory('mkdir gems', gem_dir)
+      # Temporarily install bundler
+      with self.m.context(cwd=gem_dir):
+        self.m.step(
+            'install bundler',
+            ['gem', 'install', 'bundler', '--install-dir', '.']
+        )
+      env['GEM_HOME'] = gem_dir
+      paths = env_prefixes.get('PATH', [])
+      temp_paths = copy.deepcopy(paths)
+      temp_paths.append(gem_dir.join('bin'))
+      env_prefixes['PATH'] = temp_paths
+      with self.m.context(env=env, env_prefixes=env_prefixes, cwd=gemfile_dir):
+        self.m.step(
+            'set gems path', ['bundle', 'config', 'set', 'path', gem_dir]
+        )
+        self.m.step('install gems', ['bundler', 'install'])
+      # Update envs to the final destination.
+      self.m.file.listdir('list bundle', gem_dir, recursive=True)
+      env['GEM_HOME'] = gem_dir.join('ruby', '2.3.0')
+      paths.append(gem_dir.join('ruby', '2.3.0', 'bin'))
+      env_prefixes['PATH'] = paths

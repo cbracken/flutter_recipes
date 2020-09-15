@@ -61,6 +61,9 @@ def RunSteps(api):
     if 'xcode' in dep_list:
       with api.osx_sdk('ios'):
         api.flutter_deps.swift()
+        api.flutter_deps.gems(
+            env, env_prefixes, checkout_path.join('dev', 'ci', 'mac')
+        )
         RunShard(api, env, env_prefixes, checkout_path)
     else:
       RunShard(api, env, env_prefixes, checkout_path)
