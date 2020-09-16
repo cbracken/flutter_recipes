@@ -35,7 +35,7 @@ class AddhocValidationApi(recipe_api.RecipeApi):
       resource_name = ''
       env = {}
       self.m.kms.decrypt_secrets(env, secrets)
-      if self.m.platform.is_linux:
+      if self.m.platform.is_linux or self.m.platform.is_mac:
         resource_name = self.resource('%s.sh' % validation)
         self.m.step('Set execute permission', ['chmod', '755', resource_name])
       if self.m.platform.is_win:
