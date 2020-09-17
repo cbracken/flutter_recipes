@@ -214,6 +214,11 @@ def RunSteps(api, properties, env_properties):
       if api.platform.is_mac:
         chrome_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
                                        'chrome', '768985')
+        additional_args_safari_desktop = ['--browser', 'safari']
+        felt_test_safari_desktop = copy.deepcopy(felt_cmd)
+        felt_test_safari_desktop.append('test')
+        felt_test_safari_desktop.extend(additional_args_safari_desktop)
+        api.step('felt test safari desktop', felt_test_safari_desktop)
       if api.platform.is_linux:
         web_engine_analysis_cmd = [
             checkout.join('flutter', 'lib', 'web_ui', 'dev', 'web_engine_analysis.sh'),
