@@ -47,6 +47,9 @@ message InputProperties {
   bool force_upload = 25;
   bool build_android_jit_release = 26;
   bool no_lto = 27;
+
+  // CIPD tag for fuchsia/vdl/...
+  string vdl_version = 28;
 }
 
 message EnvProperties {

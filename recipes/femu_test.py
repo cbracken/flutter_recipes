@@ -103,7 +103,8 @@ def IsolateSymlink(api):
     )
 
   def addVDLFiles():
-    api.vdl.set_vdl_cipd_tag(tag="g3-revision:vdl_fuchsia_20200824_RC00")
+    vdl_version = api.properties.get('vdl_version', 'g3-revision:vdl_fuchsia_20200917_RC00')
+    api.vdl.set_vdl_cipd_tag(tag=str(vdl_version))
     add(api.vdl.vdl_path, 'device_launcher')
     add(api.vdl.aemu_dir, 'aemu')
     add(api.vdl.create_device_proto(), 'virtual_device.textproto')
@@ -111,7 +112,6 @@ def IsolateSymlink(api):
   def addPackageFiles():
     fuchsia_packages = api.vdl.get_package_paths(sdk_version=sdk_version)
     add(fuchsia_packages.pm, api.path.basename(fuchsia_packages.pm))
-    add(fuchsia_packages.tar_file, "package_archive")
     add(fuchsia_packages.amber_files,
         api.path.basename(fuchsia_packages.amber_files))
 
@@ -197,13 +197,12 @@ def TestFuchsiaFEMU(api):
   cmd.append('--resize_fvm=2G')
   cmd.append('--gpu=swiftshader_indirect')
   cmd.append('--headless_mode=true')
-  cmd.append('--xvfb=false')
   cmd.append('--enable_grpc_server=false')
   cmd.append('--enable_grpc_tls=false')
   cmd.append(
       '--system_images=' \
       '{build_args},{kernel},{fvm},{zircona},{ssh_config},{ssh_id_public},' \
-      '{ssh_id_private},{package_archive}' \
+      '{ssh_id_private},{amber_files}' \
       .format(
           build_args='qemu_buildargs',
           kernel='qemu_kernel',
@@ -212,7 +211,7 @@ def TestFuchsiaFEMU(api):
           ssh_config='ssh_config',
           ssh_id_public='id_ed25519.pub',
           ssh_id_private='id_ed25519',
-          package_archive='package_archive',
+          amber_files='amber-files',
       ))
 
   with api.context(cwd=root_dir):
@@ -362,6 +361,7 @@ def GenTests(api):
               test_fuchsia=True,
               git_url='https://github.com/flutter/engine',
               git_ref='refs/pull/1/head',
+              vdl_version='g3-revision:vdl_fuchsia_xxxxxxxx_RC00',
           ),),
       api.step_data(
           'Read manifest',

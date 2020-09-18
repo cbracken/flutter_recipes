@@ -557,7 +557,7 @@
       "-root",
       "[CACHE]/builder/vdl",
       "-ensure-file",
-      "fuchsia/vdl/${platform} g3-revision:vdl_fuchsia_20200824_RC00",
+      "fuchsia/vdl/${platform} g3-revision:vdl_fuchsia_xxxxxxxx_RC00",
       "-max-threads",
       "0",
       "-json-output",
