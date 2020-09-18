@@ -634,7 +634,6 @@
       "8945511751514863184",
       "--builder-id-json",
       "{\"bucket\": \"ci\", \"builder\": \"Linux Drone\", \"project\": \"flutter\"}",
-      "--is-luci",
       "--buildbot-buildername",
       "Linux Drone",
       "--buildbot-mastername",
