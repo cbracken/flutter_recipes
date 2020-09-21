@@ -49,6 +49,13 @@ class AndroidSdkApi(recipe_api.RecipeApi):
           ),
       )
       self.m.cipd.ensure(
+          sdk_root.join('ndk-bundle'),
+          self.m.cipd.EnsureFile().add_package(
+              'flutter/android/ndk/${platform}',
+              'version:21.3.6528147',
+          ),
+      )
+      self.m.cipd.ensure(
           sdk_root.join('licenses'),
           self.m.cipd.EnsureFile().add_package(
               'flutter_internal/android/sdk/licenses',

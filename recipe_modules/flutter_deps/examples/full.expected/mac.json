@@ -452,6 +452,35 @@
       "cipd",
       "ensure",
       "-root",
+      "[CACHE]/android/ndk-bundle",
+      "-ensure-file",
+      "flutter/android/ndk/${platform} version:21.3.6528147",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "name": "download Android SDK components.ensure_installed (5)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-version:21.3.652\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"flutter/android/ndk/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
       "[CACHE]/android/licenses",
       "-ensure-file",
       "flutter_internal/android/sdk/licenses latest",
@@ -460,7 +489,7 @@
       "-json-output",
       "/path/to/tmp/json"
     ],
-    "name": "download Android SDK components.ensure_installed (5)",
+    "name": "download Android SDK components.ensure_installed (6)",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
