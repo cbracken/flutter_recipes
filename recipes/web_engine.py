@@ -15,7 +15,6 @@ DEPS = [
     'depot_tools/bot_update',
     'depot_tools/depot_tools',
     'depot_tools/gclient',
-    'depot_tools/git',
     'depot_tools/gsutil',
     'depot_tools/osx_sdk',
     'flutter/json_util',
@@ -129,61 +128,6 @@ def DownloadChromeAndDriver(api, chrome_path_84):
       'flutter_internal/browser-drivers/chromedriver-linux', 'latest')
   api.cipd.ensure(chrome_driver_82_path, chrome_pkgdriver_82)
 
-def CloneGoldens(api):
-  cache_root = api.path['cache'].join('builder')
-  goldens = cache_root.join('goldens')
-  api.file.ensure_directory('mkdir goldens', goldens)
-  checkout = GetCheckoutPath(api)
-  golden_yaml_file = checkout.join('flutter', 'lib', 'web_ui', 'dev',
-                                   'goldens_lock.yaml')
-  with api.context(cwd=cache_root):
-    # Use golden_lock.yaml file to read url of the goldens repository and
-    # the revision number to checkout.
-    # https://github.com/flutter/engine/blob/master/lib/web_ui/dev/goldens_lock.yaml
-    file_content = api.file.read_text('read golden yaml file',
-                                      golden_yaml_file,
-                                      'repository: repo\nrevision: b6efc758')
-    file_lines = file_content.splitlines()
-    repo_index = file_lines[0].index(':') + 2;
-    repo = file_lines[0][repo_index:]
-    revision_number_index = file_lines[1].index(':') + 2;
-    revision_number = file_lines[1][revision_number_index:]
-  with api.context(cwd=goldens):
-    api.git.checkout(
-      repo,
-      ref=revision_number,
-      recursive=True,
-      set_got_revision=True
-    )
-  golden_files = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                               'goldens')
-  api.file.copytree('copy goldens', goldens, golden_files)
-
-def UploadFailingGoldens(api, checkout):
-    logs_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                              'test_results')
-    if api.properties.get('gcs_goldens_bucket') and not api.runtime.is_experimental:
-      api.gsutil.upload(
-          bucket=api.properties['gcs_goldens_bucket'],
-          source=logs_path,
-          dest='%s/%s' % ('web_engine', api.buildbucket.build.id),
-          link_name='archive goldens',
-          args=['-r'],
-          multithreaded=True,
-          name='upload goldens %s' % api.buildbucket.build.id,
-          unauthenticated_url=True)
-      html_files = api.file.glob_paths(
-         'html goldens',
-         source=logs_path,
-         pattern='*.html',
-         test_data=('a.html',)).get_result()
-      with api.step.nest('Failed golden links') as presentation:
-        for html_file in html_files:
-          base_name = api.path.basename(html_file)
-          url = 'https://storage.googleapis.com/%s/web_engine/%s/%s' % (
-              api.properties['gcs_goldens_bucket'],
-              api.buildbucket.build.id, base_name)
-          presentation.links[base_name] = url
 
 def RunSteps(api, properties, env_properties):
   """Steps to checkout flutter engine and execute web tests."""
@@ -211,13 +155,10 @@ def RunSteps(api, properties, env_properties):
 
   # Checkout source code and build
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
-
-  if api.platform.is_mac:
-    CloneGoldens(api)
-
   with api.context(
       cwd=cache_root, env=env,
       env_prefixes=env_prefixes), api.depot_tools.on_path():
+
 
     # Checks before building the engine. Only run on Linux.
     if api.platform.is_linux:
@@ -280,8 +221,7 @@ def RunSteps(api, properties, env_properties):
         api.step('felt test safari desktop', felt_test_safari_desktop)
       if api.platform.is_linux:
         web_engine_analysis_cmd = [
-            checkout.join('flutter', 'lib', 'web_ui', 'dev',
-                          'web_engine_analysis.sh'),
+            checkout.join('flutter', 'lib', 'web_ui', 'dev', 'web_engine_analysis.sh'),
         ]
         api.step('web engine analysis', web_engine_analysis_cmd)
         DownloadFirefoxDriver(api)
@@ -298,13 +238,34 @@ def RunSteps(api, properties, env_properties):
       felt_test.extend(additional_args)
       if api.platform.is_mac:
           with SetupXcode(api):
-            with recipe_api.defer_results():
-              api.step('felt ios-safari test',felt_test)
-              UploadFailingGoldens(api, checkout)
+            api.step('felt ios-safari test',felt_test)
       else:
         with recipe_api.defer_results():
           api.step('felt test chrome', felt_test)
-          UploadFailingGoldens(api, checkout)
+          logs_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
+                                    'test_results')
+          if api.properties.get('gcs_goldens_bucket') and not api.runtime.is_experimental:
+            api.gsutil.upload(
+                bucket=api.properties['gcs_goldens_bucket'],
+                source=logs_path,
+                dest='%s/%s' % ('web_engine', api.buildbucket.build.id),
+                link_name='archive goldens',
+                args=['-r'],
+                multithreaded=True,
+                name='upload goldens %s' % api.buildbucket.build.id,
+                unauthenticated_url=True)
+            html_files = api.file.glob_paths(
+                'html goldens',
+                source=logs_path,
+                pattern='*.html',
+                test_data=('a.html',)).get_result()
+            with api.step.nest('Failed golden links') as presentation:
+              for html_file in html_files:
+                base_name = api.path.basename(html_file)
+                url = 'https://storage.googleapis.com/%s/web_engine/%s/%s' % (
+                    api.properties['gcs_goldens_bucket'],
+                    api.buildbucket.build.id, base_name)
+                presentation.links[base_name] = url
 
 
 def GenTests(api):
