@@ -217,6 +217,143 @@
   },
   {
     "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/builder/goldens"
+    ],
+    "infra_step": true,
+    "name": "mkdir goldens"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CACHE]/builder/src/flutter/lib/web_ui/dev/goldens_lock.yaml",
+      "/path/to/tmp/"
+    ],
+    "cwd": "[CACHE]/builder",
+    "infra_step": true,
+    "name": "read golden yaml file",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@goldens_lock.yaml@repository: repo@@@",
+      "@@@STEP_LOG_LINE@goldens_lock.yaml@revision: b6efc758@@@",
+      "@@@STEP_LOG_END@goldens_lock.yaml@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::git]/resources/git_setup.py",
+      "--path",
+      "[START_DIR]/repo",
+      "--url",
+      "repo"
+    ],
+    "cwd": "[CACHE]/builder/goldens",
+    "name": "git setup"
+  },
+  {
+    "cmd": [
+      "git",
+      "fetch",
+      "origin",
+      "b6efc758",
+      "--recurse-submodules",
+      "--progress"
+    ],
+    "cwd": "[START_DIR]/repo",
+    "env": {
+      "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
+    },
+    "infra_step": true,
+    "name": "git fetch"
+  },
+  {
+    "cmd": [
+      "git",
+      "checkout",
+      "-f",
+      "FETCH_HEAD"
+    ],
+    "cwd": "[START_DIR]/repo",
+    "infra_step": true,
+    "name": "git checkout"
+  },
+  {
+    "cmd": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "[START_DIR]/repo",
+    "infra_step": true,
+    "name": "read revision",
+    "~followup_annotations": [
+      "@@@STEP_TEXT@<br/>checked out 'deadbeef'<br/>@@@",
+      "@@@SET_BUILD_PROPERTY@got_revision@\"deadbeef\"@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "clean",
+      "-f",
+      "-d",
+      "-x"
+    ],
+    "cwd": "[START_DIR]/repo",
+    "infra_step": true,
+    "name": "git clean"
+  },
+  {
+    "cmd": [
+      "git",
+      "submodule",
+      "sync"
+    ],
+    "cwd": "[START_DIR]/repo",
+    "infra_step": true,
+    "name": "submodule sync"
+  },
+  {
+    "cmd": [
+      "git",
+      "submodule",
+      "update",
+      "--init",
+      "--recursive"
+    ],
+    "cwd": "[START_DIR]/repo",
+    "infra_step": true,
+    "name": "submodule update"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copytree",
+      "[CACHE]/builder/goldens",
+      "[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/goldens"
+    ],
+    "infra_step": true,
+    "name": "copy goldens"
+  },
+  {
+    "cmd": [
       "git",
       "fetch",
       "https://dart.googlesource.com/sdk.git",
