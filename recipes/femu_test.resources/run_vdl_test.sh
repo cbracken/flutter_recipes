@@ -128,7 +128,7 @@ if [[ ${_LAUNCH_EXIT_CODE} == 0 ]]; then
   ssh_to_guest lsblk
 
   for target in "${RUN_TESTS[@]}"; do
-    ssh_to_guest "run fuchsia-pkg://fuchsia.com/${target}#meta/${target}.cmx ${TEST_ARGS}"
+    ssh_to_guest "run-test-component fuchsia-pkg://fuchsia.com/${target}#meta/${target}.cmx ${TEST_ARGS}"
     _EXIT_CODE=$?
     if [[ ${_EXIT_CODE} == 0 ]]; then
       log "${target} Passed"
