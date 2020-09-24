@@ -578,7 +578,8 @@
       "CHROME_EXECUTABLE": "[CACHE]/chrome/chrome/chrome",
       "CHROME_NO_SANDBOX": "true",
       "GEM_HOME": "[START_DIR]/gems",
-      "GOPATH": "[CLEANUP]/go_path"
+      "GOPATH": "[CLEANUP]/go_path",
+      "GRADLE_OPTS": "-Dorg.gradle.daemon=false"
     },
     "env_prefixes": {
       "PATH": [
@@ -611,7 +612,8 @@
       "CHROME_EXECUTABLE": "[CACHE]/chrome/chrome/chrome",
       "CHROME_NO_SANDBOX": "true",
       "GEM_HOME": "[START_DIR]/gems",
-      "GOPATH": "[CLEANUP]/go_path"
+      "GOPATH": "[CLEANUP]/go_path",
+      "GRADLE_OPTS": "-Dorg.gradle.daemon=false"
     },
     "env_prefixes": {
       "PATH": [
