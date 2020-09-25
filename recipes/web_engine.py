@@ -160,6 +160,7 @@ def CloneGoldens(api):
   with api.context(cwd=goldens):
     api.git.checkout(
       repo,
+      dir_path=goldens,
       ref=revision_number,
       recursive=True,
       set_got_revision=True

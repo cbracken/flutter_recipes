@@ -284,7 +284,7 @@
       "-u",
       "RECIPE_MODULE[depot_tools::git]/resources/git_setup.py",
       "--path",
-      "[START_DIR]/repo",
+      "[CACHE]/builder/goldens",
       "--url",
       "repo"
     ],
@@ -300,7 +300,7 @@
       "--recurse-submodules",
       "--progress"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[CACHE]/builder/goldens",
     "env": {
       "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
     },
@@ -314,7 +314,7 @@
       "-f",
       "FETCH_HEAD"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[CACHE]/builder/goldens",
     "infra_step": true,
     "name": "git checkout"
   },
@@ -324,7 +324,7 @@
       "rev-parse",
       "HEAD"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[CACHE]/builder/goldens",
     "infra_step": true,
     "name": "read revision",
     "~followup_annotations": [
@@ -340,7 +340,7 @@
       "-d",
       "-x"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[CACHE]/builder/goldens",
     "infra_step": true,
     "name": "git clean"
   },
@@ -350,7 +350,7 @@
       "submodule",
       "sync"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[CACHE]/builder/goldens",
     "infra_step": true,
     "name": "submodule sync"
   },
@@ -362,7 +362,7 @@
       "--init",
       "--recursive"
     ],
-    "cwd": "[START_DIR]/repo",
+    "cwd": "[CACHE]/builder/goldens",
     "infra_step": true,
     "name": "submodule update"
   },
