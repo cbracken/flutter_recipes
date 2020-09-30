@@ -5,15 +5,20 @@
 from recipe_engine.post_process import DoesNotRun, Filter, StatusFailure
 
 DEPS = [
-    'flutter/adhoc_validation',
-    'recipe_engine/platform',
+    'flutter/adhoc_validation', 'recipe_engine/platform',
+    'recipe_engine/properties'
 ]
 
 
 def RunSteps(api):
-  api.adhoc_validation.run('dart analyze', 'analyze')
+  api.adhoc_validation.run('dart analyze', 'analyze', {}, {})
 
 
 def GenTests(api):
   yield api.test('win', api.platform.name('win'))
   yield api.test('linux', api.platform.name('linux'))
+  yield api.test(
+      'mac', api.platform.name('mac'),
+      api.properties(dependencies=[{"dependency": "xcode"}])
+  )
+  yield api.test('mac_nodeps', api.platform.name('mac'))

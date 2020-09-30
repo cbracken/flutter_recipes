@@ -17,28 +17,37 @@ class AddhocValidationApi(recipe_api.RecipeApi):
     """Returns the list of accepted validations."""
     return [
         'analyze', 'customer_testing', 'docs', 'fuchsia_precache',
-        'tool_coverage', 'web_smoke_test'
+        'tool_coverage', 'web_smoke_test', 'verify_binaries_codesigned'
     ]
 
-  def run(self, name, validation, secrets=None):
+  def run(self, name, validation, env, env_prefixes, secrets=None):
     """Runs a validation as a recipe step.
 
     Args:
       name(str): The step group name.
       validation(str): The name of a validation to run. This has to correlate
         to a <validation>.sh for linux/mac or <validation>.bat for windows.
+      env(dict): Current environment variables.
+      env_prefixes(dict):  Current environment prefixes variables.
       secrets(dict): The key is the name of the secret and value is the path to kms.
     """
     assert (validation in self.available_validations())
     secrets = secrets or {}
     with self.m.step.nest(name):
       resource_name = ''
-      env = {}
+      deps = self.m.properties.get('dependencies', [])
+      self.m.flutter_deps.required_deps(env, env_prefixes, deps)
       self.m.kms.decrypt_secrets(env, secrets)
       if self.m.platform.is_linux or self.m.platform.is_mac:
         resource_name = self.resource('%s.sh' % validation)
         self.m.step('Set execute permission', ['chmod', '755', resource_name])
-      if self.m.platform.is_win:
+      elif self.m.platform.is_win:
         resource_name = self.resource('%s.bat' % validation)
       with self.m.context(env=env):
-        self.m.step(validation, [resource_name])
+        dep_list = [d['dependency'] for d in deps]
+        if 'xcode' in dep_list:
+          with self.m.osx_sdk('ios'):
+            self.m.flutter_deps.swift()
+            self.m.step(validation, [resource_name])
+        else:
+          self.m.step(validation, [resource_name])

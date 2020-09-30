@@ -63,7 +63,7 @@ def RunSteps(api):
       api.step('download dependencies', ['flutter', 'update-packages'])
       api.adhoc_validation.run(
           api.properties.get('validation_name'),
-          api.properties.get('validation')
+          api.properties.get('validation'), env, env_prefixes
       )
 
 
