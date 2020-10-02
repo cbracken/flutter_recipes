@@ -5,4 +5,7 @@
 # found in the LICENSE file.
 
 set -e
+
+export FIREBASE_MASTER_TOKEN=`cat $FIREBASE_MASTER_TOKEN`
+export FIREBASE_PUBLIC_TOKEN=`cat $FIREBASE_PUBLIC_TOKEN`
 ./dev/bots/docs.sh

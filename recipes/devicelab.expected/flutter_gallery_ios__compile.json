@@ -125,6 +125,9 @@
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -143,6 +146,9 @@
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -160,6 +166,9 @@
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -183,6 +192,9 @@
       "FLUTTER_XCODE_CODE_SIGN_STYLE": "Manual",
       "FLUTTER_XCODE_DEVELOPMENT_TEAM": "S8QB4VV633",
       "FLUTTER_XCODE_PROVISIONING_PROFILE_SPECIFIER": "match Development *",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {

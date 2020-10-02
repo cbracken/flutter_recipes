@@ -230,9 +230,9 @@
         "[CACHE]/chrome/chrome",
         "[CACHE]/chrome/drivers",
         "[CACHE]/go/bin",
-        "[CLEANUP]/go_path",
+        "[CLEANUP]/go_path/bin",
         "[CACHE]/go/bin",
-        "[CLEANUP]/go_path"
+        "[CLEANUP]/go_path/bin"
       ]
     },
     "name": "Install dashing"
@@ -579,16 +579,17 @@
       "CHROME_NO_SANDBOX": "true",
       "GEM_HOME": "[START_DIR]/gems",
       "GOPATH": "[CLEANUP]/go_path",
-      "GRADLE_OPTS": "-Dorg.gradle.daemon=false"
+      "GRADLE_OPTS": "-Dorg.gradle.daemon=false",
+      "GRADLE_USER_HOME": "[CACHE]/gradle"
     },
     "env_prefixes": {
       "PATH": [
         "[CACHE]/chrome/chrome",
         "[CACHE]/chrome/drivers",
         "[CACHE]/go/bin",
-        "[CLEANUP]/go_path",
+        "[CLEANUP]/go_path/bin",
         "[CACHE]/go/bin",
-        "[CLEANUP]/go_path",
+        "[CLEANUP]/go_path/bin",
         "[CACHE]/vpython",
         "[CACHE]/android/platform-tools",
         "[CACHE]/android/tools",
@@ -613,16 +614,17 @@
       "CHROME_NO_SANDBOX": "true",
       "GEM_HOME": "[START_DIR]/gems",
       "GOPATH": "[CLEANUP]/go_path",
-      "GRADLE_OPTS": "-Dorg.gradle.daemon=false"
+      "GRADLE_OPTS": "-Dorg.gradle.daemon=false",
+      "GRADLE_USER_HOME": "[CACHE]/gradle"
     },
     "env_prefixes": {
       "PATH": [
         "[CACHE]/chrome/chrome",
         "[CACHE]/chrome/drivers",
         "[CACHE]/go/bin",
-        "[CLEANUP]/go_path",
+        "[CLEANUP]/go_path/bin",
         "[CACHE]/go/bin",
-        "[CLEANUP]/go_path",
+        "[CLEANUP]/go_path/bin",
         "[CACHE]/vpython",
         "[CACHE]/android/platform-tools",
         "[CACHE]/android/tools",
@@ -650,6 +652,48 @@
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_END@listdir@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[START_DIR]/firebase"
+    ],
+    "infra_step": true,
+    "name": "ensure directory"
+  },
+  {
+    "cmd": [],
+    "name": "Install firebase"
+  },
+  {
+    "cmd": [
+      "curl",
+      "-Lo",
+      "[START_DIR]/firebase/firebase",
+      "https://firebase.tools/bin/linux/latest"
+    ],
+    "name": "Install firebase.Install firebase bin",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "chmod",
+      "755",
+      "[START_DIR]/firebase/firebase"
+    ],
+    "name": "Install firebase.Set execute permission",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {

@@ -186,7 +186,8 @@
     "env": {
       "ANDROID_HOME": "[CACHE]/android29",
       "ANDROID_SDK_ROOT": "[CACHE]/android29",
-      "GRADLE_OPTS": "-Dorg.gradle.daemon=false"
+      "GRADLE_OPTS": "-Dorg.gradle.daemon=false",
+      "GRADLE_USER_HOME": "[CACHE]/gradle"
     },
     "env_prefixes": {
       "PATH": [

@@ -56,7 +56,7 @@ def RunSteps(api):
 def GenTests(api):
   tasks_dict = {'tasks': [{'task': 'one', 'script': 'myscript'}]}
   yield api.test(
-      'pull_request', api.runtime(is_luci=True, is_experimental=True),
+      'pull_request', api.runtime(is_experimental=True),
       api.properties(
           git_url='https://github.com/flutter/cocoon',
           git_ref='refs/pull/1/head'),

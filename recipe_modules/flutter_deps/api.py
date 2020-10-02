@@ -47,10 +47,14 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         means the default.
     """
     available_deps = {
-        'open_jdk': self.open_jdk, 'goldctl': self.goldctl,
-        'chrome_and_driver': self.chrome_and_driver, 'go_sdk': self.go_sdk,
-        'dashing': self.dashing, 'vpython': self.vpython,
-        'android_sdk': self.android_sdk
+        'open_jdk': self.open_jdk,
+        'goldctl': self.goldctl,
+        'chrome_and_driver': self.chrome_and_driver,
+        'go_sdk': self.go_sdk,
+        'dashing': self.dashing,
+        'vpython': self.vpython,
+        'android_sdk': self.android_sdk,
+        'firebase': self.firebase,
     }
     for dep in deps:
       if dep.get('dependency') in ['xcode', 'gems']:
@@ -150,7 +154,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     bin_path = self.m.path['cleanup'].join('go_path')
     self.m.file.ensure_directory('Ensure go path', bin_path)
     env['GOPATH'] = bin_path
-    paths.append(bin_path)
+    paths.append(bin_path.join('bin'))
     env_prefixes['PATH'] = paths
 
   def dashing(self, env, env_prefixes, version):
@@ -245,3 +249,30 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       env['GEM_HOME'] = gem_dir.join('ruby', '2.6.0')
       paths.append(gem_dir.join('ruby', '2.6.0', 'bin'))
       env_prefixes['PATH'] = paths
+
+  def firebase(self, env, env_prefixes, version='latest'):
+    """Installs firebase binary.
+
+    This dependency is only supported in linux.
+
+    Args:
+      env(dict): Current environment variables.
+      env_prefixes(dict):  Current environment prefixes variables.
+    """
+    firebase_dir = self.m.path['start_dir'].join('firebase')
+    self.m.file.ensure_directory('ensure directory', firebase_dir)
+    with self.m.step.nest('Install firebase'):
+      self.m.step(
+          'Install firebase bin', [
+              'curl', '-Lo',
+              firebase_dir.join('firebase'),
+              'https://firebase.tools/bin/linux/latest'
+          ]
+      )
+      self.m.step(
+          'Set execute permission',
+          ['chmod', '755', firebase_dir.join('firebase')]
+      )
+    paths = env_prefixes.get('PATH', [])
+    paths.append(firebase_dir)
+    env_prefixes['PATH'] = paths

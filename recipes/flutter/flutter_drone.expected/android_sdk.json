@@ -300,6 +300,10 @@
       "ANDROID_SDK_ROOT": "[CACHE]/android",
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "GRADLE_OPTS": "-Dorg.gradle.daemon=false",
+      "GRADLE_USER_HOME": "[CACHE]/gradle",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache",
       "SHARD": null,
       "SUBSHARD": null
@@ -325,6 +329,10 @@
       "ANDROID_SDK_ROOT": "[CACHE]/android",
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "GRADLE_OPTS": "-Dorg.gradle.daemon=false",
+      "GRADLE_USER_HOME": "[CACHE]/gradle",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache",
       "SHARD": null,
       "SUBSHARD": null
@@ -351,6 +359,10 @@
       "ANDROID_SDK_ROOT": "[CACHE]/android",
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "GRADLE_OPTS": "-Dorg.gradle.daemon=false",
+      "GRADLE_USER_HOME": "[CACHE]/gradle",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache",
       "SHARD": null,
       "SUBSHARD": null

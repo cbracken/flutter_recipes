@@ -119,6 +119,9 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -137,6 +140,9 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -167,6 +173,9 @@
     "cwd": "[START_DIR]/flutter/dev/integration_tests/the_task",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -203,6 +212,9 @@
     "cwd": "[START_DIR]/flutter/dev/integration_tests/the_task",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -241,6 +253,9 @@
     "cwd": "[START_DIR]/flutter/dev/integration_tests/the_task",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -269,6 +284,9 @@
     "cwd": "[START_DIR]/flutter/dev/integration_tests/the_task",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -295,6 +313,9 @@
     "cwd": "[START_DIR]/flutter/dev/integration_tests/the_task",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -333,6 +354,9 @@
     "cwd": "[START_DIR]/flutter/dev/integration_tests/the_task",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -368,6 +392,9 @@
     "cwd": "[START_DIR]/flutter/dev/integration_tests/the_task",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -398,6 +425,9 @@
     "cwd": "[START_DIR]/flutter/dev/integration_tests/the_task",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -439,6 +469,9 @@
     "cwd": "[START_DIR]/flutter/dev/integration_tests/the_task",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -467,6 +500,9 @@
     "cwd": "[START_DIR]/flutter/dev/integration_tests/the_task",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -491,6 +527,9 @@
     "cwd": "[START_DIR]/flutter/dev/integration_tests/the_task",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {

@@ -43,7 +43,7 @@ class AddhocValidationApi(recipe_api.RecipeApi):
         self.m.step('Set execute permission', ['chmod', '755', resource_name])
       elif self.m.platform.is_win:
         resource_name = self.resource('%s.bat' % validation)
-      with self.m.context(env=env):
+      with self.m.context(env=env, env_prefixes=env_prefixes):
         dep_list = [d['dependency'] for d in deps]
         if 'xcode' in dep_list:
           with self.m.osx_sdk('ios'):

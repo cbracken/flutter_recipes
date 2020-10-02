@@ -272,7 +272,7 @@ def GenTests(api):
           'linux_master_coverage_%s%s' %
           ('_experimental' if experimental else '',
            '_upload' if should_upload else ''),
-          api.runtime(is_luci=True, is_experimental=experimental),
+          api.runtime(is_experimental=experimental),
           api.properties(
               shard='framework_coverage',
               coveralls_lcov_version='5.1.0',
@@ -294,14 +294,14 @@ def GenTests(api):
                   fuchsia_ctl_version='version:0.0.2',
                   upload_packages=should_upload,
                   gold_tryjob=not should_upload),
-              api.runtime(is_luci=True, is_experimental=experimental),
+              api.runtime(is_experimental=experimental),
           )
           yield test + api.post_check(lambda check, steps: check(
               'Download goldctl' in steps))
 
   yield (api.test(
       'pull_request',
-      api.runtime(is_luci=True, is_experimental=True),
+      api.runtime(is_experimental=True),
       api.properties(
           git_url='https://github.com/flutter/flutter',
           git_ref='refs/pull/1/head',

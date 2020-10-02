@@ -123,6 +123,9 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache",
       "SHARD": null,
       "SUBSHARD": null
@@ -143,6 +146,9 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache",
       "SHARD": null,
       "SUBSHARD": null
@@ -164,6 +170,9 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
       "PUB_CACHE": "[CACHE]/.pub-cache",
       "SHARD": null,
       "SUBSHARD": null

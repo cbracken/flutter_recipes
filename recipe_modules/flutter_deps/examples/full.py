@@ -45,6 +45,7 @@ def RunSteps(api):
   api.flutter_deps.swift()
   gems_dir = api.path['start_dir'].join('dev', 'ci', 'mac')
   api.flutter_deps.gems(env, env_prefixes, gems_dir)
+  api.flutter_deps.firebase(env, env_prefixes)
 
 
 def GenTests(api):

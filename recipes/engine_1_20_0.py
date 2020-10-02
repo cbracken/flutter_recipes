@@ -1729,7 +1729,7 @@ def GenTests(api):
                   project='flutter',
                   revision='%s' % git_revision,
               ),
-              api.runtime(is_luci=True, is_experimental=False),
+              api.runtime(is_experimental=False),
               api.properties(
                   InputProperties(
                       clobber=False,
@@ -1779,7 +1779,7 @@ def GenTests(api):
 
   yield api.test(
       'safeupload_raise_on_duplicate',
-      api.runtime(is_luci=True, is_experimental=False),
+      api.runtime(is_experimental=False),
       api.step_data(
           'Ensure %s does not already exist on cloud storage' %
           ('flutter//linux-x64/artifacts.zip'),
@@ -1800,7 +1800,7 @@ def GenTests(api):
             project='flutter',
         ),
         collect_build_output,
-        api.runtime(is_luci=True, is_experimental=True),
+        api.runtime(is_experimental=True),
         api.properties(
             InputProperties(
                 goma_jobs='1024',
@@ -1819,7 +1819,7 @@ def GenTests(api):
           project='flutter'
       ),
       collect_build_output,
-      api.runtime(is_luci=True, is_experimental=True),
+      api.runtime(is_experimental=True),
       api.step_data(
           'Copy files.Retrieve list of test FARs',
           api.file.read_text('#this is a comment\ntest.far\n'),
@@ -1850,7 +1850,7 @@ def GenTests(api):
           project='flutter'
       ),
       collect_build_output,
-      api.runtime(is_luci=True, is_experimental=True),
+      api.runtime(is_experimental=True),
       api.properties(
           InputProperties(
               clobber=False,
@@ -1996,7 +1996,7 @@ def GenTests(api):
       # first execution.
       api.step_data("Checkout source code.bot_update", retcode=1),
       collect_build_output,
-      api.runtime(is_luci=True, is_experimental=True),
+      api.runtime(is_experimental=True),
       api.properties(
           InputProperties(
               clobber=False,

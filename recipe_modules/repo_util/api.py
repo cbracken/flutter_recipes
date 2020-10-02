@@ -14,6 +14,7 @@ REPOS = {
             'https://github.com/flutter/plugins'
 }
 
+import re
 from recipe_engine import recipe_api
 
 
@@ -115,13 +116,21 @@ class RepoUtilApi(recipe_api.RecipeApi):
           'did you forget to checkout flutter repo?'
       )
       self.m.python.failing_step('Flutter Environment', msg)
-
+    git_ref = self.m.properties.get('git_ref', '')
     env = {
         # Setup our own pub_cache to not affect other slaves on this machine,
         # and so that the pre-populated pub cache is contained in the package.
-        'PUB_CACHE': self.m.path['cache'].join('.pub-cache'),
+        'PUB_CACHE':
+            self.m.path['cache'].join('.pub-cache'),
         # Windows Packaging script assumes this is set.
-        'DEPOT_TOOLS': str(self.m.depot_tools.root),
+        'DEPOT_TOOLS':
+            str(self.m.depot_tools.root),
+        'LUCI_CI':
+            True,
+        'LUCI_PR':
+            re.sub('refs\/pull\/|\/head', '', git_ref),
+        'LUCI_BRANCH':
+            self.m.properties.get('release_ref', '').replace('refs/heads/', ''),
     }
     env_prefixes = {'PATH': [flutter_bin, dart_bin]}
     return env, env_prefixes

@@ -66,6 +66,7 @@ class AndroidSdkApi(recipe_api.RecipeApi):
     # Setup environment variables
     env['ANDROID_SDK_ROOT'] = sdk_root
     env['ANDROID_HOME'] = sdk_root
+    env['GRADLE_USER_HOME'] = self.m.path['cache'].join('gradle')
     env['GRADLE_OPTS'] = '-Dorg.gradle.daemon=false'
     paths = env_prefixes.get('PATH', [])
     paths.append(sdk_root.join('platform-tools'))
