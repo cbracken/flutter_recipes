@@ -113,6 +113,7 @@ set +e
 log "Launching virtual device using VDL."
 "./${VDL_LOCATION}" "${VDL_ARGS[@]}" \
   --action=start \
+  --ga=true \
   --host_port_map="${PORT_MAP}" \
   --output_launched_device_proto="${VDL_PROTO}" > "${EMULATOR_LOG}" \
   --grpc_port="${GRPC_PORT}"
@@ -146,6 +147,7 @@ log "Stopping virtual device."
 
 "./${VDL_LOCATION}" \
   --action=kill \
+  --ga=true \
   --launched_virtual_device_proto="${VDL_PROTO}"
 
 VDL_STOP_EXIT_CODE=$?
