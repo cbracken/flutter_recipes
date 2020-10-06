@@ -1528,6 +1528,9 @@ def RunSteps(api, properties, env_properties):
 
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
 
+  # Delete derived data on mac. This is a noop for other platforms.
+  api.os_utils.clean_derived_data()
+
   # Various scripts we run assume access to depot_tools on path for `ninja`.
   with SetupXcode(api), api.context(
       cwd=cache_root, env=env,
@@ -1673,8 +1676,7 @@ def GenTests(api):
             yield test
 
   yield api.test(
-      'safeupload_raise_on_duplicate',
-      api.runtime(is_experimental=False),
+      'safeupload_raise_on_duplicate', api.runtime(is_experimental=False),
       api.step_data(
           'Ensure %s does not already exist on cloud storage' %
           ('flutter//linux-x64/artifacts.zip'),

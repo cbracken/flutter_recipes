@@ -20,6 +20,21 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     """
     self.m.step(name, ['taskkill', '/f', '/im', exe_name, '/t'], ok_ret='any')
 
+  def clean_derived_data(self):
+    """Cleans the derived data folder in mac builders.
+
+    Derived data caches fail very frequently when different version of mac/ios
+    sdks are used in the same bot. To prevent those failures we will start
+    deleting the folder before every task.
+    """
+    if self.m.platform.is_mac:
+      self.m.step(
+          'Delete mac deriveddata', [
+              'rm', '-rf',
+              '/Users/chrome-bot/Library/Developer/Xcode/DerivedData/'
+          ]
+      )
+
   def kill_win_processes(self):
     """Kills windows processes.
 

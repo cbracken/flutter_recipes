@@ -16,6 +16,7 @@ def RunSteps(api):
 
   with api.os_utils.make_temp_directory('Create temp directory') as temp_dir:
     file = temp_dir.join('artifacts.zip')
+  api.os_utils.clean_derived_data()
 
 
 def GenTests(api):
@@ -25,4 +26,6 @@ def GenTests(api):
   )
   yield api.test(
       'with_failures', api.platform('win', 64),
-      api.step_data("Killing Windows Processes.stop dart", retcode=1))
+      api.step_data("Killing Windows Processes.stop dart", retcode=1)
+  )
+  yield api.test('clean_derived_data', api.platform('mac', 64))

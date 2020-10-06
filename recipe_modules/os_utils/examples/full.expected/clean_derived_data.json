@@ -1,0 +1,26 @@
+[
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/tmp_tmp_1"
+    ],
+    "infra_step": true,
+    "name": "temp dir for Create temp directory"
+  },
+  {
+    "cmd": [
+      "rm",
+      "-rf",
+      "/Users/chrome-bot/Library/Developer/Xcode/DerivedData/"
+    ],
+    "name": "Delete mac deriveddata"
+  },
+  {
+    "name": "$result"
+  }
+]
