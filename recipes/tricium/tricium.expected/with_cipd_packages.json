@@ -112,7 +112,7 @@
     ],
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
     "infra_step": true,
-    "name": "fetch master.cache.git config",
+    "name": "fetch master.cache.replace fetch configs",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -286,7 +286,7 @@
     ],
     "cwd": "[START_DIR]/recipes",
     "infra_step": true,
-    "name": "git config"
+    "name": "remove section"
   },
   {
     "cmd": [
@@ -361,7 +361,7 @@
     ],
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
     "infra_step": true,
-    "name": "cache.git config",
+    "name": "cache.replace fetch configs",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]

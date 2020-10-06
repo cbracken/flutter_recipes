@@ -91,7 +91,7 @@
       "\\+refs/heads/\\*:.*"
     ],
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
-    "name": "cache.git config",
+    "name": "cache.replace fetch configs",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -228,7 +228,7 @@
       "10"
     ],
     "cwd": "[START_DIR]/recipes",
-    "name": "git log"
+    "name": "log"
   },
   {
     "cmd": [

@@ -106,11 +106,11 @@ def RunSteps(api, remote, unittest_only):
   if bb_input.gerrit_changes:
     api.git.checkout_cl(bb_input.gerrit_changes[0], checkout_path)
     with api.context(cwd=checkout_path):
-      api.git('log', '--oneline', '-n', '10')
+      api.git('log', 'log', '--oneline', '-n', '10')
   else:
     api.git.checkout(remote)
     with api.context(cwd=checkout_path):
-      api.git('log', '--oneline', '-n', '10')
+      api.git('log', 'log', '--oneline', '-n', '10')
   api.recipe_testing.projects = ('flutter',)
   with api.step.defer_results():
     api.recipe_testing.run_lint(checkout_path)
