@@ -727,6 +727,299 @@
     ]
   },
   {
+    "cmd": [],
+    "name": "Checkout flutter/flutter"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::git]/resources/git_setup.py",
+      "--path",
+      "[CACHE]/flutter",
+      "--url",
+      "https://github.com/flutter/flutter"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ENGINE_PATH": "[CACHE]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Checkout flutter/flutter.git setup",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "fetch",
+      "origin",
+      "master",
+      "--recurse-submodules",
+      "--progress",
+      "--tags"
+    ],
+    "cwd": "[CACHE]/flutter",
+    "env": {
+      "ENGINE_PATH": "[CACHE]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Checkout flutter/flutter.git fetch",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "checkout",
+      "-f",
+      "FETCH_HEAD"
+    ],
+    "cwd": "[CACHE]/flutter",
+    "env": {
+      "ENGINE_PATH": "[CACHE]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Checkout flutter/flutter.git checkout",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "[CACHE]/flutter",
+    "env": {
+      "ENGINE_PATH": "[CACHE]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Checkout flutter/flutter.read revision",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_TEXT@<br/>checked out 'deadbeef'<br/>@@@",
+      "@@@SET_BUILD_PROPERTY@got_revision@\"deadbeef\"@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "clean",
+      "-f",
+      "-d",
+      "-x"
+    ],
+    "cwd": "[CACHE]/flutter",
+    "env": {
+      "ENGINE_PATH": "[CACHE]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Checkout flutter/flutter.git clean",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "submodule",
+      "sync"
+    ],
+    "cwd": "[CACHE]/flutter",
+    "env": {
+      "ENGINE_PATH": "[CACHE]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Checkout flutter/flutter.submodule sync",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "submodule",
+      "update",
+      "--init",
+      "--recursive"
+    ],
+    "cwd": "[CACHE]/flutter",
+    "env": {
+      "ENGINE_PATH": "[CACHE]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Checkout flutter/flutter.submodule update",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[CACHE]/builder/src/flutter/tools/configure_framework_commit.sh"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ENGINE_PATH": "[CACHE]/builder",
+      "FLUTTER_CLONE_REPO_PATH": "[CACHE]/flutter",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "configure framework commit"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CACHE]/flutter/flutter_ref.txt",
+      "/path/to/tmp/"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ENGINE_PATH": "[CACHE]/builder",
+      "FLUTTER_CLONE_REPO_PATH": "[CACHE]/flutter",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "read commit no",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@flutter_ref.txt@b6efc758213fdfffee1234465@@@",
+      "@@@STEP_LOG_END@flutter_ref.txt@@@"
+    ]
+  },
+  {
     "cmd": [
       "bb",
       "batch",
@@ -753,7 +1046,7 @@
     },
     "infra_step": true,
     "name": "buildbucket.schedule",
-    "stdin": "{\"requests\": [{\"scheduleBuild\": {\"builder\": {\"builder\": \"Linux SDK Drone\"}, \"experimental\": \"NO\", \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", \"priority\": 25, \"properties\": {\"dependencies\": [{\"dependency\": \"chrome_and_driver\"}], \"git_ref\": \"refs/heads/master\", \"git_url\": \"https://github.com/flutter/flutter\", \"isolated_hash\": \"[dummy hash]\", \"shard\": \"web_tests\", \"subshard\": \"0\", \"task_name\": \"web_tests-0\"}, \"requestId\": \"0-00000000-0000-0000-0000-000000001337\", \"swarming\": {\"parentRunId\": \"fake-task-id\"}, \"tags\": [{\"key\": \"user_agent\", \"value\": \"recipe\"}]}}, {\"scheduleBuild\": {\"builder\": {\"builder\": \"Linux SDK Drone\"}, \"experimental\": \"NO\", \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", \"priority\": 25, \"properties\": {\"dependencies\": [{\"dependency\": \"chrome_and_driver\"}], \"git_ref\": \"refs/heads/master\", \"git_url\": \"https://github.com/flutter/flutter\", \"isolated_hash\": \"[dummy hash]\", \"shard\": \"web_tests\", \"subshard\": \"1_last\", \"task_name\": \"web_tests-1_last\"}, \"requestId\": \"0-00000000-0000-0000-0000-00000000133a\", \"swarming\": {\"parentRunId\": \"fake-task-id\"}, \"tags\": [{\"key\": \"user_agent\", \"value\": \"recipe\"}]}}]}",
+    "stdin": "{\"requests\": [{\"scheduleBuild\": {\"builder\": {\"builder\": \"Linux SDK Drone\"}, \"experimental\": \"NO\", \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", \"priority\": 25, \"properties\": {\"dependencies\": [{\"dependency\": \"chrome_and_driver\"}], \"git_ref\": \"b6efc758213fdfffee1234465\", \"git_url\": \"https://github.com/flutter/flutter\", \"isolated_hash\": \"[dummy hash]\", \"shard\": \"web_tests\", \"subshard\": \"0\", \"task_name\": \"web_tests-0\"}, \"requestId\": \"0-00000000-0000-0000-0000-000000001337\", \"swarming\": {\"parentRunId\": \"fake-task-id\"}, \"tags\": [{\"key\": \"user_agent\", \"value\": \"recipe\"}]}}, {\"scheduleBuild\": {\"builder\": {\"builder\": \"Linux SDK Drone\"}, \"experimental\": \"NO\", \"fields\": \"builder,createTime,createdBy,critical,endTime,id,input,number,output,startTime,status,updateTime\", \"priority\": 25, \"properties\": {\"dependencies\": [{\"dependency\": \"chrome_and_driver\"}], \"git_ref\": \"b6efc758213fdfffee1234465\", \"git_url\": \"https://github.com/flutter/flutter\", \"isolated_hash\": \"[dummy hash]\", \"shard\": \"web_tests\", \"subshard\": \"1_last\", \"task_name\": \"web_tests-1_last\"}, \"requestId\": \"0-00000000-0000-0000-0000-00000000133a\", \"swarming\": {\"parentRunId\": \"fake-task-id\"}, \"tags\": [{\"key\": \"user_agent\", \"value\": \"recipe\"}]}}]}",
     "~followup_annotations": [
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"responses\": [@@@",
@@ -792,7 +1085,7 @@
       "@@@STEP_LOG_LINE@request@              \"dependency\": \"chrome_and_driver\"@@@",
       "@@@STEP_LOG_LINE@request@            }@@@",
       "@@@STEP_LOG_LINE@request@          ], @@@",
-      "@@@STEP_LOG_LINE@request@          \"git_ref\": \"refs/heads/master\", @@@",
+      "@@@STEP_LOG_LINE@request@          \"git_ref\": \"b6efc758213fdfffee1234465\", @@@",
       "@@@STEP_LOG_LINE@request@          \"git_url\": \"https://github.com/flutter/flutter\", @@@",
       "@@@STEP_LOG_LINE@request@          \"isolated_hash\": \"[dummy hash]\", @@@",
       "@@@STEP_LOG_LINE@request@          \"shard\": \"web_tests\", @@@",
@@ -825,7 +1118,7 @@
       "@@@STEP_LOG_LINE@request@              \"dependency\": \"chrome_and_driver\"@@@",
       "@@@STEP_LOG_LINE@request@            }@@@",
       "@@@STEP_LOG_LINE@request@          ], @@@",
-      "@@@STEP_LOG_LINE@request@          \"git_ref\": \"refs/heads/master\", @@@",
+      "@@@STEP_LOG_LINE@request@          \"git_ref\": \"b6efc758213fdfffee1234465\", @@@",
       "@@@STEP_LOG_LINE@request@          \"git_url\": \"https://github.com/flutter/flutter\", @@@",
       "@@@STEP_LOG_LINE@request@          \"isolated_hash\": \"[dummy hash]\", @@@",
       "@@@STEP_LOG_LINE@request@          \"shard\": \"web_tests\", @@@",
@@ -849,117 +1142,6 @@
       "@@@STEP_LOG_END@request@@@",
       "@@@STEP_LINK@8922054662172514000@https://cr-buildbucket.appspot.com/build/8922054662172514000@@@",
       "@@@STEP_LINK@8922054662172514001@https://cr-buildbucket.appspot.com/build/8922054662172514001@@@"
-    ]
-  },
-  {
-    "cmd": [],
-    "name": "Checkout flutter/flutter"
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "RECIPE_MODULE[depot_tools::git]/resources/git_setup.py",
-      "--path",
-      "[CACHE]/flutter",
-      "--url",
-      "https://github.com/flutter/flutter"
-    ],
-    "name": "Checkout flutter/flutter.git setup",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "fetch",
-      "origin",
-      "master",
-      "--recurse-submodules",
-      "--progress",
-      "--tags"
-    ],
-    "cwd": "[CACHE]/flutter",
-    "env": {
-      "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
-    },
-    "infra_step": true,
-    "name": "Checkout flutter/flutter.git fetch",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "checkout",
-      "-f",
-      "FETCH_HEAD"
-    ],
-    "cwd": "[CACHE]/flutter",
-    "infra_step": true,
-    "name": "Checkout flutter/flutter.git checkout",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "rev-parse",
-      "HEAD"
-    ],
-    "cwd": "[CACHE]/flutter",
-    "infra_step": true,
-    "name": "Checkout flutter/flutter.read revision",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_TEXT@<br/>checked out 'deadbeef'<br/>@@@",
-      "@@@SET_BUILD_PROPERTY@got_revision@\"deadbeef\"@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "clean",
-      "-f",
-      "-d",
-      "-x"
-    ],
-    "cwd": "[CACHE]/flutter",
-    "infra_step": true,
-    "name": "Checkout flutter/flutter.git clean",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "submodule",
-      "sync"
-    ],
-    "cwd": "[CACHE]/flutter",
-    "infra_step": true,
-    "name": "Checkout flutter/flutter.submodule sync",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "git",
-      "submodule",
-      "update",
-      "--init",
-      "--recursive"
-    ],
-    "cwd": "[CACHE]/flutter",
-    "infra_step": true,
-    "name": "Checkout flutter/flutter.submodule update",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
@@ -1105,6 +1287,7 @@
     "cwd": "[CACHE]/builder",
     "env": {
       "ENGINE_PATH": "[CACHE]/builder",
+      "FLUTTER_CLONE_REPO_PATH": "[CACHE]/flutter",
       "GOMA_DIR": "[CACHE]/goma/client"
     },
     "env_prefixes": {
@@ -1129,6 +1312,7 @@
     "cwd": "[CACHE]/builder",
     "env": {
       "ENGINE_PATH": "[CACHE]/builder",
+      "FLUTTER_CLONE_REPO_PATH": "[CACHE]/flutter",
       "GOMA_DIR": "[CACHE]/goma/client"
     },
     "env_prefixes": {

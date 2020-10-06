@@ -108,16 +108,31 @@ def RunSteps(api, properties, env_properties):
 
     # Archive build directory into isolate.
     isolated_hash = Archive(api, target_name)
-    # TODO(nurhan): Use the youngest commit older than the engine.
     ref = 'refs/heads/master'
     url = 'https://github.com/flutter/flutter'
 
-    builds = schedule_builds(api, isolated_hash, ref, url)
+    # Checkout flutter to run the web integration tests with the local engine.
+    flutter_checkout_path = api.path['cache'].join('flutter')
+    api.repo_util.checkout(
+        'flutter', checkout_path=flutter_checkout_path, url=url, ref=ref)
+    env['FLUTTER_CLONE_REPO_PATH'] = flutter_checkout_path
 
-  # Checkout flutter to run the web integration tests with the local engine.
-  flutter_checkout_path = api.path['cache'].join('flutter')
-  api.repo_util.checkout(
-      'flutter', checkout_path=flutter_checkout_path, url=url, ref=ref)
+    with api.context(cwd=cache_root, env=env, env_prefixes=env_prefixes):
+      configure_script = checkout.join(
+          'flutter',
+          'tools',
+          'configure_framework_commit.sh',
+      )
+      api.step('configure framework commit', [configure_script])
+      commit_no_file = flutter_checkout_path.join(
+          'flutter_ref.txt',
+      )
+      ref = api.file.read_text('read commit no', commit_no_file,
+                               'b6efc758213fdfffee1234465')
+      assert(len(ref) > 0)
+    # The SHA of the youngest commit older than the engine in the framework
+    # side is kept in `ref`.
+    builds = schedule_builds(api, isolated_hash, ref.strip(), url)
 
   # Create new enviromenent variables for Framework.
   # Note that the `dart binary` location is not the same for Framework and the
