@@ -17,10 +17,10 @@ DEPS = [
     'depot_tools/gclient',
     'depot_tools/git',
     'depot_tools/gsutil',
-    'depot_tools/osx_sdk',
     'flutter/bucket_util',
     'flutter/json_util',
     'flutter/os_utils',
+    'flutter/flutter_osx_sdk',
     'flutter/repo_util',
     'flutter/zip',
     'fuchsia/display_util',
@@ -988,8 +988,8 @@ def TestObservatory(api):
 @contextmanager
 def SetupXcode(api):
   # See cr-buildbucket.cfg for how the version is passed in.
-  # https://github.com/flutter/infra/blob/master/config/cr-buildbucket.cfg#L148
-  with api.osx_sdk('ios'):
+  # https://github.com/flutter/infra/blob/35f51ea4bfc91966b41d988f6028e34449aa4279/config/generated/flutter/luci/cr-buildbucket.cfg#L7176-L7203
+  with api.flutter_osx_sdk('ios'):
     yield
 
 
