@@ -17,8 +17,8 @@ class AddhocValidationApi(recipe_api.RecipeApi):
     """Returns the list of accepted validations."""
     return [
         'analyze', 'customer_testing', 'docs', 'fuchsia_precache',
-        'tool_coverage', 'web_smoke_test', 'verify_binaries_codesigned',
-        'build_gallery'
+        'tool_coverage', 'web_e2e_test', 'web_smoke_test',
+        'verify_binaries_codesigned', 'build_gallery'
     ]
 
   def run(self, name, validation, env, env_prefixes, secrets=None):
