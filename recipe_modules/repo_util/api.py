@@ -131,6 +131,9 @@ class RepoUtilApi(recipe_api.RecipeApi):
             re.sub('refs\/pull\/|\/head', '', git_ref),
         'LUCI_BRANCH':
             self.m.properties.get('release_ref', '').replace('refs/heads/', ''),
+        'OS':
+            'linux' if self.m.platform.name == 'linux' else (
+                'darwin' if self.m.platform.name == 'mac' else 'win')
     }
     env_prefixes = {'PATH': [flutter_bin, dart_bin]}
     return env, env_prefixes

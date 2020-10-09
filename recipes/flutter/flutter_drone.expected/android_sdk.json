@@ -304,6 +304,7 @@
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
+      "OS": "linux",
       "PUB_CACHE": "[CACHE]/.pub-cache",
       "SHARD": null,
       "SUBSHARD": null
@@ -333,6 +334,7 @@
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
+      "OS": "linux",
       "PUB_CACHE": "[CACHE]/.pub-cache",
       "SHARD": null,
       "SUBSHARD": null
@@ -363,6 +365,7 @@
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
+      "OS": "linux",
       "PUB_CACHE": "[CACHE]/.pub-cache",
       "SHARD": null,
       "SUBSHARD": null

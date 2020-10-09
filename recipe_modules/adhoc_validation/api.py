@@ -17,7 +17,8 @@ class AddhocValidationApi(recipe_api.RecipeApi):
     """Returns the list of accepted validations."""
     return [
         'analyze', 'customer_testing', 'docs', 'fuchsia_precache',
-        'tool_coverage', 'web_smoke_test', 'verify_binaries_codesigned'
+        'tool_coverage', 'web_smoke_test', 'verify_binaries_codesigned',
+        'build_gallery'
     ]
 
   def run(self, name, validation, env, env_prefixes, secrets=None):
@@ -43,11 +44,16 @@ class AddhocValidationApi(recipe_api.RecipeApi):
         self.m.step('Set execute permission', ['chmod', '755', resource_name])
       elif self.m.platform.is_win:
         resource_name = self.resource('%s.bat' % validation)
-      with self.m.context(env=env, env_prefixes=env_prefixes):
-        dep_list = [d['dependency'] for d in deps]
-        if 'xcode' in dep_list:
-          with self.m.osx_sdk('ios'):
-            self.m.flutter_deps.swift()
+      dep_list = [d['dependency'] for d in deps]
+      if 'xcode' in dep_list:
+        with self.m.osx_sdk('ios'):
+          self.m.flutter_deps.swift()
+          checkout_path = self.m.path['start_dir'].join('flutter')
+          self.m.flutter_deps.gems(
+            env, env_prefixes, checkout_path.join('dev', 'ci', 'mac')
+          )
+          with self.m.context(env=env, env_prefixes=env_prefixes):
             self.m.step(validation, [resource_name])
-        else:
+      else:
+        with self.m.context(env=env, env_prefixes=env_prefixes):
           self.m.step(validation, [resource_name])

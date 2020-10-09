@@ -128,6 +128,7 @@
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
+      "OS": "linux",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -149,6 +150,7 @@
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
+      "OS": "linux",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -169,6 +171,7 @@
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
+      "OS": "linux",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
@@ -195,6 +198,7 @@
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
+      "OS": "linux",
       "PUB_CACHE": "[CACHE]/.pub-cache"
     },
     "env_prefixes": {
