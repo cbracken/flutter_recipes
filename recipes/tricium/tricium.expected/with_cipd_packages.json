@@ -49,6 +49,20 @@
     ]
   },
   {
+    "cmd": [
+      "git",
+      "config",
+      "fetch.uriprotocols",
+      "https"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "infra_step": true,
+    "name": "fetch master.set fetch.uriprotocols",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
     "cmd": [],
     "name": "fetch master.cache",
     "~followup_annotations": [
@@ -97,6 +111,20 @@
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
     "infra_step": true,
     "name": "fetch master.cache.remote set-url",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "config",
+      "fetch.uriprotocols",
+      "https"
+    ],
+    "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
+    "infra_step": true,
+    "name": "fetch master.cache.set fetch.uriprotocols",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -301,6 +329,17 @@
     "name": "git remote"
   },
   {
+    "cmd": [
+      "git",
+      "config",
+      "fetch.uriprotocols",
+      "https"
+    ],
+    "cwd": "[START_DIR]/recipes",
+    "infra_step": true,
+    "name": "set fetch.uriprotocols"
+  },
+  {
     "cmd": [],
     "name": "cache"
   },
@@ -346,6 +385,20 @@
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
     "infra_step": true,
     "name": "cache.remote set-url",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "config",
+      "fetch.uriprotocols",
+      "https"
+    ],
+    "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
+    "infra_step": true,
+    "name": "cache.set fetch.uriprotocols",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
