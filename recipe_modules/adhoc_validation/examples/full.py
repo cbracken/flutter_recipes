@@ -11,7 +11,8 @@ DEPS = [
 
 
 def RunSteps(api):
-  api.adhoc_validation.run('dart analyze', 'analyze', {}, {})
+  validation = api.properties.get('validation', 'analyze')
+  api.adhoc_validation.run('dart analyze', validation, {}, {})
 
 
 def GenTests(api):
@@ -22,3 +23,8 @@ def GenTests(api):
       api.properties(dependencies=[{"dependency": "xcode"}])
   )
   yield api.test('mac_nodeps', api.platform.name('mac'))
+  yield api.test(
+      'invalid_validation',
+      api.properties(validation='invalid'),
+      api.expect_exception('AssertionError'),
+  )

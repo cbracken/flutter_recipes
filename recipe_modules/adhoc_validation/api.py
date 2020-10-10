@@ -32,7 +32,9 @@ class AddhocValidationApi(recipe_api.RecipeApi):
       env_prefixes(dict):  Current environment prefixes variables.
       secrets(dict): The key is the name of the secret and value is the path to kms.
     """
-    assert (validation in self.available_validations())
+    if validation not in self.available_validations():
+      msg = validation + ' is not listed in available_validations.'
+      raise AssertionError(msg)
     secrets = secrets or {}
     with self.m.step.nest(name):
       resource_name = ''
