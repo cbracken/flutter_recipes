@@ -9,7 +9,6 @@ DEPS = [
     'recipe_engine/path',
     'recipe_engine/platform',
     'recipe_engine/step',
-    'recipe_engine/version',
     ]
 
 PROPERTIES = {
@@ -18,6 +17,8 @@ PROPERTIES = {
     param_name='sdk_properties',
     kind=ConfigGroup(  # pylint: disable=line-too-long
       iphoneos_sdk=Single(str),
+      iphonesimulator_sdk=Single(str),
+      ld=Single(str),
     ), default={},
   )
 }

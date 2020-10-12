@@ -1,5 +1,12 @@
 [
   {
+    "cmd": [
+      "do",
+      "stuff"
+    ],
+    "name": "inner step"
+  },
+  {
     "name": "$result"
   }
 ]

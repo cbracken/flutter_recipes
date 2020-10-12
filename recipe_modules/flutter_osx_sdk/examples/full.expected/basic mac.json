@@ -54,6 +54,13 @@
   },
   {
     "cmd": [
+      "do",
+      "stuff"
+    ],
+    "name": "inner step"
+  },
+  {
+    "cmd": [
       "sudo",
       "xcode-select",
       "--reset"

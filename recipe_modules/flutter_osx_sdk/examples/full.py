@@ -11,7 +11,7 @@ DEPS = [
 
 def RunSteps(api):
   with api.flutter_osx_sdk('mac'):
-    pass
+    api.step('inner step', ['do', 'stuff'])
 
 def GenTests(api):
   yield api.test('basic')
@@ -35,6 +35,8 @@ def GenTests(api):
     },
     '$flutter/flutter_osx_sdk': {
       'iphoneos_sdk': '0xDEADBEEF',
+      'iphonesimulator_sdk': '0xDEADBEEF',
+      'ld': '0xDEADBEEF',
     },
   }
   yield api.test(
