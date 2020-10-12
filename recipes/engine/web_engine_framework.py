@@ -17,6 +17,7 @@ DEPS = [
     'depot_tools/gclient',
     'depot_tools/gsutil',
     'flutter/display_util',
+    'flutter/os_utils',
     'flutter/repo_util',
     'flutter/flutter_deps',
     'flutter/shard_util',
@@ -83,6 +84,9 @@ def RunSteps(api, properties, env_properties):
   if properties.clobber:
     api.file.rmtree('Clobber cache', cache_root)
   api.file.rmtree('Clobber build output', checkout.join('out'))
+
+  # Collect memory/cpu/process before task execution.
+  api.os_utils.collect_os_info()
 
   api.file.ensure_directory('Ensure checkout cache', cache_root)
   api.goma.ensure()
@@ -169,7 +173,8 @@ def RunSteps(api, properties, env_properties):
         builds=builds,
         raise_on_failure=True,
     )
-
+  # Collect memory/cpu/process after task execution.
+  api.os_utils.collect_os_info()
 
 def schedule_builds(api, isolated_hash, ref, url):
   """Schedules one subbuild per subshard."""

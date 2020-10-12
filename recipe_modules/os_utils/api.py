@@ -35,6 +35,11 @@ class FlutterDepsApi(recipe_api.RecipeApi):
           ]
       )
 
+  def collect_os_info(self):
+    """Collects meminfo, cpu, processes for mac"""
+    if self.m.platform.is_mac:
+      self.m.step('OS info', cmd=['top', '-l', '3', '-n30', '-o', 'mem'])
+
   def kill_win_processes(self):
     """Kills windows processes.
 

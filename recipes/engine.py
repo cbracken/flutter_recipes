@@ -1515,6 +1515,9 @@ def RunSteps(api, properties, env_properties):
 
   api.file.rmtree('Clobber build output', checkout.join('out'))
 
+  # Collect memory/cpu/process before task execution.
+  api.os_utils.collect_os_info()
+
   api.file.ensure_directory('Ensure checkout cache', cache_root)
   api.goma.ensure()
   dart_bin = checkout.join(
@@ -1591,6 +1594,9 @@ def RunSteps(api, properties, env_properties):
 
     if api.platform.is_win:
       BuildWindows(api)
+
+  # Collect memory/cpu/process after task execution.
+  api.os_utils.collect_os_info()
 
 
 # pylint: disable=line-too-long

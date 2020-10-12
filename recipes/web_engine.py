@@ -18,6 +18,7 @@ DEPS = [
     'depot_tools/git',
     'depot_tools/gsutil',
     'depot_tools/osx_sdk',
+    'flutter/os_utils',
     'flutter/json_util',
     'flutter/repo_util',
     'flutter/yaml',
@@ -210,6 +211,9 @@ def RunSteps(api, properties, env_properties):
     api.file.rmtree('Clobber cache', cache_root)
   api.file.rmtree('Clobber build output', checkout.join('out'))
 
+  # Collect memory/cpu/process before task execution.
+  api.os_utils.collect_os_info()
+
   api.file.ensure_directory('Ensure checkout cache', cache_root)
   api.goma.ensure()
   dart_bin = checkout.join('third_party', 'dart', 'tools', 'sdks', 'dart-sdk',
@@ -322,6 +326,8 @@ def RunSteps(api, properties, env_properties):
           api.step('felt test chrome', felt_test)
           UploadFailingGoldens(api, checkout)
 
+  # Collect memory/cpu/process after task execution.
+  api.os_utils.collect_os_info()
 
 def GenTests(api):
   golden_yaml_file = {'repository': 'repo', 'revision': 'b6efc758'}

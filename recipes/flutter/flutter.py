@@ -15,6 +15,7 @@ DEPS = [
     'flutter/android_sdk',
     'flutter/adhoc_validation',
     'flutter/json_util',
+    'flutter/os_utils',
     'flutter/repo_util',
     'flutter/shard_util',
     'flutter/flutter_deps',
@@ -40,6 +41,9 @@ def RunSteps(api):
         raise_on_failure=True,
     )
     return
+
+  # Collect memory/cpu/process before task execution.
+  api.os_utils.collect_os_info()
 
   # Trigger validation tests. This is to optimize resources usage
   # when don't need to run in shards.
@@ -70,6 +74,8 @@ def RunSteps(api):
           api.properties.get('secrets', {})
       )
 
+  # Collect memory/cpu/process after task execution.
+  api.os_utils.collect_os_info()
 
 def GenTests(api):
   yield api.test(
