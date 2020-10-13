@@ -1,0 +1,65 @@
+[
+  {
+    "cmd": [
+      "luci-auth",
+      "token",
+      "-scopes",
+      "https://www.googleapis.com/auth/cloud-platform",
+      "-lifetime",
+      "3m"
+    ],
+    "infra_step": true,
+    "name": "get access token for default account"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "extra.secret.token.should.not.be.logged",
+      "[CLEANUP]/tmp_tmp_1"
+    ],
+    "infra_step": true,
+    "name": "write token"
+  },
+  {
+    "cmd": [],
+    "name": "Deploy docs"
+  },
+  {
+    "cmd": [
+      "chmod",
+      "755",
+      "RECIPE_MODULE[flutter::firebase]/resources/firebase_deploy.sh"
+    ],
+    "cwd": "[START_DIR]/flutter/dev/docs",
+    "env": {
+      "GCP_PROJECT": "myproject",
+      "TOKEN_PATH": "[CLEANUP]/tmp_tmp_1"
+    },
+    "name": "Deploy docs.Set execute permission",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_MODULE[flutter::firebase]/resources/firebase_deploy.sh"
+    ],
+    "cwd": "[START_DIR]/flutter/dev/docs",
+    "env": {
+      "GCP_PROJECT": "myproject",
+      "TOKEN_PATH": "[CLEANUP]/tmp_tmp_1"
+    },
+    "name": "Deploy docs.Firebase deploy",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]
