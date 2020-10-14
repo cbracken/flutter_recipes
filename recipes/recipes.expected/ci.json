@@ -371,8 +371,7 @@
       "--no-commit-id",
       "--name-only",
       "-r",
-      "HEAD",
-      "-z"
+      "HEAD"
     ],
     "cwd": "[START_DIR]/recipes",
     "name": "get_affected_recipes.git diff-tree",
