@@ -11,8 +11,8 @@ DEPS = [
 
 
 def RunSteps(api):
-  validation = api.properties.get('validation', 'analyze')
-  api.adhoc_validation.run('dart analyze', validation, {}, {})
+  validation = api.properties.get('validation', 'docs')
+  api.adhoc_validation.run('Docs', validation, {}, {})
 
 
 def GenTests(api):

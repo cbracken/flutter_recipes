@@ -52,10 +52,19 @@ class AddhocValidationApi(recipe_api.RecipeApi):
           self.m.flutter_deps.swift()
           checkout_path = self.m.path['start_dir'].join('flutter')
           self.m.flutter_deps.gems(
-            env, env_prefixes, checkout_path.join('dev', 'ci', 'mac')
+              env, env_prefixes, checkout_path.join('dev', 'ci', 'mac')
           )
           with self.m.context(env=env, env_prefixes=env_prefixes):
             self.m.step(validation, [resource_name])
       else:
         with self.m.context(env=env, env_prefixes=env_prefixes):
           self.m.step(validation, [resource_name])
+          if validation == 'docs':
+            docs_path = self.m.path['start_dir'].join('flutter', 'dev', 'docs')
+            project = self.m.properties.get('firebase_project')
+            self.m.firebase.deploy_docs(
+                env=env,
+                env_prefixes=env_prefixes,
+                docs_path=docs_path,
+                project=project
+            )

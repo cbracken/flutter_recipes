@@ -1,15 +1,15 @@
 [
   {
     "cmd": [],
-    "name": "dart analyze"
+    "name": "Docs"
   },
   {
     "cmd": [
       "chmod",
       "755",
-      "RECIPE_MODULE[flutter::adhoc_validation]/resources/analyze.sh"
+      "RECIPE_MODULE[flutter::adhoc_validation]/resources/docs.sh"
     ],
-    "name": "dart analyze.Set execute permission",
+    "name": "Docs.Set execute permission",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -28,7 +28,7 @@
       "/path/to/tmp/json"
     ],
     "infra_step": true,
-    "name": "dart analyze.ensure_installed",
+    "name": "Docs.ensure_installed",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -56,7 +56,7 @@
       "[CACHE]/osx_sdk/XCode.app"
     ],
     "infra_step": true,
-    "name": "dart analyze.install xcode",
+    "name": "Docs.install xcode",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -69,14 +69,14 @@
       "[CACHE]/osx_sdk/XCode.app"
     ],
     "infra_step": true,
-    "name": "dart analyze.select XCode",
+    "name": "Docs.select XCode",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
     "cmd": [],
-    "name": "dart analyze.Swift deps",
+    "name": "Docs.Swift deps",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -94,7 +94,7 @@
       "-json-output",
       "/path/to/tmp/json"
     ],
-    "name": "dart analyze.Swift deps.ensure_installed",
+    "name": "Docs.Swift deps.ensure_installed",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -122,7 +122,7 @@
       "[CACHE]/osx_sdk/XCode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift"
     ],
     "infra_step": true,
-    "name": "dart analyze.Swift deps.Copy swift",
+    "name": "Docs.Swift deps.Copy swift",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -139,7 +139,7 @@
       "[CACHE]/osx_sdk/XCode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0"
     ],
     "infra_step": true,
-    "name": "dart analyze.Swift deps.Copy swift-5.0",
+    "name": "Docs.Swift deps.Copy swift-5.0",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -155,7 +155,7 @@
       "[CACHE]/osx_sdk/XCode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
     ],
     "infra_step": true,
-    "name": "dart analyze.Swift deps.List directory",
+    "name": "Docs.Swift deps.List directory",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LOG_END@listdir@@@"
@@ -163,9 +163,9 @@
   },
   {
     "cmd": [
-      "RECIPE_MODULE[flutter::adhoc_validation]/resources/analyze.sh"
+      "RECIPE_MODULE[flutter::adhoc_validation]/resources/docs.sh"
     ],
-    "name": "dart analyze.analyze",
+    "name": "Docs.docs",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -177,7 +177,7 @@
       "--reset"
     ],
     "infra_step": true,
-    "name": "dart analyze.reset XCode",
+    "name": "Docs.reset XCode",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]

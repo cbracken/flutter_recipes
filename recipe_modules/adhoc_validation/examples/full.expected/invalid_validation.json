@@ -8,7 +8,7 @@
       "",
       "Traceback (most recent call last):",
       "  File \"RECIPE_REPO[flutter]/recipe_modules/adhoc_validation/examples/full.py\", line 15, in RunSteps",
-      "    api.adhoc_validation.run('dart analyze', validation, {}, {})",
+      "    api.adhoc_validation.run('Docs', validation, {}, {})",
       "  File \"RECIPE_REPO[flutter]/recipe_modules/adhoc_validation/api.py\", line 37, in run",
       "    raise AssertionError(msg)",
       "AssertionError: invalid is not listed in available_validations."
