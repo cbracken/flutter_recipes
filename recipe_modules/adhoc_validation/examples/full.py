@@ -17,7 +17,10 @@ def RunSteps(api):
 
 def GenTests(api):
   yield api.test('win', api.platform.name('win'))
-  yield api.test('linux', api.platform.name('linux'))
+  yield api.test(
+      'linux', api.platform.name('linux'),
+      api.properties(firebase_project='myproject')
+  )
   yield api.test(
       'mac', api.platform.name('mac'),
       api.properties(dependencies=[{"dependency": "xcode"}])

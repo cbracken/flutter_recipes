@@ -70,7 +70,7 @@
     ],
     "cwd": "[START_DIR]/flutter/dev/docs",
     "env": {
-      "GCP_PROJECT": null,
+      "GCP_PROJECT": "myproject",
       "TOKEN_PATH": "[CLEANUP]/tmp_tmp_1"
     },
     "name": "Docs.Deploy docs.Set execute permission",
@@ -84,7 +84,7 @@
     ],
     "cwd": "[START_DIR]/flutter/dev/docs",
     "env": {
-      "GCP_PROJECT": null,
+      "GCP_PROJECT": "myproject",
       "TOKEN_PATH": "[CLEANUP]/tmp_tmp_1"
     },
     "name": "Docs.Deploy docs.Firebase deploy",

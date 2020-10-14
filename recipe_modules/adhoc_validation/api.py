@@ -59,7 +59,7 @@ class AddhocValidationApi(recipe_api.RecipeApi):
       else:
         with self.m.context(env=env, env_prefixes=env_prefixes):
           self.m.step(validation, [resource_name])
-          if validation == 'docs':
+          if validation == 'docs' and self.m.properties.get('firebase_project'):
             docs_path = self.m.path['start_dir'].join('flutter', 'dev', 'docs')
             project = self.m.properties.get('firebase_project')
             self.m.firebase.deploy_docs(
