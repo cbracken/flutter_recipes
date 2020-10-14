@@ -60,7 +60,6 @@ def Build(api, config, *targets):
     name = 'build %s' % ' '.join([config] + list(targets))
     api.step(name, ninja_args)
 
-
 def FormatAndDartTest(api):
   checkout = GetCheckoutPath(api)
   with api.context(cwd=checkout.join('flutter')):
@@ -90,7 +89,7 @@ def DownloadFirefoxDriver(api):
   checkout = GetCheckoutPath(api)
   # Download the driver for Firefox.
   firefox_driver_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                                      'drivers', 'firefox')
+                                     'drivers', 'firefox')
   pkgdriver = api.cipd.EnsureFile()
   pkgdriver.add_package('flutter_internal/browser-drivers/firefoxdriver-linux',
                         'latest')
@@ -111,7 +110,7 @@ def DownloadChromeAndDriver(api, chrome_path_84):
   # Download the driver for Chrome 84.
   chrome_driver_84_path = checkout.join('flutter', 'lib', 'web_ui',
                                         '.dart_tool', 'drivers', 'chrome', '84')
-  chrome_pkgdriver_84 = api.cipd.EnsureFile()
+  chrome_pkgdriver_84= api.cipd.EnsureFile()
   chrome_pkgdriver_84.add_package(
       'flutter_internal/browser-drivers/chrome/${platform}', 'latest-84')
   api.cipd.ensure(chrome_driver_84_path, chrome_pkgdriver_84)
@@ -120,19 +119,18 @@ def DownloadChromeAndDriver(api, chrome_path_84):
   # The binary 741412 has major version 82.
   # TODO: remove this version once 84 start working with no issues.
   chrome_path_82 = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                                 'chrome', '741412')
+                              'chrome', '741412')
   chrome_pkg_82 = api.cipd.EnsureFile()
   chrome_pkg_82.add_package('flutter_internal/browsers/chrome-linux', 'latest')
   api.cipd.ensure(chrome_path_82, chrome_pkg_82)
   # Download the driver for Chrome 82.
   # TODO: remove this version once 84 start working with no issues.
-  chrome_driver_82_path = checkout.join('flutter', 'lib', 'web_ui',
-                                        '.dart_tool', 'drivers', 'chrome')
+  chrome_driver_82_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
+                                     'drivers', 'chrome')
   chrome_pkgdriver_82 = api.cipd.EnsureFile()
   chrome_pkgdriver_82.add_package(
       'flutter_internal/browser-drivers/chromedriver-linux', 'latest')
   api.cipd.ensure(chrome_driver_82_path, chrome_pkgdriver_82)
-
 
 def CloneGoldens(api):
   builder_root = api.path['cache'].join('builder')
@@ -162,54 +160,47 @@ def CloneGoldens(api):
     revision_number = golden_lock_content['revision']
   with api.context(cwd=goldens):
     api.git.checkout(
-        repo,
-        dir_path=goldens,
-        ref=revision_number,
-        recursive=True,
-        set_got_revision=True)
+      repo,
+      dir_path=goldens,
+      ref=revision_number,
+      recursive=True,
+      set_got_revision=True
+    )
   golden_files = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
                                'goldens')
   api.file.copytree('copy goldens', goldens, golden_files)
 
-
-def UploadFailingGoldens(api, checkout, browser):
-  logs_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                            'test_results')
-  tests_info_file_path = logs_path.join('info.txt')
-  api.file.write_text(
-      'write info file',
-      tests_info_file_path,
-      'tests for %s' % api.platform.name,
-      'tests for windows',
-  )
-
-  if api.properties.get('gcs_goldens_bucket'):
-    if browser == 'chrome':
-      bucket_id = api.buildbucket.build.id
-    else:
-      bucket_id = str(api.buildbucket.build.id) + browser
-
-    api.gsutil.upload(
-        bucket=api.properties['gcs_goldens_bucket'],
-        source=logs_path,
-        dest='%s/%s' % ('web_engine', bucket_id),
-        link_name='archive goldens',
-        args=['-r'],
-        multithreaded=True,
-        name='upload goldens %s' % bucket_id,
-        unauthenticated_url=True)
-    html_files = api.file.glob_paths(
-        'html goldens',
-        source=logs_path,
-        pattern='*.html',
-        test_data=('a.html',)).get_result()
-    with api.step.nest('Failed golden links') as presentation:
-      for html_file in html_files:
-        base_name = api.path.basename(html_file)
-        url = 'https://storage.googleapis.com/%s/web_engine/%s/%s' % (
-            api.properties['gcs_goldens_bucket'], bucket_id, base_name)
-        presentation.links[base_name] = url
-
+def UploadFailingGoldens(api, checkout):
+    logs_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
+                              'test_results')
+    tests_info_file_path = logs_path.join('info.txt')
+    api.file.write_text('write info file',
+                        tests_info_file_path,
+                        'tests for %s' % api.platform.name,
+                        'tests for windows',
+                       )
+    if api.properties.get('gcs_goldens_bucket') and not api.runtime.is_experimental:
+      api.gsutil.upload(
+          bucket=api.properties['gcs_goldens_bucket'],
+          source=logs_path,
+          dest='%s/%s' % ('web_engine', api.buildbucket.build.id),
+          link_name='archive goldens',
+          args=['-r'],
+          multithreaded=True,
+          name='upload goldens %s' % api.buildbucket.build.id,
+          unauthenticated_url=True)
+      html_files = api.file.glob_paths(
+         'html goldens',
+         source=logs_path,
+         pattern='*.html',
+         test_data=('a.html',)).get_result()
+      with api.step.nest('Failed golden links') as presentation:
+        for html_file in html_files:
+          base_name = api.path.basename(html_file)
+          url = 'https://storage.googleapis.com/%s/web_engine/%s/%s' % (
+              api.properties['gcs_goldens_bucket'],
+              api.buildbucket.build.id, base_name)
+          presentation.links[base_name] = url
 
 def RunSteps(api, properties, env_properties):
   """Steps to checkout flutter engine and execute web tests."""
@@ -259,9 +250,8 @@ def RunSteps(api, properties, env_properties):
     with api.context(cwd=dart_sdk_dir):
       # The default fetch remote is a local dir, so explicitly fetch from
       # upstream remote
-      api.step(
-          'Fetch dart tags',
-          ['git', 'fetch', 'https://dart.googlesource.com/sdk.git', '--tags'])
+      api.step('Fetch dart tags',
+              ['git', 'fetch', 'https://dart.googlesource.com/sdk.git', '--tags'])
       api.step('List all tags', ['git', 'tag', '--list'])
 
     api.gclient.runhooks()
@@ -299,10 +289,10 @@ def RunSteps(api, properties, env_properties):
       api.step('felt licenses', felt_licenses)
       if api.platform.is_win:
         chrome_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                                    'chrome', '768975')
+                                       'chrome', '768975')
       if api.platform.is_mac:
         chrome_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                                    'chrome', '768985')
+                                       'chrome', '768985')
         additional_args_safari_desktop = ['--browser', 'safari']
         felt_test_safari_desktop = copy.deepcopy(felt_cmd)
         felt_test_safari_desktop.append('test')
@@ -319,28 +309,25 @@ def RunSteps(api, properties, env_properties):
         felt_test_firefox = copy.deepcopy(felt_cmd)
         felt_test_firefox.append('test')
         felt_test_firefox.extend(additional_args_firefox)
-        with recipe_api.defer_results():
-          api.step('felt test firefox', felt_test_firefox)
-          UploadFailingGoldens(api, checkout, 'firefox')
+        api.step('felt test firefox', felt_test_firefox)
         chrome_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                                    'chrome', '768968')
+                                       'chrome', '768968')
       DownloadChromeAndDriver(api, chrome_path)
       felt_test = copy.deepcopy(felt_cmd)
       felt_test.append('test')
       felt_test.extend(additional_args)
       if api.platform.is_mac:
-        with SetupXcode(api):
-          with recipe_api.defer_results():
-            api.step('felt ios-safari test', felt_test)
-            UploadFailingGoldens(api, checkout, 'ios-safari')
+          with SetupXcode(api):
+            with recipe_api.defer_results():
+              api.step('felt ios-safari test',felt_test)
+              UploadFailingGoldens(api, checkout)
       else:
         with recipe_api.defer_results():
           api.step('felt test chrome', felt_test)
-          UploadFailingGoldens(api, checkout, 'chrome')
+          UploadFailingGoldens(api, checkout)
 
   # Collect memory/cpu/process after task execution.
   api.os_utils.collect_os_info()
-
 
 def GenTests(api):
   golden_yaml_file = {'repository': 'repo', 'revision': 'b6efc758'}
@@ -348,8 +335,7 @@ def GenTests(api):
       goma_jobs='200') + api.platform('linux', 64)
   yield api.test('windows-post-submit') + api.properties(
       goma_jobs='200') + api.platform('win', 32)
-  yield api.test(
-      'mac-post-submit',
+  yield api.test('mac-post-submit',
       api.step_data('read yaml.parse', api.json.output(golden_yaml_file)),
       api.properties(goma_jobs='200'), api.platform('mac', 64))
   yield api.test('linux-pre-submit') + api.properties(
