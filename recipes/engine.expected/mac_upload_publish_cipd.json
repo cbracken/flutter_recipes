@@ -1,6 +1,17 @@
 [
   {
     "cmd": [
+      "top",
+      "-l",
+      "3",
+      "-n30",
+      "-o",
+      "mem"
+    ],
+    "name": "OS info"
+  },
+  {
+    "cmd": [
       "vpython",
       "-u",
       "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
@@ -11,17 +22,6 @@
     ],
     "infra_step": true,
     "name": "Clobber build output"
-  },
-  {
-    "cmd": [
-      "top",
-      "-l",
-      "3",
-      "-n30",
-      "-o",
-      "mem"
-    ],
-    "name": "OS info"
   },
   {
     "cmd": [

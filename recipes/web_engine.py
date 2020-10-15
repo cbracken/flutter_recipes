@@ -203,6 +203,9 @@ def UploadFailingGoldens(api, checkout):
           presentation.links[base_name] = url
 
 def RunSteps(api, properties, env_properties):
+  # Collect memory/cpu/process before task execution.
+  api.os_utils.collect_os_info()
+
   """Steps to checkout flutter engine and execute web tests."""
   cache_root = api.path['cache'].join('builder')
   checkout = GetCheckoutPath(api)
@@ -210,9 +213,6 @@ def RunSteps(api, properties, env_properties):
   if properties.clobber:
     api.file.rmtree('Clobber cache', cache_root)
   api.file.rmtree('Clobber build output', checkout.join('out'))
-
-  # Collect memory/cpu/process before task execution.
-  api.os_utils.collect_os_info()
 
   api.file.ensure_directory('Ensure checkout cache', cache_root)
   api.goma.ensure()

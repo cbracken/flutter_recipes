@@ -39,6 +39,7 @@ def RunShard(api, env, env_prefixes, checkout_path):
 def RunSteps(api):
   # Collect memory/cpu/process before task execution.
   api.os_utils.collect_os_info()
+
   checkout_path = api.path['start_dir'].join('flutter')
   api.repo_util.checkout(
       'flutter',
