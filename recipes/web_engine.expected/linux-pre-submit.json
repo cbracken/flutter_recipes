@@ -891,6 +891,129 @@
   },
   {
     "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "tests for linux",
+      "[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/test_results/info.txt"
+    ],
+    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "write info file",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@info.txt@tests for linux@@@",
+      "@@@STEP_LOG_END@info.txt@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "-m",
+      "----",
+      "cp",
+      "-r",
+      "[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/test_results",
+      "gs://mybucket/web_engine/0/firefox"
+    ],
+    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload goldens 0",
+    "~followup_annotations": [
+      "@@@STEP_LINK@archive goldens@https://console.cloud.google.com/storage/browser/mybucket/web_engine/0/firefox@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "glob",
+      "[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/test_results",
+      "*.html"
+    ],
+    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "html goldens",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@glob@[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/test_results/a.html@@@",
+      "@@@STEP_LOG_END@glob@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "Failed golden links",
+    "~followup_annotations": [
+      "@@@STEP_LINK@a.html@https://storage.googleapis.com/mybucket/web_engine/0/firefox/a.html@@@"
+    ]
+  },
+  {
+    "cmd": [
       "cipd",
       "ensure",
       "-root",
@@ -1141,7 +1264,7 @@
       ]
     },
     "infra_step": true,
-    "name": "write info file",
+    "name": "write info file (2)",
     "~followup_annotations": [
       "@@@STEP_LOG_LINE@info.txt@tests for linux@@@",
       "@@@STEP_LOG_END@info.txt@@@"
@@ -1159,7 +1282,7 @@
       "cp",
       "-r",
       "[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/test_results",
-      "gs://mybucket/web_engine/0"
+      "gs://mybucket/web_engine/0/chrome"
     ],
     "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
     "env": {
@@ -1182,9 +1305,9 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload goldens 0",
+    "name": "gsutil upload goldens 0 (2)",
     "~followup_annotations": [
-      "@@@STEP_LINK@archive goldens@https://console.cloud.google.com/storage/browser/mybucket/web_engine/0@@@"
+      "@@@STEP_LINK@archive goldens@https://console.cloud.google.com/storage/browser/mybucket/web_engine/0/chrome@@@"
     ]
   },
   {
@@ -1219,7 +1342,7 @@
       ]
     },
     "infra_step": true,
-    "name": "html goldens",
+    "name": "html goldens (2)",
     "~followup_annotations": [
       "@@@STEP_LOG_LINE@glob@[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/test_results/a.html@@@",
       "@@@STEP_LOG_END@glob@@@"
@@ -1227,9 +1350,9 @@
   },
   {
     "cmd": [],
-    "name": "Failed golden links",
+    "name": "Failed golden links (2)",
     "~followup_annotations": [
-      "@@@STEP_LINK@a.html@https://storage.googleapis.com/mybucket/web_engine/0/a.html@@@"
+      "@@@STEP_LINK@a.html@https://storage.googleapis.com/mybucket/web_engine/0/chrome/a.html@@@"
     ]
   },
   {
