@@ -261,59 +261,6 @@
   },
   {
     "cmd": [
-      "git",
-      "fetch",
-      "https://dart.googlesource.com/sdk.git",
-      "--tags"
-    ],
-    "cwd": "[CACHE]/builder/src/third_party/dart",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "Fetch dart tags"
-  },
-  {
-    "cmd": [
-      "git",
-      "tag",
-      "--list"
-    ],
-    "cwd": "[CACHE]/builder/src/third_party/dart",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "List all tags"
-  },
-  {
-    "cmd": [
       "python",
       "-u",
       "RECIPE_REPO[depot_tools]/gclient.py",
@@ -2239,7 +2186,7 @@
       "The recipe has crashed at point 'Uncaught exception'!",
       "",
       "Traceback (most recent call last):",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine_1_22_0.py\", line 1529, in RunSteps",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine_1_22_0.py\", line 1519, in RunSteps",
       "    BuildLinux(api)",
       "  File \"RECIPE_REPO[flutter]/recipes/engine_1_22_0.py\", line 704, in BuildLinux",
       "    'out/host_debug_unopt/gen/frontend_server.dart.snapshot',",
