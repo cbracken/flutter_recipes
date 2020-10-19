@@ -107,25 +107,27 @@ class FlutterXcodeApi(recipe_api.RecipeApi):
     )
     symlink_filename = '%s%s.sdk' % (kind, version)
 
-    with self.m.step.nest('set up %s' % symlink_filename):
-      ensureFile = self.m.cipd.EnsureFile()
-      # TODO(LongCatIsLooong): relocate these CIPD packages to reuse
-      # self._ensure_package.
-      ensureFile.add_package(
-        'flutter_internal/mac/%s' % package_name,
-        'sdk_version:%s' % version,
-      )
-      self.m.cipd.ensure(base_path, ensureFile)
+    try:
+      with self.m.step.nest('set up %s' % symlink_filename):
+        ensureFile = self.m.cipd.EnsureFile()
+        # TODO(LongCatIsLooong): relocate these CIPD packages to reuse
+        # self._ensure_package.
+        ensureFile.add_package(
+          'flutter_internal/mac/%s' % package_name,
+          'sdk_version:%s' % version,
+        )
+        self.m.cipd.ensure(base_path, ensureFile)
 
-      # Symlink the sdk folder to the right location in Xcode.
-      src = base_path.join('%s.sdk' % (kind.lower()))
-      dst = self.m.path['cache'].join(
-          'osx_sdk', 'XCode.app', 'Contents', 'Developer', 'Platforms',
-          '%s.platform' % (kind), 'Developer', 'SDKs', symlink_filename
-      )
-      # Fails if this is a directory. This makes sure that we don't touch
-      # the stock SDK.
-      self.m.file.remove('removing existing symlink', dst)
-      self.m.file.symlink('symlinking %s' % (symlink_filename), src, dst)
-    yield
-    self.m.file.remove('removing %s' % (symlink_filename), dst)
+        # Symlink the sdk folder to the right location in Xcode.
+        src = base_path.join('%s.sdk' % (kind.lower()))
+        dst = self.m.path['cache'].join(
+            'osx_sdk', 'XCode.app', 'Contents', 'Developer', 'Platforms',
+            '%s.platform' % (kind), 'Developer', 'SDKs', symlink_filename
+        )
+        # Fails if this is a directory. This makes sure that we don't touch
+        # the stock SDK.
+        self.m.file.remove('removing existing symlink', dst)
+        self.m.file.symlink('symlinking %s' % (symlink_filename), src, dst)
+      yield
+    finally:
+      self.m.file.remove('removing %s' % (symlink_filename), dst)
