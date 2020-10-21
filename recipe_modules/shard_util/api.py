@@ -5,6 +5,7 @@
 DRONE_TIMEOUT_SECS = 3600 * 3  # 3 hours.
 
 from recipe_engine import recipe_api
+from PB.go.chromium.org.luci.buildbucket.proto import common as common_pb2
 
 # Builder names use full platform name instead of short names. We need to
 # map short names to full platform names to be able to identify the drone
@@ -45,11 +46,19 @@ class ShardUtilApi(recipe_api.RecipeApi):
                 self.m.properties.get('$depot_tools/osx_sdk'
                                      ).get('sdk_version')
         }
+      # Drone_dimensions property from the parent builder will override the
+      # default drone properties if not empty.
+      drone_dimensions = self.m.properties.get('drone_dimensions', [])
+      task_dimensions = []
+      for d in drone_dimensions:
+        k, v = d.split('=')
+        task_dimensions.append(common_pb2.RequestedDimension(key=k, value=v))
       platform_name = PLATFORM_TO_NAME.get(self.m.platform.name)
       req = self.m.buildbucket.schedule_request(
           swarming_parent_run_id=self.m.swarming.task_id,
           builder='%s SDK Drone' % platform_name,
           properties=drone_props,
+          dimensions=task_dimensions or None,
           # Having main build and subbuilds with the same priority can lead
           # to a deadlock situation when there are limited resources. For example
           # if we have only 7 mac bots and we get more than 7 new build requests the
