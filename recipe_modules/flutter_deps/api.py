@@ -55,6 +55,9 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         'vpython': self.vpython,
         'android_sdk': self.android_sdk,
         'firebase': self.firebase,
+        'clang': self.clang,
+        'cmake': self.cmake,
+        'ninja': self.ninja,
     }
     for dep in deps:
       if dep.get('dependency') in ['xcode', 'gems']:
@@ -275,4 +278,55 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       )
     paths = env_prefixes.get('PATH', [])
     paths.append(firebase_dir)
+    env_prefixes['PATH'] = paths
+
+  def clang(self, env, env_prefixes, version=None):
+    """Installs clang toolchain.
+
+    Args:
+      env(dict): Current environment variables.
+      env_prefixes(dict):  Current environment prefixes variables.
+    """
+    version = version or 'git_revision:7e9747b50bcb1be28d4a3236571e8050835497a6'
+    clang_path = self.m.path['cache'].join('clang')
+    clang = self.m.cipd.EnsureFile()
+    clang.add_package('fuchsia/third_party/clang/${platform}', version)
+    with self.m.step.nest('Install clang'):
+      self.m.cipd.ensure(clang_path, clang)
+    paths = env_prefixes.get('PATH', [])
+    paths.append(clang_path.join('bin'))
+    env_prefixes['PATH'] = paths
+
+  def cmake(self, env, env_prefixes, version=None):
+    """Installs cmake.
+
+    Args:
+      env(dict): Current environment variables.
+      env_prefixes(dict):  Current environment prefixes variables.
+    """
+    version = version or 'version:3.16.1'
+    cmake_path = self.m.path['cache'].join('cmake')
+    cmake = self.m.cipd.EnsureFile()
+    cmake.add_package('infra/cmake/${platform}', version)
+    with self.m.step.nest('Install cmake'):
+      self.m.cipd.ensure(cmake_path, cmake)
+    paths = env_prefixes.get('PATH', [])
+    paths.append(cmake_path.join('bin'))
+    env_prefixes['PATH'] = paths
+
+  def ninja(self, env, env_prefixes, version=None):
+    """Installs ninja.
+
+    Args:
+      env(dict): Current environment variables.
+      env_prefixes(dict):  Current environment prefixes variables.
+    """
+    version = version or 'version:1.9.0'
+    ninja_path = self.m.path['cache'].join('ninja')
+    ninja = self.m.cipd.EnsureFile()
+    ninja.add_package("infra/ninja/${platform}", version)
+    with self.m.step.nest('Install ninja'):
+      self.m.cipd.ensure(ninja_path, ninja)
+    paths = env_prefixes.get('PATH', [])
+    paths.append(ninja_path)
     env_prefixes['PATH'] = paths
