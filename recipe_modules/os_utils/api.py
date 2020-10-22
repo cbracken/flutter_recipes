@@ -11,7 +11,7 @@ from PB.go.chromium.org.luci.buildbucket.proto import common as common_pb2
 class FlutterDepsApi(recipe_api.RecipeApi):
   """Operating system utilities."""
 
-  def _kill_all(self, name, exe_name):
+  def _kill_win(self, name, exe_name):
     """Kills all the windows processes with a given name.
 
     Args:
@@ -40,27 +40,39 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     if self.m.platform.is_mac:
       self.m.step('OS info', cmd=['top', '-l', '3', '-n30', '-o', 'mem'])
 
-  def kill_win_processes(self):
-    """Kills windows processes.
+  def kill_processes(self):
+    """Kills processes.
 
     Windows uses exclusive file locking.  On LUCI, if these processes remain
     they will cause the build to fail because the builder won't be able to
     clean up.
+
+    Linux and Mac have leaking processes after task executions, potentially
+    causing the build to fail if without clean up.
 
     This might fail if there's not actually a process running, which is
     fine.
 
     If it actually fails to kill the task, the job will just fail anyway.
     """
-    if self.m.platform.is_win:
-      with self.m.step.nest('Killing Windows Processes') as presentation:
-        self._kill_all('stop gradle daemon', 'java.exe')
-        self._kill_all('stop dart', 'dart.exe')
-        self._kill_all('stop adb', 'adb.exe')
-        self._kill_all('stop flutter_tester', 'flutter_tester.exe')
-        # Ensure we always pass this step as killing non existing processes
-        # may create errors.
-        presentation.status = 'SUCCESS'
+    with self.m.step.nest('Killing Processes') as presentation:
+      if self.m.platform.is_win:
+        self._kill_win('stop gradle daemon', 'java.exe')
+        self._kill_win('stop dart', 'dart.exe')
+        self._kill_win('stop adb', 'adb.exe')
+        self._kill_win('stop flutter_tester', 'flutter_tester.exe')
+      elif self.m.platform.is_mac:
+        self.m.step('kill dart', ['killall', '-9', 'dart'], ok_ret='any')
+        self.m.step('kill flutter', ['killall', '-9', 'flutter'], ok_ret='any')
+        self.m.step('kill Chrome', ['killall', '-9', 'Chrome'], ok_ret='any')
+        self.m.step('kill Safari', ['killall', '-9', 'Safari'], ok_ret='any')
+      else:
+        self.m.step('kill chrome', ['pkill', 'chrome'], ok_ret='any')
+        self.m.step('kill dart', ['pkill', 'dart'], ok_ret='any')
+        self.m.step('kill flutter', ['pkill', 'flutter'], ok_ret='any')
+      # Ensure we always pass this step as killing non existing processes
+      # may create errors.
+      presentation.status = 'SUCCESS'
 
   @contextmanager
   def make_temp_directory(self, label):

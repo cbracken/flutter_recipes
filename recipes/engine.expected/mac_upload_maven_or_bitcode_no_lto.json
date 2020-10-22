@@ -13107,6 +13107,54 @@
     "name": "reset XCode (2)"
   },
   {
+    "cmd": [],
+    "name": "Killing Processes"
+  },
+  {
+    "cmd": [
+      "killall",
+      "-9",
+      "dart"
+    ],
+    "name": "Killing Processes.kill dart",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "killall",
+      "-9",
+      "flutter"
+    ],
+    "name": "Killing Processes.kill flutter",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "killall",
+      "-9",
+      "Chrome"
+    ],
+    "name": "Killing Processes.kill Chrome",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "killall",
+      "-9",
+      "Safari"
+    ],
+    "name": "Killing Processes.kill Safari",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
     "cmd": [
       "top",
       "-l",

@@ -1,0 +1,52 @@
+[
+  {
+    "cmd": [],
+    "name": "Killing Processes"
+  },
+  {
+    "cmd": [
+      "pkill",
+      "chrome"
+    ],
+    "name": "Killing Processes.kill chrome",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "dart"
+    ],
+    "name": "Killing Processes.kill dart",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "flutter"
+    ],
+    "name": "Killing Processes.kill flutter",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/tmp_tmp_1"
+    ],
+    "infra_step": true,
+    "name": "temp dir for Create temp directory"
+  },
+  {
+    "name": "$result"
+  }
+]

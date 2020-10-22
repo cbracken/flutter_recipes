@@ -58,8 +58,10 @@ def RunSteps(api):
             'run %s' % task_name, ['dart', 'bin/run.dart', '-t', task_name]
         )
 
-  # This is a noop for non windows tasks.
-  api.os_utils.kill_win_processes()
+  # This is to clean up leaked processes.
+  api.os_utils.kill_processes()
+  # This is to clean up leaked processes.
+  api.os_utils.kill_processes()
 
 
 def GenTests(api):

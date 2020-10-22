@@ -1584,6 +1584,8 @@ def RunSteps(api, properties, env_properties):
     if api.platform.is_win:
       BuildWindows(api)
 
+  # This is to clean up leaked processes.
+  api.os_utils.kill_processes()
   # Collect memory/cpu/process after task execution.
   api.os_utils.collect_os_info()
 

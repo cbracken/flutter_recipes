@@ -15833,6 +15833,40 @@
     "name": "Verify exported symbols on release binaries"
   },
   {
+    "cmd": [],
+    "name": "Killing Processes"
+  },
+  {
+    "cmd": [
+      "pkill",
+      "chrome"
+    ],
+    "name": "Killing Processes.kill chrome",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "dart"
+    ],
+    "name": "Killing Processes.kill dart",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "flutter"
+    ],
+    "name": "Killing Processes.kill flutter",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
     "name": "$result"
   }
 ]

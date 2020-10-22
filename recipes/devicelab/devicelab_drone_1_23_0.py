@@ -56,7 +56,7 @@ def RunSteps(api):
         )
 
   # This is a noop for non windows tasks.
-  api.os_utils.kill_win_processes()
+  api.os_utils.kill_processes()
 
 
 def GenTests(api):

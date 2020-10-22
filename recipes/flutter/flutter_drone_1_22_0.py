@@ -64,8 +64,8 @@ def RunSteps(api):
     else:
       RunShard(api, env, env_prefixes, checkout_path)
 
-  # This is a noop for non windows tasks.
-  api.os_utils.kill_win_processes()
+  # This is to clean up leaked processes.
+  api.os_utils.kill_processes()
 
 
 def GenTests(api):

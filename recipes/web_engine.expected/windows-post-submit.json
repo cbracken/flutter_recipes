@@ -975,6 +975,62 @@
     ]
   },
   {
+    "cmd": [],
+    "name": "Killing Processes"
+  },
+  {
+    "cmd": [
+      "taskkill",
+      "/f",
+      "/im",
+      "java.exe",
+      "/t"
+    ],
+    "name": "Killing Processes.stop gradle daemon",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "taskkill",
+      "/f",
+      "/im",
+      "dart.exe",
+      "/t"
+    ],
+    "name": "Killing Processes.stop dart",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "taskkill",
+      "/f",
+      "/im",
+      "adb.exe",
+      "/t"
+    ],
+    "name": "Killing Processes.stop adb",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "taskkill",
+      "/f",
+      "/im",
+      "flutter_tester.exe",
+      "/t"
+    ],
+    "name": "Killing Processes.stop flutter_tester",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
     "name": "$result"
   }
 ]

@@ -173,6 +173,8 @@ def RunSteps(api, properties, env_properties):
         builds=builds,
         raise_on_failure=True,
     )
+  # This is to clean up leaked processes.
+  api.os_utils.kill_processes()
   # Collect memory/cpu/process after task execution.
   api.os_utils.collect_os_info()
 

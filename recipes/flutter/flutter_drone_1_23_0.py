@@ -71,7 +71,7 @@ def RunSteps(api):
       RunShard(api, env, env_prefixes, checkout_path)
 
   # This is a noop for non windows tasks.
-  api.os_utils.kill_win_processes()
+  api.os_utils.kill_processes()
   # Collect memory/cpu/process after task execution.
   api.os_utils.collect_os_info()
 
