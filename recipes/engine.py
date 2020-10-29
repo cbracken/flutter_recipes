@@ -164,7 +164,7 @@ def GetFuchsiaOutputDirs(product, build_mode, target_arch):
   ]
 
 
-def BuildAndTestFuchsia(api, build_script, git_rev):
+def BuildAndPackageFuchsia(api, build_script, git_rev):
   RunGN(
       api, '--fuchsia', '--fuchsia-cpu', 'x64', '--runtime-mode', 'debug',
       '--no-lto'
@@ -176,9 +176,8 @@ def BuildAndTestFuchsia(api, build_script, git_rev):
       '--archs', 'x64', '--runtime-mode', 'debug'
   ]
 
-  if api.platform.is_linux and api.properties.get('test_fuchsia', True):
+  if api.platform.is_linux:
     api.step('Package Fuchsia Artifacts', fuchsia_package_cmd)
-    TestFuchsia(api)
 
   RunGN(
       api, '--fuchsia', '--fuchsia-cpu', 'arm64', '--runtime-mode', 'debug',
@@ -679,140 +678,6 @@ def BuildLinux(api):
   UploadWebSdk(api, archive_name='flutter-web-sdk-linux-x64.zip')
 
 
-def GetFuchsiaBuildId(api):
-  checkout = GetCheckoutPath(api)
-  manifest_path = checkout.join(
-      'fuchsia', 'sdk', 'linux', 'meta', 'manifest.json'
-  )
-  manifest_data = api.file.read_json(
-      'Read manifest', manifest_path, test_data={'id': 123}
-  )
-  return manifest_data['id']
-
-
-def DownloadFuchsiaSystemDeps(
-    api, target_dir, bucket_name, build_id, image_name, packages_name
-):
-  api.gsutil.download(
-      bucket_name, 'development/%s/images/%s' % (build_id, image_name),
-      target_dir
-  )
-  api.gsutil.download(
-      bucket_name, 'development/%s/packages/%s' % (build_id, packages_name),
-      target_dir
-  )
-
-
-def IsolateFuchsiaTestArtifacts(
-    api, checkout, fuchsia_tools, image_name, packages_name, fuchsia_test_script
-):
-  """
-  Gets the system image for the current Fuchsia SDK from cloud storage, adds it
-  to an isolated along with the `pm` and `device-finder` utilities, as well as the
-  flutter_runner_tests and the required flutter unittest FARs (listed in
-  engine/testing/fuchsia/test_fars), and a bash script (in
-  engine/testing/fuchsia/run_tests.sh) to drive the flutter_ctl.
-  """
-  with api.os_utils.make_temp_directory('isolated') as isolated_dir:
-    with api.step.nest('Copy files'):
-      api.file.copy('Copy test script', fuchsia_test_script, isolated_dir)
-      api.file.copy(
-          'Copy device-finder', fuchsia_tools.join('device-finder'),
-          isolated_dir
-      )
-      api.file.copy('Copy pm', fuchsia_tools.join('pm'), isolated_dir)
-      api.file.copy(
-          'Copy flutter_runner far',
-          checkout.join(
-              'out', 'fuchsia_bucket', 'flutter', 'x64', 'debug', 'aot',
-              'flutter_aot_runner-0.far'
-          ), isolated_dir
-      )
-      test_fars_file = checkout.join(
-          'flutter', 'testing', 'fuchsia', 'test_fars'
-      )
-      test_fars_raw = api.file.read_text(
-          'Retrieve list of test FARs', test_fars_file
-      )
-      test_fars = test_fars_raw.split('\n')
-      for far in test_fars:
-        if (len(far) > 0) and (not far.startswith('#')):
-          api.file.copy(
-              'Copy %s to isolated' % far,
-              checkout.join('out', 'fuchsia_debug_x64', far), isolated_dir
-          )
-
-    DownloadFuchsiaSystemDeps(
-        api, isolated_dir, 'fuchsia', GetFuchsiaBuildId(api), image_name,
-        packages_name
-    )
-    isolated = api.isolated.isolated(isolated_dir)
-    isolated.add_dir(isolated_dir)
-    return isolated.archive('Archive Fuchsia Test Isolate')
-
-
-def TestFuchsia(api):
-  """
-  Packages the flutter_runner build artifacts into a FAR, and then sends them
-  and related artifacts to isolated. The isolated is used to create a swarming
-  task that:
-    - Downloads the isolated artifacts
-    - Gets fuchsia_ctl from CIPD
-    - Runs the script to pave, test, and reboot the Fuchsia device
-  """
-  checkout = GetCheckoutPath(api)
-  fuchsia_tools = checkout.join('fuchsia', 'sdk', 'linux', 'tools')
-  image_name = 'generic-x64.tgz'
-  packages_name = 'generic-x64.tar.gz'
-
-  fuchsia_test_script = checkout.join(
-      'flutter', 'testing', 'fuchsia', 'run_tests.sh'
-  )
-
-  isolated_hash = IsolateFuchsiaTestArtifacts(
-      api, checkout, fuchsia_tools, image_name, packages_name,
-      fuchsia_test_script
-  )
-
-  ensure_file = api.cipd.EnsureFile()
-  ensure_file.add_package(
-      'flutter/fuchsia_ctl/${platform}',
-      api.properties.get('fuchsia_ctl_version')
-  )
-
-  request = (
-      api.swarming.task_request().with_name('flutter_fuchsia_unittests'
-                                           ).with_priority(100)
-  )
-
-  request = (
-      request.with_slice(
-          0, request[0].with_cipd_ensure_file(ensure_file).with_command([
-              './run_tests.sh', image_name, packages_name
-          ]).with_dimensions(
-              pool='luci.flutter.tests', device_type='Intel NUC Kit NUC7i5DNHE'
-          ).with_isolated(isolated_hash).with_expiration_secs(3600)
-          .with_io_timeout_secs(3600).with_execution_timeout_secs(3600)
-          .with_idempotent(True).with_containment_type('AUTO')
-      )
-  )
-
-  # Trigger the task request.
-  metadata = api.swarming.trigger('Trigger Fuchsia Tests', requests=[request])
-  # Collect the result of the task by metadata.
-  fuchsia_output = api.path['cleanup'].join('fuchsia_test_output')
-  api.file.ensure_directory('swarming output', fuchsia_output)
-  results = api.swarming.collect(
-      'collect', metadata, output_dir=fuchsia_output, timeout='30m'
-  )
-  api.display_util.display_tasks(
-      'Display builds',
-      results=results,
-      metadata=metadata,
-      raise_on_failure=True
-  )
-
-
 def GetRemoteFileName(exec_path):
   # An example of exec_path is:
   # out/fuchsia_debug_x64/flutter-fuchsia-x64/d4/917f5976.debug
@@ -936,7 +801,7 @@ def BuildFuchsia(api):
   git_rev = api.buildbucket.gitiles_commit.id or 'HEAD'
 
   try:
-    BuildAndTestFuchsia(api, build_script, git_rev)
+    BuildAndPackageFuchsia(api, build_script, git_rev)
   except (api.step.StepFailure, api.step.InfraFailure) as e:
     CancelBuilds(api, builds)
     raise e
@@ -1631,7 +1496,6 @@ def GenTests(api):
                         fuchsia_ctl_version='version:0.0.2',
                         build_host=True,
                         build_fuchsia=True,
-                        test_fuchsia=True,
                         build_android_aot=True,
                         build_android_debug=True,
                         build_android_vulkan=True,
@@ -1714,10 +1578,6 @@ def GenTests(api):
       ),
       collect_build_output,
       api.runtime(is_experimental=True),
-      api.step_data(
-          'Copy files.Retrieve list of test FARs',
-          api.file.read_text('#this is a comment\ntest.far\n'),
-      ),
       api.properties(
           InputProperties(
               clobber=True,
@@ -1727,7 +1587,6 @@ def GenTests(api):
               fuchsia_ctl_version='version:0.0.2',
               build_host=True,
               build_fuchsia=True,
-              test_fuchsia=True,
               build_android_aot=True,
               build_android_debug=True,
               build_android_vulkan=True,
@@ -1754,7 +1613,6 @@ def GenTests(api):
               fuchsia_ctl_version='version:0.0.2',
               build_host=True,
               build_fuchsia=True,
-              test_fuchsia=True,
               build_android_aot=True,
               build_android_debug=True,
               build_android_vulkan=True,
@@ -1785,7 +1643,6 @@ def GenTests(api):
               fuchsia_ctl_version='version:0.0.2',
               build_host=False,
               build_fuchsia=True,
-              test_fuchsia=False,
               build_android_aot=False,
               build_android_jit_release=False,
               build_android_debug=False,
@@ -1866,7 +1723,6 @@ def GenTests(api):
               fuchsia_ctl_version='version:0.0.2',
               build_host=False,
               build_fuchsia=True,
-              test_fuchsia=True,
               build_android_aot=False,
               build_android_debug=False,
               build_android_vulkan=False,
@@ -1900,7 +1756,6 @@ def GenTests(api):
               fuchsia_ctl_version='version:0.0.2',
               build_host=True,
               build_fuchsia=True,
-              test_fuchsia=True,
               build_android_aot=True,
               build_android_debug=True,
               build_android_vulkan=True,
