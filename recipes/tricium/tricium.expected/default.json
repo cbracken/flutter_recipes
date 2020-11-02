@@ -90,6 +90,25 @@
   },
   {
     "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "",
+      "[CACHE]/git/.GUARD_FILE"
+    ],
+    "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
+    "infra_step": true,
+    "name": "fetch master.cache.write guard file",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_LOG_END@.GUARD_FILE@@@"
+    ]
+  },
+  {
+    "cmd": [
       "git",
       "init",
       "--bare"
@@ -156,6 +175,23 @@
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
     "infra_step": true,
     "name": "fetch master.cache.git fetch",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "remove",
+      "[CACHE]/git/.GUARD_FILE"
+    ],
+    "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
+    "infra_step": true,
+    "name": "fetch master.cache.remove guard file",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -364,6 +400,25 @@
   },
   {
     "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "",
+      "[CACHE]/git/.GUARD_FILE"
+    ],
+    "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
+    "infra_step": true,
+    "name": "cache.write guard file",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_END@.GUARD_FILE@@@"
+    ]
+  },
+  {
+    "cmd": [
       "git",
       "init",
       "--bare"
@@ -430,6 +485,23 @@
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
     "infra_step": true,
     "name": "cache.git fetch",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "remove",
+      "[CACHE]/git/.GUARD_FILE"
+    ],
+    "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
+    "infra_step": true,
+    "name": "cache.remove guard file",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
