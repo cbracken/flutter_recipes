@@ -112,6 +112,32 @@
   },
   {
     "cmd": [
+      "luci-auth",
+      "token",
+      "-scopes",
+      "https://www.googleapis.com/auth/cloud-platform",
+      "-lifetime",
+      "3m"
+    ],
+    "infra_step": true,
+    "name": "get access token for default account"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "extra.secret.token.should.not.be.logged",
+      "[CLEANUP]/tmp_tmp_1"
+    ],
+    "infra_step": true,
+    "name": "write token"
+  },
+  {
+    "cmd": [
       "flutter",
       "doctor",
       "--verbose"
@@ -160,7 +186,9 @@
       "dart",
       "bin/run.dart",
       "-t",
-      "abc"
+      "abc",
+      "--service-account-token-file",
+      "[CLEANUP]/tmp_tmp_1"
     ],
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
