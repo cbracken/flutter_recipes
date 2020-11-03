@@ -763,6 +763,19 @@
     ]
   },
   {
+    "cmd": [],
+    "name": "Prepare code signing"
+  },
+  {
+    "cmd": [
+      "unlock_login_keychain.sh"
+    ],
+    "name": "Prepare code signing.unlock login keychain",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
     "name": "$result"
   }
 ]

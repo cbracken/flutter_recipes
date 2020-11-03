@@ -39,15 +39,16 @@ def RunSteps(api):
   api.flutter_deps.required_deps(env, env_prefixes, deps)
   devicelab_path = flutter_path.join('dev', 'devicelab')
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
-    api.step('flutter doctor', ['flutter', 'doctor'])
+    api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
     api.step('pub get', ['pub', 'get'])
     dep_list = [d['dependency'] for d in deps]
     if 'xcode' in dep_list:
+      api.os_utils.clean_derived_data()
+      api.flutter_deps.gems(
+          env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
+      )
       with api.osx_sdk('ios'):
         api.flutter_deps.swift()
-        api.flutter_deps.gems(
-            env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
-        )
         with api.context(env=env, env_prefixes=env_prefixes):
           api.step(
               'run %s' % task_name, ['dart', 'bin/run.dart', '-t', task_name]

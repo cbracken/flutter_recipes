@@ -58,6 +58,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         'clang': self.clang,
         'cmake': self.cmake,
         'ninja': self.ninja,
+        'ios_signing': self.ios_signing,
     }
     for dep in deps:
       if dep.get('dependency') in ['xcode', 'gems']:
@@ -330,3 +331,19 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     paths = env_prefixes.get('PATH', [])
     paths.append(ninja_path)
     env_prefixes['PATH'] = paths
+
+  def ios_signing(self, env, env_prefixes, version=None):
+    """Installs ninja.
+
+    Args:
+      env(dict): Current environment variables.
+      env_prefixes(dict):  Current environment prefixes variables.
+    """
+    with self.m.step.nest('Prepare code signing'):
+      self.m.step('unlock login keychain', ['unlock_login_keychain.sh'])
+      # See go/googler-flutter-signing about how to renew the Apple development
+      # certificate and provisioning profile.
+      env['FLUTTER_XCODE_CODE_SIGN_STYLE'] = 'Manual'
+      env['FLUTTER_XCODE_DEVELOPMENT_TEAM'] = 'S8QB4VV633'
+      env['FLUTTER_XCODE_PROVISIONING_PROFILE_SPECIFIER'
+         ] = 'match Development *'

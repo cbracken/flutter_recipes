@@ -49,6 +49,7 @@ def RunSteps(api):
   api.flutter_deps.cmake(env, env_prefixes)
   api.flutter_deps.ninja(env, env_prefixes)
   api.flutter_deps.clang(env, env_prefixes)
+  api.flutter_deps.ios_signing(env, env_prefixes)
 
 
 def GenTests(api):

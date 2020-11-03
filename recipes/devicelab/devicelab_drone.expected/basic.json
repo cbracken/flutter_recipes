@@ -113,7 +113,8 @@
   {
     "cmd": [
       "flutter",
-      "doctor"
+      "doctor",
+      "--verbose"
     ],
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
