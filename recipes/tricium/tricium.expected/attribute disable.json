@@ -1,7 +1,7 @@
 [
   {
     "cmd": [],
-    "name": "fetch master"
+    "name": "fetch refs/heads/master"
   },
   {
     "cmd": [
@@ -16,7 +16,7 @@
       "[START_DIR]/recipes"
     ],
     "infra_step": true,
-    "name": "fetch master.makedirs",
+    "name": "fetch refs/heads/master.makedirs",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -28,7 +28,7 @@
     ],
     "cwd": "[START_DIR]/recipes",
     "infra_step": true,
-    "name": "fetch master.git init",
+    "name": "fetch refs/heads/master.git init",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -43,7 +43,7 @@
     ],
     "cwd": "[START_DIR]/recipes",
     "infra_step": true,
-    "name": "fetch master.git remote",
+    "name": "fetch refs/heads/master.git remote",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -57,14 +57,14 @@
     ],
     "cwd": "[START_DIR]/recipes",
     "infra_step": true,
-    "name": "fetch master.set fetch.uriprotocols",
+    "name": "fetch refs/heads/master.set fetch.uriprotocols",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
     "cmd": [],
-    "name": "fetch master.cache",
+    "name": "fetch refs/heads/master.cache",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -83,7 +83,7 @@
     ],
     "cwd": "[START_DIR]/recipes",
     "infra_step": true,
-    "name": "fetch master.cache.makedirs",
+    "name": "fetch refs/heads/master.cache.makedirs",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -101,7 +101,7 @@
     ],
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
     "infra_step": true,
-    "name": "fetch master.cache.write guard file",
+    "name": "fetch refs/heads/master.cache.write guard file",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LOG_END@.GUARD_FILE@@@"
@@ -115,7 +115,7 @@
     ],
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
     "infra_step": true,
-    "name": "fetch master.cache.git init",
+    "name": "fetch refs/heads/master.cache.git init",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -129,7 +129,7 @@
     ],
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
     "infra_step": true,
-    "name": "fetch master.cache.remote set-url",
+    "name": "fetch refs/heads/master.cache.remote set-url",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -143,7 +143,7 @@
     ],
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
     "infra_step": true,
-    "name": "fetch master.cache.set fetch.uriprotocols",
+    "name": "fetch refs/heads/master.cache.set fetch.uriprotocols",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -159,7 +159,7 @@
     ],
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
     "infra_step": true,
-    "name": "fetch master.cache.replace fetch configs",
+    "name": "fetch refs/heads/master.cache.replace fetch configs",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -174,7 +174,7 @@
     ],
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
     "infra_step": true,
-    "name": "fetch master.cache.git fetch",
+    "name": "fetch refs/heads/master.cache.git fetch",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -191,7 +191,7 @@
     ],
     "cwd": "[CACHE]/git/flutter.googlesource.com-recipes",
     "infra_step": true,
-    "name": "fetch master.cache.remove guard file",
+    "name": "fetch refs/heads/master.cache.remove guard file",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -210,7 +210,7 @@
     ],
     "cwd": "[START_DIR]/recipes",
     "infra_step": true,
-    "name": "fetch master.cache.makedirs object/info",
+    "name": "fetch refs/heads/master.cache.makedirs object/info",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -228,7 +228,7 @@
     ],
     "cwd": "[START_DIR]/recipes",
     "infra_step": true,
-    "name": "fetch master.cache.alternates",
+    "name": "fetch refs/heads/master.cache.alternates",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LOG_LINE@alternates@[CACHE]/git/flutter.googlesource.com-recipes/objects@@@",
@@ -245,7 +245,7 @@
     ],
     "cwd": "[START_DIR]/recipes",
     "infra_step": true,
-    "name": "fetch master.git fetch",
+    "name": "fetch refs/heads/master.git fetch",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -259,7 +259,7 @@
     ],
     "cwd": "[START_DIR]/recipes",
     "infra_step": true,
-    "name": "fetch master.git checkout",
+    "name": "fetch refs/heads/master.git checkout",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -272,7 +272,7 @@
     ],
     "cwd": "[START_DIR]/recipes",
     "infra_step": true,
-    "name": "fetch master.git rev-parse",
+    "name": "fetch refs/heads/master.git rev-parse",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -287,14 +287,14 @@
     ],
     "cwd": "[START_DIR]/recipes",
     "infra_step": true,
-    "name": "fetch master.git clean",
+    "name": "fetch refs/heads/master.git clean",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
     "cmd": [],
-    "name": "fetch master.submodule",
+    "name": "fetch refs/heads/master.submodule",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -307,7 +307,7 @@
     ],
     "cwd": "[START_DIR]/recipes",
     "infra_step": true,
-    "name": "fetch master.submodule.git submodule sync",
+    "name": "fetch refs/heads/master.submodule.git submodule sync",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -321,7 +321,7 @@
     ],
     "cwd": "[START_DIR]/recipes",
     "infra_step": true,
-    "name": "fetch master.submodule.git submodule update",
+    "name": "fetch refs/heads/master.submodule.git submodule update",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
