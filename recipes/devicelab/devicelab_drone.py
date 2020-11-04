@@ -44,12 +44,13 @@ def RunSteps(api):
     dep_list = [d['dependency'] for d in deps]
     if 'xcode' in dep_list:
       api.os_utils.clean_derived_data()
-      api.flutter_deps.gems(
-          env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
-      )
       with api.osx_sdk('ios'):
         api.flutter_deps.swift()
-        with api.context(env=env, env_prefixes=env_prefixes), api.step.defer_results():
+        api.flutter_deps.gems(
+            env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
+        )
+        with api.context(env=env,
+                         env_prefixes=env_prefixes), api.step.defer_results():
           api.step(
               'run %s' % task_name, ['dart', 'bin/run.dart', '-t', task_name]
           )
@@ -58,7 +59,8 @@ def RunSteps(api):
           # Collect memory/cpu/process after task execution.
           api.os_utils.collect_os_info()
     else:
-      with api.context(env=env, env_prefixes=env_prefixes), api.step.defer_results():
+      with api.context(env=env,
+                       env_prefixes=env_prefixes), api.step.defer_results():
         api.step(
             'run %s' % task_name, ['dart', 'bin/run.dart', '-t', task_name]
         )
