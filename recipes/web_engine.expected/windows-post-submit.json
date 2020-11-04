@@ -986,6 +986,26 @@
       "java.exe",
       "/t"
     ],
+    "cwd": "[CACHE]\\builder\\src\\flutter\\lib\\web_ui",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
     "name": "Killing Processes.stop gradle daemon",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -999,6 +1019,26 @@
       "dart.exe",
       "/t"
     ],
+    "cwd": "[CACHE]\\builder\\src\\flutter\\lib\\web_ui",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
     "name": "Killing Processes.stop dart",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -1012,6 +1052,26 @@
       "adb.exe",
       "/t"
     ],
+    "cwd": "[CACHE]\\builder\\src\\flutter\\lib\\web_ui",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
     "name": "Killing Processes.stop adb",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -1025,6 +1085,26 @@
       "flutter_tester.exe",
       "/t"
     ],
+    "cwd": "[CACHE]\\builder\\src\\flutter\\lib\\web_ui",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]\\builder",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
     "name": "Killing Processes.stop flutter_tester",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"

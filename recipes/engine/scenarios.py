@@ -9,6 +9,7 @@ DEPS = [
     'depot_tools/depot_tools',
     'depot_tools/gclient',
     'flutter/bucket_util',
+    'flutter/os_utils',
     'flutter/repo_util',
     'fuchsia/goma',
     'recipe_engine/buildbucket',
@@ -101,6 +102,9 @@ def RunAndroidScenarioTests(api):
 
 
 def RunSteps(api, properties, env_properties):
+  # Collect memory/cpu/process after task execution.
+  api.os_utils.collect_os_info()
+
   cache_root = api.path['cache'].join('builder')
   checkout = GetCheckoutPath(api)
 
@@ -141,6 +145,11 @@ def RunSteps(api, properties, env_properties):
 
     RunAndroidScenarioTests(api)
 
+  with api.step.defer_results():
+    # This is to clean up leaked processes.
+    api.os_utils.kill_processes()
+    # Collect memory/cpu/process after task execution.
+    api.os_utils.collect_os_info()
 
 def GenTests(api):
   scenario_failures = GetCheckoutPath(api).join('flutter',

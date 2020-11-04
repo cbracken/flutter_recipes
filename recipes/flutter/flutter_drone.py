@@ -62,19 +62,23 @@ def RunSteps(api):
     api.step('download dependencies', ['flutter', 'update-packages'])
     dep_list = [d['dependency'] for d in deps]
     if 'xcode' in dep_list:
-      with api.osx_sdk('ios'):
+      with api.osx_sdk('ios'), api.step.defer_results():
         api.flutter_deps.swift()
         api.flutter_deps.gems(
             env, env_prefixes, checkout_path.join('dev', 'ci', 'mac')
         )
         RunShard(api, env, env_prefixes, checkout_path)
+        # This is to clean up leaked processes.
+        api.os_utils.kill_processes()
+        # Collect memory/cpu/process after task execution.
+        api.os_utils.collect_os_info()
     else:
-      RunShard(api, env, env_prefixes, checkout_path)
-
-  # This is to clean up leaked processes.
-  api.os_utils.kill_processes()
-  # Collect memory/cpu/process after task execution.
-  api.os_utils.collect_os_info()
+      with api.step.defer_results():
+        RunShard(api, env, env_prefixes, checkout_path)
+        # This is to clean up leaked processes.
+        api.os_utils.kill_processes()
+        # Collect memory/cpu/process after task execution.
+        api.os_utils.collect_os_info()
 
 
 def GenTests(api):

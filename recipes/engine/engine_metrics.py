@@ -9,6 +9,7 @@ DEPS = [
     'depot_tools/bot_update',
     'depot_tools/depot_tools',
     'flutter/build_util',
+    'flutter/os_utils',
     'flutter/repo_util',
     'fuchsia/goma',
     'recipe_engine/context',
@@ -23,6 +24,9 @@ ENV_PROPERTIES = EnvProperties
 
 
 def RunSteps(api, properties, env_properties):
+  # Collect memory/cpu/process after task execution.
+  api.os_utils.collect_os_info()
+
   checkout_path = api.path['cache'].join('builder', 'src')
   cache_root = api.path['cache'].join('builder')
   api.goma.ensure()
@@ -41,8 +45,13 @@ def RunSteps(api, properties, env_properties):
   script_path = checkout_path.join(
       'flutter', 'testing', 'benchmark', 'generate_metrics.sh'
   )
-  with api.context(env=env, env_prefixes=env_prefixes, cwd=host_release_path):
+  with api.context(env=env, env_prefixes=env_prefixes,
+                   cwd=host_release_path), api.step.defer_results():
     api.step('Generate metrics', ['bash', script_path])
+    # This is to clean up leaked processes.
+    api.os_utils.kill_processes()
+    # Collect memory/cpu/process after task execution.
+    api.os_utils.collect_os_info()
 
   benchmark_path = checkout_path.join('flutter', 'testing', 'benchmark')
   script_path = checkout_path.join(

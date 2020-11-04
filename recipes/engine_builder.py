@@ -13,6 +13,7 @@ DEPS = [
   'depot_tools/gclient',
   'depot_tools/git',
   'depot_tools/osx_sdk',
+  'flutter/os_utils',
   'flutter/repo_util',
   'fuchsia/goma',
   'recipe_engine/buildbucket',
@@ -67,6 +68,8 @@ def IsolateOutputs(api, output_files, output_dirs):
 
 
 def RunSteps(api, properties):
+  # Collect memory/cpu/process after task execution.
+  api.os_utils.collect_os_info()
   cache_root = api.path['cache'].join('builder')
   api.repo_util.engine_checkout(cache_root, {}, {})
   with api.context(cwd=cache_root):
@@ -87,7 +90,8 @@ def RunSteps(api, properties):
 
     output_files = []
     output_dirs = []
-    with api.osx_sdk('ios'), api.depot_tools.on_path(), api.context(env=env):
+    with api.osx_sdk('ios'), api.depot_tools.on_path(), api.context(
+        env=env), api.step.defer_results():
       for build in properties.builds:
         with api.step.nest('build %s (%s)' %
                            (build.dir, ','.join(build.targets))):
@@ -99,6 +103,10 @@ def RunSteps(api, properties):
           for output_dir in build.output_dirs:
             output_dirs.append(
                 cache_root.join('src', 'out', build.dir, output_dir))
+      # This is to clean up leaked processes.
+      api.os_utils.kill_processes()
+      # Collect memory/cpu/process after task execution.
+      api.os_utils.collect_os_info()
 
     isolated_hash = IsolateOutputs(api, output_files, output_dirs)
     output_props = api.step('Set output properties', None)

@@ -59,22 +59,25 @@ def RunSteps(api):
       )
       with api.osx_sdk('ios'):
         api.flutter_deps.swift()
-        with api.context(env=env, env_prefixes=env_prefixes):
+        with api.context(env=env, env_prefixes=env_prefixes), api.step.defer_results():
           api.step(
               'run %s' % task_name, ['dart', 'bin/run.dart', '-t', task_name,
               '--service-account-token-file', access_token_path]
           )
+          # This is to clean up leaked processes.
+          api.os_utils.kill_processes()
+          # Collect memory/cpu/process after task execution.
+          api.os_utils.collect_os_info()
     else:
-      with api.context(env=env, env_prefixes=env_prefixes):
+      with api.context(env=env, env_prefixes=env_prefixes), api.step.defer_results():
         api.step(
             'run %s' % task_name, ['dart', 'bin/run.dart', '-t', task_name,
             '--service-account-token-file', access_token_path]
         )
-
-  # This is to clean up leaked processes.
-  api.os_utils.kill_processes()
-  # This is to clean up leaked processes.
-  api.os_utils.kill_processes()
+        # This is to clean up leaked processes.
+        api.os_utils.kill_processes()
+        # Collect memory/cpu/process after task execution.
+        api.os_utils.collect_os_info()
 
 
 def GenTests(api):

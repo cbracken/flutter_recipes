@@ -149,7 +149,8 @@ def RunSteps(api, properties, env_properties):
   integration_test = flutter_checkout_path.join('dev', 'integration_tests',
                                                 'web')
 
-  with api.context(cwd=integration_test, env=f_env, env_prefixes=f_env_prefix):
+  with api.context(cwd=integration_test, env=f_env,
+                   env_prefixes=f_env_prefix), api.step.defer_results():
     build_dir = checkout.join('out', target_name)
     api.step('web integration tests config', [
         'flutter',
@@ -166,6 +167,11 @@ def RunSteps(api, properties, env_properties):
         '-v',
     ])
 
+    # This is to clean up leaked processes.
+    api.os_utils.kill_processes()
+    # Collect memory/cpu/process after task execution.
+    api.os_utils.collect_os_info()
+
   with api.context(cwd=cache_root, env=env, env_prefixes=env_prefixes):
     builds = api.shard_util.collect_builds(builds)
     api.display_util.display_builds(
@@ -173,10 +179,6 @@ def RunSteps(api, properties, env_properties):
         builds=builds,
         raise_on_failure=True,
     )
-  # This is to clean up leaked processes.
-  api.os_utils.kill_processes()
-  # Collect memory/cpu/process after task execution.
-  api.os_utils.collect_os_info()
 
 def schedule_builds(api, isolated_hash, ref, url):
   """Schedules one subbuild per subshard."""

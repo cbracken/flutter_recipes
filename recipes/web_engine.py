@@ -331,15 +331,18 @@ def RunSteps(api, properties, env_properties):
           with recipe_api.defer_results():
             api.step('felt ios-safari test', felt_test)
             UploadFailingGoldens(api, checkout, 'ios-safari')
+            # This is to clean up leaked processes.
+            api.os_utils.kill_processes()
+            # Collect memory/cpu/process after task execution.
+            api.os_utils.collect_os_info()
       else:
         with recipe_api.defer_results():
           api.step('felt test chrome', felt_test)
           UploadFailingGoldens(api, checkout, 'chrome')
-
-  # This is to clean up leaked processes.
-  api.os_utils.kill_processes()
-  # Collect memory/cpu/process after task execution.
-  api.os_utils.collect_os_info()
+          # This is to clean up leaked processes.
+          api.os_utils.kill_processes()
+          # Collect memory/cpu/process after task execution.
+          api.os_utils.collect_os_info()
 
 
 def GenTests(api):

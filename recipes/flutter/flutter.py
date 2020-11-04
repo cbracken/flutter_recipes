@@ -65,7 +65,7 @@ def RunSteps(api):
       env, env_prefixes, api.properties.get('dependencies', [])
   )
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
-    with api.step.nest('prepare environment'):
+    with api.step.nest('prepare environment'), api.step.defer_results():
       api.step('flutter doctor', ['flutter', 'doctor'])
       api.step('download dependencies', ['flutter', 'update-packages'])
       api.adhoc_validation.run(
@@ -74,10 +74,10 @@ def RunSteps(api):
           api.properties.get('secrets', {})
       )
 
-  # This is to clean up leaked processes.
-  api.os_utils.kill_processes()
-  # Collect memory/cpu/process after task execution.
-  api.os_utils.collect_os_info()
+      # This is to clean up leaked processes.
+      api.os_utils.kill_processes()
+      # Collect memory/cpu/process after task execution.
+      api.os_utils.collect_os_info()
 
 def GenTests(api):
   yield api.test(

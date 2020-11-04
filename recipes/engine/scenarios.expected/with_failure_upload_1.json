@@ -1347,9 +1347,9 @@
       "The recipe has crashed at point 'Uncaught exception'!",
       "",
       "Traceback (most recent call last):",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine/scenarios.py\", line 142, in RunSteps",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine/scenarios.py\", line 146, in RunSteps",
       "    RunAndroidScenarioTests(api)",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine/scenarios.py\", line 100, in RunAndroidScenarioTests",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine/scenarios.py\", line 101, in RunAndroidScenarioTests",
       "    raise AssertionError('Diff detected. Please verify the diff failures.')",
       "AssertionError: Diff detected. Please verify the diff failures."
     ]
