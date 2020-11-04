@@ -10,7 +10,6 @@ DEPS = [
     'flutter/repo_util',
     'flutter/os_utils',
     'recipe_engine/context',
-    'recipe_engine/file',
     'recipe_engine/path',
     'recipe_engine/properties',
     'recipe_engine/raw_io',
@@ -39,15 +38,6 @@ def RunSteps(api):
   deps = api.properties.get('dependencies', [])
   api.flutter_deps.required_deps(env, env_prefixes, deps)
   devicelab_path = flutter_path.join('dev', 'devicelab')
-  # Create service account
-  service_account = api.service_account.default()
-  access_token = service_account.get_access_token(
-      scopes=["https://www.googleapis.com/auth/cloud-platform"]
-  )
-  access_token_path = api.path.mkstemp()
-  api.file.write_text("write token", access_token_path, access_token,
-                      include_log=False)
-  # Run test
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
     api.step('pub get', ['pub', 'get'])
@@ -61,8 +51,7 @@ def RunSteps(api):
         api.flutter_deps.swift()
         with api.context(env=env, env_prefixes=env_prefixes), api.step.defer_results():
           api.step(
-              'run %s' % task_name, ['dart', 'bin/run.dart', '-t', task_name,
-              '--service-account-token-file', access_token_path]
+              'run %s' % task_name, ['dart', 'bin/run.dart', '-t', task_name]
           )
           # This is to clean up leaked processes.
           api.os_utils.kill_processes()
@@ -71,8 +60,7 @@ def RunSteps(api):
     else:
       with api.context(env=env, env_prefixes=env_prefixes), api.step.defer_results():
         api.step(
-            'run %s' % task_name, ['dart', 'bin/run.dart', '-t', task_name,
-            '--service-account-token-file', access_token_path]
+            'run %s' % task_name, ['dart', 'bin/run.dart', '-t', task_name]
         )
         # This is to clean up leaked processes.
         api.os_utils.kill_processes()
