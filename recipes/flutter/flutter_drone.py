@@ -40,7 +40,8 @@ def RunSteps(api):
   # Collect memory/cpu/process before task execution.
   api.os_utils.collect_os_info()
 
-  checkout_path = api.path['start_dir'].join('flutter')
+  # The space is intentional, to ensure we support paths with spaces.
+  checkout_path = api.path['start_dir'].join('flutter sdk')
   api.repo_util.checkout(
       'flutter',
       checkout_path=checkout_path,

@@ -47,7 +47,8 @@ def RunSteps(api):
 
   # Trigger validation tests. This is to optimize resources usage
   # when don't need to run in shards.
-  checkout_path = api.path['start_dir'].join('flutter')
+  # The space is intentional, to ensure we support paths with spaces.
+  checkout_path = api.path['start_dir'].join('flutter sdk')
   with api.step.nest('checkout source code'):
     api.repo_util.checkout(
         'flutter',

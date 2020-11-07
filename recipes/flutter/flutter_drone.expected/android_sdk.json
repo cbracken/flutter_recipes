@@ -9,7 +9,7 @@
       "-u",
       "RECIPE_MODULE[depot_tools::git]/resources/git_setup.py",
       "--path",
-      "[START_DIR]/flutter",
+      "[START_DIR]/flutter sdk",
       "--url",
       "https://chromium.googlesource.com/external/github.com/flutter/flutter"
     ],
@@ -28,7 +28,7 @@
       "--progress",
       "--tags"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "env": {
       "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
     },
@@ -45,7 +45,7 @@
       "-f",
       "FETCH_HEAD"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "infra_step": true,
     "name": "Checkout flutter/flutter.git checkout",
     "~followup_annotations": [
@@ -58,7 +58,7 @@
       "rev-parse",
       "HEAD"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "infra_step": true,
     "name": "Checkout flutter/flutter.read revision",
     "~followup_annotations": [
@@ -75,7 +75,7 @@
       "-d",
       "-x"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "infra_step": true,
     "name": "Checkout flutter/flutter.git clean",
     "~followup_annotations": [
@@ -88,7 +88,7 @@
       "submodule",
       "sync"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "infra_step": true,
     "name": "Checkout flutter/flutter.submodule sync",
     "~followup_annotations": [
@@ -103,7 +103,7 @@
       "--init",
       "--recursive"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "infra_step": true,
     "name": "Checkout flutter/flutter.submodule update",
     "~followup_annotations": [
@@ -294,7 +294,7 @@
       "doctor",
       "-v"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "env": {
       "ANDROID_HOME": "[CACHE]/android",
       "ANDROID_SDK_ROOT": "[CACHE]/android",
@@ -311,8 +311,8 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
         "[CACHE]/android/platform-tools",
         "[CACHE]/android/tools"
       ]
@@ -324,7 +324,7 @@
       "flutter",
       "update-packages"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "env": {
       "ANDROID_HOME": "[CACHE]/android",
       "ANDROID_SDK_ROOT": "[CACHE]/android",
@@ -341,8 +341,8 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
         "[CACHE]/android/platform-tools",
         "[CACHE]/android/tools"
       ]
@@ -353,9 +353,9 @@
     "cmd": [
       "dart",
       "--enable-asserts",
-      "[START_DIR]/flutter/dev/bots/test.dart"
+      "[START_DIR]/flutter sdk/dev/bots/test.dart"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "env": {
       "ANDROID_HOME": "[CACHE]/android",
       "ANDROID_SDK_ROOT": "[CACHE]/android",
@@ -372,12 +372,12 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
         "[CACHE]/android/platform-tools",
         "[CACHE]/android/tools",
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
         "[CACHE]/android/platform-tools",
         "[CACHE]/android/tools"
       ]
@@ -393,7 +393,7 @@
       "pkill",
       "chrome"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "env": {
       "ANDROID_HOME": "[CACHE]/android",
       "ANDROID_SDK_ROOT": "[CACHE]/android",
@@ -410,8 +410,8 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
         "[CACHE]/android/platform-tools",
         "[CACHE]/android/tools"
       ]
@@ -426,7 +426,7 @@
       "pkill",
       "dart"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "env": {
       "ANDROID_HOME": "[CACHE]/android",
       "ANDROID_SDK_ROOT": "[CACHE]/android",
@@ -443,8 +443,8 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
         "[CACHE]/android/platform-tools",
         "[CACHE]/android/tools"
       ]
@@ -459,7 +459,7 @@
       "pkill",
       "flutter"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "env": {
       "ANDROID_HOME": "[CACHE]/android",
       "ANDROID_SDK_ROOT": "[CACHE]/android",
@@ -476,8 +476,8 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
         "[CACHE]/android/platform-tools",
         "[CACHE]/android/tools"
       ]

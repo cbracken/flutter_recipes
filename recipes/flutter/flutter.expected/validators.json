@@ -16,7 +16,7 @@
       "-u",
       "RECIPE_MODULE[depot_tools::git]/resources/git_setup.py",
       "--path",
-      "[START_DIR]/flutter",
+      "[START_DIR]/flutter sdk",
       "--url",
       "https://chromium.googlesource.com/external/github.com/flutter/flutter"
     ],
@@ -35,7 +35,7 @@
       "--progress",
       "--tags"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "env": {
       "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
     },
@@ -52,7 +52,7 @@
       "-f",
       "FETCH_HEAD"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "infra_step": true,
     "name": "checkout source code.Checkout flutter/flutter.git checkout",
     "~followup_annotations": [
@@ -65,7 +65,7 @@
       "rev-parse",
       "HEAD"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "infra_step": true,
     "name": "checkout source code.Checkout flutter/flutter.read revision",
     "~followup_annotations": [
@@ -82,7 +82,7 @@
       "-d",
       "-x"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "infra_step": true,
     "name": "checkout source code.Checkout flutter/flutter.git clean",
     "~followup_annotations": [
@@ -95,7 +95,7 @@
       "submodule",
       "sync"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "infra_step": true,
     "name": "checkout source code.Checkout flutter/flutter.submodule sync",
     "~followup_annotations": [
@@ -110,7 +110,7 @@
       "--init",
       "--recursive"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "infra_step": true,
     "name": "checkout source code.Checkout flutter/flutter.submodule update",
     "~followup_annotations": [
@@ -130,7 +130,7 @@
       "flutter",
       "doctor"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "LUCI_BRANCH": "",
@@ -141,8 +141,8 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "prepare environment.flutter doctor",
@@ -155,7 +155,7 @@
       "flutter",
       "update-packages"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "LUCI_BRANCH": "",
@@ -166,8 +166,8 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "prepare environment.download dependencies",
@@ -188,7 +188,7 @@
       "755",
       "RECIPE_MODULE[flutter::adhoc_validation]/resources/analyze.sh"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "LUCI_BRANCH": "",
@@ -199,8 +199,8 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "prepare environment.dart analyze.Set execute permission",
@@ -212,7 +212,7 @@
     "cmd": [
       "RECIPE_MODULE[flutter::adhoc_validation]/resources/analyze.sh"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "LUCI_BRANCH": "",
@@ -223,10 +223,10 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "prepare environment.dart analyze.analyze",
@@ -246,7 +246,7 @@
       "pkill",
       "chrome"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "LUCI_BRANCH": "",
@@ -257,8 +257,8 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "prepare environment.Killing Processes.kill chrome",
@@ -271,7 +271,7 @@
       "pkill",
       "dart"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "LUCI_BRANCH": "",
@@ -282,8 +282,8 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "prepare environment.Killing Processes.kill dart",
@@ -296,7 +296,7 @@
       "pkill",
       "flutter"
     ],
-    "cwd": "[START_DIR]/flutter",
+    "cwd": "[START_DIR]/flutter sdk",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "LUCI_BRANCH": "",
@@ -307,8 +307,8 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "prepare environment.Killing Processes.kill flutter",
