@@ -218,7 +218,6 @@
       "GOMA_DIR": "[CACHE]/goma/client",
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
-      "GOMA_SEND_EXPECTED_OUTPUTS": "True",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
       "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
       "GOMA_TMP_DIR": "[CLEANUP]/goma",
@@ -1259,7 +1258,7 @@
       "GSUtil:software_update_check_period=0",
       "cp",
       "gs://fuchsia/development/0.20200101.0.1/images/qemu-x64.tgz",
-      "[CLEANUP]/fuchsia_image_tmp_tmp_2"
+      "[CLEANUP]/fuchsia_image_tmp_tmp_1"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -1290,7 +1289,7 @@
       "--extract",
       "--verbose",
       "-f",
-      "[CLEANUP]/fuchsia_image_tmp_tmp_2/qemu-x64.tgz",
+      "[CLEANUP]/fuchsia_image_tmp_tmp_1/qemu-x64.tgz",
       "-C",
       "[CACHE]/builder/0.20200101.0.1/fuchsia_image/linux_intel_64"
     ],
