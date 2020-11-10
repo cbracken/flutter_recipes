@@ -47,10 +47,10 @@ class AddhocValidationApi(recipe_api.RecipeApi):
       elif self.m.platform.is_win:
         resource_name = self.resource('%s.bat' % validation)
       dep_list = [d['dependency'] for d in deps]
+      checkout_path = self.m.repo_util.sdk_checkout_path()
       if 'xcode' in dep_list:
         with self.m.osx_sdk('ios'):
           self.m.flutter_deps.swift()
-          checkout_path = self.m.repo_util.sdk_checkout_path()
           self.m.flutter_deps.gems(
               env, env_prefixes, checkout_path.join('dev', 'ci', 'mac')
           )
@@ -60,7 +60,7 @@ class AddhocValidationApi(recipe_api.RecipeApi):
         with self.m.context(env=env, env_prefixes=env_prefixes):
           self.m.step(validation, [resource_name])
           if validation == 'docs' and self.m.properties.get('firebase_project'):
-            docs_path = self.m.path['start_dir'].join('flutter', 'dev', 'docs')
+            docs_path = checkout_path.join('dev', 'docs')
             project = self.m.properties.get('firebase_project')
             self.m.firebase.deploy_docs(
                 env=env,
