@@ -286,7 +286,8 @@
       "LUCI_CI": "True",
       "LUCI_PR": "1",
       "OS": "linux",
-      "PUB_CACHE": "[CACHE]/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
     },
     "env_prefixes": {
       "PATH": [
@@ -307,7 +308,8 @@
       "LUCI_CI": "True",
       "LUCI_PR": "1",
       "OS": "linux",
-      "PUB_CACHE": "[CACHE]/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
     },
     "env_prefixes": {
       "PATH": [
@@ -329,7 +331,8 @@
       "LUCI_CI": "True",
       "LUCI_PR": "1",
       "OS": "linux",
-      "PUB_CACHE": "[CACHE]/.pub-cache"
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
     },
     "env_prefixes": {
       "PATH": [

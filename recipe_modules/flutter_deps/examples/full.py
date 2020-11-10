@@ -6,7 +6,9 @@ from recipe_engine.post_process import DoesNotRun, Filter, StatusFailure
 
 DEPS = [
     'flutter/flutter_deps',
+    'flutter/repo_util',
     'recipe_engine/assertions',
+    'recipe_engine/context',
     'recipe_engine/path',
     'recipe_engine/platform',
     'recipe_engine/properties',
@@ -43,22 +45,31 @@ def RunSteps(api):
   api.flutter_deps.android_sdk(env, env_prefixes, '')
   api.flutter_deps.flutter_engine(env, env_prefixes)
   api.flutter_deps.swift()
-  gems_dir = api.path['start_dir'].join('dev', 'ci', 'mac')
-  api.flutter_deps.gems(env, env_prefixes, gems_dir)
   api.flutter_deps.firebase(env, env_prefixes)
   api.flutter_deps.cmake(env, env_prefixes)
   api.flutter_deps.ninja(env, env_prefixes)
   api.flutter_deps.clang(env, env_prefixes)
   api.flutter_deps.ios_signing(env, env_prefixes)
 
+  # Gems dependency requires to run from a flutter_environment.
+  checkout_path = api.path['start_dir'].join('flutter\ sdk')
+  env, env_prefixes = api.repo_util.flutter_environment(checkout_path)
+  with api.context(env=env, env_prefixes=env_prefixes):
+    gems_dir = api.path['start_dir'].join('dev', 'ci', 'mac')
+    api.flutter_deps.gems(env, env_prefixes, gems_dir)
+
 
 def GenTests(api):
-  yield api.test('basic')
+  checkout_path = api.path['start_dir'].join('flutter\ sdk')
+  yield api.test('basic', api.repo_util.flutter_environment_data(checkout_path))
   yield api.test(
-      'with-gems', api.properties(dependencies=[{"dependency": "gems"}])
+      'with-gems', api.properties(dependencies=[{"dependency": "gems"}]),
+      api.repo_util.flutter_environment_data(checkout_path)
   )
+
   yield api.test(
-      'mac', api.platform('mac', 64),
+      'mac',
+      api.platform('mac', 64),
       api.properties(
           dependencies=[{"dependency": "xcode"},
                         {'dependency': 'chrome_and_driver'}]
@@ -70,10 +81,14 @@ def GenTests(api):
           api.path['cache'].join(
               'osx_sdk/XCode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0'
           ),
-      )
+      ),
   )
-  yield api.test('flutter_engine', api.properties(isolated_hash='abceqwe',))
+  yield api.test(
+      'flutter_engine', api.properties(isolated_hash='abceqwe',),
+      api.repo_util.flutter_environment_data(checkout_path)
+  )
   yield api.test(
       'goldTryjob',
-      api.properties(gold_tryjob=True, git_ref='refs/pull/1/head')
+      api.properties(gold_tryjob=True, git_ref='refs/pull/1/head'),
+      api.repo_util.flutter_environment_data(checkout_path)
   )

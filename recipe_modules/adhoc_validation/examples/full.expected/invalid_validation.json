@@ -7,7 +7,7 @@
       "The recipe has crashed at point 'Uncaught exception'!",
       "",
       "Traceback (most recent call last):",
-      "  File \"RECIPE_REPO[flutter]/recipe_modules/adhoc_validation/examples/full.py\", line 15, in RunSteps",
+      "  File \"RECIPE_REPO[flutter]/recipe_modules/adhoc_validation/examples/full.py\", line 19, in RunSteps",
       "    api.adhoc_validation.run('Docs', validation, {}, {})",
       "  File \"RECIPE_REPO[flutter]/recipe_modules/adhoc_validation/api.py\", line 37, in run",
       "    raise AssertionError(msg)",

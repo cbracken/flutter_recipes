@@ -227,8 +227,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     if 'gems' not in deps:
       # Noop if gems property is not set.
       return
-
-    gem_file = self.m.path['start_dir'].join('flutter', 'flutter')
+    gem_file = self.m.repo_util.sdk_checkout_path().join('flutter')
     gem_dir = self.m.path['start_dir'].join('gems')
     with self.m.step.nest('Install gems'):
       self.m.file.ensure_directory('mkdir gems', gem_dir)

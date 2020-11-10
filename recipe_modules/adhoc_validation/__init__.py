@@ -3,6 +3,7 @@ DEPS = [
     'flutter/firebase',
     'flutter/flutter_deps',
     'flutter/kms',
+    'flutter/repo_util',
     'recipe_engine/context',
     'recipe_engine/file',
     'recipe_engine/path',

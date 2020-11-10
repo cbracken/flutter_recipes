@@ -9,6 +9,21 @@
       "755",
       "RECIPE_MODULE[flutter::adhoc_validation]/resources/docs.sh"
     ],
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+      ]
+    },
     "name": "Docs.Set execute permission",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -18,6 +33,21 @@
     "cmd": [
       "RECIPE_MODULE[flutter::adhoc_validation]/resources/docs.sh"
     ],
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+      ]
+    },
     "name": "Docs.docs",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -32,6 +62,21 @@
       "-lifetime",
       "3m"
     ],
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+      ]
+    },
     "infra_step": true,
     "name": "Docs.get access token for default account",
     "~followup_annotations": [
@@ -49,6 +94,21 @@
       "extra.secret.token.should.not.be.logged",
       "[CLEANUP]/tmp_tmp_1"
     ],
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+      ]
+    },
     "infra_step": true,
     "name": "Docs.write token",
     "~followup_annotations": [
@@ -70,8 +130,21 @@
     ],
     "cwd": "[START_DIR]/flutter/dev/docs",
     "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "GCP_PROJECT": "myproject",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk",
       "TOKEN_PATH": "[CLEANUP]/tmp_tmp_1"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+      ]
     },
     "name": "Docs.Deploy docs.Set execute permission",
     "~followup_annotations": [
@@ -84,8 +157,21 @@
     ],
     "cwd": "[START_DIR]/flutter/dev/docs",
     "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "GCP_PROJECT": "myproject",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk",
       "TOKEN_PATH": "[CLEANUP]/tmp_tmp_1"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+      ]
     },
     "name": "Docs.Deploy docs.Firebase deploy",
     "~followup_annotations": [

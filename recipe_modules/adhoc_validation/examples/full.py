@@ -5,29 +5,42 @@
 from recipe_engine.post_process import DoesNotRun, Filter, StatusFailure
 
 DEPS = [
-    'flutter/adhoc_validation', 'recipe_engine/platform',
-    'recipe_engine/properties'
+    'flutter/adhoc_validation', 'flutter/repo_util', 'recipe_engine/context',
+    'recipe_engine/path', 'recipe_engine/platform', 'recipe_engine/properties'
 ]
 
 
 def RunSteps(api):
   validation = api.properties.get('validation', 'docs')
-  api.adhoc_validation.run('Docs', validation, {}, {})
+  env, env_prefixes = api.repo_util.flutter_environment(
+      api.path['start_dir'].join('flutter sdk')
+  )
+  with api.context(env=env, env_prefixes=env_prefixes):
+    api.adhoc_validation.run('Docs', validation, {}, {})
 
 
 def GenTests(api):
-  yield api.test('win', api.platform.name('win'))
+  checkout_path = api.path['start_dir'].join('flutter sdk')
+  yield api.test(
+      'win', api.platform.name('win'),
+      api.repo_util.flutter_environment_data(checkout_path)
+  )
   yield api.test(
       'linux', api.platform.name('linux'),
-      api.properties(firebase_project='myproject')
+      api.properties(firebase_project='myproject'),
+      api.repo_util.flutter_environment_data(checkout_path)
   )
   yield api.test(
       'mac', api.platform.name('mac'),
-      api.properties(dependencies=[{"dependency": "xcode"}])
+      api.properties(dependencies=[{"dependency": "xcode"}]),
+      api.repo_util.flutter_environment_data(checkout_path)
   )
-  yield api.test('mac_nodeps', api.platform.name('mac'))
   yield api.test(
-      'invalid_validation',
-      api.properties(validation='invalid'),
+      'mac_nodeps', api.platform.name('mac'),
+      api.repo_util.flutter_environment_data(checkout_path)
+  )
+  yield api.test(
+      'invalid_validation', api.properties(validation='invalid'),
       api.expect_exception('AssertionError'),
+      api.repo_util.flutter_environment_data(checkout_path)
   )

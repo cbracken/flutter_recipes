@@ -6,6 +6,7 @@ from recipe_engine.post_process import DoesNotRun, Filter, StatusFailure
 
 DEPS = [
     'flutter/repo_util',
+    'recipe_engine/context',
     'recipe_engine/file',
     'recipe_engine/path',
     'recipe_engine/properties',
@@ -21,6 +22,8 @@ def RunSteps(api):
   api.repo_util.checkout('packages', api.path['start_dir'].join('packages'))
   env, env_paths = api.repo_util.flutter_environment(flutter_checkout_path)
   api.repo_util.engine_checkout(api.path['start_dir'].join('engine'), {}, {})
+  with api.context(env=env, env_prefixes=env_paths):
+    api.repo_util.sdk_checkout_path()
 
 
 def GenTests(api):
@@ -31,8 +34,11 @@ def GenTests(api):
           'first_bot_update_failed',
           api.properties(
               git_url='https://github.com/flutter/engine',
-              git_ref='refs/pull/1/head')) +
+              git_ref='refs/pull/1/head'
+          )
+      ) +
       # Next line force a fail condition for the bot update
       # first execution.
       api.step_data("Checkout source code.bot_update", retcode=1) +
-      api.repo_util.flutter_environment_data())
+      api.repo_util.flutter_environment_data()
+  )

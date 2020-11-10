@@ -125,6 +125,8 @@ class RepoUtilApi(recipe_api.RecipeApi):
         # Windows Packaging script assumes this is set.
         'DEPOT_TOOLS':
             str(self.m.depot_tools.root),
+        'SDK_CHECKOUT_PATH':
+            checkout_path,
         'LUCI_CI':
             True,
         'LUCI_PR':
@@ -135,5 +137,14 @@ class RepoUtilApi(recipe_api.RecipeApi):
             'linux' if self.m.platform.name == 'linux' else
             ('darwin' if self.m.platform.name == 'mac' else 'win')
     }
-    env_prefixes = {'PATH': [flutter_bin, dart_bin]}
+    env_prefixes = {'PATH': ['%s' % str(flutter_bin), '%s' % str(dart_bin)]}
     return env, env_prefixes
+
+  def sdk_checkout_path(self):
+    """Returns the checkoout path of the current flutter_environment.
+
+    Returns(Path): A path object with the current checkout path.
+    """
+    checkout_path = self.m.context.env.get('SDK_CHECKOUT_PATH')
+    assert checkout_path, 'Outside of a flutter_environment?'
+    return self.m.path.abs_to_path(checkout_path)

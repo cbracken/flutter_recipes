@@ -528,133 +528,6 @@
     ]
   },
   {
-    "cmd": [],
-    "name": "Install gems"
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "ensure-directory",
-      "--mode",
-      "0777",
-      "[START_DIR]/gems"
-    ],
-    "infra_step": true,
-    "name": "Install gems.mkdir gems",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "gem",
-      "install",
-      "bundler",
-      "--install-dir",
-      "."
-    ],
-    "cwd": "[START_DIR]/gems",
-    "name": "Install gems.install bundler",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "bundle",
-      "config",
-      "set",
-      "path",
-      "[START_DIR]/gems"
-    ],
-    "cwd": "[START_DIR]/dev/ci/mac",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/android",
-      "ANDROID_SDK_ROOT": "[CACHE]/android",
-      "CHROME_EXECUTABLE": "[CACHE]/chrome/chrome/chrome",
-      "CHROME_NO_SANDBOX": "true",
-      "GEM_HOME": "[START_DIR]/gems",
-      "GOPATH": "[CLEANUP]/go_path",
-      "GRADLE_OPTS": "-Dorg.gradle.daemon=false",
-      "GRADLE_USER_HOME": "[CACHE]/gradle"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/chrome/chrome",
-        "[CACHE]/chrome/drivers",
-        "[CACHE]/go/bin",
-        "[CLEANUP]/go_path/bin",
-        "[CACHE]/go/bin",
-        "[CLEANUP]/go_path/bin",
-        "[CACHE]/vpython",
-        "[CACHE]/android/platform-tools",
-        "[CACHE]/android/tools",
-        "[START_DIR]/gems/bin"
-      ]
-    },
-    "name": "Install gems.set gems path",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "bundler",
-      "install"
-    ],
-    "cwd": "[START_DIR]/dev/ci/mac",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/android",
-      "ANDROID_SDK_ROOT": "[CACHE]/android",
-      "CHROME_EXECUTABLE": "[CACHE]/chrome/chrome/chrome",
-      "CHROME_NO_SANDBOX": "true",
-      "GEM_HOME": "[START_DIR]/gems",
-      "GOPATH": "[CLEANUP]/go_path",
-      "GRADLE_OPTS": "-Dorg.gradle.daemon=false",
-      "GRADLE_USER_HOME": "[CACHE]/gradle"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/chrome/chrome",
-        "[CACHE]/chrome/drivers",
-        "[CACHE]/go/bin",
-        "[CLEANUP]/go_path/bin",
-        "[CACHE]/go/bin",
-        "[CLEANUP]/go_path/bin",
-        "[CACHE]/vpython",
-        "[CACHE]/android/platform-tools",
-        "[CACHE]/android/tools",
-        "[START_DIR]/gems/bin"
-      ]
-    },
-    "name": "Install gems.install gems",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "listdir",
-      "[START_DIR]/gems",
-      "--recursive"
-    ],
-    "infra_step": true,
-    "name": "Install gems.list bundle",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_END@listdir@@@"
-    ]
-  },
-  {
     "cmd": [
       "vpython",
       "-u",
@@ -806,6 +679,168 @@
     "name": "Prepare code signing.unlock login keychain",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "Install gems"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[START_DIR]/gems"
+    ],
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter\\ sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter\\ sdk/bin",
+        "[START_DIR]/flutter\\ sdk/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "Install gems.mkdir gems",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "gem",
+      "install",
+      "bundler",
+      "--install-dir",
+      "."
+    ],
+    "cwd": "[START_DIR]/gems",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter\\ sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter\\ sdk/bin",
+        "[START_DIR]/flutter\\ sdk/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "name": "Install gems.install bundler",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "bundle",
+      "config",
+      "set",
+      "path",
+      "[START_DIR]/gems"
+    ],
+    "cwd": "[START_DIR]/dev/ci/mac",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "GEM_HOME": "[START_DIR]/gems",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter\\ sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter\\ sdk/bin",
+        "[START_DIR]/flutter\\ sdk/bin/cache/dart-sdk/bin",
+        "[START_DIR]/gems/bin",
+        "[START_DIR]/flutter\\ sdk/bin",
+        "[START_DIR]/flutter\\ sdk/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "name": "Install gems.set gems path",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "bundler",
+      "install"
+    ],
+    "cwd": "[START_DIR]/dev/ci/mac",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "GEM_HOME": "[START_DIR]/gems",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter\\ sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter\\ sdk/bin",
+        "[START_DIR]/flutter\\ sdk/bin/cache/dart-sdk/bin",
+        "[START_DIR]/gems/bin",
+        "[START_DIR]/flutter\\ sdk/bin",
+        "[START_DIR]/flutter\\ sdk/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "name": "Install gems.install gems",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "listdir",
+      "[START_DIR]/gems",
+      "--recursive"
+    ],
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter\\ sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter\\ sdk/bin",
+        "[START_DIR]/flutter\\ sdk/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "Install gems.list bundle",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_END@listdir@@@"
     ]
   },
   {

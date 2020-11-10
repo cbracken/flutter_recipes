@@ -124,6 +124,7 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
       "SHARD": null,
       "SUBSHARD": null
     },
@@ -148,6 +149,7 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
       "SHARD": null,
       "SUBSHARD": null
     },
@@ -184,6 +186,7 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
       "SHARD": null,
       "SUBSHARD": null
     },
@@ -228,6 +231,7 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
       "SHARD": null,
       "SUBSHARD": null
     },
@@ -262,6 +266,7 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
       "SHARD": null,
       "SUBSHARD": null
     },
@@ -295,6 +300,7 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
       "SHARD": null,
       "SUBSHARD": null
     },
@@ -325,6 +331,7 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
       "SHARD": null,
       "SUBSHARD": null
     },

@@ -1,5 +1,6 @@
 DEPS = [
     'flutter/android_sdk',
+    'flutter/repo_util',
     'recipe_engine/cipd',
     'recipe_engine/context',
     'recipe_engine/file',

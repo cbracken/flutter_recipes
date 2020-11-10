@@ -50,7 +50,7 @@ class AddhocValidationApi(recipe_api.RecipeApi):
       if 'xcode' in dep_list:
         with self.m.osx_sdk('ios'):
           self.m.flutter_deps.swift()
-          checkout_path = self.m.path['start_dir'].join('flutter')
+          checkout_path = self.m.repo_util.sdk_checkout_path()
           self.m.flutter_deps.gems(
               env, env_prefixes, checkout_path.join('dev', 'ci', 'mac')
           )
