@@ -32,7 +32,6 @@ class FirebaseApi(recipe_api.RecipeApi):
     )
     env['TOKEN_PATH'] = access_token_path
     env['GCP_PROJECT'] = project
-    docs_path = self.m.path['start_dir'].join('flutter', 'dev', 'docs')
     with self.m.step.nest('Deploy docs'):
       with self.m.context(env=env, env_prefixes=env_prefixes, cwd=docs_path):
         resource_name = self.resource('firebase_deploy.sh')

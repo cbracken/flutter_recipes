@@ -128,7 +128,7 @@
       "755",
       "RECIPE_MODULE[flutter::firebase]/resources/firebase_deploy.sh"
     ],
-    "cwd": "[START_DIR]/flutter/dev/docs",
+    "cwd": "[START_DIR]/flutter sdk/dev/docs",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "GCP_PROJECT": "myproject",
@@ -155,7 +155,7 @@
     "cmd": [
       "RECIPE_MODULE[flutter::firebase]/resources/firebase_deploy.sh"
     ],
-    "cwd": "[START_DIR]/flutter/dev/docs",
+    "cwd": "[START_DIR]/flutter sdk/dev/docs",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "GCP_PROJECT": "myproject",
