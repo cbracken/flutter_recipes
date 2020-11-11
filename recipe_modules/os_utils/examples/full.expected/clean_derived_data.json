@@ -80,6 +80,36 @@
     "name": "Delete mac deriveddata"
   },
   {
+    "cmd": [],
+    "name": "Shutdown simulators"
+  },
+  {
+    "cmd": [
+      "sudo",
+      "xcrun",
+      "simctl",
+      "shutdown",
+      "all"
+    ],
+    "name": "Shutdown simulators.Shutdown simulators",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "sudo",
+      "xcrun",
+      "simctl",
+      "erase",
+      "all"
+    ],
+    "name": "Shutdown simulators.Erase simulators",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
     "name": "$result"
   }
 ]

@@ -61,7 +61,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         'ios_signing': self.ios_signing,
     }
     for dep in deps:
-      if dep.get('dependency') in ['xcode', 'gems']:
+      if dep.get('dependency') in ['xcode', 'gems', 'swift']:
         continue
       dep_funct = available_deps.get(dep.get('dependency'))
       if not dep_funct:
@@ -188,14 +188,15 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     root_path = self.m.path['cache'].join('android')
     self.m.android_sdk.install(root_path, env, env_prefixes)
 
-  def swift(self):
+  def swift(self, version=None):
     """Installs apple swift.
 
     Xcode cipd packages do not include swift which is required for some sdk tests.
     """
+    version = version or 'latest'
     swift_path = self.m.path['cleanup'].join('swift')
     swift = self.m.cipd.EnsureFile()
-    swift.add_package('flutter_internal/mac/swift/${platform}', 'latest')
+    swift.add_package('flutter_internal/mac/swift/${platform}', version)
     dst = self.m.path['cache'].join(
         'osx_sdk', 'XCode.app', 'Contents', 'Developer', 'Toolchains',
         'XcodeDefault.xctoolchain', 'usr', 'lib'

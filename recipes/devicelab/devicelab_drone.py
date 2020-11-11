@@ -14,6 +14,7 @@ DEPS = [
     'recipe_engine/properties',
     'recipe_engine/raw_io',
     'recipe_engine/service_account',
+    'recipe_engine/swarming',
     'recipe_engine/step',
 ]
 
@@ -41,14 +42,15 @@ def RunSteps(api):
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
     api.step('pub get', ['pub', 'get'])
-    dep_list = [d['dependency'] for d in deps]
-    if 'xcode' in dep_list:
+    dep_list = {d['dependency']: d.get('version') for d in deps}
+    if dep_list.has_key('xcode'):
       api.os_utils.clean_derived_data()
       with api.osx_sdk('ios'):
-        api.flutter_deps.swift()
+        api.flutter_deps.swift(dep_list.get('swift', 'latest'))
         api.flutter_deps.gems(
             env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
         )
+        api.os_utils.shutdown_simulators()
         with api.context(env=env,
                          env_prefixes=env_prefixes), api.step.defer_results():
           api.step(
@@ -81,6 +83,10 @@ def GenTests(api):
   )
   yield api.test(
       "xcode",
-      api.properties(task_name='abc', dependencies=[{'dependency': 'xcode'}]),
-      api.repo_util.flutter_environment_data()
+      api.properties(
+          task_name='abc',
+          dependencies=[{'dependency': 'xcode'},
+                        {'dependency': 'swift', 'version': 'abc'}]
+      ),
+      api.repo_util.flutter_environment_data(),
   )

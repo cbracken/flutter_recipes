@@ -87,3 +87,16 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       yield temp_dir
     finally:
       self.m.file.rmtree('temp dir for %s' % label, temp_dir)
+
+  def shutdown_simulators(self):
+    """It stops simulators if task is running on a devicelab bot."""
+    if str(self.m.swarming.bot_id
+          ).startswith('flutter-devicelab') and self.m.platform.is_mac:
+      with self.m.step.nest('Shutdown simulators'):
+        self.m.step(
+            'Shutdown simulators',
+            ['sudo', 'xcrun', 'simctl', 'shutdown', 'all']
+        )
+        self.m.step(
+            'Erase simulators', ['sudo', 'xcrun', 'simctl', 'erase', 'all']
+        )
