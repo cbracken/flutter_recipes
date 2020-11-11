@@ -38,7 +38,9 @@ class FlutterDepsApi(recipe_api.RecipeApi):
   def collect_os_info(self):
     """Collects meminfo, cpu, processes for mac"""
     if self.m.platform.is_mac:
-      self.m.step('OS info', cmd=['top', '-l', '3', '-n30', '-o', 'mem'])
+      self.m.step('OS info', cmd=['top', '-l', '3', '-o', 'mem'])
+    elif self.m.platform.is_linux:
+      self.m.step('OS info', cmd=['top', '-b', '-n', '3', '-o', '%MEM'])
 
   def kill_processes(self):
     """Kills processes.

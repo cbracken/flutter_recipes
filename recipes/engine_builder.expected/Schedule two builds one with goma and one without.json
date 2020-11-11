@@ -1,5 +1,16 @@
 [
   {
+    "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "name": "OS info"
+  },
+  {
     "cmd": [],
     "name": "Checkout source code"
   },
@@ -764,6 +775,30 @@
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
+  },
+  {
+    "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "OS info (2)"
   },
   {
     "cmd": [],

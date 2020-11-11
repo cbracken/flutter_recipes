@@ -1,5 +1,16 @@
 [
   {
+    "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "name": "OS info"
+  },
+  {
     "cmd": [],
     "name": "checkout source code"
   },
@@ -321,6 +332,36 @@
     "name": "prepare environment.Killing Processes.kill flutter",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "cwd": "[START_DIR]/flutter sdk",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter sdk/bin",
+        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "name": "prepare environment.OS info",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {

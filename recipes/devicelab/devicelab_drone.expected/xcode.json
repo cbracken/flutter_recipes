@@ -1,5 +1,16 @@
 [
   {
+    "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "name": "OS info"
+  },
+  {
     "cmd": [],
     "name": "Checkout flutter/flutter"
   },
@@ -419,6 +430,35 @@
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
+  },
+  {
+    "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "cwd": "[START_DIR]/flutter/dev/devicelab",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "name": "OS info (2)"
   },
   {
     "name": "$result"

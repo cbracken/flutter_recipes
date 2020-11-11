@@ -27,6 +27,17 @@
   },
   {
     "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "name": "OS info"
+  },
+  {
+    "cmd": [
       "vpython",
       "-u",
       "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
@@ -1230,6 +1241,17 @@
     "~followup_annotations": [
       "@@@STEP_LINK@a.html@https://storage.googleapis.com/mybucket/web_engine/0/a.html@@@"
     ]
+  },
+  {
+    "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "name": "OS info (2)"
   },
   {
     "name": "$result"

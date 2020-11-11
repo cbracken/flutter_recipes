@@ -1,5 +1,16 @@
 [
   {
+    "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "name": "OS info"
+  },
+  {
     "cmd": [],
     "name": "RECIPE CRASH (Uncaught exception)",
     "~followup_annotations": [

@@ -1,5 +1,16 @@
 [
   {
+    "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "name": "OS info"
+  },
+  {
     "cmd": [],
     "name": "checkout source code"
   },
@@ -237,6 +248,17 @@
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
+  },
+  {
+    "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "name": "OS info (2)"
   },
   {
     "name": "$result"

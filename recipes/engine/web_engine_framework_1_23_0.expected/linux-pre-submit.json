@@ -27,6 +27,17 @@
   },
   {
     "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "name": "OS info"
+  },
+  {
+    "cmd": [
       "vpython",
       "-u",
       "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
@@ -1385,6 +1396,17 @@
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LINK@8922054662172514001@https://cr-buildbucket.appspot.com/build/8922054662172514001@@@"
     ]
+  },
+  {
+    "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "name": "OS info (2)"
   },
   {
     "name": "$result"
