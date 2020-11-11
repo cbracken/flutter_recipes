@@ -1213,6 +1213,33 @@
     "name": "Scenario App Integration Tests"
   },
   {
+    "cmd": [
+      "kill",
+      "-9",
+      "17687"
+    ],
+    "cwd": "[CACHE]/builder/src/flutter/testing/scenario_app",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/flutter/testing/scenario_app/android/gradle-home/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Kill emulator"
+  },
+  {
     "cmd": [],
     "name": "Killing Processes"
   },

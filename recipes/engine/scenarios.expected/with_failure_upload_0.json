@@ -1214,6 +1214,33 @@
   },
   {
     "cmd": [
+      "kill",
+      "-9",
+      "17687"
+    ],
+    "cwd": "[CACHE]/builder/src/flutter/testing/scenario_app",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/flutter/testing/scenario_app/android/gradle-home/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Kill emulator"
+  },
+  {
+    "cmd": [
       "python",
       "-u",
       "RECIPE_MODULE[flutter::zip]/resources/zip.py"
@@ -1280,9 +1307,9 @@
       "The recipe has crashed at point 'Uncaught exception'!",
       "",
       "Traceback (most recent call last):",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine/scenarios.py\", line 146, in RunSteps",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine/scenarios.py\", line 164, in RunSteps",
       "    RunAndroidScenarioTests(api)",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine/scenarios.py\", line 101, in RunAndroidScenarioTests",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine/scenarios.py\", line 118, in RunAndroidScenarioTests",
       "    raise AssertionError('Diff detected. Please verify the diff failures.')",
       "AssertionError: Diff detected. Please verify the diff failures."
     ]
