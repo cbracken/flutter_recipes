@@ -10,6 +10,7 @@ DEPS = [
     'flutter/repo_util',
     'flutter/os_utils',
     'recipe_engine/context',
+    'recipe_engine/file',
     'recipe_engine/path',
     'recipe_engine/properties',
     'recipe_engine/raw_io',
@@ -39,6 +40,18 @@ def RunSteps(api):
   deps = api.properties.get('dependencies', [])
   api.flutter_deps.required_deps(env, env_prefixes, deps)
   devicelab_path = flutter_path.join('dev', 'devicelab')
+  # Create service account for post submit tests.
+  service_account_args = []
+  if api.properties.get('pool') == 'flutter.luci.prod':
+    service_account = api.service_account.default()
+    access_token = service_account.get_access_token()
+    access_token_path = api.path.mkstemp()
+    api.file.write_text("write token", access_token_path, access_token,
+                        include_log=False)
+    service_account_args = ['--service-account-token-file', access_token_path]
+  # Run test
+  test_runner_command = ['dart', 'bin/run.dart', '-t', task_name]
+  test_runner_command.extend(service_account_args)
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
     api.step('pub get', ['pub', 'get'])
@@ -53,9 +66,7 @@ def RunSteps(api):
         api.os_utils.shutdown_simulators()
         with api.context(env=env,
                          env_prefixes=env_prefixes), api.step.defer_results():
-          api.step(
-              'run %s' % task_name, ['dart', 'bin/run.dart', '-t', task_name]
-          )
+          api.step('run %s' % task_name, test_runner_command)
           # This is to clean up leaked processes.
           api.os_utils.kill_processes()
           # Collect memory/cpu/process after task execution.
@@ -63,9 +74,7 @@ def RunSteps(api):
     else:
       with api.context(env=env,
                        env_prefixes=env_prefixes), api.step.defer_results():
-        api.step(
-            'run %s' % task_name, ['dart', 'bin/run.dart', '-t', task_name]
-        )
+        api.step('run %s' % task_name, test_runner_command)
         # This is to clean up leaked processes.
         api.os_utils.kill_processes()
         # Collect memory/cpu/process after task execution.
@@ -89,4 +98,8 @@ def GenTests(api):
                         {'dependency': 'swift', 'version': 'abc'}]
       ),
       api.repo_util.flutter_environment_data(),
+  )
+  yield api.test(
+      "post-submit", api.properties(task_name='abc', pool='flutter.luci.prod'),
+      api.repo_util.flutter_environment_data()
   )
