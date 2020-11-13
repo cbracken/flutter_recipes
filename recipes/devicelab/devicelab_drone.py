@@ -51,8 +51,6 @@ def RunSteps(api):
     service_account_args = ['--service-account-token-file', access_token_path]
   # Run test
   test_runner_command = ['dart', 'bin/run.dart', '-t', task_name]
-  test_runner_command.extend(['--luci-builder',
-                              api.properties.get('buildername')])
   test_runner_command.extend(service_account_args)
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
@@ -89,13 +87,12 @@ def GenTests(api):
       api.expect_exception('ValueError'),
   )
   yield api.test(
-      "basic", api.properties(buildername='Linux abc', task_name='abc'),
+      "basic", api.properties(task_name='abc'),
       api.repo_util.flutter_environment_data()
   )
   yield api.test(
       "xcode",
       api.properties(
-          buildername='Mac abc',
           task_name='abc',
           dependencies=[{'dependency': 'xcode'},
                         {'dependency': 'swift', 'version': 'abc'}]
@@ -103,11 +100,6 @@ def GenTests(api):
       api.repo_util.flutter_environment_data(),
   )
   yield api.test(
-      "post-submit",
-      api.properties(
-          buildername='Linux abc',
-          pool='flutter.luci.prod',
-          task_name='abc'
-      ),
+      "post-submit", api.properties(task_name='abc', pool='flutter.luci.prod'),
       api.repo_util.flutter_environment_data()
   )
