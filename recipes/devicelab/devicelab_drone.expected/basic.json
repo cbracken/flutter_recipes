@@ -173,7 +173,9 @@
       "dart",
       "bin/run.dart",
       "-t",
-      "abc"
+      "abc",
+      "--luci-builder",
+      "Linux abc"
     ],
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
