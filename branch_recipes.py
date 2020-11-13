@@ -10,6 +10,7 @@ import sys
 RECIPES_TO_BRANCH = (
         'devicelab',
         'devicelab/devicelab_drone',
+        'engine/engine_metrics',
         'engine/scenarios',
         'engine/web_engine_framework',
         'engine',
