@@ -689,8 +689,7 @@
       "gen",
       "[START_DIR]/recipes/out/default",
       "--check=system",
-      "--args=import(\"//boards/x64.gni\")  import(\"//products/core.gni\")  if (!defined(zircon_extra_args)) { zircon_extra_args = { } } base_package_labels+=[\"//bundles:kitchen_sink\"] build_info_board=\"x64\" build_info_product=\"core\" goma_dir=\"[START_DIR]/recipes/prebuilt/third_party/goma/linux-x64\" is_debug=false target_cpu=\"x64\" use_goma=true zircon_tracelog=\"[START_DIR]/recipes/out/default/zircon_gn_trace.json\"",
-      "--tracelog=[START_DIR]/recipes/out/default/gn_trace.json",
+      "--args=import(\"//boards/x64.gni\")  import(\"//products/core.gni\")  if (!defined(zircon_extra_args)) { zircon_extra_args = { } } base_package_labels+=[\"//bundles:kitchen_sink\"] build_info_board=\"x64\" build_info_product=\"core\" goma_dir=\"[START_DIR]/recipes/prebuilt/third_party/goma/linux-x64\" is_debug=false target_cpu=\"x64\" use_goma=true",
       "--export-compile-commands",
       "--fail-on-unused-args"
     ],
