@@ -143,7 +143,13 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       paths.append(chrome_driver_path)
       env_prefixes['PATH'] = paths
       binary_name = 'chrome.exe' if self.m.platform.is_win else 'chrome'
-      env['CHROME_EXECUTABLE'] = chrome_path.join(binary_name)
+      if self.m.platform.is_mac:
+        exec_path = chrome_path.join(
+            'chrome-mac', 'Chromium.app', 'Contents', 'MacOS', 'Chromium'
+        )
+        env['CHROME_EXECUTABLE'] = exec_path
+      else:
+        env['CHROME_EXECUTABLE'] = chrome_path.join(binary_name)
 
   def go_sdk(self, env, env_prefixes, version):
     """Installs go sdk."""

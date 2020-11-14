@@ -221,7 +221,7 @@
       "github.com/technosophos/dashing"
     ],
     "env": {
-      "CHROME_EXECUTABLE": "[CACHE]/chrome/chrome/chrome",
+      "CHROME_EXECUTABLE": "[CACHE]/chrome/chrome/chrome-mac/Chromium.app/Contents/MacOS/Chromium",
       "CHROME_NO_SANDBOX": "true",
       "GOPATH": "[CLEANUP]/go_path"
     },
