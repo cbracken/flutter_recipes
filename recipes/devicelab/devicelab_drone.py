@@ -42,7 +42,7 @@ def RunSteps(api):
   devicelab_path = flutter_path.join('dev', 'devicelab')
   # Create service account for post submit tests.
   service_account_args = []
-  if api.properties.get('pool') == 'flutter.luci.prod':
+  if api.properties.get('upload_metrics'):
     service_account = api.service_account.default()
     access_token = service_account.get_access_token()
     access_token_path = api.path.mkstemp()
@@ -100,6 +100,6 @@ def GenTests(api):
       api.repo_util.flutter_environment_data(),
   )
   yield api.test(
-      "post-submit", api.properties(task_name='abc', pool='flutter.luci.prod'),
+      "post-submit", api.properties(task_name='abc', upload_metrics=True),
       api.repo_util.flutter_environment_data()
   )
