@@ -116,24 +116,6 @@ def DownloadChromeAndDriver(api, chrome_path_84):
       'flutter_internal/browser-drivers/chrome/${platform}', 'latest-84')
   api.cipd.ensure(chrome_driver_84_path, chrome_pkgdriver_84)
 
-  # Chrome uses binary numbers for archiving different versions of the browser.
-  # The binary 741412 has major version 82.
-  # TODO: remove this version once 84 start working with no issues.
-  chrome_path_82 = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                                 'chrome', '741412')
-  chrome_pkg_82 = api.cipd.EnsureFile()
-  chrome_pkg_82.add_package('flutter_internal/browsers/chrome-linux', 'latest')
-  api.cipd.ensure(chrome_path_82, chrome_pkg_82)
-  # Download the driver for Chrome 82.
-  # TODO: remove this version once 84 start working with no issues.
-  chrome_driver_82_path = checkout.join('flutter', 'lib', 'web_ui',
-                                        '.dart_tool', 'drivers', 'chrome')
-  chrome_pkgdriver_82 = api.cipd.EnsureFile()
-  chrome_pkgdriver_82.add_package(
-      'flutter_internal/browser-drivers/chromedriver-linux', 'latest')
-  api.cipd.ensure(chrome_driver_82_path, chrome_pkgdriver_82)
-
-
 def CloneGoldens(api):
   builder_root = api.path['cache'].join('builder')
   goldens = builder_root.join('goldens')
