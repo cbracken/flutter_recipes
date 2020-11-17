@@ -198,8 +198,6 @@
       "bin/run.dart",
       "-t",
       "abc",
-      "--luci-builder",
-      "Linux abc",
       "--service-account-token-file",
       "[CLEANUP]/tmp_tmp_1"
     ],
