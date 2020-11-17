@@ -1412,19 +1412,6 @@ def RunSteps(api, properties, env_properties):
 
     api.gclient.runhooks()
 
-    with api.step.nest('Android SDK Licenses'):
-      api.file.ensure_directory('mkdir licenses', android_home.join('licenses'))
-      api.file.write_text(
-          'android sdk license',
-          android_home.join('licenses', 'android-sdk-license'),
-          str(properties.android_sdk_license)
-      )
-      api.file.write_text(
-          'android sdk preview license',
-          android_home.join('licenses', 'android-sdk-preview-license'),
-          str(properties.android_sdk_preview_license)
-      )
-
     if api.platform.is_linux:
       if api.properties.get('build_host', True):
         AnalyzeDartUI(api)
@@ -1501,8 +1488,6 @@ def GenTests(api):
                         build_android_vulkan=True,
                         no_maven=maven_or_bitcode,
                         upload_packages=should_upload,
-                        android_sdk_license='android_sdk_hash',
-                        android_sdk_preview_license='android_sdk_preview_hash',
                         force_upload=True,
                         no_lto=no_lto,
                     ),
