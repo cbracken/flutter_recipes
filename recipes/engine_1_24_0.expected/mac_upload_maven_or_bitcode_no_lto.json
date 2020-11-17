@@ -13133,6 +13133,28 @@
   },
   {
     "cmd": [
+      "killall",
+      "-9",
+      "java"
+    ],
+    "name": "Killing Processes.kill Safari (2)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "killall",
+      "-9",
+      "adb"
+    ],
+    "name": "Killing Processes.kill Safari (3)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
       "top",
       "-l",
       "3",

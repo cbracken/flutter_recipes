@@ -17500,6 +17500,26 @@
   },
   {
     "cmd": [
+      "pkill",
+      "java"
+    ],
+    "name": "Killing Processes.kill java",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "adb"
+    ],
+    "name": "Killing Processes.kill adb",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
       "top",
       "-b",
       "-n",
