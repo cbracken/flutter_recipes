@@ -191,65 +191,6 @@
     ]
   },
   {
-    "cmd": [],
-    "name": "Android SDK Licenses"
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "ensure-directory",
-      "--mode",
-      "0777",
-      "[CACHE]/builder/src/third_party/android_tools/sdk/licenses"
-    ],
-    "infra_step": true,
-    "name": "Android SDK Licenses.mkdir licenses",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "android_sdk_hash",
-      "[CACHE]/builder/src/third_party/android_tools/sdk/licenses/android-sdk-license"
-    ],
-    "infra_step": true,
-    "name": "Android SDK Licenses.android sdk license",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@android-sdk-license@android_sdk_hash@@@",
-      "@@@STEP_LOG_END@android-sdk-license@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "",
-      "[CACHE]/builder/src/third_party/android_tools/sdk/licenses/android-sdk-preview-license"
-    ],
-    "infra_step": true,
-    "name": "Android SDK Licenses.android sdk preview license",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_END@android-sdk-preview-license@@@"
-    ]
-  },
-  {
     "cmd": [
       "python",
       "[CACHE]/builder/src/flutter/tools/gn",
@@ -1356,7 +1297,7 @@
       "The recipe has crashed at point 'Uncaught exception'!",
       "",
       "Traceback (most recent call last):",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine/scenarios_1_24_0.py\", line 146, in RunSteps",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine/scenarios_1_24_0.py\", line 136, in RunSteps",
       "    RunAndroidScenarioTests(api)",
       "  File \"RECIPE_REPO[flutter]/recipes/engine/scenarios_1_24_0.py\", line 101, in RunAndroidScenarioTests",
       "    raise AssertionError('Diff detected. Please verify the diff failures.')",

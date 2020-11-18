@@ -73,15 +73,6 @@ def RunSteps(api, properties):
     api.goma.ensure()
 
     android_home = cache_root.join('src', 'third_party', 'android_tools', 'sdk')
-    with api.step.nest('Android SDK'):
-      api.file.ensure_directory('mkdir licenses', android_home.join('licenses'))
-      api.file.write_text('android sdk license',
-                          android_home.join('licenses', 'android-sdk-license'),
-                          str(properties.android_sdk_license))
-      api.file.write_text(
-          'android sdk preview license',
-          android_home.join('licenses', 'android-sdk-preview-license'),
-          str(properties.android_sdk_preview_license))
 
     env = {'GOMA_DIR': api.goma.goma_dir, 'ANDROID_HOME': str(android_home)}
 
@@ -114,8 +105,6 @@ def GenTests(api):
          ) + api.properties(
              InputProperties(
                  mastername='client.flutter',
-                 android_sdk_license='sdk_hash',
-                 android_sdk_preview_license='sdk preview hash',
                  builds=[
                      EngineBuild(
                          disable_goma=True,

@@ -123,16 +123,6 @@ def RunSteps(api, properties, env_properties):
                                 env_prefixes,
                                 clobber=properties.clobber)
 
-  with api.step.nest('Android SDK Licenses'):
-      api.file.ensure_directory('mkdir licenses', android_home.join('licenses'))
-      api.file.write_text('android sdk license',
-                          android_home.join('licenses', 'android-sdk-license'),
-                          str(properties.android_sdk_license))
-      api.file.write_text(
-          'android sdk preview license',
-          android_home.join('licenses', 'android-sdk-preview-license'),
-          str(properties.android_sdk_preview_license))
-
   with api.context(
       cwd=cache_root,
       env=env,
@@ -186,7 +176,6 @@ def GenTests(api):
         ),
         api.properties(
             InputProperties(
-                android_sdk_license='android_sdk_hash',
                 goma_jobs='1024',
                 upload_packages=upload_packages,
                 clobber=False,
