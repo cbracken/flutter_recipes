@@ -40,6 +40,7 @@ def RunSteps(api):
   deps = api.properties.get('dependencies', [])
   api.flutter_deps.required_deps(env, env_prefixes, deps)
   devicelab_path = flutter_path.join('dev', 'devicelab')
+  test_runner_command = ['dart', 'bin/run.dart', '-t', task_name]
   # Create service account for post submit tests.
   service_account_args = []
   if api.properties.get('upload_metrics'):
@@ -49,10 +50,10 @@ def RunSteps(api):
     api.file.write_text(
         "write token", access_token_path, access_token, include_log=False
     )
-    service_account_args = ['--service-account-token-file', access_token_path]
+    test_runner_command.extend([
+      '--service-account-token-file', access_token_path,
+      '--luci-builder', api.properties.get('buildername')])
   # Run test
-  test_runner_command = ['dart', 'bin/run.dart', '-t', task_name]
-  test_runner_command.extend(service_account_args)
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
     api.step('flutter update-packages', ['flutter', 'update-packages'])
@@ -102,6 +103,12 @@ def GenTests(api):
       api.repo_util.flutter_environment_data(),
   )
   yield api.test(
-      "post-submit", api.properties(task_name='abc', upload_metrics=True),
+      "post-submit",
+      api.properties(
+          buildername='Linux abc',
+          pool='flutter.luci.prod',
+          task_name='abc',
+          upload_metrics=True
+      ),
       api.repo_util.flutter_environment_data()
   )

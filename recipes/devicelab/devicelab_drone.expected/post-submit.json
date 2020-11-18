@@ -222,7 +222,9 @@
       "-t",
       "abc",
       "--service-account-token-file",
-      "[CLEANUP]/tmp_tmp_1"
+      "[CLEANUP]/tmp_tmp_1",
+      "--luci-builder",
+      "Linux abc"
     ],
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
