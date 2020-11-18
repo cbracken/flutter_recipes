@@ -46,14 +46,16 @@ def RunSteps(api):
     service_account = api.service_account.default()
     access_token = service_account.get_access_token()
     access_token_path = api.path.mkstemp()
-    api.file.write_text("write token", access_token_path, access_token,
-                        include_log=False)
+    api.file.write_text(
+        "write token", access_token_path, access_token, include_log=False
+    )
     service_account_args = ['--service-account-token-file', access_token_path]
   # Run test
   test_runner_command = ['dart', 'bin/run.dart', '-t', task_name]
   test_runner_command.extend(service_account_args)
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
+    api.step('flutter update-packages', ['flutter', 'update-packages'])
     api.step('pub get', ['pub', 'get'])
     dep_list = {d['dependency']: d.get('version') for d in deps}
     if dep_list.has_key('xcode'):
