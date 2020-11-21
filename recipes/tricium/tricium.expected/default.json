@@ -666,7 +666,9 @@
       "--no-commit-id",
       "--diff-filter=d",
       "-U0",
-      "HEAD"
+      "HEAD",
+      "--",
+      "flutter.py"
     ],
     "cwd": "[START_DIR]/recipes",
     "name": "analyze flutter.py.get changed files",
@@ -2101,7 +2103,9 @@
       "--no-commit-id",
       "--diff-filter=d",
       "-U0",
-      "HEAD"
+      "HEAD",
+      "--",
+      "flutter.py"
     ],
     "cwd": "[START_DIR]/recipes",
     "name": "analyze flutter.py.get formatted files",
