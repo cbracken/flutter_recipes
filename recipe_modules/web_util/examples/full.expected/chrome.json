@@ -1,0 +1,105 @@
+[
+  {
+    "cmd": [],
+    "name": "read browser lock yaml",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@yaml@@@@",
+      "@@@STEP_LOG_END@yaml@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CACHE]/builder/src/flutter/lib/web_ui/dev/browser_lock.yaml",
+      "/path/to/tmp/"
+    ],
+    "cwd": "[CACHE]/builder/src",
+    "infra_step": true,
+    "name": "read browser lock yaml.read",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_END@browser_lock.yaml@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[flutter::yaml]/resources/parse_yaml.py",
+      "--yaml_file",
+      "[CACHE]/builder/src/flutter/lib/web_ui/dev/browser_lock.yaml",
+      "--json_file",
+      "/path/to/tmp/json"
+    ],
+    "cwd": "[CACHE]/builder/src",
+    "name": "read browser lock yaml.parse",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"chrome\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"Linux\": \"768968\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"Mac\": \"768985\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"Win\": \"768975\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"required_driver_version\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"chrome\": 84@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/chrome/768968",
+      "-ensure-file",
+      "flutter_internal/browsers/chrome/${platform} 768968",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "name": "ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-768968----------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"flutter_internal/browsers/chrome/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "tests for linux",
+      "[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/test_results/info.txt"
+    ],
+    "infra_step": true,
+    "name": "write info file",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@info.txt@tests for linux@@@",
+      "@@@STEP_LOG_END@info.txt@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]

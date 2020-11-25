@@ -1,0 +1,23 @@
+[
+  {
+    "cmd": [],
+    "name": "RECIPE CRASH (Uncaught exception)",
+    "~followup_annotations": [
+      "@@@STEP_EXCEPTION@@@",
+      "The recipe has crashed at point 'Uncaught exception'!",
+      "",
+      "Traceback (most recent call last):",
+      "  File \"RECIPE_REPO[flutter]/recipe_modules/web_util/examples/full.py\", line 23, in RunSteps",
+      "    api.web_util.prepare_dependencies(engine_checkout_path)",
+      "  File \"RECIPE_REPO[flutter]/recipe_modules/web_util/api.py\", line 172, in prepare_dependencies",
+      "    raise ValueError('Dependency %s not available.' % dep)",
+      "ValueError: Dependency invalid_dependency not available."
+    ]
+  },
+  {
+    "failure": {
+      "humanReason": "Uncaught Exception: ValueError('Dependency invalid_dependency not available.',)"
+    },
+    "name": "$result"
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/drivers/firefox",
+      "-ensure-file",
+      "flutter_internal/browser-drivers/firefoxdriver-linux latest",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "name": "ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"flutter_internal/browser-drivers/firefoxdriver-linux\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "tests for linux",
+      "[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/test_results/info.txt"
+    ],
+    "infra_step": true,
+    "name": "write info file",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@info.txt@tests for linux@@@",
+      "@@@STEP_LOG_END@info.txt@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]
