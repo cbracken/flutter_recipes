@@ -149,11 +149,20 @@
   {
     "cmd": [
       "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+    ],
+    "name": "zipping",
+    "stdin": "{\"entries\": [{\"archive_name\": \"a\", \"path\": \"[CLEANUP]/bucketutil-example_tmp_1/a\", \"type\": \"file\"}, {\"archive_name\": \"b\", \"path\": \"[CLEANUP]/bucketutil-example_tmp_1/b\", \"type\": \"file\"}, {\"path\": \"[CLEANUP]/bucketutil-example_tmp_1/sub\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]/bucketutil-example_tmp_1/output.zip\", \"root\": \"[CLEANUP]/bucketutil-example_tmp_1\"}"
+  },
+  {
+    "cmd": [
+      "python",
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "stat",
-      "gs://flutter_infra/bar"
+      "gs://flutter_infra/foo"
     ],
-    "name": "Ensure bar does not already exist on cloud storage"
+    "name": "Ensure foo does not already exist on cloud storage"
   },
   {
     "name": "$result"

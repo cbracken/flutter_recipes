@@ -4,8 +4,12 @@
 
 DEPS = [
     'bucket_util',
+    'recipe_engine/file',
+    'recipe_engine/path',
     'recipe_engine/properties',
     'recipe_engine/runtime',
+    'recipe_engine/step',
+    'zip',
 ]
 
 
@@ -31,10 +35,21 @@ def RunSteps(api):
       platform='parent_directory',
       file_paths=['a.txt'])
 
+  # Prepare files.
+  temp = api.path.mkdtemp('bucketutil-example')
+
+  local_zip = temp.join('output.zip')
+  package = api.zip.make_package(temp, local_zip)
+
+  # Add files to zip package.
+  api.bucket_util.add_files(package, ['a', 'b'])
+  api.bucket_util.add_directories(package, ['sub'])
+  package.zip('zipping')
+
   if api.bucket_util.should_upload_packages():
     api.bucket_util.safe_upload(
-                    "foo", # local_path
-                    "bar", # remote_path
+                    local_zip, # local_path
+                    "foo", # remote_path
                     skip_on_duplicate=True)
 
 

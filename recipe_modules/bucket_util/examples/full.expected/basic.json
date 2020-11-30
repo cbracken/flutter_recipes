@@ -66,6 +66,15 @@
     "name": "temp dir for Upload test.zip (3)"
   },
   {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+    ],
+    "name": "zipping",
+    "stdin": "{\"entries\": [{\"archive_name\": \"a\", \"path\": \"[CLEANUP]/bucketutil-example_tmp_1/a\", \"type\": \"file\"}, {\"archive_name\": \"b\", \"path\": \"[CLEANUP]/bucketutil-example_tmp_1/b\", \"type\": \"file\"}, {\"path\": \"[CLEANUP]/bucketutil-example_tmp_1/sub\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]/bucketutil-example_tmp_1/output.zip\", \"root\": \"[CLEANUP]/bucketutil-example_tmp_1\"}"
+  },
+  {
     "name": "$result"
   }
 ]

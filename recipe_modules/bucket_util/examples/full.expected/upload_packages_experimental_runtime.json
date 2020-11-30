@@ -123,18 +123,27 @@
     "cmd": [
       "python",
       "-u",
+      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+    ],
+    "name": "zipping",
+    "stdin": "{\"entries\": [{\"archive_name\": \"a\", \"path\": \"[CLEANUP]/bucketutil-example_tmp_1/a\", \"type\": \"file\"}, {\"archive_name\": \"b\", \"path\": \"[CLEANUP]/bucketutil-example_tmp_1/b\", \"type\": \"file\"}, {\"path\": \"[CLEANUP]/bucketutil-example_tmp_1/sub\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]/bucketutil-example_tmp_1/output.zip\", \"root\": \"[CLEANUP]/bucketutil-example_tmp_1\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
       "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
       "--",
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "foo",
-      "gs://flutter_infra/bar"
+      "[CLEANUP]/bucketutil-example_tmp_1/output.zip",
+      "gs://flutter_infra/foo"
     ],
     "infra_step": true,
-    "name": "gsutil upload \"bar\"",
+    "name": "gsutil upload \"foo\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/bar@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/foo@@@"
     ]
   },
   {

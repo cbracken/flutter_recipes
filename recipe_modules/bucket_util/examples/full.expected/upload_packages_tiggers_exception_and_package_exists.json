@@ -38,7 +38,7 @@
       "The recipe has crashed at point 'Uncaught exception'!",
       "",
       "Traceback (most recent call last):",
-      "  File \"RECIPE_REPO[flutter]/recipe_modules/bucket_util/examples/full.py\", line 17, in RunSteps",
+      "  File \"RECIPE_REPO[flutter]/recipe_modules/bucket_util/examples/full.py\", line 21, in RunSteps",
       "    'test1.zip') # zip_name",
       "  File \"RECIPE_REPO[flutter]/recipe_modules/bucket_util/api.py\", line 40, in upload_folder",
       "    platform=platform)",

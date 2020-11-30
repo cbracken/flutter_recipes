@@ -214,14 +214,17 @@ def RunGNBitcode(api, *args):
     api.step('gn %s' % ' '.join(args), gn_cmd)
 
 
-def UploadArtifacts(api, platform, file_paths, archive_name='artifacts.zip'):
+def UploadArtifacts(api, platform, file_paths=[], directory_paths=[], archive_name='artifacts.zip', pkg_root=None):
   dir_label = '%s UploadArtifacts %s' % (platform, archive_name)
   with api.os_utils.make_temp_directory(dir_label) as temp_dir:
     local_zip = temp_dir.join('artifacts.zip')
     remote_name = '%s/%s' % (platform, archive_name)
     remote_zip = GetCloudPath(api, remote_name)
-    pkg = api.zip.make_package(GetCheckoutPath(api), local_zip)
+    if pkg_root is None:
+      pkg_root = GetCheckoutPath(api)
+    pkg = api.zip.make_package(pkg_root, local_zip)
     api.bucket_util.add_files(pkg, file_paths)
+    api.bucket_util.add_directories(pkg, directory_paths)
 
     pkg.zip('Zip %s %s' % (platform, archive_name))
     if api.bucket_util.should_upload_packages():
@@ -1097,14 +1100,25 @@ def PackageIOSVariant(
         'Create macOS %s gen_snapshot' % label, create_macos_gen_snapshot_cmd
     )
 
+  label_root = checkout.join('out', label)
+  api.file.copy(
+    'Copy podspec for %s' % label,
+    checkout.join('flutter/shell/platform/darwin/ios/framework/Flutter.podspec'),
+    label_root,
+  )
+
   # Upload the artifacts to cloud storage.
-  artifacts = [
-      'flutter/shell/platform/darwin/ios/framework/Flutter.podspec',
-      'out/%s/gen_snapshot_armv7' % label,
-      'out/%s/gen_snapshot_arm64' % label,
-      'out/%s/Flutter.framework.zip' % label,
+  file_artifacts = [
+      'Flutter.podspec',
+      'gen_snapshot_armv7',
+      'gen_snapshot_arm64',
+      'Flutter.framework.zip',
   ]
-  UploadArtifacts(api, bucket_name, artifacts)
+  directory_artifacts = [
+      'Flutter.xcframework',
+  ]
+
+  UploadArtifacts(api, bucket_name, file_artifacts, directory_artifacts, pkg_root=label_root)
 
   if label == 'release':
     dsym_zip = label_dir.join('Flutter.dSYM.zip')

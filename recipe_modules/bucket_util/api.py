@@ -121,7 +121,7 @@ class BucketUtilApi(recipe_api.RecipeApi):
         args=args,
         name='upload "%s"' % remote_path)
 
-  def add_files(self, pkg, relative_paths):
+  def add_files(self, pkg, relative_paths=[]):
     """Adds files to the package.
 
     Args:
@@ -137,6 +137,18 @@ class BucketUtilApi(recipe_api.RecipeApi):
     for path in relative_paths:
       pkg.add_file(pkg.root.join(path),
                    archive_name=self.m.path.basename(path))
+
+  def add_directories(self, pkg, relative_paths=[]):
+    """Adds directories to the package.
+
+    Args:
+      pkg: (package) The package that contains the files.
+      relative_paths:
+        (list) The relative_paths parameter is a list of directories to add to
+        the archive.
+    """
+    for path in relative_paths:
+      pkg.add_directory(pkg.root.join(path))
 
   def get_cloud_path(self, path):
     """Gets the path in the cloud bucket.
