@@ -107,14 +107,15 @@ def RunAndroidScenarioTests(api):
         ok_ret='all'
     )
     api.step('Kill emulator', ['kill', '-9', emulator_pid])
-    build_failures_dir = scenario_app_tests.join('build', 'reports', 'diff_failures')
-    if api.path.exists(build_failures_dir):
+    build_failures_dir = scenario_app_tests.join('build', 'reports', 'failures')
+    if result.exc_result.retcode != 0 and api.path.exists(build_failures_dir):
       # Upload any diff failures.
       # If there are any, upload them to the cloud bucket.
       api.bucket_util.upload_folder(
           'Upload diff failures', 'src/flutter/testing/scenario_app',
           'build/reports/diff_failures', 'diff_failures.zip'
       )
+      raise AssertionError('Diff detected. Please verify the diff failures.')
 
 
 def RunSteps(api, properties, env_properties):
@@ -158,7 +159,7 @@ def RunSteps(api, properties, env_properties):
 
 def GenTests(api):
   scenario_failures = GetCheckoutPath(api).join(
-      'flutter', 'testing', 'scenario_app', 'build', 'reports', 'diff_failures'
+      'flutter', 'testing', 'scenario_app', 'build', 'reports', 'failures'
   )
   for upload_packages in (True, False):
     yield api.test(
@@ -174,7 +175,7 @@ def GenTests(api):
                 goma_jobs='1024',
                 upload_packages=upload_packages,
             ),
-        ),
+        ), api.path.exists(scenario_failures),
         api.step_data(
             'Start Android emulator (API level 28)',
             stdout=api.raw_io.output_text(
@@ -200,6 +201,7 @@ def GenTests(api):
         # Makes the test fail.
         api.step_data('Scenario App Integration Tests', retcode=1),
         api.path.exists(scenario_failures),
+        api.expect_exception('AssertionError'),
         api.step_data(
             'Start Android emulator (API level 28)',
             stdout=api.raw_io.output_text(
