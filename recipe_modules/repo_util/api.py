@@ -93,7 +93,9 @@ class RepoUtilApi(recipe_api.RecipeApi):
       raise ValueError('Unsupported repo: %s' % name)
     with self.m.step.nest('Checkout flutter/%s' % name):
       git_url = url or REPOS[name]
-      git_ref = ref or self.m.buildbucket.gitiles_commit.ref
+      # gitiles_commit.id is more specific than gitiles_commit.ref, which is
+      # branch
+      git_ref = ref or self.m.buildbucket.gitiles_commit.id
       return self.m.git.checkout(
           git_url,
           dir_path=checkout_path,
