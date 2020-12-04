@@ -18,12 +18,12 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_1/test1.zip",
-      "gs://flutter_infra/flutter/experimental//test1.zip"
+      "gs://flutter_infra/flutter/experimental/00000000-0000-0000-0000-000000001337/test1.zip"
     ],
     "infra_step": true,
-    "name": "gsutil upload \"flutter/experimental//test1.zip\"",
+    "name": "gsutil upload \"flutter/experimental/00000000-0000-0000-0000-000000001337/test1.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental//test1.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental/00000000-0000-0000-0000-000000001337/test1.zip@@@"
     ]
   },
   {
@@ -58,12 +58,12 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_2/test2.zip",
-      "gs://flutter_infra/flutter/experimental//test2.zip"
+      "gs://flutter_infra/flutter/experimental/00000000-0000-0000-0000-00000000133a/test2.zip"
     ],
     "infra_step": true,
-    "name": "gsutil upload \"flutter/experimental//test2.zip\"",
+    "name": "gsutil upload \"flutter/experimental/00000000-0000-0000-0000-00000000133a/test2.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental//test2.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental/00000000-0000-0000-0000-00000000133a/test2.zip@@@"
     ]
   },
   {
@@ -98,12 +98,12 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_3/test3.zip",
-      "gs://flutter_infra/flutter/experimental//parent_directory/test3.zip"
+      "gs://flutter_infra/flutter/experimental/00000000-0000-0000-0000-00000000133d/parent_directory/test3.zip"
     ],
     "infra_step": true,
-    "name": "gsutil upload \"flutter/experimental//parent_directory/test3.zip\"",
+    "name": "gsutil upload \"flutter/experimental/00000000-0000-0000-0000-00000000133d/parent_directory/test3.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental//parent_directory/test3.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental/00000000-0000-0000-0000-00000000133d/parent_directory/test3.zip@@@"
     ]
   },
   {

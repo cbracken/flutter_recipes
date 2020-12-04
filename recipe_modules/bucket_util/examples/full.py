@@ -4,6 +4,7 @@
 
 DEPS = [
     'bucket_util',
+    'recipe_engine/buildbucket',
     'recipe_engine/file',
     'recipe_engine/path',
     'recipe_engine/properties',
@@ -65,16 +66,48 @@ def GenTests(api):
       api.properties(
           upload_packages=True,
       ),
+      # These ids are UUIDs derivated from a fixed seed.
+      # To get new ids, just run the test and use the ids generated
+      # by the uuid module.
       api.step_data(
-          'Ensure flutter//test1.zip does not already exist on cloud storage',
+          'Ensure flutter/00000000-0000-0000-0000-000000001337/test1.zip '
+          'does not already exist on cloud storage',
           retcode=1,
       ),
       api.step_data(
-          'Ensure flutter//test2.zip does not already exist on cloud storage',
+          'Ensure flutter/00000000-0000-0000-0000-00000000133a/test2.zip '
+          'does not already exist on cloud storage',
           retcode=1,
       ),
       api.step_data(
-          'Ensure flutter//parent_directory/test3.zip does not already exist on cloud storage',
+          'Ensure '
+          'flutter/00000000-0000-0000-0000-00000000133d/parent_directory/test3.zip '
+          'does not already exist on cloud storage',
+          retcode=1,
+      ),
+  )
+  yield api.test(
+      'upload_packages_if_commit_is_present',
+      api.properties(
+          upload_packages=True,
+      ),
+      api.buildbucket.ci_build(
+          git_repo='github.com/flutter/engine',
+          revision='8b3cd40a25a512033cc8c0797e41de9ecfc2432c'),
+      api.step_data(
+          'Ensure flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/test1.zip '
+          'does not already exist on cloud storage',
+          retcode=1,
+      ),
+      api.step_data(
+          'Ensure flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/test2.zip '
+          'does not already exist on cloud storage',
+          retcode=1,
+      ),
+      api.step_data(
+          'Ensure '
+          'flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/parent_directory/test3.zip '
+          'does not already exist on cloud storage',
           retcode=1,
       ),
   )

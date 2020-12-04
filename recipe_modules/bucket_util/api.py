@@ -23,7 +23,8 @@ class BucketUtilApi(recipe_api.RecipeApi):
                     parent_directory,
                     folder_name,
                     zip_name,
-                    platform=None):
+                    platform=None,
+                    bucket_name=INFRA_BUCKET_NAME):
     """Uploads a folder to the cloud bucket
 
     Args:
@@ -32,12 +33,14 @@ class BucketUtilApi(recipe_api.RecipeApi):
       folder_name: (str) Folder to upload.
       zip_name: (str) Name of the zip file in the cloud bucket.
       platform: (str) Directory name to add the zip file to.
+      bucket_name: (str) The bucket name. Defaults to flutter_infra.
     """
     self.upload_folder_and_files(dir_label,
                                  parent_directory,
                                  folder_name,
                                  zip_name,
-                                 platform=platform)
+                                 platform=platform,
+                                 bucket_name=bucket_name)
 
   def upload_folder_and_files(self,
                               dir_label,
@@ -45,7 +48,8 @@ class BucketUtilApi(recipe_api.RecipeApi):
                               folder_name,
                               zip_name,
                               platform=None,
-                              file_paths=None):
+                              file_paths=None,
+                              bucket_name=INFRA_BUCKET_NAME):
     """Uploads a folder and or files to the cloud bucket
 
     Args:
@@ -55,6 +59,7 @@ class BucketUtilApi(recipe_api.RecipeApi):
       zip_name: (str) Name of the zip file in the cloud bucket.
       platform: (str) directory name to add the zip file to.
       file_paths: (list) A list of string with the filenames to upload.
+      bucket_name: (str) The bucket name. Defaults to flutter_infra.
     """
     with self.m.os_utils.make_temp_directory(dir_label) as temp_dir:
       remote_name = '%s/%s' % (platform, zip_name) if platform else zip_name
@@ -69,7 +74,7 @@ class BucketUtilApi(recipe_api.RecipeApi):
 
       pkg.zip('Zip %s' % folder_name)
       if self.should_upload_packages():
-        self.safe_upload(local_zip, remote_zip)
+        self.safe_upload(local_zip, remote_zip, bucket_name=bucket_name)
 
   def safe_upload(self,
                   local_path,
@@ -157,9 +162,14 @@ class BucketUtilApi(recipe_api.RecipeApi):
       path: (str) Path to append after the commit hash.
 
     Returns:
-      The path formed by `flutter/<commit-hash>/<path>`.
+      The path formed by `flutter/<commit-hash|uuid>/<path>`.
     """
     git_hash = self.m.buildbucket.gitiles_commit.id
+    # gitiles_commit is only populated on post-submits.
+    # UUID is used in LED and try jobs.
+    uuid = self.m.uuid.random()
+    invocation_id = git_hash if git_hash else uuid
+
     if self.m.runtime.is_experimental:
-      return 'flutter/experimental/%s/%s' % (git_hash, path)
-    return 'flutter/%s/%s' % (git_hash, path)
+      return 'flutter/experimental/%s/%s' % (invocation_id, path)
+    return 'flutter/%s/%s' % (invocation_id, path)

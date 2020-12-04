@@ -1224,7 +1224,7 @@
       "python",
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "stat",
-      "gs://flutter_infra/flutter/abcd1234/diff_failures.zip"
+      "gs://flutter_logs/flutter/abcd1234/diff_failures.zip"
     ],
     "cwd": "[CACHE]/builder/src/flutter/testing/scenario_app",
     "env": {
@@ -1257,7 +1257,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_1/diff_failures.zip",
-      "gs://flutter_infra/flutter/abcd1234/diff_failures.zip"
+      "gs://flutter_logs/flutter/abcd1234/diff_failures.zip"
     ],
     "cwd": "[CACHE]/builder/src/flutter/testing/scenario_app",
     "env": {
@@ -1281,7 +1281,7 @@
     "infra_step": true,
     "name": "gsutil upload \"flutter/abcd1234/diff_failures.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/diff_failures.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_logs/flutter/abcd1234/diff_failures.zip@@@"
     ]
   },
   {
@@ -1318,23 +1318,70 @@
   },
   {
     "cmd": [],
-    "name": "RECIPE CRASH (Uncaught exception)",
+    "name": "Killing Processes"
+  },
+  {
+    "cmd": [
+      "pkill",
+      "chrome"
+    ],
+    "name": "Killing Processes.kill chrome",
     "~followup_annotations": [
-      "@@@STEP_EXCEPTION@@@",
-      "The recipe has crashed at point 'Uncaught exception'!",
-      "",
-      "Traceback (most recent call last):",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine/scenarios.py\", line 151, in RunSteps",
-      "    RunAndroidScenarioTests(api)",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine/scenarios.py\", line 118, in RunAndroidScenarioTests",
-      "    raise AssertionError('Diff detected. Please verify the diff failures.')",
-      "AssertionError: Diff detected. Please verify the diff failures."
+      "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
-    "failure": {
-      "humanReason": "Uncaught Exception: AssertionError('Diff detected. Please verify the diff failures.',)"
-    },
+    "cmd": [
+      "pkill",
+      "dart"
+    ],
+    "name": "Killing Processes.kill dart",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "flutter"
+    ],
+    "name": "Killing Processes.kill flutter",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "java"
+    ],
+    "name": "Killing Processes.kill java",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "adb"
+    ],
+    "name": "Killing Processes.kill adb",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "name": "OS info (2)"
+  },
+  {
     "name": "$result"
   }
 ]

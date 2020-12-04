@@ -9,4 +9,5 @@ DEPS = [
     'recipe_engine/properties',
     'recipe_engine/runtime',
     'recipe_engine/step',
+    'recipe_engine/uuid',
 ]

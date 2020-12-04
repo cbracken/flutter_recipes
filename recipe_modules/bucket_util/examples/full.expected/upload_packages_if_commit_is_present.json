@@ -13,9 +13,9 @@
       "python",
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "stat",
-      "gs://flutter_infra/flutter/00000000-0000-0000-0000-000000001337/test1.zip"
+      "gs://flutter_infra/flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/test1.zip"
     ],
-    "name": "Ensure flutter/00000000-0000-0000-0000-000000001337/test1.zip does not already exist on cloud storage"
+    "name": "Ensure flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/test1.zip does not already exist on cloud storage"
   },
   {
     "cmd": [
@@ -27,12 +27,12 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_1/test1.zip",
-      "gs://flutter_infra/flutter/00000000-0000-0000-0000-000000001337/test1.zip"
+      "gs://flutter_infra/flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/test1.zip"
     ],
     "infra_step": true,
-    "name": "gsutil upload \"flutter/00000000-0000-0000-0000-000000001337/test1.zip\"",
+    "name": "gsutil upload \"flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/test1.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/00000000-0000-0000-0000-000000001337/test1.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/test1.zip@@@"
     ]
   },
   {
@@ -62,9 +62,9 @@
       "python",
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "stat",
-      "gs://flutter_infra/flutter/00000000-0000-0000-0000-00000000133a/test2.zip"
+      "gs://flutter_infra/flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/test2.zip"
     ],
-    "name": "Ensure flutter/00000000-0000-0000-0000-00000000133a/test2.zip does not already exist on cloud storage"
+    "name": "Ensure flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/test2.zip does not already exist on cloud storage"
   },
   {
     "cmd": [
@@ -76,12 +76,12 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_2/test2.zip",
-      "gs://flutter_infra/flutter/00000000-0000-0000-0000-00000000133a/test2.zip"
+      "gs://flutter_infra/flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/test2.zip"
     ],
     "infra_step": true,
-    "name": "gsutil upload \"flutter/00000000-0000-0000-0000-00000000133a/test2.zip\"",
+    "name": "gsutil upload \"flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/test2.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/00000000-0000-0000-0000-00000000133a/test2.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/test2.zip@@@"
     ]
   },
   {
@@ -111,9 +111,9 @@
       "python",
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "stat",
-      "gs://flutter_infra/flutter/00000000-0000-0000-0000-00000000133d/parent_directory/test3.zip"
+      "gs://flutter_infra/flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/parent_directory/test3.zip"
     ],
-    "name": "Ensure flutter/00000000-0000-0000-0000-00000000133d/parent_directory/test3.zip does not already exist on cloud storage"
+    "name": "Ensure flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/parent_directory/test3.zip does not already exist on cloud storage"
   },
   {
     "cmd": [
@@ -125,12 +125,12 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_3/test3.zip",
-      "gs://flutter_infra/flutter/00000000-0000-0000-0000-00000000133d/parent_directory/test3.zip"
+      "gs://flutter_infra/flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/parent_directory/test3.zip"
     ],
     "infra_step": true,
-    "name": "gsutil upload \"flutter/00000000-0000-0000-0000-00000000133d/parent_directory/test3.zip\"",
+    "name": "gsutil upload \"flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/parent_directory/test3.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/00000000-0000-0000-0000-00000000133d/parent_directory/test3.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/8b3cd40a25a512033cc8c0797e41de9ecfc2432c/parent_directory/test3.zip@@@"
     ]
   },
   {

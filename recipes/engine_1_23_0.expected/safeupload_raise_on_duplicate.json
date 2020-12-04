@@ -2153,7 +2153,7 @@
       "    'out/host_debug_unopt/gen/frontend_server.dart.snapshot',",
       "  File \"RECIPE_REPO[flutter]/recipes/engine_1_23_0.py\", line 229, in UploadArtifacts",
       "    api.bucket_util.safe_upload(local_zip, remote_zip)",
-      "  File \"RECIPE_REPO[flutter]/recipe_modules/bucket_util/api.py\", line 115, in safe_upload",
+      "  File \"RECIPE_REPO[flutter]/recipe_modules/bucket_util/api.py\", line 120, in safe_upload",
       "    raise AssertionError('%s already exists on cloud storage' % cloud_path)",
       "AssertionError: gs://flutter_infra/flutter//linux-x64/artifacts.zip already exists on cloud storage"
     ]
