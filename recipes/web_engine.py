@@ -18,21 +18,26 @@ DEPS = [
     'depot_tools/git',
     'depot_tools/gsutil',
     'depot_tools/osx_sdk',
+    'flutter/display_util',
     'flutter/os_utils',
     'flutter/json_util',
     'flutter/repo_util',
+    'flutter/shard_util',
+    'flutter/web_util',
     'flutter/yaml',
     'fuchsia/goma',
     'recipe_engine/buildbucket',
     'recipe_engine/cipd',
     'recipe_engine/context',
     'recipe_engine/file',
+    'recipe_engine/isolated',
     'recipe_engine/json',
     'recipe_engine/path',
     'recipe_engine/platform',
     'recipe_engine/properties',
     'recipe_engine/runtime',
     'recipe_engine/step',
+    'recipe_engine/swarming',
 ]
 
 GIT_REPO = (
@@ -75,6 +80,17 @@ def Lint(api):
     api.step('lint test', [lint_cmd])
 
 
+def Archive(api, target):
+  checkout = GetCheckoutPath(api)
+  build_dir = checkout.join('out', target)
+  isolate_dir = api.path.mkdtemp('isolate-directory')
+  isolate_engine = isolate_dir.join(target)
+  api.file.copytree('Copy host_debug_unopt', build_dir, isolate_engine)
+  isolated = api.isolated.isolated(isolate_dir)
+  isolated.add_dir(isolate_dir)
+  return isolated.archive('Archive Flutter Engine Test Isolate')
+
+
 def RunGN(api, *args):
   checkout = GetCheckoutPath(api)
   gn_cmd = ['python', checkout.join('flutter/tools/gn'), '--goma']
@@ -86,109 +102,11 @@ def GetCheckoutPath(api):
   return api.path['cache'].join('builder', 'src')
 
 
-def DownloadFirefoxDriver(api):
-  checkout = GetCheckoutPath(api)
-  # Download the driver for Firefox.
-  firefox_driver_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                                      'drivers', 'firefox')
-  pkgdriver = api.cipd.EnsureFile()
-  pkgdriver.add_package('flutter_internal/browser-drivers/firefoxdriver-linux',
-                        'latest')
-  api.cipd.ensure(firefox_driver_path, pkgdriver)
-
-
-def DownloadChromeAndDriver(api, chrome_path_84):
-  checkout = GetCheckoutPath(api)
-  # Download a specific version of chrome-linux before running Flutter Web
-  # tests.
-  # Please make sure at least one of the versions in this method is this file:
-  # flutter/engine/blob/master/lib/web_ui/dev/browser_lock.yaml#L4
-  # Chrome uses binary numbers for archiving different versions of the browser.
-  chrome_pkg_84 = api.cipd.EnsureFile()
-  chrome_pkg_84.add_package('flutter_internal/browsers/chrome/${platform}',
-                            'latest-84')
-  api.cipd.ensure(chrome_path_84, chrome_pkg_84)
-  # Download the driver for Chrome 84.
-  chrome_driver_84_path = checkout.join('flutter', 'lib', 'web_ui',
-                                        '.dart_tool', 'drivers', 'chrome', '84')
-  chrome_pkgdriver_84 = api.cipd.EnsureFile()
-  chrome_pkgdriver_84.add_package(
-      'flutter_internal/browser-drivers/chrome/${platform}', 'latest-84')
-  api.cipd.ensure(chrome_driver_84_path, chrome_pkgdriver_84)
-
-def CloneGoldens(api):
-  builder_root = api.path['cache'].join('builder')
-  goldens = builder_root.join('goldens')
-  api.file.ensure_directory('mkdir goldens', goldens)
-  checkout = GetCheckoutPath(api)
-  golden_yaml_file = checkout.join('flutter', 'lib', 'web_ui', 'dev',
-                                   'goldens_lock.yaml')
-  with api.context(cwd=builder_root):
-    # Use golden_lock.yaml file to read url of the goldens repository and
-    # the revision number to checkout.
-    # https://github.com/flutter/engine/blob/master/lib/web_ui/dev/goldens_lock.yaml
-    # This file is used by web engine developers. The engine developers update
-    # the flutter/goldens.git repo when they  need changes. Later change the
-    # revision number on this file.
-    result = api.yaml.read(
-        'read yaml',
-        golden_yaml_file,
-        api.json.output(),
-    )
-    # The content of the file is expected to be:
-    #
-    # repository: https://github.com/flutter/goldens.git
-    # revision: b6efc75885c23f0b5c485d8bd659ed339feec9ec
-    golden_lock_content = result.json.output
-    repo = golden_lock_content['repository']
-    revision_number = golden_lock_content['revision']
-  with api.context(cwd=goldens):
-    api.git.checkout(
-        repo,
-        dir_path=goldens,
-        ref=revision_number,
-        recursive=True,
-        set_got_revision=True)
-  golden_files = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                               'goldens')
-  api.file.copytree('copy goldens', goldens, golden_files)
-
-
-def UploadFailingGoldens(api, checkout, browser):
-  logs_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                            'test_results')
-  tests_info_file_path = logs_path.join('info.txt')
-  api.file.write_text(
-      'write info file',
-      tests_info_file_path,
-      'tests for %s' % api.platform.name,
-      'tests for windows',
-  )
-
-  if not api.properties.get('gcs_goldens_bucket') or api.runtime.is_experimental:
-    # This is to avoid trying to upload files when 'gcs_goldens_bucket' is
-    # missing or when running from led.
-    return
-
-  bucket_id = api.buildbucket.build.id
-  api.gsutil.upload(
-      bucket=api.properties['gcs_goldens_bucket'],
-      source=logs_path,
-      dest='%s/%s/%s' % ('web_engine', bucket_id, browser),
-      link_name='archive goldens',
-      args=['-r'],
-      multithreaded=True,
-      name='upload goldens %s' % bucket_id,
-      unauthenticated_url=True)
-  html_files = api.file.glob_paths(
-      'html goldens', source=logs_path, pattern='*.html',
-      test_data=('a.html',)).get_result()
-  with api.step.nest('Failed golden links') as presentation:
-    for html_file in html_files:
-      base_name = api.path.basename(html_file)
-      url = 'https://storage.googleapis.com/%s/web_engine/%s/%s/%s' % (
-          api.properties['gcs_goldens_bucket'], bucket_id, browser, base_name)
-      presentation.links[base_name] = url
+def CleanUpProcesses(api):
+  # This is to clean up leaked processes.
+  api.os_utils.kill_processes()
+  # Collect memory/cpu/process after task execution.
+  api.os_utils.collect_os_info()
 
 
 def RunSteps(api, properties, env_properties):
@@ -222,7 +140,7 @@ def RunSteps(api, properties, env_properties):
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
 
   if api.platform.is_mac:
-    CloneGoldens(api)
+    api.web_util.clone_goldens_repo(checkout)
 
   with api.context(
       cwd=cache_root, env=env,
@@ -245,18 +163,36 @@ def RunSteps(api, properties, env_properties):
         'dev/felt.dart'
     ]
 
-    if api.platform.is_mac:
+    isolated_hash = ''
+    builds = []
+    if api.platform.is_linux:
+      RunGN(api, *gn_flags)
+      Build(api, target_name)
+      # Archieve the engine. Start the drones. Due to capacity limits we are
+      # Only using the drones on the Linux for now.
+      # Archive build directory into isolate.
+      isolated_hash = Archive(api, target_name)
+      # Schedule builds.
+      # TODO(nurhan): Currently this recipe only shards Linux. The web drones
+      # recipe is written in a way that it can also support sharding for
+      # macOS and Windows OSes. When more resources are available or when
+      # MWE or WWE builders start running more than 1 hour, also shard those
+      # builders.
+      builds = schedule_builds_on_linux(api, isolated_hash)
+    elif api.platform.is_mac:
       with SetupXcode(api):
         RunGN(api, *gn_flags)
         Build(api, target_name)
         additional_args = ['--browser', 'ios-safari']
     else:
+      # Platform = windows.
       RunGN(api, *gn_flags)
       Build(api, target_name)
       if api.platform.is_win:
         felt_cmd = [
             checkout.join('flutter', 'lib', 'web_ui', 'dev', 'felt_windows.bat')
         ]
+
     # Update dart packages and run tests.
     local_pub = checkout.join('out', target_name, 'dart-sdk', 'bin', 'pub')
     with api.context(
@@ -264,65 +200,162 @@ def RunSteps(api, properties, env_properties):
       api.step('pub get in web_engine_tester', [local_pub, 'get'])
     with api.context(cwd=checkout.join('flutter', 'lib', 'web_ui')):
       api.step('pub get in web_engine_tester', [local_pub, 'get'])
+      # TODO(nurhan): carry licenses to another shard when we have more
+      # resources.
       felt_licenses = copy.deepcopy(felt_cmd)
       felt_licenses.append('check-licenses')
       api.step('felt licenses', felt_licenses)
-      if api.platform.is_win:
-        chrome_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                                    'chrome', '768975')
       if api.platform.is_mac:
-        chrome_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                                    'chrome', '768985')
         additional_args_safari_desktop = ['--browser', 'safari']
         felt_test_safari_desktop = copy.deepcopy(felt_cmd)
         felt_test_safari_desktop.append('test')
         felt_test_safari_desktop.extend(additional_args_safari_desktop)
         api.step('felt test safari desktop', felt_test_safari_desktop)
       if api.platform.is_linux:
+        # TODO(nurhan): Web engine analysis can also be part of felt and used
+        # in a shard.
         web_engine_analysis_cmd = [
             checkout.join('flutter', 'lib', 'web_ui', 'dev',
                           'web_engine_analysis.sh'),
         ]
         api.step('web engine analysis', web_engine_analysis_cmd)
-        DownloadFirefoxDriver(api)
-        additional_args_firefox = ['--browser', 'firefox']
-        felt_test_firefox = copy.deepcopy(felt_cmd)
-        felt_test_firefox.append('test')
-        felt_test_firefox.extend(additional_args_firefox)
-        with recipe_api.defer_results():
-          api.step('felt test firefox', felt_test_firefox)
-          UploadFailingGoldens(api, checkout, 'firefox')
-        chrome_path = checkout.join('flutter', 'lib', 'web_ui', '.dart_tool',
-                                    'chrome', '768968')
-      DownloadChromeAndDriver(api, chrome_path)
-      felt_test = copy.deepcopy(felt_cmd)
-      felt_test.append('test')
-      felt_test.extend(additional_args)
-      if api.platform.is_mac:
+        builds = api.shard_util.collect_builds(builds)
+        api.display_util.display_builds(
+          step_name='display builds',
+          builds=builds,
+          raise_on_failure=True,
+        )
+        CleanUpProcesses(api)
+      elif api.platform.is_mac:
         with SetupXcode(api):
           with recipe_api.defer_results():
+            felt_test = copy.deepcopy(felt_cmd)
+            felt_test.append('test')
+            felt_test.extend(additional_args)
             api.step('felt ios-safari test', felt_test)
-            UploadFailingGoldens(api, checkout, 'ios-safari')
-            # This is to clean up leaked processes.
-            api.os_utils.kill_processes()
-            # Collect memory/cpu/process after task execution.
-            api.os_utils.collect_os_info()
+            api.web_util.upload_failing_goldens(checkout, 'ios-safari')
+            CleanUpProcesses(api)
       else:
-        with recipe_api.defer_results():
-          api.step('felt test chrome', felt_test)
-          UploadFailingGoldens(api, checkout, 'chrome')
-          # This is to clean up leaked processes.
-          api.os_utils.kill_processes()
-          # Collect memory/cpu/process after task execution.
-          api.os_utils.collect_os_info()
+        api.web_util.chrome(checkout)
+        felt_test = copy.deepcopy(felt_cmd)
+        felt_test.append('test')
+        felt_test.extend(additional_args)
+        api.step('felt test chrome', felt_test)
+        CleanUpProcesses(api)
 
+def schedule_builds_on_linux(api, isolated_hash):
+  """Schedules one subbuild per subshard."""
+  reqs = []
+
+  # For running Chrome Integration tests:
+  command_name = 'chrome-integration-linux'
+  # These are the required dependencies.
+  dependencies = [
+    'chrome',
+    'chrome_driver',
+    'goldens_repo'
+  ]
+  # These are the felt commands which will be used.
+  command_args = [
+    'test',
+    '--browser=chrome',
+    '--integration-tests-only'
+  ]
+  addShardTask(api, reqs, command_name, dependencies, command_args, isolated_hash)
+
+  # For running Chrome Unit tests:
+  command_name = 'chrome-unit-linux'
+  # These are the required dependencies.
+  dependencies = [
+    'chrome',
+    'goldens_repo'
+  ]
+  # These are the felt commands which will be used.
+  command_args = [
+    'test',
+    '--browser=chrome',
+    '--unit-tests-only'
+  ]
+  addShardTask(api, reqs, command_name, dependencies, command_args, isolated_hash)
+
+  # For running Firefox Unit tests:
+  command_name = 'firefox-unit-linux'
+  # We don't need extra dependencies since felt tools handles firefox itself.
+  # TODO(nurhan): Use cipd packages for Firefox. As we are doing for chrome
+  # still respect to the version from browser_lock.yaml.
+  dependencies = []
+  # These are the felt commands which will be used.
+  command_args = [
+    'test',
+    '--browser=firefox',
+    '--unit-tests-only'
+  ]
+  addShardTask(api, reqs, command_name, dependencies, command_args, isolated_hash)
+
+  # For running Firefox Integration tests:
+  command_name = 'firefox-integration-linux'
+  # These are the required dependencies.
+  dependencies = [
+    'firefox_driver',
+    'goldens_repo'
+  ]
+  # These are the felt commands which will be used.
+  command_args = [
+    'test',
+    '--browser=firefox',
+    '--integration-tests-only'
+  ]
+  addShardTask(api, reqs, command_name, dependencies, command_args, isolated_hash)
+
+  return api.buildbucket.schedule(reqs)
+
+def addShardTask(api, reqs, command_name, dependencies, command_args, isolated_hash):
+  drone_props = {
+        'command_name': command_name,
+        'dependencies': dependencies,
+        'command_args': command_args,
+        'isolated_hash': isolated_hash
+  }
+
+  git_url = GIT_REPO
+  git_ref = api.buildbucket.gitiles_commit.ref
+  if 'git_url' in api.properties and 'git_ref' in api.properties:
+    git_url = api.properties['git_url']
+    git_ref = api.properties['git_ref']
+
+  drone_props['git_url'] = git_url
+  if not git_ref:
+    drone_props['git_ref'] = 'refs/heads/master'
+  else:
+    drone_props['git_ref'] = git_ref
+
+
+  req = api.buildbucket.schedule_request(
+      swarming_parent_run_id=api.swarming.task_id,
+      builder='Linux Web Drone',
+      properties=drone_props,
+      priority=25
+  )
+  reqs.append(req)
 
 def GenTests(api):
+  browser_yaml_file = {
+      'required_driver_version': {
+          'chrome': 84
+      },
+      'chrome': {
+          'Linux': '768968',
+          'Mac': '768985',
+          'Win': '768975'
+      }
+  }
   golden_yaml_file = {'repository': 'repo', 'revision': 'b6efc758'}
   yield api.test('linux-post-submit') + api.properties(
       goma_jobs='200') + api.platform('linux', 64) + api.runtime(is_experimental=False)
-  yield api.test('windows-post-submit') + api.properties(
-      goma_jobs='200') + api.platform('win', 32) + api.runtime(is_experimental=False)
+  yield api.test(
+      'windows-post-submit',
+      api.step_data('read browser lock yaml.parse', api.json.output(browser_yaml_file)),
+      api.properties(goma_jobs='200'), api.platform('win', 64)) + api.runtime(is_experimental=False)
   yield api.test(
       'mac-post-submit',
       api.step_data('read yaml.parse', api.json.output(golden_yaml_file)),

@@ -49,6 +49,7 @@ def GetCheckoutPath(api):
   """Path to checkout the flutter/engine repo."""
   return api.path['cache'].join('builder', 'src')
 
+
 def RunSteps(api, properties, env_properties):
   """Steps to checkout flutter engine and execute web test shard.
 
