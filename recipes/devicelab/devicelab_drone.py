@@ -15,8 +15,8 @@ DEPS = [
     'recipe_engine/properties',
     'recipe_engine/raw_io',
     'recipe_engine/service_account',
-    'recipe_engine/swarming',
     'recipe_engine/step',
+    'recipe_engine/swarming',
 ]
 
 
@@ -51,9 +51,20 @@ def RunSteps(api):
         "write token", access_token_path, access_token, include_log=False
     )
     test_runner_command.extend([
-      '--service-account-token-file', access_token_path,
-      '--luci-builder', api.properties.get('buildername')])
+        '--service-account-token-file', access_token_path, '--luci-builder',
+        api.properties.get('buildername')
+    ])
   # Run test
+  test_runner_command = ['dart', 'bin/run.dart', '-t', task_name]
+  test_runner_command.extend(service_account_args)
+
+  # Gems are installed differently new and old versions of xcode. Pre xcode 12
+  # the ruby sdk included in xcode was able to compile the gems correctly but
+  # with xcode 12 gems building from inside a xcode context fails. We use the
+  # bot name to identify if the builder is running on a devicelab bot which will
+  # be running xcode 12.
+  bot_id = api.swarming.bot_id
+  is_devicelab_bot = bot_id.startswith('flutter-devicelab')
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
     api.step('flutter update-packages', ['flutter', 'update-packages'])
@@ -61,11 +72,19 @@ def RunSteps(api):
     dep_list = {d['dependency']: d.get('version') for d in deps}
     if dep_list.has_key('xcode'):
       api.os_utils.clean_derived_data()
-      with api.osx_sdk('ios'):
-        api.flutter_deps.swift(dep_list.get('swift', 'latest'))
+      # Build gems here for xcode 12 or newer.
+      if is_devicelab_bot:
         api.flutter_deps.gems(
             env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
         )
+      with api.osx_sdk('ios'):
+        api.flutter_deps.swift(dep_list.get('swift', 'latest'))
+        # Build gems here for xcode older than 12 we'll need to delete
+        # this path after migrating sdk and devicelab to xcode 12.
+        if not is_devicelab_bot:
+          api.flutter_deps.gems(
+              env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
+          )
         api.os_utils.shutdown_simulators()
         with api.context(env=env,
                          env_prefixes=env_prefixes), api.step.defer_results():
@@ -90,11 +109,21 @@ def GenTests(api):
       api.expect_exception('ValueError'),
   )
   yield api.test(
-      "basic", api.properties(task_name='abc'),
-      api.repo_util.flutter_environment_data()
+      "basic",
+      api.properties(task_name='abc'),
+      api.repo_util.flutter_environment_data(),
   )
   yield api.test(
-      "xcode",
+      "xcode-devicelab",
+      api.properties(
+          task_name='abc',
+          dependencies=[{'dependency': 'xcode'},
+                        {'dependency': 'swift', 'version': 'abc'}]
+      ), api.repo_util.flutter_environment_data(),
+      api.swarming.properties(bot_id='flutter-devicelab-mac-1')
+  )
+  yield api.test(
+      "xcode-chromium-mac",
       api.properties(
           task_name='abc',
           dependencies=[{'dependency': 'xcode'},
@@ -109,6 +138,5 @@ def GenTests(api):
           pool='flutter.luci.prod',
           task_name='abc',
           upload_metrics=True
-      ),
-      api.repo_util.flutter_environment_data()
+      ), api.repo_util.flutter_environment_data()
   )
