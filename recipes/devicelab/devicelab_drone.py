@@ -40,24 +40,24 @@ def RunSteps(api):
   deps = api.properties.get('dependencies', [])
   api.flutter_deps.required_deps(env, env_prefixes, deps)
   devicelab_path = flutter_path.join('dev', 'devicelab')
+  # Run test
   test_runner_command = ['dart', 'bin/run.dart', '-t', task_name]
   # Create service account for post submit tests.
-  service_account_args = []
   if api.properties.get('upload_metrics'):
     service_account = api.service_account.default()
     access_token = service_account.get_access_token()
     access_token_path = api.path.mkstemp()
+    git_branch = api.properties.get('branch').replace('refs/heads/', '')
     api.file.write_text(
         "write token", access_token_path, access_token, include_log=False
     )
     test_runner_command.extend([
-        '--service-account-token-file', access_token_path, '--luci-builder',
-        api.properties.get('buildername')
+        '--service-account-token-file', access_token_path,
+        '--luci-builder', api.properties.get('buildername'),
+        # LUCI git checkouts end up in a detached HEAD state, so branch must
+        # be passed from gitiles -> test runner -> Cocoon.
+        '--git-branch', git_branch
     ])
-  # Run test
-  test_runner_command = ['dart', 'bin/run.dart', '-t', task_name]
-  test_runner_command.extend(service_account_args)
-
   # Gems are installed differently new and old versions of xcode. Pre xcode 12
   # the ruby sdk included in xcode was able to compile the gems correctly but
   # with xcode 12 gems building from inside a xcode context fails. We use the
@@ -134,6 +134,7 @@ def GenTests(api):
   yield api.test(
       "post-submit",
       api.properties(
+          branch='refs/heads/master',
           buildername='Linux abc',
           pool='flutter.luci.prod',
           task_name='abc',
