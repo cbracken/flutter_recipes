@@ -34,7 +34,7 @@
       "git",
       "fetch",
       "origin",
-      "refs/heads/master",
+      "master",
       "--recurse-submodules",
       "--progress",
       "--tags"
@@ -226,7 +226,7 @@
       "--luci-builder",
       "Linux abc",
       "--git-branch",
-      "master"
+      ""
     ],
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {

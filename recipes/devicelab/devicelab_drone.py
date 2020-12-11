@@ -9,6 +9,7 @@ DEPS = [
     'flutter/flutter_deps',
     'flutter/repo_util',
     'flutter/os_utils',
+    'recipe_engine/buildbucket',
     'recipe_engine/context',
     'recipe_engine/file',
     'recipe_engine/path',
@@ -47,7 +48,9 @@ def RunSteps(api):
     service_account = api.service_account.default()
     access_token = service_account.get_access_token()
     access_token_path = api.path.mkstemp()
-    git_branch = api.properties.get('branch').replace('refs/heads/', '')
+    git_branch = api.buildbucket.gitiles_commit.ref.replace(
+        'refs/heads/', ''
+    )
     api.file.write_text(
         "write token", access_token_path, access_token, include_log=False
     )
@@ -134,7 +137,6 @@ def GenTests(api):
   yield api.test(
       "post-submit",
       api.properties(
-          branch='refs/heads/master',
           buildername='Linux abc',
           pool='flutter.luci.prod',
           task_name='abc',
