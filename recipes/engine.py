@@ -11,6 +11,7 @@ from PB.go.chromium.org.luci.buildbucket.proto import build as build_pb2
 from google.protobuf import struct_pb2
 
 DEPS = [
+    'fuchsia/gcloud',
     'fuchsia/goma',
     'depot_tools/bot_update',
     'depot_tools/depot_tools',
@@ -34,6 +35,7 @@ DEPS = [
     'recipe_engine/platform',
     'recipe_engine/properties',
     'recipe_engine/python',
+    'recipe_engine/raw_io',
     'recipe_engine/runtime',
     'recipe_engine/step',
     'recipe_engine/swarming',
@@ -62,6 +64,10 @@ def BuildFontSubset(api):
 def GetCheckoutPath(api):
   return api.path['cache'].join('builder', 'src')
 
+
+def GetGitHash(api):
+  with api.context(cwd=GetCheckoutPath(api)):
+    return api.step("Retrieve git hash", ["git", "rev-parse", "HEAD"], stdout=api.raw_io.output()).stdout.strip()
 
 def GetCloudPath(api, path):
   git_hash = api.buildbucket.gitiles_commit.id
@@ -212,6 +218,21 @@ def RunGNBitcode(api, *args):
       args += ('--no-lto',)
     gn_cmd.extend(args)
     api.step('gn %s' % ' '.join(args), gn_cmd)
+
+
+def NotifyPubsub(api, buildername, topic='projects/flutter-dashboard/topics/luci-builds-prod'):
+  """Sends a pubsub message to the topic specified with buildername and githash, identifying
+  the completed build.
+
+  Args:
+    api: luci api object.
+    buildername(str): The name of builder.
+    topic(str): (optional) gcloud topic to publish message to.
+  """
+  githash = GetGitHash(api)
+  cmd = [
+  'pubsub', 'topics', 'publish', topic, '--message={"buildername" : "%s", "githash" : "%s"}'  % (buildername, githash)]
+  api.gcloud(*cmd)
 
 
 def UploadArtifacts(api, platform, file_paths=[], directory_paths=[], archive_name='artifacts.zip', pkg_root=None):
@@ -1450,6 +1471,9 @@ def RunSteps(api, properties, env_properties):
     if api.platform.is_win:
       BuildWindows(api)
 
+  # Notifies of build completion
+  # TODO(crbug.com/843720): replace this when user defined notifications is implemented.
+  NotifyPubsub(api, api.m.buildbucket.builder_name)
   # This is to clean up leaked processes.
   api.os_utils.kill_processes()
   # Collect memory/cpu/process after task execution.
