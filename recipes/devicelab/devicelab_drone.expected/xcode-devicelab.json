@@ -192,159 +192,10 @@
     "name": "pub get"
   },
   {
-    "cmd": [],
-    "name": "Swift deps"
-  },
-  {
     "cmd": [
-      "cipd",
-      "ensure",
-      "-root",
-      "[CLEANUP]/swift",
-      "-ensure-file",
-      "flutter_internal/mac/swift/${platform} abc",
-      "-max-threads",
-      "0",
-      "-json-output",
-      "/path/to/tmp/json"
-    ],
-    "cwd": "[START_DIR]/flutter/dev/devicelab",
-    "env": {
-      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LUCI_BRANCH": "",
-      "LUCI_CI": "True",
-      "LUCI_PR": "",
-      "OS": "linux",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
-      ]
-    },
-    "name": "Swift deps.ensure_installed",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@json.output@{@@@",
-      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
-      "@@@STEP_LOG_LINE@json.output@      {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-abc-------------\", @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"package\": \"flutter_internal/mac/swift/resolved-platform\"@@@",
-      "@@@STEP_LOG_LINE@json.output@      }@@@",
-      "@@@STEP_LOG_LINE@json.output@    ]@@@",
-      "@@@STEP_LOG_LINE@json.output@  }@@@",
-      "@@@STEP_LOG_LINE@json.output@}@@@",
-      "@@@STEP_LOG_END@json.output@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copytree",
-      "[CLEANUP]/swift/swift",
-      "[CACHE]/osx_sdk/XCode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift"
-    ],
-    "cwd": "[START_DIR]/flutter/dev/devicelab",
-    "env": {
-      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LUCI_BRANCH": "",
-      "LUCI_CI": "True",
-      "LUCI_PR": "",
-      "OS": "linux",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
-      ]
-    },
-    "infra_step": true,
-    "name": "Swift deps.Copy swift",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copytree",
-      "[CLEANUP]/swift/swift-5.0",
-      "[CACHE]/osx_sdk/XCode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0"
-    ],
-    "cwd": "[START_DIR]/flutter/dev/devicelab",
-    "env": {
-      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LUCI_BRANCH": "",
-      "LUCI_CI": "True",
-      "LUCI_PR": "",
-      "OS": "linux",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
-      ]
-    },
-    "infra_step": true,
-    "name": "Swift deps.Copy swift-5.0",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "listdir",
-      "[CACHE]/osx_sdk/XCode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
-    ],
-    "cwd": "[START_DIR]/flutter/dev/devicelab",
-    "env": {
-      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LUCI_BRANCH": "",
-      "LUCI_CI": "True",
-      "LUCI_PR": "",
-      "OS": "linux",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
-      ]
-    },
-    "infra_step": true,
-    "name": "Swift deps.List directory",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_END@listdir@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "dart",
-      "bin/run.dart",
-      "-t",
-      "abc"
+      "chmod",
+      "755",
+      "RECIPE[flutter::devicelab/devicelab_drone].resources/runner.sh"
     ],
     "cwd": "[START_DIR]/flutter/dev/devicelab",
     "env": {
@@ -364,6 +215,10 @@
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
     },
+    "name": "Set execute permission"
+  },
+  {
+    "cmd": [],
     "name": "run abc"
   },
   {
