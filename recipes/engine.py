@@ -21,7 +21,7 @@ DEPS = [
     'flutter/bucket_util',
     'flutter/json_util',
     'flutter/os_utils',
-    'flutter/flutter_osx_sdk',
+    'flutter/osx_sdk',
     'flutter/repo_util',
     'flutter/zip',
     'fuchsia/display_util',
@@ -67,7 +67,11 @@ def GetCheckoutPath(api):
 
 def GetGitHash(api):
   with api.context(cwd=GetCheckoutPath(api)):
-    return api.step("Retrieve git hash", ["git", "rev-parse", "HEAD"], stdout=api.raw_io.output()).stdout.strip()
+    return api.step(
+        "Retrieve git hash", ["git", "rev-parse", "HEAD"],
+        stdout=api.raw_io.output()
+    ).stdout.strip()
+
 
 def GetCloudPath(api, path):
   git_hash = api.buildbucket.gitiles_commit.id
@@ -220,7 +224,12 @@ def RunGNBitcode(api, *args):
     api.step('gn %s' % ' '.join(args), gn_cmd)
 
 
-def NotifyPubsub(api, buildername, bucket, topic='projects/flutter-dashboard/topics/luci-builds-prod'):
+def NotifyPubsub(
+    api,
+    buildername,
+    bucket,
+    topic='projects/flutter-dashboard/topics/luci-builds-prod'
+):
   """Sends a pubsub message to the topic specified with buildername and githash, identifying
   the completed build.
 
@@ -232,11 +241,21 @@ def NotifyPubsub(api, buildername, bucket, topic='projects/flutter-dashboard/top
   """
   githash = GetGitHash(api)
   cmd = [
-  'pubsub', 'topics', 'publish', topic, '--message={"buildername" : "%s", "bucket" : "%s", "githash" : "%s"}'  % (buildername, bucket, githash)]
+      'pubsub', 'topics', 'publish', topic,
+      '--message={"buildername" : "%s", "bucket" : "%s", "githash" : "%s"}' %
+      (buildername, bucket, githash)
+  ]
   api.gcloud(*cmd)
 
 
-def UploadArtifacts(api, platform, file_paths=[], directory_paths=[], archive_name='artifacts.zip', pkg_root=None):
+def UploadArtifacts(
+    api,
+    platform,
+    file_paths=[],
+    directory_paths=[],
+    archive_name='artifacts.zip',
+    pkg_root=None
+):
   dir_label = '%s UploadArtifacts %s' % (platform, archive_name)
   with api.os_utils.make_temp_directory(dir_label) as temp_dir:
     local_zip = temp_dir.join('artifacts.zip')
@@ -879,7 +898,7 @@ def TestObservatory(api):
 def SetupXcode(api):
   # See cr-buildbucket.cfg for how the version is passed in.
   # https://github.com/flutter/infra/blob/35f51ea4bfc91966b41d988f6028e34449aa4279/config/generated/flutter/luci/cr-buildbucket.cfg#L7176-L7203
-  with api.flutter_osx_sdk('ios'):
+  with api.osx_sdk('ios'):
     yield
 
 
@@ -1124,9 +1143,10 @@ def PackageIOSVariant(
 
   label_root = checkout.join('out', label)
   api.file.copy(
-    'Copy podspec for %s' % label,
-    checkout.join('flutter/shell/platform/darwin/ios/framework/Flutter.podspec'),
-    label_root,
+      'Copy podspec for %s' % label,
+      checkout
+      .join('flutter/shell/platform/darwin/ios/framework/Flutter.podspec'),
+      label_root,
   )
 
   # Upload the artifacts to cloud storage.
@@ -1140,7 +1160,13 @@ def PackageIOSVariant(
       'Flutter.xcframework',
   ]
 
-  UploadArtifacts(api, bucket_name, file_artifacts, directory_artifacts, pkg_root=label_root)
+  UploadArtifacts(
+      api,
+      bucket_name,
+      file_artifacts,
+      directory_artifacts,
+      pkg_root=label_root
+  )
 
   if label == 'release':
     dsym_zip = label_dir.join('Flutter.dSYM.zip')
@@ -1436,9 +1462,8 @@ def RunSteps(api, properties, env_properties):
   api.os_utils.clean_derived_data()
 
   # Various scripts we run assume access to depot_tools on path for `ninja`.
-  with SetupXcode(api), api.context(
-      cwd=cache_root, env=env,
-      env_prefixes=env_prefixes), api.depot_tools.on_path():
+  with api.context(cwd=cache_root, env=env,
+                   env_prefixes=env_prefixes), api.depot_tools.on_path():
 
     # Checks before building the engine. Only run on Linux.
     if api.platform.is_linux:
@@ -1475,7 +1500,9 @@ def RunSteps(api, properties, env_properties):
   # Notifies of build completion
   # TODO(crbug.com/843720): replace this when user defined notifications is implemented.
   try:
-    NotifyPubsub(api, api.buildbucket.builder_name, api.buildbucket.build.builder.bucket)
+    NotifyPubsub(
+        api, api.buildbucket.builder_name, api.buildbucket.build.builder.bucket
+    )
   except (api.step.StepFailure) as e:
     pass
 
