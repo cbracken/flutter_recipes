@@ -478,7 +478,9 @@
       "-xcode-version",
       "9f2000",
       "-output-dir",
-      "[CACHE]/osx_sdk/XCode.app"
+      "[CACHE]/osx_sdk/XCode.app",
+      "-cipd-package-prefix",
+      "flutter_internal/ios/xcode"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -1061,7 +1063,9 @@
       "-xcode-version",
       "9f2000",
       "-output-dir",
-      "[CACHE]/osx_sdk/XCode.app"
+      "[CACHE]/osx_sdk/XCode.app",
+      "-cipd-package-prefix",
+      "flutter_internal/ios/xcode"
     ],
     "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
     "env": {
