@@ -152,10 +152,6 @@
       "cipd.bat",
       "pkg-register",
       "device_doctor.zip",
-      "-ref",
-      "staging",
-      "-tag",
-      "sha_timestamp:deadbeef_1337000001",
       "-json-output",
       "/path/to/tmp/json"
     ],

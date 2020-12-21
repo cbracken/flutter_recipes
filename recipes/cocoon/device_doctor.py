@@ -44,9 +44,7 @@ def RunSteps(api):
 
   api.cipd.build(
       device_doctor_path.join('build'), cipd_zip_path, cipd_package_name)
-  time = str(int(api.time.time()))
-  api.cipd.register(cipd_package_name, cipd_zip_path, refs=['staging'],
-      tags={'sha_timestamp': cocoon_git_rev+'_'+time})
+  api.cipd.register(cipd_package_name, cipd_zip_path)
 
 
 def GenTests(api):
