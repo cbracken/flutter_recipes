@@ -11,7 +11,6 @@ from PB.go.chromium.org.luci.buildbucket.proto import build as build_pb2
 from google.protobuf import struct_pb2
 
 DEPS = [
-    'fuchsia/goma',
     'depot_tools/bot_update',
     'depot_tools/depot_tools',
     'depot_tools/gclient',
@@ -20,10 +19,11 @@ DEPS = [
     'flutter/bucket_util',
     'flutter/json_util',
     'flutter/os_utils',
-    'flutter/flutter_osx_sdk',
+    'flutter/osx_sdk',
     'flutter/repo_util',
     'flutter/zip',
     'fuchsia/display_util',
+    'fuchsia/goma',
     'recipe_engine/buildbucket',
     'recipe_engine/cipd',
     'recipe_engine/context',
@@ -857,7 +857,7 @@ def TestObservatory(api):
 def SetupXcode(api):
   # See cr-buildbucket.cfg for how the version is passed in.
   # https://github.com/flutter/infra/blob/35f51ea4bfc91966b41d988f6028e34449aa4279/config/generated/flutter/luci/cr-buildbucket.cfg#L7176-L7203
-  with api.flutter_osx_sdk('ios'):
+  with api.osx_sdk('ios'):
     yield
 
 

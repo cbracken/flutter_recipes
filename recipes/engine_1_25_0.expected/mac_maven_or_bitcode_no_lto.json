@@ -269,7 +269,9 @@
       "-xcode-version",
       "9f2000",
       "-output-dir",
-      "[CACHE]/osx_sdk/XCode.app"
+      "[CACHE]/osx_sdk/XCode.app",
+      "-cipd-package-prefix",
+      "flutter_internal/ios/xcode"
     ],
     "infra_step": true,
     "name": "install xcode"
@@ -368,7 +370,9 @@
       "-xcode-version",
       "9f2000",
       "-output-dir",
-      "[CACHE]/osx_sdk/XCode.app"
+      "[CACHE]/osx_sdk/XCode.app",
+      "-cipd-package-prefix",
+      "flutter_internal/ios/xcode"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
