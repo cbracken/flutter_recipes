@@ -9,11 +9,11 @@ from contextlib import contextmanager
 import re
 
 DEPS = [
-    'depot_tools/osx_sdk',
     'flutter/android_sdk',
-    'flutter/repo_util',
     'flutter/flutter_deps',
     'flutter/os_utils',
+    'flutter/osx_sdk',
+    'flutter/repo_util',
     'recipe_engine/context',
     'recipe_engine/path',
     'recipe_engine/properties',

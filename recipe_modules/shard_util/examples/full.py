@@ -26,6 +26,7 @@ def GenTests(api):
       'dependencies': [{"dependency": "android_sdk"},
                        {"dependency": "chrome_and_driver"}],
       '$depot_tools/osx_sdk': {"sdk_version": "11a420a"},
+      '$flutter/osx_sdk': {"sdk_version": "11a420a"},
       'gems': [["cocoapods",
                 "1.6.0"]], 'drone_dimensions': ['os=Windows Server']
   }

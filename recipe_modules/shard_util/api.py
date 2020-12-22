@@ -46,6 +46,11 @@ class ShardUtilApi(recipe_api.RecipeApi):
                 self.m.properties.get('$depot_tools/osx_sdk'
                                      ).get('sdk_version')
         }
+      if self.m.properties.get('$flutter/osx_sdk'):
+        drone_props['$flutter/osx_sdk'] = {
+            "sdk_version":
+                self.m.properties.get('$flutter/osx_sdk').get('sdk_version')
+        }
       # Drone_dimensions property from the parent builder will override the
       # default drone properties if not empty.
       drone_dimensions = self.m.properties.get('drone_dimensions', [])
