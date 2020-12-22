@@ -5,18 +5,18 @@
 from recipe_engine.recipe_api import Property
 
 DEPS = [
+    'depot_tools/osx_sdk',
     'flutter/flutter_deps',
-    'flutter/os_utils',
-    'flutter/osx_sdk',
     'flutter/repo_util',
+    'flutter/os_utils',
     'recipe_engine/context',
     'recipe_engine/file',
     'recipe_engine/path',
     'recipe_engine/properties',
     'recipe_engine/raw_io',
     'recipe_engine/service_account',
-    'recipe_engine/step',
     'recipe_engine/swarming',
+    'recipe_engine/step',
 ]
 
 
@@ -51,9 +51,8 @@ def RunSteps(api):
         "write token", access_token_path, access_token, include_log=False
     )
     test_runner_command.extend([
-        '--service-account-token-file', access_token_path, '--luci-builder',
-        api.properties.get('buildername')
-    ])
+      '--service-account-token-file', access_token_path,
+      '--luci-builder', api.properties.get('buildername')])
   # Run test
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
@@ -63,6 +62,7 @@ def RunSteps(api):
     if dep_list.has_key('xcode'):
       api.os_utils.clean_derived_data()
       with api.osx_sdk('ios'):
+        api.flutter_deps.swift(dep_list.get('swift', 'latest'))
         api.flutter_deps.gems(
             env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
         )
@@ -109,5 +109,6 @@ def GenTests(api):
           pool='flutter.luci.prod',
           task_name='abc',
           upload_metrics=True
-      ), api.repo_util.flutter_environment_data()
+      ),
+      api.repo_util.flutter_environment_data()
   )

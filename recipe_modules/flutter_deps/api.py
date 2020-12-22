@@ -194,6 +194,33 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     root_path = self.m.path['cache'].join('android')
     self.m.android_sdk.install(root_path, env, env_prefixes)
 
+  def swift(self, version=None):
+    """Installs apple swift.
+
+    Xcode cipd packages do not include swift which is required for some sdk tests.
+    """
+    version = version or 'latest'
+    swift_path = self.m.path['cleanup'].join('swift')
+    swift = self.m.cipd.EnsureFile()
+    swift.add_package('flutter_internal/mac/swift/${platform}', version)
+    dst = self.m.path['cache'].join(
+        'osx_sdk', 'XCode.app', 'Contents', 'Developer', 'Toolchains',
+        'XcodeDefault.xctoolchain', 'usr', 'lib'
+    )
+    with self.m.step.nest('Swift deps'):
+      self.m.cipd.ensure(swift_path, swift)
+      if self.m.path.exists(dst.join('swift')):
+        self.m.file.rmtree('Delete swift', dst.join('swift'))
+      self.m.file.copytree(
+          'Copy swift', swift_path.join('swift'), dst.join('swift')
+      )
+      if self.m.path.exists(dst.join('swift-5.0')):
+        self.m.file.rmtree('Delete swift-5.0', dst.join('swift-5.0'))
+      self.m.file.copytree(
+          'Copy swift-5.0', swift_path.join('swift-5.0'), dst.join('swift-5.0')
+      )
+      self.m.file.listdir('List directory', dst)
+
   def gems(self, env, env_prefixes, gemfile_dir):
     """Installs android sdk.
 

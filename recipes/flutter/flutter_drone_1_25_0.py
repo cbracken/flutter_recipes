@@ -9,11 +9,11 @@ from contextlib import contextmanager
 import re
 
 DEPS = [
+    'depot_tools/osx_sdk',
     'flutter/android_sdk',
+    'flutter/repo_util',
     'flutter/flutter_deps',
     'flutter/os_utils',
-    'flutter/osx_sdk',
-    'flutter/repo_util',
     'recipe_engine/context',
     'recipe_engine/path',
     'recipe_engine/properties',
@@ -63,6 +63,7 @@ def RunSteps(api):
     dep_list = [d['dependency'] for d in deps]
     if 'xcode' in dep_list:
       with api.osx_sdk('ios'), api.step.defer_results():
+        api.flutter_deps.swift()
         api.flutter_deps.gems(
             env, env_prefixes, checkout_path.join('dev', 'ci', 'mac')
         )
