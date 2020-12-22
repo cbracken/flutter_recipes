@@ -63,7 +63,6 @@ def RunSteps(api):
     dep_list = [d['dependency'] for d in deps]
     if 'xcode' in dep_list:
       with api.osx_sdk('ios'), api.step.defer_results():
-        api.flutter_deps.swift()
         api.flutter_deps.gems(
             env, env_prefixes, checkout_path.join('dev', 'ci', 'mac')
         )
