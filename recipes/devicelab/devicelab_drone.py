@@ -40,27 +40,22 @@ def RunSteps(api):
   deps = api.properties.get('dependencies', [])
   api.flutter_deps.required_deps(env, env_prefixes, deps)
   devicelab_path = flutter_path.join('dev', 'devicelab')
+  git_branch = api.buildbucket.gitiles_commit.ref.replace('refs/heads/', '')
+  # Create tmp file to store results in
+  results_path = api.path.mkstemp()
   # Run test
-  runner_params = ['-t', task_name]
-  # Create service account for post submit tests.
-  if api.properties.get('upload_metrics'):
-    service_account = api.service_account.default()
-    access_token = service_account.get_access_token()
-    access_token_path = api.path.mkstemp()
-    git_branch = api.buildbucket.gitiles_commit.ref.replace('refs/heads/', '')
-    api.file.write_text(
-        "write token", access_token_path, access_token, include_log=False
-    )
-    runner_params.extend([
-        '--service-account-token-file',
-        access_token_path,
-        '--luci-builder',
-        api.properties.get('buildername'),
-        # LUCI git checkouts end up in a detached HEAD state, so branch must
-        # be passed from gitiles -> test runner -> Cocoon.
-        '--git-branch',
-        git_branch
-    ])
+  runner_params = [
+      '-t',
+      task_name,
+      '--results-file',
+      results_path,
+      '--luci-builder',
+      api.properties.get('buildername'),
+      # LUCI git checkouts end up in a detached HEAD state, so branch must
+      # be passed from gitiles -> test runner -> Cocoon.
+      '--git-branch',
+      git_branch
+  ]
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
     api.step('flutter update-packages', ['flutter', 'update-packages'])
@@ -92,6 +87,30 @@ def RunSteps(api):
         api.os_utils.kill_processes()
         # Collect memory/cpu/process after task execution.
         api.os_utils.collect_os_info()
+  with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
+    uploadMetrics(api, results_path)
+
+
+def uploadMetrics(api, results_path):
+  """Upload DeviceLab test performance metrics to Cocoon.
+
+  luci-auth only gurantees a service account token life of 3 minutes. To work
+  around this limitation, results uploading is separate from the the test run.
+  """
+  if not api.properties.get('upload_metrics'):
+    return
+  with api.step.nest('Upload metrics'):
+    service_account = api.service_account.default()
+    access_token = service_account.get_access_token()
+    access_token_path = api.path.mkstemp()
+    api.file.write_text(
+        "write token", access_token_path, access_token, include_log=False
+    )
+    upload_command = [
+        'dart', 'bin/test_runner.dart', 'upload-metrics', '--results-file',
+        results_path, '--service-account-token-file', access_token_path
+    ]
+    api.step('upload metrics', upload_command)
 
 
 def GenTests(api):
@@ -101,25 +120,38 @@ def GenTests(api):
   )
   yield api.test(
       "basic",
-      api.properties(task_name='abc'),
+      api.properties(buildername='Linux abc', task_name='abc'),
       api.repo_util.flutter_environment_data(),
   )
   yield api.test(
       "xcode-devicelab",
-      api.properties(task_name='abc', dependencies=[{'dependency': 'xcode'}]),
-      api.repo_util.flutter_environment_data(),
+      api.properties(
+          buildername='Mac abc',
+          task_name='abc',
+          dependencies=[{'dependency': 'xcode'}]
+      ), api.repo_util.flutter_environment_data(),
       api.swarming.properties(bot_id='flutter-devicelab-mac-1')
   )
   yield api.test(
       "xcode-chromium-mac",
-      api.properties(task_name='abc', dependencies=[{'dependency': 'xcode'}]),
+      api.properties(
+          buildername='Mac abc',
+          task_name='abc',
+          dependencies=[{'dependency': 'xcode'}]
+      ),
       api.repo_util.flutter_environment_data(),
   )
   yield api.test(
       "post-submit",
       api.properties(
-          buildername='Linux abc',
-          pool='flutter.luci.prod',
+          buildername='Linux abc', task_name='abc', upload_metrics=True
+      ), api.repo_util.flutter_environment_data()
+  )
+  yield api.test(
+      "upload-metrics-mac",
+      api.properties(
+          buildername='Mac abc',
+          dependencies=[{'dependency': 'xcode'}],
           task_name='abc',
           upload_metrics=True
       ), api.repo_util.flutter_environment_data()

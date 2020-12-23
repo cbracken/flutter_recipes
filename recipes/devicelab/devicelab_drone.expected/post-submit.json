@@ -123,30 +123,6 @@
   },
   {
     "cmd": [
-      "luci-auth",
-      "token",
-      "-lifetime",
-      "3m"
-    ],
-    "infra_step": true,
-    "name": "get access token for default account"
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "extra.secret.token.should.not.be.logged",
-      "[CLEANUP]/tmp_tmp_1"
-    ],
-    "infra_step": true,
-    "name": "write token"
-  },
-  {
-    "cmd": [
       "flutter",
       "doctor",
       "--verbose"
@@ -221,7 +197,7 @@
       "bin/run.dart",
       "-t",
       "abc",
-      "--service-account-token-file",
+      "--results-file",
       "[CLEANUP]/tmp_tmp_1",
       "--luci-builder",
       "Linux abc",
@@ -420,6 +396,103 @@
       ]
     },
     "name": "OS info (2)"
+  },
+  {
+    "cmd": [],
+    "name": "Upload metrics"
+  },
+  {
+    "cmd": [
+      "luci-auth",
+      "token",
+      "-lifetime",
+      "3m"
+    ],
+    "cwd": "[CACHE]/flutter sdk/dev/devicelab",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[CACHE]/flutter sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/flutter sdk/bin",
+        "[CACHE]/flutter sdk/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload metrics.get access token for default account",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "extra.secret.token.should.not.be.logged",
+      "[CLEANUP]/tmp_tmp_2"
+    ],
+    "cwd": "[CACHE]/flutter sdk/dev/devicelab",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[CACHE]/flutter sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/flutter sdk/bin",
+        "[CACHE]/flutter sdk/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "Upload metrics.write token",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "dart",
+      "bin/test_runner.dart",
+      "upload-metrics",
+      "--results-file",
+      "[CLEANUP]/tmp_tmp_1",
+      "--service-account-token-file",
+      "[CLEANUP]/tmp_tmp_2"
+    ],
+    "cwd": "[CACHE]/flutter sdk/dev/devicelab",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[CACHE]/flutter sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/flutter sdk/bin",
+        "[CACHE]/flutter sdk/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "name": "Upload metrics.upload metrics",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
   },
   {
     "name": "$result"
