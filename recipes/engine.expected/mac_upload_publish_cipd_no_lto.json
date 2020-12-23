@@ -11,6 +11,20 @@
   },
   {
     "cmd": [
+      "xattr",
+      "/opt/s/w/ir/cipd_bin_packages/python"
+    ],
+    "name": "python xattr info"
+  },
+  {
+    "cmd": [
+      "xattr",
+      "/opt/s/w/ir/cipd_bin_packages/git"
+    ],
+    "name": "git xattr info"
+  },
+  {
+    "cmd": [
       "vpython",
       "-u",
       "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
@@ -11358,6 +11372,20 @@
       "mem"
     ],
     "name": "OS info (2)"
+  },
+  {
+    "cmd": [
+      "xattr",
+      "/opt/s/w/ir/cipd_bin_packages/python"
+    ],
+    "name": "python xattr info (2)"
+  },
+  {
+    "cmd": [
+      "xattr",
+      "/opt/s/w/ir/cipd_bin_packages/git"
+    ],
+    "name": "git xattr info (2)"
   },
   {
     "name": "$result"

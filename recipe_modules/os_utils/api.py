@@ -39,6 +39,18 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     """Collects meminfo, cpu, processes for mac"""
     if self.m.platform.is_mac:
       self.m.step('OS info', cmd=['top', '-l', '3', '-o', 'mem'])
+      # These are temporary steps to collect xattr info for triage purpose.
+      # See issue: https://github.com/flutter/flutter/issues/68322#issuecomment-740264251
+      self.m.step(
+          'python xattr info',
+          cmd=['xattr', '/opt/s/w/ir/cipd_bin_packages/python'],
+          ok_ret='any'
+      )
+      self.m.step(
+          'git xattr info',
+          cmd=['xattr', '/opt/s/w/ir/cipd_bin_packages/git'],
+          ok_ret='any'
+      )
     elif self.m.platform.is_linux:
       self.m.step('OS info', cmd=['top', '-b', '-n', '3', '-o', '%MEM'])
 

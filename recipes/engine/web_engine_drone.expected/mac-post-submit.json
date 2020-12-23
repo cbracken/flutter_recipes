@@ -934,6 +934,64 @@
   },
   {
     "cmd": [
+      "xattr",
+      "/opt/s/w/ir/cipd_bin_packages/python"
+    ],
+    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "python xattr info"
+  },
+  {
+    "cmd": [
+      "xattr",
+      "/opt/s/w/ir/cipd_bin_packages/git"
+    ],
+    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CACHE]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "git xattr info"
+  },
+  {
+    "cmd": [
       "sudo",
       "xcode-select",
       "--reset"
