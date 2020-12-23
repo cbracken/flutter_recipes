@@ -44,7 +44,6 @@ def RunSteps(api):
     )
   api.flutter_deps.android_sdk(env, env_prefixes, '')
   api.flutter_deps.flutter_engine(env, env_prefixes)
-  api.flutter_deps.swift()
   api.flutter_deps.firebase(env, env_prefixes)
   api.flutter_deps.cmake(env, env_prefixes)
   api.flutter_deps.ninja(env, env_prefixes)
