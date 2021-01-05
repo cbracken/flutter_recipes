@@ -1583,19 +1583,6 @@ def GenTests(api):
               )
             yield test
 
-  yield api.test(
-      'safeupload_raise_on_duplicate', api.runtime(is_experimental=False),
-      api.step_data(
-          'Ensure %s does not already exist on cloud storage' %
-          ('flutter//linux-x64/artifacts.zip'),
-          retcode=0,
-      ), api.expect_exception('AssertionError'),
-      api.properties(InputProperties(
-          goma_jobs='1024',
-          upload_packages=True,
-      ))
-  )
-
   for should_upload in (True, False):
     yield api.test(
         'experimental%s' % ('_upload' if should_upload else ''),
