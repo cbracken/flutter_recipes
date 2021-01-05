@@ -1115,15 +1115,8 @@ def PackageIOSVariant(
     ])
   with api.context(cwd=checkout):
     api.step(
-        'Create iOS %s Flutter.framework' % label, create_ios_framework_cmd
+        'Create iOS %s Flutter.xcframework' % label, create_ios_framework_cmd
     )
-
-  # Zip Flutter.framework.
-  api.zip.directory(
-      'Archive Flutter.framework for %s' % label,
-      label_dir.join('Flutter.framework'),
-      label_dir.join('Flutter.framework.zip')
-  )
 
   # Package the multi-arch gen_snapshot for macOS.
   create_macos_gen_snapshot_cmd = [
@@ -1154,7 +1147,6 @@ def PackageIOSVariant(
       'Flutter.podspec',
       'gen_snapshot_armv7',
       'gen_snapshot_arm64',
-      'Flutter.framework.zip',
   ]
   directory_artifacts = [
       'Flutter.xcframework',
