@@ -1774,8 +1774,8 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "Zip dart-sdk",
-    "stdin": "{\"entries\": [{\"path\": \"[CACHE]/builder/src/out/linux_debug_arm64/dart-sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]/tmp_tmp_2/dart-sdk-linux-arm64.zip\", \"root\": \"[CACHE]/builder/src/out/linux_debug_arm64\"}"
+    "name": "Zip linux-arm64 font-subset.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"font-subset\", \"path\": \"[CACHE]/builder/src/out/linux_release_arm64/font-subset\", \"type\": \"file\"}, {\"archive_name\": \"const_finder.dart.snapshot\", \"path\": \"[CACHE]/builder/src/out/linux_debug_arm64/gen/const_finder.dart.snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_2/artifacts.zip\", \"root\": \"[CACHE]/builder/src\"}"
   },
   {
     "cmd": [
@@ -1786,7 +1786,86 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "[CLEANUP]/tmp_tmp_2/dart-sdk-linux-arm64.zip",
+      "[CLEANUP]/tmp_tmp_2/artifacts.zip",
+      "gs://flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-arm64/font-subset.zip"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-arm64/font-subset.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-arm64/font-subset.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/tmp_tmp_2"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for linux-arm64 UploadArtifacts font-subset.zip"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip dart-sdk",
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]/builder/src/out/linux_debug_arm64/dart-sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]/tmp_tmp_3/dart-sdk-linux-arm64.zip\", \"root\": \"[CACHE]/builder/src/out/linux_debug_arm64\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]/tmp_tmp_3/dart-sdk-linux-arm64.zip",
       "gs://flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/dart-sdk-linux-arm64.zip"
     ],
     "cwd": "[CACHE]/builder",
@@ -1816,7 +1895,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_2"
+      "[CLEANUP]/tmp_tmp_3"
     ],
     "cwd": "[CACHE]/builder",
     "env": {

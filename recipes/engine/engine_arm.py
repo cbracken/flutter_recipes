@@ -154,6 +154,16 @@ def BuildLinux(api):
       'out/linux_debug_unopt_arm64/gen/flutter/lib/snapshot/vm_isolate_snapshot.bin',
       'out/linux_debug_unopt_arm64/gen/frontend_server.dart.snapshot',
   ])
+
+  UploadArtifacts(
+      api,
+      'linux-arm64', [
+          'out/linux_release_arm64/font-subset',
+          'out/linux_debug_arm64/gen/const_finder.dart.snapshot',
+      ],
+      archive_name='font-subset.zip'
+  )
+
   UploadDartSdk(
       api,
       archive_name='dart-sdk-linux-arm64.zip',
