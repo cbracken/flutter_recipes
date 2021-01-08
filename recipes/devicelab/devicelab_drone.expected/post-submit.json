@@ -200,9 +200,7 @@
       "--results-file",
       "[CLEANUP]/tmp_tmp_1",
       "--luci-builder",
-      "Linux abc",
-      "--git-branch",
-      ""
+      "Linux abc"
     ],
     "cwd": "[CACHE]/flutter sdk/dev/devicelab",
     "env": {

@@ -218,7 +218,33 @@
     "name": "Set execute permission"
   },
   {
-    "cmd": [],
+    "cmd": [
+      "RECIPE[flutter::devicelab/devicelab_drone].resources/runner.sh",
+      "-t",
+      "abc",
+      "--results-file",
+      "[CLEANUP]/tmp_tmp_1",
+      "--luci-builder",
+      "Mac abc"
+    ],
+    "cwd": "[CACHE]/flutter sdk/dev/devicelab",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[CACHE]/flutter sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/flutter sdk/bin",
+        "[CACHE]/flutter sdk/bin/cache/dart-sdk/bin",
+        "[CACHE]/flutter sdk/bin",
+        "[CACHE]/flutter sdk/bin/cache/dart-sdk/bin"
+      ]
+    },
     "name": "run abc"
   },
   {

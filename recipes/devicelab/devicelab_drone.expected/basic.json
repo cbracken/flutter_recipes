@@ -34,7 +34,6 @@
       "git",
       "fetch",
       "origin",
-      "master",
       "--recurse-submodules",
       "--progress",
       "--tags"
@@ -54,7 +53,7 @@
       "git",
       "checkout",
       "-f",
-      "FETCH_HEAD"
+      "2d72510e447ab60a9728aeea2362d8be2cbd7789"
     ],
     "cwd": "[CACHE]/flutter sdk",
     "infra_step": true,
@@ -202,7 +201,7 @@
       "--luci-builder",
       "Linux abc",
       "--git-branch",
-      ""
+      "master"
     ],
     "cwd": "[CACHE]/flutter sdk/dev/devicelab",
     "env": {

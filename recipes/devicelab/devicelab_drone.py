@@ -45,17 +45,14 @@ def RunSteps(api):
   results_path = api.path.mkstemp()
   # Run test
   runner_params = [
-      '-t',
-      task_name,
-      '--results-file',
-      results_path,
-      '--luci-builder',
-      api.properties.get('buildername'),
-      # LUCI git checkouts end up in a detached HEAD state, so branch must
-      # be passed from gitiles -> test runner -> Cocoon.
-      '--git-branch',
-      git_branch
+      '-t', task_name, '--results-file', results_path, '--luci-builder',
+      api.properties.get('buildername')
   ]
+  # LUCI git checkouts end up in a detached HEAD state, so branch must
+  # be passed from gitiles -> test runner -> Cocoon.
+  if git_branch:
+    # git_branch is set only when the build was triggered by buildbucket.
+    runner_params.extend(['--git-branch', git_branch])
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
     api.step('flutter update-packages', ['flutter', 'update-packages'])
@@ -72,7 +69,9 @@ def RunSteps(api):
                          env_prefixes=env_prefixes), api.step.defer_results():
           resource_name = api.resource('runner.sh')
           api.step('Set execute permission', ['chmod', '755', resource_name])
-          api.step('run %s' % task_name, [resource_name].extend(runner_params))
+          test_runner_command = [resource_name]
+          test_runner_command.extend(runner_params)
+          api.step('run %s' % task_name, test_runner_command)
           # This is to clean up leaked processes.
           api.os_utils.kill_processes()
           # Collect memory/cpu/process after task execution.
@@ -119,9 +118,12 @@ def GenTests(api):
       api.expect_exception('ValueError'),
   )
   yield api.test(
-      "basic",
-      api.properties(buildername='Linux abc', task_name='abc'),
+      "basic", api.properties(buildername='Linux abc', task_name='abc'),
       api.repo_util.flutter_environment_data(),
+      api.buildbucket.ci_build(
+          project='test',
+          git_repo='git.example.com/test/repo',
+      )
   )
   yield api.test(
       "xcode-devicelab",
