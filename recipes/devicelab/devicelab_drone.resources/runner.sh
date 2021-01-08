@@ -4,8 +4,7 @@
 # as the test runner script.
 set -e
 
-if [ -f /usr/local/bin/unlock_login_keychain.sh ]
-then
+if [ -f /usr/local/bin/unlock_login_keychain.sh ] then
   /usr/local/bin/unlock_login_keychain.sh
 else
   echo "This bot does not support codesigning"
