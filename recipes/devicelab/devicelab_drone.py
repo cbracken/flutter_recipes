@@ -54,7 +54,7 @@ def RunSteps(api):
       # LUCI git checkouts end up in a detached HEAD state, so branch must
       # be passed from gitiles -> test runner -> Cocoon.
       '--git-branch',
-      git_branch
+      '"%s"' % git_branch
   ]
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
@@ -72,7 +72,9 @@ def RunSteps(api):
                          env_prefixes=env_prefixes), api.step.defer_results():
           resource_name = api.resource('runner.sh')
           api.step('Set execute permission', ['chmod', '755', resource_name])
-          api.step('run %s' % task_name, [resource_name].extend(runner_params))
+          test_runner_command = [resource_name]
+          test_runner_command.extend(runner_params)
+          api.step('run %s' % task_name, test_runner_command)
           # This is to clean up leaked processes.
           api.os_utils.kill_processes()
           # Collect memory/cpu/process after task execution.

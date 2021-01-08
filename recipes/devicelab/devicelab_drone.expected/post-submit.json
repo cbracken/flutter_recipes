@@ -202,7 +202,7 @@
       "--luci-builder",
       "Linux abc",
       "--git-branch",
-      ""
+      "\"\""
     ],
     "cwd": "[CACHE]/flutter sdk/dev/devicelab",
     "env": {
