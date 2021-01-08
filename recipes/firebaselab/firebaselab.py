@@ -36,29 +36,9 @@ def RunSteps(api):
   deps = api.properties.get('dependencies', [])
   api.flutter_deps.required_deps(env, env_prefixes, deps)
   task_name = api.properties.get('task_name')
-
   device_flags = [
-      # Physical devices - use only highly available devices to avoid timeouts.
-      # Pixel 3
-      '--device', 'model=blueline,version=28',
-      # Pixel 4
-      '--device', 'model=flame,version=29',
-      # Moto Z XT1650
-      '--device', 'model=griffin,version=24',
-
-      # Virtual devices for API level coverage.
-      '--device', 'model=Nexus5,version=19',
-      # version 20 not available.
-      '--device', 'model=Nexus5,version=21',
-      '--device', 'model=Nexus5,version=22',
-      '--device', 'model=Nexus5,version=23',
-      # SDK 24 is run on a physical griffin/Moto Z above.
-      '--device', 'model=Nexus6P,version=25',
-      '--device', 'model=Nexus6P,version=26',
-      '--device', 'model=Nexus6P,version=27',
-      # SDK 28 is run on a physical blueline/Pixel 3 above.
-      # SDK 29 is run on a physical flame/Pixel 4 above.
-      '--device', 'model=NexusLowRes,version=30',
+      '--device', 'model=blueline,version=28', '--device',
+      'model=flame,version=29', '--device', 'model=griffin,version=24'
   ]
 
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
