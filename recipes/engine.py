@@ -906,6 +906,7 @@ def BuildMac(api):
   if api.properties.get('build_host', True):
     RunGN(api, '--runtime-mode', 'debug', '--no-lto', '--full-dart-sdk')
     RunGN(api, '--runtime-mode', 'debug', '--unoptimized', '--no-lto')
+    RunGN(api, '--unopt', '--no-lto', '--macos-enable-metal')
     RunGN(api, '--runtime-mode', 'profile', '--no-lto')
     RunGN(api, '--runtime-mode', 'release', '--no-lto')
 
@@ -915,6 +916,8 @@ def BuildMac(api):
     Build(api, 'host_profile')
     RunTests(api, 'host_profile', types='engine')
     Build(api, 'host_release')
+    Build(api, 'host_debug_unopt_metal')
+    RunTests(api, 'host_debug_unopt_metal', types='engine')
     host_debug_path = GetCheckoutPath(api).join('out', 'host_debug')
     host_profile_path = GetCheckoutPath(api).join('out', 'host_profile')
     host_release_path = GetCheckoutPath(api).join('out', 'host_release')

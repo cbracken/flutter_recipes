@@ -447,6 +447,35 @@
       "python",
       "[CACHE]/builder/src/flutter/tools/gn",
       "--goma",
+      "--unopt",
+      "--no-lto",
+      "--macos-enable-metal"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --unopt --no-lto --macos-enable-metal"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/gn",
+      "--goma",
       "--runtime-mode",
       "profile",
       "--no-lto"
@@ -2086,6 +2115,404 @@
     ]
   },
   {
+    "cmd": [],
+    "name": "pre_goma (5)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "pre_goma (5).start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]/ninja",
+      "-j",
+      "1024",
+      "-C",
+      "[CACHE]/builder/src/out/host_debug_unopt_metal"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build host_debug_unopt_metal"
+  },
+  {
+    "cmd": [],
+    "name": "post_goma (5)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "jsonstatus",
+      "[CACHE]/goma/client/jsonstatus"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (5).goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (5).goma_stats",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (5).stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CLEANUP]/compiler_proxy.WARNING",
+      "/path/to/tmp/"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "post_goma (5).read goma_client warning log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
+      "@@@STEP_LOG_END@compiler_proxy.WARNING@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CACHE]/goma/client/goma_stats.json",
+      "/path/to/tmp/"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "post_goma (5).read goma_stats.json",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
+      "@@@STEP_LOG_END@goma_stats.json@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Mac Engine\", \"time_stamp\": \"2012-05-14 12:53:33.500000\", \"time_stamp_int\": 1337000015000}}",
+      "[CACHE]/goma/client/goma_stats.json"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "post_goma (5).write goma_stats.json",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Mac Engine\", \"time_stamp\": \"2012-05-14 12:53:33.500000\", \"time_stamp_int\": 1337000015000}}@@@",
+      "@@@STEP_LOG_END@goma_stats.json@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"build_info\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"build_id\": 8945511751514863184, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"builder\": \"Mac Engine\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"time_stamp\": \"2012-05-14 12:53:33.500000\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"time_stamp_int\": 1337000015000@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[START_DIR]/cipd/bqupload/bqupload",
+      "fuchsia-infra.artifacts.builds_beta_goma",
+      "[CACHE]/goma/client/goma_stats.json"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (5).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-vpython-spec",
+      "RECIPE_REPO[depot_tools]/.vpython",
+      "-u",
+      "[CACHE]/builder/src/flutter/testing/run_tests.py",
+      "--variant",
+      "host_debug_unopt_metal",
+      "--type",
+      "engine"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Host Tests for host_debug_unopt_metal"
+  },
+  {
     "cmd": [
       "python",
       "-u",
@@ -2864,556 +3291,6 @@
   },
   {
     "cmd": [],
-    "name": "pre_goma (5)"
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "[CACHE]/goma/client/goma_ctl.py",
-      "restart"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GLOG_log_dir": "[CLEANUP]",
-      "GOMA_CACHE_DIR": "[CACHE]/goma",
-      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
-      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
-      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
-      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "pre_goma (5).start_goma",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "RECIPE_REPO[depot_tools]/ninja",
-      "-j",
-      "1024",
-      "-C",
-      "[CACHE]/builder/src/out/android_release_vulkan"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0",
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]",
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "build android_release_vulkan"
-  },
-  {
-    "cmd": [],
-    "name": "post_goma (5)"
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "[CACHE]/goma/client/goma_ctl.py",
-      "jsonstatus",
-      "[CACHE]/goma/client/jsonstatus"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GLOG_log_dir": "[CLEANUP]",
-      "GOMA_CACHE_DIR": "[CACHE]/goma",
-      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
-      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
-      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
-      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "post_goma (5).goma_jsonstatus",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@json.output@{@@@",
-      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
-      "@@@STEP_LOG_LINE@json.output@    {@@@",
-      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
-      "@@@STEP_LOG_LINE@json.output@      }@@@",
-      "@@@STEP_LOG_LINE@json.output@    }@@@",
-      "@@@STEP_LOG_LINE@json.output@  ]@@@",
-      "@@@STEP_LOG_LINE@json.output@}@@@",
-      "@@@STEP_LOG_END@json.output@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "[CACHE]/goma/client/goma_ctl.py",
-      "stat"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GLOG_log_dir": "[CLEANUP]",
-      "GOMA_CACHE_DIR": "[CACHE]/goma",
-      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
-      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
-      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
-      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "post_goma (5).goma_stats",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "[CACHE]/goma/client/goma_ctl.py",
-      "stop"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GLOG_log_dir": "[CLEANUP]",
-      "GOMA_CACHE_DIR": "[CACHE]/goma",
-      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
-      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
-      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
-      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "post_goma (5).stop_goma",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "[CLEANUP]/compiler_proxy.WARNING",
-      "/path/to/tmp/"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "post_goma (5).read goma_client warning log",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
-      "@@@STEP_LOG_END@compiler_proxy.WARNING@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "[CACHE]/goma/client/goma_stats.json",
-      "/path/to/tmp/"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "post_goma (5).read goma_stats.json",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Mac Engine\", \"time_stamp\": \"2012-05-14 12:53:33.500000\", \"time_stamp_int\": 1337000015000}}",
-      "[CACHE]/goma/client/goma_stats.json"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "post_goma (5).write goma_stats.json",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Mac Engine\", \"time_stamp\": \"2012-05-14 12:53:33.500000\", \"time_stamp_int\": 1337000015000}}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@",
-      "@@@STEP_LOG_LINE@json.output@{@@@",
-      "@@@STEP_LOG_LINE@json.output@    \"build_info\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"build_id\": 8945511751514863184, @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"builder\": \"Mac Engine\", @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"time_stamp\": \"2012-05-14 12:53:33.500000\", @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"time_stamp_int\": 1337000015000@@@",
-      "@@@STEP_LOG_LINE@json.output@    }@@@",
-      "@@@STEP_LOG_LINE@json.output@}@@@",
-      "@@@STEP_LOG_END@json.output@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
-      "fuchsia-infra.artifacts.builds_beta_goma",
-      "[CACHE]/goma/client/goma_stats.json"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "post_goma (5).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "[CACHE]/builder/src/flutter/tools/gn",
-      "--goma",
-      "--runtime-mode",
-      "profile",
-      "--android",
-      "--no-lto"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "gn --runtime-mode profile --android --no-lto"
-  },
-  {
-    "cmd": [
-      "python",
-      "[CACHE]/builder/src/flutter/tools/gn",
-      "--goma",
-      "--runtime-mode",
-      "profile",
-      "--android",
-      "--android-cpu=arm64",
-      "--no-lto"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "gn --runtime-mode profile --android --android-cpu=arm64 --no-lto"
-  },
-  {
-    "cmd": [
-      "python",
-      "[CACHE]/builder/src/flutter/tools/gn",
-      "--goma",
-      "--runtime-mode",
-      "profile",
-      "--android",
-      "--android-cpu=x64",
-      "--no-lto"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "gn --runtime-mode profile --android --android-cpu=x64 --no-lto"
-  },
-  {
-    "cmd": [
-      "python",
-      "[CACHE]/builder/src/flutter/tools/gn",
-      "--goma",
-      "--runtime-mode",
-      "release",
-      "--android",
-      "--no-lto"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "gn --runtime-mode release --android --no-lto"
-  },
-  {
-    "cmd": [
-      "python",
-      "[CACHE]/builder/src/flutter/tools/gn",
-      "--goma",
-      "--runtime-mode",
-      "release",
-      "--android",
-      "--android-cpu=arm64",
-      "--no-lto"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "gn --runtime-mode release --android --android-cpu=arm64 --no-lto"
-  },
-  {
-    "cmd": [
-      "python",
-      "[CACHE]/builder/src/flutter/tools/gn",
-      "--goma",
-      "--runtime-mode",
-      "release",
-      "--android",
-      "--android-cpu=x64",
-      "--no-lto"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "gn --runtime-mode release --android --android-cpu=x64 --no-lto"
-  },
-  {
-    "cmd": [],
     "name": "pre_goma (6)"
   },
   {
@@ -3462,8 +3339,7 @@
       "-j",
       "1024",
       "-C",
-      "[CACHE]/builder/src/out/android_profile",
-      "flutter/lib/snapshot"
+      "[CACHE]/builder/src/out/android_release_vulkan"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -3487,7 +3363,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "build android_profile flutter/lib/snapshot"
+    "name": "build android_release_vulkan"
   },
   {
     "cmd": [],
@@ -3780,6 +3656,190 @@
     ]
   },
   {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "profile",
+      "--android",
+      "--no-lto"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode profile --android --no-lto"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "profile",
+      "--android",
+      "--android-cpu=arm64",
+      "--no-lto"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode profile --android --android-cpu=arm64 --no-lto"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "profile",
+      "--android",
+      "--android-cpu=x64",
+      "--no-lto"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode profile --android --android-cpu=x64 --no-lto"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "release",
+      "--android",
+      "--no-lto"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode release --android --no-lto"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "release",
+      "--android",
+      "--android-cpu=arm64",
+      "--no-lto"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode release --android --android-cpu=arm64 --no-lto"
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "release",
+      "--android",
+      "--android-cpu=x64",
+      "--no-lto"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode release --android --android-cpu=x64 --no-lto"
+  },
+  {
     "cmd": [],
     "name": "pre_goma (7)"
   },
@@ -3829,7 +3889,7 @@
       "-j",
       "1024",
       "-C",
-      "[CACHE]/builder/src/out/android_profile_arm64",
+      "[CACHE]/builder/src/out/android_profile",
       "flutter/lib/snapshot"
     ],
     "cwd": "[CACHE]/builder",
@@ -3854,7 +3914,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "build android_profile_arm64 flutter/lib/snapshot"
+    "name": "build android_profile flutter/lib/snapshot"
   },
   {
     "cmd": [],
@@ -4196,7 +4256,7 @@
       "-j",
       "1024",
       "-C",
-      "[CACHE]/builder/src/out/android_profile_x64",
+      "[CACHE]/builder/src/out/android_profile_arm64",
       "flutter/lib/snapshot"
     ],
     "cwd": "[CACHE]/builder",
@@ -4221,7 +4281,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "build android_profile_x64 flutter/lib/snapshot"
+    "name": "build android_profile_arm64 flutter/lib/snapshot"
   },
   {
     "cmd": [],
@@ -4563,7 +4623,7 @@
       "-j",
       "1024",
       "-C",
-      "[CACHE]/builder/src/out/android_release",
+      "[CACHE]/builder/src/out/android_profile_x64",
       "flutter/lib/snapshot"
     ],
     "cwd": "[CACHE]/builder",
@@ -4588,7 +4648,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "build android_release flutter/lib/snapshot"
+    "name": "build android_profile_x64 flutter/lib/snapshot"
   },
   {
     "cmd": [],
@@ -4930,7 +4990,7 @@
       "-j",
       "1024",
       "-C",
-      "[CACHE]/builder/src/out/android_release_arm64",
+      "[CACHE]/builder/src/out/android_release",
       "flutter/lib/snapshot"
     ],
     "cwd": "[CACHE]/builder",
@@ -4955,7 +5015,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "build android_release_arm64 flutter/lib/snapshot"
+    "name": "build android_release flutter/lib/snapshot"
   },
   {
     "cmd": [],
@@ -5297,7 +5357,7 @@
       "-j",
       "1024",
       "-C",
-      "[CACHE]/builder/src/out/android_release_x64",
+      "[CACHE]/builder/src/out/android_release_arm64",
       "flutter/lib/snapshot"
     ],
     "cwd": "[CACHE]/builder",
@@ -5322,7 +5382,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "build android_release_x64 flutter/lib/snapshot"
+    "name": "build android_release_arm64 flutter/lib/snapshot"
   },
   {
     "cmd": [],
@@ -5610,6 +5670,373 @@
       ]
     },
     "name": "post_goma (11).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "pre_goma (12)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "pre_goma (12).start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]/ninja",
+      "-j",
+      "1024",
+      "-C",
+      "[CACHE]/builder/src/out/android_release_x64",
+      "flutter/lib/snapshot"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build android_release_x64 flutter/lib/snapshot"
+  },
+  {
+    "cmd": [],
+    "name": "post_goma (12)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "jsonstatus",
+      "[CACHE]/goma/client/jsonstatus"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (12).goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (12).goma_stats",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (12).stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CLEANUP]/compiler_proxy.WARNING",
+      "/path/to/tmp/"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "post_goma (12).read goma_client warning log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
+      "@@@STEP_LOG_END@compiler_proxy.WARNING@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CACHE]/goma/client/goma_stats.json",
+      "/path/to/tmp/"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "post_goma (12).read goma_stats.json",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
+      "@@@STEP_LOG_END@goma_stats.json@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Mac Engine\", \"time_stamp\": \"2012-05-14 12:53:54.500000\", \"time_stamp_int\": 1337000036000}}",
+      "[CACHE]/goma/client/goma_stats.json"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "post_goma (12).write goma_stats.json",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Mac Engine\", \"time_stamp\": \"2012-05-14 12:53:54.500000\", \"time_stamp_int\": 1337000036000}}@@@",
+      "@@@STEP_LOG_END@goma_stats.json@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"build_info\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"build_id\": 8945511751514863184, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"builder\": \"Mac Engine\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"time_stamp\": \"2012-05-14 12:53:54.500000\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"time_stamp_int\": 1337000036000@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[START_DIR]/cipd/bqupload/bqupload",
+      "fuchsia-infra.artifacts.builds_beta_goma",
+      "[CACHE]/goma/client/goma_stats.json"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (12).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -6058,420 +6485,6 @@
   },
   {
     "cmd": [],
-    "name": "pre_goma (12)"
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "[CACHE]/goma/client/goma_ctl.py",
-      "restart"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GEM_HOME": "[START_DIR]/gems",
-      "GLOG_log_dir": "[CLEANUP]",
-      "GOMA_CACHE_DIR": "[CACHE]/goma",
-      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
-      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
-      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
-      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/gems/bin",
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "pre_goma (12).start_goma",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "RECIPE_REPO[depot_tools]/ninja",
-      "-j",
-      "1024",
-      "-C",
-      "[CACHE]/builder/src/out/ios_debug_sim"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GEM_HOME": "[START_DIR]/gems",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/gems/bin",
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0",
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]",
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "build ios_debug_sim"
-  },
-  {
-    "cmd": [],
-    "name": "post_goma (12)"
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "[CACHE]/goma/client/goma_ctl.py",
-      "jsonstatus",
-      "[CACHE]/goma/client/jsonstatus"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GEM_HOME": "[START_DIR]/gems",
-      "GLOG_log_dir": "[CLEANUP]",
-      "GOMA_CACHE_DIR": "[CACHE]/goma",
-      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
-      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
-      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
-      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/gems/bin",
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "post_goma (12).goma_jsonstatus",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@json.output@{@@@",
-      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
-      "@@@STEP_LOG_LINE@json.output@    {@@@",
-      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
-      "@@@STEP_LOG_LINE@json.output@      }@@@",
-      "@@@STEP_LOG_LINE@json.output@    }@@@",
-      "@@@STEP_LOG_LINE@json.output@  ]@@@",
-      "@@@STEP_LOG_LINE@json.output@}@@@",
-      "@@@STEP_LOG_END@json.output@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "[CACHE]/goma/client/goma_ctl.py",
-      "stat"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GEM_HOME": "[START_DIR]/gems",
-      "GLOG_log_dir": "[CLEANUP]",
-      "GOMA_CACHE_DIR": "[CACHE]/goma",
-      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
-      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
-      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
-      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/gems/bin",
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "post_goma (12).goma_stats",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "[CACHE]/goma/client/goma_ctl.py",
-      "stop"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GEM_HOME": "[START_DIR]/gems",
-      "GLOG_log_dir": "[CLEANUP]",
-      "GOMA_CACHE_DIR": "[CACHE]/goma",
-      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
-      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
-      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
-      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/gems/bin",
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "post_goma (12).stop_goma",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "[CLEANUP]/compiler_proxy.WARNING",
-      "/path/to/tmp/"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GEM_HOME": "[START_DIR]/gems",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/gems/bin",
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "post_goma (12).read goma_client warning log",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
-      "@@@STEP_LOG_END@compiler_proxy.WARNING@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "[CACHE]/goma/client/goma_stats.json",
-      "/path/to/tmp/"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GEM_HOME": "[START_DIR]/gems",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/gems/bin",
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "post_goma (12).read goma_stats.json",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Mac Engine\", \"time_stamp\": \"2012-05-14 12:53:54.500000\", \"time_stamp_int\": 1337000036000}}",
-      "[CACHE]/goma/client/goma_stats.json"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GEM_HOME": "[START_DIR]/gems",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/gems/bin",
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "post_goma (12).write goma_stats.json",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Mac Engine\", \"time_stamp\": \"2012-05-14 12:53:54.500000\", \"time_stamp_int\": 1337000036000}}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@",
-      "@@@STEP_LOG_LINE@json.output@{@@@",
-      "@@@STEP_LOG_LINE@json.output@    \"build_info\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"build_id\": 8945511751514863184, @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"builder\": \"Mac Engine\", @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"time_stamp\": \"2012-05-14 12:53:54.500000\", @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"time_stamp_int\": 1337000036000@@@",
-      "@@@STEP_LOG_LINE@json.output@    }@@@",
-      "@@@STEP_LOG_LINE@json.output@}@@@",
-      "@@@STEP_LOG_END@json.output@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
-      "fuchsia-infra.artifacts.builds_beta_goma",
-      "[CACHE]/goma/client/goma_stats.json"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GEM_HOME": "[START_DIR]/gems",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/gems/bin",
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "post_goma (12).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "[CACHE]/builder/src/flutter/tools/gn",
-      "--goma",
-      "--unoptimized",
-      "--no-lto"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GEM_HOME": "[START_DIR]/gems",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/gems/bin",
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "gn --unoptimized --no-lto"
-  },
-  {
-    "cmd": [],
     "name": "pre_goma (13)"
   },
   {
@@ -6522,7 +6535,7 @@
       "-j",
       "1024",
       "-C",
-      "[CACHE]/builder/src/out/host_debug_unopt"
+      "[CACHE]/builder/src/out/ios_debug_sim"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6548,7 +6561,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "build host_debug_unopt (2)"
+    "name": "build ios_debug_sim"
   },
   {
     "cmd": [],
@@ -6855,6 +6868,36 @@
     ]
   },
   {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/gn",
+      "--goma",
+      "--unoptimized",
+      "--no-lto"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GEM_HOME": "[START_DIR]/gems",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/gems/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --unoptimized --no-lto"
+  },
+  {
     "cmd": [],
     "name": "pre_goma (14)"
   },
@@ -6906,8 +6949,7 @@
       "-j",
       "1024",
       "-C",
-      "[CACHE]/builder/src/out/ios_debug_sim",
-      "ios_test_flutter"
+      "[CACHE]/builder/src/out/host_debug_unopt"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -6933,7 +6975,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "build ios_debug_sim ios_test_flutter"
+    "name": "build host_debug_unopt (2)"
   },
   {
     "cmd": [],
@@ -7235,6 +7277,391 @@
       ]
     },
     "name": "post_goma (14).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "pre_goma (15)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GEM_HOME": "[START_DIR]/gems",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/gems/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "pre_goma (15).start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]/ninja",
+      "-j",
+      "1024",
+      "-C",
+      "[CACHE]/builder/src/out/ios_debug_sim",
+      "ios_test_flutter"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GEM_HOME": "[START_DIR]/gems",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/gems/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build ios_debug_sim ios_test_flutter"
+  },
+  {
+    "cmd": [],
+    "name": "post_goma (15)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "jsonstatus",
+      "[CACHE]/goma/client/jsonstatus"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GEM_HOME": "[START_DIR]/gems",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/gems/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (15).goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GEM_HOME": "[START_DIR]/gems",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/gems/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (15).goma_stats",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GEM_HOME": "[START_DIR]/gems",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/gems/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (15).stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CLEANUP]/compiler_proxy.WARNING",
+      "/path/to/tmp/"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GEM_HOME": "[START_DIR]/gems",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/gems/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "post_goma (15).read goma_client warning log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
+      "@@@STEP_LOG_END@compiler_proxy.WARNING@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CACHE]/goma/client/goma_stats.json",
+      "/path/to/tmp/"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GEM_HOME": "[START_DIR]/gems",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/gems/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "post_goma (15).read goma_stats.json",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
+      "@@@STEP_LOG_END@goma_stats.json@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Mac Engine\", \"time_stamp\": \"2012-05-14 12:54:03.500000\", \"time_stamp_int\": 1337000045000}}",
+      "[CACHE]/goma/client/goma_stats.json"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GEM_HOME": "[START_DIR]/gems",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/gems/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "post_goma (15).write goma_stats.json",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Mac Engine\", \"time_stamp\": \"2012-05-14 12:54:03.500000\", \"time_stamp_int\": 1337000045000}}@@@",
+      "@@@STEP_LOG_END@goma_stats.json@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"build_info\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"build_id\": 8945511751514863184, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"builder\": \"Mac Engine\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"time_stamp\": \"2012-05-14 12:54:03.500000\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"time_stamp_int\": 1337000045000@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[START_DIR]/cipd/bqupload/bqupload",
+      "fuchsia-infra.artifacts.builds_beta_goma",
+      "[CACHE]/goma/client/goma_stats.json"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GEM_HOME": "[START_DIR]/gems",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/gems/bin",
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (15).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -8969,406 +9396,6 @@
   },
   {
     "cmd": [],
-    "name": "pre_goma (15)"
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "[CACHE]/goma/client/goma_ctl.py",
-      "restart"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GLOG_log_dir": "[CLEANUP]",
-      "GOMA_CACHE_DIR": "[CACHE]/goma",
-      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
-      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
-      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
-      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "pre_goma (15).start_goma",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "RECIPE_REPO[depot_tools]/ninja",
-      "-j",
-      "1024",
-      "-C",
-      "[CACHE]/builder/src/out/fuchsia_debug_x64",
-      "flutter/shell/platform/fuchsia:fuchsia",
-      "fuchsia_tests"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0",
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]",
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "build fuchsia_debug_x64 flutter/shell/platform/fuchsia:fuchsia fuchsia_tests"
-  },
-  {
-    "cmd": [],
-    "name": "post_goma (15)"
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "[CACHE]/goma/client/goma_ctl.py",
-      "jsonstatus",
-      "[CACHE]/goma/client/jsonstatus"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GLOG_log_dir": "[CLEANUP]",
-      "GOMA_CACHE_DIR": "[CACHE]/goma",
-      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
-      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
-      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
-      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "post_goma (15).goma_jsonstatus",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@json.output@{@@@",
-      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
-      "@@@STEP_LOG_LINE@json.output@    {@@@",
-      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
-      "@@@STEP_LOG_LINE@json.output@      }@@@",
-      "@@@STEP_LOG_LINE@json.output@    }@@@",
-      "@@@STEP_LOG_LINE@json.output@  ]@@@",
-      "@@@STEP_LOG_LINE@json.output@}@@@",
-      "@@@STEP_LOG_END@json.output@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "[CACHE]/goma/client/goma_ctl.py",
-      "stat"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GLOG_log_dir": "[CLEANUP]",
-      "GOMA_CACHE_DIR": "[CACHE]/goma",
-      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
-      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
-      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
-      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "post_goma (15).goma_stats",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "-u",
-      "[CACHE]/goma/client/goma_ctl.py",
-      "stop"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GLOG_log_dir": "[CLEANUP]",
-      "GOMA_CACHE_DIR": "[CACHE]/goma",
-      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
-      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
-      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
-      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "post_goma (15).stop_goma",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "[CLEANUP]/compiler_proxy.WARNING",
-      "/path/to/tmp/"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "post_goma (15).read goma_client warning log",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
-      "@@@STEP_LOG_END@compiler_proxy.WARNING@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "[CACHE]/goma/client/goma_stats.json",
-      "/path/to/tmp/"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "post_goma (15).read goma_stats.json",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Mac Engine\", \"time_stamp\": \"2012-05-14 12:54:03.500000\", \"time_stamp_int\": 1337000045000}}",
-      "[CACHE]/goma/client/goma_stats.json"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "post_goma (15).write goma_stats.json",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Mac Engine\", \"time_stamp\": \"2012-05-14 12:54:03.500000\", \"time_stamp_int\": 1337000045000}}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@",
-      "@@@STEP_LOG_LINE@json.output@{@@@",
-      "@@@STEP_LOG_LINE@json.output@    \"build_info\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"build_id\": 8945511751514863184, @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"builder\": \"Mac Engine\", @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"time_stamp\": \"2012-05-14 12:54:03.500000\", @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"time_stamp_int\": 1337000045000@@@",
-      "@@@STEP_LOG_LINE@json.output@    }@@@",
-      "@@@STEP_LOG_LINE@json.output@}@@@",
-      "@@@STEP_LOG_END@json.output@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
-      "fuchsia-infra.artifacts.builds_beta_goma",
-      "[CACHE]/goma/client/goma_stats.json"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "post_goma (15).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "python",
-      "[CACHE]/builder/src/flutter/tools/gn",
-      "--goma",
-      "--fuchsia",
-      "--fuchsia-cpu",
-      "arm64",
-      "--runtime-mode",
-      "debug",
-      "--no-lto"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
-      ]
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "gn --fuchsia --fuchsia-cpu arm64 --runtime-mode debug --no-lto"
-  },
-  {
-    "cmd": [],
     "name": "pre_goma (16)"
   },
   {
@@ -9417,7 +9444,7 @@
       "-j",
       "1024",
       "-C",
-      "[CACHE]/builder/src/out/fuchsia_debug_arm64",
+      "[CACHE]/builder/src/out/fuchsia_debug_x64",
       "flutter/shell/platform/fuchsia:fuchsia",
       "fuchsia_tests"
     ],
@@ -9443,7 +9470,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "build fuchsia_debug_arm64 flutter/shell/platform/fuchsia:fuchsia fuchsia_tests"
+    "name": "build fuchsia_debug_x64 flutter/shell/platform/fuchsia:fuchsia fuchsia_tests"
   },
   {
     "cmd": [],
@@ -9731,6 +9758,406 @@
       ]
     },
     "name": "post_goma (16).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/gn",
+      "--goma",
+      "--fuchsia",
+      "--fuchsia-cpu",
+      "arm64",
+      "--runtime-mode",
+      "debug",
+      "--no-lto"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --fuchsia --fuchsia-cpu arm64 --runtime-mode debug --no-lto"
+  },
+  {
+    "cmd": [],
+    "name": "pre_goma (17)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "restart"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "pre_goma (17).start_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "RECIPE_REPO[depot_tools]/ninja",
+      "-j",
+      "1024",
+      "-C",
+      "[CACHE]/builder/src/out/fuchsia_debug_arm64",
+      "flutter/shell/platform/fuchsia:fuchsia",
+      "fuchsia_tests"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "build fuchsia_debug_arm64 flutter/shell/platform/fuchsia:fuchsia fuchsia_tests"
+  },
+  {
+    "cmd": [],
+    "name": "post_goma (17)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "jsonstatus",
+      "[CACHE]/goma/client/jsonstatus"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (17).goma_jsonstatus",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"notice\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@    {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"infra_status\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"num_user_error\": 0, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"ping_status_code\": 200@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  ]@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "stat"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (17).goma_stats",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[CACHE]/goma/client/goma_ctl.py",
+      "stop"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GLOG_log_dir": "[CLEANUP]",
+      "GOMA_CACHE_DIR": "[CACHE]/goma",
+      "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
+      "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
+      "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
+      "GOMA_STORE_LOCAL_RUN_OUTPUT": "True",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (17).stop_goma",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CLEANUP]/compiler_proxy.WARNING",
+      "/path/to/tmp/"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "post_goma (17).read goma_client warning log",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
+      "@@@STEP_LOG_END@compiler_proxy.WARNING@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CACHE]/goma/client/goma_stats.json",
+      "/path/to/tmp/"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "post_goma (17).read goma_stats.json",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
+      "@@@STEP_LOG_END@goma_stats.json@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Mac Engine\", \"time_stamp\": \"2012-05-14 12:54:09.500000\", \"time_stamp_int\": 1337000051000}}",
+      "[CACHE]/goma/client/goma_stats.json"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "post_goma (17).write goma_stats.json",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Mac Engine\", \"time_stamp\": \"2012-05-14 12:54:09.500000\", \"time_stamp_int\": 1337000051000}}@@@",
+      "@@@STEP_LOG_END@goma_stats.json@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"build_info\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"build_id\": 8945511751514863184, @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"builder\": \"Mac Engine\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"time_stamp\": \"2012-05-14 12:54:09.500000\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"time_stamp_int\": 1337000051000@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[START_DIR]/cipd/bqupload/bqupload",
+      "fuchsia-infra.artifacts.builds_beta_goma",
+      "[CACHE]/goma/client/goma_stats.json"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "post_goma (17).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
