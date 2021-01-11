@@ -36,10 +36,49 @@ def RunSteps(api):
   deps = api.properties.get('dependencies', [])
   api.flutter_deps.required_deps(env, env_prefixes, deps)
   task_name = api.properties.get('task_name')
-  device_flags = [
-      '--device', 'model=blueline,version=28', '--device',
-      'model=flame,version=29', '--device', 'model=griffin,version=24'
+
+  physical_devices = [
+      # Physical devices - use only highly available devices to avoid timeouts.
+      # Pixel 3
+      '--device', 'model=blueline,version=28',
+      # Pixel 4
+      '--device', 'model=flame,version=29',
+      # Moto Z XT1650
+      '--device', 'model=griffin,version=24',
   ]
+
+  virtual_devices = [
+      # Virtual devices for API level coverage.
+      '--device', 'model=Nexus5,version=19',
+      # SDK 20 not available virtually or physically.
+      '--device', 'model=Nexus5,version=21',
+      '--device', 'model=Nexus5,version=22',
+      '--device', 'model=Nexus5,version=23',
+      # SDK 24 is run on a physical griffin/Moto Z above.
+      '--device', 'model=Nexus6P,version=25',
+      '--device', 'model=Nexus6P,version=26',
+      '--device', 'model=Nexus6P,version=27',
+      # SDK 28 is run on a physical blueline/Pixel 3 above.
+      # SDK 29 is run on a physical flame/Pixel 4 above.
+      '--device', 'model=NexusLowRes,version=30',
+  ]
+
+  test_configurations = (
+      (
+          'Build appbundle',
+          ['flutter', 'build', 'appbundle', '--target-platform',
+                'android-arm,android-arm64'],
+          'build/app/outputs/bundle/release/app-release.aab',
+          physical_devices
+      ),
+      (
+          'Build apk',
+          ['flutter', 'build', 'apk', '--debug', '--target-platform',
+                'android-x86'],
+          'build/app/outputs/flutter-apk/app-debug.apk',
+          virtual_devices
+      ),
+  )
 
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
     api.step('flutter doctor', ['flutter', 'doctor', '-v'])
@@ -48,22 +87,19 @@ def RunSteps(api):
   test_path = checkout_path.join('dev', 'integration_tests', task_name)
   with api.step.nest('test_execution') as presentation:
     with api.context(env=env, env_prefixes=env_prefixes, cwd=test_path):
-      aab = "build/app/outputs/bundle/release/app-release.aab"
-      api.step(
-          'Build appbundle', [
-              'flutter', 'build', 'appbundle', '--target-platform',
-              'android-arm,android-arm64'
-          ]
-      )
       task_id = api.swarming.task_id
       api.gcloud('--quiet', 'config', 'set', 'project', 'flutter-infra')
-      cmd = [
-          'firebase', 'test', 'android', 'run', '--type', 'robo', '--app', aab,
-          '--timeout', '2m',
-          '--results-bucket=gs://%s' % gcs_bucket,
-          '--results-dir=%s/%s' % (task_name, task_id)
-      ] + device_flags
-      api.gcloud(*cmd)
+      for step_name, build_command, binary, devices in test_configurations:
+        api.step(step_name, build_command)
+        firebase_cmd = [
+            'firebase', 'test', 'android', 'run', '--type', 'robo',
+            '--app', binary,
+            '--timeout', '2m',
+            '--results-bucket=gs://%s' % gcs_bucket,
+            '--results-dir=%s/%s' % (task_name, task_id)
+        ] + devices
+        api.gcloud(*firebase_cmd)
+
       logcat_path = '%s/%s/*/logcat' % (task_name, task_id)
       tmp_logcat = api.path['cleanup'].join('logcat')
       api.gsutil.download(gcs_bucket, logcat_path, api.path['cleanup'])
