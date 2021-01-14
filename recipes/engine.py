@@ -1248,6 +1248,7 @@ def PackageWindowsDesktopVariant(api, label, bucket_name):
       'out/%s/flutter_windows.h' % label,
       'out/%s/flutter_messenger.h' % label,
       'out/%s/flutter_plugin_registrar.h' % label,
+      'out/%s/flutter_texture_registrar.h' % label,
       'out/%s/flutter_windows.dll' % label,
       'out/%s/flutter_windows.dll.exp' % label,
       'out/%s/flutter_windows.dll.lib' % label,
