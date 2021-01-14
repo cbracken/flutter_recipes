@@ -1135,11 +1135,13 @@ def RunIosIntegrationTests(api):
   test_dir = GetCheckoutPath(api).join('flutter', 'testing')
   scenario_app_tests = test_dir.join('scenario_app')
 
-  with api.context(cwd=scenario_app_tests):
-    api.step(
-        'Scenario App Integration Tests',
-        ['./build_and_run_ios_tests.sh', 'ios_debug_sim']
-    )
+  # TODO(fujino): un-skip this test when
+  # https://github.com/flutter/flutter/issues/73963 is resolved.
+  #with api.context(cwd=scenario_app_tests):
+  #  api.step(
+  #      'Scenario App Integration Tests',
+  #      ['./build_and_run_ios_tests.sh', 'ios_debug_sim']
+  #  )
 
 
 def BuildIOS(api):
