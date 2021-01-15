@@ -1853,8 +1853,8 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "Zip dart-sdk",
-    "stdin": "{\"entries\": [{\"path\": \"[CACHE]/builder/src/out/linux_debug_arm64/dart-sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]/tmp_tmp_3/dart-sdk-linux-arm64.zip\", \"root\": \"[CACHE]/builder/src/out/linux_debug_arm64\"}"
+    "name": "Zip flutter_linux",
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]/builder/src/out/linux_debug_arm64/flutter_linux\", \"type\": \"dir\"}, {\"archive_name\": \"libflutter_linux_gtk.so\", \"path\": \"[CACHE]/builder/src/out/linux_debug_arm64/libflutter_linux_gtk.so\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_3/linux-arm64-flutter-gtk.zip\", \"root\": \"[CACHE]/builder/src/out/linux_debug_arm64\"}"
   },
   {
     "cmd": [
@@ -1865,7 +1865,323 @@
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "----",
       "cp",
-      "[CLEANUP]/tmp_tmp_3/dart-sdk-linux-arm64.zip",
+      "[CLEANUP]/tmp_tmp_3/linux-arm64-flutter-gtk.zip",
+      "gs://flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-arm64-debug/linux-arm64-flutter-gtk.zip"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-arm64-debug/linux-arm64-flutter-gtk.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-arm64-debug/linux-arm64-flutter-gtk.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/tmp_tmp_3"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for Upload linux-arm64 Flutter GTK artifacts"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip flutter_linux (2)",
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]/builder/src/out/linux_profile_arm64/flutter_linux\", \"type\": \"dir\"}, {\"archive_name\": \"libflutter_linux_gtk.so\", \"path\": \"[CACHE]/builder/src/out/linux_profile_arm64/libflutter_linux_gtk.so\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot\", \"path\": \"[CACHE]/builder/src/out/linux_profile_arm64/gen_snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_4/linux-arm64-flutter-gtk.zip\", \"root\": \"[CACHE]/builder/src/out/linux_profile_arm64\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]/tmp_tmp_4/linux-arm64-flutter-gtk.zip",
+      "gs://flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-arm64-profile/linux-arm64-flutter-gtk.zip"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-arm64-profile/linux-arm64-flutter-gtk.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-arm64-profile/linux-arm64-flutter-gtk.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/tmp_tmp_4"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for Upload linux-arm64 Flutter GTK artifacts (2)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip flutter_linux (3)",
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]/builder/src/out/linux_release_arm64/flutter_linux\", \"type\": \"dir\"}, {\"archive_name\": \"libflutter_linux_gtk.so\", \"path\": \"[CACHE]/builder/src/out/linux_release_arm64/libflutter_linux_gtk.so\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot\", \"path\": \"[CACHE]/builder/src/out/linux_release_arm64/gen_snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_5/linux-arm64-flutter-gtk.zip\", \"root\": \"[CACHE]/builder/src/out/linux_release_arm64\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]/tmp_tmp_5/linux-arm64-flutter-gtk.zip",
+      "gs://flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-arm64-release/linux-arm64-flutter-gtk.zip"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-arm64-release/linux-arm64-flutter-gtk.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-arm64-release/linux-arm64-flutter-gtk.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/tmp_tmp_5"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for Upload linux-arm64 Flutter GTK artifacts (3)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip flutter_linux (4)",
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]/builder/src/out/linux_debug_arm64/flutter_linux\", \"type\": \"dir\"}, {\"archive_name\": \"libflutter_linux_gtk.so\", \"path\": \"[CACHE]/builder/src/out/linux_debug_arm64/libflutter_linux_gtk.so\", \"type\": \"file\"}], \"output\": \"[CLEANUP]/tmp_tmp_6/linux-arm64-flutter-gtk.zip\", \"root\": \"[CACHE]/builder/src/out/linux_debug_arm64\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]/tmp_tmp_6/linux-arm64-flutter-gtk.zip",
+      "gs://flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/linux-arm64-flutter-gtk.zip"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload \"flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/linux-arm64-flutter-gtk.zip\"",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/linux-arm64-flutter-gtk.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/tmp_tmp_6"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "temp dir for Upload linux-arm64 Flutter GTK artifacts (4)"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[flutter::zip]/resources/zip.py"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Zip dart-sdk",
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]/builder/src/out/linux_debug_arm64/dart-sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]/tmp_tmp_7/dart-sdk-linux-arm64.zip\", \"root\": \"[CACHE]/builder/src/out/linux_debug_arm64\"}"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]/tmp_tmp_7/dart-sdk-linux-arm64.zip",
       "gs://flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/dart-sdk-linux-arm64.zip"
     ],
     "cwd": "[CACHE]/builder",
@@ -1895,7 +2211,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]/tmp_tmp_3"
+      "[CLEANUP]/tmp_tmp_7"
     ],
     "cwd": "[CACHE]/builder",
     "env": {

@@ -130,6 +130,24 @@ def UploadDartSdk(api, archive_name, target_path='src/out/host_debug'):
   api.bucket_util.upload_folder('Upload Dart SDK', target_path, 'dart-sdk',
                                 archive_name)
 
+
+def PackageLinuxDesktopVariant(api, label, bucket_name):
+  artifacts = [
+      'libflutter_linux_gtk.so',
+  ]
+  if bucket_name.endswith('profile') or bucket_name.endswith('release'):
+    artifacts.append('gen_snapshot')
+  # Headers for the library are in the flutter_linux folder.
+  api.bucket_util.upload_folder_and_files(
+      'Upload linux-arm64 Flutter GTK artifacts',
+      'src/out/%s' % label,
+      'flutter_linux',
+      'linux-arm64-flutter-gtk.zip',
+      platform=bucket_name,
+      file_paths=artifacts
+  )
+
+
 def BuildLinux(api):
   RunGN(api, '--runtime-mode', 'debug', '--full-dart-sdk', '--target-os=linux',
         '--linux-cpu=arm64')
@@ -155,6 +173,7 @@ def BuildLinux(api):
       'out/linux_debug_unopt_arm64/gen/frontend_server.dart.snapshot',
   ])
 
+  # Font subset
   UploadArtifacts(
       api,
       'linux-arm64', [
@@ -163,6 +182,13 @@ def BuildLinux(api):
       ],
       archive_name='font-subset.zip'
   )
+
+  # Desktop embedding.
+  PackageLinuxDesktopVariant(api, 'linux_debug_arm64', 'linux-arm64-debug')
+  PackageLinuxDesktopVariant(api, 'linux_profile_arm64', 'linux-arm64-profile')
+  PackageLinuxDesktopVariant(api, 'linux_release_arm64', 'linux-arm64-release')
+  # Legacy; remove once Flutter tooling is updated to use the -debug location.
+  PackageLinuxDesktopVariant(api, 'linux_debug_arm64', 'linux-x64')
 
   UploadDartSdk(
       api,
