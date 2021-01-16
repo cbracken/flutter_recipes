@@ -119,11 +119,12 @@ class RepoUtilApi(recipe_api.RecipeApi):
       )
       self.m.python.failing_step('Flutter Environment', msg)
     git_ref = self.m.properties.get('git_ref', '')
+    pub_cache_path = (self.m.path['cache'].join('.pub-cache') if self.m.platform.is_mac
+                      else self.m.path['start_dir'].join('.pub-cache'))
     env = {
         # Setup our own pub_cache to not affect other slaves on this machine,
         # and so that the pre-populated pub cache is contained in the package.
-        'PUB_CACHE':
-            self.m.path['cache'].join('.pub-cache'),
+        'PUB_CACHE': pub_cache_path,
         # Windows Packaging script assumes this is set.
         'DEPOT_TOOLS':
             str(self.m.depot_tools.root),

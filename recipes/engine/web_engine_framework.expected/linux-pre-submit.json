@@ -1233,7 +1233,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "1",
       "OS": "linux",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[CACHE]/flutter"
     },
     "env_prefixes": {
@@ -1263,7 +1263,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "1",
       "OS": "linux",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[CACHE]/flutter"
     },
     "env_prefixes": {
@@ -1294,7 +1294,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "1",
       "OS": "linux",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[CACHE]/flutter"
     },
     "env_prefixes": {
@@ -1324,7 +1324,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "1",
       "OS": "linux",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[CACHE]/flutter"
     },
     "env_prefixes": {
@@ -1354,7 +1354,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "1",
       "OS": "linux",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[CACHE]/flutter"
     },
     "env_prefixes": {
@@ -1384,7 +1384,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "1",
       "OS": "linux",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[CACHE]/flutter"
     },
     "env_prefixes": {
@@ -1414,7 +1414,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "1",
       "OS": "linux",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[CACHE]/flutter"
     },
     "env_prefixes": {
@@ -1448,7 +1448,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "1",
       "OS": "linux",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[CACHE]/flutter"
     },
     "env_prefixes": {
