@@ -700,13 +700,6 @@ def BuildLinux(api):
       archive_name='linux-x64-embedder'
   )
 
-  # Desktop embedding.
-  PackageLinuxDesktopVariant(api, 'host_debug', 'linux-x64-debug')
-  PackageLinuxDesktopVariant(api, 'host_profile', 'linux-x64-profile')
-  PackageLinuxDesktopVariant(api, 'host_release', 'linux-x64-release')
-  # Legacy; remove once Flutter tooling is updated to use the -debug location.
-  PackageLinuxDesktopVariant(api, 'host_debug', 'linux-x64')
-
   if BuildFontSubset(api):
     UploadArtifacts(
         api,
@@ -720,6 +713,22 @@ def BuildLinux(api):
   UploadFlutterPatchedSdk(api)
   UploadDartSdk(api, archive_name='dart-sdk-linux-x64.zip')
   UploadWebSdk(api, archive_name='flutter-web-sdk-linux-x64.zip')
+
+  # Rebuild with fontconfig support enabled for the desktop embedding, since it
+  # should be on for libflutter_linux_gtk.so, but not libflutter_engine.so.
+  RunGN(api, '--runtime-mode', 'debug', '--enable-fontconfig')
+  RunGN(api, '--runtime-mode', 'profile', '--no-lto', '--enable-fontconfig')
+  RunGN(api, '--runtime-mode', 'release', '--enable-fontconfig')
+
+  Build(api, 'host_debug')
+  Build(api, 'host_profile')
+  Build(api, 'host_release')
+
+  PackageLinuxDesktopVariant(api, 'host_debug', 'linux-x64-debug')
+  PackageLinuxDesktopVariant(api, 'host_profile', 'linux-x64-profile')
+  PackageLinuxDesktopVariant(api, 'host_release', 'linux-x64-release')
+  # Legacy; remove once Flutter tooling is updated to use the -debug location.
+  PackageLinuxDesktopVariant(api, 'host_debug', 'linux-x64')
 
 
 def GetRemoteFileName(exec_path):
