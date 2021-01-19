@@ -124,6 +124,31 @@
   {
     "cmd": [
       "flutter",
+      "update-packages"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
+      "SHARD": null,
+      "SUBSHARD": null
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "name": "download dependencies"
+  },
+  {
+    "cmd": [
+      "flutter",
       "doctor",
       "-v"
     ],
@@ -146,31 +171,6 @@
       ]
     },
     "name": "flutter doctor"
-  },
-  {
-    "cmd": [
-      "flutter",
-      "update-packages"
-    ],
-    "cwd": "[START_DIR]/flutter",
-    "env": {
-      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LUCI_BRANCH": "",
-      "LUCI_CI": "True",
-      "LUCI_PR": "",
-      "OS": "linux",
-      "PUB_CACHE": "[START_DIR]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
-      "SHARD": null,
-      "SUBSHARD": null
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[START_DIR]/flutter/bin",
-        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
-      ]
-    },
-    "name": "download dependencies"
   },
   {
     "cmd": [

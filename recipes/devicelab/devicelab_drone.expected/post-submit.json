@@ -124,30 +124,6 @@
   {
     "cmd": [
       "flutter",
-      "doctor",
-      "--verbose"
-    ],
-    "cwd": "[CACHE]/flutter sdk/dev/devicelab",
-    "env": {
-      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LUCI_BRANCH": "",
-      "LUCI_CI": "True",
-      "LUCI_PR": "",
-      "OS": "linux",
-      "PUB_CACHE": "[START_DIR]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[CACHE]/flutter sdk"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]/flutter sdk/bin",
-        "[CACHE]/flutter sdk/bin/cache/dart-sdk/bin"
-      ]
-    },
-    "name": "flutter doctor"
-  },
-  {
-    "cmd": [
-      "flutter",
       "update-packages"
     ],
     "cwd": "[CACHE]/flutter sdk/dev/devicelab",
@@ -190,6 +166,32 @@
       ]
     },
     "name": "pub get"
+  },
+  {
+    "cmd": [
+      "flutter",
+      "doctor",
+      "--verbose"
+    ],
+    "cwd": "[CACHE]/flutter sdk/dev/devicelab",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[CACHE]/flutter sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/flutter sdk/bin",
+        "[CACHE]/flutter sdk/bin/cache/dart-sdk/bin",
+        "[CACHE]/flutter sdk/bin",
+        "[CACHE]/flutter sdk/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "name": "flutter doctor"
   },
   {
     "cmd": [

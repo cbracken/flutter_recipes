@@ -54,7 +54,6 @@ def RunSteps(api):
     # git_branch is set only when the build was triggered by buildbucket.
     runner_params.extend(['--git-branch', git_branch])
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
-    api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
     api.step('flutter update-packages', ['flutter', 'update-packages'])
     api.step('pub get', ['pub', 'get'])
     dep_list = {d['dependency']: d.get('version') for d in deps}
@@ -64,6 +63,7 @@ def RunSteps(api):
         api.flutter_deps.gems(
             env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
         )
+        api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
         api.os_utils.shutdown_simulators()
         with api.context(env=env,
                          env_prefixes=env_prefixes), api.step.defer_results():
@@ -79,6 +79,7 @@ def RunSteps(api):
     else:
       with api.context(env=env,
                        env_prefixes=env_prefixes), api.step.defer_results():
+        api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
         test_runner_command = ['dart', 'bin/run.dart']
         test_runner_command.extend(runner_params)
         api.step('run %s' % task_name, test_runner_command)
