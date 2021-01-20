@@ -27,11 +27,14 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     sdks are used in the same bot. To prevent those failures we will start
     deleting the folder before every task.
     """
+    # Defaulting to mocked user here as there is no easy way to mock env
+    # variables passed to the bot.
+    user = self.m.context.env.get('USER', 'mockeduser')
     if self.m.platform.is_mac:
       self.m.step(
           'Delete mac deriveddata', [
               'rm', '-rf',
-              '/Users/chrome-bot/Library/Developer/Xcode/DerivedData/'
+              '/Users/%s/Library/Developer/Xcode/DerivedData/' % user
           ]
       )
 

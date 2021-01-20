@@ -110,7 +110,7 @@
     "cmd": [
       "rm",
       "-rf",
-      "/Users/chrome-bot/Library/Developer/Xcode/DerivedData/"
+      "/Users/mockeduser/Library/Developer/Xcode/DerivedData/"
     ],
     "name": "Delete mac deriveddata"
   },

@@ -25,6 +25,9 @@ def RunSteps(api):
   # Collect memory/cpu/process before task execution.
   api.os_utils.collect_os_info()
 
+  # Clean deriveddata
+  api.os_utils.clean_derived_data()
+
   task_name = api.properties.get("task_name")
   if not task_name:
     raise ValueError('A task_name property is required')
