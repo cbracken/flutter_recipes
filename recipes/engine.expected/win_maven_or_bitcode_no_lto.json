@@ -273,7 +273,7 @@
   },
   {
     "cmd": [],
-    "name": "pre_goma"
+    "name": "setup goma"
   },
   {
     "cmd": [
@@ -311,7 +311,7 @@
       ]
     },
     "infra_step": true,
-    "name": "pre_goma.start_goma",
+    "name": "setup goma.start goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -350,7 +350,7 @@
   },
   {
     "cmd": [],
-    "name": "post_goma"
+    "name": "teardown goma"
   },
   {
     "cmd": [
@@ -388,7 +388,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma.goma_jsonstatus",
+    "name": "teardown goma.goma jsonstatus",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -439,7 +439,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma.goma_stats",
+    "name": "teardown goma.goma stats",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -479,7 +479,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma.stop_goma",
+    "name": "teardown goma.stop goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -516,7 +516,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma.read goma_client warning log",
+    "name": "teardown goma.read goma_client warning log",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
@@ -555,7 +555,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma.read goma_stats.json",
+    "name": "teardown goma.read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
@@ -594,7 +594,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma.write goma_stats.json",
+    "name": "teardown goma.write goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Win Engine\", \"time_stamp\": \"2012-05-14 12:53:21.500000\", \"time_stamp_int\": 1337000003000}}@@@",
@@ -612,7 +612,7 @@
   },
   {
     "cmd": [],
-    "name": "post_goma.ensure bqupload",
+    "name": "teardown goma.ensure bqupload",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -651,7 +651,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma.ensure bqupload.ensure_installed",
+    "name": "teardown goma.ensure bqupload.ensure_installed",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -693,7 +693,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma.upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "teardown goma.upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -762,7 +762,7 @@
   },
   {
     "cmd": [],
-    "name": "pre_goma (2)"
+    "name": "setup goma (2)"
   },
   {
     "cmd": [
@@ -800,7 +800,7 @@
       ]
     },
     "infra_step": true,
-    "name": "pre_goma (2).start_goma",
+    "name": "setup goma (2).start goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -839,7 +839,7 @@
   },
   {
     "cmd": [],
-    "name": "post_goma (2)"
+    "name": "teardown goma (2)"
   },
   {
     "cmd": [
@@ -877,7 +877,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (2).goma_jsonstatus",
+    "name": "teardown goma (2).goma jsonstatus",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -928,7 +928,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (2).goma_stats",
+    "name": "teardown goma (2).goma stats",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -968,7 +968,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (2).stop_goma",
+    "name": "teardown goma (2).stop goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -1005,7 +1005,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (2).read goma_client warning log",
+    "name": "teardown goma (2).read goma_client warning log",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
@@ -1044,7 +1044,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (2).read goma_stats.json",
+    "name": "teardown goma (2).read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
@@ -1083,7 +1083,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (2).write goma_stats.json",
+    "name": "teardown goma (2).write goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Win Engine\", \"time_stamp\": \"2012-05-14 12:53:24.500000\", \"time_stamp_int\": 1337000006000}}@@@",
@@ -1125,7 +1125,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (2).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "teardown goma (2).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -1193,7 +1193,7 @@
   },
   {
     "cmd": [],
-    "name": "pre_goma (3)"
+    "name": "setup goma (3)"
   },
   {
     "cmd": [
@@ -1231,7 +1231,7 @@
       ]
     },
     "infra_step": true,
-    "name": "pre_goma (3).start_goma",
+    "name": "setup goma (3).start goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -1272,7 +1272,7 @@
   },
   {
     "cmd": [],
-    "name": "post_goma (3)"
+    "name": "teardown goma (3)"
   },
   {
     "cmd": [
@@ -1310,7 +1310,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (3).goma_jsonstatus",
+    "name": "teardown goma (3).goma jsonstatus",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -1361,7 +1361,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (3).goma_stats",
+    "name": "teardown goma (3).goma stats",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -1401,7 +1401,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (3).stop_goma",
+    "name": "teardown goma (3).stop goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -1438,7 +1438,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (3).read goma_client warning log",
+    "name": "teardown goma (3).read goma_client warning log",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
@@ -1477,7 +1477,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (3).read goma_stats.json",
+    "name": "teardown goma (3).read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
@@ -1516,7 +1516,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (3).write goma_stats.json",
+    "name": "teardown goma (3).write goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Win Engine\", \"time_stamp\": \"2012-05-14 12:53:27.500000\", \"time_stamp_int\": 1337000009000}}@@@",
@@ -1558,7 +1558,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (3).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "teardown goma (3).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -1594,7 +1594,7 @@
   },
   {
     "cmd": [],
-    "name": "pre_goma (4)"
+    "name": "setup goma (4)"
   },
   {
     "cmd": [
@@ -1632,7 +1632,7 @@
       ]
     },
     "infra_step": true,
-    "name": "pre_goma (4).start_goma",
+    "name": "setup goma (4).start goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -1673,7 +1673,7 @@
   },
   {
     "cmd": [],
-    "name": "post_goma (4)"
+    "name": "teardown goma (4)"
   },
   {
     "cmd": [
@@ -1711,7 +1711,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (4).goma_jsonstatus",
+    "name": "teardown goma (4).goma jsonstatus",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -1762,7 +1762,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (4).goma_stats",
+    "name": "teardown goma (4).goma stats",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -1802,7 +1802,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (4).stop_goma",
+    "name": "teardown goma (4).stop goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -1839,7 +1839,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (4).read goma_client warning log",
+    "name": "teardown goma (4).read goma_client warning log",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
@@ -1878,7 +1878,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (4).read goma_stats.json",
+    "name": "teardown goma (4).read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
@@ -1917,7 +1917,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (4).write goma_stats.json",
+    "name": "teardown goma (4).write goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Win Engine\", \"time_stamp\": \"2012-05-14 12:53:30.500000\", \"time_stamp_int\": 1337000012000}}@@@",
@@ -1959,14 +1959,14 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (4).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "teardown goma (4).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
     "cmd": [],
-    "name": "pre_goma (5)"
+    "name": "setup goma (5)"
   },
   {
     "cmd": [
@@ -2004,7 +2004,7 @@
       ]
     },
     "infra_step": true,
-    "name": "pre_goma (5).start_goma",
+    "name": "setup goma (5).start goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -2044,7 +2044,7 @@
   },
   {
     "cmd": [],
-    "name": "post_goma (5)"
+    "name": "teardown goma (5)"
   },
   {
     "cmd": [
@@ -2082,7 +2082,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (5).goma_jsonstatus",
+    "name": "teardown goma (5).goma jsonstatus",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -2133,7 +2133,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (5).goma_stats",
+    "name": "teardown goma (5).goma stats",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -2173,7 +2173,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (5).stop_goma",
+    "name": "teardown goma (5).stop goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -2210,7 +2210,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (5).read goma_client warning log",
+    "name": "teardown goma (5).read goma_client warning log",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
@@ -2249,7 +2249,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (5).read goma_stats.json",
+    "name": "teardown goma (5).read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
@@ -2288,7 +2288,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (5).write goma_stats.json",
+    "name": "teardown goma (5).write goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Win Engine\", \"time_stamp\": \"2012-05-14 12:53:33.500000\", \"time_stamp_int\": 1337000015000}}@@@",
@@ -2330,7 +2330,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (5).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "teardown goma (5).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -3101,7 +3101,7 @@
   },
   {
     "cmd": [],
-    "name": "pre_goma (6)"
+    "name": "setup goma (6)"
   },
   {
     "cmd": [
@@ -3139,7 +3139,7 @@
       ]
     },
     "infra_step": true,
-    "name": "pre_goma (6).start_goma",
+    "name": "setup goma (6).start goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -3179,7 +3179,7 @@
   },
   {
     "cmd": [],
-    "name": "post_goma (6)"
+    "name": "teardown goma (6)"
   },
   {
     "cmd": [
@@ -3217,7 +3217,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (6).goma_jsonstatus",
+    "name": "teardown goma (6).goma jsonstatus",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -3268,7 +3268,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (6).goma_stats",
+    "name": "teardown goma (6).goma stats",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -3308,7 +3308,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (6).stop_goma",
+    "name": "teardown goma (6).stop goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -3345,7 +3345,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (6).read goma_client warning log",
+    "name": "teardown goma (6).read goma_client warning log",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
@@ -3384,7 +3384,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (6).read goma_stats.json",
+    "name": "teardown goma (6).read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
@@ -3423,7 +3423,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (6).write goma_stats.json",
+    "name": "teardown goma (6).write goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Win Engine\", \"time_stamp\": \"2012-05-14 12:53:36.500000\", \"time_stamp_int\": 1337000018000}}@@@",
@@ -3465,14 +3465,14 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (6).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "teardown goma (6).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
     "cmd": [],
-    "name": "pre_goma (7)"
+    "name": "setup goma (7)"
   },
   {
     "cmd": [
@@ -3510,7 +3510,7 @@
       ]
     },
     "infra_step": true,
-    "name": "pre_goma (7).start_goma",
+    "name": "setup goma (7).start goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -3550,7 +3550,7 @@
   },
   {
     "cmd": [],
-    "name": "post_goma (7)"
+    "name": "teardown goma (7)"
   },
   {
     "cmd": [
@@ -3588,7 +3588,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (7).goma_jsonstatus",
+    "name": "teardown goma (7).goma jsonstatus",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -3639,7 +3639,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (7).goma_stats",
+    "name": "teardown goma (7).goma stats",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -3679,7 +3679,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (7).stop_goma",
+    "name": "teardown goma (7).stop goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -3716,7 +3716,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (7).read goma_client warning log",
+    "name": "teardown goma (7).read goma_client warning log",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
@@ -3755,7 +3755,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (7).read goma_stats.json",
+    "name": "teardown goma (7).read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
@@ -3794,7 +3794,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (7).write goma_stats.json",
+    "name": "teardown goma (7).write goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Win Engine\", \"time_stamp\": \"2012-05-14 12:53:39.500000\", \"time_stamp_int\": 1337000021000}}@@@",
@@ -3836,14 +3836,14 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (7).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "teardown goma (7).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
     "cmd": [],
-    "name": "pre_goma (8)"
+    "name": "setup goma (8)"
   },
   {
     "cmd": [
@@ -3881,7 +3881,7 @@
       ]
     },
     "infra_step": true,
-    "name": "pre_goma (8).start_goma",
+    "name": "setup goma (8).start goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -3921,7 +3921,7 @@
   },
   {
     "cmd": [],
-    "name": "post_goma (8)"
+    "name": "teardown goma (8)"
   },
   {
     "cmd": [
@@ -3959,7 +3959,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (8).goma_jsonstatus",
+    "name": "teardown goma (8).goma jsonstatus",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -4010,7 +4010,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (8).goma_stats",
+    "name": "teardown goma (8).goma stats",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -4050,7 +4050,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (8).stop_goma",
+    "name": "teardown goma (8).stop goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -4087,7 +4087,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (8).read goma_client warning log",
+    "name": "teardown goma (8).read goma_client warning log",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
@@ -4126,7 +4126,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (8).read goma_stats.json",
+    "name": "teardown goma (8).read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
@@ -4165,7 +4165,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (8).write goma_stats.json",
+    "name": "teardown goma (8).write goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Win Engine\", \"time_stamp\": \"2012-05-14 12:53:42.500000\", \"time_stamp_int\": 1337000024000}}@@@",
@@ -4207,14 +4207,14 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (8).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "teardown goma (8).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
     "cmd": [],
-    "name": "pre_goma (9)"
+    "name": "setup goma (9)"
   },
   {
     "cmd": [
@@ -4252,7 +4252,7 @@
       ]
     },
     "infra_step": true,
-    "name": "pre_goma (9).start_goma",
+    "name": "setup goma (9).start goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -4292,7 +4292,7 @@
   },
   {
     "cmd": [],
-    "name": "post_goma (9)"
+    "name": "teardown goma (9)"
   },
   {
     "cmd": [
@@ -4330,7 +4330,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (9).goma_jsonstatus",
+    "name": "teardown goma (9).goma jsonstatus",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -4381,7 +4381,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (9).goma_stats",
+    "name": "teardown goma (9).goma stats",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -4421,7 +4421,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (9).stop_goma",
+    "name": "teardown goma (9).stop goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -4458,7 +4458,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (9).read goma_client warning log",
+    "name": "teardown goma (9).read goma_client warning log",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
@@ -4497,7 +4497,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (9).read goma_stats.json",
+    "name": "teardown goma (9).read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
@@ -4536,7 +4536,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (9).write goma_stats.json",
+    "name": "teardown goma (9).write goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Win Engine\", \"time_stamp\": \"2012-05-14 12:53:45.500000\", \"time_stamp_int\": 1337000027000}}@@@",
@@ -4578,14 +4578,14 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (9).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "teardown goma (9).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
     "cmd": [],
-    "name": "pre_goma (10)"
+    "name": "setup goma (10)"
   },
   {
     "cmd": [
@@ -4623,7 +4623,7 @@
       ]
     },
     "infra_step": true,
-    "name": "pre_goma (10).start_goma",
+    "name": "setup goma (10).start goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -4663,7 +4663,7 @@
   },
   {
     "cmd": [],
-    "name": "post_goma (10)"
+    "name": "teardown goma (10)"
   },
   {
     "cmd": [
@@ -4701,7 +4701,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (10).goma_jsonstatus",
+    "name": "teardown goma (10).goma jsonstatus",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -4752,7 +4752,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (10).goma_stats",
+    "name": "teardown goma (10).goma stats",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -4792,7 +4792,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (10).stop_goma",
+    "name": "teardown goma (10).stop goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -4829,7 +4829,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (10).read goma_client warning log",
+    "name": "teardown goma (10).read goma_client warning log",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
@@ -4868,7 +4868,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (10).read goma_stats.json",
+    "name": "teardown goma (10).read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
@@ -4907,7 +4907,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (10).write goma_stats.json",
+    "name": "teardown goma (10).write goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Win Engine\", \"time_stamp\": \"2012-05-14 12:53:48.500000\", \"time_stamp_int\": 1337000030000}}@@@",
@@ -4949,14 +4949,14 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (10).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "teardown goma (10).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
     "cmd": [],
-    "name": "pre_goma (11)"
+    "name": "setup goma (11)"
   },
   {
     "cmd": [
@@ -4994,7 +4994,7 @@
       ]
     },
     "infra_step": true,
-    "name": "pre_goma (11).start_goma",
+    "name": "setup goma (11).start goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -5034,7 +5034,7 @@
   },
   {
     "cmd": [],
-    "name": "post_goma (11)"
+    "name": "teardown goma (11)"
   },
   {
     "cmd": [
@@ -5072,7 +5072,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (11).goma_jsonstatus",
+    "name": "teardown goma (11).goma jsonstatus",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -5123,7 +5123,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (11).goma_stats",
+    "name": "teardown goma (11).goma stats",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -5163,7 +5163,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (11).stop_goma",
+    "name": "teardown goma (11).stop goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -5200,7 +5200,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (11).read goma_client warning log",
+    "name": "teardown goma (11).read goma_client warning log",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
@@ -5239,7 +5239,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (11).read goma_stats.json",
+    "name": "teardown goma (11).read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
@@ -5278,7 +5278,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma (11).write goma_stats.json",
+    "name": "teardown goma (11).write goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Win Engine\", \"time_stamp\": \"2012-05-14 12:53:51.500000\", \"time_stamp_int\": 1337000033000}}@@@",
@@ -5320,7 +5320,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma (11).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "teardown goma (11).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]

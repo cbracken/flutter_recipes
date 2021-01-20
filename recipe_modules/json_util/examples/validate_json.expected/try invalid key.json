@@ -21,7 +21,13 @@
     "name": "validate luci builder json schemas.validate try json format",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@try_builders.json@{\"builders\": [{\"abc\": \"def\"}]}@@@",
+      "@@@STEP_LOG_LINE@try_builders.json@{@@@",
+      "@@@STEP_LOG_LINE@try_builders.json@  \"builders\": [@@@",
+      "@@@STEP_LOG_LINE@try_builders.json@    {@@@",
+      "@@@STEP_LOG_LINE@try_builders.json@      \"abc\": \"def\"@@@",
+      "@@@STEP_LOG_LINE@try_builders.json@    }@@@",
+      "@@@STEP_LOG_LINE@try_builders.json@  ]@@@",
+      "@@@STEP_LOG_LINE@try_builders.json@}@@@",
       "@@@STEP_LOG_END@try_builders.json@@@"
     ]
   },

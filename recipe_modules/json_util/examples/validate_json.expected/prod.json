@@ -18,7 +18,14 @@
     "name": "validate luci builder json schemas.validate prod json format",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@prod_builders.json@{\"builders\": [{\"repo\": \"abc\", \"name\": \"def\"}]}@@@",
+      "@@@STEP_LOG_LINE@prod_builders.json@{@@@",
+      "@@@STEP_LOG_LINE@prod_builders.json@  \"builders\": [@@@",
+      "@@@STEP_LOG_LINE@prod_builders.json@    {@@@",
+      "@@@STEP_LOG_LINE@prod_builders.json@      \"repo\": \"abc\",@@@",
+      "@@@STEP_LOG_LINE@prod_builders.json@      \"name\": \"def\"@@@",
+      "@@@STEP_LOG_LINE@prod_builders.json@    }@@@",
+      "@@@STEP_LOG_LINE@prod_builders.json@  ]@@@",
+      "@@@STEP_LOG_LINE@prod_builders.json@}@@@",
       "@@@STEP_LOG_END@prod_builders.json@@@"
     ]
   },

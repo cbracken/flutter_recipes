@@ -264,7 +264,7 @@
   },
   {
     "cmd": [],
-    "name": "build host_debug_unopt ().pre_goma",
+    "name": "build host_debug_unopt ().setup goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -299,7 +299,7 @@
       ]
     },
     "infra_step": true,
-    "name": "build host_debug_unopt ().pre_goma.start_goma",
+    "name": "build host_debug_unopt ().setup goma.start goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -332,7 +332,7 @@
   },
   {
     "cmd": [],
-    "name": "build host_debug_unopt ().post_goma",
+    "name": "build host_debug_unopt ().teardown goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -367,7 +367,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "build host_debug_unopt ().post_goma.goma_jsonstatus",
+    "name": "build host_debug_unopt ().teardown goma.goma jsonstatus",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -412,7 +412,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "build host_debug_unopt ().post_goma.goma_stats",
+    "name": "build host_debug_unopt ().teardown goma.goma stats",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -446,7 +446,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "build host_debug_unopt ().post_goma.stop_goma",
+    "name": "build host_debug_unopt ().teardown goma.stop goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -478,7 +478,7 @@
       ]
     },
     "infra_step": true,
-    "name": "build host_debug_unopt ().post_goma.read goma_client warning log",
+    "name": "build host_debug_unopt ().teardown goma.read goma_client warning log",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
@@ -512,7 +512,7 @@
       ]
     },
     "infra_step": true,
-    "name": "build host_debug_unopt ().post_goma.read goma_stats.json",
+    "name": "build host_debug_unopt ().teardown goma.read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
@@ -546,7 +546,7 @@
       ]
     },
     "infra_step": true,
-    "name": "build host_debug_unopt ().post_goma.write goma_stats.json",
+    "name": "build host_debug_unopt ().teardown goma.write goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Drone\", \"time_stamp\": \"2012-05-14 12:53:21.500000\", \"time_stamp_int\": 1337000003000}}@@@",
@@ -564,7 +564,7 @@
   },
   {
     "cmd": [],
-    "name": "build host_debug_unopt ().post_goma.ensure bqupload",
+    "name": "build host_debug_unopt ().teardown goma.ensure bqupload",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -598,7 +598,7 @@
       ]
     },
     "infra_step": true,
-    "name": "build host_debug_unopt ().post_goma.ensure bqupload.ensure_installed",
+    "name": "build host_debug_unopt ().teardown goma.ensure bqupload.ensure_installed",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@3@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -635,7 +635,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "build host_debug_unopt ().post_goma.upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "build host_debug_unopt ().teardown goma.upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]

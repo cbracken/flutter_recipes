@@ -386,7 +386,7 @@
   },
   {
     "cmd": [],
-    "name": "pre_goma"
+    "name": "setup goma"
   },
   {
     "cmd": [
@@ -425,7 +425,7 @@
       ]
     },
     "infra_step": true,
-    "name": "pre_goma.start_goma",
+    "name": "setup goma.start goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -464,7 +464,7 @@
   },
   {
     "cmd": [],
-    "name": "post_goma"
+    "name": "teardown goma"
   },
   {
     "cmd": [
@@ -503,7 +503,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma.goma_jsonstatus",
+    "name": "teardown goma.goma jsonstatus",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -555,7 +555,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma.goma_stats",
+    "name": "teardown goma.goma stats",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -596,7 +596,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "post_goma.stop_goma",
+    "name": "teardown goma.stop goma",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -635,7 +635,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma.read goma_client warning log",
+    "name": "teardown goma.read goma_client warning log",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@compiler_proxy.WARNING@test log@@@",
@@ -676,7 +676,7 @@
       ]
     },
     "infra_step": true,
-    "name": "post_goma.read goma_stats.json",
+    "name": "teardown goma.read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
