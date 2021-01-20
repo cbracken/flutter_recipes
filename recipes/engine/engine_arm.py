@@ -188,7 +188,7 @@ def BuildLinux(api):
   PackageLinuxDesktopVariant(api, 'linux_profile_arm64', 'linux-arm64-profile')
   PackageLinuxDesktopVariant(api, 'linux_release_arm64', 'linux-arm64-release')
   # Legacy; remove once Flutter tooling is updated to use the -debug location.
-  PackageLinuxDesktopVariant(api, 'linux_debug_arm64', 'linux-x64')
+  PackageLinuxDesktopVariant(api, 'linux_debug_arm64', 'linux-arm64')
 
   UploadDartSdk(
       api,

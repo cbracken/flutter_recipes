@@ -2103,7 +2103,7 @@
       "----",
       "cp",
       "[CLEANUP]/tmp_tmp_6/linux-arm64-flutter-gtk.zip",
-      "gs://flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/linux-arm64-flutter-gtk.zip"
+      "gs://flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-arm64/linux-arm64-flutter-gtk.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2119,9 +2119,9 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/linux-arm64-flutter-gtk.zip\"",
+    "name": "gsutil upload \"flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-arm64/linux-arm64-flutter-gtk.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-x64/linux-arm64-flutter-gtk.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental/2d72510e447ab60a9728aeea2362d8be2cbd7789/linux-arm64/linux-arm64-flutter-gtk.zip@@@"
     ]
   },
   {
