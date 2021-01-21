@@ -110,7 +110,7 @@
     "cmd": [
       "rm",
       "-rf",
-      "/Users/mockeduser/Library/Developer/Xcode/DerivedData/"
+      "[HOME]/Library/Developer/Xcode/DerivedData"
     ],
     "name": "Delete mac deriveddata"
   },
