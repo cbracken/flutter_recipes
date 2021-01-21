@@ -38,7 +38,7 @@ PROPERTIES = {
 # led recipes will call itself reaching the max recursion limit. In the
 # flutter recipes the fuchsia_ctl recipe is the only one without too many
 # dependencies.
-SELFTEST_CL = ('https://flutter-review.googlesource.com/c/recipes/+/4600')
+SELFTEST_CL = ('https://flutter-review.googlesource.com/c/recipes/+/9802')
 COMMIT_QUEUE_CFG = """
     submit_options: <
       max_burst: 4
@@ -115,31 +115,28 @@ def RunSteps(api, remote, unittest_only):
   with api.step.defer_results():
     api.recipe_testing.run_lint(checkout_path)
     api.recipe_testing.run_unit_tests(checkout_path)
-  # Temporarily disable self test to be able to land the recipe engine updates.
-  # if not unittest_only:
-  #  api.recipe_testing.run_tests(checkout_path, SELFTEST_CL)
+  if not unittest_only:
+    api.recipe_testing.run_tests(checkout_path, SELFTEST_CL)
 
 
 def GenTests(api):
-  # Temporarily disable self test to be able to land the recipe engine updates.
-  #yield (api.status_check.test('ci') + api.properties(unittest_only=False) +
-  #       api.commit_queue.test_data(COMMIT_QUEUE_CFG) +
-  #       api.recipe_testing.affected_recipes_data(['none']) +
-  #       api.recipe_testing.build_data(
-  #           'flutter/try/flutter-foo', 'flutter', skip=True) +
-  #       api.recipe_testing.build_data(
-  #           'flutter/try/flutter-bar', 'flutter', skip=True) +
-  #       api.recipe_testing.build_data(
-  #           'flutter/try/flutter-baz', 'project', skip=True))
-  #yield (api.status_check.test('cq_try') + api.properties(unittest_only=False) +
-  #       api.commit_queue.test_data(COMMIT_QUEUE_CFG) +
-  #       api.recipe_testing.affected_recipes_data(['none']) +
-  #       api.recipe_testing.build_data(
-  #           'flutter/try/flutter-foo', 'flutter', skip=True) +
-  #       api.recipe_testing.build_data(
-  #           'flutter/try/flutter-bar', 'flutter', skip=True) +
-  #       api.recipe_testing.build_data(
-  #           'flutter/try/flutter-baz', 'project', skip=True) +
-  #       api.buildbucket.try_build(
-  #           git_repo='https://flutter.googlesource.com/recipes'))
-  return []
+  yield (api.status_check.test('ci') + api.properties(unittest_only=False) +
+         api.commit_queue.test_data(COMMIT_QUEUE_CFG) +
+         api.recipe_testing.affected_recipes_data(['none']) +
+         api.recipe_testing.build_data(
+             'flutter/try/flutter-foo', 'flutter', skip=True) +
+         api.recipe_testing.build_data(
+             'flutter/try/flutter-bar', 'flutter', skip=True) +
+         api.recipe_testing.build_data(
+             'flutter/try/flutter-baz', 'project', skip=True))
+  yield (api.status_check.test('cq_try') + api.properties(unittest_only=False) +
+         api.commit_queue.test_data(COMMIT_QUEUE_CFG) +
+         api.recipe_testing.affected_recipes_data(['none']) +
+         api.recipe_testing.build_data(
+             'flutter/try/flutter-foo', 'flutter', skip=True) +
+         api.recipe_testing.build_data(
+             'flutter/try/flutter-bar', 'flutter', skip=True) +
+         api.recipe_testing.build_data(
+             'flutter/try/flutter-baz', 'project', skip=True) +
+         api.buildbucket.try_build(
+             git_repo='https://flutter.googlesource.com/recipes'))
