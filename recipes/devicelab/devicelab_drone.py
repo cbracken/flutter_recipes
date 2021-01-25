@@ -5,7 +5,9 @@
 from recipe_engine.recipe_api import Property
 
 DEPS = [
+    'flutter/bucket_util',
     'flutter/flutter_deps',
+    'flutter/logs_util',
     'flutter/repo_util',
     'flutter/os_utils',
     'recipe_engine/buildbucket',
@@ -37,6 +39,7 @@ def RunSteps(api):
       api.properties.get('git_ref'),
   )
   env, env_prefixes = api.repo_util.flutter_environment(flutter_path)
+  api.logs_util.initialize_logs_collection(env)
   deps = api.properties.get('dependencies', [])
   api.flutter_deps.required_deps(env, env_prefixes, deps)
   devicelab_path = flutter_path.join('dev', 'devicelab')
@@ -72,6 +75,7 @@ def RunSteps(api):
           test_runner_command = [resource_name]
           test_runner_command.extend(runner_params)
           api.step('run %s' % task_name, test_runner_command)
+          api.logs_util.upload_logs(task_name)
           # This is to clean up leaked processes.
           api.os_utils.kill_processes()
           # Collect memory/cpu/process after task execution.
@@ -83,6 +87,7 @@ def RunSteps(api):
         test_runner_command = ['dart', 'bin/run.dart']
         test_runner_command.extend(runner_params)
         api.step('run %s' % task_name, test_runner_command)
+        api.logs_util.upload_logs(task_name)
         # This is to clean up leaked processes.
         api.os_utils.kill_processes()
         # Collect memory/cpu/process after task execution.
