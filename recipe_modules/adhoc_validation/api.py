@@ -18,7 +18,7 @@ class AddhocValidationApi(recipe_api.RecipeApi):
     return [
         'analyze', 'customer_testing', 'docs', 'fuchsia_precache',
         'tool_coverage', 'web_e2e_test', 'web_smoke_test',
-        'verify_binaries_codesigned', 'build_gallery'
+        'verify_binaries_codesigned'
     ]
 
   def run(self, name, validation, env, env_prefixes, secrets=None):
