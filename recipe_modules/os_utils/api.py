@@ -116,3 +116,25 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         self.m.step(
             'Erase simulators', ['sudo', 'xcrun', 'simctl', 'erase', 'all']
         )
+
+  def dismiss_dialogs(self):
+    """Dismisses iOS dialogs to avoid problems.
+
+    Args:
+      flutter_path(Path): A path to the checkout of the flutter sdk repository.
+    """
+    if str(self.m.swarming.bot_id
+          ).startswith('flutter-devicelab') and self.m.platform.is_mac:
+      with self.m.step.nest('Dismiss dialogs'):
+        cocoon_path = self.m.path['cache'].join('cocoon')
+        self.m.repo_util.checkout('cocoon', cocoon_path)
+        resource_name = self.resource('dismiss_dialogs.sh')
+        self.m.step('Set execute permission', ['chmod', '755', resource_name])
+        with self.m.context(
+            cwd=cocoon_path.join('agent', 'tool', 'infra-dialog')):
+          device_id = self.m.step(
+              'Find device id', ['idevice_id', '-l'],
+              stdout=self.m.raw_io.output()
+          ).stdout.rstrip()
+          cmd = [resource_name, device_id]
+          self.m.step('Run app to dismiss dialogs', cmd)

@@ -21,6 +21,7 @@ def RunSteps(api):
     file = temp_dir.join('artifacts.zip')
   api.os_utils.clean_derived_data()
   api.os_utils.shutdown_simulators()
+  api.os_utils.dismiss_dialogs()
 
 
 def GenTests(api):

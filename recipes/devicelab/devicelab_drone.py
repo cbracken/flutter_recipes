@@ -67,6 +67,7 @@ def RunSteps(api):
             env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
         )
         api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
+        api.os_utils.dismiss_dialogs()
         api.os_utils.shutdown_simulators()
         with api.context(env=env,
                          env_prefixes=env_prefixes), api.step.defer_results():
