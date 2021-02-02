@@ -221,7 +221,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "",
       "OS": "darwin",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
     },
     "env_prefixes": {
@@ -257,7 +257,7 @@
       "LUCI_PR": "",
       "OS": "darwin",
       "PATH": "RECIPE_REPO[depot_tools]:<PATH>",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
     },
     "env_prefixes": {
@@ -291,7 +291,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "",
       "OS": "darwin",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
     },
     "env_prefixes": {
@@ -324,7 +324,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "",
       "OS": "darwin",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
     },
     "env_prefixes": {
@@ -363,7 +363,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "",
       "OS": "darwin",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
     },
     "env_prefixes": {
@@ -396,7 +396,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "",
       "OS": "darwin",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
     },
     "env_prefixes": {
@@ -431,7 +431,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "",
       "OS": "darwin",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
     },
     "env_prefixes": {
@@ -462,7 +462,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "",
       "OS": "darwin",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
     },
     "env_prefixes": {
@@ -492,7 +492,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "",
       "OS": "darwin",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
     },
     "env_prefixes": {
@@ -527,7 +527,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "",
       "OS": "darwin",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
     },
     "env_prefixes": {
@@ -565,7 +565,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "",
       "OS": "darwin",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
     },
     "env_prefixes": {
@@ -600,7 +600,7 @@
       "LUCI_CI": "True",
       "LUCI_PR": "",
       "OS": "darwin",
-      "PUB_CACHE": "[CACHE]/.pub-cache",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
       "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
     },
     "env_prefixes": {
