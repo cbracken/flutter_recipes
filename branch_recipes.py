@@ -11,6 +11,7 @@ import sys
 RECIPES_TO_BRANCH = (
         'devicelab',
         'devicelab/devicelab_drone',
+        'engine/engine_arm',
         'engine/engine_metrics',
         'engine/scenarios',
         'engine/web_engine_framework',
@@ -23,8 +24,12 @@ RECIPES_TO_BRANCH = (
         'flutter',
         'web_engine',
         )
+
+# These recipes are not used in a Flutter release build, and thus do not need to
+# be branched.
 RECIPES_TO_SKIP = (
-        'cocoon',
+        'cocoon/cocoon',
+        'cocoon/device_doctor',
         'firebaselab/firebaselab',
         'fuchsia/fuchsia',
         'fuchsia_ctl',
