@@ -57,7 +57,7 @@ def RunSteps(api):
     # git_branch is set only when the build was triggered by buildbucket.
     runner_params.extend(['--git-branch', git_branch])
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
-    api.step('flutter update-packages', ['flutter', 'update-packages'])
+    api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
     api.step('pub get', ['pub', 'get'])
     dep_list = {d['dependency']: d.get('version') for d in deps}
     if dep_list.has_key('xcode'):

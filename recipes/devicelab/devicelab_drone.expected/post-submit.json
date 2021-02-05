@@ -163,7 +163,8 @@
   {
     "cmd": [
       "flutter",
-      "update-packages"
+      "doctor",
+      "--verbose"
     ],
     "cwd": "[CACHE]/flutter sdk/dev/devicelab",
     "env": {
@@ -182,7 +183,7 @@
         "[CACHE]/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
-    "name": "flutter update-packages"
+    "name": "flutter doctor"
   },
   {
     "cmd": [
@@ -233,7 +234,7 @@
         "[CACHE]/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
-    "name": "flutter doctor"
+    "name": "flutter doctor (2)"
   },
   {
     "cmd": [
