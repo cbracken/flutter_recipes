@@ -28,6 +28,24 @@
   },
   {
     "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]/tmp_tmp_1/test1.zip",
+      "gs://flutter_infra_release/flutter/experimental/00000000-0000-0000-0000-000000001337/test1.zip"
+    ],
+    "infra_step": true,
+    "name": "gsutil upload \"flutter/experimental/00000000-0000-0000-0000-000000001337/test1.zip\" (2)",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra_release/flutter/experimental/00000000-0000-0000-0000-000000001337/test1.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
       "vpython",
       "-u",
       "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
@@ -64,6 +82,24 @@
     "name": "gsutil upload \"flutter/experimental/00000000-0000-0000-0000-00000000133a/test2.zip\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/experimental/00000000-0000-0000-0000-00000000133a/test2.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]/tmp_tmp_2/test2.zip",
+      "gs://flutter_infra_release/flutter/experimental/00000000-0000-0000-0000-00000000133a/test2.zip"
+    ],
+    "infra_step": true,
+    "name": "gsutil upload \"flutter/experimental/00000000-0000-0000-0000-00000000133a/test2.zip\" (2)",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra_release/flutter/experimental/00000000-0000-0000-0000-00000000133a/test2.zip@@@"
     ]
   },
   {
@@ -108,6 +144,24 @@
   },
   {
     "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]/tmp_tmp_3/test3.zip",
+      "gs://flutter_infra_release/flutter/experimental/00000000-0000-0000-0000-00000000133d/parent_directory/test3.zip"
+    ],
+    "infra_step": true,
+    "name": "gsutil upload \"flutter/experimental/00000000-0000-0000-0000-00000000133d/parent_directory/test3.zip\" (2)",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra_release/flutter/experimental/00000000-0000-0000-0000-00000000133d/parent_directory/test3.zip@@@"
+    ]
+  },
+  {
+    "cmd": [
       "vpython",
       "-u",
       "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
@@ -144,6 +198,24 @@
     "name": "gsutil upload \"foo\"",
     "~followup_annotations": [
       "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/foo@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[CLEANUP]/bucketutil-example_tmp_1/output.zip",
+      "gs://flutter_infra_release/foo"
+    ],
+    "infra_step": true,
+    "name": "gsutil upload \"foo\" (2)",
+    "~followup_annotations": [
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra_release/foo@@@"
     ]
   },
   {

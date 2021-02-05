@@ -232,6 +232,24 @@
     ]
   },
   {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[START_DIR]/zips/libimobiledevice-flutter.zip",
+      "gs://flutter_infra_release/ios-usb-dependencies/unsigned/libimobiledevice/2d72510e447ab60a9728aeea2362d8be2cbd7789/libimobiledevice.zip"
+    ],
+    "infra_step": true,
+    "name": "gsutil upload of libimobiledevice-flutter.zip (2)",
+    "~followup_annotations": [
+      "@@@STEP_LINK@libimobiledevice-flutter.zip@https://storage.cloud.google.com/flutter_infra_release/ios-usb-dependencies/unsigned/libimobiledevice/2d72510e447ab60a9728aeea2362d8be2cbd7789/libimobiledevice.zip@@@"
+    ]
+  },
+  {
     "name": "$result"
   }
 ]

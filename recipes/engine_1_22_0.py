@@ -40,7 +40,11 @@ DEPS = [
 # Account for ~1 hour queue time when there is a high number of commits.
 DRONE_TIMEOUT_SECS = 7200
 
-BUCKET_NAME = 'flutter_infra'
+# TODO(godofredoc): Remove when flutter tool branches to stable.
+# https://github.com/flutter/flutter/issues/75363.
+OLD_BUCKET_NAME = 'flutter_infra'
+NEW_BUCKET_NAME = 'flutter_infra_release'
+
 MAVEN_BUCKET_NAME = 'download.flutter.io'
 FUCHSIA_ARTIFACTS_BUCKET_NAME = 'fuchsia-artifacts-release'
 FUCHSIA_ARTIFACTS_DEBUG_NAMESPACE = 'debug'
@@ -64,7 +68,7 @@ def GetCheckoutPath(api):
 def SafeUpload(api,
                local_path,
                remote_path,
-               bucket_name=BUCKET_NAME,
+               bucket_name=NEW_BUCKET_NAME,
                args=[],
                skip_on_duplicate=False):
   """Upload a file if it doesn't already exist, fail job otherwise.
@@ -93,6 +97,13 @@ def SafeUpload(api,
         return
       raise AssertionError('%s already exists on cloud storage' % cloud_path)
 
+  if bucket_name == NEW_BUCKET_NAME:
+    api.gsutil.upload(
+        local_path,
+         OLD_BUCKET_NAME,
+         remote_path,
+         args=args,
+         name='upload "%s"' % remote_path)
   return api.gsutil.upload(
       local_path,
       bucket_name,
@@ -499,14 +510,24 @@ def UploadTreeMap(api, upload_dir, lib_flutter_path, android_triple):
       # TODO(fujino): create SafeUploadDirectory() wrapper
       result = api.gsutil.upload(
           destination_dir,
-          BUCKET_NAME,
+          NEW_BUCKET_NAME,
           remote_name,
           args=['-r'],
           name='upload treemap for %s' % lib_flutter_path,
           link_name=None)
       result.presentation.links['Open Treemap'] = (
           'https://storage.googleapis.com/%s/%s/sizes/index.html' %
-          (BUCKET_NAME, remote_name))
+          (NEW_BUCKET_NAME, remote_name))
+      result = api.gsutil.upload(
+          destination_dir,
+          OLD_BUCKET_NAME,
+          remote_name,
+          args=['-r'],
+          name='upload treemap for %s' % lib_flutter_path,
+          link_name=None)
+      result.presentation.links['Open Treemap'] = (
+          'https://storage.googleapis.com/%s/%s/sizes/index.html' %
+          (OLD_BUCKET_NAME, remote_name))
 
 
 def LintAndroidHost(api):

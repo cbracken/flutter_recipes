@@ -1,6 +1,7 @@
 # Copyright 2016 The Chromium Authors. All rights reserved.
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
+
 '''
 This recipe was forked from flutter.py for Flutter release version
 1.22-candidate.12.
@@ -40,7 +41,10 @@ DEPS = [
     'recipe_engine/url',
 ]
 
-BUCKET_NAME = 'flutter_infra'
+# TODO(godofredoc): Remove when flutter tool branches to stable.
+# https://github.com/flutter/flutter/issues/75363.
+OLD_BUCKET_NAME = 'flutter_infra'
+NEW_BUCKET_NAME = 'flutter_infra_release'
 PACKAGED_REF_RE = re.compile(r'^refs/heads/(dev|beta|stable)$')
 
 # Fuchsia globals.
@@ -126,7 +130,14 @@ def UploadFlutterCoverage(api):
   coverage_path = flutter_package_dir.join('coverage', 'lcov.info')
   api.gsutil.upload(
       coverage_path,
-      BUCKET_NAME,
+      OLD_BUCKET_NAME,
+      GetCloudPath(api, 'coverage', 'lcov.info'),
+      link_name='lcov.info',
+      name='upload coverage data'
+  )
+  api.gsutil.upload(
+      coverage_path,
+      NEW_BUCKET_NAME,
       GetCloudPath(api, 'coverage', 'lcov.info'),
       link_name='lcov.info',
       name='upload coverage data'

@@ -176,6 +176,24 @@
     ]
   },
   {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[START_DIR]/zips/ios-deploy-flutter.zip",
+      "gs://flutter_infra_release/ios-usb-dependencies/unsigned/ios-deploy/2d72510e447ab60a9728aeea2362d8be2cbd7789/ios-deploy.zip"
+    ],
+    "infra_step": true,
+    "name": "gsutil upload of ios-deploy-flutter.zip (2)",
+    "~followup_annotations": [
+      "@@@STEP_LINK@ios-deploy-flutter.zip@https://storage.cloud.google.com/flutter_infra_release/ios-usb-dependencies/unsigned/ios-deploy/2d72510e447ab60a9728aeea2362d8be2cbd7789/ios-deploy.zip@@@"
+    ]
+  },
+  {
     "name": "$result"
   }
 ]

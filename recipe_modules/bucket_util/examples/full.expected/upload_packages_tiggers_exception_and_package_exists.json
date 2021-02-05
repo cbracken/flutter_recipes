@@ -13,7 +13,7 @@
       "python",
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "stat",
-      "gs://flutter_infra/flutter/00000000-0000-0000-0000-000000001337/test1.zip"
+      "gs://flutter_infra_release/flutter/00000000-0000-0000-0000-000000001337/test1.zip"
     ],
     "name": "Ensure flutter/00000000-0000-0000-0000-000000001337/test1.zip does not already exist on cloud storage"
   },
@@ -40,18 +40,18 @@
       "Traceback (most recent call last):",
       "  File \"RECIPE_REPO[flutter]/recipe_modules/bucket_util/examples/full.py\", line 22, in RunSteps",
       "    'test1.zip') # zip_name",
-      "  File \"RECIPE_REPO[flutter]/recipe_modules/bucket_util/api.py\", line 43, in upload_folder",
+      "  File \"RECIPE_REPO[flutter]/recipe_modules/bucket_util/api.py\", line 47, in upload_folder",
       "    bucket_name=bucket_name)",
-      "  File \"RECIPE_REPO[flutter]/recipe_modules/bucket_util/api.py\", line 77, in upload_folder_and_files",
+      "  File \"RECIPE_REPO[flutter]/recipe_modules/bucket_util/api.py\", line 81, in upload_folder_and_files",
       "    self.safe_upload(local_zip, remote_zip, bucket_name=bucket_name)",
-      "  File \"RECIPE_REPO[flutter]/recipe_modules/bucket_util/api.py\", line 120, in safe_upload",
+      "  File \"RECIPE_REPO[flutter]/recipe_modules/bucket_util/api.py\", line 124, in safe_upload",
       "    raise AssertionError('%s already exists on cloud storage' % cloud_path)",
-      "AssertionError: gs://flutter_infra/flutter/00000000-0000-0000-0000-000000001337/test1.zip already exists on cloud storage"
+      "AssertionError: gs://flutter_infra_release/flutter/00000000-0000-0000-0000-000000001337/test1.zip already exists on cloud storage"
     ]
   },
   {
     "failure": {
-      "humanReason": "Uncaught Exception: AssertionError('gs://flutter_infra/flutter/00000000-0000-0000-0000-000000001337/test1.zip already exists on cloud storage',)"
+      "humanReason": "Uncaught Exception: AssertionError('gs://flutter_infra_release/flutter/00000000-0000-0000-0000-000000001337/test1.zip already exists on cloud storage',)"
     },
     "name": "$result"
   }

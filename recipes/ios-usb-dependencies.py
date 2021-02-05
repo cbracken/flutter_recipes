@@ -20,114 +20,126 @@ DEPS = [
     'recipe_engine/url',
 ]
 
-BUCKET_NAME = 'flutter_infra'
+# TODO(godofredoc): Remove when flutter tool branches to stable.
+# https://github.com/flutter/flutter/issues/75363.
+OLD_BUCKET_NAME = 'flutter_infra'
+NEW_BUCKET_NAME = 'flutter_infra_release'
+
 HOMEBREW_FLUTTER_PREFIX = ['flutter', 'homebrew-flutter']
 MIRROR_URL_PREFIX = 'https://flutter-mirrors.googlesource.com'
 
 INSTALL_PKGS = {
     'libplist-flutter': {
-      'install_flags': ['--HEAD'],
-      'deliverables': [
-        'lib/libplist-2.0.3.dylib',
-        'COPYING',
+        'install_flags': ['--HEAD'],
+        'deliverables': [
+            'lib/libplist-2.0.3.dylib',
+            'COPYING',
         ],
-      },
+    },
     'usbmuxd-flutter': {
-      'install_flags': ['--HEAD'],
-      'deliverables': [
-        'lib/libusbmuxd-2.0.6.dylib',
-        'bin/iproxy',
-        'COPYING',
+        'install_flags': ['--HEAD'],
+        'deliverables': [
+            'lib/libusbmuxd-2.0.6.dylib',
+            'bin/iproxy',
+            'COPYING',
         ],
-      },
+    },
     'openssl-flutter': {
-      'install_flags': ['--HEAD'],
-      'deliverables': [
-        'lib/libssl.1.1.dylib',
-        'lib/libcrypto.1.1.dylib',
-        'LICENSE',
+        'install_flags': ['--HEAD'],
+        'deliverables': [
+            'lib/libssl.1.1.dylib',
+            'lib/libcrypto.1.1.dylib',
+            'LICENSE',
         ],
-      },
+    },
     'libimobiledevice-flutter': {
-      'install_flags': ['--HEAD'],
-      'deliverables': [
-        'COPYING',
-        'COPYING.LESSER',
-        'libtasn1-LICENSE',
-        'libtasn1-AUTHORS',
-        'bin/idevicescreenshot',
-        'bin/idevicesyslog',
-        'lib/libimobiledevice-1.0.6.dylib',
+        'install_flags': ['--HEAD'],
+        'deliverables': [
+            'COPYING',
+            'COPYING.LESSER',
+            'libtasn1-LICENSE',
+            'libtasn1-AUTHORS',
+            'bin/idevicescreenshot',
+            'bin/idevicesyslog',
+            'lib/libimobiledevice-1.0.6.dylib',
         ],
-      },
+    },
     'ios-deploy-flutter': {
-      'install_flags': ['--HEAD'],
-      'deliverables': [
-        'bin/ios-deploy',
-        'LICENSE',
-        'LICENSE2',
+        'install_flags': ['--HEAD'],
+        'deliverables': [
+            'bin/ios-deploy',
+            'LICENSE',
+            'LICENSE2',
         ],
-      },
-    }
+    },
+}
+
 
 def InstallHomebrew(api, homebrew_dir):
   homebrew_tar = api.path['start_dir'].join('homebrew.tar.gz')
   api.file.ensure_directory('mkdir homebrew', homebrew_dir)
-  api.step('get homebrew', [
-    'curl',
-    '-L',
-    'https://github.com/Homebrew/brew/tarball/master',
-    '-o',
-    homebrew_tar])
-  api.step('open tarball', [
-    'tar',
-    'zxf',
-    homebrew_tar,
-    '--strip',
-    '1',
-    '-C',
-    homebrew_dir])
+  api.step(
+      'get homebrew', [
+          'curl', '-L', 'https://github.com/Homebrew/brew/tarball/master', '-o',
+          homebrew_tar
+      ]
+  )
+  api.step(
+      'open tarball',
+      ['tar', 'zxf', homebrew_tar, '--strip', '1', '-C', homebrew_dir]
+  )
+
 
 def GetBrewBin(api):
   return api.path['start_dir'].join('homebrew', 'bin', 'brew')
 
+
 def TapCustomBrews(api):
-  api.step('tap custom formulae', [
-    str(GetBrewBin(api)),
-    'tap',
-    '/'.join(HOMEBREW_FLUTTER_PREFIX),
-    '%s/homebrew-flutter' % MIRROR_URL_PREFIX])
+  api.step(
+      'tap custom formulae', [
+          str(GetBrewBin(api)), 'tap', '/'.join(HOMEBREW_FLUTTER_PREFIX),
+          '%s/homebrew-flutter' % MIRROR_URL_PREFIX
+      ]
+  )
+
 
 def GetLocalPath(api, package_name):
   return api.path['start_dir'].join('homebrew', 'opt', package_name)
+
 
 def GetCloudPath(api, package_name):
   '''Location of cloud bucket for unsigned binaries'''
   commit_hash = GetCommitHash(api)
   short_name = package_name.replace('-flutter', '')
   return 'ios-usb-dependencies/unsigned/%s/%s/%s.zip' % (
-      short_name,
-      commit_hash,
-      short_name)
+      short_name, commit_hash, short_name
+  )
+
 
 def GetCommitHash(api):
   return api.buildbucket.gitiles_commit.id
 
+
 def InstallPackage(api, package, name):
   install_flags = package.get('install_flags', [])
   prefix = '/'.join(HOMEBREW_FLUTTER_PREFIX)
-  api.step('installing %s' % name, [
-    str(GetBrewBin(api)),
-    'install',
-    '/'.join([prefix, name]),
-    ] + install_flags)
+  api.step(
+      'installing %s' % name, [
+          str(GetBrewBin(api)),
+          'install',
+          '/'.join([prefix, name]),
+      ] + install_flags
+  )
+
 
 def CopyDeliverable(api, deliverable, name, output_path):
   deliverable_path = GetLocalPath(api, name).join(deliverable)
-  api.file.copy('copying %s from package %s' % (deliverable, name),
+  api.file.copy(
+      'copying %s from package %s' % (deliverable, name),
       deliverable_path,
       output_path,
-      )
+  )
+
 
 def ZipAndUploadDeliverables(api, package_name, input_path, zip_out_dir):
   file_name = '%s.zip' % package_name
@@ -137,11 +149,19 @@ def ZipAndUploadDeliverables(api, package_name, input_path, zip_out_dir):
   api.step('cloud path', ['echo', cloud_path])
   api.gsutil.upload(
       output_path,
-      BUCKET_NAME,
+      OLD_BUCKET_NAME,
       cloud_path,
       link_name=file_name,
       name='upload of %s' % file_name,
-      )
+  )
+  api.gsutil.upload(
+      output_path,
+      NEW_BUCKET_NAME,
+      cloud_path,
+      link_name=file_name,
+      name='upload of %s' % file_name,
+  )
+
 
 def RunSteps(api):
   work_dir = api.path['start_dir']
@@ -164,14 +184,15 @@ def RunSteps(api):
 
   package_out_dir = output_dir.join(package_name)
   api.file.ensure_directory(
-      'mkdir package %s' % package_out_dir,
-      package_out_dir)
+      'mkdir package %s' % package_out_dir, package_out_dir
+  )
 
   if len(package['deliverables']) > 0:
     for deliverable in package['deliverables']:
       CopyDeliverable(api, deliverable, package_name, package_out_dir)
 
     ZipAndUploadDeliverables(api, package_name, package_out_dir, zip_out_dir)
+
 
 def GenTests(api):
   for package_name in INSTALL_PKGS:
@@ -180,5 +201,6 @@ def GenTests(api):
         api.properties(package_name=package_name),
         api.buildbucket.ci_build(git_ref='refs/heads/master'),
     )
+
 
 # vim: ts=2 sw=2

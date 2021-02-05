@@ -2008,7 +2008,7 @@
       "python",
       "RECIPE_REPO[depot_tools]/gsutil.py",
       "stat",
-      "gs://flutter_infra/flutter//linux-x64/artifacts.zip"
+      "gs://flutter_infra_release/flutter//linux-x64/artifacts.zip"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -2069,20 +2069,20 @@
       "The recipe has crashed at point 'Uncaught exception'!",
       "",
       "Traceback (most recent call last):",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine_1_22_0.py\", line 1509, in RunSteps",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine_1_22_0.py\", line 1530, in RunSteps",
       "    BuildLinux(api)",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine_1_22_0.py\", line 704, in BuildLinux",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine_1_22_0.py\", line 725, in BuildLinux",
       "    'out/host_debug_unopt/gen/frontend_server.dart.snapshot',",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine_1_22_0.py\", line 277, in UploadArtifacts",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine_1_22_0.py\", line 288, in UploadArtifacts",
       "    SafeUpload(api, local_zip, remote_zip)",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine_1_22_0.py\", line 94, in SafeUpload",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine_1_22_0.py\", line 98, in SafeUpload",
       "    raise AssertionError('%s already exists on cloud storage' % cloud_path)",
-      "AssertionError: gs://flutter_infra/flutter//linux-x64/artifacts.zip already exists on cloud storage"
+      "AssertionError: gs://flutter_infra_release/flutter//linux-x64/artifacts.zip already exists on cloud storage"
     ]
   },
   {
     "failure": {
-      "humanReason": "Uncaught Exception: AssertionError(u'gs://flutter_infra/flutter//linux-x64/artifacts.zip already exists on cloud storage',)"
+      "humanReason": "Uncaught Exception: AssertionError(u'gs://flutter_infra_release/flutter//linux-x64/artifacts.zip already exists on cloud storage',)"
     },
     "name": "$result"
   }

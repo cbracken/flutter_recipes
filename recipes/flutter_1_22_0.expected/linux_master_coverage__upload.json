@@ -246,6 +246,38 @@
   },
   {
     "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::gsutil]/resources/gsutil_smart_retry.py",
+      "--",
+      "RECIPE_REPO[depot_tools]/gsutil.py",
+      "----",
+      "cp",
+      "[START_DIR]/flutter/packages/flutter/coverage/lcov.info",
+      "gs://flutter_infra_release/flutter/coverage/lcov.info"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "GOLDCTL": "[CACHE]/gold/goldctl",
+      "JAVA_HOME": "[CACHE]/java",
+      "PUB_CACHE": "[START_DIR]/flutter/.pub-cache"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[CACHE]/java/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "gsutil upload coverage data (2)",
+    "~followup_annotations": [
+      "@@@STEP_LINK@lcov.info@https://storage.cloud.google.com/flutter_infra_release/flutter/coverage/lcov.info@@@"
+    ]
+  },
+  {
+    "cmd": [
       "cipd",
       "ensure",
       "-root",
