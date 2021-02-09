@@ -31,7 +31,7 @@ def RunSteps(api):
   if not task_name:
     raise ValueError('A task_name property is required')
 
-  flutter_path = api.path['cache'].join('flutter sdk')
+  flutter_path = api.path['start_dir'].join('flutter sdk')
   api.repo_util.checkout(
       'flutter',
       flutter_path,
