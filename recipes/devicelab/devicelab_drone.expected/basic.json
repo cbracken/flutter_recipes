@@ -20,7 +20,7 @@
       "-u",
       "RECIPE_MODULE[depot_tools::git]/resources/git_setup.py",
       "--path",
-      "[START_DIR]/flutter sdk",
+      "[CLEANUP]/tmp_tmp_1/flutter sdk",
       "--url",
       "https://chromium.googlesource.com/external/github.com/flutter/flutter"
     ],
@@ -38,7 +38,7 @@
       "--progress",
       "--tags"
     ],
-    "cwd": "[START_DIR]/flutter sdk",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk",
     "env": {
       "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
     },
@@ -55,7 +55,7 @@
       "-f",
       "2d72510e447ab60a9728aeea2362d8be2cbd7789"
     ],
-    "cwd": "[START_DIR]/flutter sdk",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk",
     "infra_step": true,
     "name": "Checkout flutter/flutter.git checkout",
     "~followup_annotations": [
@@ -68,7 +68,7 @@
       "rev-parse",
       "HEAD"
     ],
-    "cwd": "[START_DIR]/flutter sdk",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk",
     "infra_step": true,
     "name": "Checkout flutter/flutter.read revision",
     "~followup_annotations": [
@@ -85,7 +85,7 @@
       "-d",
       "-x"
     ],
-    "cwd": "[START_DIR]/flutter sdk",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk",
     "infra_step": true,
     "name": "Checkout flutter/flutter.git clean",
     "~followup_annotations": [
@@ -98,7 +98,7 @@
       "submodule",
       "sync"
     ],
-    "cwd": "[START_DIR]/flutter sdk",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk",
     "infra_step": true,
     "name": "Checkout flutter/flutter.submodule sync",
     "~followup_annotations": [
@@ -113,7 +113,7 @@
       "--init",
       "--recursive"
     ],
-    "cwd": "[START_DIR]/flutter sdk",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk",
     "infra_step": true,
     "name": "Checkout flutter/flutter.submodule update",
     "~followup_annotations": [
@@ -164,7 +164,7 @@
       "flutter",
       "update-packages"
     ],
-    "cwd": "[START_DIR]/flutter sdk/dev/devicelab",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "FLUTTER_LOGS_DIR": "[CLEANUP]/flutter_logs_dir",
@@ -173,12 +173,12 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[START_DIR]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+      "SDK_CHECKOUT_PATH": "[CLEANUP]/tmp_tmp_1/flutter sdk"
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "flutter update-packages"
@@ -188,7 +188,7 @@
       "pub",
       "get"
     ],
-    "cwd": "[START_DIR]/flutter sdk/dev/devicelab",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "FLUTTER_LOGS_DIR": "[CLEANUP]/flutter_logs_dir",
@@ -197,12 +197,12 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[START_DIR]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+      "SDK_CHECKOUT_PATH": "[CLEANUP]/tmp_tmp_1/flutter sdk"
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "pub get"
@@ -213,7 +213,7 @@
       "doctor",
       "--verbose"
     ],
-    "cwd": "[START_DIR]/flutter sdk/dev/devicelab",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "FLUTTER_LOGS_DIR": "[CLEANUP]/flutter_logs_dir",
@@ -222,14 +222,14 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[START_DIR]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+      "SDK_CHECKOUT_PATH": "[CLEANUP]/tmp_tmp_1/flutter sdk"
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "flutter doctor"
@@ -241,13 +241,13 @@
       "-t",
       "abc",
       "--results-file",
-      "[CLEANUP]/tmp_tmp_1",
+      "[CLEANUP]/tmp_tmp_2",
       "--luci-builder",
       "Linux abc",
       "--git-branch",
       "master"
     ],
-    "cwd": "[START_DIR]/flutter sdk/dev/devicelab",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "FLUTTER_LOGS_DIR": "[CLEANUP]/flutter_logs_dir",
@@ -256,14 +256,14 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[START_DIR]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+      "SDK_CHECKOUT_PATH": "[CLEANUP]/tmp_tmp_1/flutter sdk"
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "run abc"
@@ -286,7 +286,7 @@
       "[CLEANUP]/flutter_logs_dir",
       "gs://flutter_logs/flutter/2d72510e447ab60a9728aeea2362d8be2cbd7789/abc/00000000-0000-0000-0000-000000001337"
     ],
-    "cwd": "[START_DIR]/flutter sdk/dev/devicelab",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "FLUTTER_LOGS_DIR": "[CLEANUP]/flutter_logs_dir",
@@ -295,14 +295,14 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[START_DIR]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+      "SDK_CHECKOUT_PATH": "[CLEANUP]/tmp_tmp_1/flutter sdk"
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "infra_step": true,
@@ -323,7 +323,7 @@
       "[CLEANUP]/flutter_logs_dir",
       "*"
     ],
-    "cwd": "[START_DIR]/flutter sdk/dev/devicelab",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "FLUTTER_LOGS_DIR": "[CLEANUP]/flutter_logs_dir",
@@ -332,14 +332,14 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[START_DIR]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+      "SDK_CHECKOUT_PATH": "[CLEANUP]/tmp_tmp_1/flutter sdk"
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "infra_step": true,
@@ -368,7 +368,7 @@
       "[CLEANUP]/flutter_logs_dir",
       "--recursive"
     ],
-    "cwd": "[START_DIR]/flutter sdk/dev/devicelab",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "FLUTTER_LOGS_DIR": "[CLEANUP]/flutter_logs_dir",
@@ -377,14 +377,14 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[START_DIR]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+      "SDK_CHECKOUT_PATH": "[CLEANUP]/tmp_tmp_1/flutter sdk"
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "infra_step": true,
@@ -404,7 +404,7 @@
       "pkill",
       "chrome"
     ],
-    "cwd": "[START_DIR]/flutter sdk/dev/devicelab",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "FLUTTER_LOGS_DIR": "[CLEANUP]/flutter_logs_dir",
@@ -413,14 +413,14 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[START_DIR]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+      "SDK_CHECKOUT_PATH": "[CLEANUP]/tmp_tmp_1/flutter sdk"
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "Killing Processes.kill chrome",
@@ -433,7 +433,7 @@
       "pkill",
       "dart"
     ],
-    "cwd": "[START_DIR]/flutter sdk/dev/devicelab",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "FLUTTER_LOGS_DIR": "[CLEANUP]/flutter_logs_dir",
@@ -442,14 +442,14 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[START_DIR]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+      "SDK_CHECKOUT_PATH": "[CLEANUP]/tmp_tmp_1/flutter sdk"
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "Killing Processes.kill dart",
@@ -462,7 +462,7 @@
       "pkill",
       "flutter"
     ],
-    "cwd": "[START_DIR]/flutter sdk/dev/devicelab",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "FLUTTER_LOGS_DIR": "[CLEANUP]/flutter_logs_dir",
@@ -471,14 +471,14 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[START_DIR]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+      "SDK_CHECKOUT_PATH": "[CLEANUP]/tmp_tmp_1/flutter sdk"
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "Killing Processes.kill flutter",
@@ -491,7 +491,7 @@
       "pkill",
       "java"
     ],
-    "cwd": "[START_DIR]/flutter sdk/dev/devicelab",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "FLUTTER_LOGS_DIR": "[CLEANUP]/flutter_logs_dir",
@@ -500,14 +500,14 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[START_DIR]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+      "SDK_CHECKOUT_PATH": "[CLEANUP]/tmp_tmp_1/flutter sdk"
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "Killing Processes.kill java",
@@ -520,7 +520,7 @@
       "pkill",
       "adb"
     ],
-    "cwd": "[START_DIR]/flutter sdk/dev/devicelab",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "FLUTTER_LOGS_DIR": "[CLEANUP]/flutter_logs_dir",
@@ -529,14 +529,14 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[START_DIR]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+      "SDK_CHECKOUT_PATH": "[CLEANUP]/tmp_tmp_1/flutter sdk"
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "Killing Processes.kill adb",
@@ -553,7 +553,7 @@
       "-o",
       "%MEM"
     ],
-    "cwd": "[START_DIR]/flutter sdk/dev/devicelab",
+    "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
       "FLUTTER_LOGS_DIR": "[CLEANUP]/flutter_logs_dir",
@@ -562,14 +562,14 @@
       "LUCI_PR": "",
       "OS": "linux",
       "PUB_CACHE": "[START_DIR]/.pub-cache",
-      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter sdk"
+      "SDK_CHECKOUT_PATH": "[CLEANUP]/tmp_tmp_1/flutter sdk"
     },
     "env_prefixes": {
       "PATH": [
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin",
-        "[START_DIR]/flutter sdk/bin",
-        "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin",
+        "[CLEANUP]/tmp_tmp_1/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
     "name": "OS info (2)"

@@ -31,7 +31,7 @@ def RunSteps(api):
   if not task_name:
     raise ValueError('A task_name property is required')
 
-  flutter_path = api.path['start_dir'].join('flutter sdk')
+  flutter_path = api.path.mkdtemp().join('flutter sdk')
   api.repo_util.checkout(
       'flutter',
       flutter_path,
@@ -120,13 +120,14 @@ def uploadMetrics(api, results_path):
 
 
 def GenTests(api):
+  checkout_path = api.path['cleanup'].join('tmp_tmp_1', 'flutter sdk')
   yield api.test(
       "no-task-name",
       api.expect_exception('ValueError'),
   )
   yield api.test(
       "basic", api.properties(buildername='Linux abc', task_name='abc'),
-      api.repo_util.flutter_environment_data(),
+      api.repo_util.flutter_environment_data(checkout_dir=checkout_path),
       api.buildbucket.ci_build(
           project='test',
           git_repo='git.example.com/test/repo',
@@ -138,7 +139,7 @@ def GenTests(api):
           buildername='Mac abc',
           task_name='abc',
           dependencies=[{'dependency': 'xcode'}]
-      ), api.repo_util.flutter_environment_data(),
+      ), api.repo_util.flutter_environment_data(checkout_dir=checkout_path),
       api.swarming.properties(bot_id='flutter-devicelab-mac-1')
   )
   yield api.test(
@@ -148,13 +149,13 @@ def GenTests(api):
           task_name='abc',
           dependencies=[{'dependency': 'xcode'}]
       ),
-      api.repo_util.flutter_environment_data(),
+      api.repo_util.flutter_environment_data(checkout_dir=checkout_path),
   )
   yield api.test(
       "post-submit",
       api.properties(
           buildername='Linux abc', task_name='abc', upload_metrics=True
-      ), api.repo_util.flutter_environment_data()
+      ), api.repo_util.flutter_environment_data(checkout_dir=checkout_path)
   )
   yield api.test(
       "upload-metrics-mac",
@@ -163,5 +164,5 @@ def GenTests(api):
           dependencies=[{'dependency': 'xcode'}],
           task_name='abc',
           upload_metrics=True
-      ), api.repo_util.flutter_environment_data()
+      ), api.repo_util.flutter_environment_data(checkout_dir=checkout_path)
   )
