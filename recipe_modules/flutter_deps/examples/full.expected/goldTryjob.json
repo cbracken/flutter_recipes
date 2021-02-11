@@ -242,7 +242,7 @@
       "cipd",
       "ensure",
       "-root",
-      "[CACHE]/vpython",
+      "[CLEANUP]/tmp_tmp_1/vpython",
       "-ensure-file",
       "infra/tools/luci/vpython/${platform} v6",
       "-max-threads",

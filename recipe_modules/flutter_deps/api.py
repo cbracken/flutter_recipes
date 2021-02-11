@@ -180,7 +180,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
   def vpython(self, env, env_prefixes, version):
     """Installs vpython."""
     version = version or 'latest'
-    vpython_path = self.m.path['cache'].join('vpython')
+    vpython_path = self.m.path.mkdtemp().join('vpython')
     vpython = self.m.cipd.EnsureFile()
     vpython.add_package('infra/tools/luci/vpython/${platform}', version)
     self.m.cipd.ensure(vpython_path, vpython)
