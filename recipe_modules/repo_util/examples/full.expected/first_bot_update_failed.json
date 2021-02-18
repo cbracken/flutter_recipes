@@ -511,9 +511,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -569,6 +571,14 @@
       "rmtree",
       "[START_DIR]/engine"
     ],
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
     "infra_step": true,
     "name": "Checkout source code.Clobber cache (2)",
     "~followup_annotations": [
@@ -585,6 +595,14 @@
       "rmtree",
       "[CACHE]/git"
     ],
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
     "infra_step": true,
     "name": "Checkout source code.Clobber git cache",
     "~followup_annotations": [
@@ -603,6 +621,14 @@
       "0777",
       "[START_DIR]/engine"
     ],
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
     "infra_step": true,
     "name": "Checkout source code.Ensure checkout cache (2)",
     "~followup_annotations": [
@@ -636,9 +662,11 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -692,7 +720,11 @@
     ],
     "cwd": "[START_DIR]/engine",
     "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },

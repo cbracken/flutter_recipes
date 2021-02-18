@@ -41,7 +41,7 @@ class RepoUtilApi(recipe_api.RecipeApi):
     # Inner function to execute code a second time in case of failure.
     def _InnerCheckout():
       with self.m.context(env=env, env_prefixes=env_prefixes,
-                          cwd=checkout_path):
+                          cwd=checkout_path), self.m.depot_tools.on_path():
         src_cfg = self.m.gclient.make_config()
         soln = src_cfg.solutions.add()
         soln.name = 'src/flutter'
@@ -58,17 +58,17 @@ class RepoUtilApi(recipe_api.RecipeApi):
 
     with self.m.step.nest('Checkout source code'):
       try:
-        # Run this outsite of the _InnerCheckout context to prevent deleting the
-        # current folder.
+        # Run this out of context
         if clobber:
-          with self.m.context(env=env, env_prefixes=env_prefixes):
-            self.m.file.rmtree('Clobber cache', checkout_path)
-            self.m.file.ensure_directory('Ensure checkout cache', checkout_path)
+          self.m.file.rmtree('Clobber cache', checkout_path)
+          self.m.file.ensure_directory('Ensure checkout cache', checkout_path)
         _InnerCheckout()
       except (self.m.step.StepFailure, self.m.step.InfraFailure):
-        # Run this outsite of the _InnerCheckout context to prevent deleting the
-        # current folder.
-        with self.m.context(env=env, env_prefixes=env_prefixes):
+        # Run this out of context
+
+        # Ensure depot tools is in the path to prevent problems with vpython not
+        # being found after a failure.
+        with self.m.depot_tools.on_path():
           self.m.file.rmtree('Clobber cache', checkout_path)
           self.m.file.rmtree(
               'Clobber git cache', self.m.path['cache'].join('git')

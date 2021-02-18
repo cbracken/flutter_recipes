@@ -19,7 +19,6 @@ DEPS = [
     'depot_tools/git',
     'depot_tools/gsutil',
     'flutter/bucket_util',
-    'flutter/flutter_deps',
     'flutter/json_util',
     'flutter/os_utils',
     'flutter/osx_sdk',
@@ -101,11 +100,7 @@ def BuildBitcode(api, config, *targets):
 
   checkout = GetCheckoutPath(api)
   build_dir = checkout.join('out/%s' % config)
-
-  ninja_args = [
-      'vpython',
-      '%s.py' % api.depot_tools.autoninja_path, '-C', build_dir
-  ]
+  ninja_args = [api.depot_tools.autoninja_path, '-C', build_dir]
   ninja_args.extend(targets)
   api.step('build %s' % ' '.join([config] + list(targets)), ninja_args)
 
@@ -1478,10 +1473,6 @@ def RunSteps(api, properties, env_properties):
 
   env = {'GOMA_DIR': api.goma.goma_dir, 'ANDROID_HOME': str(android_home)}
   env_prefixes = {'PATH': [dart_bin]}
-
-  # Install cipd dependencies on non deterministic paths.
-  with api.m.step.nest('Install dependencies'):
-    api.flutter_deps.vpython(env, env_prefixes, 'latest')
 
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
 

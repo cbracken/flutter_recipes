@@ -63,43 +63,6 @@
   },
   {
     "cmd": [],
-    "name": "Install dependencies"
-  },
-  {
-    "cmd": [
-      "cipd.bat",
-      "ensure",
-      "-root",
-      "[CLEANUP]\\tmp_tmp_1\\vpython",
-      "-ensure-file",
-      "infra/tools/luci/vpython/${platform} latest\ninfra/tools/luci/vpython-native/${platform} latest",
-      "-max-threads",
-      "0",
-      "-json-output",
-      "/path/to/tmp/json"
-    ],
-    "name": "Install dependencies.ensure_installed",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@json.output@{@@@",
-      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
-      "@@@STEP_LOG_LINE@json.output@      {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/vpython-native/resolved-platform\"@@@",
-      "@@@STEP_LOG_LINE@json.output@      }, @@@",
-      "@@@STEP_LOG_LINE@json.output@      {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/vpython/resolved-platform\"@@@",
-      "@@@STEP_LOG_LINE@json.output@      }@@@",
-      "@@@STEP_LOG_LINE@json.output@    ]@@@",
-      "@@@STEP_LOG_LINE@json.output@  }@@@",
-      "@@@STEP_LOG_LINE@json.output@}@@@",
-      "@@@STEP_LOG_END@json.output@@@"
-    ]
-  },
-  {
-    "cmd": [],
     "name": "Checkout source code"
   },
   {
@@ -112,16 +75,6 @@
       "rmtree",
       "[CACHE]\\builder"
     ],
-    "env": {
-      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
-      ]
-    },
     "infra_step": true,
     "name": "Checkout source code.Clobber cache",
     "~followup_annotations": [
@@ -140,16 +93,6 @@
       "0777",
       "[CACHE]\\builder"
     ],
-    "env": {
-      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
-    },
-    "env_prefixes": {
-      "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
-      ]
-    },
     "infra_step": true,
     "name": "Checkout source code.Ensure checkout cache",
     "~followup_annotations": [
@@ -185,15 +128,16 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
+        "0",
         "0"
       ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -252,12 +196,15 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
       "PATH": [
+        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -280,8 +227,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -312,8 +258,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -354,8 +299,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -389,8 +333,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -434,8 +377,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -486,8 +428,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -527,8 +468,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -564,8 +504,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -604,8 +543,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -644,8 +582,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -702,8 +639,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -746,8 +682,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -782,8 +717,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -813,8 +747,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -855,8 +788,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -890,8 +822,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -935,8 +866,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -987,8 +917,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1028,8 +957,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1065,8 +993,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1105,8 +1032,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1145,8 +1071,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1189,8 +1114,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1225,8 +1149,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1255,8 +1178,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1297,8 +1219,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1334,8 +1255,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1379,8 +1299,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1431,8 +1350,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1472,8 +1390,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1509,8 +1426,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1549,8 +1465,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1589,8 +1504,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1633,8 +1547,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1666,8 +1579,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1708,8 +1620,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1745,8 +1656,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1790,8 +1700,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1842,8 +1751,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1883,8 +1791,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1920,8 +1827,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -1960,8 +1866,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2000,8 +1905,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2044,8 +1948,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2089,8 +1992,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2125,8 +2027,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2170,8 +2071,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2222,8 +2122,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2263,8 +2162,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2300,8 +2198,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2340,8 +2237,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2380,8 +2276,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2424,8 +2319,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2454,8 +2348,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2467,7 +2360,7 @@
       ]
     },
     "name": "Zip windows-x64 artifacts.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"icudtl.dat\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\third_party/icu/flutter/icudtl.dat\", \"type\": \"file\"}, {\"archive_name\": \"flutter_tester.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_tester.exe\", \"type\": \"file\"}, {\"archive_name\": \"isolate_snapshot.bin\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/gen/flutter/lib/snapshot/isolate_snapshot.bin\", \"type\": \"file\"}, {\"archive_name\": \"vm_isolate_snapshot.bin\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/gen/flutter/lib/snapshot/vm_isolate_snapshot.bin\", \"type\": \"file\"}, {\"archive_name\": \"frontend_server.dart.snapshot\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/gen/frontend_server.dart.snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_2\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"icudtl.dat\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\third_party/icu/flutter/icudtl.dat\", \"type\": \"file\"}, {\"archive_name\": \"flutter_tester.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_tester.exe\", \"type\": \"file\"}, {\"archive_name\": \"isolate_snapshot.bin\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/gen/flutter/lib/snapshot/isolate_snapshot.bin\", \"type\": \"file\"}, {\"archive_name\": \"vm_isolate_snapshot.bin\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/gen/flutter/lib/snapshot/vm_isolate_snapshot.bin\", \"type\": \"file\"}, {\"archive_name\": \"frontend_server.dart.snapshot\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/gen/frontend_server.dart.snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_1\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -2477,7 +2370,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_2"
+      "[CLEANUP]\\tmp_tmp_1"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -2486,8 +2379,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2514,8 +2406,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2527,7 +2418,7 @@
       ]
     },
     "name": "Zip windows-x64 windows-x64-embedder.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_embedder.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_embedder.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_engine.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_engine.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_engine.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_engine.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_engine.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_engine.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_engine.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_engine.dll.pdb\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_3\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_embedder.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_embedder.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_engine.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_engine.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_engine.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_engine.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_engine.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_engine.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_engine.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_engine.dll.pdb\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_2\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -2537,7 +2428,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_3"
+      "[CLEANUP]\\tmp_tmp_2"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -2546,8 +2437,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2574,8 +2464,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2587,7 +2476,7 @@
       ]
     },
     "name": "Zip windows-x64-debug windows-x64-flutter.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_texture_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_texture_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.pdb\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_4\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_texture_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_texture_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.pdb\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_3\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -2597,7 +2486,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_4"
+      "[CLEANUP]\\tmp_tmp_3"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -2606,8 +2495,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2634,8 +2522,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2647,7 +2534,7 @@
       ]
     },
     "name": "Zip windows-x64-profile windows-x64-flutter.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_texture_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_texture_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_windows.dll.pdb\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_5\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_texture_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_texture_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/flutter_windows.dll.pdb\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_profile/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_4\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -2657,7 +2544,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_5"
+      "[CLEANUP]\\tmp_tmp_4"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -2666,8 +2553,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2694,8 +2580,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2707,7 +2592,7 @@
       ]
     },
     "name": "Zip windows-x64-release windows-x64-flutter.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_texture_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_texture_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_windows.dll.pdb\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_6\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_texture_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_texture_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/flutter_windows.dll.pdb\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_5\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -2717,7 +2602,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_6"
+      "[CLEANUP]\\tmp_tmp_5"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -2726,8 +2611,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2754,8 +2638,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2767,7 +2650,7 @@
       ]
     },
     "name": "Zip cpp_client_wrapper",
-    "stdin": "{\"entries\": [{\"path\": \"[CACHE]\\\\builder\\\\src/out/host_debug\\\\cpp_client_wrapper\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_7\\\\flutter-cpp-client-wrapper.zip\", \"root\": \"[CACHE]\\\\builder\\\\src/out/host_debug\"}"
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]\\\\builder\\\\src/out/host_debug\\\\cpp_client_wrapper\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_6\\\\flutter-cpp-client-wrapper.zip\", \"root\": \"[CACHE]\\\\builder\\\\src/out/host_debug\"}"
   },
   {
     "cmd": [
@@ -2777,7 +2660,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_7"
+      "[CLEANUP]\\tmp_tmp_6"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -2786,8 +2669,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2814,8 +2696,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2827,7 +2708,7 @@
       ]
     },
     "name": "Zip windows-x64 windows-x64-flutter.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_texture_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_texture_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.pdb\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_8\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_texture_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_texture_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/flutter_windows.dll.pdb\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_7\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -2837,7 +2718,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_8"
+      "[CLEANUP]\\tmp_tmp_7"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -2846,8 +2727,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2874,8 +2754,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2887,7 +2766,7 @@
       ]
     },
     "name": "Zip windows-x64 font-subset.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"font-subset.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/font-subset.exe\", \"type\": \"file\"}, {\"archive_name\": \"const_finder.dart.snapshot\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/gen/const_finder.dart.snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_9\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"font-subset.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_release/font-subset.exe\", \"type\": \"file\"}, {\"archive_name\": \"const_finder.dart.snapshot\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/host_debug/gen/const_finder.dart.snapshot\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_8\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -2897,7 +2776,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_9"
+      "[CLEANUP]\\tmp_tmp_8"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -2906,8 +2785,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2934,8 +2812,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2947,7 +2824,7 @@
       ]
     },
     "name": "Zip dart-sdk",
-    "stdin": "{\"entries\": [{\"path\": \"[CACHE]\\\\builder\\\\src/out/host_debug\\\\dart-sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_10\\\\dart-sdk-windows-x64.zip\", \"root\": \"[CACHE]\\\\builder\\\\src/out/host_debug\"}"
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]\\\\builder\\\\src/out/host_debug\\\\dart-sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_9\\\\dart-sdk-windows-x64.zip\", \"root\": \"[CACHE]\\\\builder\\\\src/out/host_debug\"}"
   },
   {
     "cmd": [
@@ -2957,7 +2834,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_10"
+      "[CLEANUP]\\tmp_tmp_9"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -2966,8 +2843,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -2994,8 +2870,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3007,7 +2882,7 @@
       ]
     },
     "name": "Zip flutter_web_sdk",
-    "stdin": "{\"entries\": [{\"path\": \"[CACHE]\\\\builder\\\\src/out/host_debug\\\\flutter_web_sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_11\\\\flutter-web-sdk-windows-x64.zip\", \"root\": \"[CACHE]\\\\builder\\\\src/out/host_debug\"}"
+    "stdin": "{\"entries\": [{\"path\": \"[CACHE]\\\\builder\\\\src/out/host_debug\\\\flutter_web_sdk\", \"type\": \"dir\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_10\\\\flutter-web-sdk-windows-x64.zip\", \"root\": \"[CACHE]\\\\builder\\\\src/out/host_debug\"}"
   },
   {
     "cmd": [
@@ -3017,7 +2892,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_11"
+      "[CLEANUP]\\tmp_tmp_10"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -3026,8 +2901,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3058,8 +2932,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3090,8 +2963,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3122,8 +2994,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3153,8 +3024,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3185,8 +3055,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3217,8 +3086,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3259,8 +3127,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3295,8 +3162,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3340,8 +3206,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3392,8 +3257,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3433,8 +3297,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3470,8 +3333,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3510,8 +3372,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3550,8 +3411,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3594,8 +3454,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3639,8 +3498,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3675,8 +3533,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3720,8 +3577,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3772,8 +3628,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3813,8 +3668,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3850,8 +3704,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3890,8 +3743,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3930,8 +3782,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -3974,8 +3825,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4019,8 +3869,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4055,8 +3904,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4100,8 +3948,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4152,8 +3999,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4193,8 +4039,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4230,8 +4075,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4270,8 +4114,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4310,8 +4153,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4354,8 +4196,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4399,8 +4240,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4435,8 +4275,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4480,8 +4319,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4532,8 +4370,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4573,8 +4410,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4610,8 +4446,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4650,8 +4485,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4690,8 +4524,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4734,8 +4567,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4779,8 +4611,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4815,8 +4646,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4860,8 +4690,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4912,8 +4741,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4953,8 +4781,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -4990,8 +4817,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5030,8 +4856,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5070,8 +4895,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5114,8 +4938,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5159,8 +4982,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5195,8 +5017,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5240,8 +5061,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5292,8 +5112,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5333,8 +5152,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5370,8 +5188,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5410,8 +5227,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5450,8 +5266,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5494,8 +5309,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5524,8 +5338,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5537,7 +5350,7 @@
       ]
     },
     "name": "Zip android-arm-profile windows-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_profile/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_12\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_profile/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_11\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -5547,7 +5360,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_12"
+      "[CLEANUP]\\tmp_tmp_11"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -5556,8 +5369,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5584,8 +5396,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5597,7 +5408,7 @@
       ]
     },
     "name": "Zip android-arm64-profile windows-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_profile_arm64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_13\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_profile_arm64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_12\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -5607,7 +5418,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_13"
+      "[CLEANUP]\\tmp_tmp_12"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -5616,8 +5427,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5644,8 +5454,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5657,7 +5466,7 @@
       ]
     },
     "name": "Zip android-x64-profile windows-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_profile_x64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_14\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_profile_x64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_13\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -5667,7 +5476,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_14"
+      "[CLEANUP]\\tmp_tmp_13"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -5676,8 +5485,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5704,8 +5512,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5717,7 +5524,7 @@
       ]
     },
     "name": "Zip android-arm-release windows-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_release/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_15\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_release/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_14\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -5727,7 +5534,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_15"
+      "[CLEANUP]\\tmp_tmp_14"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -5736,8 +5543,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5764,8 +5570,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5777,7 +5582,7 @@
       ]
     },
     "name": "Zip android-arm64-release windows-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_release_arm64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_16\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_release_arm64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_15\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -5787,7 +5592,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_16"
+      "[CLEANUP]\\tmp_tmp_15"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -5796,8 +5601,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5824,8 +5628,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
@@ -5837,7 +5640,7 @@
       ]
     },
     "name": "Zip android-x64-release windows-x64.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_release_x64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_17\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "stdin": "{\"entries\": [{\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/android_release_x64/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_16\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -5847,7 +5650,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CLEANUP]\\tmp_tmp_17"
+      "[CLEANUP]\\tmp_tmp_16"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -5856,8 +5659,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin",
-        "[CLEANUP]\\tmp_tmp_1\\vpython"
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
     "env_suffixes": {
