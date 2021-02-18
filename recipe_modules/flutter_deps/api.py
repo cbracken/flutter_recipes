@@ -183,6 +183,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     vpython_path = self.m.path.mkdtemp().join('vpython')
     vpython = self.m.cipd.EnsureFile()
     vpython.add_package('infra/tools/luci/vpython/${platform}', version)
+    vpython.add_package('infra/tools/luci/vpython-native/${platform}', version)
     self.m.cipd.ensure(vpython_path, vpython)
     paths = env_prefixes.get('PATH', [])
     paths.append(vpython_path)

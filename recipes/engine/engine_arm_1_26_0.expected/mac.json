@@ -99,6 +99,10 @@
       "rmtree",
       "[CACHE]/builder"
     ],
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
     "infra_step": true,
     "name": "Checkout source code.Clobber cache",
     "~followup_annotations": [
@@ -117,6 +121,10 @@
       "0777",
       "[CACHE]/builder"
     ],
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
     "infra_step": true,
     "name": "Checkout source code.Ensure checkout cache",
     "~followup_annotations": [
@@ -152,11 +160,9 @@
     },
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
-        "0",
         "0"
       ],
       "PATH": [
-        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
@@ -214,11 +220,7 @@
       "GOMA_DIR": "[CACHE]/goma/client"
     },
     "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
       "PATH": [
-        "RECIPE_REPO[depot_tools]",
         "RECIPE_REPO[depot_tools]"
       ]
     },
