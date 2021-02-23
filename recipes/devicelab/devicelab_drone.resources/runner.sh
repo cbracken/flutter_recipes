@@ -10,4 +10,6 @@ then
 else
   echo "This bot does not support codesigning"
 fi
-dart bin/run.dart $*
+
+args=( "$@" )
+dart bin/run.dart "${args[@]}"

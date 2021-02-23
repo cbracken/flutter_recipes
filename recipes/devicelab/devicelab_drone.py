@@ -26,9 +26,6 @@ DEPS = [
 
 
 def RunSteps(api):
-  # Collect memory/cpu/process before task execution.
-  api.os_utils.collect_os_info()
-
   task_name = api.properties.get("task_name")
   if not task_name:
     raise ValueError('A task_name property is required')
@@ -86,8 +83,7 @@ def RunSteps(api):
         api.logs_util.upload_logs(task_name)
         # This is to clean up leaked processes.
         api.os_utils.kill_processes()
-        # Collect memory/cpu/process after task execution.
-        api.os_utils.collect_os_info()
+
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     uploadMetrics(api, results_path)
 
@@ -110,8 +106,6 @@ def mac_test(api, env, env_prefixes, flutter_path, task_name, runner_params):
     api.logs_util.upload_logs(task_name)
     # This is to clean up leaked processes.
     api.os_utils.kill_processes()
-    # Collect memory/cpu/process after task execution.
-    api.os_utils.collect_os_info()
 
 
 def uploadMetrics(api, results_path):
