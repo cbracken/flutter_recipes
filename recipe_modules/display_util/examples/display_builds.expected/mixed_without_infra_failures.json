@@ -234,22 +234,9 @@
     ]
   },
   {
-    "cmd": [
-      "python",
-      "-u",
-      "import sys; sys.exit(1)"
-    ],
-    "name": "display builds.build(s) failed",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_TEXT@step failures: builder, builder@@@",
-      "@@@STEP_FAILURE@@@"
-    ]
-  },
-  {
     "failure": {
       "failure": {},
-      "humanReason": "Step('display builds.build(s) failed') (retcode: 1)"
+      "humanReason": "2 builds failed:\n\n[builder](https://cr-buildbucket.appspot.com/build/987654321098765432)\n\n[builder](https://cr-buildbucket.appspot.com/build/112233445566778899)"
     },
     "name": "$result"
   }

@@ -6,6 +6,8 @@ from recipe_engine import recipe_api
 
 from PB.go.chromium.org.luci.buildbucket.proto import common as common_pb2
 
+from RECIPE_MODULES.fuchsia.utils import pluralize
+
 
 class DisplayUtilApi(recipe_api.RecipeApi):
   """Module to display buildbucket or swarming tasks as steps."""
@@ -26,12 +28,63 @@ class DisplayUtilApi(recipe_api.RecipeApi):
             over step failures.
           StepFailure: One or more of input builds failed.
         """
-    self._display(
-        step_name=step_name,
-        builds=builds,
-        raise_on_failure=raise_on_failure,
-        process_func=self._process_build,
-    )
+    # List of failed builds
+    infra_failures = []
+    failures = []
+    # Create per-build display steps.
+    with self.m.step.nest(step_name) as presentation:
+      for k in builds:
+        build = builds[k] if isinstance(k, long) or isinstance(k, int) else k
+        with self.m.step.nest(build.builder.builder) as display_step:
+          step_links = display_step.presentation.links
+          step_links[str(build.id)
+                    ] = self.m.buildbucket.build_url(build_id=build.id)
+          if build.status == common_pb2.Status.Value('SUCCESS'):
+            display_step.presentation.status = self.m.step.SUCCESS
+          elif build.status == common_pb2.Status.Value('INFRA_FAILURE'):
+            display_step.presentation.status = self.m.step.EXCEPTION
+            infra_failures.append(build)
+          elif build.status == common_pb2.Status.Value('FAILURE'):
+            display_step.presentation.status = self.m.step.FAILURE
+            failures.append(build)
+          # For any other status, use warning color.
+          else:
+            display_step.presentation.status = self.m.step.WARNING
+
+      def summary_section(build):
+        url = self.m.buildbucket.build_url(build_id=build.id)
+        failure_header = "[%s](%s)" % (build.builder.builder, url)
+        if build.status == common_pb2.INFRA_FAILURE:
+          failure_header += " (infra failure)"
+        summary = build.summary_markdown.strip()
+        # Don't include an empty summary.
+        if not summary:
+          return failure_header
+        return failure_header + ":\n\n%s" % summary
+
+      failure_message_parts = []
+      for b in infra_failures + failures:
+        failure_message_parts.append(summary_section(b))
+
+      if raise_on_failure:
+        # If there were any infra failures, raise purple.
+        if infra_failures:
+          presentation.status = self.m.step.EXCEPTION
+          exception_type = self.m.step.InfraFailure
+        # Otherwise if there were any step failures, raise red.
+        elif failures:
+          presentation.status = self.m.step.FAILURE
+          exception_type = self.m.step.StepFailure
+        else:
+          return
+
+        num_failed = len(failures) + len(infra_failures)
+        raise exception_type(
+            "%s failed:\n\n%s" % (
+                pluralize("build",
+                          num_failed), "\n\n".join(failure_message_parts)
+            )
+        )
 
   def display_tasks(self, step_name, results, metadata, raise_on_failure=False):
     """Display task links and status for each input task.
@@ -59,32 +112,9 @@ class DisplayUtilApi(recipe_api.RecipeApi):
         metadata=metadata,
     )
 
-  def _process_build(self, result, infra_failed_builders, failed_builders):
-    """Process a single buildbucket.v2.Build.
-
-        Args:
-          result (buildbucket.v2.Build): A buildbucket Build object.
-          infra_failed_builders (List(str)): A list of the builder names with infra failures.
-          failed_builders (List(str)): A list of the builder names with failures.
-        """
-    with self.m.step.nest(result.builder.builder) as display_step:
-      step_links = display_step.presentation.links
-      step_links[str(
-          result.id)] = self.m.buildbucket.build_url(build_id=result.id)
-      if result.status == common_pb2.Status.Value('SUCCESS'):
-        display_step.presentation.status = self.m.step.SUCCESS
-      elif result.status == common_pb2.Status.Value('INFRA_FAILURE'):
-        display_step.presentation.status = self.m.step.EXCEPTION
-        infra_failed_builders.append(result.builder.builder)
-      elif result.status == common_pb2.Status.Value('FAILURE'):
-        display_step.presentation.status = self.m.step.FAILURE
-        failed_builders.append(result.builder.builder)
-      # For any other status, use warning color.
-      else:
-        display_step.presentation.status = self.m.step.WARNING
-
-  def _process_task(self, result, infra_failed_builders, failed_builders,
-                    links):
+  def _process_task(
+      self, result, infra_failed_builders, failed_builders, links
+  ):
     """Process a single swarming.TaskResult.
 
         Args:
@@ -106,12 +136,14 @@ class DisplayUtilApi(recipe_api.RecipeApi):
       else:
         display_step.presentation.status = self.m.step.WARNING
 
-  def _display(self,
-               step_name,
-               builds,
-               process_func,
-               raise_on_failure=False,
-               metadata=None):
+  def _display(
+      self,
+      step_name,
+      builds,
+      process_func,
+      raise_on_failure=False,
+      metadata=None
+  ):
     """Display build links and status for each input build.
 
         Optionally raise on build failure(s).
@@ -153,10 +185,15 @@ class DisplayUtilApi(recipe_api.RecipeApi):
         if infra_failed_builders:
           failure_message.append(
               "infra failures: {infra_failed_builders}".format(
-                  infra_failed_builders=", ".join(infra_failed_builders)))
+                  infra_failed_builders=", ".join(infra_failed_builders)
+              )
+          )
         if failed_builders:
-          failure_message.append("step failures: {failed_builders}".format(
-              failed_builders=", ".join(failed_builders)))
+          failure_message.append(
+              "step failures: {failed_builders}".format(
+                  failed_builders=", ".join(failed_builders)
+              )
+          )
         failure_message = ", ".join(failure_message)
         # If there were any infra failures, raise purple.
         if infra_failed_builders:

@@ -92,7 +92,8 @@
       "@@@STEP_LOG_LINE@json.output@            \"ref\": \"refs/heads/master\"@@@",
       "@@@STEP_LOG_LINE@json.output@          }@@@",
       "@@@STEP_LOG_LINE@json.output@        }, @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"status\": \"INFRA_FAILURE\"@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"status\": \"INFRA_FAILURE\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"summaryMarkdown\": \"something failed related to infra\"@@@",
       "@@@STEP_LOG_LINE@json.output@      }@@@",
       "@@@STEP_LOG_LINE@json.output@    }, @@@",
       "@@@STEP_LOG_LINE@json.output@    {@@@",
@@ -121,7 +122,8 @@
       "@@@STEP_LOG_LINE@json.output@            \"ref\": \"refs/heads/master\"@@@",
       "@@@STEP_LOG_LINE@json.output@          }@@@",
       "@@@STEP_LOG_LINE@json.output@        }, @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"status\": \"FAILURE\"@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"status\": \"FAILURE\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"summaryMarkdown\": \"something failed not related to infra\"@@@",
       "@@@STEP_LOG_LINE@json.output@      }@@@",
       "@@@STEP_LOG_LINE@json.output@    }, @@@",
       "@@@STEP_LOG_LINE@json.output@    {@@@",
@@ -234,22 +236,8 @@
     ]
   },
   {
-    "cmd": [
-      "python",
-      "-u",
-      "import sys; sys.exit(1)"
-    ],
-    "infra_step": true,
-    "name": "display builds.build(s) failed",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_TEXT@infra failures: builder, step failures: builder@@@",
-      "@@@STEP_EXCEPTION@@@"
-    ]
-  },
-  {
     "failure": {
-      "humanReason": "Infra Failure: Step('display builds.build(s) failed') (retcode: 1)"
+      "humanReason": "2 builds failed:\n\n[builder](https://cr-buildbucket.appspot.com/build/987654321098765432) (infra failure):\n\nsomething failed related to infra\n\n[builder](https://cr-buildbucket.appspot.com/build/112233445566778899):\n\nsomething failed not related to infra"
     },
     "name": "$result"
   }
