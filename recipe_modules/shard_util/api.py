@@ -89,6 +89,8 @@ class ShardUtilApi(recipe_api.RecipeApi):
       step.presentation.links[task_name] = self.m.buildbucket.build_url(
           build_id=build.id
       )
+    bb_fields = self.m.buildbucket.DEFAULT_FIELDS.union({"summary_markdown"})
     return self.m.buildbucket.collect_builds([build.id for build in builds],
                                              timeout=DRONE_TIMEOUT_SECS,
-                                             mirror_status=True)
+                                             mirror_status=True,
+                                             fields=bb_fields)
