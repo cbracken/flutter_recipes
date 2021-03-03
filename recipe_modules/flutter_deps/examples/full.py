@@ -49,6 +49,7 @@ def RunSteps(api):
   api.flutter_deps.ninja(env, env_prefixes)
   api.flutter_deps.clang(env, env_prefixes)
   api.flutter_deps.ios_signing(env, env_prefixes)
+  api.flutter_deps.curl(env, env_prefixes, '')
 
   # Gems dependency requires to run from a flutter_environment.
   checkout_path = api.path['start_dir'].join('flutter\ sdk')

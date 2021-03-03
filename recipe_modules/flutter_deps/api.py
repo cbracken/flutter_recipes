@@ -49,6 +49,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     available_deps = {
         'open_jdk': self.open_jdk,
         'goldctl': self.goldctl,
+        'curl': self.curl,
         'chrome_and_driver': self.chrome_and_driver,
         'go_sdk': self.go_sdk,
         'dashing': self.dashing,
@@ -186,6 +187,17 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     self.m.cipd.ensure(vpython_path, vpython)
     paths = env_prefixes.get('PATH', [])
     paths.append(vpython_path)
+    env_prefixes['PATH'] = paths
+
+  def curl(self, env, env_prefixes, version):
+    """Installs curl."""
+    version = version or 'latest'
+    curl_path = self.m.path.mkdtemp().join('curl')
+    curl = self.m.cipd.EnsureFile()
+    curl.add_package('flutter_internal/tools/curl/${platform}', version)
+    self.m.cipd.ensure(curl_path, curl)
+    paths = env_prefixes.get('PATH', [])
+    paths.append(curl_path)
     env_prefixes['PATH'] = paths
 
   def android_sdk(self, env, env_prefixes, version):
