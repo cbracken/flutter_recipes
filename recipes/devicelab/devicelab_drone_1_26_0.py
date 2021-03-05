@@ -11,7 +11,7 @@ DEPS = [
     'flutter/repo_util',
     'flutter/os_utils',
     'recipe_engine/buildbucket',
-    'flutter/osx_sdk',
+    'flutter/devicelab_osx_sdk',
     'recipe_engine/context',
     'recipe_engine/file',
     'recipe_engine/path',
@@ -62,7 +62,7 @@ def RunSteps(api):
     dep_list = {d['dependency']: d.get('version') for d in deps}
     if dep_list.has_key('xcode'):
       api.os_utils.clean_derived_data()
-      with api.osx_sdk('ios'):
+      with api.devicelab_osx_sdk('ios'):
         api.flutter_deps.gems(
             env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
         )

@@ -50,7 +50,7 @@ class DevicelabOSXSDKApi(recipe_api.RecipeApi):
     `/opt/flutter/xcode/<version>`.
 
     Usage:
-      with api.devicela_osx_sdk('mac'):
+      with api.devicelab_osx_sdk('mac'):
         # sdk with mac build bits
 
       with api.devicelab_osx_sdk('ios'):
