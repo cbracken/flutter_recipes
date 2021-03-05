@@ -1,0 +1,12 @@
+[
+  {
+    "cmd": [
+      "echo",
+      "Complete publishing plugins (tests)]"
+    ],
+    "name": "report"
+  },
+  {
+    "name": "$result"
+  }
+]

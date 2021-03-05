@@ -35,6 +35,7 @@ RECIPES_TO_SKIP = (
         'fuchsia_ctl',
         'ios-usb-dependencies',
         'plugins/plugins',
+        'plugins/plugins_publish',
         'recipes',
         'tricium/tricium',
         )
