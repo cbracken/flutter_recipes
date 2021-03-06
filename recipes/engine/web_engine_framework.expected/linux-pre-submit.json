@@ -1218,6 +1218,34 @@
   },
   {
     "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CLEANUP]/tmp_tmp_1/curl",
+      "-ensure-file",
+      "flutter_internal/tools/curl/${platform} latest",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "name": "ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"flutter_internal/tools/curl/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
       "flutter",
       "config",
       "--local-engine=[CACHE]/builder/src/out/host_debug_unopt",
@@ -1241,7 +1269,8 @@
         "[CACHE]/flutter/bin",
         "[CACHE]/flutter/bin/cache/dart-sdk/bin",
         "[CACHE]/chrome/chrome",
-        "[CACHE]/chrome/drivers"
+        "[CACHE]/chrome/drivers",
+        "[CLEANUP]/tmp_tmp_1/curl"
       ]
     },
     "name": "web integration tests config"
@@ -1271,7 +1300,8 @@
         "[CACHE]/flutter/bin",
         "[CACHE]/flutter/bin/cache/dart-sdk/bin",
         "[CACHE]/chrome/chrome",
-        "[CACHE]/chrome/drivers"
+        "[CACHE]/chrome/drivers",
+        "[CLEANUP]/tmp_tmp_1/curl"
       ]
     },
     "name": "run web integration tests"
@@ -1302,7 +1332,8 @@
         "[CACHE]/flutter/bin",
         "[CACHE]/flutter/bin/cache/dart-sdk/bin",
         "[CACHE]/chrome/chrome",
-        "[CACHE]/chrome/drivers"
+        "[CACHE]/chrome/drivers",
+        "[CLEANUP]/tmp_tmp_1/curl"
       ]
     },
     "name": "Killing Processes.kill chrome",
@@ -1332,7 +1363,8 @@
         "[CACHE]/flutter/bin",
         "[CACHE]/flutter/bin/cache/dart-sdk/bin",
         "[CACHE]/chrome/chrome",
-        "[CACHE]/chrome/drivers"
+        "[CACHE]/chrome/drivers",
+        "[CLEANUP]/tmp_tmp_1/curl"
       ]
     },
     "name": "Killing Processes.kill dart",
@@ -1362,7 +1394,8 @@
         "[CACHE]/flutter/bin",
         "[CACHE]/flutter/bin/cache/dart-sdk/bin",
         "[CACHE]/chrome/chrome",
-        "[CACHE]/chrome/drivers"
+        "[CACHE]/chrome/drivers",
+        "[CLEANUP]/tmp_tmp_1/curl"
       ]
     },
     "name": "Killing Processes.kill flutter",
@@ -1392,7 +1425,8 @@
         "[CACHE]/flutter/bin",
         "[CACHE]/flutter/bin/cache/dart-sdk/bin",
         "[CACHE]/chrome/chrome",
-        "[CACHE]/chrome/drivers"
+        "[CACHE]/chrome/drivers",
+        "[CLEANUP]/tmp_tmp_1/curl"
       ]
     },
     "name": "Killing Processes.kill java",
@@ -1422,7 +1456,8 @@
         "[CACHE]/flutter/bin",
         "[CACHE]/flutter/bin/cache/dart-sdk/bin",
         "[CACHE]/chrome/chrome",
-        "[CACHE]/chrome/drivers"
+        "[CACHE]/chrome/drivers",
+        "[CLEANUP]/tmp_tmp_1/curl"
       ]
     },
     "name": "Killing Processes.kill adb",
@@ -1456,7 +1491,8 @@
         "[CACHE]/flutter/bin",
         "[CACHE]/flutter/bin/cache/dart-sdk/bin",
         "[CACHE]/chrome/chrome",
-        "[CACHE]/chrome/drivers"
+        "[CACHE]/chrome/drivers",
+        "[CLEANUP]/tmp_tmp_1/curl"
       ]
     },
     "name": "OS info (2)"

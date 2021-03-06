@@ -143,7 +143,7 @@ def RunSteps(api, properties, env_properties):
   # engine.
   f_env, f_env_prefix = api.repo_util.flutter_environment(flutter_checkout_path)
 
-  deps = [{'dependency': 'chrome_and_driver'}]
+  deps = [{'dependency': 'chrome_and_driver'}, {"dependency": "curl"}]
   api.flutter_deps.required_deps(f_env, f_env_prefix, deps)
 
   integration_test = flutter_checkout_path.join('dev', 'integration_tests',
