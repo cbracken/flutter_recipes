@@ -45,7 +45,7 @@ def RunSteps(api):
 
 def GenTests(api):
   yield (
-      api.status_check.test("Test Infra Failure", status="infra_failure") +
+      api.status_check.test("Test_Infra_Failure", status="infra_failure") +
       api.step_data(
           "Trigger Tests", api.swarming.trigger(["task1", "task2"],
                                                 initial_id=0)
@@ -60,7 +60,7 @@ def GenTests(api):
       )
   )
   yield (
-      api.status_check.test("Test Failure", status="failure") + api.step_data(
+      api.status_check.test("Test_Failure", status="failure") + api.step_data(
           "Trigger Tests", api.swarming.trigger(["task1", "task2"],
                                                 initial_id=0)
       ) + api.step_data(
@@ -72,7 +72,7 @@ def GenTests(api):
       )
   )
   yield (
-      api.status_check.test("Test Success", status="success") + api.step_data(
+      api.status_check.test("Test_Success", status="success") + api.step_data(
           "Trigger Tests", api.swarming.trigger(["task1"], initial_id=0)
       ) + api.step_data(
           "collect",
