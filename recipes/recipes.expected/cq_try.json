@@ -636,7 +636,7 @@
   },
   {
     "cmd": [],
-    "name": "fetch commit-queue.cfg"
+    "name": "fetch flutter commit-queue.cfg"
   },
   {
     "cmd": [
@@ -646,7 +646,7 @@
       "3m"
     ],
     "infra_step": true,
-    "name": "fetch commit-queue.cfg.get access token for default account",
+    "name": "fetch flutter commit-queue.cfg.get access token for default account",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -665,7 +665,7 @@
       "--headers-json",
       "{\"Authorization\": \"Bearer extra.secret.token.should.not.be.logged\"}"
     ],
-    "name": "fetch commit-queue.cfg.get",
+    "name": "fetch flutter commit-queue.cfg.get",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]

@@ -121,7 +121,7 @@ def RunSteps(api, remote, unittest_only):
 
 def GenTests(api):
   yield (api.status_check.test('ci') + api.properties(unittest_only=False) +
-         api.commit_queue.test_data(COMMIT_QUEUE_CFG) +
+         api.commit_queue.test_data('flutter', COMMIT_QUEUE_CFG) +
          api.recipe_testing.affected_recipes_data(['none']) +
          api.recipe_testing.build_data(
              'flutter/try/flutter-foo', 'flutter', skip=True) +
@@ -130,7 +130,7 @@ def GenTests(api):
          api.recipe_testing.build_data(
              'flutter/try/flutter-baz', 'project', skip=True))
   yield (api.status_check.test('cq_try') + api.properties(unittest_only=False) +
-         api.commit_queue.test_data(COMMIT_QUEUE_CFG) +
+         api.commit_queue.test_data('flutter', COMMIT_QUEUE_CFG) +
          api.recipe_testing.affected_recipes_data(['none']) +
          api.recipe_testing.build_data(
              'flutter/try/flutter-foo', 'flutter', skip=True) +
