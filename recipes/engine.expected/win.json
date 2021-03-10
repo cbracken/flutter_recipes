@@ -124,7 +124,8 @@
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
       "GIT_HTTP_LOW_SPEED_LIMIT": "102400",
       "GIT_HTTP_LOW_SPEED_TIME": "300",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -192,7 +193,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -223,7 +225,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -245,7 +248,6 @@
     "cmd": [
       "python",
       "[CACHE]\\builder\\src\\flutter/tools/gn",
-      "--goma",
       "--runtime-mode",
       "debug",
       "--full-dart-sdk",
@@ -254,7 +256,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -280,7 +283,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -312,7 +316,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -333,7 +338,6 @@
     "cmd": [
       "python",
       "[CACHE]\\builder\\src\\flutter/tools/gn",
-      "--goma",
       "--runtime-mode",
       "debug",
       "--unoptimized"
@@ -341,7 +345,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -367,7 +372,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -399,7 +405,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -420,7 +427,6 @@
     "cmd": [
       "python",
       "[CACHE]\\builder\\src\\flutter/tools/gn",
-      "--goma",
       "--runtime-mode",
       "profile",
       "--no-lto"
@@ -428,7 +434,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -456,7 +463,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -477,7 +485,6 @@
     "cmd": [
       "python",
       "[CACHE]\\builder\\src\\flutter/tools/gn",
-      "--goma",
       "--runtime-mode",
       "release",
       "--no-lto"
@@ -485,7 +492,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -513,7 +521,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -540,7 +549,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -566,7 +576,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -597,7 +608,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -624,7 +636,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -655,7 +668,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -682,7 +696,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -713,7 +728,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -740,7 +756,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -771,7 +788,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -798,7 +816,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -829,7 +848,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -856,7 +876,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -887,7 +908,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -914,7 +936,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -945,7 +968,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -972,7 +996,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1003,7 +1028,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1030,7 +1056,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1061,7 +1088,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1088,7 +1116,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1119,7 +1148,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1141,7 +1171,6 @@
     "cmd": [
       "python",
       "[CACHE]\\builder\\src\\flutter/tools/gn",
-      "--goma",
       "--runtime-mode",
       "profile",
       "--android"
@@ -1149,7 +1178,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1170,7 +1200,6 @@
     "cmd": [
       "python",
       "[CACHE]\\builder\\src\\flutter/tools/gn",
-      "--goma",
       "--runtime-mode",
       "profile",
       "--android",
@@ -1179,7 +1208,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1200,7 +1230,6 @@
     "cmd": [
       "python",
       "[CACHE]\\builder\\src\\flutter/tools/gn",
-      "--goma",
       "--runtime-mode",
       "profile",
       "--android",
@@ -1209,7 +1238,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1230,7 +1260,6 @@
     "cmd": [
       "python",
       "[CACHE]\\builder\\src\\flutter/tools/gn",
-      "--goma",
       "--runtime-mode",
       "release",
       "--android"
@@ -1238,7 +1267,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1259,7 +1289,6 @@
     "cmd": [
       "python",
       "[CACHE]\\builder\\src\\flutter/tools/gn",
-      "--goma",
       "--runtime-mode",
       "release",
       "--android",
@@ -1268,7 +1297,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1289,7 +1319,6 @@
     "cmd": [
       "python",
       "[CACHE]\\builder\\src\\flutter/tools/gn",
-      "--goma",
       "--runtime-mode",
       "release",
       "--android",
@@ -1298,7 +1327,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1325,7 +1355,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1352,7 +1383,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1379,7 +1411,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1406,7 +1439,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1433,7 +1467,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1460,7 +1495,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1486,7 +1522,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1517,7 +1554,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1544,7 +1582,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1575,7 +1614,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1602,7 +1642,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1633,7 +1674,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1660,7 +1702,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1691,7 +1734,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1718,7 +1762,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1749,7 +1794,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1776,7 +1822,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [
@@ -1807,7 +1854,8 @@
     "cwd": "[CACHE]\\builder",
     "env": {
       "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
-      "GOMA_DIR": "[CACHE]\\goma\\client"
+      "GOMA_DIR": "[CACHE]\\goma\\client",
+      "GOMA_DISABLED": "True"
     },
     "env_prefixes": {
       "PATH": [

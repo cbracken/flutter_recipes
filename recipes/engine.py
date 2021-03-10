@@ -85,7 +85,7 @@ def Build(api, config, *targets):
   checkout = GetCheckoutPath(api)
   build_dir = checkout.join('out/%s' % config)
 
-  # Temporary workaround to disable goma while fxb/71828 is fixed.
+  # TODO(godofredoc): remove once fxb/71828 is fixed.
   if api.platform.is_win:
     ninja_args = [api.depot_tools.ninja_path, '-C', build_dir]
     ninja_args.extend(targets)
@@ -207,7 +207,10 @@ def BuildAndPackageFuchsia(api, build_script, git_rev):
 
 def RunGN(api, *args):
   checkout = GetCheckoutPath(api)
-  gn_cmd = ['python', checkout.join('flutter/tools/gn'), '--goma']
+  gn_cmd = ['python', checkout.join('flutter/tools/gn')]
+  # TODO(godofredoc): remove once fxb/71828 is fixed.
+  if not api.platform.is_win:
+    gn_cmd.append('--goma')
   if api.properties.get('no_lto', False) and '--no-lto' not in args:
     args += ('--no-lto',)
   gn_cmd.extend(args)
@@ -1480,6 +1483,8 @@ def RunSteps(api, properties, env_properties):
   android_home = checkout.join('third_party', 'android_tools', 'sdk')
 
   env = {'GOMA_DIR': api.goma.goma_dir, 'ANDROID_HOME': str(android_home)}
+  if api.platform.is_win:
+    env['GOMA_DISABLED'] = True
   env_prefixes = {'PATH': [dart_bin]}
 
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
