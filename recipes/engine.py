@@ -84,6 +84,14 @@ def GetCloudPath(api, path):
 def Build(api, config, *targets):
   checkout = GetCheckoutPath(api)
   build_dir = checkout.join('out/%s' % config)
+
+  # Temporary workaround to disable goma while fxb/71828 is fixed.
+  if api.platform.is_win:
+    ninja_args = [api.depot_tools.ninja_path, '-C', build_dir]
+    ninja_args.extend(targets)
+    api.step('build %s' % ' '.join([config] + list(targets)), ninja_args)
+    return
+
   goma_jobs = api.properties['goma_jobs']
   ninja_args = [api.depot_tools.ninja_path, '-j', goma_jobs, '-C', build_dir]
   ninja_args.extend(targets)
