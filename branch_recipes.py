@@ -98,13 +98,9 @@ def parse_arguments(argv):
     # validate
     if options['delete']:
         if 'flutter-version=' not in options:
-            print('meep')
-            print(options)
             usage(optional_options, required_options, 1)
     else:
         if 'flutter-version=' not in options or 'recipe-revision=' not in options:
-            print('moop')
-            print(options)
             usage(optional_options, required_options, 1)
     return options
 
