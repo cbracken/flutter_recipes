@@ -6,17 +6,19 @@ from recipe_engine.recipe_api import Property
 
 DEPS = [
     'flutter/bucket_util',
+    'flutter/devicelab_osx_sdk',
     'flutter/flutter_deps',
     'flutter/logs_util',
     'flutter/repo_util',
     'flutter/os_utils',
+    'flutter/osx_sdk',
     'recipe_engine/buildbucket',
-    'flutter/devicelab_osx_sdk',
     'recipe_engine/context',
     'recipe_engine/file',
     'recipe_engine/path',
     'recipe_engine/properties',
     'recipe_engine/raw_io',
+    'recipe_engine/runtime',
     'recipe_engine/service_account',
     'recipe_engine/step',
     'recipe_engine/swarming',
@@ -24,14 +26,11 @@ DEPS = [
 
 
 def RunSteps(api):
-  # Collect memory/cpu/process before task execution.
-  api.os_utils.collect_os_info()
-
   task_name = api.properties.get("task_name")
   if not task_name:
     raise ValueError('A task_name property is required')
 
-  flutter_path = api.path['cache'].join('flutter sdk')
+  flutter_path = api.path.mkdtemp().join('flutter sdk')
   api.repo_util.checkout(
       'flutter',
       flutter_path,
@@ -40,8 +39,10 @@ def RunSteps(api):
   )
   env, env_prefixes = api.repo_util.flutter_environment(flutter_path)
   api.logs_util.initialize_logs_collection(env)
-  deps = api.properties.get('dependencies', [])
-  api.flutter_deps.required_deps(env, env_prefixes, deps)
+  with api.step.nest('Dependencies'):
+    deps = api.properties.get('dependencies', [])
+    api.flutter_deps.required_deps(env, env_prefixes, deps)
+    api.flutter_deps.vpython(env, env_prefixes, 'latest')
   devicelab_path = flutter_path.join('dev', 'devicelab')
   git_branch = api.buildbucket.gitiles_commit.ref.replace('refs/heads/', '')
   # Create tmp file to store results in
@@ -57,29 +58,21 @@ def RunSteps(api):
     # git_branch is set only when the build was triggered by buildbucket.
     runner_params.extend(['--git-branch', git_branch])
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
-    api.step('flutter update-packages', ['flutter', 'update-packages'])
+    api.step('flutter doctor', ['flutter', 'doctor'])
     api.step('pub get', ['pub', 'get'])
     dep_list = {d['dependency']: d.get('version') for d in deps}
     if dep_list.has_key('xcode'):
       api.os_utils.clean_derived_data()
-      with api.devicelab_osx_sdk('ios'):
-        api.flutter_deps.gems(
-            env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
-        )
-        api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
-        api.os_utils.shutdown_simulators()
-        with api.context(env=env,
-                         env_prefixes=env_prefixes), api.step.defer_results():
-          resource_name = api.resource('runner.sh')
-          api.step('Set execute permission', ['chmod', '755', resource_name])
-          test_runner_command = [resource_name]
-          test_runner_command.extend(runner_params)
-          api.step('run %s' % task_name, test_runner_command)
-          api.logs_util.upload_logs(task_name)
-          # This is to clean up leaked processes.
-          api.os_utils.kill_processes()
-          # Collect memory/cpu/process after task execution.
-          api.os_utils.collect_os_info()
+      if str(api.swarming.bot_id).startswith('flutter-devicelab'):
+        with api.devicelab_osx_sdk('ios'):
+          mac_test(
+              api, env, env_prefixes, flutter_path, task_name, runner_params
+          )
+      else:
+        with api.osx_sdk('ios'):
+          mac_test(
+              api, env, env_prefixes, flutter_path, task_name, runner_params
+          )
     else:
       with api.context(env=env,
                        env_prefixes=env_prefixes), api.step.defer_results():
@@ -90,10 +83,29 @@ def RunSteps(api):
         api.logs_util.upload_logs(task_name)
         # This is to clean up leaked processes.
         api.os_utils.kill_processes()
-        # Collect memory/cpu/process after task execution.
-        api.os_utils.collect_os_info()
+
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     uploadMetrics(api, results_path)
+
+
+def mac_test(api, env, env_prefixes, flutter_path, task_name, runner_params):
+  """Runs a devicelab mac test."""
+  api.flutter_deps.gems(
+      env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
+  )
+  api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
+  api.os_utils.dismiss_dialogs()
+  api.os_utils.shutdown_simulators()
+  with api.context(env=env,
+                   env_prefixes=env_prefixes), api.step.defer_results():
+    resource_name = api.resource('runner.sh')
+    api.step('Set execute permission', ['chmod', '755', resource_name])
+    test_runner_command = [resource_name]
+    test_runner_command.extend(runner_params)
+    api.step('run %s' % task_name, test_runner_command)
+    api.logs_util.upload_logs(task_name)
+    # This is to clean up leaked processes.
+    api.os_utils.kill_processes()
 
 
 def uploadMetrics(api, results_path):
@@ -102,7 +114,7 @@ def uploadMetrics(api, results_path):
   luci-auth only gurantees a service account token life of 3 minutes. To work
   around this limitation, results uploading is separate from the the test run.
   """
-  if not api.properties.get('upload_metrics'):
+  if not api.properties.get('upload_metrics') or api.runtime.is_experimental:
     return
   with api.step.nest('Upload metrics'):
     service_account = api.service_account.default()
@@ -119,13 +131,14 @@ def uploadMetrics(api, results_path):
 
 
 def GenTests(api):
+  checkout_path = api.path['cleanup'].join('tmp_tmp_1', 'flutter sdk')
   yield api.test(
       "no-task-name",
       api.expect_exception('ValueError'),
   )
   yield api.test(
       "basic", api.properties(buildername='Linux abc', task_name='abc'),
-      api.repo_util.flutter_environment_data(),
+      api.repo_util.flutter_environment_data(checkout_dir=checkout_path),
       api.buildbucket.ci_build(
           project='test',
           git_repo='git.example.com/test/repo',
@@ -137,7 +150,7 @@ def GenTests(api):
           buildername='Mac abc',
           task_name='abc',
           dependencies=[{'dependency': 'xcode'}]
-      ), api.repo_util.flutter_environment_data(),
+      ), api.repo_util.flutter_environment_data(checkout_dir=checkout_path),
       api.swarming.properties(bot_id='flutter-devicelab-mac-1')
   )
   yield api.test(
@@ -147,13 +160,13 @@ def GenTests(api):
           task_name='abc',
           dependencies=[{'dependency': 'xcode'}]
       ),
-      api.repo_util.flutter_environment_data(),
+      api.repo_util.flutter_environment_data(checkout_dir=checkout_path),
   )
   yield api.test(
       "post-submit",
       api.properties(
           buildername='Linux abc', task_name='abc', upload_metrics=True
-      ), api.repo_util.flutter_environment_data()
+      ), api.repo_util.flutter_environment_data(checkout_dir=checkout_path)
   )
   yield api.test(
       "upload-metrics-mac",
@@ -162,5 +175,5 @@ def GenTests(api):
           dependencies=[{'dependency': 'xcode'}],
           task_name='abc',
           upload_metrics=True
-      ), api.repo_util.flutter_environment_data()
+      ), api.repo_util.flutter_environment_data(checkout_dir=checkout_path)
   )

@@ -1,16 +1,5 @@
 [
   {
-    "cmd": [
-      "top",
-      "-b",
-      "-n",
-      "3",
-      "-o",
-      "%MEM"
-    ],
-    "name": "OS info"
-  },
-  {
     "cmd": [],
     "name": "RECIPE CRASH (Uncaught exception)",
     "~followup_annotations": [
@@ -18,7 +7,7 @@
       "The recipe has crashed at point 'Uncaught exception'!",
       "",
       "Traceback (most recent call last):",
-      "  File \"RECIPE_REPO[flutter]/recipes/devicelab/devicelab_drone_1_26_0.py\", line 32, in RunSteps",
+      "  File \"RECIPE_REPO[flutter]/recipes/devicelab/devicelab_drone_1_26_0.py\", line 31, in RunSteps",
       "    raise ValueError('A task_name property is required')",
       "ValueError: A task_name property is required"
     ]
