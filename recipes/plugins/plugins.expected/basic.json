@@ -132,7 +132,7 @@
       "--path",
       "[START_DIR]/plugins",
       "--url",
-      "https://github.com/flutter/plugins"
+      "https://chromium.googlesource.com/external/github.com/flutter/plugins"
     ],
     "name": "checkout source code.Checkout flutter/plugins.git setup",
     "~followup_annotations": [

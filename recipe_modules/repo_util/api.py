@@ -10,8 +10,9 @@ REPOS = {
     'cocoon':
         'https://chromium.googlesource.com/external/github.com/flutter/cocoon',
     'packages':
-        'https://github.com/flutter/packages', 'plugins':
-            'https://github.com/flutter/plugins'
+        'https://github.com/flutter/packages',
+    'plugins':
+        'https://chromium.googlesource.com/external/github.com/flutter/plugins'
 }
 
 import re

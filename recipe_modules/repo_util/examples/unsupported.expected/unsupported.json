@@ -9,7 +9,7 @@
       "Traceback (most recent call last):",
       "  File \"RECIPE_REPO[flutter]/recipe_modules/repo_util/examples/unsupported.py\", line 15, in RunSteps",
       "    api.path['start_dir'].join('unsupported_repo'))",
-      "  File \"RECIPE_REPO[flutter]/recipe_modules/repo_util/api.py\", line 93, in checkout",
+      "  File \"RECIPE_REPO[flutter]/recipe_modules/repo_util/api.py\", line 94, in checkout",
       "    raise ValueError('Unsupported repo: %s' % name)",
       "ValueError: Unsupported repo: unsupported_repo"
     ]
