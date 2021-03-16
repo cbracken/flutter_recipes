@@ -515,42 +515,6 @@
     "name": "build host_debug_unopt ().teardown goma.read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Drone\", \"time_stamp\": \"2012-05-14 12:53:21.500000\", \"time_stamp_int\": 1337000003000}}",
-      "[CACHE]/goma/client/goma_stats.json"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "build host_debug_unopt ().teardown goma.write goma_stats.json",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Drone\", \"time_stamp\": \"2012-05-14 12:53:21.500000\", \"time_stamp_int\": 1337000003000}}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@    \"build_info\": {@@@",
       "@@@STEP_LOG_LINE@json.output@        \"build_id\": 8945511751514863184, @@@",
@@ -618,7 +582,7 @@
     "cmd": [
       "[START_DIR]/cipd/bqupload/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
-      "[CACHE]/goma/client/goma_stats.json"
+      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Drone\", \"time_stamp\": \"2012-05-14 12:53:21.500000\", \"time_stamp_int\": 1337000003000}}"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -635,7 +599,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "build host_debug_unopt ().teardown goma.upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "build host_debug_unopt ().teardown goma.upload goma stats to bigquery",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]

@@ -511,42 +511,6 @@
     "name": "teardown goma.read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:21.500000\", \"time_stamp_int\": 1337000003000}}",
-      "[CACHE]/goma/client/goma_stats.json"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "teardown goma.write goma_stats.json",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:21.500000\", \"time_stamp_int\": 1337000003000}}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@    \"build_info\": {@@@",
       "@@@STEP_LOG_LINE@json.output@        \"build_id\": 8945511751514863184, @@@",
@@ -614,7 +578,7 @@
     "cmd": [
       "[START_DIR]/cipd/bqupload/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
-      "[CACHE]/goma/client/goma_stats.json"
+      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:21.500000\", \"time_stamp_int\": 1337000003000}}"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -631,7 +595,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "teardown goma.upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "teardown goma.upload goma stats to bigquery",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -910,42 +874,6 @@
     "name": "teardown goma (2).read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:24.500000\", \"time_stamp_int\": 1337000006000}}",
-      "[CACHE]/goma/client/goma_stats.json"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "teardown goma (2).write goma_stats.json",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:24.500000\", \"time_stamp_int\": 1337000006000}}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@    \"build_info\": {@@@",
       "@@@STEP_LOG_LINE@json.output@        \"build_id\": 8945511751514863184, @@@",
@@ -961,7 +889,7 @@
     "cmd": [
       "[START_DIR]/cipd/bqupload/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
-      "[CACHE]/goma/client/goma_stats.json"
+      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:24.500000\", \"time_stamp_int\": 1337000006000}}"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -978,7 +906,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "teardown goma (2).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "teardown goma (2).upload goma stats to bigquery",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -1257,42 +1185,6 @@
     "name": "teardown goma (3).read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:27.500000\", \"time_stamp_int\": 1337000009000}}",
-      "[CACHE]/goma/client/goma_stats.json"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "teardown goma (3).write goma_stats.json",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:27.500000\", \"time_stamp_int\": 1337000009000}}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@    \"build_info\": {@@@",
       "@@@STEP_LOG_LINE@json.output@        \"build_id\": 8945511751514863184, @@@",
@@ -1308,7 +1200,7 @@
     "cmd": [
       "[START_DIR]/cipd/bqupload/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
-      "[CACHE]/goma/client/goma_stats.json"
+      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:27.500000\", \"time_stamp_int\": 1337000009000}}"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -1325,7 +1217,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "teardown goma (3).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "teardown goma (3).upload goma stats to bigquery",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -1603,42 +1495,6 @@
     "name": "teardown goma (4).read goma_stats.json",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:30.500000\", \"time_stamp_int\": 1337000012000}}",
-      "[CACHE]/goma/client/goma_stats.json"
-    ],
-    "cwd": "[CACHE]/builder",
-    "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
-      "GOMA_DIR": "[CACHE]/goma/client",
-      "GOMA_TMP_DIR": "[CLEANUP]/goma",
-      "GOMA_USE_LOCAL": "False"
-    },
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "infra_step": true,
-    "name": "teardown goma (4).write goma_stats.json",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:30.500000\", \"time_stamp_int\": 1337000012000}}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@    \"build_info\": {@@@",
       "@@@STEP_LOG_LINE@json.output@        \"build_id\": 8945511751514863184, @@@",
@@ -1654,7 +1510,7 @@
     "cmd": [
       "[START_DIR]/cipd/bqupload/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
-      "[CACHE]/goma/client/goma_stats.json"
+      "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:30.500000\", \"time_stamp_int\": 1337000012000}}"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -1671,7 +1527,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "teardown goma (4).upload goma_stats_to BQ: fuchsia-infra/artifacts/builds_beta_goma",
+    "name": "teardown goma (4).upload goma stats to bigquery",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]

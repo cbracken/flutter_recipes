@@ -636,9 +636,7 @@
     "infra_step": true,
     "name": "teardown goma.read goma_stats.json",
     "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@goma_stats.json@{}@@@",
-      "@@@STEP_LOG_END@goma_stats.json@@@"
+      "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
