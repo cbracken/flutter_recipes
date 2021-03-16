@@ -629,9 +629,47 @@
   },
   {
     "cmd": [],
-    "name": "teardown goma.ensure bqupload",
+    "name": "teardown goma.install infra/tools/bqupload",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "teardown goma.install infra/tools/bqupload.ensure package directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
     ]
   },
   {
@@ -639,7 +677,7 @@
       "cipd",
       "ensure",
       "-root",
-      "[START_DIR]/cipd/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef",
       "-ensure-file",
       "infra/tools/bqupload/${platform} git_revision:d85fe78f303c3e969f815121e17c8b08868039ef",
       "-max-threads",
@@ -668,7 +706,7 @@
       ]
     },
     "infra_step": true,
-    "name": "teardown goma.ensure bqupload.ensure_installed",
+    "name": "teardown goma.install infra/tools/bqupload.ensure_installed",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -686,7 +724,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:21.500000\", \"time_stamp_int\": 1337000003000}}"
     ],
@@ -1154,7 +1192,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:24.500000\", \"time_stamp_int\": 1337000006000}}"
     ],
@@ -1511,7 +1549,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:27.500000\", \"time_stamp_int\": 1337000009000}}"
     ],
@@ -1836,7 +1874,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:30.500000\", \"time_stamp_int\": 1337000012000}}"
     ],
@@ -2193,7 +2231,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:33.500000\", \"time_stamp_int\": 1337000015000}}"
     ],
@@ -3109,7 +3147,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:36.500000\", \"time_stamp_int\": 1337000018000}}"
     ],
@@ -3434,7 +3472,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:39.500000\", \"time_stamp_int\": 1337000021000}}"
     ],
@@ -3759,7 +3797,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:42.500000\", \"time_stamp_int\": 1337000024000}}"
     ],
@@ -4433,7 +4471,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:45.500000\", \"time_stamp_int\": 1337000027000}}"
     ],
@@ -4879,7 +4917,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:48.500000\", \"time_stamp_int\": 1337000030000}}"
     ],
@@ -5267,7 +5305,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:51.500000\", \"time_stamp_int\": 1337000033000}}"
     ],
@@ -5771,7 +5809,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:54.500000\", \"time_stamp_int\": 1337000036000}}"
     ],
@@ -6241,7 +6279,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:53:57.500000\", \"time_stamp_int\": 1337000039000}}"
     ],
@@ -6711,7 +6749,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:00.500000\", \"time_stamp_int\": 1337000042000}}"
     ],
@@ -7153,7 +7191,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:03.500000\", \"time_stamp_int\": 1337000045000}}"
     ],
@@ -7728,7 +7766,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:06.500000\", \"time_stamp_int\": 1337000048000}}"
     ],
@@ -8083,7 +8121,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:09.500000\", \"time_stamp_int\": 1337000051000}}"
     ],
@@ -8438,7 +8476,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:12.500000\", \"time_stamp_int\": 1337000054000}}"
     ],
@@ -8764,7 +8802,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:15.500000\", \"time_stamp_int\": 1337000057000}}"
     ],
@@ -9346,7 +9384,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:18.500000\", \"time_stamp_int\": 1337000060000}}"
     ],
@@ -9672,7 +9710,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:21.500000\", \"time_stamp_int\": 1337000063000}}"
     ],
@@ -10264,7 +10302,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:24.500000\", \"time_stamp_int\": 1337000066000}}"
     ],
@@ -10590,7 +10628,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:27.500000\", \"time_stamp_int\": 1337000069000}}"
     ],
@@ -11119,7 +11157,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:30.500000\", \"time_stamp_int\": 1337000072000}}"
     ],
@@ -11445,7 +11483,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:33.500000\", \"time_stamp_int\": 1337000075000}}"
     ],
@@ -12037,7 +12075,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:36.500000\", \"time_stamp_int\": 1337000078000}}"
     ],
@@ -12363,7 +12401,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:39.500000\", \"time_stamp_int\": 1337000081000}}"
     ],
@@ -12892,7 +12930,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:42.500000\", \"time_stamp_int\": 1337000084000}}"
     ],
@@ -13218,7 +13256,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:45.500000\", \"time_stamp_int\": 1337000087000}}"
     ],
@@ -14203,7 +14241,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:48.500000\", \"time_stamp_int\": 1337000090000}}"
     ],
@@ -14594,7 +14632,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Engine\", \"time_stamp\": \"2012-05-14 12:54:51.500000\", \"time_stamp_int\": 1337000093000}}"
     ],
@@ -14975,11 +15013,36 @@
     "name": "ensure gcloud"
   },
   {
+    "cmd": [],
+    "name": "ensure gcloud.install infra/gcloud",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0"
+    ],
+    "infra_step": true,
+    "name": "ensure gcloud.install infra/gcloud.ensure package directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
     "cmd": [
       "cipd",
       "ensure",
       "-root",
-      "[START_DIR]/cipd/gcloud",
+      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0",
       "-ensure-file",
       "infra/gcloud/${platform} version:266.0.0.chromium0",
       "-max-threads",
@@ -14988,9 +15051,9 @@
       "/path/to/tmp/json"
     ],
     "infra_step": true,
-    "name": "ensure gcloud.ensure_installed",
+    "name": "ensure gcloud.install infra/gcloud.ensure_installed",
     "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
@@ -15012,7 +15075,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "remove",
-      "[START_DIR]/cipd/gcloud/bin/gcloud"
+      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0/bin/gcloud"
     ],
     "infra_step": true,
     "name": "ensure gcloud.remove gcloud wrapper",
@@ -15029,7 +15092,7 @@
       "/path/to/tmp/json",
       "copy",
       "RECIPE_MODULE[fuchsia::gcloud]/resources/gcloud",
-      "[START_DIR]/cipd/gcloud/bin/gcloud"
+      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0/bin/gcloud"
     ],
     "infra_step": true,
     "name": "ensure gcloud.copy patched gcloud",
@@ -15039,7 +15102,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/gcloud/bin/gcloud",
+      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0/bin/gcloud",
       "pubsub",
       "topics",
       "publish",

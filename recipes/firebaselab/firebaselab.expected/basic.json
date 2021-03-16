@@ -174,11 +174,52 @@
     ]
   },
   {
+    "cmd": [],
+    "name": "test_execution.ensure gcloud.install infra/gcloud",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0"
+    ],
+    "cwd": "[START_DIR]/flutter/dev/integration_tests/the_task",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "test_execution.ensure gcloud.install infra/gcloud.ensure package directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@3@@@"
+    ]
+  },
+  {
     "cmd": [
       "cipd",
       "ensure",
       "-root",
-      "[START_DIR]/cipd/gcloud",
+      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0",
       "-ensure-file",
       "infra/gcloud/${platform} version:266.0.0.chromium0",
       "-max-threads",
@@ -203,9 +244,9 @@
       ]
     },
     "infra_step": true,
-    "name": "test_execution.ensure gcloud.ensure_installed",
+    "name": "test_execution.ensure gcloud.install infra/gcloud.ensure_installed",
     "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_NEST_LEVEL@3@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
@@ -227,7 +268,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "remove",
-      "[START_DIR]/cipd/gcloud/bin/gcloud"
+      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0/bin/gcloud"
     ],
     "cwd": "[START_DIR]/flutter/dev/integration_tests/the_task",
     "env": {
@@ -260,7 +301,7 @@
       "/path/to/tmp/json",
       "copy",
       "RECIPE_MODULE[fuchsia::gcloud]/resources/gcloud",
-      "[START_DIR]/cipd/gcloud/bin/gcloud"
+      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0/bin/gcloud"
     ],
     "cwd": "[START_DIR]/flutter/dev/integration_tests/the_task",
     "env": {
@@ -286,7 +327,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/gcloud/bin/gcloud",
+      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0/bin/gcloud",
       "--quiet",
       "config",
       "set",
@@ -345,7 +386,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/gcloud/bin/gcloud",
+      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0/bin/gcloud",
       "firebase",
       "test",
       "android",
@@ -418,7 +459,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/gcloud/bin/gcloud",
+      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0/bin/gcloud",
       "firebase",
       "test",
       "android",

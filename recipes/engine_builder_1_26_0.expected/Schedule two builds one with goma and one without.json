@@ -528,9 +528,42 @@
   },
   {
     "cmd": [],
-    "name": "build host_debug_unopt ().teardown goma.ensure bqupload",
+    "name": "build host_debug_unopt ().teardown goma.install infra/tools/bqupload",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "GOMA_TMP_DIR": "[CLEANUP]/goma",
+      "GOMA_USE_LOCAL": "False"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "build host_debug_unopt ().teardown goma.install infra/tools/bqupload.ensure package directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@3@@@"
     ]
   },
   {
@@ -538,7 +571,7 @@
       "cipd",
       "ensure",
       "-root",
-      "[START_DIR]/cipd/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef",
       "-ensure-file",
       "infra/tools/bqupload/${platform} git_revision:d85fe78f303c3e969f815121e17c8b08868039ef",
       "-max-threads",
@@ -562,7 +595,7 @@
       ]
     },
     "infra_step": true,
-    "name": "build host_debug_unopt ().teardown goma.ensure bqupload.ensure_installed",
+    "name": "build host_debug_unopt ().teardown goma.install infra/tools/bqupload.ensure_installed",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@3@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
@@ -580,7 +613,7 @@
   },
   {
     "cmd": [
-      "[START_DIR]/cipd/bqupload/bqupload",
+      "[CACHE]/cipd/infra/tools/bqupload/git_revision%3Ad85fe78f303c3e969f815121e17c8b08868039ef/bqupload",
       "fuchsia-infra.artifacts.builds_beta_goma",
       "{\"build_info\": {\"build_id\": 8945511751514863184, \"builder\": \"Linux Drone\", \"time_stamp\": \"2012-05-14 12:53:21.500000\", \"time_stamp_int\": 1337000003000}}"
     ],
