@@ -30,7 +30,7 @@
       "git",
       "fetch",
       "origin",
-      "master",
+      "stable",
       "--recurse-submodules",
       "--progress",
       "--tags"

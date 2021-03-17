@@ -18,7 +18,10 @@ def RunSteps(api):
   flutter_checkout_path = api.path['start_dir'].join('flutter')
   with api.step.nest('checkout source code'):
     # Check out flutter ToT from master.
-    api.repo_util.checkout('flutter', checkout_path=flutter_checkout_path)
+    api.repo_util.checkout('flutter',
+        checkout_path=flutter_checkout_path,
+        ref='refs/heads/stable',
+        )
     api.repo_util.checkout(
         'plugins',
         checkout_path=plugins_checkout_path,
