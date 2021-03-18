@@ -107,26 +107,42 @@ log "SYSLOG: ${SYSLOG}"
 readonly PORT_MAP="hostfwd=tcp::${SSH_PORT}-:22"
 readonly VDL_PROTO=$(mktemp -p "${PWD}")
 
-# Make sure --action=kill gets called even if --action=start errored.
 set +e
+
+shutdown() {
+  # Make sure --action=kill gets called even if --action=start errored.
+  # Stop the emulator
+  log "Stopping virtual device."
+  "./${VDL_LOCATION}" \
+    --action=kill \
+    --ga=true \
+    --launched_virtual_device_proto="${VDL_PROTO}"
+
+  VDL_STOP_EXIT_CODE=$?
+
+  if [[ ${VDL_STOP_EXIT_CODE} == 0 ]]; then
+    log "Stopped virtual device."
+  else
+    log "Stopping virutal device errored, this is usually fine. Exit code ${VDL_STOP_EXIT_CODE}"
+  fi
+}
+trap shutdown EXIT
 
 log "Launching virtual device using VDL."
 "./${VDL_LOCATION}" "${VDL_ARGS[@]}" \
   --action=start \
   --ga=true \
+  --event_action="flutter_infra" \
   --host_port_map="${PORT_MAP}" \
   --output_launched_device_proto="${VDL_PROTO}" > "${EMULATOR_LOG}" \
   --grpc_port="${GRPC_PORT}"
 
 _LAUNCH_EXIT_CODE=$?
-_TEST_EXIT_CODE=0
+err_codes=()
 
 if [[ ${_LAUNCH_EXIT_CODE} == 0 ]]; then
   log "Successfully launched virtual device proto ${VDL_PROTO}"
   ssh_to_guest "log_listener" >"${SYSLOG}" 2>&1 &
-
-  # Debug info to makesure fvm resizing worked.
-  ssh_to_guest lsblk
 
   for target in "${RUN_TESTS[@]}"; do
     ssh_to_guest "run-test-component fuchsia-pkg://fuchsia.com/${target}#meta/${target}.cmx ${TEST_ARGS}"
@@ -134,7 +150,7 @@ if [[ ${_LAUNCH_EXIT_CODE} == 0 ]]; then
     if [[ ${_EXIT_CODE} == 0 ]]; then
       log "${target} Passed"
     else
-      _TEST_EXIT_CODE=${_EXIT_CODE}
+      err_codes+=(${_EXIT_CODE})
       log "${target} Failed with exit code ${_EXIT_CODE}"
     fi
   done
@@ -142,20 +158,8 @@ else
   log "Failed to launch virtual device. Exit code ${_LAUNCH_EXIT_CODE}"
 fi
 
-# Stop the emulator
-log "Stopping virtual device."
-
-"./${VDL_LOCATION}" \
-  --action=kill \
-  --ga=true \
-  --launched_virtual_device_proto="${VDL_PROTO}"
-
-VDL_STOP_EXIT_CODE=$?
-
-if [[ ${VDL_STOP_EXIT_CODE} == 0 ]]; then
-  log "Stopped virtual device."
-else
-  log "Failed to stop virtual device. Exit code ${VDL_STOP_EXIT_CODE}"
+if [[ ${err_codes[@]} ]]; then
+  log "Has test fails" 
+  exit 1
 fi
-
-exit ${_LAUNCH_EXIT_CODE} && ${_TEST_EXIT_CODE} && ${VDL_STOP_EXIT_CODE}
+exit 0

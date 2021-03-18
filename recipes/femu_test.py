@@ -103,7 +103,7 @@ def IsolateSymlink(api):
     )
 
   def addVDLFiles():
-    vdl_version = api.properties.get('vdl_version', 'g3-revision:vdl_fuchsia_20201002_RC00')
+    vdl_version = api.properties.get('vdl_version', 'g3-revision:vdl_fuchsia_20210316_RC00')
     api.vdl.set_vdl_cipd_tag(tag=str(vdl_version))
     add(api.vdl.vdl_path, 'device_launcher')
     add(api.vdl.aemu_dir, 'aemu')
@@ -182,9 +182,29 @@ def TestFuchsiaFEMU(api):
       'fml_tests':
           '--gtest_filter=-MessageLoop.TimeSensistiveTest_*:FileTest.CanTruncateAndWrite:FileTest.CreateDirectoryStructure',
       'shell_tests':
-          '--gtest_filter=-ShellTest.ReportTimingsIsCalledLaterInReleaseMode:ShellTest.ReportTimingsIsCalledSoonerInNonReleaseMode',
+          (
+              '--gtest_filter=-'
+              'ShellTest.ReportTimingsIsCalledLaterInReleaseMode:'
+              'ShellTest.ReportTimingsIsCalledSoonerInNonReleaseMode:'
+              'ShellTest.CacheSkSLWorks:'
+              'ShellTest.FrameRasterizedCallbackIsCalled:'
+              'ShellTest.ExternalEmbedderNoThreadMerger:'
+              'ShellTest.OnPlatformViewDestroyWithoutRasterThreadMerger:'
+              'ShellTest.ReportTimingsIsCalledImmediatelyAfterTheFirstFrame:'
+              'ShellTest.DisallowedDartVMFlag:'
+              'ShellTest.SetResourceCacheSize:'
+              'ShellTest.SetResourceCacheSizeEarly:'
+              'ShellTest.SetResourceCacheSizeNotifiesDart:'
+              'ShellTest.Screenshot:'
+              'ShellTest.RasterizerScreenshot:'
+              'ShellTest.DiscardLayerTreeOnResize:'
+              'SkpWarmupTest.Basic:'
+              'SkpWarmupTest.Image:'
+              'FuchsiaShellTest.LocaltimesVaryOnTimezoneChanges'),
       'flutter_runner_scenic_tests':
           '--gtest_filter=-SessionConnectionTest.*:CalculateNextLatchPointTest.*',
+      'flutter_runner_tests':
+          '--gtest_filter=-EngineTest.SkpWarmup',
   }
   flutter_tests, root_dir, isolated_hash = IsolateSymlink(api)
   cmd = ['./run_vdl_test.sh']
