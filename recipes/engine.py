@@ -363,12 +363,6 @@ def UploadFlutterPatchedSdk(api):
       '*.dill.S',
   )
 
-  api.file.rmglob(
-      'remove *.dill.S files from flutter_patched_sdk_product',
-      host_release_path.join('flutter_patched_sdk_product'),
-      '*.dill.S',
-  )
-
   api.bucket_util.upload_folder(
       'Upload Flutter patched sdk', 'src/out/host_debug', 'flutter_patched_sdk',
       'flutter_patched_sdk.zip'
@@ -385,6 +379,13 @@ def UploadFlutterPatchedSdk(api):
       'Move release flutter_patched_sdk to flutter_patched_sdk_product',
       host_release_path.join('flutter_patched_sdk'), flutter_patched_sdk_product
   )
+
+  api.file.rmglob(
+      'remove *.dill.S files from flutter_patched_sdk_product',
+      host_release_path.join('flutter_patched_sdk_product'),
+      '*.dill.S',
+  )
+
   api.bucket_util.upload_folder(
       'Upload Product Flutter patched sdk', 'src/out/host_release',
       'flutter_patched_sdk_product', 'flutter_patched_sdk_product.zip'
