@@ -1912,14 +1912,7 @@
   },
   {
     "cmd": [],
-    "name": "ensure gcloud"
-  },
-  {
-    "cmd": [],
-    "name": "ensure gcloud.install infra/gcloud",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
+    "name": "install infra/gcloud"
   },
   {
     "cmd": [
@@ -1934,9 +1927,9 @@
       "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0"
     ],
     "infra_step": true,
-    "name": "ensure gcloud.install infra/gcloud.ensure package directory",
+    "name": "install infra/gcloud.ensure package directory",
     "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@"
+      "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
@@ -1953,9 +1946,9 @@
       "/path/to/tmp/json"
     ],
     "infra_step": true,
-    "name": "ensure gcloud.install infra/gcloud.ensure_installed",
+    "name": "install infra/gcloud.ensure_installed",
     "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
@@ -1971,40 +1964,9 @@
   },
   {
     "cmd": [
-      "vpython",
+      "python",
       "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "remove",
-      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0/bin/gcloud"
-    ],
-    "infra_step": true,
-    "name": "ensure gcloud.remove gcloud wrapper",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "copy",
-      "RECIPE_MODULE[fuchsia::gcloud]/resources/gcloud",
-      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0/bin/gcloud"
-    ],
-    "infra_step": true,
-    "name": "ensure gcloud.copy patched gcloud",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0/bin/gcloud",
+      "[CACHE]/cipd/infra/gcloud/version%3A266.0.0.chromium0/lib/gcloud.py",
       "pubsub",
       "topics",
       "publish",
