@@ -353,15 +353,31 @@ def UploadSkyEngineDartPackage(api):
 
 
 def UploadFlutterPatchedSdk(api):
+  host_debug_path = GetCheckoutPath(api).join('out/host_debug')
+  host_release_path = GetCheckoutPath(api).join('out/host_release')
+
+  # These are large and unused by Flutter, see #77950
+  api.file.rmglob(
+      'remove *.dill.S files from flutter_patched_sdk',
+      host_debug_path.join('flutter_patched_sdk'),
+      '*.dill.S',
+  )
+
+  api.file.rmglob(
+      'remove *.dill.S files from flutter_patched_sdk_product',
+      host_release_path.join('flutter_patched_sdk_product'),
+      '*.dill.S',
+  )
+
   api.bucket_util.upload_folder(
       'Upload Flutter patched sdk', 'src/out/host_debug', 'flutter_patched_sdk',
       'flutter_patched_sdk.zip'
   )
 
-  host_release_path = GetCheckoutPath(api).join('out/host_release')
   flutter_patched_sdk_product = host_release_path.join(
       'flutter_patched_sdk_product'
   )
+
   api.file.rmtree(
       'Remove stale flutter_patched_sdk_product', flutter_patched_sdk_product
   )
