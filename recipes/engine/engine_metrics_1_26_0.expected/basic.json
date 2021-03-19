@@ -195,25 +195,6 @@
     ]
   },
   {
-    "cmd": [
-      "python",
-      "[CACHE]/builder/src/flutter/tools/gn",
-      "--goma",
-      "--runtime-mode",
-      "release",
-      "--no-lto"
-    ],
-    "env_suffixes": {
-      "DEPOT_TOOLS_UPDATE": [
-        "0"
-      ],
-      "PATH": [
-        "RECIPE_REPO[depot_tools]"
-      ]
-    },
-    "name": "gn --runtime-mode release --no-lto"
-  },
-  {
     "cmd": [],
     "name": "ensure goma (2)"
   },
@@ -256,6 +237,28 @@
     ]
   },
   {
+    "cmd": [
+      "python",
+      "[CACHE]/builder/src/flutter/tools/gn",
+      "--goma",
+      "--runtime-mode",
+      "release",
+      "--no-lto"
+    ],
+    "env": {
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "gn --runtime-mode release --no-lto"
+  },
+  {
     "cmd": [],
     "name": "setup goma"
   },
@@ -270,6 +273,7 @@
       "GLOG_log_dir": "[CLEANUP]",
       "GOMA_CACHE_DIR": "[CACHE]/goma",
       "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
@@ -300,6 +304,7 @@
       "[CACHE]/builder/src/out/host_release"
     ],
     "env": {
+      "GOMA_DIR": "[CACHE]/goma/client",
       "GOMA_TMP_DIR": "[CLEANUP]/goma",
       "GOMA_USE_LOCAL": "False"
     },
@@ -331,6 +336,7 @@
       "GLOG_log_dir": "[CLEANUP]",
       "GOMA_CACHE_DIR": "[CACHE]/goma",
       "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
@@ -373,6 +379,7 @@
       "GLOG_log_dir": "[CLEANUP]",
       "GOMA_CACHE_DIR": "[CACHE]/goma",
       "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
@@ -404,6 +411,7 @@
       "GLOG_log_dir": "[CLEANUP]",
       "GOMA_CACHE_DIR": "[CACHE]/goma",
       "GOMA_DEPS_CACHE_FILE": "goma_deps_cache",
+      "GOMA_DIR": "[CACHE]/goma/client",
       "GOMA_DUMP_STATS_FILE": "[CACHE]/goma/client/goma_stats.json",
       "GOMA_LOCAL_OUTPUT_CACHE_DIR": "[CACHE]/goma/localoutputcache",
       "GOMA_SERVER_HOST": "rbe-prod1.endpoints.fuchsia-infra-goma-prod.cloud.goog",
@@ -436,6 +444,7 @@
       "/path/to/tmp/"
     ],
     "env": {
+      "GOMA_DIR": "[CACHE]/goma/client",
       "GOMA_TMP_DIR": "[CLEANUP]/goma",
       "GOMA_USE_LOCAL": "False"
     },
@@ -467,6 +476,7 @@
       "/path/to/tmp/"
     ],
     "env": {
+      "GOMA_DIR": "[CACHE]/goma/client",
       "GOMA_TMP_DIR": "[CLEANUP]/goma",
       "GOMA_USE_LOCAL": "False"
     },

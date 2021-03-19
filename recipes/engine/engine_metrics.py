@@ -29,15 +29,15 @@ def RunSteps(api, properties, env_properties):
 
   checkout_path = api.path['cache'].join('builder', 'src')
   cache_root = api.path['cache'].join('builder')
-  api.goma.ensure()
   dart_bin = checkout_path.join(
       'third_party', 'dart', 'tools', 'sdks', 'dart-sdk', 'bin'
   )
   android_home = checkout_path.join('third_party', 'android_tools', 'sdk')
-  env = {'GOMA_DIR': api.goma.goma_dir, 'ANDROID_HOME': str(android_home)}
+  env = {'ANDROID_HOME': str(android_home)}
   env_prefixes = {'PATH': [dart_bin]}
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
-  with api.depot_tools.on_path():
+  with api.depot_tools.on_path(), api.context(env=env,
+                                              env_prefixes=env_prefixes):
     api.build_util.run_gn(['--runtime-mode', 'release'], checkout_path)
     api.build_util.build('host_release', checkout_path, [])
 
