@@ -184,7 +184,7 @@
   {
     "cmd": [
       "flutter",
-      "doctor"
+      "update-packages"
     ],
     "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
@@ -204,7 +204,7 @@
         "[CLEANUP]/tmp_tmp_2/vpython"
       ]
     },
-    "name": "flutter doctor"
+    "name": "flutter update-packages"
   },
   {
     "cmd": [
@@ -258,7 +258,7 @@
         "[CLEANUP]/tmp_tmp_2/vpython"
       ]
     },
-    "name": "flutter doctor (2)"
+    "name": "flutter doctor"
   },
   {
     "cmd": [
