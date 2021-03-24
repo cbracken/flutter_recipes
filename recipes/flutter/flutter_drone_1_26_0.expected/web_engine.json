@@ -183,7 +183,7 @@
       "-isolated",
       "abceqwe",
       "-output-dir",
-      "[CACHE]/builder/src/out"
+      "[CLEANUP]/builder/src/out"
     ],
     "infra_step": true,
     "name": "Download for engine"
@@ -196,7 +196,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -208,7 +208,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
@@ -224,7 +224,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -236,7 +236,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
@@ -249,12 +249,12 @@
       "--enable-asserts",
       "[START_DIR]/flutter/dev/bots/test.dart",
       "--local-engine",
-      "[CACHE]/builder/src/out/host_debug_unopt"
+      "[CLEANUP]/builder/src/out/host_debug_unopt"
     ],
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -266,10 +266,10 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
@@ -288,7 +288,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -300,7 +300,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
@@ -318,7 +318,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -330,7 +330,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
@@ -348,7 +348,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -360,7 +360,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
@@ -378,7 +378,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -390,7 +390,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
@@ -408,7 +408,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -420,7 +420,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
@@ -442,7 +442,7 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -454,7 +454,7 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]

@@ -24,7 +24,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     # No-op if `isolate_hash` property is empty.
     if self.m.properties.get('isolated_hash'):
       isolated_hash = self.m.properties.get('isolated_hash')
-      checkout_engine = self.m.path['cache'].join('builder', 'src', 'out')
+      checkout_engine = self.m.path['cleanup'].join('builder', 'src', 'out')
       # Download host_debug_unopt from the isolate.
       self.m.isolated.download(
           'Download for engine', isolated_hash, checkout_engine

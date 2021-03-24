@@ -122,6 +122,31 @@
     ]
   },
   {
+    "cmd": [
+      "flutter",
+      "update-packages"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
+      "SHARD": null,
+      "SUBSHARD": null
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "name": "download dependencies"
+  },
+  {
     "cmd": [],
     "name": "install infra/tools/luci/isolated"
   },
@@ -137,6 +162,24 @@
       "0777",
       "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin"
     ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
+      "SHARD": null,
+      "SUBSHARD": null
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
     "infra_step": true,
     "name": "install infra/tools/luci/isolated.ensure package directory",
     "~followup_annotations": [
@@ -156,6 +199,24 @@
       "-json-output",
       "/path/to/tmp/json"
     ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
+      "SHARD": null,
+      "SUBSHARD": null
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
     "infra_step": true,
     "name": "install infra/tools/luci/isolated.ensure_installed",
     "~followup_annotations": [
@@ -183,20 +244,11 @@
       "-isolated",
       "abceqwe",
       "-output-dir",
-      "[CACHE]/builder/src/out"
-    ],
-    "infra_step": true,
-    "name": "Download for engine"
-  },
-  {
-    "cmd": [
-      "flutter",
-      "update-packages"
+      "[CLEANUP]/builder/src/out"
     ],
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -208,12 +260,12 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
     },
-    "name": "download dependencies"
+    "infra_step": true,
+    "name": "Download for engine"
   },
   {
     "cmd": [
@@ -224,7 +276,6 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -236,7 +287,6 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
@@ -249,12 +299,12 @@
       "--enable-asserts",
       "[START_DIR]/flutter/dev/bots/test.dart",
       "--local-engine",
-      "[CACHE]/builder/src/out/host_debug_unopt"
+      "[CLEANUP]/builder/src/out/host_debug_unopt"
     ],
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -266,10 +316,10 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
@@ -288,7 +338,6 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -300,7 +349,6 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
@@ -318,7 +366,6 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -330,7 +377,6 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
@@ -348,7 +394,6 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -360,7 +405,6 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
@@ -378,7 +422,6 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -390,7 +433,6 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
@@ -408,7 +450,6 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -420,7 +461,6 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
@@ -442,7 +482,6 @@
     "cwd": "[START_DIR]/flutter",
     "env": {
       "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
-      "LOCAL_ENGINE": "[CACHE]/builder/src/out/host_debug_unopt",
       "LUCI_BRANCH": "",
       "LUCI_CI": "True",
       "LUCI_PR": "",
@@ -454,7 +493,6 @@
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin",
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]

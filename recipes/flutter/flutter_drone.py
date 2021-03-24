@@ -29,11 +29,15 @@ def RunShard(api, env, env_prefixes, checkout_path):
     ]
     if env.get('LOCAL_ENGINE'):
       cmd_list.extend(['--local-engine', env.get('LOCAL_ENGINE')])
-
-    api.step(
-        'run test.dart for %s shard and subshard %s' %
-        (api.properties.get('shard'), api.properties.get('subshard')), cmd_list
-    )
+      local_engine_path = api.path.abs_to_path(str(env.get('LOCAL_ENGINE')))
+      dart_bin = local_engine_path.join('dart-sdk', 'bin')
+      env_prefixes = {'PATH': ['%s' % str(dart_bin)]}
+    with api.context(env=env, env_prefixes=env_prefixes):
+      api.step(
+          'run test.dart for %s shard and subshard %s' %
+          (api.properties.get('shard'), api.properties.get('subshard')),
+          cmd_list
+      )
 
 
 def RunSteps(api):
@@ -54,11 +58,11 @@ def RunSteps(api):
   # Add shard and subshard.
   env['SHARD'] = api.properties.get('shard')
   env['SUBSHARD'] = api.properties.get('subshard')
-  # Load local engine information if available.
-  api.flutter_deps.flutter_engine(env, env_prefixes)
 
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
     api.step('download dependencies', ['flutter', 'update-packages'])
+    # Load local engine information if available.
+    api.flutter_deps.flutter_engine(env, env_prefixes)
     dep_list = [d['dependency'] for d in deps]
     if 'xcode' in dep_list:
       with api.osx_sdk('ios'), api.step.defer_results():

@@ -393,6 +393,10 @@
         "[START_DIR]/flutter/bin",
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
         "[CACHE]/android/platform-tools",
+        "[CACHE]/android/tools",
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[CACHE]/android/platform-tools",
         "[CACHE]/android/tools"
       ]
     },

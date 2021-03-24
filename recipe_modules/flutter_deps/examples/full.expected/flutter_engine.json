@@ -505,7 +505,7 @@
       "-isolated",
       "abceqwe",
       "-output-dir",
-      "[CACHE]/builder/src/out"
+      "[CLEANUP]/builder/src/out"
     ],
     "infra_step": true,
     "name": "Download for engine"

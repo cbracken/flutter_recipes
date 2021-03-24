@@ -1,6 +1,7 @@
 # Copyright 2020 The Chromium Authors. All rights reserved.
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
+
 """Recipe for framework tests running with web-engine repository tests."""
 
 import contextlib
@@ -60,6 +61,9 @@ def Archive(api, target):
   isolate_dir = api.path.mkdtemp('isolate-directory')
   isolate_engine = isolate_dir.join(target)
   api.file.copytree('Copy host_debug_unopt', build_dir, isolate_engine)
+  source_dir = checkout.join('flutter')
+  isolate_source = isolate_dir.join('flutter')
+  api.file.copytree('Copy source', build_dir, isolate_source)
   isolated = api.isolated.isolated(isolate_dir)
   isolated.add_dir(isolate_dir)
   return isolated.archive('Archive Flutter Engine Test Isolate')
@@ -79,7 +83,6 @@ def GetCheckoutPath(api):
 def RunSteps(api, properties, env_properties):
   # Collect memory/cpu/process before task execution.
   api.os_utils.collect_os_info()
-
   """Steps to checkout flutter engine and execute web tests."""
   cache_root = api.path['cache'].join('builder')
   checkout = GetCheckoutPath(api)
@@ -90,17 +93,17 @@ def RunSteps(api, properties, env_properties):
 
   api.file.ensure_directory('Ensure checkout cache', cache_root)
   api.goma.ensure()
-  dart_bin = checkout.join('third_party', 'dart', 'tools', 'sdks', 'dart-sdk',
-                           'bin')
+  dart_bin = checkout.join(
+      'third_party', 'dart', 'tools', 'sdks', 'dart-sdk', 'bin'
+  )
 
   env = {'GOMA_DIR': api.goma.goma_dir, 'ENGINE_PATH': cache_root}
   env_prefixes = {'PATH': [dart_bin]}
 
   # Checkout source code and build
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
-  with api.context(
-      cwd=cache_root, env=env,
-      env_prefixes=env_prefixes), api.depot_tools.on_path():
+  with api.context(cwd=cache_root, env=env,
+                   env_prefixes=env_prefixes), api.depot_tools.on_path():
 
     api.gclient.runhooks()
 
@@ -118,7 +121,8 @@ def RunSteps(api, properties, env_properties):
     # Checkout flutter to run the web integration tests with the local engine.
     flutter_checkout_path = api.path['cache'].join('flutter')
     api.repo_util.checkout(
-        'flutter', checkout_path=flutter_checkout_path, url=url, ref=ref)
+        'flutter', checkout_path=flutter_checkout_path, url=url, ref=ref
+    )
     env['FLUTTER_CLONE_REPO_PATH'] = flutter_checkout_path
 
     with api.context(cwd=cache_root, env=env, env_prefixes=env_prefixes):
@@ -128,12 +132,11 @@ def RunSteps(api, properties, env_properties):
           'configure_framework_commit.sh',
       )
       api.step('configure framework commit', [configure_script])
-      commit_no_file = flutter_checkout_path.join(
-          'flutter_ref.txt',
+      commit_no_file = flutter_checkout_path.join('flutter_ref.txt',)
+      ref = api.file.read_text(
+          'read commit no', commit_no_file, 'b6efc758213fdfffee1234465'
       )
-      ref = api.file.read_text('read commit no', commit_no_file,
-                               'b6efc758213fdfffee1234465')
-      assert(len(ref) > 0)
+      assert (len(ref) > 0)
     # The SHA of the youngest commit older than the engine in the framework
     # side is kept in `ref`.
     builds = schedule_builds(api, isolated_hash, ref.strip(), url)
@@ -146,26 +149,31 @@ def RunSteps(api, properties, env_properties):
   deps = [{'dependency': 'chrome_and_driver'}, {"dependency": "curl"}]
   api.flutter_deps.required_deps(f_env, f_env_prefix, deps)
 
-  integration_test = flutter_checkout_path.join('dev', 'integration_tests',
-                                                'web')
+  integration_test = flutter_checkout_path.join(
+      'dev', 'integration_tests', 'web'
+  )
 
   with api.context(cwd=integration_test, env=f_env,
                    env_prefixes=f_env_prefix), api.step.defer_results():
     build_dir = checkout.join('out', target_name)
-    api.step('web integration tests config', [
-        'flutter',
-        'config',
-        '--local-engine=%s' % build_dir,
-        '--no-analytics',
-        '--enable-web',
-    ])
-    api.step('run web integration tests', [
-        'flutter',
-        '--local-engine=%s' % build_dir,
-        'build',
-        'web',
-        '-v',
-    ])
+    api.step(
+        'web integration tests config', [
+            'flutter',
+            'config',
+            '--local-engine=%s' % build_dir,
+            '--no-analytics',
+            '--enable-web',
+        ]
+    )
+    api.step(
+        'run web integration tests', [
+            'flutter',
+            '--local-engine=%s' % build_dir,
+            'build',
+            'web',
+            '-v',
+        ]
+    )
 
     # This is to clean up leaked processes.
     api.os_utils.kill_processes()
@@ -179,6 +187,7 @@ def RunSteps(api, properties, env_properties):
         builds=builds,
         raise_on_failure=True,
     )
+
 
 def schedule_builds(api, isolated_hash, ref, url):
   """Schedules one subbuild per subshard."""
@@ -202,7 +211,8 @@ def schedule_builds(api, isolated_hash, ref, url):
         swarming_parent_run_id=api.swarming.task_id,
         builder='%s SDK Drone' % platform_name,
         properties=drone_props,
-        priority=25)
+        priority=25
+    )
     reqs.append(req)
   return api.buildbucket.schedule(reqs)
 
@@ -212,15 +222,14 @@ def GenTests(api):
       'linux-pre-submit',
       api.repo_util.flutter_environment_data(api.path['cache'].join('flutter')),
       api.properties(
-          dependencies=[{
-              'dependency': 'chrome_and_driver'
-          }],
+          dependencies=[{'dependency': 'chrome_and_driver'}],
           shard='web_tests',
           subshards=['0', '1_last'],
           goma_jobs='200',
           git_url='https://mygitrepo',
           git_ref='refs/pull/1/head',
           clobber=True,
-          task_name='abc'),
+          task_name='abc'
+      ),
       api.platform('linux', 64),
   )

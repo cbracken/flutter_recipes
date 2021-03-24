@@ -609,6 +609,38 @@
     "name": "Copy host_debug_unopt"
   },
   {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copytree",
+      "[CACHE]/builder/src/out/host_debug_unopt",
+      "[CLEANUP]/isolate-directory_tmp_1/flutter"
+    ],
+    "cwd": "[CACHE]/builder",
+    "env": {
+      "ENGINE_PATH": "[CACHE]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Copy source"
+  },
+  {
     "cmd": [],
     "name": "install infra/tools/luci/isolated"
   },
