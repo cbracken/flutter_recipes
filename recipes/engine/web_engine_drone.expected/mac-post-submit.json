@@ -7,7 +7,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CACHE]/builder/src/out"
+      "[CLEANUP]/builder/src/out"
     ],
     "infra_step": true,
     "name": "Clobber build output: Mac"
@@ -22,7 +22,7 @@
       "ensure-directory",
       "--mode",
       "0777",
-      "[CACHE]/builder"
+      "[CLEANUP]/builder"
     ],
     "infra_step": true,
     "name": "Ensure checkout cache"
@@ -73,7 +73,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CACHE]/builder"
+      "[CLEANUP]/builder"
     ],
     "infra_step": true,
     "name": "Checkout source code.Clobber cache",
@@ -91,7 +91,7 @@
       "ensure-directory",
       "--mode",
       "0777",
-      "[CACHE]/builder"
+      "[CLEANUP]/builder"
     ],
     "infra_step": true,
     "name": "Checkout source code.Ensure checkout cache",
@@ -117,7 +117,7 @@
       "--revision",
       "src/flutter@HEAD"
     ],
-    "cwd": "[CACHE]/builder",
+    "cwd": "[CLEANUP]/builder",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "102400",
       "GIT_HTTP_LOW_SPEED_TIME": "300"
@@ -180,7 +180,7 @@
       "RECIPE_REPO[depot_tools]/gclient.py",
       "runhooks"
     ],
-    "cwd": "[CACHE]/builder",
+    "cwd": "[CLEANUP]/builder",
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
         "0"
@@ -226,7 +226,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "copy",
-      "[CACHE]/builder/src/flutter/lib/web_ui/dev/goldens_lock.yaml",
+      "[CLEANUP]/builder/src/flutter/lib/web_ui/dev/goldens_lock.yaml",
       "/path/to/tmp/"
     ],
     "cwd": "[CACHE]/builder",
@@ -243,7 +243,7 @@
       "-u",
       "RECIPE_MODULE[flutter::yaml]/resources/parse_yaml.py",
       "--yaml_file",
-      "[CACHE]/builder/src/flutter/lib/web_ui/dev/goldens_lock.yaml",
+      "[CLEANUP]/builder/src/flutter/lib/web_ui/dev/goldens_lock.yaml",
       "--json_file",
       "/path/to/tmp/json"
     ],
@@ -355,26 +355,122 @@
       "/path/to/tmp/json",
       "copytree",
       "[CACHE]/builder/goldens",
-      "[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/goldens"
+      "[CLEANUP]/builder/src/flutter/lib/web_ui/.dart_tool/goldens"
     ],
     "infra_step": true,
     "name": "copy goldens"
   },
   {
+    "cmd": [],
+    "name": "install infra/tools/luci/isolated"
+  },
+  {
     "cmd": [
-      "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin/pub",
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin"
+    ],
+    "cwd": "[CLEANUP]/builder",
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "install infra/tools/luci/isolated.ensure package directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin",
+      "-ensure-file",
+      "infra/tools/luci/isolated/${platform} isolated_module_pin",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "cwd": "[CLEANUP]/builder",
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "install infra/tools/luci/isolated.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-isolated_module_\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/isolated/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin/isolated",
+      "download",
+      "-verbose",
+      "-isolate-server",
+      "https://example.isolateserver.appspot.com",
+      "-isolated",
+      "abceqwe",
+      "-output-dir",
+      "[CLEANUP]/builder/src/out"
+    ],
+    "cwd": "[CLEANUP]/builder",
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Download for engine"
+  },
+  {
+    "cmd": [
+      "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin/pub",
       "get"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/web_sdk/web_engine_tester",
+    "cwd": "[CLEANUP]/builder/src/flutter/web_sdk/web_engine_tester",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -391,19 +487,21 @@
   },
   {
     "cmd": [
-      "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin/pub",
+      "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin/pub",
       "get"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -431,16 +529,18 @@
       "-json-output",
       "/path/to/tmp/json"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -480,16 +580,18 @@
       "-output-dir",
       "[CACHE]/osx_sdk/XCode.app"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -512,16 +614,18 @@
       "--switch",
       "[CACHE]/osx_sdk/XCode.app"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -539,22 +643,24 @@
   },
   {
     "cmd": [
-      "[CACHE]/builder/src/out/host_debug_unopt/dart-sdk/bin/dart",
+      "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin/dart",
       "dev/felt.dart",
       "test",
       "--browser=ios-safari",
       "--unit-tests-only"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -578,18 +684,20 @@
       "/path/to/tmp/json",
       "copy",
       "tests for mac",
-      "[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/test_results/info.txt"
+      "[CLEANUP]/builder/src/flutter/lib/web_ui/.dart_tool/test_results/info.txt"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -620,19 +728,21 @@
       "----",
       "cp",
       "-r",
-      "[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/test_results",
+      "[CLEANUP]/builder/src/flutter/lib/web_ui/.dart_tool/test_results",
       "gs://mybucket/web_engine/0/ios-safari"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -659,19 +769,21 @@
       "--json-output",
       "/path/to/tmp/json",
       "glob",
-      "[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/test_results",
+      "[CLEANUP]/builder/src/flutter/lib/web_ui/.dart_tool/test_results",
       "*.html"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -687,7 +799,7 @@
     "infra_step": true,
     "name": "html goldens",
     "~followup_annotations": [
-      "@@@STEP_LOG_LINE@glob@[CACHE]/builder/src/flutter/lib/web_ui/.dart_tool/test_results/a.html@@@",
+      "@@@STEP_LOG_LINE@glob@[CLEANUP]/builder/src/flutter/lib/web_ui/.dart_tool/test_results/a.html@@@",
       "@@@STEP_LOG_END@glob@@@"
     ]
   },
@@ -708,16 +820,18 @@
       "-9",
       "dart"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -741,16 +855,18 @@
       "-9",
       "flutter"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -774,16 +890,18 @@
       "-9",
       "Chrome"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -807,16 +925,18 @@
       "-9",
       "Safari"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -840,16 +960,18 @@
       "-9",
       "java"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -873,16 +995,18 @@
       "-9",
       "adb"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -908,16 +1032,18 @@
       "-o",
       "mem"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -937,16 +1063,18 @@
       "xattr",
       "/opt/s/w/ir/cipd_bin_packages/python"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -966,16 +1094,18 @@
       "xattr",
       "/opt/s/w/ir/cipd_bin_packages/git"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {
@@ -996,16 +1126,18 @@
       "xcode-select",
       "--reset"
     ],
-    "cwd": "[CACHE]/builder/src/flutter/lib/web_ui",
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
     "env": {
-      "ANDROID_HOME": "[CACHE]/builder/src/third_party/android_tools/sdk",
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
       "CHROME_NO_SANDBOX": "true",
-      "ENGINE_PATH": "[CACHE]/builder",
-      "GOMA_DIR": "[CACHE]/goma/client"
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
       ]
     },
     "env_suffixes": {

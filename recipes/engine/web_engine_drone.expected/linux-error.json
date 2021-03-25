@@ -7,7 +7,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CACHE]/builder"
+      "[CLEANUP]/builder"
     ],
     "infra_step": true,
     "name": "Clobber cache"
@@ -20,7 +20,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CACHE]/builder/src/out"
+      "[CLEANUP]/builder/src/out"
     ],
     "infra_step": true,
     "name": "Clobber build output: Linux"
@@ -35,7 +35,7 @@
       "ensure-directory",
       "--mode",
       "0777",
-      "[CACHE]/builder"
+      "[CLEANUP]/builder"
     ],
     "infra_step": true,
     "name": "Ensure checkout cache"
@@ -86,7 +86,7 @@
       "--json-output",
       "/path/to/tmp/json",
       "rmtree",
-      "[CACHE]/builder"
+      "[CLEANUP]/builder"
     ],
     "infra_step": true,
     "name": "Checkout source code.Clobber cache",
@@ -104,7 +104,7 @@
       "ensure-directory",
       "--mode",
       "0777",
-      "[CACHE]/builder"
+      "[CLEANUP]/builder"
     ],
     "infra_step": true,
     "name": "Checkout source code.Ensure checkout cache",
@@ -132,7 +132,7 @@
       "--refs",
       "refs/pull/1/head"
     ],
-    "cwd": "[CACHE]/builder",
+    "cwd": "[CLEANUP]/builder",
     "env": {
       "GIT_HTTP_LOW_SPEED_LIMIT": "102400",
       "GIT_HTTP_LOW_SPEED_TIME": "300"
@@ -195,7 +195,7 @@
       "RECIPE_REPO[depot_tools]/gclient.py",
       "runhooks"
     ],
-    "cwd": "[CACHE]/builder",
+    "cwd": "[CLEANUP]/builder",
     "env_suffixes": {
       "DEPOT_TOOLS_UPDATE": [
         "0"
@@ -218,7 +218,7 @@
       "The recipe has crashed at point 'Uncaught exception'!",
       "",
       "Traceback (most recent call last):",
-      "  File \"RECIPE_REPO[flutter]/recipes/engine/web_engine_drone.py\", line 76, in RunSteps",
+      "  File \"RECIPE_REPO[flutter]/recipes/engine/web_engine_drone.py\", line 78, in RunSteps",
       "    api.web_util.prepare_dependencies(checkout)",
       "  File \"RECIPE_REPO[flutter]/recipe_modules/web_util/api.py\", line 172, in prepare_dependencies",
       "    raise ValueError('Dependency %s not available.' % dep)",
