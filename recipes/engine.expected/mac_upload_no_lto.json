@@ -11850,6 +11850,7 @@
       "-9",
       "dart"
     ],
+    "infra_step": true,
     "name": "Killing Processes.kill dart",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -11861,6 +11862,7 @@
       "-9",
       "flutter"
     ],
+    "infra_step": true,
     "name": "Killing Processes.kill flutter",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -11872,6 +11874,7 @@
       "-9",
       "Chrome"
     ],
+    "infra_step": true,
     "name": "Killing Processes.kill Chrome",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -11883,6 +11886,7 @@
       "-9",
       "Safari"
     ],
+    "infra_step": true,
     "name": "Killing Processes.kill Safari",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -11894,6 +11898,7 @@
       "-9",
       "java"
     ],
+    "infra_step": true,
     "name": "Killing Processes.kill Safari (2)",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -11905,6 +11910,7 @@
       "-9",
       "adb"
     ],
+    "infra_step": true,
     "name": "Killing Processes.kill Safari (3)",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"

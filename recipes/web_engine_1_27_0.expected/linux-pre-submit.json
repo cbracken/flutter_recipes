@@ -1357,6 +1357,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
+    "infra_step": true,
     "name": "Killing Processes.kill chrome",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -1387,6 +1388,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
+    "infra_step": true,
     "name": "Killing Processes.kill dart",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -1417,6 +1419,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
+    "infra_step": true,
     "name": "Killing Processes.kill flutter",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -1447,6 +1450,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
+    "infra_step": true,
     "name": "Killing Processes.kill java",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -1477,6 +1481,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
+    "infra_step": true,
     "name": "Killing Processes.kill adb",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"

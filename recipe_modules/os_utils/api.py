@@ -18,7 +18,11 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       name(str): The name of the step.
       exe_name(str): The name of the windows executable.
     """
-    self.m.step(name, ['taskkill', '/f', '/im', exe_name, '/t'], ok_ret='any')
+    self.m.step(
+        name, ['taskkill', '/f', '/im', exe_name, '/t'],
+        ok_ret='any',
+        infra_step=True
+    )
 
   def clean_derived_data(self):
     """Cleans the derived data folder in mac builders.
@@ -74,18 +78,50 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         self._kill_win('stop adb', 'adb.exe')
         self._kill_win('stop flutter_tester', 'flutter_tester.exe')
       elif self.m.platform.is_mac:
-        self.m.step('kill dart', ['killall', '-9', 'dart'], ok_ret='any')
-        self.m.step('kill flutter', ['killall', '-9', 'flutter'], ok_ret='any')
-        self.m.step('kill Chrome', ['killall', '-9', 'Chrome'], ok_ret='any')
-        self.m.step('kill Safari', ['killall', '-9', 'Safari'], ok_ret='any')
-        self.m.step('kill Safari', ['killall', '-9', 'java'], ok_ret='any')
-        self.m.step('kill Safari', ['killall', '-9', 'adb'], ok_ret='any')
+        self.m.step(
+            'kill dart', ['killall', '-9', 'dart'],
+            ok_ret='any',
+            infra_step=True
+        )
+        self.m.step(
+            'kill flutter', ['killall', '-9', 'flutter'],
+            ok_ret='any',
+            infra_step=True
+        )
+        self.m.step(
+            'kill Chrome', ['killall', '-9', 'Chrome'],
+            ok_ret='any',
+            infra_step=True
+        )
+        self.m.step(
+            'kill Safari', ['killall', '-9', 'Safari'],
+            ok_ret='any',
+            infra_step=True
+        )
+        self.m.step(
+            'kill Safari', ['killall', '-9', 'java'],
+            ok_ret='any',
+            infra_step=True
+        )
+        self.m.step(
+            'kill Safari', ['killall', '-9', 'adb'],
+            ok_ret='any',
+            infra_step=True
+        )
       else:
-        self.m.step('kill chrome', ['pkill', 'chrome'], ok_ret='any')
-        self.m.step('kill dart', ['pkill', 'dart'], ok_ret='any')
-        self.m.step('kill flutter', ['pkill', 'flutter'], ok_ret='any')
-        self.m.step('kill java', ['pkill', 'java'], ok_ret='any')
-        self.m.step('kill adb', ['pkill', 'adb'], ok_ret='any')
+        self.m.step(
+            'kill chrome', ['pkill', 'chrome'], ok_ret='any', infra_step=True
+        )
+        self.m.step(
+            'kill dart', ['pkill', 'dart'], ok_ret='any', infra_step=True
+        )
+        self.m.step(
+            'kill flutter', ['pkill', 'flutter'], ok_ret='any', infra_step=True
+        )
+        self.m.step(
+            'kill java', ['pkill', 'java'], ok_ret='any', infra_step=True
+        )
+        self.m.step('kill adb', ['pkill', 'adb'], ok_ret='any', infra_step=True)
       # Ensure we always pass this step as killing non existing processes
       # may create errors.
       presentation.status = 'SUCCESS'

@@ -58,8 +58,8 @@ def RunSteps(api):
     # git_branch is set only when the build was triggered by buildbucket.
     runner_params.extend(['--git-branch', git_branch])
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
-    api.step('flutter doctor', ['flutter', 'doctor'])
-    api.step('pub get', ['pub', 'get'])
+    api.step('flutter doctor', ['flutter', 'doctor'], infra_step=True)
+    api.step('pub get', ['pub', 'get'], infra_step=True)
     dep_list = {d['dependency']: d.get('version') for d in deps}
     if dep_list.has_key('xcode'):
       api.os_utils.clean_derived_data()
@@ -127,7 +127,7 @@ def uploadMetrics(api, results_path):
         'dart', 'bin/test_runner.dart', 'upload-metrics', '--results-file',
         results_path, '--service-account-token-file', access_token_path
     ]
-    api.step('upload metrics', upload_command)
+    api.step('upload metrics', upload_command, infra_step=True)
 
 
 def GenTests(api):

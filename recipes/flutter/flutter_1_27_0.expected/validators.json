@@ -277,6 +277,7 @@
         "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
+    "infra_step": true,
     "name": "prepare environment.Killing Processes.kill chrome",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
@@ -303,6 +304,7 @@
         "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
+    "infra_step": true,
     "name": "prepare environment.Killing Processes.kill dart",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
@@ -329,6 +331,7 @@
         "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
+    "infra_step": true,
     "name": "prepare environment.Killing Processes.kill flutter",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
@@ -355,6 +358,7 @@
         "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
+    "infra_step": true,
     "name": "prepare environment.Killing Processes.kill java",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
@@ -381,6 +385,7 @@
         "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
+    "infra_step": true,
     "name": "prepare environment.Killing Processes.kill adb",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
