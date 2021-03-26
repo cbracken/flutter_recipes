@@ -70,7 +70,7 @@ def GetGitHash(api):
   with api.context(cwd=GetCheckoutPath(api)):
     return api.step(
         "Retrieve git hash", ["git", "rev-parse", "HEAD"],
-        stdout=api.raw_io.output()
+        stdout=api.raw_io.output(), infra_step=True,
     ).stdout.strip()
 
 
@@ -246,7 +246,7 @@ def NotifyPubsub(
       '--message={"buildername" : "%s", "bucket" : "%s", "githash" : "%s"}' %
       (buildername, bucket, githash)
   ]
-  api.gcloud(*cmd)
+  api.gcloud(*cmd, infra_step=True)
 
 
 def UploadArtifacts(
@@ -1534,12 +1534,9 @@ def RunSteps(api, properties, env_properties):
 
   # Notifies of build completion
   # TODO(crbug.com/843720): replace this when user defined notifications is implemented.
-  try:
-    NotifyPubsub(
-        api, api.buildbucket.builder_name, api.buildbucket.build.builder.bucket
-    )
-  except (api.step.StepFailure) as e:
-    pass
+  NotifyPubsub(
+      api, api.buildbucket.builder_name, api.buildbucket.build.builder.bucket
+  )
 
   # This is to clean up leaked processes.
   api.os_utils.kill_processes()

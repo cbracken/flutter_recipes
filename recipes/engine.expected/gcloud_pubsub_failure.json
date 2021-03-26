@@ -15067,6 +15067,7 @@
       "HEAD"
     ],
     "cwd": "[CACHE]/builder/src",
+    "infra_step": true,
     "name": "Retrieve git hash"
   },
   {
@@ -15132,82 +15133,16 @@
       "projects/flutter-dashboard/topics/luci-builds-prod",
       "--message={\"buildername\" : \"Linux Host Engine\", \"bucket\" : \"ci\", \"githash\" : \"\"}"
     ],
+    "infra_step": true,
     "name": "gcloud pubsub",
     "~followup_annotations": [
-      "@@@STEP_FAILURE@@@"
+      "@@@STEP_EXCEPTION@@@"
     ]
   },
   {
-    "cmd": [],
-    "name": "Killing Processes"
-  },
-  {
-    "cmd": [
-      "pkill",
-      "chrome"
-    ],
-    "infra_step": true,
-    "name": "Killing Processes.kill chrome",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "pkill",
-      "dart"
-    ],
-    "infra_step": true,
-    "name": "Killing Processes.kill dart",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "pkill",
-      "flutter"
-    ],
-    "infra_step": true,
-    "name": "Killing Processes.kill flutter",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "pkill",
-      "java"
-    ],
-    "infra_step": true,
-    "name": "Killing Processes.kill java",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "pkill",
-      "adb"
-    ],
-    "infra_step": true,
-    "name": "Killing Processes.kill adb",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "top",
-      "-b",
-      "-n",
-      "3",
-      "-o",
-      "%MEM"
-    ],
-    "name": "OS info (2)"
-  },
-  {
+    "failure": {
+      "humanReason": "Infra Failure: Step('gcloud pubsub') (retcode: 1)"
+    },
     "name": "$result"
   }
 ]

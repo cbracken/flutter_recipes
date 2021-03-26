@@ -15067,6 +15067,7 @@
       "HEAD"
     ],
     "cwd": "[CACHE]/builder/src",
+    "infra_step": true,
     "name": "Retrieve git hash"
   },
   {
@@ -15132,6 +15133,7 @@
       "projects/flutter-dashboard/topics/luci-builds-prod",
       "--message={\"buildername\" : \"Linux Host Engine\", \"bucket\" : \"ci\", \"githash\" : \"\"}"
     ],
+    "infra_step": true,
     "name": "gcloud pubsub"
   },
   {
