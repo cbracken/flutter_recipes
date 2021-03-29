@@ -4,4 +4,4 @@
 
 set -e
 
-dart --enable-asserts ./dev/bots/codesign.dart
+./dev/tools/bin/conductor codesign --verify
