@@ -7,6 +7,7 @@
       "-o",
       "mem"
     ],
+    "infra_step": true,
     "name": "OS info"
   },
   {
@@ -14,6 +15,7 @@
       "xattr",
       "/opt/s/w/ir/cipd_bin_packages/python"
     ],
+    "infra_step": true,
     "name": "python xattr info"
   },
   {
@@ -21,6 +23,7 @@
       "xattr",
       "/opt/s/w/ir/cipd_bin_packages/git"
     ],
+    "infra_step": true,
     "name": "git xattr info"
   },
   {
@@ -13530,6 +13533,7 @@
       "-o",
       "mem"
     ],
+    "infra_step": true,
     "name": "OS info (2)"
   },
   {
@@ -13537,6 +13541,7 @@
       "xattr",
       "/opt/s/w/ir/cipd_bin_packages/python"
     ],
+    "infra_step": true,
     "name": "python xattr info (2)"
   },
   {
@@ -13544,6 +13549,7 @@
       "xattr",
       "/opt/s/w/ir/cipd_bin_packages/git"
     ],
+    "infra_step": true,
     "name": "git xattr info (2)"
   },
   {

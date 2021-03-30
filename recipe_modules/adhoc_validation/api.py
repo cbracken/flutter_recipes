@@ -43,7 +43,11 @@ class AddhocValidationApi(recipe_api.RecipeApi):
       self.m.kms.decrypt_secrets(env, secrets)
       if self.m.platform.is_linux or self.m.platform.is_mac:
         resource_name = self.resource('%s.sh' % validation)
-        self.m.step('Set execute permission', ['chmod', '755', resource_name])
+        self.m.step(
+            'Set execute permission',
+            ['chmod', '755', resource_name],
+            infra_step=True,
+        )
       elif self.m.platform.is_win:
         resource_name = self.resource('%s.bat' % validation)
       dep_list = [d['dependency'] for d in deps]

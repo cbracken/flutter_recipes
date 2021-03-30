@@ -1062,6 +1062,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
+    "infra_step": true,
     "name": "OS info"
   },
   {
@@ -1093,6 +1094,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
+    "infra_step": true,
     "name": "python xattr info"
   },
   {
@@ -1124,6 +1126,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
+    "infra_step": true,
     "name": "git xattr info"
   },
   {

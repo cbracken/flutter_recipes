@@ -235,6 +235,7 @@
         "[CLEANUP]/go_path/bin"
       ]
     },
+    "infra_step": true,
     "name": "Install dashing"
   },
   {
@@ -469,6 +470,7 @@
       "[START_DIR]/firebase/firebase",
       "https://firebase.tools/bin/linux/latest"
     ],
+    "infra_step": true,
     "name": "Install firebase.Install firebase bin",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -480,6 +482,7 @@
       "755",
       "[START_DIR]/firebase/firebase"
     ],
+    "infra_step": true,
     "name": "Install firebase.Set execute permission",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -592,6 +595,7 @@
     "cmd": [
       "unlock_login_keychain.sh"
     ],
+    "infra_step": true,
     "name": "Prepare code signing.unlock login keychain",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"

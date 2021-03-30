@@ -8,6 +8,7 @@
       "-o",
       "%MEM"
     ],
+    "infra_step": true,
     "name": "OS info"
   },
   {
@@ -2064,6 +2065,7 @@
       "-o",
       "%MEM"
     ],
+    "infra_step": true,
     "name": "OS info (2)"
   },
   {

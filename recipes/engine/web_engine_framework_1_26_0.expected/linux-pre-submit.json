@@ -8,6 +8,7 @@
       "-o",
       "%MEM"
     ],
+    "infra_step": true,
     "name": "OS info"
   },
   {
@@ -1466,6 +1467,7 @@
         "[CACHE]/chrome/drivers"
       ]
     },
+    "infra_step": true,
     "name": "OS info (2)"
   },
   {

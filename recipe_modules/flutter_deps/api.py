@@ -175,7 +175,8 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     with self.m.context(env=env, env_prefixes=env_prefixes):
       self.m.step(
           'Install dashing',
-          ['go', 'get', '-u', 'github.com/technosophos/dashing']
+          ['go', 'get', '-u', 'github.com/technosophos/dashing'],
+          infra_step=True,
       )
 
   def vpython(self, env, env_prefixes, version):
@@ -227,7 +228,8 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       with self.m.context(cwd=gem_dir):
         self.m.step(
             'install bundler',
-            ['gem', 'install', 'bundler', '--install-dir', '.']
+            ['gem', 'install', 'bundler', '--install-dir', '.'],
+            infra_step=True,
         )
       env['GEM_HOME'] = gem_dir
       paths = env_prefixes.get('PATH', [])
@@ -236,9 +238,11 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       env_prefixes['PATH'] = temp_paths
       with self.m.context(env=env, env_prefixes=env_prefixes, cwd=gemfile_dir):
         self.m.step(
-            'set gems path', ['bundle', 'config', 'set', 'path', gem_dir]
+            'set gems path',
+            ['bundle', 'config', 'set', 'path', gem_dir],
+            infra_step=True,
         )
-        self.m.step('install gems', ['bundler', 'install'])
+        self.m.step('install gems', ['bundler', 'install'], infra_step=True)
       # Update envs to the final destination.
       self.m.file.listdir('list bundle', gem_dir, recursive=True)
       env['GEM_HOME'] = gem_dir.join('ruby', '2.6.0')
@@ -258,15 +262,18 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     self.m.file.ensure_directory('ensure directory', firebase_dir)
     with self.m.step.nest('Install firebase'):
       self.m.step(
-          'Install firebase bin', [
+          'Install firebase bin',
+          [
               'curl', '-Lo',
               firebase_dir.join('firebase'),
               'https://firebase.tools/bin/linux/latest'
-          ]
+          ],
+          infra_step=True,
       )
       self.m.step(
           'Set execute permission',
-          ['chmod', '755', firebase_dir.join('firebase')]
+          ['chmod', '755', firebase_dir.join('firebase')],
+          infra_step=True,
       )
     paths = env_prefixes.get('PATH', [])
     paths.append(firebase_dir)
@@ -331,7 +338,11 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       env_prefixes(dict):  Current environment prefixes variables.
     """
     with self.m.step.nest('Prepare code signing'):
-      self.m.step('unlock login keychain', ['unlock_login_keychain.sh'])
+      self.m.step(
+          'unlock login keychain',
+          ['unlock_login_keychain.sh'],
+          infra_step=True,
+      )
       # See go/googler-flutter-signing about how to renew the Apple development
       # certificate and provisioning profile.
       env['FLUTTER_XCODE_CODE_SIGN_STYLE'] = 'Manual'

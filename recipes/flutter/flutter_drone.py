@@ -60,7 +60,11 @@ def RunSteps(api):
   env['SUBSHARD'] = api.properties.get('subshard')
 
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
-    api.step('download dependencies', ['flutter', 'update-packages'])
+    api.step(
+        'download dependencies',
+        ['flutter', 'update-packages'],
+        infra_step=True,
+    )
     # Load local engine information if available.
     api.flutter_deps.flutter_engine(env, env_prefixes)
     dep_list = [d['dependency'] for d in deps]
@@ -69,7 +73,11 @@ def RunSteps(api):
         api.flutter_deps.gems(
             env, env_prefixes, checkout_path.join('dev', 'ci', 'mac')
         )
-        api.step('flutter doctor', ['flutter', 'doctor', '-v'])
+        api.step(
+            'flutter doctor',
+            ['flutter', 'doctor', '-v'],
+            infra_step=True,
+        )
         RunShard(api, env, env_prefixes, checkout_path)
         # This is to clean up leaked processes.
         api.os_utils.kill_processes()
@@ -77,7 +85,11 @@ def RunSteps(api):
         api.os_utils.collect_os_info()
     else:
       with api.step.defer_results():
-        api.step('flutter doctor', ['flutter', 'doctor', '-v'])
+        api.step(
+            'flutter doctor',
+            ['flutter', 'doctor', '-v'],
+            infra_step=True,
+        )
         RunShard(api, env, env_prefixes, checkout_path)
         # This is to clean up leaked processes.
         api.os_utils.kill_processes()

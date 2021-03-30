@@ -8,6 +8,7 @@
       "-o",
       "%MEM"
     ],
+    "infra_step": true,
     "name": "OS info"
   },
   {
@@ -328,6 +329,7 @@
         "[CACHE]/android/tools"
       ]
     },
+    "infra_step": true,
     "name": "download dependencies"
   },
   {
@@ -360,6 +362,7 @@
         "[CACHE]/android/tools"
       ]
     },
+    "infra_step": true,
     "name": "flutter doctor"
   },
   {
@@ -614,6 +617,7 @@
         "[CACHE]/android/tools"
       ]
     },
+    "infra_step": true,
     "name": "OS info (2)"
   },
   {

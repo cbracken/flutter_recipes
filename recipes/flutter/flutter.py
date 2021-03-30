@@ -66,8 +66,12 @@ def RunSteps(api):
   )
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
     with api.step.nest('prepare environment'), api.step.defer_results():
-      api.step('flutter doctor', ['flutter', 'doctor'])
-      api.step('download dependencies', ['flutter', 'update-packages'])
+      api.step('flutter doctor', ['flutter', 'doctor'], infra_step=True)
+      api.step(
+          'download dependencies',
+          ['flutter', 'update-packages'],
+          infra_step=True,
+      )
       api.adhoc_validation.run(
           api.properties.get('validation_name'),
           api.properties.get('validation'), env, env_prefixes,

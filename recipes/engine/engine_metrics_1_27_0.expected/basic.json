@@ -8,6 +8,7 @@
       "-o",
       "%MEM"
     ],
+    "infra_step": true,
     "name": "OS info"
   },
   {
@@ -643,6 +644,7 @@
         "[CACHE]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin"
       ]
     },
+    "infra_step": true,
     "name": "OS info (2)"
   },
   {
