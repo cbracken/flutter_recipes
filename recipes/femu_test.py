@@ -17,7 +17,6 @@ DEPS = [
     'depot_tools/depot_tools',
     'flutter/json_util',
     'flutter/repo_util',
-    'flutter/yaml',
     'fuchsia/display_util',
     'fuchsia/sdk',
     'fuchsia/ssh',
@@ -177,14 +176,35 @@ def IsolateSymlink(api):
 
 def TestFuchsiaFEMU(api):
   """Run flutter tests on FEMU."""
-  checkout = GetCheckoutPath(api)
-  gtest_filters_file = checkout.join('flutter', 'testing', 'fuchsia',
-                                     'gtest_filters.yaml')
-  gtest_filters = api.yaml.read('Retrieve list of gtest filters',
-                                gtest_filters_file, api.json.output())
   test_args = {
-    test_type: '--gtest_filter={filter}'.format(filter=gtest_filter)
-    for test_type, gtest_filter in gtest_filters.json.output.items()
+      'txt_tests':
+          '--gtest_filter=-ParagraphTest.*',
+      'fml_tests':
+          '--gtest_filter=-MessageLoop.TimeSensistiveTest_*:FileTest.CanTruncateAndWrite:FileTest.CreateDirectoryStructure',
+      'shell_tests':
+          (
+              '--gtest_filter=-'
+              'ShellTest.ReportTimingsIsCalledLaterInReleaseMode:'
+              'ShellTest.ReportTimingsIsCalledSoonerInNonReleaseMode:'
+              'ShellTest.CacheSkSLWorks:'
+              'ShellTest.FrameRasterizedCallbackIsCalled:'
+              'ShellTest.ExternalEmbedderNoThreadMerger:'
+              'ShellTest.OnPlatformViewDestroyWithoutRasterThreadMerger:'
+              'ShellTest.ReportTimingsIsCalledImmediatelyAfterTheFirstFrame:'
+              'ShellTest.DisallowedDartVMFlag:'
+              'ShellTest.SetResourceCacheSize:'
+              'ShellTest.SetResourceCacheSizeEarly:'
+              'ShellTest.SetResourceCacheSizeNotifiesDart:'
+              'ShellTest.Screenshot:'
+              'ShellTest.RasterizerScreenshot:'
+              'ShellTest.DiscardLayerTreeOnResize:'
+              'SkpWarmupTest.Basic:'
+              'SkpWarmupTest.Image:'
+              'FuchsiaShellTest.LocaltimesVaryOnTimezoneChanges'),
+      'flutter_runner_scenic_tests':
+          '--gtest_filter=-SessionConnectionTest.*:CalculateNextLatchPointTest.*',
+      'flutter_runner_tests':
+          '--gtest_filter=-EngineTest.SkpWarmup',
   }
   flutter_tests, root_dir, isolated_hash = IsolateSymlink(api)
   cmd = ['./run_vdl_test.sh']
@@ -317,18 +337,6 @@ def GenTests(api):
           ),
       ),
       api.step_data(
-          'Retrieve list of gtest filters.parse',
-          api.json.output({
-            'txt_tests': '-ParagraphTest.*',
-            'fml_tests': '-MessageLoop.TimeSensistiveTest_*:FileTest.CanTruncateAndWrite:FileTest.CreateDirectoryStructure'
-          })
-      ),
-      api.step_data(
-          'Retrieve list of gtest filters.read',
-          api.file.read_text('''txt_tests: -ParagraphTest.*
-fml_tests: -MessageLoop.TimeSensistiveTest_*:FileTest.CanTruncateAndWrite:FileTest.CreateDirectoryStructure''')
-      ),
-      api.step_data(
           'Read manifest',
           api.file.read_json({'id': '0.20200101.0.1'}),
       ),
@@ -375,18 +383,6 @@ fml_tests: -MessageLoop.TimeSensistiveTest_*:FileTest.CanTruncateAndWrite:FileTe
               git_ref='refs/pull/1/head',
               vdl_version='g3-revision:vdl_fuchsia_xxxxxxxx_RC00',
           ),),
-      api.step_data(
-          'Retrieve list of gtest filters.parse',
-          api.json.output({
-            'txt_tests': '-ParagraphTest.*',
-            'fml_tests': '-MessageLoop.TimeSensistiveTest_*:FileTest.CanTruncateAndWrite:FileTest.CreateDirectoryStructure'
-          })
-      ),
-      api.step_data(
-          'Retrieve list of gtest filters.read',
-          api.file.read_text('''txt_tests: -ParagraphTest.*
-fml_tests: -MessageLoop.TimeSensistiveTest_*:FileTest.CanTruncateAndWrite:FileTest.CreateDirectoryStructure''')
-      ),
       api.step_data(
           'Read manifest',
           api.file.read_json({'id': '0.20200101.0.1'}),
