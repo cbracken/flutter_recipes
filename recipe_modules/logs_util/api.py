@@ -25,9 +25,6 @@ class LogUtilsApi(recipe_api.RecipeApi):
       logs_path = self.m.path['cleanup'].join('flutter_logs_dir')
       self.m.file.ensure_directory('Ensure %s' % logs_path, logs_path)
       env['FLUTTER_LOGS_DIR'] = logs_path
-      # Ensure that any test outputs, e.g. timelines/timeline summaries are
-      # included as logs.
-      env['FLUTTER_TEST_OUTPUTS_DIR'] = logs_path
       # Write a noop file to for the creation of the remote folder estructure
       # when there logs folder is empty.
       self.m.file.write_text(
