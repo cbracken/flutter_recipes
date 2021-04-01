@@ -76,7 +76,6 @@ def RunSteps(api):
         api.step(
             'flutter doctor',
             ['flutter', 'doctor', '-v'],
-            infra_step=True,
         )
         RunShard(api, env, env_prefixes, checkout_path)
         # This is to clean up leaked processes.
@@ -88,7 +87,6 @@ def RunSteps(api):
         api.step(
             'flutter doctor',
             ['flutter', 'doctor', '-v'],
-            infra_step=True,
         )
         RunShard(api, env, env_prefixes, checkout_path)
         # This is to clean up leaked processes.

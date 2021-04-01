@@ -362,7 +362,6 @@
         "[CACHE]/android/tools"
       ]
     },
-    "infra_step": true,
     "name": "flutter doctor"
   },
   {

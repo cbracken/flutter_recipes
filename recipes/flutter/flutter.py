@@ -66,7 +66,10 @@ def RunSteps(api):
   )
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
     with api.step.nest('prepare environment'), api.step.defer_results():
-      api.step('flutter doctor', ['flutter', 'doctor'], infra_step=True)
+      api.step(
+          'flutter doctor',
+          ['flutter', 'doctor'],
+      )
       api.step(
           'download dependencies',
           ['flutter', 'update-packages'],

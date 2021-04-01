@@ -158,7 +158,6 @@
         "[START_DIR]/flutter sdk/bin/cache/dart-sdk/bin"
       ]
     },
-    "infra_step": true,
     "name": "prepare environment.flutter doctor",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"

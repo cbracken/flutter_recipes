@@ -206,7 +206,6 @@
         "[CLEANUP]/tmp_tmp_2/vpython"
       ]
     },
-    "infra_step": true,
     "name": "flutter doctor"
   },
   {

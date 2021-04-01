@@ -293,7 +293,6 @@
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
     },
-    "infra_step": true,
     "name": "flutter doctor"
   },
   {
