@@ -246,6 +246,7 @@
       "-rf",
       "[HOME]/Library/Developer/Xcode/DerivedData"
     ],
+    "infra_step": true,
     "name": "Delete mac deriveddata"
   },
   {
@@ -13306,6 +13307,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
+    "infra_step": true,
     "name": "pub get for verify_exported.dart"
   },
   {

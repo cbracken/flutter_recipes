@@ -133,7 +133,8 @@ class OSXSDKApi(recipe_api.RecipeApi):
 
     sdk_app = cache_dir.join('XCode.app')
     self.m.step(
-        'install xcode', [
+        'install xcode',
+        [
             cache_dir.join('mac_toolchain'),
             'install',
             '-kind',
@@ -144,6 +145,6 @@ class OSXSDKApi(recipe_api.RecipeApi):
             sdk_app,
             '-cipd-package-prefix',
             'flutter_internal/ios/xcode',
-        ]
+        ],
     )
     return sdk_app

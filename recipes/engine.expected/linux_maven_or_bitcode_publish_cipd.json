@@ -4205,6 +4205,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
+    "infra_step": true,
     "name": "android lint.pub get",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -15147,6 +15148,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
+    "infra_step": true,
     "name": "pub get for verify_exported.dart"
   },
   {

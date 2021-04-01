@@ -419,7 +419,6 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "infra_step": true,
     "name": "Killing Processes.stop gradle daemon",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -457,7 +456,6 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "infra_step": true,
     "name": "Killing Processes.stop dart",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -495,7 +493,6 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "infra_step": true,
     "name": "Killing Processes.stop adb",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -533,7 +530,6 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "infra_step": true,
     "name": "Killing Processes.stop flutter_tester",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"

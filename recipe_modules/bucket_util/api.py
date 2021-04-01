@@ -4,11 +4,11 @@
 
 from recipe_engine import recipe_api
 
-
 # TODO(godofredoc): Remove when flutter tool branches to stable.
 # https://github.com/flutter/flutter/issues/75363.
 OLD_INFRA_BUCKET_NAME = 'flutter_infra'
 NEW_INFRA_BUCKET_NAME = 'flutter_infra_release'
+
 
 class BucketUtilApi(recipe_api.RecipeApi):
   """Utility functions to upload files to cloud buckets.
@@ -22,13 +22,15 @@ class BucketUtilApi(recipe_api.RecipeApi):
   def should_upload_packages(self):
     return self.m.properties.get('upload_packages', False)
 
-  def upload_folder(self,
-                    dir_label,
-                    parent_directory,
-                    folder_name,
-                    zip_name,
-                    platform=None,
-                    bucket_name=NEW_INFRA_BUCKET_NAME):
+  def upload_folder(
+      self,
+      dir_label,
+      parent_directory,
+      folder_name,
+      zip_name,
+      platform=None,
+      bucket_name=NEW_INFRA_BUCKET_NAME
+  ):
     """Uploads a folder to the cloud bucket
 
     Args:
@@ -39,21 +41,25 @@ class BucketUtilApi(recipe_api.RecipeApi):
       platform: (str) Directory name to add the zip file to.
       bucket_name: (str) The bucket name. Defaults to flutter_infra.
     """
-    self.upload_folder_and_files(dir_label,
-                                 parent_directory,
-                                 folder_name,
-                                 zip_name,
-                                 platform=platform,
-                                 bucket_name=bucket_name)
+    self.upload_folder_and_files(
+        dir_label,
+        parent_directory,
+        folder_name,
+        zip_name,
+        platform=platform,
+        bucket_name=bucket_name
+    )
 
-  def upload_folder_and_files(self,
-                              dir_label,
-                              parent_directory,
-                              folder_name,
-                              zip_name,
-                              platform=None,
-                              file_paths=None,
-                              bucket_name=NEW_INFRA_BUCKET_NAME):
+  def upload_folder_and_files(
+      self,
+      dir_label,
+      parent_directory,
+      folder_name,
+      zip_name,
+      platform=None,
+      file_paths=None,
+      bucket_name=NEW_INFRA_BUCKET_NAME
+  ):
     """Uploads a folder and or files to the cloud bucket
 
     Args:
@@ -80,12 +86,14 @@ class BucketUtilApi(recipe_api.RecipeApi):
       if self.should_upload_packages():
         self.safe_upload(local_zip, remote_zip, bucket_name=bucket_name)
 
-  def safe_upload(self,
-                  local_path,
-                  remote_path,
-                  bucket_name=NEW_INFRA_BUCKET_NAME,
-                  args=[],
-                  skip_on_duplicate=False):
+  def safe_upload(
+      self,
+      local_path,
+      remote_path,
+      bucket_name=NEW_INFRA_BUCKET_NAME,
+      args=[],
+      skip_on_duplicate=False
+  ):
     """Upload a file if it doesn't already exist, fail job otherwise.
 
     The check can be overridden with the `force_upload` property.
@@ -109,13 +117,15 @@ class BucketUtilApi(recipe_api.RecipeApi):
     if not experimental and not force_upload:
       cloud_path = 'gs://%s/%s' % (bucket_name, remote_path)
       result = self.m.step(
-          'Ensure %s does not already exist on cloud storage' % remote_path, [
+          'Ensure %s does not already exist on cloud storage' % remote_path,
+          [
               'python',
               self.m.depot_tools.gsutil_py_path,
               'stat',
               cloud_path,
           ],
-          ok_ret='all')
+          ok_ret='all',
+      )
       # A return value of 0 means the file ALREADY exists on cloud storage
       if result.exc_result.retcode == 0:
         if skip_on_duplicate:
@@ -123,20 +133,21 @@ class BucketUtilApi(recipe_api.RecipeApi):
           return
         raise AssertionError('%s already exists on cloud storage' % cloud_path)
 
-    
     if bucket_name == NEW_INFRA_BUCKET_NAME:
       self.m.gsutil.upload(
-         local_path,
-         OLD_INFRA_BUCKET_NAME,
-         remote_path,
-         args=args,
-         name='upload "%s"' % remote_path)
+          local_path,
+          OLD_INFRA_BUCKET_NAME,
+          remote_path,
+          args=args,
+          name='upload "%s"' % remote_path
+      )
     return self.m.gsutil.upload(
         local_path,
         bucket_name,
         remote_path,
         args=args,
-        name='upload "%s"' % remote_path)
+        name='upload "%s"' % remote_path
+    )
 
   def add_files(self, pkg, relative_paths=[]):
     """Adds files to the package.
@@ -152,8 +163,7 @@ class BucketUtilApi(recipe_api.RecipeApi):
         destination filename in the archive.
     """
     for path in relative_paths:
-      pkg.add_file(pkg.root.join(path),
-                   archive_name=self.m.path.basename(path))
+      pkg.add_file(pkg.root.join(path), archive_name=self.m.path.basename(path))
 
   def add_directories(self, pkg, relative_paths=[]):
     """Adds directories to the package.

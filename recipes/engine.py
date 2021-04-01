@@ -69,8 +69,10 @@ def GetCheckoutPath(api):
 def GetGitHash(api):
   with api.context(cwd=GetCheckoutPath(api)):
     return api.step(
-        "Retrieve git hash", ["git", "rev-parse", "HEAD"],
-        stdout=api.raw_io.output(), infra_step=True,
+        "Retrieve git hash",
+        ["git", "rev-parse", "HEAD"],
+        stdout=api.raw_io.output(),
+        infra_step=True,
     ).stdout.strip()
 
 
@@ -433,7 +435,11 @@ def VerifyExportedSymbols(api):
   script_dir = checkout.join('flutter/testing/symbols')
   script_path = script_dir.join('verify_exported.dart')
   with api.context(cwd=script_dir):
-    api.step('pub get for verify_exported.dart', ['pub', 'get'])
+    api.step(
+        'pub get for verify_exported.dart',
+        ['pub', 'get'],
+        infra_step=True,
+    )
   api.step(
       'Verify exported symbols on release binaries',
       ['dart', script_path, out_dir]
@@ -494,7 +500,11 @@ def LintAndroidHost(api):
                                      ).join('flutter', 'tools', 'android_lint')
   with api.step.nest('android lint'):
     with api.context(cwd=android_lint_path):
-      api.step('pub get', ['pub', 'get'])
+      api.step(
+          'pub get',
+          ['pub', 'get'],
+          infra_step=True,
+      )
       api.step('dart bin/main.dart', ['dart', 'bin/main.dart'])
 
 

@@ -19,9 +19,9 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       exe_name(str): The name of the windows executable.
     """
     self.m.step(
-        name, ['taskkill', '/f', '/im', exe_name, '/t'],
+        name,
+        ['taskkill', '/f', '/im', exe_name, '/t'],
         ok_ret='any',
-        infra_step=True
     )
 
   def clean_derived_data(self):
@@ -35,7 +35,11 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         'Library', 'Developer', 'Xcode', 'DerivedData'
     )
     if self.m.platform.is_mac:
-      self.m.step('Delete mac deriveddata', ['rm', '-rf', derived_data_path])
+      self.m.step(
+          'Delete mac deriveddata',
+          ['rm', '-rf', derived_data_path],
+          infra_step=True,
+      )
 
   def collect_os_info(self):
     """Collects meminfo, cpu, processes for mac"""
