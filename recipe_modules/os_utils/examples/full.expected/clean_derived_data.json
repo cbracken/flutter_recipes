@@ -278,6 +278,7 @@
       "755",
       "RECIPE_MODULE[flutter::os_utils]/resources/dismiss_dialogs.sh"
     ],
+    "infra_step": true,
     "name": "Dismiss dialogs.Set execute permission",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -289,6 +290,7 @@
       "-l"
     ],
     "cwd": "[CACHE]/cocoon/agent/tool/infra-dialog",
+    "infra_step": true,
     "name": "Dismiss dialogs.Find device id",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -300,6 +302,7 @@
       ""
     ],
     "cwd": "[CACHE]/cocoon/agent/tool/infra-dialog",
+    "infra_step": true,
     "name": "Dismiss dialogs.Run app to dismiss dialogs",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"

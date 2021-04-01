@@ -181,9 +181,15 @@ class FlutterDepsApi(recipe_api.RecipeApi):
             'cocoon', cocoon_path, ref='refs/heads/master'
         )
         resource_name = self.resource('dismiss_dialogs.sh')
-        self.m.step('Set execute permission', ['chmod', '755', resource_name])
+        self.m.step(
+            'Set execute permission',
+            ['chmod', '755', resource_name],
+            infra_step=True,
+        )
         with self.m.context(
-            cwd=cocoon_path.join('agent', 'tool', 'infra-dialog')):
+            cwd=cocoon_path.join('agent', 'tool', 'infra-dialog'),
+            infra_steps=True,
+        ):
           device_id = self.m.step(
               'Find device id', ['idevice_id', '-l'],
               stdout=self.m.raw_io.output()
