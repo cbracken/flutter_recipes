@@ -186,25 +186,10 @@ def TestFuchsiaFEMU(api):
               '--gtest_filter=-'
               'ShellTest.ReportTimingsIsCalledLaterInReleaseMode:'
               'ShellTest.ReportTimingsIsCalledSoonerInNonReleaseMode:'
-              'ShellTest.CacheSkSLWorks:'
-              'ShellTest.FrameRasterizedCallbackIsCalled:'
-              'ShellTest.ExternalEmbedderNoThreadMerger:'
-              'ShellTest.OnPlatformViewDestroyWithoutRasterThreadMerger:'
-              'ShellTest.ReportTimingsIsCalledImmediatelyAfterTheFirstFrame:'
               'ShellTest.DisallowedDartVMFlag:'
-              'ShellTest.SetResourceCacheSize:'
-              'ShellTest.SetResourceCacheSizeEarly:'
-              'ShellTest.SetResourceCacheSizeNotifiesDart:'
-              'ShellTest.Screenshot:'
-              'ShellTest.RasterizerScreenshot:'
-              'ShellTest.DiscardLayerTreeOnResize:'
-              'SkpWarmupTest.Basic:'
-              'SkpWarmupTest.Image:'
               'FuchsiaShellTest.LocaltimesVaryOnTimezoneChanges'),
       'flutter_runner_scenic_tests':
           '--gtest_filter=-SessionConnectionTest.*:CalculateNextLatchPointTest.*',
-      'flutter_runner_tests':
-          '--gtest_filter=-EngineTest.SkpWarmup',
   }
   flutter_tests, root_dir, isolated_hash = IsolateSymlink(api)
   cmd = ['./run_vdl_test.sh']
