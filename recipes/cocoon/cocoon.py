@@ -1,6 +1,7 @@
 # Copyright 2019 The Chromium Authors. All rights reserved.
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
+
 """Recipe for cocoon repository tests."""
 
 DEPS = [
@@ -28,7 +29,8 @@ def RunSteps(api):
       'cocoon',
       cocoon_path,
       url=api.properties.get('git_url'),
-      ref=api.properties.get('git_ref'))
+      ref=api.properties.get('git_ref')
+  )
 
   # Validates engine builders json format.
   api.json_util.validate_json(cocoon_path)
@@ -44,9 +46,14 @@ def RunSteps(api):
   # The context adds dart-sdk tools to PATH and sets PUB_CACHE.
   with api.context(env=env, env_prefixes=env_prefixes, cwd=start_path):
     api.step('flutter doctor', cmd=['flutter', 'doctor'])
-    prepare_script_path = cocoon_path.join('test_utilities', 'bin',
-                                           'prepare_environment.sh')
-    api.step('prepare environment', cmd=['bash', prepare_script_path])
+    prepare_script_path = cocoon_path.join(
+        'test_utilities', 'bin', 'prepare_environment.sh'
+    )
+    api.step(
+        'prepare environment',
+        cmd=['bash', prepare_script_path],
+        infra_step=True,
+    )
     for task in result.json.output['tasks']:
       script_path = cocoon_path.join(task['script'])
       test_folder = cocoon_path.join(task['task'])
@@ -59,7 +66,9 @@ def GenTests(api):
       'pull_request', api.runtime(is_experimental=True),
       api.properties(
           git_url='https://github.com/flutter/cocoon',
-          git_ref='refs/pull/1/head'),
+          git_ref='refs/pull/1/head'
+      ),
       api.repo_util.flutter_environment_data(
-          api.path['start_dir'].join('flutter')),
-      api.step_data('read yaml.parse', api.json.output(tasks_dict)))
+          api.path['start_dir'].join('flutter')
+      ), api.step_data('read yaml.parse', api.json.output(tasks_dict))
+  )

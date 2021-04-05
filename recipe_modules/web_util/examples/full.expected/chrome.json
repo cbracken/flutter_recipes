@@ -37,6 +37,7 @@
       "/path/to/tmp/json"
     ],
     "cwd": "[CACHE]/builder/src",
+    "infra_step": true,
     "name": "read browser lock yaml.parse",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",

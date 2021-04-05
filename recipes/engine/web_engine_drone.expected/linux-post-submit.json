@@ -233,6 +233,7 @@
       "/path/to/tmp/json"
     ],
     "cwd": "[CLEANUP]/builder/src",
+    "infra_step": true,
     "name": "read browser lock yaml.parse",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
@@ -315,6 +316,7 @@
       "/path/to/tmp/json"
     ],
     "cwd": "[CLEANUP]/builder/src",
+    "infra_step": true,
     "name": "read browser lock yaml (2).parse",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
@@ -412,6 +414,7 @@
       "/path/to/tmp/json"
     ],
     "cwd": "[CACHE]/builder",
+    "infra_step": true,
     "name": "read yaml.parse",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",

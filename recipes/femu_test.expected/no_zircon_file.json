@@ -585,6 +585,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
+    "infra_step": true,
     "name": "Retrieve list of gtest filters.parse",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",

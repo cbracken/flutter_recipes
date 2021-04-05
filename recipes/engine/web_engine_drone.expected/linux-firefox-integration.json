@@ -276,6 +276,7 @@
       "/path/to/tmp/json"
     ],
     "cwd": "[CACHE]/builder",
+    "infra_step": true,
     "name": "read yaml.parse",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",

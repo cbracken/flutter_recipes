@@ -42,6 +42,7 @@
       "--json_file",
       "/path/to/tmp/json"
     ],
+    "infra_step": true,
     "name": "yaml.parse",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
