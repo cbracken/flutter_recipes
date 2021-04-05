@@ -131,7 +131,11 @@ def RunSteps(api, properties, env_properties):
           'tools',
           'configure_framework_commit.sh',
       )
-      api.step('configure framework commit', [configure_script])
+      api.step(
+          'configure framework commit',
+          [configure_script],
+          infra_step=True,
+      )
       commit_no_file = flutter_checkout_path.join('flutter_ref.txt',)
       ref = api.file.read_text(
           'read commit no', commit_no_file, 'b6efc758213fdfffee1234465'
@@ -157,13 +161,15 @@ def RunSteps(api, properties, env_properties):
                    env_prefixes=f_env_prefix), api.step.defer_results():
     build_dir = checkout.join('out', target_name)
     api.step(
-        'web integration tests config', [
+        'web integration tests config',
+        [
             'flutter',
             'config',
             '--local-engine=%s' % build_dir,
             '--no-analytics',
             '--enable-web',
-        ]
+        ],
+        infra_step=True,
     )
     api.step(
         'run web integration tests', [

@@ -1024,6 +1024,7 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
+    "infra_step": true,
     "name": "configure framework commit"
   },
   {
@@ -1308,6 +1309,7 @@
         "[CLEANUP]/tmp_tmp_1/curl"
       ]
     },
+    "infra_step": true,
     "name": "web integration tests config"
   },
   {
