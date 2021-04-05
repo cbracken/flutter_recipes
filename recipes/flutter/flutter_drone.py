@@ -14,6 +14,7 @@ DEPS = [
     'flutter/os_utils',
     'flutter/osx_sdk',
     'flutter/repo_util',
+    'flutter/test_utils',
     'recipe_engine/context',
     'recipe_engine/path',
     'recipe_engine/properties',
@@ -33,7 +34,7 @@ def RunShard(api, env, env_prefixes, checkout_path):
       dart_bin = local_engine_path.join('dart-sdk', 'bin')
       env_prefixes = {'PATH': ['%s' % str(dart_bin)]}
     with api.context(env=env, env_prefixes=env_prefixes):
-      api.step(
+      api.test_utils.run_test(
           'run test.dart for %s shard and subshard %s' %
           (api.properties.get('shard'), api.properties.get('subshard')),
           cmd_list

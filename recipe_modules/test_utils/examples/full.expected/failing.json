@@ -1,0 +1,24 @@
+[
+  {
+    "cmd": [
+      "ls",
+      "-la"
+    ],
+    "name": "mytest",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@stdout@#failure@@@",
+      "@@@STEP_LOG_LINE@stdout@this is a failure@@@",
+      "@@@STEP_LOG_END@stdout@@@",
+      "@@@STEP_LOG_LINE@stderr@@@@",
+      "@@@STEP_LOG_END@stderr@@@",
+      "@@@STEP_FAILURE@@@"
+    ]
+  },
+  {
+    "failure": {
+      "failure": {},
+      "humanReason": "#failure\nthis is a failure"
+    },
+    "name": "$result"
+  }
+]

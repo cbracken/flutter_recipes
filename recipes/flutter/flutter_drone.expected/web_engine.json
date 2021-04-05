@@ -326,7 +326,13 @@
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
     },
-    "name": "run test.dart for None shard and subshard None"
+    "name": "run test.dart for None shard and subshard None",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@stdout@@@@",
+      "@@@STEP_LOG_END@stdout@@@",
+      "@@@STEP_LOG_LINE@stderr@@@@",
+      "@@@STEP_LOG_END@stderr@@@"
+    ]
   },
   {
     "cmd": [],
