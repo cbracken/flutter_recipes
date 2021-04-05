@@ -261,6 +261,7 @@
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
     },
+    "infra_step": true,
     "name": "prepare environment.flutter config --enable-windows-desktop",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -313,6 +314,7 @@
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
     },
+    "infra_step": true,
     "name": "prepare environment.download dependencies",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
@@ -341,6 +343,7 @@
         "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
       ]
     },
+    "infra_step": true,
     "name": "prepare environment.pub global activate flutter_plugin_tools",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"

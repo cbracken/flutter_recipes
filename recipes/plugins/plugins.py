@@ -18,10 +18,11 @@ def RunSteps(api):
   flutter_checkout_path = api.path['start_dir'].join('flutter')
   with api.step.nest('checkout source code'):
     # Check out flutter ToT from master.
-    api.repo_util.checkout('flutter',
+    api.repo_util.checkout(
+        'flutter',
         checkout_path=flutter_checkout_path,
         ref='refs/heads/stable',
-        )
+    )
     api.repo_util.checkout(
         'plugins',
         checkout_path=plugins_checkout_path,
@@ -37,13 +38,19 @@ def RunSteps(api):
     with api.step.nest('prepare environment'):
       api.step(
           'flutter config --enable-windows-desktop',
-          ['flutter', 'config', '--enable-windows-desktop']
+          ['flutter', 'config', '--enable-windows-desktop'],
+          infra_step=True,
       )
       api.step('flutter doctor', ['flutter', 'doctor'])
-      api.step('download dependencies', ['flutter', 'update-packages'])
+      api.step(
+          'download dependencies',
+          ['flutter', 'update-packages'],
+          infra_step=True,
+      )
       api.step(
           'pub global activate flutter_plugin_tools',
-          ['pub', 'global', 'activate', 'flutter_plugin_tools']
+          ['pub', 'global', 'activate', 'flutter_plugin_tools'],
+          infra_step=True,
       )
   with api.context(env=env, env_prefixes=env_prefixes,
                    cwd=plugins_checkout_path):
