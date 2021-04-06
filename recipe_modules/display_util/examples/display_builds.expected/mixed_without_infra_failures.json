@@ -203,22 +203,12 @@
     "name": "display builds.builder",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LINK@987654321098765432@https://cr-buildbucket.appspot.com/build/987654321098765432@@@",
-      "@@@STEP_FAILURE@@@"
+      "@@@STEP_LINK@123456789012345678@https://cr-buildbucket.appspot.com/build/123456789012345678@@@"
     ]
   },
   {
     "cmd": [],
     "name": "display builds.builder (2)",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LINK@112233445566778899@https://cr-buildbucket.appspot.com/build/112233445566778899@@@",
-      "@@@STEP_FAILURE@@@"
-    ]
-  },
-  {
-    "cmd": [],
-    "name": "display builds.builder (3)",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LINK@199887766554433221@https://cr-buildbucket.appspot.com/build/199887766554433221@@@",
@@ -227,16 +217,26 @@
   },
   {
     "cmd": [],
+    "name": "display builds.builder (3)",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LINK@112233445566778899@https://cr-buildbucket.appspot.com/build/112233445566778899@@@",
+      "@@@STEP_FAILURE@@@"
+    ]
+  },
+  {
+    "cmd": [],
     "name": "display builds.builder (4)",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LINK@123456789012345678@https://cr-buildbucket.appspot.com/build/123456789012345678@@@"
+      "@@@STEP_LINK@987654321098765432@https://cr-buildbucket.appspot.com/build/987654321098765432@@@",
+      "@@@STEP_FAILURE@@@"
     ]
   },
   {
     "failure": {
       "failure": {},
-      "humanReason": "2 builds failed:\n\n[builder](https://cr-buildbucket.appspot.com/build/987654321098765432)\n\n[builder](https://cr-buildbucket.appspot.com/build/112233445566778899)"
+      "humanReason": "2 builds failed:\n\n[builder](https://cr-buildbucket.appspot.com/build/112233445566778899)\n\n[builder](https://cr-buildbucket.appspot.com/build/987654321098765432)"
     },
     "name": "$result"
   }

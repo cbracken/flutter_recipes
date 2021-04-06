@@ -1294,10 +1294,10 @@ def BuildIOS(api):
 def PackageWindowsDesktopVariant(api, label, bucket_name):
   artifacts = [
       'out/%s/flutter_export.h' % label,
-      'out/%s/flutter_windows.h' % label,
       'out/%s/flutter_messenger.h' % label,
       'out/%s/flutter_plugin_registrar.h' % label,
       'out/%s/flutter_texture_registrar.h' % label,
+      'out/%s/flutter_windows.h' % label,
       'out/%s/flutter_windows.dll' % label,
       'out/%s/flutter_windows.dll.exp' % label,
       'out/%s/flutter_windows.dll.lib' % label,
@@ -1307,6 +1307,24 @@ def PackageWindowsDesktopVariant(api, label, bucket_name):
     artifacts.append('out/%s/gen_snapshot.exe' % label)
   UploadArtifacts(
       api, bucket_name, artifacts, archive_name='windows-x64-flutter.zip'
+  )
+
+def PackageWindowsUwpDesktopVariant(api, label, bucket_name):
+  artifacts = [
+      'out/%s/flutter_export.h' % label,
+      'out/%s/flutter_messenger.h' % label,
+      'out/%s/flutter_plugin_registrar.h' % label,
+      'out/%s/flutter_texture_registrar.h' % label,
+      'out/%s/flutter_windows.h' % label,
+      'out/%s/flutter_windows.dll' % label,
+      'out/%s/flutter_windows.dll.exp' % label,
+      'out/%s/flutter_windows.dll.lib' % label,
+      'out/%s/flutter_windows.dll.pdb' % label,
+  ]
+  if bucket_name.endswith('profile') or bucket_name.endswith('release'):
+    artifacts.append('out/%s/gen_snapshot.exe' % label)
+  UploadArtifacts(
+      api, bucket_name, artifacts, archive_name='windows-uwp-x64-flutter.zip'
   )
 
 
@@ -1372,6 +1390,11 @@ def BuildWindows(api):
 
     UploadDartSdk(api, archive_name='dart-sdk-windows-x64.zip')
     UploadWebSdk(api, archive_name='flutter-web-sdk-windows-x64.zip')
+
+  if api.properties.get('build_windows_uwp', True):
+    RunGN(api, '--runtime-mode', 'debug', '--winuwp', '--no-lto')
+    Build(api, 'winwup_debug')
+    PackageWindowsUwpDesktopVariant(api, 'uwp_debug', 'windows-uwp-x64-debug')
 
   if api.properties.get('build_android_aot', True):
     RunGN(api, '--runtime-mode', 'profile', '--android')

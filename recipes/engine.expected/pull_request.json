@@ -2494,7 +2494,7 @@
       "/path/to/tmp/json",
       "rmglob",
       "[CACHE]/builder/src/out/host_debug/flutter_patched_sdk",
-      "**/*.dill.S",
+      "**\\*.dill.S",
       "--hidden"
     ],
     "cwd": "[CACHE]/builder",
@@ -2648,7 +2648,7 @@
       "/path/to/tmp/json",
       "rmglob",
       "[CACHE]/builder/src/out/host_release/flutter_patched_sdk_product",
-      "**/*.dill.S",
+      "**\\*.dill.S",
       "--hidden"
     ],
     "cwd": "[CACHE]/builder",
