@@ -42,16 +42,16 @@ class TestUtilsApi(recipe_api.RecipeApi):
     except self.m.step.StepFailure as f:
       result = f.result
       # Truncate stdout
-      lines = result.stdout.split("\n")
-      stdout_lines = lines[-SUMMARY_MAX_LINES
+      lines = result.stdout.splitlines()
+      stdout_lines = lines[-SUMMARY_MAX_LINES:
                           ] if len(lines) > SUMMARY_MAX_LINES else lines
       stdout = '\n'.join(stdout_lines)
       # Truncate stderr
-      lines = result.stderr.split("\n")
-      stderr_lines = lines[-SUMMARY_MAX_LINES
+      lines = result.stderr.splitlines()
+      stderr_lines = lines[-SUMMARY_MAX_LINES:
                           ] if len(lines) > SUMMARY_MAX_LINES else lines
       stderr = '\n'.join(stderr_lines)
-      raise self.m.step.StepFailure(stdout or stderr)
+      raise self.m.step.StepFailure('\n\n```%s```\n' % (stdout or stderr))
     finally:
       self.m.step.active_result.presentation.logs[
           'stdout'] = self.m.step.active_result.stdout

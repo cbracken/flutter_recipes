@@ -299,7 +299,14 @@
         "[CLEANUP]/tmp_tmp_2/vpython"
       ]
     },
-    "name": "run abc"
+    "name": "run abc",
+    "timeout": 3600,
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@stdout@@@@",
+      "@@@STEP_LOG_END@stdout@@@",
+      "@@@STEP_LOG_LINE@stderr@@@@",
+      "@@@STEP_LOG_END@stderr@@@"
+    ]
   },
   {
     "cmd": [],

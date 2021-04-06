@@ -12,6 +12,7 @@ DEPS = [
     'flutter/repo_util',
     'flutter/os_utils',
     'flutter/osx_sdk',
+    'flutter/test_utils',
     'recipe_engine/buildbucket',
     'recipe_engine/context',
     'recipe_engine/file',
@@ -82,7 +83,7 @@ def RunSteps(api):
         api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
         test_runner_command = ['dart', 'bin/run.dart']
         test_runner_command.extend(runner_params)
-        api.step('run %s' % task_name, test_runner_command)
+        api.test_utils.run_test('run %s' % task_name, test_runner_command)
         api.logs_util.upload_logs(task_name)
         # This is to clean up leaked processes.
         api.os_utils.kill_processes()
@@ -105,7 +106,7 @@ def mac_test(api, env, env_prefixes, flutter_path, task_name, runner_params):
     api.step('Set execute permission', ['chmod', '755', resource_name])
     test_runner_command = [resource_name]
     test_runner_command.extend(runner_params)
-    api.step('run %s' % task_name, test_runner_command)
+    api.test_utils.run_test('run %s' % task_name, test_runner_command)
     api.logs_util.upload_logs(task_name)
     # This is to clean up leaked processes.
     api.os_utils.kill_processes()

@@ -18,7 +18,7 @@
   {
     "failure": {
       "failure": {},
-      "humanReason": "#failure\nthis is a failure"
+      "humanReason": "\n\n```#failure\nthis is a failure```\n"
     },
     "name": "$result"
   }
