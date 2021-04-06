@@ -60,6 +60,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         'cmake': self.cmake,
         'ninja': self.ninja,
         'ios_signing': self.ios_signing,
+        'cocoon': self.cocoon,
     }
     for dep in deps:
       if dep.get('dependency') in ['xcode', 'gems', 'swift']:
@@ -68,6 +69,24 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       if not dep_funct:
         raise ValueError('Dependency %s not available.' % dep)
       dep_funct(env, env_prefixes, dep.get('version'))
+
+  def cocoon(self, env, env_prefixes, version='refs/heads/master'):
+    """Checkout cocoon repo and update env variables.
+
+    Args:
+      env(dict): Current environment variables.
+      env_prefixes(dict):  Current environment prefixes variables.
+      version(str): The ref of the repo to checkout.
+    """
+    checkout_path = self.m.path['cache'].join('cocoon')
+    cocoon_dart_path = checkout_path.join('app_dart')
+    with self.m.step.nest('Checkout cocoon'):
+      env['COCOON_PATH'] = checkout_path
+      self.m.repo_util.checkout(
+          'cocoon',
+          checkout_path,
+          ref=version,
+      )
 
   def open_jdk(self, env, env_prefixes, version):
     """Downloads OpenJdk CIPD package and updates environment variables.
@@ -124,7 +143,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     Args:
       env(dict): Current environment variables.
       env_prefixes(dict):  Current environment prefixes variables.
-      version(str): The OpenJdk version to install.
+      version(str): The Chrome version to install.
     """
     version = version or 'latest'
     with self.m.step.nest('Chrome and driver dependency'):
