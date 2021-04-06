@@ -21,6 +21,10 @@ DEPS = [
     'recipe_engine/step',
 ]
 
+# Default timeouts for framework tests.
+HOSTONLY_TIMEOUT_SECS = 30 * 60
+DEVICELAB_TIMEOUT_SECS = 10 * 60
+
 
 def RunShard(api, env, env_prefixes, checkout_path):
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
@@ -33,11 +37,15 @@ def RunShard(api, env, env_prefixes, checkout_path):
       local_engine_path = api.path.abs_to_path(str(env.get('LOCAL_ENGINE')))
       dart_bin = local_engine_path.join('dart-sdk', 'bin')
       env_prefixes = {'PATH': ['%s' % str(dart_bin)]}
+    # Default timeout for tasks in either devicelab or hostonly.
+    deps_timeout_secs = DEVICELAB_TIMEOUT_SECS if api.test_utils.is_devicelab_bot(
+    ) else HOSTONLY_TIMEOUT_SECS
     with api.context(env=env, env_prefixes=env_prefixes):
       api.test_utils.run_test(
           'run test.dart for %s shard and subshard %s' %
           (api.properties.get('shard'), api.properties.get('subshard')),
-          cmd_list
+          cmd_list,
+          timeout_secs=deps_timeout_secs
       )
 
 
@@ -61,10 +69,12 @@ def RunSteps(api):
   env['SUBSHARD'] = api.properties.get('subshard')
 
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
+    # Dependencies timeout.
+    deps_timeout_secs = 300
     api.step(
-        'download dependencies',
-        ['flutter', 'update-packages'],
+        'download dependencies', ['flutter', 'update-packages'],
         infra_step=True,
+        timeout=deps_timeout_secs
     )
     # Load local engine information if available.
     api.flutter_deps.flutter_engine(env, env_prefixes)

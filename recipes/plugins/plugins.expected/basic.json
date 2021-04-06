@@ -316,6 +316,7 @@
     },
     "infra_step": true,
     "name": "prepare environment.download dependencies",
+    "timeout": 300,
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]

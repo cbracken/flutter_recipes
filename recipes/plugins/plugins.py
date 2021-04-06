@@ -42,10 +42,13 @@ def RunSteps(api):
           infra_step=True,
       )
       api.step('flutter doctor', ['flutter', 'doctor'])
+      # Fail fast on dependencies problem.
+      timeout_secs = 300
       api.step(
           'download dependencies',
           ['flutter', 'update-packages'],
           infra_step=True,
+          timeout=timeout_secs
       )
       api.step(
           'pub global activate flutter_plugin_tools',

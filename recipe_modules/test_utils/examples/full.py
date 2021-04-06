@@ -13,6 +13,7 @@ DEPS = [
 
 def RunSteps(api):
   api.test_utils.run_test('mytest', ['ls', '-la'])
+  api.test_utils.is_devicelab_bot()
 
 
 def GenTests(api):

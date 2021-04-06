@@ -5,6 +5,7 @@
       "-la"
     ],
     "name": "mytest",
+    "timeout": 3600,
     "~followup_annotations": [
       "@@@STEP_LOG_LINE@stdout@@@@",
       "@@@STEP_LOG_END@stdout@@@",
