@@ -1291,7 +1291,7 @@ def BuildIOS(api):
       )
 
 
-def PackageWindowsDesktopVariant(api, label, bucket_name):
+def PackageWindowsDesktopVariant(api, label, bucket_name, archive_name):
   artifacts = [
       'out/%s/flutter_export.h' % label,
       'out/%s/flutter_windows.h' % label,
@@ -1305,9 +1305,7 @@ def PackageWindowsDesktopVariant(api, label, bucket_name):
   ]
   if bucket_name.endswith('profile') or bucket_name.endswith('release'):
     artifacts.append('out/%s/gen_snapshot.exe' % label)
-  UploadArtifacts(
-      api, bucket_name, artifacts, archive_name='windows-x64-flutter.zip'
-  )
+  UploadArtifacts(api, bucket_name, artifacts, archive_name=archive_name)
 
 
 def BuildWindows(api):
@@ -1347,9 +1345,12 @@ def BuildWindows(api):
         archive_name='windows-x64-embedder.zip'
     )
 
-    PackageWindowsDesktopVariant(api, 'host_debug', 'windows-x64-debug')
-    PackageWindowsDesktopVariant(api, 'host_profile', 'windows-x64-profile')
-    PackageWindowsDesktopVariant(api, 'host_release', 'windows-x64-release')
+    PackageWindowsDesktopVariant(
+        api, 'host_debug', 'windows-x64-debug', 'windows-x64-flutter.zip')
+    PackageWindowsDesktopVariant(
+        api, 'host_profile', 'windows-x64-profile', 'windows-x64-flutter.zip')
+    PackageWindowsDesktopVariant(
+        api, 'host_release', 'windows-x64-release', 'windows-x64-flutter.zip')
     api.bucket_util.upload_folder(
         'Upload windows-x64 Flutter library C++ wrapper',
         'src/out/host_debug',
@@ -1358,7 +1359,8 @@ def BuildWindows(api):
         platform='windows-x64'
     )
     # Legacy; remove once Flutter tooling is updated to use the -debug location.
-    PackageWindowsDesktopVariant(api, 'host_debug', 'windows-x64')
+    PackageWindowsDesktopVariant(
+        api, 'host_debug', 'windows-x64', 'windows-x64-flutter.zip')
 
     if BuildFontSubset(api):
       UploadArtifacts(
@@ -1372,6 +1374,20 @@ def BuildWindows(api):
 
     UploadDartSdk(api, archive_name='dart-sdk-windows-x64.zip')
     UploadWebSdk(api, archive_name='flutter-web-sdk-windows-x64.zip')
+
+  if api.properties.get('build_windows_uwp', True):
+    RunGN(api, '--runtime-mode', 'debug', '--winuwp', '--no-lto')
+    RunGN(api, '--runtime-mode', 'profile', '--winuwp')
+    RunGN(api, '--runtime-mode', 'release', '--winuwp')
+    Build(api, 'winuwp_debug')
+    PackageWindowsDesktopVariant(
+        api, 'winuwp_debug', 'windows-x64', 'windows-uwp-x64-flutter.zip')
+    Build(api, 'winuwp_profile')
+    PackageWindowsDesktopVariant(
+        api, 'winuwp_profile', 'windows-x64', 'windows-uwp-x64-flutter.zip')
+    Build(api, 'winuwp_release')
+    PackageWindowsDesktopVariant(
+        api, 'winuwp_release', 'windows-x64', 'windows-uwp-x64-flutter.zip')
 
   if api.properties.get('build_android_aot', True):
     RunGN(api, '--runtime-mode', 'profile', '--android')
