@@ -79,7 +79,6 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       version(str): The ref of the repo to checkout.
     """
     checkout_path = self.m.path['cache'].join('cocoon')
-    cocoon_dart_path = checkout_path.join('app_dart')
     with self.m.step.nest('Checkout cocoon'):
       env['COCOON_PATH'] = checkout_path
       self.m.repo_util.checkout(
