@@ -70,7 +70,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         raise ValueError('Dependency %s not available.' % dep)
       dep_funct(env, env_prefixes, dep.get('version'))
 
-  def cocoon(self, env, env_prefixes, version='refs/heads/master'):
+  def cocoon(self, env, env_prefixes, version):
     """Checkout cocoon repo and update env variables.
 
     Args:
@@ -78,6 +78,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       env_prefixes(dict):  Current environment prefixes variables.
       version(str): The ref of the repo to checkout.
     """
+    version = version or 'refs/heads/master'
     checkout_path = self.m.path['cache'].join('cocoon')
     with self.m.step.nest('Checkout cocoon'):
       env['COCOON_PATH'] = checkout_path
