@@ -1291,7 +1291,7 @@ def BuildIOS(api):
       )
 
 
-def PackageWindowsDesktopVariant(api, label, bucket_name, archive_name):
+def PackageWindowsDesktopVariant(api, label, bucket_name):
   artifacts = [
       'out/%s/flutter_export.h' % label,
       'out/%s/flutter_windows.h' % label,
@@ -1305,7 +1305,26 @@ def PackageWindowsDesktopVariant(api, label, bucket_name, archive_name):
   ]
   if bucket_name.endswith('profile') or bucket_name.endswith('release'):
     artifacts.append('out/%s/gen_snapshot.exe' % label)
-  UploadArtifacts(api, bucket_name, artifacts, archive_name=archive_name)
+  UploadArtifacts(
+      api, bucket_name, artifacts, archive_name='windows-x64-flutter.zip')
+
+
+def PackageWindowsUwpDesktopVariant(api, label, bucket_name):
+  artifacts = [
+      'out/%s/flutter_export.h' % label,
+      'out/%s/flutter_windows.h' % label,
+      'out/%s/flutter_messenger.h' % label,
+      'out/%s/flutter_plugin_registrar.h' % label,
+      'out/%s/flutter_texture_registrar.h' % label,
+      'out/%s/flutter_windows_winuwp.dll' % label,
+      'out/%s/flutter_windows_winuwp.dll.exp' % label,
+      'out/%s/flutter_windows_winuwp.dll.lib' % label,
+      'out/%s/flutter_windows_winuwp.dll.pdb' % label,
+  ]
+  if bucket_name.endswith('profile') or bucket_name.endswith('release'):
+    artifacts.append('out/%s/gen_snapshot.exe' % label)
+  UploadArtifacts(
+      api, bucket_name, artifacts, archive_name= 'windows-uwp-x64-flutter.zip')
 
 
 def BuildWindows(api):
@@ -1345,12 +1364,9 @@ def BuildWindows(api):
         archive_name='windows-x64-embedder.zip'
     )
 
-    PackageWindowsDesktopVariant(
-        api, 'host_debug', 'windows-x64-debug', 'windows-x64-flutter.zip')
-    PackageWindowsDesktopVariant(
-        api, 'host_profile', 'windows-x64-profile', 'windows-x64-flutter.zip')
-    PackageWindowsDesktopVariant(
-        api, 'host_release', 'windows-x64-release', 'windows-x64-flutter.zip')
+    PackageWindowsDesktopVariant(api, 'host_debug', 'windows-x64-debug')
+    PackageWindowsDesktopVariant(api, 'host_profile', 'windows-x64-profile')
+    PackageWindowsDesktopVariant(api, 'host_release', 'windows-x64-release')
     api.bucket_util.upload_folder(
         'Upload windows-x64 Flutter library C++ wrapper',
         'src/out/host_debug',
@@ -1359,8 +1375,7 @@ def BuildWindows(api):
         platform='windows-x64'
     )
     # Legacy; remove once Flutter tooling is updated to use the -debug location.
-    PackageWindowsDesktopVariant(
-        api, 'host_debug', 'windows-x64', 'windows-x64-flutter.zip')
+    PackageWindowsDesktopVariant(api, 'host_debug', 'windows-x64')
 
     if BuildFontSubset(api):
       UploadArtifacts(
@@ -1380,14 +1395,14 @@ def BuildWindows(api):
     RunGN(api, '--runtime-mode', 'profile', '--winuwp')
     RunGN(api, '--runtime-mode', 'release', '--winuwp')
     Build(api, 'winuwp_debug')
-    PackageWindowsDesktopVariant(
-        api, 'winuwp_debug', 'windows-x64', 'windows-uwp-x64-flutter.zip')
+    PackageWindowsUwpDesktopVariant(
+        api, 'winuwp_debug', 'windows-x64-debug')
     Build(api, 'winuwp_profile')
-    PackageWindowsDesktopVariant(
-        api, 'winuwp_profile', 'windows-x64', 'windows-uwp-x64-flutter.zip')
+    PackageWindowsUwpDesktopVariant(
+        api, 'winuwp_profile', 'windows-x64-profile')
     Build(api, 'winuwp_release')
-    PackageWindowsDesktopVariant(
-        api, 'winuwp_release', 'windows-x64', 'windows-uwp-x64-flutter.zip')
+    PackageWindowsUwpDesktopVariant(
+        api, 'winuwp_release', 'windows-x64-release')
 
   if api.properties.get('build_android_aot', True):
     RunGN(api, '--runtime-mode', 'profile', '--android')
@@ -1614,6 +1629,7 @@ def GenTests(api):
                         build_android_aot=True,
                         build_android_debug=True,
                         build_android_vulkan=True,
+                        build_windows_uwp=True,
                         no_maven=maven_or_bitcode,
                         upload_packages=should_upload,
                         force_upload=True,

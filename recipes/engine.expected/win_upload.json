@@ -3932,8 +3932,8 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "Zip windows-x64 windows-uwp-x64-flutter.zip",
-    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_texture_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_texture_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_windows.dll.pdb\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_11\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "name": "Zip windows-x64-debug windows-uwp-x64-flutter.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_texture_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_texture_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows_winuwp.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_windows_winuwp.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows_winuwp.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_windows_winuwp.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows_winuwp.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_windows_winuwp.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows_winuwp.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_debug/flutter_windows_winuwp.dll.pdb\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_11\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -3945,7 +3945,7 @@
       "----",
       "cp",
       "[CLEANUP]\\tmp_tmp_11\\artifacts.zip",
-      "gs://flutter_infra/flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip"
+      "gs://flutter_infra/flutter/abcd1234/windows-x64-debug/windows-uwp-x64-flutter.zip"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -3966,9 +3966,9 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip\"",
+    "name": "gsutil upload \"flutter/abcd1234/windows-x64-debug/windows-uwp-x64-flutter.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/windows-x64-debug/windows-uwp-x64-flutter.zip@@@"
     ]
   },
   {
@@ -3981,7 +3981,7 @@
       "----",
       "cp",
       "[CLEANUP]\\tmp_tmp_11\\artifacts.zip",
-      "gs://flutter_infra_release/flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip"
+      "gs://flutter_infra_release/flutter/abcd1234/windows-x64-debug/windows-uwp-x64-flutter.zip"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -4002,9 +4002,9 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip\" (2)",
+    "name": "gsutil upload \"flutter/abcd1234/windows-x64-debug/windows-uwp-x64-flutter.zip\" (2)",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra_release/flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra_release/flutter/abcd1234/windows-x64-debug/windows-uwp-x64-flutter.zip@@@"
     ]
   },
   {
@@ -4036,7 +4036,7 @@
       ]
     },
     "infra_step": true,
-    "name": "temp dir for windows-x64 UploadArtifacts windows-uwp-x64-flutter.zip"
+    "name": "temp dir for windows-x64-debug UploadArtifacts windows-uwp-x64-flutter.zip"
   },
   {
     "cmd": [],
@@ -4395,8 +4395,8 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "Zip windows-x64 windows-uwp-x64-flutter.zip (2)",
-    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_texture_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_texture_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_windows.dll.pdb\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_12\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "name": "Zip windows-x64-profile windows-uwp-x64-flutter.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_texture_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_texture_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows_winuwp.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_windows_winuwp.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows_winuwp.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_windows_winuwp.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows_winuwp.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_windows_winuwp.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows_winuwp.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/flutter_windows_winuwp.dll.pdb\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_profile/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_12\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -4408,7 +4408,7 @@
       "----",
       "cp",
       "[CLEANUP]\\tmp_tmp_12\\artifacts.zip",
-      "gs://flutter_infra/flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip"
+      "gs://flutter_infra/flutter/abcd1234/windows-x64-profile/windows-uwp-x64-flutter.zip"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -4429,9 +4429,9 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip\" (3)",
+    "name": "gsutil upload \"flutter/abcd1234/windows-x64-profile/windows-uwp-x64-flutter.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/windows-x64-profile/windows-uwp-x64-flutter.zip@@@"
     ]
   },
   {
@@ -4444,7 +4444,7 @@
       "----",
       "cp",
       "[CLEANUP]\\tmp_tmp_12\\artifacts.zip",
-      "gs://flutter_infra_release/flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip"
+      "gs://flutter_infra_release/flutter/abcd1234/windows-x64-profile/windows-uwp-x64-flutter.zip"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -4465,9 +4465,9 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip\" (4)",
+    "name": "gsutil upload \"flutter/abcd1234/windows-x64-profile/windows-uwp-x64-flutter.zip\" (2)",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra_release/flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra_release/flutter/abcd1234/windows-x64-profile/windows-uwp-x64-flutter.zip@@@"
     ]
   },
   {
@@ -4499,7 +4499,7 @@
       ]
     },
     "infra_step": true,
-    "name": "temp dir for windows-x64 UploadArtifacts windows-uwp-x64-flutter.zip (2)"
+    "name": "temp dir for windows-x64-profile UploadArtifacts windows-uwp-x64-flutter.zip"
   },
   {
     "cmd": [],
@@ -4858,8 +4858,8 @@
         "RECIPE_REPO[depot_tools]"
       ]
     },
-    "name": "Zip windows-x64 windows-uwp-x64-flutter.zip (3)",
-    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_texture_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_texture_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_windows.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_windows.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_windows.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_windows.dll.pdb\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_13\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
+    "name": "Zip windows-x64-release windows-uwp-x64-flutter.zip",
+    "stdin": "{\"entries\": [{\"archive_name\": \"flutter_export.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_export.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_windows.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_messenger.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_messenger.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_plugin_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_plugin_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_texture_registrar.h\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_texture_registrar.h\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows_winuwp.dll\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_windows_winuwp.dll\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows_winuwp.dll.exp\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_windows_winuwp.dll.exp\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows_winuwp.dll.lib\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_windows_winuwp.dll.lib\", \"type\": \"file\"}, {\"archive_name\": \"flutter_windows_winuwp.dll.pdb\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/flutter_windows_winuwp.dll.pdb\", \"type\": \"file\"}, {\"archive_name\": \"gen_snapshot.exe\", \"path\": \"[CACHE]\\\\builder\\\\src\\\\out/winuwp_release/gen_snapshot.exe\", \"type\": \"file\"}], \"output\": \"[CLEANUP]\\\\tmp_tmp_13\\\\artifacts.zip\", \"root\": \"[CACHE]\\\\builder\\\\src\"}"
   },
   {
     "cmd": [
@@ -4871,7 +4871,7 @@
       "----",
       "cp",
       "[CLEANUP]\\tmp_tmp_13\\artifacts.zip",
-      "gs://flutter_infra/flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip"
+      "gs://flutter_infra/flutter/abcd1234/windows-x64-release/windows-uwp-x64-flutter.zip"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -4892,9 +4892,9 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip\" (5)",
+    "name": "gsutil upload \"flutter/abcd1234/windows-x64-release/windows-uwp-x64-flutter.zip\"",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra/flutter/abcd1234/windows-x64-release/windows-uwp-x64-flutter.zip@@@"
     ]
   },
   {
@@ -4907,7 +4907,7 @@
       "----",
       "cp",
       "[CLEANUP]\\tmp_tmp_13\\artifacts.zip",
-      "gs://flutter_infra_release/flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip"
+      "gs://flutter_infra_release/flutter/abcd1234/windows-x64-release/windows-uwp-x64-flutter.zip"
     ],
     "cwd": "[CACHE]\\builder",
     "env": {
@@ -4928,9 +4928,9 @@
       ]
     },
     "infra_step": true,
-    "name": "gsutil upload \"flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip\" (6)",
+    "name": "gsutil upload \"flutter/abcd1234/windows-x64-release/windows-uwp-x64-flutter.zip\" (2)",
     "~followup_annotations": [
-      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra_release/flutter/abcd1234/windows-x64/windows-uwp-x64-flutter.zip@@@"
+      "@@@STEP_LINK@gsutil.upload@https://storage.cloud.google.com/flutter_infra_release/flutter/abcd1234/windows-x64-release/windows-uwp-x64-flutter.zip@@@"
     ]
   },
   {
@@ -4962,7 +4962,7 @@
       ]
     },
     "infra_step": true,
-    "name": "temp dir for windows-x64 UploadArtifacts windows-uwp-x64-flutter.zip (3)"
+    "name": "temp dir for windows-x64-release UploadArtifacts windows-uwp-x64-flutter.zip"
   },
   {
     "cmd": [

@@ -50,6 +50,9 @@ message InputProperties {
 
   // CIPD tag for fuchsia/vdl/...
   string vdl_version = 28;
+
+  // Whether to build Windows UWP artifacts.
+  bool build_windows_uwp = 29;
 }
 
 message EnvProperties {
