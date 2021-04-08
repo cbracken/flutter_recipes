@@ -4,6 +4,7 @@ DEPS = [
     'flutter/flutter_deps',
     'flutter/kms',
     'flutter/repo_util',
+    'flutter/test_utils',
     'recipe_engine/context',
     'recipe_engine/file',
     'recipe_engine/path',

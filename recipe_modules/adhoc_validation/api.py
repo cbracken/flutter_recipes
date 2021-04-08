@@ -58,10 +58,10 @@ class AddhocValidationApi(recipe_api.RecipeApi):
               env, env_prefixes, checkout_path.join('dev', 'ci', 'mac')
           )
           with self.m.context(env=env, env_prefixes=env_prefixes):
-            self.m.step(validation, [resource_name])
+            self.m.test_utils.run_test(validation, [resource_name])
       else:
         with self.m.context(env=env, env_prefixes=env_prefixes):
-          self.m.step(validation, [resource_name])
+          self.m.test_utils.run_test(validation, [resource_name])
           if validation == 'docs' and self.m.properties.get('firebase_project'):
             docs_path = checkout_path.join('dev', 'docs')
             project = self.m.properties.get('firebase_project')
