@@ -25,8 +25,8 @@ DEPS = [
     'recipe_engine/swarming',
 ]
 
-# Ten minutes
-MAX_TIMEOUT_SECS = 10 * 60
+# Fifteen minutes
+MAX_TIMEOUT_SECS = 15 * 60
 
 
 def RunSteps(api):
