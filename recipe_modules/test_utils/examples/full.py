@@ -26,3 +26,12 @@ def GenTests(api):
           retcode=1
       )
   )
+  very_long_string = "xyz\n" * 1500
+  yield api.test(
+      'long_stdout',
+      api.step_data(
+          'mytest',
+          stdout=api.raw_io.output_text(very_long_string),
+          retcode=1
+      )
+  )
