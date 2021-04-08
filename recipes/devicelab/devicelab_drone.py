@@ -25,6 +25,9 @@ DEPS = [
     'recipe_engine/swarming',
 ]
 
+# Ten minutes
+MAX_TIMEOUT_SECS = 10 * 60
+
 
 def RunSteps(api):
   task_name = api.properties.get("task_name")
@@ -83,7 +86,11 @@ def RunSteps(api):
         api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
         test_runner_command = ['dart', 'bin/run.dart']
         test_runner_command.extend(runner_params)
-        api.test_utils.run_test('run %s' % task_name, test_runner_command)
+        api.test_utils.run_test(
+            'run %s' % task_name,
+            test_runner_command,
+            timeout_secs=MAX_TIMEOUT_SECS
+        )
         api.logs_util.upload_logs(task_name)
         # This is to clean up leaked processes.
         api.os_utils.kill_processes()
@@ -106,7 +113,11 @@ def mac_test(api, env, env_prefixes, flutter_path, task_name, runner_params):
     api.step('Set execute permission', ['chmod', '755', resource_name])
     test_runner_command = [resource_name]
     test_runner_command.extend(runner_params)
-    api.test_utils.run_test('run %s' % task_name, test_runner_command)
+    api.test_utils.run_test(
+        'run %s' % task_name,
+        test_runner_command,
+        timeout_secs=MAX_TIMEOUT_SECS
+    )
     api.logs_util.upload_logs(task_name)
     # This is to clean up leaked processes.
     api.os_utils.kill_processes()

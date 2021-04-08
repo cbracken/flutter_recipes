@@ -300,7 +300,7 @@
       ]
     },
     "name": "run abc",
-    "timeout": 3600,
+    "timeout": 600,
     "~followup_annotations": [
       "@@@STEP_LOG_LINE@stdout@@@@",
       "@@@STEP_LOG_END@stdout@@@",
