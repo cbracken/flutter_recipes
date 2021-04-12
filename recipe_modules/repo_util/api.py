@@ -97,14 +97,18 @@ class RepoUtilApi(recipe_api.RecipeApi):
       # gitiles_commit.id is more specific than gitiles_commit.ref, which is
       # branch
       git_ref = ref or self.m.buildbucket.gitiles_commit.id
-      return self.m.git.checkout(
-          git_url,
-          dir_path=checkout_path,
-          ref=git_ref,
-          recursive=True,
-          set_got_revision=True,
-          tags=True
-      )
+
+      def do_checkout():
+        return self.m.git.checkout(
+            git_url,
+            dir_path=checkout_path,
+            ref=git_ref,
+            recursive=True,
+            set_got_revision=True,
+            tags=True
+        )
+
+      return self.m.utils.retry(do_checkout, max_attempts=2)
 
   def flutter_environment(self, checkout_path):
     """Returns env and env_prefixes of an flutter/dart command environment."""
