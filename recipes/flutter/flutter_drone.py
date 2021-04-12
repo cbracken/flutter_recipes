@@ -14,6 +14,7 @@ DEPS = [
     'flutter/os_utils',
     'flutter/osx_sdk',
     'flutter/repo_util',
+    'flutter/retry',
     'flutter/test_utils',
     'recipe_engine/context',
     'recipe_engine/path',
@@ -71,8 +72,9 @@ def RunSteps(api):
   with api.context(env=env, env_prefixes=env_prefixes, cwd=checkout_path):
     # Dependencies timeout.
     deps_timeout_secs = 300
-    api.step(
+    api.retry.step(
         'download dependencies', ['flutter', 'update-packages'],
+        max_attempts=2,
         infra_step=True,
         timeout=deps_timeout_secs
     )

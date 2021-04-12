@@ -1,0 +1,22 @@
+[
+  {
+    "cmd": [
+      "ls",
+      "-la"
+    ],
+    "name": "mytest",
+    "~followup_annotations": [
+      "@@@STEP_FAILURE@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "ls",
+      "-la"
+    ],
+    "name": "mytest (2)"
+  },
+  {
+    "name": "$result"
+  }
+]

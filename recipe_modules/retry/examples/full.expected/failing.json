@@ -1,0 +1,19 @@
+[
+  {
+    "cmd": [
+      "ls",
+      "-la"
+    ],
+    "name": "mytest",
+    "~followup_annotations": [
+      "@@@STEP_FAILURE@@@"
+    ]
+  },
+  {
+    "failure": {
+      "failure": {},
+      "humanReason": "Step('mytest') (retcode: 1)"
+    },
+    "name": "$result"
+  }
+]
