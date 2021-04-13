@@ -86,10 +86,10 @@ def RunSteps(api):
         api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
         test_runner_command = ['dart', 'bin/run.dart']
         test_runner_command.extend(runner_params)
-        api.test_utils.run_test(
+        api.step(
             'run %s' % task_name,
             test_runner_command,
-            timeout_secs=MAX_TIMEOUT_SECS
+            timeout=MAX_TIMEOUT_SECS
         )
         api.logs_util.upload_logs(task_name)
         # This is to clean up leaked processes.
@@ -113,10 +113,10 @@ def mac_test(api, env, env_prefixes, flutter_path, task_name, runner_params):
     api.step('Set execute permission', ['chmod', '755', resource_name])
     test_runner_command = [resource_name]
     test_runner_command.extend(runner_params)
-    api.test_utils.run_test(
+    api.step(
         'run %s' % task_name,
         test_runner_command,
-        timeout_secs=MAX_TIMEOUT_SECS
+        timeout=MAX_TIMEOUT_SECS
     )
     api.logs_util.upload_logs(task_name)
     # This is to clean up leaked processes.
