@@ -299,7 +299,7 @@
       ]
     },
     "name": "run abc",
-    "timeout": 900
+    "timeout": 1800
   },
   {
     "cmd": [],

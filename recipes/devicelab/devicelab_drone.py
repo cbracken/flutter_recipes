@@ -26,7 +26,7 @@ DEPS = [
 ]
 
 # Fifteen minutes
-MAX_TIMEOUT_SECS = 15 * 60
+MAX_TIMEOUT_SECS = 30 * 60
 
 
 def RunSteps(api):
