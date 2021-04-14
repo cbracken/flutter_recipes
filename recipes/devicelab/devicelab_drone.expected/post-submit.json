@@ -268,7 +268,8 @@
   {
     "cmd": [
       "dart",
-      "bin/run.dart",
+      "bin/test_runner.dart",
+      "test",
       "-t",
       "abc",
       "--results-file",

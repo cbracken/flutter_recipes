@@ -84,7 +84,7 @@ def RunSteps(api):
       with api.context(env=env,
                        env_prefixes=env_prefixes), api.step.defer_results():
         api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
-        test_runner_command = ['dart', 'bin/run.dart']
+        test_runner_command = ['dart', 'bin/test_runner.dart', 'test']
         test_runner_command.extend(runner_params)
         api.step(
             'run %s' % task_name,

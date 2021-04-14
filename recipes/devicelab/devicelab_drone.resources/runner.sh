@@ -12,4 +12,4 @@ else
 fi
 
 args=( "$@" )
-dart bin/run.dart "${args[@]}"
+dart bin/test_runner.dart test "${args[@]}"
