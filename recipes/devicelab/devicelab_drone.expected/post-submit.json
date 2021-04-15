@@ -184,8 +184,9 @@
   },
   {
     "cmd": [
-      "flutter",
-      "doctor"
+      "bash",
+      "-c",
+      "flutter doctor"
     ],
     "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
@@ -210,8 +211,9 @@
   },
   {
     "cmd": [
-      "pub",
-      "get"
+      "bash",
+      "-c",
+      "pub get"
     ],
     "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
@@ -237,9 +239,9 @@
   },
   {
     "cmd": [
-      "flutter",
-      "doctor",
-      "--verbose"
+      "bash",
+      "-c",
+      "flutter doctor --verbose"
     ],
     "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
@@ -267,15 +269,9 @@
   },
   {
     "cmd": [
-      "dart",
-      "bin/test_runner.dart",
-      "test",
-      "-t",
-      "abc",
-      "--results-file",
-      "[CLEANUP]/tmp_tmp_3",
-      "--luci-builder",
-      "Linux abc"
+      "bash",
+      "-c",
+      "dart bin/run.dart -t abc --results-file [CLEANUP]/tmp_tmp_3 --luci-builder Linux abc"
     ],
     "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
@@ -681,6 +677,8 @@
   },
   {
     "cmd": [
+      "bash",
+      "-c",
       "dart",
       "bin/test_runner.dart",
       "upload-metrics",

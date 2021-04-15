@@ -184,8 +184,9 @@
   },
   {
     "cmd": [
-      "flutter",
-      "doctor"
+      "bash",
+      "-c",
+      "flutter doctor"
     ],
     "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
@@ -210,8 +211,9 @@
   },
   {
     "cmd": [
-      "pub",
-      "get"
+      "bash",
+      "-c",
+      "pub get"
     ],
     "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
@@ -237,9 +239,9 @@
   },
   {
     "cmd": [
-      "flutter",
-      "doctor",
-      "--verbose"
+      "bash",
+      "-c",
+      "flutter doctor --verbose"
     ],
     "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
@@ -294,13 +296,9 @@
   },
   {
     "cmd": [
-      "RECIPE[flutter::devicelab/devicelab_drone].resources/runner.sh",
-      "-t",
-      "abc",
-      "--results-file",
-      "[CLEANUP]/tmp_tmp_3",
-      "--luci-builder",
-      "Mac abc"
+      "bash",
+      "-c",
+      "RECIPE[flutter::devicelab/devicelab_drone].resources/runner.sh -t abc --results-file [CLEANUP]/tmp_tmp_3 --luci-builder Mac abc"
     ],
     "cwd": "[CLEANUP]/tmp_tmp_1/flutter sdk/dev/devicelab",
     "env": {
@@ -706,6 +704,8 @@
   },
   {
     "cmd": [
+      "bash",
+      "-c",
       "dart",
       "bin/test_runner.dart",
       "upload-metrics",

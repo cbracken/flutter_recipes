@@ -17,6 +17,7 @@ DEPS = [
     'recipe_engine/context',
     'recipe_engine/file',
     'recipe_engine/path',
+    'recipe_engine/platform',
     'recipe_engine/properties',
     'recipe_engine/raw_io',
     'recipe_engine/runtime',
@@ -64,9 +65,10 @@ def RunSteps(api):
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
     api.step(
         'flutter doctor',
-        ['flutter', 'doctor'],
+        ['bash', '-c', 'flutter doctor'],
     )
-    api.step('pub get', ['pub', 'get'], infra_step=True)
+    pub_cmd =  'pub.bat' if api.platform.is_win else 'pub'
+    api.step('pub get', ['bash', '-c', '%s get' % pub_cmd], infra_step=True)
     dep_list = {d['dependency']: d.get('version') for d in deps}
     if dep_list.has_key('xcode'):
       api.os_utils.clean_derived_data()
@@ -83,13 +85,14 @@ def RunSteps(api):
     else:
       with api.context(env=env,
                        env_prefixes=env_prefixes), api.step.defer_results():
-        api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
-        test_runner_command = ['dart', 'bin/test_runner.dart', 'test']
-        test_runner_command.extend(runner_params)
+        api.step('flutter doctor', ['bash', '-c', 'flutter doctor --verbose'])
+        test_runner_command = ['bash', '-c']
+        postfix = 'dart bin/run.dart %s' % ' '.join([
+            str(i) for i in runner_params
+        ])
+        test_runner_command.append(postfix)
         api.step(
-            'run %s' % task_name,
-            test_runner_command,
-            timeout=MAX_TIMEOUT_SECS
+            'run %s' % task_name, test_runner_command, timeout=MAX_TIMEOUT_SECS
         )
         api.logs_util.upload_logs(task_name)
         # This is to clean up leaked processes.
@@ -104,19 +107,20 @@ def mac_test(api, env, env_prefixes, flutter_path, task_name, runner_params):
   api.flutter_deps.gems(
       env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
   )
-  api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
+  api.step('flutter doctor', ['bash', '-c', 'flutter doctor --verbose'])
   api.os_utils.dismiss_dialogs()
   api.os_utils.shutdown_simulators()
   with api.context(env=env,
                    env_prefixes=env_prefixes), api.step.defer_results():
     resource_name = api.resource('runner.sh')
     api.step('Set execute permission', ['chmod', '755', resource_name])
-    test_runner_command = [resource_name]
-    test_runner_command.extend(runner_params)
+    test_runner_command = ['bash', '-c']
+    postfix = '%s %s' % (
+        str(resource_name), ' '.join([str(i) for i in runner_params])
+    )
+    test_runner_command.append(postfix)
     api.step(
-        'run %s' % task_name,
-        test_runner_command,
-        timeout=MAX_TIMEOUT_SECS
+        'run %s' % task_name, test_runner_command, timeout=MAX_TIMEOUT_SECS
     )
     api.logs_util.upload_logs(task_name)
     # This is to clean up leaked processes.
@@ -139,8 +143,9 @@ def uploadMetrics(api, results_path):
         "write token", access_token_path, access_token, include_log=False
     )
     upload_command = [
-        'dart', 'bin/test_runner.dart', 'upload-metrics', '--results-file',
-        results_path, '--service-account-token-file', access_token_path
+        'bash', '-c', 'dart', 'bin/test_runner.dart', 'upload-metrics',
+        '--results-file', results_path, '--service-account-token-file',
+        access_token_path
     ]
     api.step('upload metrics', upload_command, infra_step=True)
 
