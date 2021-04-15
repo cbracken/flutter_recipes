@@ -1,0 +1,397 @@
+[
+  {
+    "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "infra_step": true,
+    "name": "OS info"
+  },
+  {
+    "cmd": [],
+    "name": "Checkout flutter/flutter"
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::git]/resources/git_setup.py",
+      "--path",
+      "[START_DIR]/flutter",
+      "--url",
+      "https://chromium.googlesource.com/external/github.com/flutter/flutter"
+    ],
+    "name": "Checkout flutter/flutter.git setup",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "fetch",
+      "origin",
+      "master",
+      "--recurse-submodules",
+      "--progress",
+      "--tags"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
+    },
+    "infra_step": true,
+    "name": "Checkout flutter/flutter.git fetch",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "checkout",
+      "-f",
+      "FETCH_HEAD"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "infra_step": true,
+    "name": "Checkout flutter/flutter.git checkout",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "infra_step": true,
+    "name": "Checkout flutter/flutter.read revision",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_TEXT@<br/>checked out 'deadbeef'<br/>@@@",
+      "@@@SET_BUILD_PROPERTY@got_revision@\"deadbeef\"@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "clean",
+      "-f",
+      "-d",
+      "-x"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "infra_step": true,
+    "name": "Checkout flutter/flutter.git clean",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "submodule",
+      "sync"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "infra_step": true,
+    "name": "Checkout flutter/flutter.submodule sync",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "submodule",
+      "update",
+      "--init",
+      "--recursive"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "infra_step": true,
+    "name": "Checkout flutter/flutter.submodule update",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "flutter",
+      "update-packages"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
+      "SHARD": null,
+      "SUBSHARD": null
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "download dependencies",
+    "timeout": 300
+  },
+  {
+    "cmd": [
+      "flutter",
+      "doctor",
+      "-v"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
+      "SHARD": null,
+      "SUBSHARD": null
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "name": "flutter doctor"
+  },
+  {
+    "cmd": [
+      "dart",
+      "--enable-asserts",
+      "[START_DIR]/flutter/dev/bots/test.dart"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
+      "SHARD": null,
+      "SUBSHARD": null
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin",
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "name": "run test.dart for None shard and subshard None",
+    "timeout": 1800,
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@stdout@@@@",
+      "@@@STEP_LOG_END@stdout@@@",
+      "@@@STEP_LOG_LINE@stderr@@@@",
+      "@@@STEP_LOG_END@stderr@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "Killing Processes"
+  },
+  {
+    "cmd": [
+      "pkill",
+      "chrome"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
+      "SHARD": null,
+      "SUBSHARD": null
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "Killing Processes.kill chrome",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "dart"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
+      "SHARD": null,
+      "SUBSHARD": null
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "Killing Processes.kill dart",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "flutter"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
+      "SHARD": null,
+      "SUBSHARD": null
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "Killing Processes.kill flutter",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "java"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
+      "SHARD": null,
+      "SUBSHARD": null
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "Killing Processes.kill java",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "adb"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
+      "SHARD": null,
+      "SUBSHARD": null
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "Killing Processes.kill adb",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "cwd": "[START_DIR]/flutter",
+    "env": {
+      "DEPOT_TOOLS": "RECIPE_REPO[depot_tools]",
+      "LUCI_BRANCH": "",
+      "LUCI_CI": "True",
+      "LUCI_PR": "",
+      "OS": "linux",
+      "PUB_CACHE": "[START_DIR]/.pub-cache",
+      "SDK_CHECKOUT_PATH": "[START_DIR]/flutter",
+      "SHARD": null,
+      "SUBSHARD": null
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/flutter/bin",
+        "[START_DIR]/flutter/bin/cache/dart-sdk/bin"
+      ]
+    },
+    "infra_step": true,
+    "name": "OS info (2)"
+  },
+  {
+    "name": "$result"
+  }
+]

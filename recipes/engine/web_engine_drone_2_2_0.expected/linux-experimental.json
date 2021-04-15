@@ -1,0 +1,827 @@
+[
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/builder"
+    ],
+    "infra_step": true,
+    "name": "Clobber cache"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/builder/src/out"
+    ],
+    "infra_step": true,
+    "name": "Clobber build output: Linux"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CLEANUP]/builder"
+    ],
+    "infra_step": true,
+    "name": "Ensure checkout cache"
+  },
+  {
+    "cmd": [],
+    "name": "ensure goma"
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/goma/client",
+      "-ensure-file",
+      "fuchsia/third_party/goma/client/${platform} release",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "infra_step": true,
+    "name": "ensure goma.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-release---------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"fuchsia/third_party/goma/client/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "Checkout source code"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "rmtree",
+      "[CLEANUP]/builder"
+    ],
+    "infra_step": true,
+    "name": "Checkout source code.Clobber cache",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CLEANUP]/builder"
+    ],
+    "infra_step": true,
+    "name": "Checkout source code.Ensure checkout cache",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::bot_update]/resources/bot_update.py",
+      "--spec-path",
+      "cache_dir = '[CACHE]/git'\nsolutions = [{'deps_file': '.DEPS.git', 'managed': True, 'name': 'src/flutter', 'url': 'https://mygitrepo'}]",
+      "--revision_mapping_file",
+      "{\"got_engine_revision\": \"src/flutter\"}",
+      "--git-cache-dir",
+      "[CACHE]/git",
+      "--cleanup-dir",
+      "[CLEANUP]/bot_update",
+      "--output_json",
+      "/path/to/tmp/json",
+      "--revision",
+      "src/flutter@refs/pull/1/head",
+      "--refs",
+      "refs/pull/1/head"
+    ],
+    "cwd": "[CLEANUP]/builder",
+    "env": {
+      "GIT_HTTP_LOW_SPEED_LIMIT": "102400",
+      "GIT_HTTP_LOW_SPEED_TIME": "300"
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Checkout source code.bot_update",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_TEXT@Some step text@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"did_run\": true, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"fixed_revisions\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"src/flutter\": \"refs/pull/1/head\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"manifest\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"src/flutter\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"repository\": \"https://fake.org/src/flutter.git\", @@@",
+      "@@@STEP_LOG_LINE@json.output@      \"revision\": \"a63681edc0f69a72604596b16c7986513e809995\"@@@",
+      "@@@STEP_LOG_LINE@json.output@    }@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"patch_failure\": false, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"patch_root\": \"src/flutter\", @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"properties\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"got_engine_revision\": \"a63681edc0f69a72604596b16c7986513e809995\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"got_engine_revision_cp\": \"refs/heads/master@{#84512}\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"root\": \"src/flutter\", @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"source_manifest\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"directories\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@      \"src/flutter\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"git_checkout\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@          \"repo_url\": \"https://fake.org/src/flutter.git\", @@@",
+      "@@@STEP_LOG_LINE@json.output@          \"revision\": \"a63681edc0f69a72604596b16c7986513e809995\"@@@",
+      "@@@STEP_LOG_LINE@json.output@        }@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    }, @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"version\": 0@@@",
+      "@@@STEP_LOG_LINE@json.output@  }, @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"step_text\": \"Some step text\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@",
+      "@@@SET_BUILD_PROPERTY@got_engine_revision@\"a63681edc0f69a72604596b16c7986513e809995\"@@@",
+      "@@@SET_BUILD_PROPERTY@got_engine_revision_cp@\"refs/heads/master@{#84512}\"@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_REPO[depot_tools]/gclient.py",
+      "runhooks"
+    ],
+    "cwd": "[CLEANUP]/builder",
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "Checkout source code.gclient runhooks",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/builder/goldens"
+    ],
+    "infra_step": true,
+    "name": "mkdir goldens"
+  },
+  {
+    "cmd": [],
+    "name": "read yaml",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@yaml@@@@",
+      "@@@STEP_LOG_END@yaml@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[CLEANUP]/builder/src/flutter/lib/web_ui/dev/goldens_lock.yaml",
+      "/path/to/tmp/"
+    ],
+    "cwd": "[CACHE]/builder",
+    "infra_step": true,
+    "name": "read yaml.read",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_END@goldens_lock.yaml@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[flutter::yaml]/resources/parse_yaml.py",
+      "--yaml_file",
+      "[CLEANUP]/builder/src/flutter/lib/web_ui/dev/goldens_lock.yaml",
+      "--json_file",
+      "/path/to/tmp/json"
+    ],
+    "cwd": "[CACHE]/builder",
+    "infra_step": true,
+    "name": "read yaml.parse",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"repository\": \"repo\", @@@",
+      "@@@STEP_LOG_LINE@json.output@  \"revision\": \"b6efc758\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[depot_tools::git]/resources/git_setup.py",
+      "--path",
+      "[CACHE]/builder/goldens",
+      "--url",
+      "repo"
+    ],
+    "cwd": "[CACHE]/builder/goldens",
+    "name": "git setup"
+  },
+  {
+    "cmd": [
+      "git",
+      "fetch",
+      "origin",
+      "b6efc758",
+      "--recurse-submodules",
+      "--progress"
+    ],
+    "cwd": "[CACHE]/builder/goldens",
+    "env": {
+      "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
+    },
+    "infra_step": true,
+    "name": "git fetch"
+  },
+  {
+    "cmd": [
+      "git",
+      "checkout",
+      "-f",
+      "FETCH_HEAD"
+    ],
+    "cwd": "[CACHE]/builder/goldens",
+    "infra_step": true,
+    "name": "git checkout"
+  },
+  {
+    "cmd": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "[CACHE]/builder/goldens",
+    "infra_step": true,
+    "name": "read revision",
+    "~followup_annotations": [
+      "@@@STEP_TEXT@<br/>checked out 'deadbeef'<br/>@@@",
+      "@@@SET_BUILD_PROPERTY@got_revision@\"deadbeef\"@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "clean",
+      "-f",
+      "-d",
+      "-x"
+    ],
+    "cwd": "[CACHE]/builder/goldens",
+    "infra_step": true,
+    "name": "git clean"
+  },
+  {
+    "cmd": [
+      "git",
+      "submodule",
+      "sync"
+    ],
+    "cwd": "[CACHE]/builder/goldens",
+    "infra_step": true,
+    "name": "submodule sync"
+  },
+  {
+    "cmd": [
+      "git",
+      "submodule",
+      "update",
+      "--init",
+      "--recursive"
+    ],
+    "cwd": "[CACHE]/builder/goldens",
+    "infra_step": true,
+    "name": "submodule update"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copytree",
+      "[CACHE]/builder/goldens",
+      "[CLEANUP]/builder/src/flutter/lib/web_ui/.dart_tool/goldens"
+    ],
+    "infra_step": true,
+    "name": "copy goldens"
+  },
+  {
+    "cmd": [],
+    "name": "install infra/tools/luci/isolated"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/cipd/infra/tools/luci/isolated/latest"
+    ],
+    "cwd": "[CLEANUP]/builder",
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "install infra/tools/luci/isolated.ensure package directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/cipd/infra/tools/luci/isolated/latest",
+      "-ensure-file",
+      "infra/tools/luci/isolated/${platform} latest",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "cwd": "[CLEANUP]/builder",
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "install infra/tools/luci/isolated.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/isolated/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[CACHE]/cipd/infra/tools/luci/isolated/latest/isolated",
+      "download",
+      "-verbose",
+      "-isolate-server",
+      "https://example.isolateserver.appspot.com",
+      "-isolated",
+      "abceqwe",
+      "-output-dir",
+      "[CLEANUP]/builder/src/out"
+    ],
+    "cwd": "[CLEANUP]/builder",
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Download for engine"
+  },
+  {
+    "cmd": [
+      "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin/pub",
+      "get"
+    ],
+    "cwd": "[CLEANUP]/builder/src/flutter/web_sdk/web_engine_tester",
+    "env": {
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "pub get in web_engine_tester"
+  },
+  {
+    "cmd": [
+      "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin/pub",
+      "get"
+    ],
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
+    "env": {
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "pub get in web_ui"
+  },
+  {
+    "cmd": [
+      "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin/dart",
+      "dev/felt.dart",
+      "test"
+    ],
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
+    "env": {
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "name": "felt test: test"
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "tests for linux",
+      "[CLEANUP]/builder/src/flutter/lib/web_ui/.dart_tool/test_results/info.txt"
+    ],
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
+    "env": {
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "write info file",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@info.txt@tests for linux@@@",
+      "@@@STEP_LOG_END@info.txt@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "Killing Processes"
+  },
+  {
+    "cmd": [
+      "pkill",
+      "chrome"
+    ],
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
+    "env": {
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Killing Processes.kill chrome",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "dart"
+    ],
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
+    "env": {
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Killing Processes.kill dart",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "flutter"
+    ],
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
+    "env": {
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Killing Processes.kill flutter",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "java"
+    ],
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
+    "env": {
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Killing Processes.kill java",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "pkill",
+      "adb"
+    ],
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
+    "env": {
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "Killing Processes.kill adb",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "top",
+      "-b",
+      "-n",
+      "3",
+      "-o",
+      "%MEM"
+    ],
+    "cwd": "[CLEANUP]/builder/src/flutter/lib/web_ui",
+    "env": {
+      "ANDROID_HOME": "[CLEANUP]/builder/src/third_party/android_tools/sdk",
+      "CHROME_NO_SANDBOX": "true",
+      "ENGINE_PATH": "[CLEANUP]/builder",
+      "GOMA_DIR": "[CACHE]/goma/client",
+      "LOCAL_ENGINE": "[CLEANUP]/builder/src/out/host_debug_unopt"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CLEANUP]/builder/src/third_party/dart/tools/sdks/dart-sdk/bin",
+        "[CLEANUP]/builder/src/out/host_debug_unopt/dart-sdk/bin"
+      ]
+    },
+    "env_suffixes": {
+      "DEPOT_TOOLS_UPDATE": [
+        "0",
+        "0"
+      ],
+      "PATH": [
+        "RECIPE_REPO[depot_tools]",
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "name": "OS info"
+  },
+  {
+    "name": "$result"
+  }
+]
