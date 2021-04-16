@@ -12,6 +12,7 @@ DEPS = [
     'flutter/repo_util',
     'flutter/os_utils',
     'flutter/osx_sdk',
+    'flutter/retry',
     'flutter/test_utils',
     'recipe_engine/buildbucket',
     'recipe_engine/context',
@@ -62,9 +63,10 @@ def RunSteps(api):
     # git_branch is set only when the build was triggered by buildbucket.
     runner_params.extend(['--git-branch', git_branch])
   with api.context(env=env, env_prefixes=env_prefixes, cwd=devicelab_path):
-    api.step(
+    api.retry.step(
         'flutter doctor',
         ['flutter', 'doctor'],
+        max_attempts=3,
         timeout=300,
     )
     api.step('pub get', ['pub', 'get'], infra_step=True)
@@ -84,9 +86,10 @@ def RunSteps(api):
     else:
       with api.context(env=env,
                        env_prefixes=env_prefixes), api.step.defer_results():
-        api.step(
+        api.retry.step(
             'flutter doctor',
             ['flutter', 'doctor', '--verbose'],
+            max_attempts=3,
             timeout=300,
         )
         test_runner_command = ['dart', 'bin/test_runner.dart', 'test']
@@ -107,7 +110,11 @@ def mac_test(api, env, env_prefixes, flutter_path, task_name, runner_params):
   api.flutter_deps.gems(
       env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
   )
-  api.step('flutter doctor', ['flutter', 'doctor', '--verbose'], timeout=300)
+  api.retry.step(
+      'flutter doctor', ['flutter', 'doctor', '--verbose'],
+      max_attempts=3,
+      timeout=300
+  )
   api.os_utils.dismiss_dialogs()
   api.os_utils.shutdown_simulators()
   with api.context(env=env,
