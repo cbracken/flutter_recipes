@@ -65,6 +65,7 @@ def RunSteps(api):
     api.step(
         'flutter doctor',
         ['flutter', 'doctor'],
+        timeout=300,
     )
     api.step('pub get', ['pub', 'get'], infra_step=True)
     dep_list = {d['dependency']: d.get('version') for d in deps}
@@ -83,13 +84,15 @@ def RunSteps(api):
     else:
       with api.context(env=env,
                        env_prefixes=env_prefixes), api.step.defer_results():
-        api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
+        api.step(
+            'flutter doctor',
+            ['flutter', 'doctor', '--verbose'],
+            timeout=300,
+        )
         test_runner_command = ['dart', 'bin/test_runner.dart', 'test']
         test_runner_command.extend(runner_params)
         api.step(
-            'run %s' % task_name,
-            test_runner_command,
-            timeout=MAX_TIMEOUT_SECS
+            'run %s' % task_name, test_runner_command, timeout=MAX_TIMEOUT_SECS
         )
         api.logs_util.upload_logs(task_name)
         # This is to clean up leaked processes.
@@ -104,7 +107,7 @@ def mac_test(api, env, env_prefixes, flutter_path, task_name, runner_params):
   api.flutter_deps.gems(
       env, env_prefixes, flutter_path.join('dev', 'ci', 'mac')
   )
-  api.step('flutter doctor', ['flutter', 'doctor', '--verbose'])
+  api.step('flutter doctor', ['flutter', 'doctor', '--verbose'], timeout=300)
   api.os_utils.dismiss_dialogs()
   api.os_utils.shutdown_simulators()
   with api.context(env=env,
@@ -114,9 +117,7 @@ def mac_test(api, env, env_prefixes, flutter_path, task_name, runner_params):
     test_runner_command = [resource_name]
     test_runner_command.extend(runner_params)
     api.step(
-        'run %s' % task_name,
-        test_runner_command,
-        timeout=MAX_TIMEOUT_SECS
+        'run %s' % task_name, test_runner_command, timeout=MAX_TIMEOUT_SECS
     )
     api.logs_util.upload_logs(task_name)
     # This is to clean up leaked processes.

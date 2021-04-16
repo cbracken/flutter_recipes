@@ -206,7 +206,8 @@
         "[CLEANUP]/tmp_tmp_2/vpython"
       ]
     },
-    "name": "flutter doctor"
+    "name": "flutter doctor",
+    "timeout": 300
   },
   {
     "cmd": [
@@ -263,7 +264,8 @@
         "[CLEANUP]/tmp_tmp_2/vpython"
       ]
     },
-    "name": "flutter doctor (2)"
+    "name": "flutter doctor (2)",
+    "timeout": 300
   },
   {
     "cmd": [
