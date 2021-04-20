@@ -66,8 +66,8 @@ def RunSteps(api):
     api.retry.step(
         'flutter doctor',
         ['flutter', 'doctor'],
-        max_attempts=1,
-        timeout=600,
+        max_attempts=3,
+        timeout=300,
     )
     api.step('pub get', ['pub', 'get'], infra_step=True)
     dep_list = {d['dependency']: d.get('version') for d in deps}
@@ -89,8 +89,8 @@ def RunSteps(api):
         api.retry.step(
             'flutter doctor',
             ['flutter', 'doctor', '--verbose'],
-            max_attempts=1,
-            timeout=600,
+            max_attempts=3,
+            timeout=300,
         )
         test_runner_command = ['dart', 'bin/test_runner.dart', 'test']
         test_runner_command.extend(runner_params)
@@ -112,8 +112,8 @@ def mac_test(api, env, env_prefixes, flutter_path, task_name, runner_params):
   )
   api.retry.step(
       'flutter doctor', ['flutter', 'doctor', '--verbose'],
-      max_attempts=1,
-      timeout=600
+      max_attempts=3,
+      timeout=300
   )
   api.os_utils.dismiss_dialogs()
   api.os_utils.shutdown_simulators()

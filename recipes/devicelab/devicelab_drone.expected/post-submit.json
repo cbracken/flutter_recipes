@@ -207,7 +207,7 @@
       ]
     },
     "name": "flutter doctor",
-    "timeout": 600
+    "timeout": 300
   },
   {
     "cmd": [
@@ -265,7 +265,7 @@
       ]
     },
     "name": "flutter doctor (2)",
-    "timeout": 600
+    "timeout": 300
   },
   {
     "cmd": [
