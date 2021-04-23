@@ -445,56 +445,55 @@ def VerifyExportedSymbols(api):
       ['dart', script_path, out_dir]
   )
 
-# TODO(dnfield): Re-enable this when we figure out how to get python3
-# working for it without causing too much disruption.
-# https://github.com/flutter/flutter/issues/80727
-# def UploadTreeMap(api, upload_dir, lib_flutter_path, android_triple):
-#   with api.os_utils.make_temp_directory('treemap') as temp_dir:
-#     checkout = GetCheckoutPath(api)
-#     script_path = checkout.join(
-#         'third_party/dart/runtime/'
-#         'third_party/binary_size/src/run_binary_size_analysis.py'
-#     )
-#     library_path = checkout.join(lib_flutter_path)
-#     destination_dir = temp_dir.join('sizes')
-#     addr2line = checkout.join(
-#         'third_party/android_tools/ndk/toolchains/' + android_triple +
-#         '-4.9/prebuilt/linux-x86_64/bin/' + android_triple + '-addr2line'
-#     )
-#     args = [
-#         '--library', library_path, '--destdir', destination_dir,
-#         "--addr2line-binary", addr2line
-#     ]
-#
-#     api.python('generate treemap for %s' % upload_dir, script_path, args)
-#
-#     remote_name = GetCloudPath(api, upload_dir)
-#     if api.bucket_util.should_upload_packages():
-#       # TODO(fujino): create SafeUploadDirectory() wrapper
-#       result = api.gsutil.upload(
-#           destination_dir,
-#           OLD_BUCKET_NAME,
-#           remote_name,
-#           args=['-r'],
-#           name='upload treemap for %s' % lib_flutter_path,
-#           link_name=None
-#       )
-#       result.presentation.links['Open Treemap'] = (
-#           'https://storage.googleapis.com/%s/%s/sizes/index.html' %
-#           (OLD_BUCKET_NAME, remote_name)
-#       )
-#       result = api.gsutil.upload(
-#           destination_dir,
-#           NEW_BUCKET_NAME,
-#           remote_name,
-#           args=['-r'],
-#           name='upload treemap for %s' % lib_flutter_path,
-#           link_name=None
-#       )
-#       result.presentation.links['Open Treemap'] = (
-#           'https://storage.googleapis.com/%s/%s/sizes/index.html' %
-#           (NEW_BUCKET_NAME, remote_name)
-#       )
+
+def UploadTreeMap(api, upload_dir, lib_flutter_path, android_triple):
+  with api.os_utils.make_temp_directory('treemap') as temp_dir:
+    checkout = GetCheckoutPath(api)
+    script_path = checkout.join(
+        'third_party/dart/runtime/'
+        'third_party/binary_size/src/run_binary_size_analysis.py'
+    )
+    library_path = checkout.join(lib_flutter_path)
+    destination_dir = temp_dir.join('sizes')
+    addr2line = checkout.join(
+        'third_party/android_tools/ndk/toolchains/' + android_triple +
+        '-4.9/prebuilt/linux-x86_64/bin/' + android_triple + '-addr2line'
+    )
+    args = [
+        '--library', library_path, '--destdir', destination_dir,
+        "--addr2line-binary", addr2line
+    ]
+    command = ['python3', script_path]
+    command.extend(args)
+    api.step('generate treemap for %s' % upload_dir, command)
+
+    remote_name = GetCloudPath(api, upload_dir)
+    if api.bucket_util.should_upload_packages():
+      # TODO(fujino): create SafeUploadDirectory() wrapper
+      result = api.gsutil.upload(
+          destination_dir,
+          OLD_BUCKET_NAME,
+          remote_name,
+          args=['-r'],
+          name='upload treemap for %s' % lib_flutter_path,
+          link_name=None
+      )
+      result.presentation.links['Open Treemap'] = (
+          'https://storage.googleapis.com/%s/%s/sizes/index.html' %
+          (OLD_BUCKET_NAME, remote_name)
+      )
+      result = api.gsutil.upload(
+          destination_dir,
+          NEW_BUCKET_NAME,
+          remote_name,
+          args=['-r'],
+          name='upload treemap for %s' % lib_flutter_path,
+          link_name=None
+      )
+      result.presentation.links['Open Treemap'] = (
+          'https://storage.googleapis.com/%s/%s/sizes/index.html' %
+          (NEW_BUCKET_NAME, remote_name)
+      )
 
 
 def LintAndroidHost(api):
@@ -675,13 +674,10 @@ def BuildLinuxAndroid(api, swarming_task_id):
             archive_name='symbols.zip'
         )
 
-        # TODO(dnfield): Re-enable this when we figure out how to get python3
-        # working for it without causing too much disruption.
-        # https://github.com/flutter/flutter/issues/80727
-        # if runtime_mode == 'release' and android_cpu != 'x64':
-        #   UploadTreeMap(
-        #       api, upload_dir, unstripped_lib_flutter_path, android_triple
-        #   )
+        if runtime_mode == 'release' and android_cpu != 'x64':
+          UploadTreeMap(
+              api, upload_dir, unstripped_lib_flutter_path, android_triple
+          )
 
     # Upload the embedding
     for runtime_mode in ['profile', 'release']:
@@ -1311,7 +1307,8 @@ def PackageWindowsDesktopVariant(api, label, bucket_name):
   if bucket_name.endswith('profile') or bucket_name.endswith('release'):
     artifacts.append('out/%s/gen_snapshot.exe' % label)
   UploadArtifacts(
-      api, bucket_name, artifacts, archive_name='windows-x64-flutter.zip')
+      api, bucket_name, artifacts, archive_name='windows-x64-flutter.zip'
+  )
 
 
 def PackageWindowsUwpDesktopVariant(api, label, bucket_name):
@@ -1329,7 +1326,8 @@ def PackageWindowsUwpDesktopVariant(api, label, bucket_name):
   if bucket_name.endswith('profile') or bucket_name.endswith('release'):
     artifacts.append('out/%s/gen_snapshot.exe' % label)
   UploadArtifacts(
-      api, bucket_name, artifacts, archive_name= 'windows-uwp-x64-flutter.zip')
+      api, bucket_name, artifacts, archive_name='windows-uwp-x64-flutter.zip'
+  )
 
 
 def BuildWindows(api):
@@ -1400,14 +1398,15 @@ def BuildWindows(api):
     RunGN(api, '--runtime-mode', 'profile', '--winuwp')
     RunGN(api, '--runtime-mode', 'release', '--winuwp')
     Build(api, 'winuwp_debug')
-    PackageWindowsUwpDesktopVariant(
-        api, 'winuwp_debug', 'windows-x64-debug')
+    PackageWindowsUwpDesktopVariant(api, 'winuwp_debug', 'windows-x64-debug')
     Build(api, 'winuwp_profile')
     PackageWindowsUwpDesktopVariant(
-        api, 'winuwp_profile', 'windows-x64-profile')
+        api, 'winuwp_profile', 'windows-x64-profile'
+    )
     Build(api, 'winuwp_release')
     PackageWindowsUwpDesktopVariant(
-        api, 'winuwp_release', 'windows-x64-release')
+        api, 'winuwp_release', 'windows-x64-release'
+    )
 
   if api.properties.get('build_android_aot', True):
     RunGN(api, '--runtime-mode', 'profile', '--android')
