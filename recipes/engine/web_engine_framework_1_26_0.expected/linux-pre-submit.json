@@ -148,7 +148,7 @@
     "env": {
       "ENGINE_PATH": "[CACHE]/builder",
       "GIT_HTTP_LOW_SPEED_LIMIT": "102400",
-      "GIT_HTTP_LOW_SPEED_TIME": "300",
+      "GIT_HTTP_LOW_SPEED_TIME": "1800",
       "GOMA_DIR": "[CACHE]/goma/client"
     },
     "env_prefixes": {
