@@ -187,7 +187,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
             infra_step=True,
         )
         with self.m.context(
-            cwd=cocoon_path.join('agent', 'tool', 'infra-dialog'),
+            cwd=cocoon_path.join('device_doctor', 'tool', 'infra-dialog'),
             infra_steps=True,
         ):
           device_id = self.m.step(
