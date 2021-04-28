@@ -9,13 +9,6 @@
   {
     "cmd": [
       "ls",
-      "-la"
-    ],
-    "name": "mytest (2)"
-  },
-  {
-    "cmd": [
-      "ls",
       "-a"
     ],
     "name": "mytest_func",
@@ -24,13 +17,10 @@
     ]
   },
   {
-    "cmd": [
-      "ls",
-      "-a"
-    ],
-    "name": "mytest_func (2)"
-  },
-  {
+    "failure": {
+      "failure": {},
+      "humanReason": "Step('mytest_func') (retcode: 1)"
+    },
     "name": "$result"
   }
 ]

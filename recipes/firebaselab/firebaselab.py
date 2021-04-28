@@ -10,8 +10,9 @@ from contextlib import contextmanager
 import re
 
 DEPS = [
-    'flutter/repo_util',
     'flutter/flutter_deps',
+    'flutter/repo_util',
+    'flutter/retry',
     'fuchsia/gcloud',
     'fuchsia/gsutil',
     'recipe_engine/context',
@@ -98,7 +99,16 @@ def RunSteps(api):
             '--results-bucket=gs://%s' % gcs_bucket,
             '--results-dir=%s/%s' % (task_name, task_id)
         ] + devices
-        api.gcloud(*firebase_cmd)
+        # See https://firebase.google.com/docs/test-lab/android/command-line#script_exit_codes
+        # If the firebase command fails with 1, it's likely an HTTP issue that
+        # will resolve on a retry. If it fails on 15 or 20, it's explicitly
+        # an infra failure on the FTL side, so we should just retry.
+        def run_firebase():
+          return api.gcloud(*firebase_cmd)
+        api.retry.wrap(
+          run_firebase,
+          max_attempts=3,
+          retriable_ret=(1, 15, 20))
 
       logcat_path = '%s/%s/*/logcat' % (task_name, task_id)
       tmp_logcat = api.path['cleanup'].join('logcat')
@@ -112,4 +122,16 @@ def GenTests(api):
   yield api.test(
       'basic', api.repo_util.flutter_environment_data(),
       api.properties(task_name='the_task')
+  )
+
+  yield api.test(
+      'failure 15', api.repo_util.flutter_environment_data()
+  ) + api.step_data(
+     'test_execution.gcloud firebase', retcode=15
+  )
+
+  yield api.test(
+      'failure 10', api.repo_util.flutter_environment_data()
+  ) + api.step_data(
+     'test_execution.gcloud firebase', retcode=10
   )
