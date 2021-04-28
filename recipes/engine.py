@@ -23,6 +23,7 @@ DEPS = [
     'flutter/os_utils',
     'flutter/osx_sdk',
     'flutter/repo_util',
+    'flutter/retry',
     'flutter/zip',
     'fuchsia/display_util',
     'recipe_engine/buildbucket',
@@ -641,7 +642,9 @@ def BuildLinuxAndroid(api, swarming_task_id):
                 api.buildbucket.gitiles_commit.id or 'testing',
                 swarming_task_id,
             ]
-            api.step('Firebase test', firebase_cmd, ok_ret='any')
+            def firebase_func():
+              api.step('Firebase test', firebase_cmd)
+            api.retry.wrap(firebase_func, retriable_codes=(1, 15, 20))
 
         # TODO(egarciad): Don't upload flutter.jar once the migration to Maven
         # is completed.
