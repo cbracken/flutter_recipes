@@ -10154,7 +10154,8 @@
   },
   {
     "cmd": [
-      "python3",
+      "python",
+      "-u",
       "[CACHE]/builder/src/third_party/dart/runtime/third_party/binary_size/src/run_binary_size_analysis.py",
       "--library",
       "[CACHE]/builder/src/out/android_release_arm64/libflutter.so",
@@ -11940,7 +11941,8 @@
   },
   {
     "cmd": [
-      "python3",
+      "python",
+      "-u",
       "[CACHE]/builder/src/third_party/dart/runtime/third_party/binary_size/src/run_binary_size_analysis.py",
       "--library",
       "[CACHE]/builder/src/out/android_release/libflutter.so",

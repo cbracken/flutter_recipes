@@ -444,9 +444,7 @@ def UploadTreeMap(api, upload_dir, lib_flutter_path, android_triple):
         "--addr2line-binary", addr2line
     ]
 
-    command = ['python3', script_path]
-    command.extend(args)
-    api.step('generate treemap for %s' % upload_dir, command)
+    api.python('generate treemap for %s' % upload_dir, script_path, args)
 
     remote_name = GetCloudPath(api, upload_dir)
     if api.bucket_util.should_upload_packages():
