@@ -39,8 +39,9 @@ def RunShard(api, env, env_prefixes, checkout_path):
       dart_bin = local_engine_path.join('dart-sdk', 'bin')
       env_prefixes = {'PATH': ['%s' % str(dart_bin)]}
     # Default timeout for tasks in either devicelab or hostonly.
-    deps_timeout_secs = DEVICELAB_TIMEOUT_SECS if api.test_utils.is_devicelab_bot(
+    default_timeout_secs = DEVICELAB_TIMEOUT_SECS if api.test_utils.is_devicelab_bot(
     ) else HOSTONLY_TIMEOUT_SECS
+    deps_timeout_secs = api.properties.get('test_timeout_secs') or default_timeout_secs
     with api.context(env=env, env_prefixes=env_prefixes):
       api.test_utils.run_test(
           'run test.dart for %s shard and subshard %s' %
