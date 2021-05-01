@@ -801,7 +801,7 @@
   },
   {
     "cmd": [],
-    "name": "ensure packages.install infra/gsutil",
+    "name": "ensure packages.install infra/3pp/tools/gsutil",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@1@@@"
     ]
@@ -816,7 +816,7 @@
       "ensure-directory",
       "--mode",
       "0777",
-      "[CACHE]/cipd/infra/gsutil/version%3A4.41"
+      "[CACHE]/cipd/infra/3pp/tools/gsutil/version%3A4.60"
     ],
     "cwd": "[CACHE]/builder",
     "env": {
@@ -836,7 +836,7 @@
       ]
     },
     "infra_step": true,
-    "name": "ensure packages.install infra/gsutil.ensure package directory",
+    "name": "ensure packages.install infra/3pp/tools/gsutil.ensure package directory",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
     ]
@@ -846,9 +846,9 @@
       "cipd",
       "ensure",
       "-root",
-      "[CACHE]/cipd/infra/gsutil/version%3A4.41",
+      "[CACHE]/cipd/infra/3pp/tools/gsutil/version%3A4.60",
       "-ensure-file",
-      "infra/gsutil version:4.41",
+      "infra/3pp/tools/gsutil version:4.60",
       "-max-threads",
       "0",
       "-json-output",
@@ -872,15 +872,15 @@
       ]
     },
     "infra_step": true,
-    "name": "ensure packages.install infra/gsutil.ensure_installed",
+    "name": "ensure packages.install infra/3pp/tools/gsutil.ensure_installed",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@",
       "@@@STEP_LOG_LINE@json.output@{@@@",
       "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
       "@@@STEP_LOG_LINE@json.output@      {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-version:4.41----\", @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/gsutil\"@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-version:4.60----\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/3pp/tools/gsutil\"@@@",
       "@@@STEP_LOG_LINE@json.output@      }@@@",
       "@@@STEP_LOG_LINE@json.output@    ]@@@",
       "@@@STEP_LOG_LINE@json.output@  }@@@",
@@ -894,7 +894,7 @@
       "-vpython-spec",
       "RECIPE_MODULE[fuchsia::gsutil]/resources/gsutil.vpython",
       "-u",
-      "[CACHE]/cipd/infra/gsutil/version%3A4.41/gsutil",
+      "[CACHE]/cipd/infra/3pp/tools/gsutil/version%3A4.60/gsutil",
       "-o",
       "GSUtil:software_update_check_period=0",
       "cp",
@@ -1257,7 +1257,7 @@
       "-vpython-spec",
       "RECIPE_MODULE[fuchsia::gsutil]/resources/gsutil.vpython",
       "-u",
-      "[CACHE]/cipd/infra/gsutil/version%3A4.41/gsutil",
+      "[CACHE]/cipd/infra/3pp/tools/gsutil/version%3A4.60/gsutil",
       "-o",
       "GSUtil:software_update_check_period=0",
       "cp",
