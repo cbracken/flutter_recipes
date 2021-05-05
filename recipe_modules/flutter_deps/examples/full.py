@@ -51,6 +51,8 @@ def RunSteps(api):
   api.flutter_deps.ios_signing(env, env_prefixes)
   api.flutter_deps.curl(env, env_prefixes, '')
   api.flutter_deps.cocoon(env, env_prefixes, 'refs/heads/master')
+  api.flutter_deps.dart_sdk(env, env_prefixes, '')
+  api.flutter_deps.certs(env, env_prefixes, '')
 
   # Gems dependency requires to run from a flutter_environment.
   checkout_path = api.path['start_dir'].join('flutter\ sdk')
@@ -92,4 +94,9 @@ def GenTests(api):
       'goldTryjob',
       api.properties(gold_tryjob=True, git_ref='refs/pull/1/head'),
       api.repo_util.flutter_environment_data(checkout_path)
+  )
+  yield api.test(
+      'windows', api.properties(gold_tryjob=True, git_ref='refs/pull/1/head'),
+      api.repo_util.flutter_environment_data(checkout_path),
+      api.platform.name('win')
   )

@@ -5,10 +5,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/java",
+      "[CACHE]\\java",
       "-ensure-file",
       "flutter_internal/java/openjdk/${platform} v1",
       "-max-threads",
@@ -38,10 +38,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/gold",
+      "[CACHE]\\gold",
       "-ensure-file",
       "skia/tools/goldctl/${platform} v2",
       "-max-threads",
@@ -71,10 +71,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/chrome/chrome",
+      "[CACHE]\\chrome\\chrome",
       "-ensure-file",
       "flutter_internal/browsers/chrome/${platform} v3",
       "-max-threads",
@@ -100,10 +100,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/chrome/drivers",
+      "[CACHE]\\chrome\\drivers",
       "-ensure-file",
       "flutter_internal/browser-drivers/chrome/${platform} v3",
       "-max-threads",
@@ -129,10 +129,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/go",
+      "[CACHE]\\go",
       "-ensure-file",
       "infra/go/${platform} v4",
       "-max-threads",
@@ -159,23 +159,23 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
       "--json-output",
       "/path/to/tmp/json",
       "ensure-directory",
       "--mode",
       "0777",
-      "[CLEANUP]/go_path"
+      "[CLEANUP]\\go_path"
     ],
     "infra_step": true,
     "name": "Ensure go path"
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/go",
+      "[CACHE]\\go",
       "-ensure-file",
       "infra/go/${platform} latest",
       "-max-threads",
@@ -202,13 +202,13 @@
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
       "--json-output",
       "/path/to/tmp/json",
       "ensure-directory",
       "--mode",
       "0777",
-      "[CLEANUP]/go_path"
+      "[CLEANUP]\\go_path"
     ],
     "infra_step": true,
     "name": "Ensure go path (2)"
@@ -221,18 +221,18 @@
       "github.com/technosophos/dashing"
     ],
     "env": {
-      "CHROME_EXECUTABLE": "[CACHE]/chrome/chrome/chrome",
+      "CHROME_EXECUTABLE": "[CACHE]\\chrome\\chrome\\chrome.exe",
       "CHROME_NO_SANDBOX": "true",
-      "GOPATH": "[CLEANUP]/go_path"
+      "GOPATH": "[CLEANUP]\\go_path"
     },
     "env_prefixes": {
       "PATH": [
-        "[CACHE]/chrome/chrome",
-        "[CACHE]/chrome/drivers",
-        "[CACHE]/go/bin",
-        "[CLEANUP]/go_path/bin",
-        "[CACHE]/go/bin",
-        "[CLEANUP]/go_path/bin"
+        "[CACHE]\\chrome\\chrome",
+        "[CACHE]\\chrome\\drivers",
+        "[CACHE]\\go\\bin",
+        "[CLEANUP]\\go_path\\bin",
+        "[CACHE]\\go\\bin",
+        "[CLEANUP]\\go_path\\bin"
       ]
     },
     "infra_step": true,
@@ -240,10 +240,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CLEANUP]/tmp_tmp_1/vpython",
+      "[CLEANUP]\\tmp_tmp_1\\vpython",
       "-ensure-file",
       "infra/tools/luci/vpython/${platform} v6",
       "-max-threads",
@@ -272,10 +272,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/android/tools",
+      "[CACHE]\\android\\tools",
       "-ensure-file",
       "flutter/android/sdk/tools/${platform} version:26.1.1",
       "-max-threads",
@@ -301,10 +301,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/android/platform-tools",
+      "[CACHE]\\android\\platform-tools",
       "-ensure-file",
       "flutter/android/sdk/platform-tools/${platform} version:29.0.2",
       "-max-threads",
@@ -330,10 +330,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/android/platforms",
+      "[CACHE]\\android\\platforms",
       "-ensure-file",
       "flutter/android/sdk/platforms version:29r1",
       "-max-threads",
@@ -359,10 +359,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/android/build-tools",
+      "[CACHE]\\android\\build-tools",
       "-ensure-file",
       "flutter/android/sdk/build-tools/${platform} version:29.0.1",
       "-max-threads",
@@ -388,10 +388,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/android/ndk-bundle",
+      "[CACHE]\\android\\ndk-bundle",
       "-ensure-file",
       "flutter/android/ndk/${platform} version:21.3.6528147",
       "-max-threads",
@@ -417,10 +417,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/android/licenses",
+      "[CACHE]\\android\\licenses",
       "-ensure-file",
       "flutter_internal/android/sdk/licenses latest",
       "-max-threads",
@@ -445,83 +445,16 @@
     ]
   },
   {
-    "cmd": [],
-    "name": "install infra/tools/luci/isolated"
-  },
-  {
     "cmd": [
       "vpython",
       "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
       "--json-output",
       "/path/to/tmp/json",
       "ensure-directory",
       "--mode",
       "0777",
-      "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin"
-    ],
-    "infra_step": true,
-    "name": "install infra/tools/luci/isolated.ensure package directory",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "cipd",
-      "ensure",
-      "-root",
-      "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin",
-      "-ensure-file",
-      "infra/tools/luci/isolated/${platform} isolated_module_pin",
-      "-max-threads",
-      "0",
-      "-json-output",
-      "/path/to/tmp/json"
-    ],
-    "infra_step": true,
-    "name": "install infra/tools/luci/isolated.ensure_installed",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@",
-      "@@@STEP_LOG_LINE@json.output@{@@@",
-      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
-      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
-      "@@@STEP_LOG_LINE@json.output@      {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-isolated_module_\", @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/isolated/resolved-platform\"@@@",
-      "@@@STEP_LOG_LINE@json.output@      }@@@",
-      "@@@STEP_LOG_LINE@json.output@    ]@@@",
-      "@@@STEP_LOG_LINE@json.output@  }@@@",
-      "@@@STEP_LOG_LINE@json.output@}@@@",
-      "@@@STEP_LOG_END@json.output@@@"
-    ]
-  },
-  {
-    "cmd": [
-      "[CACHE]/cipd/infra/tools/luci/isolated/isolated_module_pin/isolated",
-      "download",
-      "-verbose",
-      "-isolate-server",
-      "https://example.isolateserver.appspot.com",
-      "-isolated",
-      "abceqwe",
-      "-output-dir",
-      "[CLEANUP]/builder/src/out"
-    ],
-    "infra_step": true,
-    "name": "Download for engine"
-  },
-  {
-    "cmd": [
-      "vpython",
-      "-u",
-      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
-      "--json-output",
-      "/path/to/tmp/json",
-      "ensure-directory",
-      "--mode",
-      "0777",
-      "[START_DIR]/firebase"
+      "[START_DIR]\\firebase"
     ],
     "infra_step": true,
     "name": "ensure directory"
@@ -534,7 +467,7 @@
     "cmd": [
       "curl",
       "-Lo",
-      "[START_DIR]/firebase/firebase",
+      "[START_DIR]\\firebase\\firebase",
       "https://firebase.tools/bin/linux/latest"
     ],
     "infra_step": true,
@@ -547,7 +480,7 @@
     "cmd": [
       "chmod",
       "755",
-      "[START_DIR]/firebase/firebase"
+      "[START_DIR]\\firebase\\firebase"
     ],
     "infra_step": true,
     "name": "Install firebase.Set execute permission",
@@ -561,10 +494,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/cmake",
+      "[CACHE]\\cmake",
       "-ensure-file",
       "infra/cmake/${platform} version:3.16.1",
       "-max-threads",
@@ -594,10 +527,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/ninja",
+      "[CACHE]\\ninja",
       "-ensure-file",
       "infra/ninja/${platform} version:1.9.0",
       "-max-threads",
@@ -627,10 +560,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/clang",
+      "[CACHE]\\clang",
       "-ensure-file",
       "fuchsia/third_party/clang/${platform} git_revision:7e9747b50bcb1be28d4a3236571e8050835497a6",
       "-max-threads",
@@ -670,10 +603,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CLEANUP]/tmp_tmp_2/curl",
+      "[CLEANUP]\\tmp_tmp_2\\curl",
       "-ensure-file",
       "flutter_internal/tools/curl/${platform} latest",
       "-max-threads",
@@ -711,9 +644,9 @@
     "cmd": [
       "python",
       "-u",
-      "RECIPE_MODULE[depot_tools::git]/resources/git_setup.py",
+      "RECIPE_MODULE[depot_tools::git]\\resources\\git_setup.py",
       "--path",
-      "[CACHE]/cocoon",
+      "[CACHE]\\cocoon",
       "--url",
       "https://chromium.googlesource.com/external/github.com/flutter/cocoon"
     ],
@@ -732,9 +665,9 @@
       "--progress",
       "--tags"
     ],
-    "cwd": "[CACHE]/cocoon",
+    "cwd": "[CACHE]\\cocoon",
     "env": {
-      "PATH": "RECIPE_REPO[depot_tools]:<PATH>"
+      "PATH": "RECIPE_REPO[depot_tools];<PATH>"
     },
     "infra_step": true,
     "name": "Checkout cocoon.Checkout flutter/cocoon.git fetch",
@@ -749,7 +682,7 @@
       "-f",
       "FETCH_HEAD"
     ],
-    "cwd": "[CACHE]/cocoon",
+    "cwd": "[CACHE]\\cocoon",
     "infra_step": true,
     "name": "Checkout cocoon.Checkout flutter/cocoon.git checkout",
     "~followup_annotations": [
@@ -762,7 +695,7 @@
       "rev-parse",
       "HEAD"
     ],
-    "cwd": "[CACHE]/cocoon",
+    "cwd": "[CACHE]\\cocoon",
     "infra_step": true,
     "name": "Checkout cocoon.Checkout flutter/cocoon.read revision",
     "~followup_annotations": [
@@ -779,7 +712,7 @@
       "-d",
       "-x"
     ],
-    "cwd": "[CACHE]/cocoon",
+    "cwd": "[CACHE]\\cocoon",
     "infra_step": true,
     "name": "Checkout cocoon.Checkout flutter/cocoon.git clean",
     "~followup_annotations": [
@@ -792,7 +725,7 @@
       "submodule",
       "sync"
     ],
-    "cwd": "[CACHE]/cocoon",
+    "cwd": "[CACHE]\\cocoon",
     "infra_step": true,
     "name": "Checkout cocoon.Checkout flutter/cocoon.submodule sync",
     "~followup_annotations": [
@@ -807,7 +740,7 @@
       "--init",
       "--recursive"
     ],
-    "cwd": "[CACHE]/cocoon",
+    "cwd": "[CACHE]\\cocoon",
     "infra_step": true,
     "name": "Checkout cocoon.Checkout flutter/cocoon.submodule update",
     "~followup_annotations": [
@@ -820,10 +753,10 @@
   },
   {
     "cmd": [
-      "cipd",
+      "cipd.bat",
       "ensure",
       "-root",
-      "[CACHE]/dart_sdk",
+      "[CACHE]\\dart_sdk",
       "-ensure-file",
       "dart/dart-sdk/${platform} stable",
       "-max-threads",
@@ -846,6 +779,79 @@
       "@@@STEP_LOG_LINE@json.output@}@@@",
       "@@@STEP_LOG_END@json.output@@@"
     ]
+  },
+  {
+    "cmd": [],
+    "name": "Install certs"
+  },
+  {
+    "cmd": [
+      "cipd.bat",
+      "ensure",
+      "-root",
+      "[CACHE]\\certs",
+      "-ensure-file",
+      "flutter_internal/certs latest",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "name": "Install certs.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"flutter_internal/certs\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[CACHE]\\certs\\install.bat"
+    ],
+    "cwd": "[CACHE]\\certs",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\android",
+      "ANDROID_SDK_ROOT": "[CACHE]\\android",
+      "CHROME_EXECUTABLE": "[CACHE]\\chrome\\chrome\\chrome.exe",
+      "CHROME_NO_SANDBOX": "true",
+      "COCOON_PATH": "[CACHE]\\cocoon",
+      "FLUTTER_XCODE_CODE_SIGN_STYLE": "Manual",
+      "FLUTTER_XCODE_DEVELOPMENT_TEAM": "S8QB4VV633",
+      "FLUTTER_XCODE_PROVISIONING_PROFILE_SPECIFIER": "match Development *",
+      "GOPATH": "[CLEANUP]\\go_path",
+      "GRADLE_OPTS": "-Dorg.gradle.daemon=false",
+      "GRADLE_USER_HOME": "[CACHE]\\gradle"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\certs",
+        "[CACHE]\\dart_sdk",
+        "[CACHE]\\chrome\\chrome",
+        "[CACHE]\\chrome\\drivers",
+        "[CACHE]\\go\\bin",
+        "[CLEANUP]\\go_path\\bin",
+        "[CACHE]\\go\\bin",
+        "[CLEANUP]\\go_path\\bin",
+        "[CLEANUP]\\tmp_tmp_1\\vpython",
+        "[CACHE]\\android\\platform-tools",
+        "[CACHE]\\android\\tools",
+        "[START_DIR]\\firebase",
+        "[CACHE]\\cmake\\bin",
+        "[CACHE]\\ninja",
+        "[CACHE]\\clang\\bin",
+        "[CLEANUP]\\tmp_tmp_2\\curl"
+      ]
+    },
+    "name": "Install Certs"
   },
   {
     "name": "$result"

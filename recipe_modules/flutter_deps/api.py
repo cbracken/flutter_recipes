@@ -51,6 +51,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         'goldctl': self.goldctl,
         'curl': self.curl,
         'chrome_and_driver': self.chrome_and_driver,
+        'dart_sdk': self.dart_sdk,
         'go_sdk': self.go_sdk,
         'dashing': self.dashing,
         'vpython': self.vpython,
@@ -61,6 +62,7 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         'ninja': self.ninja,
         'ios_signing': self.ios_signing,
         'cocoon': self.cocoon,
+        'certs': self.certs,
     }
     for dep in deps:
       if dep.get('dependency') in ['xcode', 'gems', 'swift']:
@@ -348,6 +350,50 @@ class FlutterDepsApi(recipe_api.RecipeApi):
     paths = env_prefixes.get('PATH', [])
     paths.append(ninja_path)
     env_prefixes['PATH'] = paths
+
+  def dart_sdk(self, env, env_prefixes, version=None):
+    """Installs dart sdk.
+
+    Args:
+      env(dict): Current environment variables.
+      env_prefixes(dict):  Current environment prefixes variables.
+    """
+    version = version or 'stable'
+    dart_sdk_path = self.m.path['cache'].join('dart_sdk')
+    dart_sdk = self.m.cipd.EnsureFile()
+    dart_sdk.add_package("dart/dart-sdk/${platform}", version)
+    with self.m.step.nest('Install dart sdk'):
+      self.m.cipd.ensure(dart_sdk_path, dart_sdk)
+    paths = env_prefixes.get('PATH', [])
+    paths.insert(0, dart_sdk_path)
+    env_prefixes['PATH'] = paths
+
+  def certs(self, env, env_prefixes, version=None):
+    """Installs root certificates for windows.
+
+    Args:
+      env(dict): Current environment variables.
+      env_prefixes(dict):  Current environment prefixes variables.
+    """
+    if not self.m.platform.is_win:
+      # noop for non windows platforms.
+      return
+    version = version or 'latest'
+    certs_path = self.m.path['cache'].join('certs')
+    certs = self.m.cipd.EnsureFile()
+    certs.add_package("flutter_internal/certs", version)
+    with self.m.step.nest('Install certs'):
+      self.m.cipd.ensure(certs_path, certs)
+    paths = env_prefixes.get('PATH', [])
+    paths.insert(0, certs_path)
+    env_prefixes['PATH'] = paths
+    with self.m.context(env=env, env_prefixes=env_prefixes, cwd=certs_path):
+      self.m.step(
+          'Install Certs',
+          [
+              certs_path.join('install.bat'),
+          ],
+      )
 
   def ios_signing(self, env, env_prefixes, version=None):
     """Installs ninja.
