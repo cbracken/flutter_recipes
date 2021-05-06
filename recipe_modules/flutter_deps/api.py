@@ -391,7 +391,8 @@ class FlutterDepsApi(recipe_api.RecipeApi):
       self.m.step(
           'Install Certs',
           [
-              certs_path.join('install.bat'),
+              'powershell.exe',
+              certs_path.join('install.ps1'),
           ],
       )
 

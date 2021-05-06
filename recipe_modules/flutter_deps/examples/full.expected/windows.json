@@ -815,7 +815,8 @@
   },
   {
     "cmd": [
-      "[CACHE]\\certs\\install.bat"
+      "powershell.exe",
+      "[CACHE]\\certs\\install.ps1"
     ],
     "cwd": "[CACHE]\\certs",
     "env": {
