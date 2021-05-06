@@ -44,6 +44,7 @@ def RunSteps(api):
 
   # Collect memory/cpu/process before task execution.
   api.os_utils.collect_os_info()
+  api.os_utils.print_pub_certs()
 
   # Trigger validation tests. This is to optimize resources usage
   # when don't need to run in shards.

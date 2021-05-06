@@ -69,6 +69,14 @@
     "name": "temp dir for Create temp directory"
   },
   {
+    "cmd": [
+      "powershell.exe",
+      "gci -Recurse cert: |Where-Object {$_.Subject -like \"*GTS CA 1D4*\" -or $_.FriendlyName -like \"GlobalSign Root CA - R1\" -or $_.Subject -like \"*GTS Root R1*\"}"
+    ],
+    "infra_step": true,
+    "name": "Print pub.dev certs"
+  },
+  {
     "name": "$result"
   }
 ]

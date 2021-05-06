@@ -24,6 +24,20 @@ class FlutterDepsApi(recipe_api.RecipeApi):
         ok_ret='any',
     )
 
+  def print_pub_certs(self):
+    """Prints pub.dev certificates."""
+    cmd = (
+        'gci -Recurse cert: |Where-Object {$_.Subject -like "*GTS CA 1D4*"'
+        ' -or $_.FriendlyName -like "GlobalSign Root CA - R1" -or $_.Subject'
+        ' -like "*GTS Root R1*"}'
+    )
+    if self.m.platform.is_win:
+      self.m.step(
+          'Print pub.dev certs',
+          ['powershell.exe', cmd],
+          infra_step=True,
+      )
+
   def clean_derived_data(self):
     """Cleans the derived data folder in mac builders.
 

@@ -41,7 +41,9 @@ def RunShard(api, env, env_prefixes, checkout_path):
     # Default timeout for tasks in either devicelab or hostonly.
     default_timeout_secs = DEVICELAB_TIMEOUT_SECS if api.test_utils.is_devicelab_bot(
     ) else HOSTONLY_TIMEOUT_SECS
-    deps_timeout_secs = api.properties.get('test_timeout_secs') or default_timeout_secs
+    deps_timeout_secs = api.properties.get(
+        'test_timeout_secs'
+    ) or default_timeout_secs
     with api.context(env=env, env_prefixes=env_prefixes):
       api.test_utils.run_test(
           'run test.dart for %s shard and subshard %s' %
@@ -54,6 +56,7 @@ def RunShard(api, env, env_prefixes, checkout_path):
 def RunSteps(api):
   # Collect memory/cpu/process before task execution.
   api.os_utils.collect_os_info()
+  api.os_utils.print_pub_certs()
 
   checkout_path = api.path['start_dir'].join('flutter')
   api.repo_util.checkout(
