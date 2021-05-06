@@ -19,6 +19,7 @@ DEPS = [
     'depot_tools/git',
     'depot_tools/gsutil',
     'flutter/bucket_util',
+    'flutter/flutter_deps',
     'flutter/json_util',
     'flutter/os_utils',
     'flutter/osx_sdk',
@@ -1538,6 +1539,10 @@ def RunSteps(api, properties, env_properties):
 
   env = {'GOMA_DIR': api.goma.goma_dir, 'ANDROID_HOME': str(android_home)}
   env_prefixes = {'PATH': [dart_bin]}
+
+  # Add certificates and print the ones required for pub.
+  api.flutter_deps.certs(env, env_prefixes)
+  api.os_utils.print_pub_certs()
 
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
 

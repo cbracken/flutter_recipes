@@ -63,6 +63,65 @@
   },
   {
     "cmd": [],
+    "name": "Install certs"
+  },
+  {
+    "cmd": [
+      "cipd.bat",
+      "ensure",
+      "-root",
+      "[CACHE]\\certs",
+      "-ensure-file",
+      "flutter_internal/certs latest",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "name": "Install certs.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"flutter_internal/certs\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "powershell.exe",
+      "[CACHE]\\certs\\install.ps1"
+    ],
+    "cwd": "[CACHE]\\certs",
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\certs",
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "name": "Install Certs"
+  },
+  {
+    "cmd": [
+      "powershell.exe",
+      "gci -Recurse cert: |Where-Object {$_.Subject -like \"*GTS CA 1D4*\" -or $_.FriendlyName -like \"GlobalSign Root CA - R1\" -or $_.Subject -like \"*GTS Root R1*\"}"
+    ],
+    "infra_step": true,
+    "name": "Print pub.dev certs"
+  },
+  {
+    "cmd": [],
     "name": "Checkout source code"
   },
   {
@@ -128,6 +187,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -196,6 +256,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -227,6 +288,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -258,6 +320,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -300,6 +363,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -334,6 +398,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -379,6 +444,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -431,6 +497,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -472,6 +539,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -508,6 +576,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -547,6 +616,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -601,6 +671,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -640,6 +711,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -683,6 +755,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -718,6 +791,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -748,6 +822,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -790,6 +865,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -824,6 +900,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -869,6 +946,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -921,6 +999,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -962,6 +1041,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -998,6 +1078,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1037,6 +1118,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1078,6 +1160,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1113,6 +1196,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1142,6 +1226,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1184,6 +1269,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1220,6 +1306,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1265,6 +1352,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1317,6 +1405,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1358,6 +1447,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1394,6 +1484,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1433,6 +1524,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1474,6 +1566,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1506,6 +1599,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1548,6 +1642,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1584,6 +1679,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1629,6 +1725,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1681,6 +1778,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1722,6 +1820,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1758,6 +1857,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1797,6 +1897,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1838,6 +1939,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1883,6 +1985,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1918,6 +2021,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -1963,6 +2067,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2015,6 +2120,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2056,6 +2162,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2092,6 +2199,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2131,6 +2239,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2172,6 +2281,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2201,6 +2311,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2232,6 +2343,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2259,6 +2371,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2290,6 +2403,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2317,6 +2431,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2348,6 +2463,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2375,6 +2491,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2406,6 +2523,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2433,6 +2551,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2464,6 +2583,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2491,6 +2611,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2522,6 +2643,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2549,6 +2671,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2580,6 +2703,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2607,6 +2731,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2638,6 +2763,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2665,6 +2791,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2696,6 +2823,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2723,6 +2851,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2754,6 +2883,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2785,6 +2915,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2815,6 +2946,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2845,6 +2977,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2887,6 +3020,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2921,6 +3055,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -2966,6 +3101,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3018,6 +3154,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3059,6 +3196,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3095,6 +3233,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3134,6 +3273,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3175,6 +3315,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3204,6 +3345,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3235,6 +3377,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3278,6 +3421,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3312,6 +3456,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3357,6 +3502,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3409,6 +3555,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3450,6 +3597,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3486,6 +3634,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3525,6 +3674,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3566,6 +3716,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3595,6 +3746,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3626,6 +3778,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3669,6 +3822,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3703,6 +3857,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3748,6 +3903,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3800,6 +3956,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3841,6 +3998,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3877,6 +4035,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3916,6 +4075,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3957,6 +4117,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -3986,6 +4147,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4017,6 +4179,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4048,6 +4211,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4079,6 +4243,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4110,6 +4275,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4140,6 +4306,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4171,6 +4338,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4202,6 +4370,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4244,6 +4413,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4279,6 +4449,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4324,6 +4495,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4376,6 +4548,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4417,6 +4590,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4453,6 +4627,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4492,6 +4667,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4533,6 +4709,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4578,6 +4755,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4613,6 +4791,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4658,6 +4837,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4710,6 +4890,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4751,6 +4932,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4787,6 +4969,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4826,6 +5009,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4867,6 +5051,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4912,6 +5097,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4947,6 +5133,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -4992,6 +5179,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5044,6 +5232,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5085,6 +5274,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5121,6 +5311,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5160,6 +5351,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5201,6 +5393,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5246,6 +5439,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5281,6 +5475,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5326,6 +5521,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5378,6 +5574,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5419,6 +5616,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5455,6 +5653,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5494,6 +5693,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5535,6 +5735,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5580,6 +5781,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5615,6 +5817,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5660,6 +5863,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5712,6 +5916,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5753,6 +5958,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5789,6 +5995,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5828,6 +6035,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5869,6 +6077,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5914,6 +6123,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5949,6 +6159,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -5994,6 +6205,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6046,6 +6258,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6087,6 +6300,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6123,6 +6337,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6162,6 +6377,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6203,6 +6419,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6232,6 +6449,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6263,6 +6481,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6290,6 +6509,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6321,6 +6541,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6348,6 +6569,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6379,6 +6601,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6406,6 +6629,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6437,6 +6661,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6464,6 +6689,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6495,6 +6721,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6522,6 +6749,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
@@ -6553,6 +6781,7 @@
     },
     "env_prefixes": {
       "PATH": [
+        "[CACHE]\\certs",
         "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
       ]
     },
