@@ -138,6 +138,10 @@ def RunSteps(api, properties, env_properties):
   env_prefixes = {'PATH': [dart_bin]}
 
   api.flutter_deps.certs(env, env_prefixes)
+
+  # Enable long path support on Windows.
+  api.flutter_deps.enable_long_paths(env, env_prefixes)
+
   # Checkout source code and build
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
 
