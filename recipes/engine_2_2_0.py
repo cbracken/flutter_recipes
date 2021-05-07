@@ -19,6 +19,7 @@ DEPS = [
     'depot_tools/git',
     'depot_tools/gsutil',
     'flutter/bucket_util',
+    'flutter/flutter_deps',
     'flutter/json_util',
     'flutter/os_utils',
     'flutter/osx_sdk',
@@ -463,8 +464,9 @@ def UploadTreeMap(api, upload_dir, lib_flutter_path, android_triple):
         '--library', library_path, '--destdir', destination_dir,
         "--addr2line-binary", addr2line
     ]
-
-    api.python('generate treemap for %s' % upload_dir, script_path, args)
+    command = ['python3', script_path]
+    command.extend(args)
+    api.step('generate treemap for %s' % upload_dir, command)
 
     remote_name = GetCloudPath(api, upload_dir)
     if api.bucket_util.should_upload_packages():
@@ -1500,6 +1502,10 @@ def RunSteps(api, properties, env_properties):
 
   env = {'GOMA_DIR': api.goma.goma_dir, 'ANDROID_HOME': str(android_home)}
   env_prefixes = {'PATH': [dart_bin]}
+
+  # Add certificates and print the ones required for pub.
+  api.flutter_deps.certs(env, env_prefixes)
+  api.os_utils.print_pub_certs()
 
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
 

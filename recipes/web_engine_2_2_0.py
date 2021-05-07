@@ -19,6 +19,7 @@ DEPS = [
     'depot_tools/git',
     'depot_tools/gsutil',
     'flutter/display_util',
+    'flutter/flutter_deps',
     'flutter/json_util',
     'flutter/os_utils',
     'flutter/osx_sdk',
@@ -136,6 +137,7 @@ def RunSteps(api, properties, env_properties):
   }
   env_prefixes = {'PATH': [dart_bin]}
 
+  api.flutter_deps.certs(env, env_prefixes)
   # Checkout source code and build
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
 
