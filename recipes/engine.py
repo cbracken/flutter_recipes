@@ -1544,6 +1544,9 @@ def RunSteps(api, properties, env_properties):
   api.flutter_deps.certs(env, env_prefixes)
   api.os_utils.print_pub_certs()
 
+  # Enable long path support on Windows.
+  api.flutter_deps.enable_long_paths(env, env_prefixes)
+
   api.repo_util.engine_checkout(cache_root, env, env_prefixes)
 
   # Delete derived data on mac. This is a noop for other platforms.
