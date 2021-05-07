@@ -855,6 +855,46 @@
     "name": "Install Certs"
   },
   {
+    "cmd": [
+      "powershell.exe",
+      "New-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\" -Name \"LongPathsEnabled\" -Value 1 -PropertyType DWORD -Force"
+    ],
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\android",
+      "ANDROID_SDK_ROOT": "[CACHE]\\android",
+      "CHROME_EXECUTABLE": "[CACHE]\\chrome\\chrome\\chrome.exe",
+      "CHROME_NO_SANDBOX": "true",
+      "COCOON_PATH": "[CACHE]\\cocoon",
+      "FLUTTER_XCODE_CODE_SIGN_STYLE": "Manual",
+      "FLUTTER_XCODE_DEVELOPMENT_TEAM": "S8QB4VV633",
+      "FLUTTER_XCODE_PROVISIONING_PROFILE_SPECIFIER": "match Development *",
+      "GOPATH": "[CLEANUP]\\go_path",
+      "GRADLE_OPTS": "-Dorg.gradle.daemon=false",
+      "GRADLE_USER_HOME": "[CACHE]\\gradle"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\certs",
+        "[CACHE]\\dart_sdk",
+        "[CACHE]\\chrome\\chrome",
+        "[CACHE]\\chrome\\drivers",
+        "[CACHE]\\go\\bin",
+        "[CLEANUP]\\go_path\\bin",
+        "[CACHE]\\go\\bin",
+        "[CLEANUP]\\go_path\\bin",
+        "[CLEANUP]\\tmp_tmp_1\\vpython",
+        "[CACHE]\\android\\platform-tools",
+        "[CACHE]\\android\\tools",
+        "[START_DIR]\\firebase",
+        "[CACHE]\\cmake\\bin",
+        "[CACHE]\\ninja",
+        "[CACHE]\\clang\\bin",
+        "[CLEANUP]\\tmp_tmp_2\\curl"
+      ]
+    },
+    "name": "Enable long path support"
+  },
+  {
     "name": "$result"
   }
 ]

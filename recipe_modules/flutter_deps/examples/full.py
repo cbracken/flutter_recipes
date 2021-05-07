@@ -53,6 +53,7 @@ def RunSteps(api):
   api.flutter_deps.cocoon(env, env_prefixes, 'refs/heads/master')
   api.flutter_deps.dart_sdk(env, env_prefixes, '')
   api.flutter_deps.certs(env, env_prefixes, '')
+  api.flutter_deps.enable_long_paths(env, env_prefixes, '')
 
   # Gems dependency requires to run from a flutter_environment.
   checkout_path = api.path['start_dir'].join('flutter\ sdk')

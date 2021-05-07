@@ -121,6 +121,23 @@
     "name": "Print pub.dev certs"
   },
   {
+    "cmd": [
+      "powershell.exe",
+      "New-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\" -Name \"LongPathsEnabled\" -Value 1 -PropertyType DWORD -Force"
+    ],
+    "env": {
+      "ANDROID_HOME": "[CACHE]\\builder\\src\\third_party\\android_tools\\sdk",
+      "GOMA_DIR": "[CACHE]\\goma\\client"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\certs",
+        "[CACHE]\\builder\\src\\third_party\\dart\\tools\\sdks\\dart-sdk\\bin"
+      ]
+    },
+    "name": "Enable long path support"
+  },
+  {
     "cmd": [],
     "name": "Checkout source code"
   },

@@ -396,6 +396,33 @@ class FlutterDepsApi(recipe_api.RecipeApi):
           ],
       )
 
+  def enable_long_paths(self, env, env_prefixes, version=None):
+    """Enables long path support in Windows.
+
+    Args:
+      env(dict): Current environment variables.
+      env_prefixes(dict): Current environment prefixes variables.
+    """
+
+    if not self.m.platform.is_win:
+      # noop for non windows platforms.
+      return
+    with self.m.context(env=env, env_prefixes=env_prefixes):
+      self.m.step(
+          'Enable long path support',
+          [
+              'powershell.exe',
+              ' '.join([
+                  'New-ItemProperty',
+                  '-Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem"',
+                  '-Name "LongPathsEnabled"',
+                  '-Value 1',
+                  '-PropertyType DWORD',
+                  '-Force'
+              ])
+          ],
+      )
+
   def ios_signing(self, env, env_prefixes, version=None):
     """Installs ninja.
 
