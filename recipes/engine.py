@@ -1326,6 +1326,7 @@ def PackageWindowsUwpDesktopVariant(api, label, bucket_name):
       'out/%s/flutter_windows_winuwp.dll.exp' % label,
       'out/%s/flutter_windows_winuwp.dll.lib' % label,
       'out/%s/flutter_windows_winuwp.dll.pdb' % label,
+      'out/%s/uwptool.exe' % label,
   ]
   if bucket_name.endswith('profile') or bucket_name.endswith('release'):
     artifacts.append('out/%s/gen_snapshot.exe' % label)
